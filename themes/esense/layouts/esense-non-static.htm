@@ -1,0 +1,29 @@
+description = "Landing page layout for esense"
+==
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <body>
+        {% partial 'navbar' %}
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        {% page %}
+
+        {% partial 'footer-columns' %}
+
+        {% partial 'footer' %}
+
+        {% partial 'footer-scripts' %}
+
+    </body>
+
+</html>
