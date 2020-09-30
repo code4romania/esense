@@ -1,0 +1,74 @@
+body {
+    letter-spacing: 0.05rem;
+}
+
+/** Set hero section background image */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.hero-background {
+    position: absolute;
+    top: -10%;
+    right: 0;
+    z-index: -1;
+}
+
+/** Info section background */
+.info {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.info-section {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.info-section img {
+    width: 100%;
+}
+
+/** Parteners */
+.partener-1,
+.partener-2,
+.partener-3,
+.partener-4 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.partener-1 {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-1.svg");
+}
+
+.partener-2 {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-2.svg");
+}
+
+.partener-3 {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-3.svg");
+}
+
+.partener-4 {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-4.svg");
+}
+
+.form-container {
+    position: relative;
+    transform: translate(0, -40%);
+}
+
+::placeholder {
+    font-size: 14px;
+}
