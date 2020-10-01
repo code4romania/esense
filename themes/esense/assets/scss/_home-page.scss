@@ -11,9 +11,28 @@ body {
 
 .hero-background {
     position: absolute;
-    top: -15%;
+    top: -20%;
     right: 0;
     z-index: -1;
+}
+
+.depre-proiect {
+    position: relative;
+    background: url("../img/svg/small-top-svg.svg");
+    background-repeat: no-repeat;
+    background-position: top right;
+    width: 100%;
+    min-height: 20vh;
+    margin-top: -5%;
+    z-index: -1;
+}
+.login-bg {
+    position: relative;
+    background: url("../img/svg/login-bg.svg");
+    background-repeat: no-repeat;
+    background-position:center center;
+    width: 100%;
+    min-height: 100vh;
 }
 
 /** Info section background */

@@ -53,7 +53,7 @@ $small-font-size: 16px;
 
 // Heading font size
 $h1-font-size: 35px !default;
-// $h2-font-size: 48px !default;
+$h2-font-size: 28px !default;
 $h3-font-size: 22px !default;
 // $h4-font-size: 24px !default;
 // $h5-font-size: 20px !default;
@@ -118,7 +118,7 @@ $btn-line-height-lg: 22px !default;
 // Box shadow
 $box-shadow-sm: 0px 0px 3px rgba(50, 50, 93, 0.15), 0px 1px 0px rgba(0, 0, 0, 0.02);
 // $box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
-// $box-shadow-lg: 20px 20px 40px rgba(0, 0, 0, 0.07);
+$box-shadow-lg: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
 // Border-radius
 // $border-radius: 6px;

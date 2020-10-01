@@ -1,0 +1,41 @@
+title = "Register form"
+url = "/register-form"
+layout = "esense-non-static"
+description = "Formular de inregistrare"
+is_hidden = 0
+==
+<section class="depre-proiect"></section>
+<div style="min-height: 50vh;">
+    <section class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h2 class="text-gray-dark mb-3">{{'registerPage.register.title'|_}}</h2>
+                    <p class="small text-muted">{{'registerPage.register.text'|_}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-7">
+                    <div class="form-group">
+                        <select class="form-control" id="registration-select">
+                            <option>
+
+                            </option>
+                            <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3">
+                    <a role="button" class="btn btn-block btn-primary">Completeaza forumlar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% partial 'registration/register-form' %}
+{% partial 'registration/registration-success-message' %}
