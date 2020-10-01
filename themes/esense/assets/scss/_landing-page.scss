@@ -1,8 +1,7 @@
-body {
-    letter-spacing: 0.05rem;
-}
+/***********************************************
+**************** Hero section ******************
+***********************************************/
 
-/** Set hero section background image */
 .hero {
     position: relative;
     width: 100%;
@@ -11,7 +10,7 @@ body {
 
 .hero-background {
     position: absolute;
-    top: -20%;
+    top: 0;
     right: 0;
     z-index: -1;
 }
@@ -23,7 +22,7 @@ body {
     background-position: top right;
     width: 100%;
     min-height: 20vh;
-    margin-top: -5%;
+    margin-top: 0;
     z-index: -1;
 }
 .login-bg {
@@ -91,4 +90,13 @@ body {
 ::placeholder {
     font-size: 14px;
     color: #ADB5BD !important;
+}
+
+// rotate svg arrow-down in how it works acordeon
+.rotate-up {
+    transform: rotate(180deg);
+}
+
+.rotate-down {
+    transform: rotate(0deg);
 }

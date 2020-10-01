@@ -1,0 +1,45 @@
+description = "Layout for 'Termeni si conditii' page."
+
+[staticPage]
+useContent = 1
+default = 0
+==
+
+<!-- Termeni si conditii -->
+{variable name="termeniSiConditiiTitle" label="Title" tab="Termeni si conditii" type="text"}{/variable}
+{variable name="termeniSiConditii" label="Content" tab="Termeni si conditii" type="richeditor"}{/variable}
+
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <body>
+
+        {% partial 'navbar' %}
+
+        <section class="depre-proiect"></section>
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12 my-5">
+                    <h1 class="text-dark font-weight-light">{{ termeniSiConditiiTitle }}</h1>
+                    <p class="text-danger">{{ termeniSiConditii|raw }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% partial 'footer-columns' %}
+
+        {% partial 'footer' %}
+    </body>
+
+</html>
