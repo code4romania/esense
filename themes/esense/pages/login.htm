@@ -1,0 +1,61 @@
+title = "Login"
+url = "/login"
+layout = "authentification-layout"
+description = "Login"
+is_hidden = 0
+==
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex align-items-center justify-content-center" style="height: 80px;">
+                    <img class="img-fluid" src="{{ 'assets/img/svg/logo.svg'|theme }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="login-bg d-flex align-items-center justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-4 offset-lg-4 bg-light pb-5 rounded shadow">
+                <p class="py-5 text-center font-weight-bold">{{'loginPage.form.title'|_}}</p>
+                <form method="POST" data-request"">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="input-group mb-3 px-lg-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-white border-light" id="email-addon">
+                                        <img class="img-fluid" src="{{ 'assets/img/svg/form-email-icon.svg'|theme }}">
+                                    </span>
+                                </div>
+                                <input type="email" name="email" class="form-control border-left-0 border-light pl-0" placeholder="{{'loginPage.form.email.placeholder'|_}}"
+                                    aria-label="email" aria-describedby="email-addon">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group mb-3 px-lg-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-white border-light" id="password-addon">
+                                        <img class="img-fluid" src="{{ 'assets/img/svg/password-icon.svg'|theme }}">
+                                    </span>
+                                </div>
+                                <input type="pasword" name="password" class="form-control border-left-0 border-light pl-0" placeholder="{{'loginPage.form.password.placeholder'|_}}"
+                                    aria-label="password" aria-describedby="password-addon">
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end mb-5">
+                            <a class="small text-dark pr-3" href="">{{'loginPage.form.forgot.password.link.text'|_}}</a>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center mb-1">
+                                <a href="" role="button" type="submit" class="btn btn-lg btn-primary px-5 text-white">{{'loginPage.form.btn.text'|_}}</a>
+                            </div>
+                            <p class="small text-dark text-center">{{'loginPage.form.new.account.text'|_}}<a class="text-secondary" href=""> {{'loginPage.form.new.account.link.text'|_}}</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

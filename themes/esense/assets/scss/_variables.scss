@@ -1,0 +1,157 @@
+/***********************************************
+******************** Colors ********************
+***********************************************/
+
+/** Override bootstrap main colors. */
+$primary:   #0e4870;
+$secondary: #fab954;
+$dark:      #2e294e;
+$light:     #F4F5F7;
+
+/** Color for text muted. */
+$gray-600: #52567f;
+
+// Custom theme colors
+$theme-colors: () !default;
+$theme-colors: map-merge((
+        "secondary2": #363636,
+        "gray-dark":  #32325d,
+        "white":      #ffffff,
+        "gray-light": #ADB5BD,
+        "gray":       #D3D3D3,
+    ),
+    $theme-colors);
+
+// Navbar-light variables
+// $navbar-light-color: $dark;
+// $navbar-light-hover-color: $primary;
+
+// Link variables
+// $link-color: $primary;
+// $link-hover-color: $primary;
+// $link-decoration: none !default;
+// $link-hover-decoration: underline !default;
+
+/***********************************************
+******************** Fonts *********************
+***********************************************/
+
+/** Fonts path. */
+// $gontserrat-web-font-path: "../fonts/gontserrat/" !default;
+// $muli-web-font-path: "../fonts/muli/" !default;
+
+/** Font family. */
+$font-family-sans-serif: 'open Sans',
+sans-serif !default;
+// $font-family-monospace: 'Open Sans',
+// sans-serif !default;
+// $font-family-base: 'Muli-Regular',
+// sans-serif !default;
+
+/** Font size base. */
+$font-size-base: 1.25rem !default;
+// $font-size-lg:   $font-size-base * 1.25 !default;
+// $font-size-sm:   $font-size-base * .875 !default;
+$small-font-size: 16px;
+
+/** Heading font size. */
+$h1-font-size: 35px !default;
+$h2-font-size: 28px !default;
+$h3-font-size: 22px !default;
+// $h4-font-size: 24px !default;
+// $h5-font-size: 20px !default;
+// $h6-font-size: 15px !default;
+// Heading font family
+$headings-font-family: "Open Sans",
+sans-serif !default;
+$heading-line-height: 48px;
+// Heading font weight
+$headings-font-weight: bold;
+
+/** Displayes font variable. */
+$display1-size: 25px;
+$display1-weight: 300 !default;
+$display2-size: 18px;
+$display2-weight: 300 !default;
+// $display3-size: 24px;
+// $display3-weight: 600 !default;
+// $display4-size: 16px;
+// $display4-weight: 600 !default;
+// Display line height
+// $display-line-height: 2rem;
+
+/** Font weight */
+$font-weight-lighter: 300 !default;
+$font-weight-light: 600 !default;
+// $font-weight-normal: 400 !default;
+$font-weight-bold: 700 !default;
+$font-weight-bolder: 800 !default;
+
+/***********************************************
+***************** Buttons **********************
+***********************************************/
+
+// $input-btn-font-family: 'Muli-Regular' !default;
+// $btn-font-weight: 600;
+
+/** Btn general */
+// $btn-padding-y: 0 !default;
+// $btn-padding-x: 1.5rem !default;
+// $btn-font-family: 'Muli-Regular' !default;
+// $btn-font-size: 16px !default;
+// $btn-line-height: 40px;
+// $btn-white-space: nowrap !default;
+// Border radius
+// $btn-border-radius: 5px;
+// $btn-border-radius-lg: 5px;
+// $btn-border-radius-sm: 6px;
+
+/** Btn small. */
+// $btn-padding-y-sm: 0.25rem !default;
+// $btn-padding-x-sm: 1rem !default;
+$btn-font-size-sm: 16px !default;
+// $btn-line-height: 40px;
+// $btn-border-radius-sm: 5px;
+
+/** Btn large. */
+// $btn-padding-y-lg: 0.5rem !default;
+// $btn-padding-x-lg: 2rem !default;
+$btn-font-size-lg: 18px !default;
+$btn-line-height-lg: 22px !default;
+
+/***********************************************
+***************** Box shadow *******************
+***********************************************/
+
+$box-shadow-sm: 0px 0px 3px rgba(50, 50, 93, 0.15), 0px 1px 0px rgba(0, 0, 0, 0.02);
+// $box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+$box-shadow-lg: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+/***********************************************
+**************** Border-radius *****************
+***********************************************/
+
+// $border-radius: 6px;
+// $border-radius-lg: 8px;
+
+/***********************************************
+**************** Pills *************************
+***********************************************/
+
+// $nav-pills-link-active-color: $blank !important;
+// $nav-pills-link-active-bg: $primary;
+
+/***********************************************
+**************** Dropdown **********************
+***********************************************/
+
+// $dropdown-link-color: $primary;
+// $dropdown-link-hover-color: $blank;
+// $dropdown-link-hover-bg: $primary;
+// $dropdown-font-size:$display4-size;
+
+/***********************************************
+************** Responsive text *****************
+***********************************************/
+
+$enable-responsive-font-sizes: true;

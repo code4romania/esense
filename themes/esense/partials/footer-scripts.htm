@@ -1,0 +1,15 @@
+description = "Partial that includes all the footer scripts."
+
+[viewBag]
+==
+
+<script src="{{ [
+        'assets/js/ajax-setup.js',
+        '/node_modules/owl.carousel/dist/owl.carousel.min.js',
+        'assets/js/owl-testimonial.js',
+        'assets/js/owl-demo-joc.js',
+    ]|theme }}">
+</script>
+
+{% framework extras %}
+{% scripts %}

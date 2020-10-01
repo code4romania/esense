@@ -1,0 +1,44 @@
+description = "Navbar partial for drive grade"
+
+[viewBag]
+==
+<nav id="navbar" class="navbar navbar-custom navbar-expand-lg pt-3 fixed-top">
+    <div>
+        <a class="navbar-brand" href="/">
+            <img class="img-fluid" src="{{ 'assets/img/svg/logo.svg'|theme }}">
+        </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="{{ 'assets/img/mobile-open.png'|theme }}" width="50px" alt="mobile-open">
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto pr-lg-5 mr-lg-5">
+            <li class="nav-item my-2 px-2 my-md-0">
+                <a class="nav-link text-white small" href="{{ 'despre-proiect'|page }}">
+                    {{'navbar.link_1'|_}}
+                </a>
+            </li>
+            <li class="nav-item my-2 px-2 my-md-0">
+                <a class="nav-link text-white small" href="{{ 'questions-and-answers'|page }}">
+                    {{'navbar.link_2'|_}}
+                </a>
+            </li>
+            <li class="nav-item my-2 px-2 my-md-0">
+                <a class="nav-link text-white small" href="">
+                    {{'navbar.link_3'|_}}
+                </a>
+            </li>
+            <li class="nav-item my-2 px-2 my-md-0">
+                <a class="nav-link btn btn-sm btn-outline-secondary text-white small px-4" href="{{ 'register-form'|page }}">
+                    {{'navbar.link_4'|_}}
+                </a>
+            </li>
+            <li class="nav-item my-2 px-2 my-md-0">
+                <a class="nav-link btn btn-sm btn-secondary text-white small px-2" href="{{ 'login'|page }}">
+                    {{'navbar.link_5'|_}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
