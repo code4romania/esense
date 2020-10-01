@@ -100,3 +100,34 @@
 .rotate-down {
     transform: rotate(0deg);
 }
+
+/***********************************************
+**************** Custom select *****************
+***********************************************/
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus,
+.dropdown-toggle:active {
+    background: #fff !important;
+}
+
+.filter-option-inner-inner{
+    font-size: 16px;
+    color: #684d4d;
+}
+
+.dropdown-menu li .active {
+    background:#fab954;
+}
+
+.dropdown-menu li a:hover,
+.dropdown-menu li a:focus {
+    background:#fab954;
+    color: #fff;
+}
+
+.dropdown-menu li a {
+    font-size: 16px;
+    color: #838383;
+    padding: 10px;
+}
