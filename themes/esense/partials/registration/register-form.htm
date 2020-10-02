@@ -4,69 +4,79 @@ description = "Register from"
 ==
 <section class="my-5">
     <div class="container">
-        <form method="POST">
+        <!-- Register form -->
+        <form method="POST" data-request="">
             <div class="row">
                 <div class="col-12">
-                    <div class="shadow-lg rounded bg-white p-5">
-                            <div class="shadow rounded p-3 py-4">
-                                <p class="text-dark p-0 m-0 mb-3">{{'registerPage.form.title_1'|_}}</p>
-                                <div class="row">
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>1</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>1</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>1</option>
-                                            </select>
-                                        </div>
+                    <div class="shadow-lg rounded bg-white p-0 p-md-5">
+                        <div class="shadow rounded p-3 py-4">
+                            <p class="text-dark p-0 m-0 mb-3">{{'registerPage.form.title_1'|_}}</p>
+                            <div class="row">
+                                <!-- Last name input -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" name="last_name" class="form-control" id="last_name" aria-describedby="last_nameHelp" placeholder="{{'registerPage.form.input.last.name.placeholder'}}">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="shadow rounded p-3 py-4 mt-5">
-                                <p class="text-dark pl-3">{{'registerPage.form.title_2'|_}}</p>
+                                <!-- First name input -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" name="first_name" class="form-control" id="first_name" aria-describedby="first_nameHelp" placeholder="{{'registerPage.form.input.first.name.placeholder'}}">
+                                    </div>
+                                </div>
+                                <!-- Phone number input -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="number" name="phone_number" class="form-control" id="phone_number" aria-describedby="phone_numberHelp" placeholder="{{'registerPage.form.input.phone.placeholder'}}">
+                                    </div>
+                                </div>
+                                <!-- Email input -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.email.placeholder'}}">
+                                    </div>
+                                </div>
+                                <!-- Region select -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker border outline-none" data-style="btn-white">
+                                        <option>{{'registerPage.form.region.default.option'}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- County select -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <select class="form-control selectpicker border outline-none" data-style="btn-white">
+                                        <option>{{'registerPage.form.county.default.option'}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- School name select -->
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                        <select class="form-control selectpicker border outline-none" data-style="btn-white">
+                                        <option>{{'registerPage.form.school.name.default.option'}}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <!-- Description input -->
+                        <div class="shadow rounded p-3 py-4 mt-5">
+                            <p class="text-dark pl-3">{{'registerPage.form.title_2'|_}}</p>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 mt-5">
+                <!-- Submit button -->
+                <div class="col-12 mt-5 mb-5 mb-lg-0">
                     <div class="d-flex justify-content-end">
                         <a role="button" type="submit" class="btn btn-primary text-white px-5">{{'registerPage.form.submit.btn.text'|_}}</a>
                     </div>
