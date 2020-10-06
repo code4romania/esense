@@ -1,3 +1,37 @@
+body{
+    scroll-behavior: smooth;
+}
+
+/***********************************************
+*************** Navbar *************************
+***********************************************/
+
+.logo-blue {
+    display: block;
+}
+
+.logo-white {
+    display: none;
+}
+
+.nav-btn {
+    width: 130px;
+}
+
+@media screen and (max-width:991px) {
+    .logo-blue {
+        display: none;
+    }
+
+    .logo-white {
+        display: block;
+    }
+
+    .navbar-custom {
+        background: #0e4870;
+    }
+}
+
 /***********************************************
 **************** Hero section ******************
 ***********************************************/
@@ -10,89 +44,129 @@
 
 .hero-background {
     position: absolute;
+    height: 90%;
     top: 0;
     right: 0;
     z-index: -1;
 }
 
-.depre-proiect {
+@media screen and (max-width: 991px) {
+    .hero {
+        background: #0e4870;
+    }
+}
+
+/***********************************************
+*************** Info section ****************
+***********************************************/
+
+/** Background. */
+.info {
     position: relative;
-    background: url("../img/svg/small-top-svg.svg");
+    background: url("../img/svg/landing-page-info-background.svg");
     background-repeat: no-repeat;
-    background-position: top right;
+    background-position: center;
+    background-size: cover;
     width: 100%;
-    min-height: 20vh;
-    margin-top: 0;
+    min-height: 100vh;
+}
+
+/** Parteneri. */
+.partener-1,
+.partener-2,
+.partener-3,
+.partener-4 {
+    position: relative;
+    min-height: 280px;
+    background-position: center;
+}
+
+.partener-1 {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-1.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.partener-2 {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-2.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.partener-3 {
+    background: url("../img/svg/partener-3.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.partener-4 {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-4.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/***********************************************
+*************** Form section *******************
+***********************************************/
+
+.form-container {
+    position: relative;
+}
+
+.form-bg-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: radial-gradient(100% 284.32% at 100% 0%, #0E4870 0%, #498AB8 100%);;
     z-index: -1;
 }
+.form-bg-2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: #363636;
+    z-index: -1;
+}
+
+/***********************************************
+*************** Login page bg ******************
+***********************************************/
+
 .login-bg {
     position: relative;
     background: url("../img/svg/login-bg.svg");
     background-repeat: no-repeat;
     background-position:center center;
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 80px);
 }
 
-/** Info section background */
-.info {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-}
-
-.info-section {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 0;
-    z-index: -1;
-}
-
-.info-section img {
-    width: 100%;
-}
-
-/** Parteners */
-.partener-1,
-.partener-2,
-.partener-3,
-.partener-4 {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: 280px;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-.partener-1 {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-1.svg");
-}
-
-.partener-2 {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-2.svg");
-}
-
-.partener-3 {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-3.svg");
-}
-
-.partener-4 {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/svg/partener-4.svg");
-}
-
-.form-container {
-    position: relative;
-    transform: translate(0, -40%);
-}
+/***********************************************
+************* Input placeholder ****************
+***********************************************/
 
 ::placeholder {
     font-size: 14px;
     color: #ADB5BD !important;
+    font-style: italic;
 }
 
-// rotate svg arrow-down in how it works acordeon
+/***********************************************
+****************** FAQ arrow *******************
+***********************************************/
+
 .rotate-up {
     transform: rotate(180deg);
 }
@@ -105,15 +179,19 @@
 **************** Custom select *****************
 ***********************************************/
 
+.bootstrap-select .btn:focus {
+    outline: none !important;
+}
+
 .dropdown-toggle:hover,
 .dropdown-toggle:focus,
 .dropdown-toggle:active {
     background: #fff !important;
 }
 
-.filter-option-inner-inner{
-    font-size: 16px;
-    color: #684d4d;
+.filter-option-inner-inner {
+    font-size: 14px;
+    color: #838383;
 }
 
 .dropdown-menu li .active {
@@ -127,7 +205,91 @@
 }
 
 .dropdown-menu li a {
-    font-size: 16px;
+    font-size: 14px;
     color: #838383;
-    padding: 10px;
+    padding: 8px;
+}
+
+.register-select .dropdown-toggle{
+    padding: 13px 8px;
+    font-style: italic;
+}
+
+.register-select .filter-option-inner-inner {
+    color: #ADB5BD;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.register-select .dropdown-menu li .active {
+    background:transparent;
+}
+
+.register-select .dropdown-menu li a:hover,
+.register-select .dropdown-menu li a:focus {
+    background:transparent;
+    color: #838383;
+}
+
+.register-select .dropdown-menu li a {
+    font-size: 14px;
+    color: #838383;
+    padding: 0px 8px;
+}
+
+/***********************************************
+**************** Footer icons ******************
+***********************************************/
+
+.footer-icons li {
+    list-style: none;
+    margin: 0 5px;
+}
+
+.footer-icons li a i.fa-twitter {
+    color: #fff;
+    border-radius: 100%;
+    padding: 12px;
+    background: #1DA1F2;
+    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    font-size: 14.5px;
+}
+
+.footer-icons li a i.fa-facebook-square {
+    color: #fff;
+    border-radius: 100%;
+    padding: 12px;
+    background: #3B5999;
+    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    font-size: 16px;
+}
+
+.footer-icons li a i.fa-github {
+    color: #fff;
+    border-radius: 100%;
+    padding: 12px;
+    background: #222222;
+    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    font-size: 16px;
+}
+
+/***********************************************
+**************** Small top bg ******************
+***********************************************/
+
+.depre-proiect {
+    position: relative;
+    background: url("../img/svg/small-top-svg.svg");
+    background-repeat: no-repeat;
+    background-position: top right;
+    width: 100%;
+    min-height: 20vh;
+    margin-top: 0;
+    z-index: -1;
+}
+
+@media screen and (max-width:991px) {
+    .depre-proiect {
+        display: none;
+    }
 }
