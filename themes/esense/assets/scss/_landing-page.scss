@@ -227,14 +227,14 @@ body{
 
 .register-select .dropdown-menu li a:hover,
 .register-select .dropdown-menu li a:focus {
-    background:transparent;
-    color: #838383;
+    background:#fab954;
+    color: #fff;
 }
 
 .register-select .dropdown-menu li a {
     font-size: 14px;
     color: #838383;
-    padding: 0px 8px;
+    padding: 5px 8px;
 }
 
 /***********************************************
@@ -244,33 +244,22 @@ body{
 .footer-icons li {
     list-style: none;
     margin: 0 5px;
-}
-
-.footer-icons li a i.fa-twitter {
-    color: #fff;
-    border-radius: 100%;
-    padding: 12px;
-    background: #1DA1F2;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
-    font-size: 14.5px;
 }
 
-.footer-icons li a i.fa-facebook-square {
-    color: #fff;
-    border-radius: 100%;
-    padding: 12px;
+.footer-icons li:nth-child(1) {
+    background: #0077B5
+}
+
+.footer-icons li:nth-child(2) {
     background: #3B5999;
-    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
-    font-size: 16px;
 }
 
-.footer-icons li a i.fa-github {
-    color: #fff;
-    border-radius: 100%;
-    padding: 12px;
-    background: #222222;
-    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
-    font-size: 16px;
+.footer-icons li:nth-child(3) {
+    background:#FF0000;
 }
 
 /***********************************************

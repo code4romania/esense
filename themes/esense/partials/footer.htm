@@ -12,13 +12,12 @@ linkTarget = "_blank"
 			<div class="col-12">
 				<div>
 					{% set links = linkList.links %}
-
 					{% if links | length %}
 						<ul class="d-flex align-items-center justify-content-center footer-icons">
 							{% for link in links %}
-								<li class="">
-									<a class="" target="{{ linkList.linkTarget }}" href="{{ link.getLink }}" title="{{ link.getName }}">
-										<i class="{{ link.getIcon }}"></i>
+								<li class="d-flex align-items-center justify-content-center">
+									<a class="" target="_blank" href="{{ link.getLink }}" title="{{ link.getName }}">
+										<i class="small text-white {{ link.getIcon }}"></i>
 									</a>
 								</li>
 							{% endfor %}
