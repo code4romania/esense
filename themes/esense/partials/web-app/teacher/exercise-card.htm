@@ -1,0 +1,20 @@
+<div class="col-12 col-md-6 mb-4">
+    <div class="card">
+        <div class="card-header bg-white">
+            <p class="p-0 m-0 text-gray-dark">{{ exerciseCardTitle }}</p>
+        </div>
+        <div class="card-body">
+            <img class="img-fluid" src="{{ imagePath }}">
+            <p class="text-muted small pt-2">{{ exerciseCardText }}</p>
+        </div>
+        <div class="card-footer bg-white d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/label.svg'|theme }}">
+                <p class="p-0 m-0 ml-2" style="font-size: 12px; color: #000000; line-height:16px;">{{ exerciseCardGameType }}</p>
+            </div>
+            <div>
+                <a href="{{ exerciseCardBtnLink }}" class="btn btn-dashboard-dark">{{ exerciseCardBtnText }}</a>
+            </div>
+        </div>
+    </div>
+</div>

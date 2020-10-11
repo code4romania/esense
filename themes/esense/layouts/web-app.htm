@@ -1,0 +1,46 @@
+description = "Landing page layout for esense"
+==
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <link href="{{ [
+        'assets/scss/dashboard.scss',
+    ]|theme }}" rel="stylesheet">
+
+    <body>
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        <div id="wrapper">
+            <!-- Side navbar -->
+            {% partial 'dashboard/side-nav' %}
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
+                    <!-- Top navbar -->
+                    {% partial 'dashboard/top-nav' %}
+                    <!-- Page content -->
+                    {% page %}
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ [
+        'assets/js/dashboard-nav.js',
+            ]|theme }}">
+        </script>
+
+        {% framework extras %}
+        {% scripts %}
+    </body>
+
+</html>
