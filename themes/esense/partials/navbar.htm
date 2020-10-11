@@ -2,7 +2,7 @@ description = "Navbar partial for drive grade"
 
 [viewBag]
 ==
-<nav id="navbar" class="navbar navbar-custom navbar-expand-lg pt-3 fixed-top">
+<nav id="navbar" class="navbar navbar-custom navbar-expand-lg py-3 fixed-top">
     <div>
         <a class="navbar-brand pl-lg-5 ml-lg-5" href="/">
             <img class="img-fluid logo-blue" src="{{ 'assets/img/svg/logo.svg'|theme }}">
@@ -15,28 +15,38 @@ description = "Navbar partial for drive grade"
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto mr-lg-5">
+
+            <!-- Despre proiect -->
             <li class="nav-item my-2 pl-3 my-md-0">
-                <a class="nav-link text-white display-4" href="{{ 'despre-proiect'|page }}">
+                <a class="nav-link text-white display-4 roboto-family" href="{{ 'landing-pages/about-project'|page }}">
                     {{'navbar.link_1'|_}}
                 </a>
             </li>
+
+            <!-- FAQ -->
             <li class="nav-item my-2 pl-3 my-md-0">
-                <a class="nav-link text-white display-4" href="{{ 'intrebari-si-raspunsuri'|staticPage }}">
+                <a class="nav-link text-white display-4 roboto-family" href="{{ 'intrebari-si-raspunsuri'|staticPage }}">
                     {{'navbar.link_2'|_}}
                 </a>
             </li>
+
+            <!-- Contact -->
             <li class="nav-item my-2 pl-3 my-md-0">
-                <a class="nav-link text-white display-4" href="#contact">
+                <a class="nav-link text-white display-4 roboto-family" href="{{ 'landing-pages/esense-home'|page }}#contact">
                     {{'navbar.link_3'|_}}
                 </a>
             </li>
+
+            <!-- Register -->
             <li class="nav-item my-2 pl-4 my-md-0">
-                <a class="btn btn-outline-secondary btn-sm text-white display-4 nav-btn" href="{{ 'register-form'|page }}">
+                <a class="btn btn-outline-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/register-form'|page }}">
                     {{'navbar.link_4'|_}}
                 </a>
             </li>
+
+            <!-- Login -->
             <li class="nav-item my-2 pl-4 my-md-0">
-                <a class="btn btn-secondary btn-sm text-white display-4 nav-btn" href="{{ 'login'|page }}">
+                <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/login'|page }}">
                     {{'navbar.link_5'|_}}
                 </a>
             </li>

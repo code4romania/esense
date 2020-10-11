@@ -41,6 +41,10 @@ default = 0
 
     {% partial 'head' %}
 
+    <link href="{{ [
+        'assets/scss/esense/landing-page/landing-page.scss',
+    ]|theme }}" rel="stylesheet">
+
     <body>
         {% partial 'navbar' %}
 
@@ -58,86 +62,86 @@ default = 0
         <div class="container mt-5 py-5">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="text-dark py-5 font-weight-light">{{ answersAndQuestionsTitle }}</h1>
+                    <h1 class="text-gray-dark py-4 font-weight-light" style="line-height: 48px;">{{ answersAndQuestionsTitle }}</h1>
                 </div>
                 <div class="col-12 mb-5 pb-5">
                     <div class="accordion" id="accordionExample">
 
-                        <div class="card border-0 mb-5">
+                        <div class="card border-0 mb-4">
                             <div class="acordeon-header" id="headingOne">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="line-height: 27px;">
                                     {{linkOne}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="arrow-down">
                                 </p>
                             </div>
                             <div id="collapseOne" class="collapse text-muted px-lg-4" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                <p class="mt-3 text-muted px-5">{{textOne|raw}}</p>
+                                <p class="display-2 mt-3 text-muted px-5" style="line-height: 37px;">{{textOne|raw}}</p>
                             </div>
                         </div>
 
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingTwo">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                     {{linkTwo}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
                                 </p>
                             </div>
                             <div id="collapseTwo" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <p class="mt-3 px-5">{{textTwo|raw}}</p>
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textTwo|raw}}</p>
                             </div>
                         </div>
 
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingThree">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                     {{linkThree}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
                                 </p>
                             </div>
                             <div id="collapseThree" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <p class="mt-3 px-5">{{textThree|raw}}</p>
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textThree|raw}}</p>
                             </div>
                         </div>
 
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingFour">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                                     {{linkFour}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
                                 </p>
                             </div>
                             <div id="collapseFour" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <p class="mt-3 px-5">{{textFour|raw}}</p>
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textFour|raw}}</p>
                             </div>
                         </div>
 
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingFive">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                                     {{linkFive}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
                                 </p>
                             </div>
                             <div id="collapseFive" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <p class="mt-3 px-5">{{textFive|raw}}</p>
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textFive|raw}}</p>
                             </div>
                         </div>
 
                         {% if linkSix != '' %}
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingSix">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
                                     {{linkSix}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
                                 </p>
                             </div>
                             <div id="collapseSix" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <p class="mt-3 px-5">{{textSix|raw}}</p>
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textSix|raw}}</p>
                             </div>
                         </div>
 
@@ -145,14 +149,14 @@ default = 0
                         {% if linkSeven != '' %}
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingSeven">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
                                     {{linkSeven}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
                                 </p>
                             </div>
                             <div id="collapseSeven" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <p class="mt-3 px-5">{{textSeven|raw}}</p>
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textSeven|raw}}</p>
                             </div>
                         </div>
                         {% endif %}
@@ -160,14 +164,14 @@ default = 0
                         {% if linkEight != '' %}
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingEight">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
                                     {{linkEight}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
                                 </p>
                             </div>
                             <div id="collapseEight" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <p class="mt-3 px-5">{{textEight|raw}}</p>
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textEight|raw}}</p>
                             </div>
                         </div>
                         {% endif %}
@@ -175,14 +179,14 @@ default = 0
                         {% if linkNine != '' %}
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingNine">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
                                     {{linkNine}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
                                 </p>
                             </div>
                             <div id="collapseSeven" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <p class="mt-3 px-5">{{textNine|raw}}</p>
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textNine|raw}}</p>
                             </div>
                         </div>
                         {% endif %}
@@ -190,14 +194,14 @@ default = 0
                         {% if linkTen != '' %}
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingTen">
-                                <p class="bg-gray text-primary font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-5" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
                                     {{linkTen}}
                                     <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
                                 </p>
                             </div>
                             <div id="collapseTen" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
-                                <p class="mt-3 px-5">{{textTen|raw}}</p>
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textTen|raw}}</p>
                             </div>
                         </div>
                         {% endif %}

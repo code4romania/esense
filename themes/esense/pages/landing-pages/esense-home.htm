@@ -1,6 +1,6 @@
 title = "Esense"
 url = "/"
-layout = "esense-non-static"
+layout = "landing-page"
 description = "Home page"
 is_hidden = 0
 ==
@@ -11,20 +11,20 @@ is_hidden = 0
             <div class="row min-vh-100">
                 <div class="col-12 col-lg-6 d-flex align-items-center order-2 order-lg-1">
                     <div class="pr-lg-5 d-none d-lg-block">
-                        <h1 class="text-dark font-weight-bold heading-line-height" style="line-height: 48px;">
+                        <h1 class="text-dark font-weight-bolder" style="line-height: 48px;">
                             {{ 'homePage.intro.section.title'|_ }}
                         </h1>
-                        <a href="{{ 'register-form'|page }}" class="btn btn-lg btn-primary px-lg-5 mt-2">{{ 'homePage.intro.section.btn.text'|_ }}</a>
+                        <a href="{{ 'authentification/register-form'|page }}" class="btn btn-sm btn-primary px-lg-5 mt-2">{{ 'homePage.intro.section.btn.text'|_ }}</a>
                     </div>
                     <div class="pr-lg-5 d-block d-lg-none">
-                        <h1 class="text-white font-weight-bold heading-line-height" style="line-height: 48px;">
+                        <h1 class="text-white font-weight-bolder" style="line-height: 48px;">
                             {{ 'homePage.intro.section.title'|_ }}
                         </h1>
-                        <a class="btn btn-lg btn-secondary text-white px-lg-5 mt-2" href="{{ 'register-form'|page }}">{{ 'homePage.intro.section.btn.text'|_ }}</a>
+                        <a class="btn btn-sm btn-secondary text-white px-lg-5 mt-2" href="{{ 'authentification/register-form'|page }}">{{ 'homePage.intro.section.btn.text'|_ }}</a>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 d-flex align-items-end align-items-lg-center order-1 order-lg-2">
-                    <div class="">
+                    <div>
                         <img class="img-fluid w-100" src="{{ 'assets/img/svg/hero-section-laptop.svg'|theme }}">
                     </div>
                 </div>
@@ -42,13 +42,13 @@ is_hidden = 0
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-gray-dark font-weight-light">{{ 'homePage.despre.proiect.title'|_ }}</h1>
-                <p class="text-muted" style="line-height: 34px;">{{ 'homePage.despre.proiect.text_1'|_ }}</p>
-                <p class="text-muted" style="line-height: 34px;">{{ 'homePage.despre.proiect.text_2'|_ }}</p>
+                <h1 class="text-gray-dark font-weight-light" style="line-height: 48px;">{{ 'homePage.despre.proiect.title'|_ }}</h1>
+                <p class="text-muted display-2" style="line-height: 34px;">{{ 'homePage.despre.proiect.text_1'|_ }}</p>
+                <p class="text-muted display-2" style="line-height: 34px;">{{ 'homePage.despre.proiect.text_2'|_ }}</p>
             </div>
             <div class="col-12">
                 <div class="d-flex align-items-baseline justify-content-center justify-content-md-end flex-column flex-md-row">
-                    <h3 class="text-gray-dark font-weight-normal" style="line-height: 29px;">{{ 'homePage.despre.proiect.finantat.de.text'|_ }}</h3>
+                    <h5 class="text-gray-dark font-weight-normal" style="line-height: 30px;">{{ 'homePage.despre.proiect.finantat.de.text'|_ }}</h5>
                     <div class="d-flex align-items-baseline">
                         <span class="font-weight-bolder ml-md-2 mr-1" style="color: #000; font-size: 30px;">{{'homePage.despre.proiect.orange.text'|_}}</span>
                         <img class="img-fluid" src="{{ 'assets/img/svg/orange-logo.svg'|theme }}">
@@ -65,8 +65,8 @@ is_hidden = 0
         <div class="row">
             <div class="col-12">
                 <div class="">
-                    <h1 class="text-white text-center mt-5 pt-5">{{ 'homePage.info.section.title'|_ }}</h1>
-                    <p class="text-center text-white"><span class="font-weight-bold">{{ 'homePage.info.section.subtitle.esense'|_ }}</span>{{ 'homePage.info.section.subtitle.text'|_ }}</p>
+                    <h1 class="text-white text-center mt-5 pt-5 font-weight-light" style="line-height: 48px;">{{ 'homePage.info.section.title'|_ }}</h1>
+                    <h4 class="text-center font-weight-normal text-white" style="line-height: 33px;"><span class="font-weight-bold">{{ 'homePage.info.section.subtitle.esense'|_ }}</span>{{ 'homePage.info.section.subtitle.text'|_ }}</h4>
                 </div>
             </div>
             <div class="col-12">
@@ -76,19 +76,15 @@ is_hidden = 0
             </div>
         </div>
     </div>
-    <!-- Info section background image -->
-    <!-- <div class="info-section">
-        <img class="img-fluid h-100 w-100" src="{{ 'assets/img/svg/landing-page-info-background.svg'|theme }}">
-    </div> -->
 </section>
 
 <!-- Partners -->
 <section class="my-5">
-    <div class="container pt-5">
+    <div class="container pt-5 mt-lg-5">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-gray-dark font-wieght-light">{{ 'homePage.parteners.title'|_ }}</h1>
-                <p class="text-muted">
+                <h1 class="text-gray-dark font-weight-light" style="line-height: 48px;">{{ 'homePage.parteners.title'|_ }}</h1>
+                <p class="text-muted display-2" style="line-height: 34px;">
                     <span class="font-weight-bold">{{'homePage.parteners.fundatia.sense.text'|_}}</span>
                     {{'homePage.parteners.text_1'|_}}
                     <span class="font-weight-bold">{{'homePage.parteners.code.for.romania.text'|_}}</span>
@@ -109,8 +105,8 @@ is_hidden = 0
                             <div class="h-100 d-flex justify-content-between flex-column">
                                 <div></div>
                                 <div>
-                                    <p class="small text-white p-0 m-0 pl-2">{{'homePage.parteners.educatie.incluziva.constantin.pufan.text'|_}}</p>
-                                    <p class="text-white p-0 m-0 pl-2 pb-2">{{'homePage.parteners.card.partener_1.location'|_}}</p>
+                                    <p class="small text-white p-0 m-0 pl-2 pb-2" style="line-height: 22px;">{{'homePage.parteners.educatie.incluziva.constantin.pufan.text'|_}}</p>
+                                    <p class="text-white display-2 p-0 m-0 pl-2 pb-3" style="line-height: 22px;">{{'homePage.parteners.card.partener_1.location'|_}}</p>
                                 </div>
                             </div>
                         </div>
@@ -120,8 +116,8 @@ is_hidden = 0
                             <div class="h-100 d-flex justify-content-between flex-column">
                                 <div></div>
                                 <div>
-                                    <p class="small text-white p-0 m-0 pl-2">{{'homePage.parteners.liceul.vasile.pavelcu.text'|_}}</p>
-                                    <p class="text-white p-0 m-0 pl-2 pb-2">T{{'homePage.parteners.card.partener_2.location'|_}}</p>
+                                    <p class="small text-white p-0 m-0 pl-2 pb-2" style="line-height: 22px;">{{'homePage.parteners.liceul.vasile.pavelcu.text'|_}}</p>
+                                    <p class="text-white p-0 m-0 pl-2 pb-3" style="line-height: 22px;">{{'homePage.parteners.card.partener_2.location'|_}}</p>
                                 </div>
                             </div>
                         </div>
@@ -131,8 +127,8 @@ is_hidden = 0
                             <div class="h-100 d-flex justify-content-between flex-column">
                                 <div></div>
                                 <div>
-                                    <p class="small text-white p-0 m-0 pl-2 pr-1 pr-lg-0">{{'homePage.parteners.educatie.incluziva.cristal.text'|_}}</p>
-                                    <p class="text-white p-0 m-0 pl-2 pb-2">{{'homePage.parteners.card.partener_3.location'|_}}</p>
+                                    <p class="small text-white p-0 m-0 pl-2 pb-2" style="line-height: 22px;">{{'homePage.parteners.educatie.incluziva.cristal.text'|_}}</p>
+                                    <p class="text-white p-0 m-0 pl-2 pb-3" style="line-height: 22px;">{{'homePage.parteners.card.partener_3.location'|_}}</p>
                                 </div>
                             </div>
                         </div>
@@ -142,8 +138,8 @@ is_hidden = 0
                             <div class="h-100 d-flex justify-content-between flex-column">
                                 <div></div>
                                 <div>
-                                    <p class="small text-white p-0 m-0 pl-2">{{'homePage.parteners.code.for.romania.text'|_}}</p>
-                                    <p class="text-white p-0 m-0 pl-2 pb-2">{{'homePage.parteners.card.partener_4.location'|_}}</p>
+                                    <p class="small text-white p-0 pl-2 pb-4" style="margin-bottom: 3.5px; line-height: 22px;">{{'homePage.parteners.code.for.romania.text'|_}}</p>
+                                    <p class="text-white p-0 m-0 pl-2 pb-3" style="line-height: 22px;">{{'homePage.parteners.card.partener_4.location'|_}}</p>
                                 </div>
                             </div>
                         </div>
@@ -199,15 +195,17 @@ is_hidden = 0
                         <img class="img-fluid my-4" src="{{ 'assets/img/svg/message-icon.svg'|theme }}">
                     </div>
                     <div class="px-2 px-lg-5">
-                        <h3 class="text-center px-lg-5 text-gray-dark">{{'homePage.form.title'|_}}</h3>
+                        <h5 class="text-center font-weight-normal px-lg-5 text-gray-dark" style="line-height: 30px;">{{'homePage.form.title'|_}}</h5>
                     </div>
                     <div class="row">
                         <div class="col-12 mt-5">
                             <form method="POST" data-request"">
                                 <div class="row">
+
+                                    <!-- First name -->
                                     <div class="col-12 col-md-6 mb-3">
-                                        <label class="small px-3 px-lg-0" for="first_name">{{'homePage.form.first.name.label'|_}}</label>
-                                        <div class="input-group mb-3 px-3 px-lg-0">
+                                        <label class="display-4 text-muted px-3 px-lg-0" for="first_name" style="line-height: 21px;">{{'homePage.form.first.name.label'|_}}</label>
+                                        <div class="input-group mb-3 px-3 px-lg-0 shadow-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-white border-light" id="basic-addon1">
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/user-form-icon.svg'|theme }}">
@@ -217,9 +215,11 @@ is_hidden = 0
                                                 aria-label="first_name" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
+
+                                    <!-- Last name -->
                                     <div class="col-12 col-md-6 mb-3">
-                                        <label class="small px-3 px-lg-0" for="last_name">{{'homePage.form.last.name.label'|_}}</label>
-                                        <div class="input-group mb-3 px-3 px-lg-0">
+                                        <label class="display-4 text-muted px-3 px-lg-0" for="last_name" style="line-height: 21px;">{{'homePage.form.last.name.label'|_}}</label>
+                                        <div class="input-group mb-3 px-3 px-lg-0 shadow-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-white border-light" id="basic-addon1">
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/form-label-icon.svg'|theme }}">
@@ -229,9 +229,11 @@ is_hidden = 0
                                                 aria-label="last_name" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
+
+                                    <!-- Email -->
                                     <div class="col-12 mb-3">
-                                        <label class="small px-3 px-lg-0" for="email">{{'homePage.form.email.label'|_}}</label>
-                                        <div class="input-group mb-3 px-3 px-lg-0">
+                                        <label class="display-4 text-muted px-3 px-lg-0" for="email" style="line-height: 21px;">{{'homePage.form.email.label'|_}}</label>
+                                        <div class="input-group mb-3 px-3 px-lg-0 shadow-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-white border-light" id="basic-addon1">
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/form-email-icon.svg'|theme }}">
@@ -241,18 +243,22 @@ is_hidden = 0
                                                 aria-label="email" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
+
+                                    <!-- Message -->
                                     <div class="col-12 mb-3">
                                         <div class="form-group px-3 px-lg-0">
-                                            <label class="small" for="message">{{'homePage.form.message.label'|_}}</label>
-                                            <textarea class="form-control border-light" id="message"rows="4"></textarea>
+                                            <label class="display-4 text-muted" for="message" style="line-height: 21px;">{{'homePage.form.message.label'|_}}</label>
+                                            <textarea class="form-control border-light shadow-sm" id="message"rows="4"></textarea>
                                         </div>
                                     </div>
+
+                                    <!-- Submit btn -->
                                     <div class="col-12">
                                         <div class="d-flex justify-content-lg-end justify-content-center mb-3">
-                                            <a href="" role="button" type="submit"
-                                                class="btn btn-lg btn-secondary px-5 text-white">{{'homePage.form.btn.text'|_}}</a>
+                                            <a href="" role="button" type="submit" class="btn btn-sm btn-secondary px-5">{{'homePage.form.btn.text'|_}}</a>
                                         </div>
                                     </div>
+
                                 </div>
                             </form>
                         </div>

@@ -1,6 +1,6 @@
 title = "Register form"
 url = "/register-form"
-layout = "esense-non-static"
+layout = "landing-page"
 description = "Formular de inregistrare"
 is_hidden = 0
 ==
@@ -10,8 +10,8 @@ is_hidden = 0
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-4">
-                    <h2 class="text-gray-dark mb-3">{{'registerPage.register.title'|_}}</h2>
-                    <p class="small text-muted">{{'registerPage.register.text'|_}}</p>
+                    <h3 class="text-gray-dark font-weight-light mb-3" style="line-height: 38px;">{{'registerPage.register.title'|_}}</h3>
+                    <p class="small text-muted" style="line-height: 22px; letter-spacing: -0,3px;">{{'registerPage.register.text'|_}}</p>
                 </div>
             </div>
         </div>
@@ -28,13 +28,13 @@ is_hidden = 0
                     </div>
                 </div>
                 <div class="col-12 col-lg-3">
-                    <a role="button" class="btn btn-block btn-primary">{{'registerPage.complete.form.btn.text'|_}}</a>
+                    <a role="button" class="btn btn-sm btn-block btn-primary">{{'registerPage.complete.form.btn.text'|_}}</a>
                 </div>
             </div>
         </div>
     </section>
 </div>
 
-{% partial 'registration/register-form-specialist' %}
-{% partial 'registration/register-form-school' %}
-{% partial 'registration/registration-success-message' %}
+{% partial 'authentification/registration/register-form-specialist' %}
+{% partial 'authentification/registration/register-form-school' %}
+{% partial 'authentification/registration/registration-success-message' %}
