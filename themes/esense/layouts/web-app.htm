@@ -5,7 +5,7 @@ description = "Landing page layout for esense"
     {% partial 'head' %}
 
     <link href="{{ [
-        'assets/scss/dashboard.scss',
+        'assets/scss/esense/web-app/web-app.scss',
     ]|theme }}" rel="stylesheet">
 
     <body>
@@ -21,13 +21,13 @@ description = "Landing page layout for esense"
 
         <div id="wrapper">
             <!-- Side navbar -->
-            {% partial 'dashboard/side-nav' %}
+            {% partial 'web-app/navs/side-nav' %}
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content">
                     <!-- Top navbar -->
-                    {% partial 'dashboard/top-nav' %}
+                    {% partial 'web-app/navs/top-nav' %}
                     <!-- Page content -->
                     {% page %}
                 </div>
