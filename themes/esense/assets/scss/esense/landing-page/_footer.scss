@@ -1,0 +1,24 @@
+/***********************************************
+**************** Footer icons ******************
+***********************************************/
+
+.footer-icons li {
+    list-style: none;
+    margin: 0 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.footer-icons li:nth-child(1) {
+    background: #0077B5
+}
+
+.footer-icons li:nth-child(2) {
+    background: #3B5999;
+}
+
+.footer-icons li:nth-child(3) {
+    background:#FF0000;
+}

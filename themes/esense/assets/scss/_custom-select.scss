@@ -1,0 +1,61 @@
+/***********************************************
+**************** Custom select *****************
+***********************************************/
+
+.bootstrap-select .btn:focus {
+    outline: none !important;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus,
+.dropdown-toggle:active {
+    background: #fff !important;
+}
+
+.filter-option-inner-inner {
+    font-size: 14px;
+    color: #838383;
+}
+
+.dropdown-menu li .active {
+    background:#fab954;
+}
+
+.dropdown-menu li a:hover,
+.dropdown-menu li a:focus {
+    background:#fab954;
+    color: #fff;
+}
+
+.dropdown-menu li a {
+    font-size: 14px;
+    color: #838383;
+    padding: 8px;
+}
+
+.register-select .dropdown-toggle{
+    padding: 13px 8px;
+    font-style: italic;
+}
+
+.register-select .filter-option-inner-inner {
+    color: #ADB5BD;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.register-select .dropdown-menu li .active {
+    background:transparent;
+}
+
+.register-select .dropdown-menu li a:hover,
+.register-select .dropdown-menu li a:focus {
+    background:#fab954;
+    color: #fff;
+}
+
+.register-select .dropdown-menu li a {
+    font-size: 14px;
+    color: #838383;
+    padding: 5px 8px;
+}

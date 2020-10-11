@@ -1,0 +1,12 @@
+/***********************************************
+*************** Login page bg ******************
+***********************************************/
+
+.login-bg {
+    position: relative;
+    background: url("../../../img/svg/login-bg.svg");
+    background-repeat: no-repeat;
+    background-position:center center;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+}

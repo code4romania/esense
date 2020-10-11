@@ -1,10 +1,14 @@
 /** Import variables that override bootstrap. */
 @import "variables";
 
-/** Owl carousel custom scss */
-@import "owl-carousel";
+/** Import typography. */
+@import "typography";
 
-@import "landing-page";
+/** Custom select */
+@import "custom-select";
+
+/** Input placeholder */
+@import "input-placeholder";
 
 /** Import bootstrap from node modules. */
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
