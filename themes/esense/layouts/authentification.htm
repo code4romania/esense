@@ -1,0 +1,26 @@
+description = "Authentification layout"
+==
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <link href="{{ [
+        'assets/scss/esense/landing-page/landing-page.scss',
+    ]|theme }}" rel="stylesheet">
+    
+    <body>
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        {% page %}
+
+    </body>
+
+</html>

@@ -1,0 +1,51 @@
+description = "Layout for 'Politica de confidentialitate' page."
+
+[staticPage]
+useContent = 1
+default = 0
+==
+
+<!-- Politica de confidentialitate -->
+{variable name="politicaDeConfidentialitateTitle" label="Title" tab="Politica de confidentialitate" type="text"}{/variable}
+{variable name="politicaDeConfidentialitateText" label="Content" tab="Politica de confidentialitate" type="richeditor"}{/variable}
+
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <link href="{{ [
+        'assets/scss/esense/landing-page/landing-page.scss',
+    ]|theme }}" rel="stylesheet">
+
+    <body>
+
+        {% partial 'navbar' %}
+
+        <section class="depre-proiect"></section>
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12 my-5">
+                    <h1 class="text-dark font-weight-light">{{ politicaDeConfidentialitateTitle }}</h1>
+                    <p class="text-danger">{{ politicaDeConfidentialitateText|raw }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% partial 'footer-columns' %}
+
+        {% partial 'footer' %}
+
+        {% partial 'footer-scripts' %}
+    </body>
+
+</html>

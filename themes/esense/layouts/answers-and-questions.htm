@@ -1,0 +1,237 @@
+description = "Answers and questions"
+
+[staticPage]
+useContent = 1
+default = 0
+==
+<!-- FAQ -->
+{variable name="answersAndQuestionsTitle" label="Title" tab="Answers and Questions" type="text"}{/variable}
+
+{variable name="linkOne" label="Title One" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textOne" label="Text One" tab="Answers and Questions" type="richeditor"}{/variable}
+
+{variable name="linkTwo" label="Title Two" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textTwo" label="Text Two" tab="Answers and Questions" type="richeditor"}{/variable}
+
+{variable name="linkThree" label="Title Three" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textThree" label="Text Three" tab="Answers and Questions" type="richeditor"}{/variable}
+
+{variable name="linkFour" label="Title Four" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textFour" label="Text Four" tab="Answers and Questions" type="richeditor"}{/variable}
+
+{variable name="linkFive" label="Title Five" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textFive" label="Text Five" tab="Answers and Questions" type="richeditor"}{/variable}
+
+{variable name="linkSix" label="Title Six" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textSix" label="Text Six" tab="Answers and Questions" type="richeditor"}{/variable}
+
+{variable name="linkSeven" label="Title Seven" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textSeven" label="Text Seven" tab="Answers and Questions" type="richeditor"}{/variable}
+
+{variable name="linkEight" label="Title Eight" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textEight" label="Text Eight" tab="Answers and Questions" type="richeditor"}{/variable}
+
+{variable name="linkNine" label="Title Nine" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textNine" label="Text Nine" tab="Answers and Questions" type="richeditor"}{/variable}
+
+{variable name="linkTen" label="Title Ten" tab="Answers and Questions" type="text"}{/variable}
+{variable name="textTen" label="Text Ten" tab="Answers and Questions" type="richeditor"}{/variable}
+
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <link href="{{ [
+        'assets/scss/esense/landing-page/landing-page.scss',
+    ]|theme }}" rel="stylesheet">
+
+    <body>
+        {% partial 'navbar' %}
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        <section class="depre-proiect"></section>
+
+        <div class="container mt-5 py-5">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-gray-dark py-4 font-weight-light" style="line-height: 48px;">{{ answersAndQuestionsTitle }}</h1>
+                </div>
+                <div class="col-12 mb-5 pb-5">
+                    <div class="accordion" id="accordionExample">
+
+                        <div class="card border-0 mb-4">
+                            <div class="acordeon-header" id="headingOne">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="line-height: 27px;">
+                                    {{linkOne}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="arrow-down">
+                                </p>
+                            </div>
+                            <div id="collapseOne" class="collapse text-muted px-lg-4" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <p class="display-2 mt-3 text-muted px-5" style="line-height: 37px;">{{textOne|raw}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingTwo">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    {{linkTwo}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
+                                </p>
+                            </div>
+                            <div id="collapseTwo" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textTwo|raw}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingThree">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                    {{linkThree}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
+                                </p>
+                            </div>
+                            <div id="collapseThree" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textThree|raw}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingFour">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                    {{linkFour}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
+                                </p>
+                            </div>
+                            <div id="collapseFour" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textFour|raw}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingFive">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                    {{linkFive}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
+                                </p>
+                            </div>
+                            <div id="collapseFive" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textFive|raw}}</p>
+                            </div>
+                        </div>
+
+                        {% if linkSix != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingSix">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                    {{linkSix}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
+                                </p>
+                            </div>
+                            <div id="collapseSix" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textSix|raw}}</p>
+                            </div>
+                        </div>
+
+                        {% endif %}
+                        {% if linkSeven != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingSeven">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                    {{linkSeven}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
+                                </p>
+                            </div>
+                            <div id="collapseSeven" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textSeven|raw}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if linkEight != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingEight">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                    {{linkEight}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
+                                </p>
+                            </div>
+                            <div id="collapseEight" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textEight|raw}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if linkNine != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingNine">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                                    {{linkNine}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
+                                </p>
+                            </div>
+                            <div id="collapseSeven" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textNine|raw}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if linkTen != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingTen">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                                    {{linkTen}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}">
+                                </p>
+                            </div>
+                            <div id="collapseTen" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textTen|raw}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% partial 'footer-columns'%}
+
+        {% partial 'footer' %}
+
+        {% partial 'footer-scripts' %}
+
+        {% scripts %}
+
+        <script>
+            $(document).ready(function () {
+                /** Flip arrow. */
+                $(".collapse.show").each(function () {
+                    $(this).prev(".acordeon-header").find(".img").addClass("rotate-up");
+                });
+                $(".collapse").on('show.bs.collapse', function () {
+                    $(this).prev(".acordeon-header").find(".img").removeClass("rotate-down").addClass(
+                        "rotate-up");
+                }).on('hide.bs.collapse', function () {
+                    $(this).prev(".acordeon-header").find(".img").removeClass("rotate-up").addClass(
+                        "rotate-down");
+                });
+            });
+        </script>
+    </body>
+</html>

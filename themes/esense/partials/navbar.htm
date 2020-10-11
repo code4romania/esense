@@ -2,40 +2,51 @@ description = "Navbar partial for drive grade"
 
 [viewBag]
 ==
-<nav id="navbar" class="navbar navbar-custom navbar-expand-lg pt-3 fixed-top">
+<nav id="navbar" class="navbar navbar-custom navbar-expand-lg py-3 fixed-top">
     <div>
-        <a class="navbar-brand" href="/">
-            <img class="img-fluid" src="{{ 'assets/img/svg/logo.svg'|theme }}">
+        <a class="navbar-brand pl-lg-5 ml-lg-5" href="/">
+            <img class="img-fluid logo-blue" src="{{ 'assets/img/svg/logo.svg'|theme }}">
+            <img class="img-fluid logo-white" src="{{ 'assets/img/svg/logo-white.svg'|theme }}">
         </a>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="{{ 'assets/img/mobile-open.png'|theme }}" width="50px" alt="mobile-open">
+        <img src="{{ 'assets/img/menu.png'|theme }}" width="50px" alt="mobile-open">
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto pr-lg-5 mr-lg-5">
-            <li class="nav-item my-2 px-2 my-md-0">
-                <a class="nav-link text-white small" href="{{ 'despre-proiect'|page }}">
+        <ul class="navbar-nav ml-auto mr-lg-5">
+
+            <!-- Despre proiect -->
+            <li class="nav-item my-2 pl-3 my-md-0">
+                <a class="nav-link text-white display-4 roboto-family" href="{{ 'landing-pages/about-project'|page }}">
                     {{'navbar.link_1'|_}}
                 </a>
             </li>
-            <li class="nav-item my-2 px-2 my-md-0">
-                <a class="nav-link text-white small" href="{{ 'questions-and-answers'|page }}">
+
+            <!-- FAQ -->
+            <li class="nav-item my-2 pl-3 my-md-0">
+                <a class="nav-link text-white display-4 roboto-family" href="{{ 'intrebari-si-raspunsuri'|staticPage }}">
                     {{'navbar.link_2'|_}}
                 </a>
             </li>
-            <li class="nav-item my-2 px-2 my-md-0">
-                <a class="nav-link text-white small" href="">
+
+            <!-- Contact -->
+            <li class="nav-item my-2 pl-3 my-md-0">
+                <a class="nav-link text-white display-4 roboto-family" href="{{ 'landing-pages/esense-home'|page }}#contact">
                     {{'navbar.link_3'|_}}
                 </a>
             </li>
-            <li class="nav-item my-2 px-2 my-md-0">
-                <a class="nav-link btn btn-sm btn-outline-secondary text-white small px-4" href="{{ 'register-form'|page }}">
+
+            <!-- Register -->
+            <li class="nav-item my-2 pl-4 my-md-0">
+                <a class="btn btn-outline-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/register-form'|page }}">
                     {{'navbar.link_4'|_}}
                 </a>
             </li>
-            <li class="nav-item my-2 px-2 my-md-0">
-                <a class="nav-link btn btn-sm btn-secondary text-white small px-2" href="{{ 'login'|page }}">
+
+            <!-- Login -->
+            <li class="nav-item my-2 pl-4 my-md-0">
+                <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/login'|page }}">
                     {{'navbar.link_5'|_}}
                 </a>
             </li>
