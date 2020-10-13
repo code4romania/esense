@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/***********************************************
+*************** Search input *******************
+***********************************************/
+
+.dataTables_filter label {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.dataTables_filter input {
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid rgba(223, 214, 214, 0.1);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    padding: 7px;
+    background-image: url("../../../img/svg/dashboard/search.svg");
+    background-repeat: no-repeat;
+    background-position: 97% center;
+}
+
+.dataTables_filter input:focus {
+    outline: none !important;
+    background-image:none;
+}
+
+.dataTables_filter input::placeholder {
+    margin-left: 25px;
+    font-style: italic;
+}
+
+.dataTables_filter input:focus::placeholder {
+    opacity: 0 !important;
+}
+
+/***********************************************
+**************** Table th/td *******************
+***********************************************/
+
+table.dataTable th {
+    border: none;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    color: #9FA2B4 !important;
+}
+
+table.dataTable tbody tr td {
+    border: none;
+    background: #fff;
+    font-family: 'Mulish', sans-serif;
+}
+
+table.dataTable tbody tr {
+    border-top: 1.5px solid #DFE0EB;
+}
+
+table.dataTable tbody tr:last-child {
+    border-bottom: 1.5px solid #DFE0EB;
+}
+
+@media screen and (max-width: 767px) {
+
+    table.dataTable {
+        width: 100% !important;
+    }
+
+    table.dataTable th {
+        display: none;
+    }
+
+    table.dataTable tbody tr td {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/***********************************************
+***************** Pagination *******************
+***********************************************/
+
+.paginate_button {
+    position: relative;
+    color: #9FA2B4;
+    top: -5px;
+    cursor: pointer;
+}
+
+.paginate_button:hover {
+    color: #9FA2B4;
+    text-decoration: none;
+}
+
+.paginate_button.previous,
+.paginate_button.next {
+    font-size: 35px;
+    margin: 0px 3px;
+}
+
+.teacher-dashboard-pagination .paging_full_numbers {
+    padding: 0 10px;
+    margin: 0;
+}
+
+.teacher-dashboard-pagination .paginate_button {
+    position: relative;
+    color: #9FA2B4;
+    top: 0;
+    font-size: 14px;
+}
+
+.teacher-dashboard-pagination .paginate_button.previous,
+.teacher-dashboard-pagination .paginate_button.next {
+    font-size: 20px;
+    margin: 0px 3px;
+}
+
+.paginate_button.current {
+    color: #fab954 !important;
+}
+
+/***********************************************
+************** Pagination info *****************
+***********************************************/
+
+.dataTables_info {
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 0.3px;
+    color: #9FA2B4;
+    margin-right: 10px;
+}
+
+/***********************************************
+************** Datatables length ***************
+***********************************************/
+
+.dataTables_length label {
+    font-family: "Mulish", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    color: #9FA2B4;
+}
+
+.dataTables_length select {
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    color: #9FA2B4;
+}
