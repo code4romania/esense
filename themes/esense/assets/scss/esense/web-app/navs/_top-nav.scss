@@ -46,15 +46,10 @@
     font-size: 0.85rem;
     height: auto;
     border: 1px solid #E6E6E6 !important;
-    outline: none !important;
     border-radius: 25.5px;
-    background: url("../img/svg/dashboard/top-nav/search-icon.svg");
+    background: url("../../../../img/svg/dashboard/top-nav/search-icon.svg");
     background-position: 10px center;
     background-repeat: no-repeat;
-}
-
-.topbar .navbar-search input:focus {
-    background: none;
 }
 
 .topbar .navbar-search input:focus::-webkit-input-placeholder {

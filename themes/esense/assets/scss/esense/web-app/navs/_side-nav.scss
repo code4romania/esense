@@ -29,6 +29,7 @@
     line-height: 20px;
     font-size: 14px;
     font-weight: 700;
+    font-family: 'TitilliumWeb-Regular', sans-serif;
 }
 
 .sidebar .nav-item.active .nav-link {
@@ -124,7 +125,9 @@
     .sidebar .nav-item .nav-link span {
         padding-left: 15px;
         font-weight: 700;
-        font-size: 15px;
+        line-height: 25px;
+        font-size: 16px;
+        font-family: 'TitilliumWeb-Regular', sans-serif;
     }
 
     .sidebar.toggled {
@@ -134,7 +137,7 @@
 
     .sidebar.toggled .nav-item .nav-link {
         text-align: center;
-        width: 10rem;
+        width: 9rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -142,8 +145,9 @@
     }
     .sidebar.toggled .nav-item .nav-link span {
         font-size: 14px;
-        width: 9rem;
+        width: 8rem;
         padding-left: 0px;
         font-weight: 700;
+        font-family: 'TitilliumWeb-Regular', sans-serif;
     }
 }
