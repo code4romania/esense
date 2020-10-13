@@ -1,0 +1,86 @@
+title = "Student profile"
+url = "/teacher/student"
+layout = "web-app"
+description = "Student profile"
+is_hidden = 0
+==
+<div class="container-fluid px-lg-4 mb-5">
+    <div class="row">
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="bg-white rounded" style="box-shadow: 0px 0px 32px rgba(136, 152, 170, 0.15)">
+                <div class="row">
+
+                    <!-- Student details and actions -->
+                    <div class="col-12">
+                        <div class="p-3 d-flex align-items-start justify-content-between">
+                            <div class="d-flex flex-column flex-md-row">
+                                <img width="80" height="80" class="img-profile rounded-circle mb-2 mb-md-0" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <div class="ml-3">
+                                    <p class="p-0 m-0 font-weight-bold text-dark" style="line-height: 25px;">Student Name</p>
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.varsta'|_}} x {{'teacher.dashboard.student.profile.ani'|_}}</p>
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.profesor'|_}} Profesor 1, Profesor 2</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <p class="p-0 m-0 mr-2 d-none d-md-block" style="line-height: 25px; color: #313131;">{{'teacher.dashboard.student.profile.actions.text'|_}}</p>
+                                <div class="dropdown">
+                                    <button class="btn shadow-none p-0 m-0" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img class="" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'student.options.link_1'|_}}</a>
+                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'student.options.link_2'|_}}</a>
+                                        <a class="dropdown-item display-4 text-danger" href="#">{{'student.options.link_3'|_}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frequent exercises owl carousel -->
+                    <div class="col-12 mt-4">
+
+                        <div class="px-3 d-flex align-items-center justify-content-between">
+                            <p class="p-0 m-0 text-gray-dark font-weight-bold">Exercitii frecvente</p>
+                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
+                        </div>
+
+                        <div class="mt-4 px-3">
+                            <div class="exercises-owl-carousel owl-carousel owl-theme owl-responsive-0">
+                                <div class="item">
+                                    <div class="rounded bg-white" style="box-shadow: 0px 0px 32px rgba(136, 152, 170, 0.15);">
+                                        <div class="bg-white">
+                                            <p class="p-0 m-0 pl-3 text-gray-dark">Denumire joc #1</p>
+                                        </div>
+                                        <div class="">
+                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/exercise_1.svg'|theme }}">
+                                        </div>
+                                        <div class="p-3 bg-white d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/label.svg'|theme }}">
+                                                <p class="p-0 m-0 ml-2" style="font-size: 12px; color: #000000; line-height:16px;">Localizare</p>
+                                            </div>
+                                            <div>
+                                                <a href="" class="btn btn-sm btn-primary-dark">Detalii</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student profile table -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
