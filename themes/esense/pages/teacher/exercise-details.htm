@@ -1,7 +1,7 @@
-title = "Register form"
-url = "/dashboard/exercise"
+title = "Game and exercise details"
+url = "/teacher/exercise"
 layout = "web-app"
-description = ""
+description = "Game and exercise details"
 is_hidden = 0
 ==
 <div class="container-fluid px-lg-4 mb-5">
@@ -10,28 +10,28 @@ is_hidden = 0
             <img class="img-fluid w-100" src="{{ 'assets/img/svg/dashboard/exercise/exercise_1.svg'|theme }}" alt="">
         </div>
         <div class="col-12 col-md-6 col-lg-5">
-            <p class="text-dark font-weight-light">{{'demoGamePage.game.name.title'|_}}</p>
-            <div class="d-flex align-items-center mb-3">
+            <p class="text-gray-dark font-weight-bold">{{'demoGamePage.game.name.title'|_}}</p>
+            <div class="d-flex align-items-center mb-2">
                 <img class="img-fluid" src="{{ 'assets/img/svg/small-tag-icon.svg'|theme }}">
-                <p class="p-0 m-0 small pl-3">{{'demoGamePage.game.category.title'|_}}</p>
+                <p class="p-0 m-0 display-4 pl-3" style="color: #000;">{{'demoGamePage.game.category.title'|_}}</p>
             </div>
-            <p class="p-0 m-0 display-2 py-1">{{'demoGamePage.game.info_1.text'|_}}</p>
-            <p class="p-0 m-0 display-2 py-1">{{'demoGamePage.game.info_2.text'|_}}</p>
-            <p class="p-0 m-0 display-2 py-1">{{'demoGamePage.game.info_3.text'|_}}</p>
-            <p class="p-0 m-0 display-2 py-1">{{'demoGamePage.game.info_4.text'|_}}</p>
-            <p class="p-0 m-0 display-2 py-1">{{'demoGamePage.game.info_2.text'|_}}</p>
-            <p class="p-0 m-0 display-2 py-1">{{'demoGamePage.game.info_3.text'|_}}</p>
+            <p class="p-0 m-0 small text-primary-dark pb-1" style="letter-spacing: -0,3px; line-height:22px">{{'demoGamePage.game.info_1.text'|_}}</p>
+            <p class="p-0 m-0 small text-primary-dark pb-1" style="letter-spacing: -0,3px; line-height:22px">{{'demoGamePage.game.info_2.text'|_}}</p>
+            <p class="p-0 m-0 small text-primary-dark pb-1" style="letter-spacing: -0,3px; line-height:22px">{{'demoGamePage.game.info_3.text'|_}}</p>
+            <p class="p-0 m-0 small text-primary-dark pb-1" style="letter-spacing: -0,3px; line-height:22px">{{'demoGamePage.game.info_4.text'|_}}</p>
+            <p class="p-0 m-0 small text-primary-dark pb-1" style="letter-spacing: -0,3px; line-height:22px">{{'demoGamePage.game.info_2.text'|_}}</p>
+            <p class="p-0 m-0 small text-primary-dark pb-1" style="letter-spacing: -0,3px; line-height:22px">{{'demoGamePage.game.info_3.text'|_}}</p>
         </div>
         <div class="col-12">
             <div class="row">
-                <div class="col-12 col-md-4">
-
+                <div class="col-12 mt-5 mb-3">
+                    <p class="text-black font-weight-bold pb-2" style="line-height: 25px;">Cum funcționează acest exercițiu?</p>
+                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/exercise-description.svg'|theme }}">
                 </div>
-                <div class="col-12 col-md-4">
-
-                </div>
-                <div class="col-12 col-md-4">
-
+                <div class="col-12">
+                    <p class="small text-muted" style="line-height:22px; letter-spacing: -0.3px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias beatae eligendi hic quo soluta culpa laborum unde incidunt tempore non nihil nemo labore sunt maxime quidem quos ab, dolore reiciendis corporis sit reprehenderit adipisci ad repudiandae velit? Molestias aliquam voluptatem fuga nisi. Debitis quae temporibus sint non ipsa! Doloribus, a?</p>
+                    <p class="small text-muted" style="line-height:22px; letter-spacing: -0.3px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt officia, iste qui tenetur rerum quaerat aliquam aliquid debitis assumenda dolor quasi ab, eveniet consequatur, molestias enim. Exercitationem, nostrum? Recusandae, magnam incidunt iure laudantium nesciunt laboriosam! Tenetur, ut hic expedita iste dolorum, et, eveniet tempora harum consequatur laborum doloribus dolore quam.</p>
+                    <p class="small text-muted" style="line-height:22px; letter-spacing: -0.3px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, qui nobis natus aspernatur non commodi, minima tempore fugit magni tenetur, quidem laboriosam unde saepe quisquam atque in dolore ab aliquid.</p>
                 </div>
             </div>
         </div>
