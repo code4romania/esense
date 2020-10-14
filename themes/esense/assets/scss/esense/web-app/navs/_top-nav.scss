@@ -37,30 +37,3 @@
     right: 0rem;
     margin-top: -.25rem;
 }
-
-.topbar .navbar-search {
-    width: 17rem;
-}
-
-.topbar .navbar-search input {
-    font-size: 0.85rem;
-    height: auto;
-    border: 1px solid #E6E6E6 !important;
-    border-radius: 25.5px;
-    background: url("../../../../img/svg/dashboard/top-nav/search-icon.svg");
-    background-position: 10px center;
-    background-repeat: no-repeat;
-}
-
-.topbar .navbar-search input:focus::-webkit-input-placeholder {
-    opacity: 0 !important;
-}
-
-.topbar .navbar-search input::placeholder {
-    padding-left: 25px;
-    font-style: normal;
-    color: #000 !important;
-    opacity: 0.5 !important;
-    font-size: 14px !important;
-    line-height: 19px !important;
-}
