@@ -12,3 +12,6 @@
 
 /** Import bootstrap from node modules. */
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+/** Import Ocookie styles that override predefined ocookie plugin styles. */
+@import "ocookie";
