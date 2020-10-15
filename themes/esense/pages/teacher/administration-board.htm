@@ -300,9 +300,13 @@ is_hidden = 0
 </div>
 
 {% put scripts %}
-    <!-- Scripts for datatables -->
     <script type="text/javascript">
         $(document).ready(function () {
+
+            /***********************************************
+            *********** Students datatable *****************
+            ***********************************************/
+
             $('#students-datatable').DataTable({
                 dom: '<"row"<"col-12 added-content">><"row"<"col-12"t>><"row bg-white"<"col-12 p-3 teacher-dashboard-pagination d-flex align-items-center justify-content-end"p>>',
                 responsive: true,
@@ -331,49 +335,47 @@ is_hidden = 0
             });
             $('.added-content').html('<div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);"> <div class="col-12 col-lg-7"> <p class="display-2 font-weight-light text-gray-2">{{"students.table.title"|_}}</p> </div> <div class="col-12 col-lg-5"> <div class="d-flex align-items-center justify-content-start justify-content-lg-end"> <img class="img-fluid" src="{{ "assets/img/svg/dashboard/arrow-right.svg"|theme }}"><a class="ml-2 display-4 text-gray-light" href="{{ "teacher/my-students"|page }}">{{"students.table.all.students.link.text"|_}}</a> </div> </div> </div>');
 
-            /* chart.js chart examples */
+            /***********************************************
+            ***************** Panel chart ******************
+            ***********************************************/
 
-        // chart colors
-        var colors = ['#A6CEE3','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+            /** Chart colors. */
+            var colors = ['#A6CEE3','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
 
-        /* large line chart */
-        var chLine = document.getElementById("chLine");
-        var chartData = {
-        labels: ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"],
-        datasets: [{
-            data: [1, 2, 4, 3, 2, 3, 5, 0, 2, 4, 0, 2],
-            backgroundColor: 'transparent',
-            borderColor: colors[0],
-            borderWidth: 2,
-            pointBackgroundColor: colors[0]
-        }]
-        };
+            /** Large line chart. */
+            var chLine = document.getElementById("chLine");
 
-        if (chLine) {
-        new Chart(chLine, {
-        type: 'line',
-        data: chartData,
-        options: {
-            responsive: true,
-            scales: {
-            yAxes: [{
-                ticks: {
-                beginAtZero: false,
-                precision:0,
-                }
-            }]
-            },
-            legend: {
-                display: false,
-                labels: {
-                    fontColor: '#333',
-                      }
+            /** Chart data. */
+            var chartData = {
+                labels: ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"],
+                datasets: [{
+                    data: [1, 2, 4, 3, 2, 3, 5, 0, 2, 4, 0, 2],
+                    backgroundColor: 'transparent',
+                    borderColor: colors[0],
+                    borderWidth: 2,
+                    pointBackgroundColor: colors[0]
+                }]
+            };
+
+            /** Chart options */
+            if (chLine) {
+                new Chart(chLine, {
+                    type: 'line',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: false,
+                                    precision:0,
+                                }
+                            }]
+                        },
+                        legend: { display: false }
+                    }
+                });
             }
-        }
-        });
-        }
-
-
         });
     </script>
 {% endput %}
