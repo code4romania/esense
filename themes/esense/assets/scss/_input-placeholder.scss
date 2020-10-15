@@ -13,3 +13,9 @@
     font-weight: 500;
     line-height: 23px;
 }
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+    background-color: #fab954;
+    border-color: #fab954;
+    outline: 0;
+}
