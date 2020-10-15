@@ -3,6 +3,9 @@ url = "/login"
 layout = "authentification"
 description = "Login"
 is_hidden = 0
+
+[login]
+forceSecure = 0
 ==
 <section>
     <div class="container-fluid">
@@ -24,7 +27,7 @@ is_hidden = 0
             <div class="col-12 col-lg-4 offset-lg-4 bg-light pb-5 my-md-5 my-lg-0 rounded shadow">
                 <p class="py-5 display-2 text-center font-weight-light" style="line-height: 27px; color:#000;">{{'loginPage.form.title'|_}}</p>
                 <!-- Login form -->
-                <form method="POST" data-request"">
+                <form method="POST" data-request="onLogin">
                     <div class="row">
 
                         <div class="col-12 mb-3">
