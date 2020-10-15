@@ -30,7 +30,7 @@
 	</li>
 
 	<!-- Elevi mei -->
-	<li class="nav-item mb-2 {% if this.page.url == "/teacher/students" or this.page.url == "/teacher/student"  %} active {% endif %}">
+	<li class="nav-item mb-2 {% if this.page.url == "/teacher/students" or this.page.url == "/teacher/student" or this.page.url == '/teacher/transfer-student' or this.page.url == '/teacher/add-student'  %} active {% endif %}">
 		<div class="vertical-border"></div>
 		<a class="nav-link" href="{{ 'teacher/my-students'|page }}">
 			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
@@ -39,18 +39,18 @@
 	</li>
 
 	<!-- Scoala -->
-	<li class="nav-item mb-2">
+	<li class="nav-item mb-2 {% if this.page.url == "/teacher/school"%} active {% endif %}">
 		<div class="vertical-border"></div>
-		<a class="nav-link" href="tables.html">
+		<a class="nav-link" href="{{ 'teacher/school'|page }}">
 			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/sliders.svg'|theme }}">
 			<span class="text-primary-dark">{{"side.nav.link_4"|_}}</span>
 		</a>
 	</li>
 
 	<!-- Informatii utile -->
-	<li class="nav-item mb-2">
+	<li class="nav-item mb-2 {% if this.page.url == "/teacher/information/:slug?"%} active {% endif %}">
 		<div class="vertical-border"></div>
-		<a class="nav-link" href="tables.html">
+		<a class="nav-link" href="{{ 'teacher/information'|page }}">
 			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/alert-circle.svg'|theme }}">
 			<span class="text-primary-dark">{{"side.nav.link_5"|_}}</span>
 		</a>
