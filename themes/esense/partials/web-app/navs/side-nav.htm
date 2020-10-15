@@ -21,7 +21,7 @@
 	</li>
 
 	<!-- Exercitii si jocuri -->
-	<li class="nav-item mb-2 {% if this.page.url == "/teacher/exercises" or this.page.url == "/teacher/exercise" %} active {% endif %}">
+	<li class="nav-item mb-2 {% if this.page.url == "/teacher/exercises/:category?" or this.page.url == "teacher/exercise/:slug" %} active {% endif %}">
 		<div class="vertical-border"></div>
 		<a class="nav-link" href="{{ 'teacher/exercises'|page }}">
 			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/zap.svg'|theme }}">
