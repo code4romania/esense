@@ -11,57 +11,63 @@ description = "Register from"
                     <div class="shadow-lg rounded bg-white p-0 p-md-5">
                         <div class="shadow rounded p-3 py-4">
                             <p class="display-2 text-medium-dark p-0 m-0 mb-3 form-styles">{{'registerPage.form.title_1'|_}}</p>
+
                             <div class="row">
                                 <!-- Last name input -->
-                                <div class="col-12 col-lg-6">
+                                <div class="col-12">
                                     <div class="form-group">
-                                        <input type="text" name="last_name" class="form-control" id="last_name" aria-describedby="last_nameHelp" placeholder="{{'registerPage.form.input.last.name.placeholder'|_}}" style="font-style:italic;">
+                                        <input type="text" name="school_name" class="form-control" id="school_name" aria-describedby="school_nameHelp" placeholder="{{'registerPage.form.input.school.name.placeholder'|_}}" style="font-style:italic;">
                                     </div>
                                 </div>
-                                <!-- First name input -->
-                                <div class="col-12 col-lg-6">
-                                    <div class="form-group">
-                                        <input type="text" name="first_name" class="form-control" id="first_name" aria-describedby="first_nameHelp" placeholder="{{'registerPage.form.input.first.name.placeholder'|_}}" style="font-style:italic;">
-                                    </div>
-                                </div>
-                                <!-- Phone number input -->
-                                <div class="col-12 col-lg-6">
-                                    <div class="form-group">
-                                        <input type="number" name="phone_number" class="form-control" id="phone_number" aria-describedby="phone_numberHelp" placeholder="{{'registerPage.form.input.phone.placeholder'|_}}" style="font-style:italic;">
-                                    </div>
-                                </div>
-                                <!-- Email input -->
-                                <div class="col-12 col-lg-6">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.email.placeholder'|_}}" style="font-style:italic;">
-                                    </div>
-                                </div>
-                                <!-- Region select -->
-                                <div class="col-12 col-lg-6">
-                                    <div class="form-group register-select">
-                                        <select class="form-control selectpicker border outline-none" data-style="btn-white">
-                                        <option>{{'registerPage.form.region.default.option'|_}}</option>
-                                        </select>
-                                    </div>
-                                </div>
+
                                 <!-- County select -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group register-select">
-                                        <select class="form-control selectpicker border outline-none" data-style="btn-white">
-                                        <option>{{'registerPage.form.county.default.option'|_}}</option>
+                                        <select name="county" id="schoolCounty" class="form-control border outline-none" data-style="btn-white">
+                                            {% for key, county in counties %}
+                                                <option value="{{ key }}">{{ county }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
-                                <!-- School name select -->
-                                <div class="col-12">
+
+                                <!-- City select -->
+                                <div class="col-12 col-lg-6">
                                     <div class="form-group register-select">
-                                        <select class="form-control selectpicker border outline-none" data-style="btn-white">
-                                        <option>{{'registerPage.form.school.name.default.option'|_}}</option>
-                                        </select>
+                                        <select name="city" id="schoolCity" class="form-control border outline-none" data-style="btn-white" disabled></select>
+                                    </div>
+                                </div>
+
+                                <!-- Contact person last name input -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" name="last_name" class="form-control" id="last_name" aria-describedby="last_nameHelp" placeholder="{{'registerPage.form.input.contact.person.last.name.placeholder'|_}}" style="font-style: italic;">
+                                    </div>
+                                </div>
+
+                                <!-- Contact person first name input -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" name="first_name" class="form-control" id="first_name" aria-describedby="first_nameHelp" placeholder="{{'registerPage.form.input.contact.person.first.name.placeholder'|_}}" style="font-style: italic;">
+                                    </div>
+                                </div>
+
+                                <!-- Contact person phone number input -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="number" name="phone_number" class="form-control" id="phone_number" aria-describedby="phone_numberHelp" placeholder="{{'registerPage.form.input.contact.person.phone.placeholder'|_}}" style="font-style: italic;">
+                                    </div>
+                                </div>
+
+                                <!-- Contact person email input -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.contact.person.email.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <!-- Description input -->
                         <div class="shadow rounded p-3 py-4 mt-5">
                             <p class="display-2 text-medium-dark form-styles pl-3">{{'registerPage.form.title_2'|_}}</p>
@@ -74,6 +80,7 @@ description = "Register from"
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <!-- Submit button -->
                 <div class="col-12 mt-5 mb-5 mb-lg-0">
@@ -85,3 +92,32 @@ description = "Register from"
         </form>
     </div>
 </section>
+
+{% put scripts %}
+    <script type="text/javascript">
+        /**
+          * Function that extracts the cities of a county.
+          */
+        $(document).ready(function () {
+            $('#schoolCounty').on('change', function() {
+                $.request('onGetCities', {
+                    data: {
+                        countyId: this.value
+                    },
+                    success: function(data) {
+                        /* Reset the city select content. */
+                        $('#schoolCity').html('');
+
+                        /* Parse all received citied and add them. */
+                        for (const city in data) {
+                            $('#schoolCity').append(`<option value="${data[city]}">${city}</option>`);
+                        }
+
+                        /* Activate the select. */
+                        $('#schoolCity').prop("disabled", false);
+                    }
+                })
+            });
+        });
+    </script>
+{% endput %}
