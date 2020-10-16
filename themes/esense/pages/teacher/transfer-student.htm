@@ -1,0 +1,70 @@
+title = "Transfer student"
+url = "/teacher/transfer-student"
+layout = "web-app"
+description = "Transfer student page"
+is_hidden = 0
+==
+<div class="container-fluid px-lg-4">
+    <div class="row">
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="rounded shadow bg-white p-lg-4">
+                <div class="border-bottom">
+                    <p class="text-muted">Transfer elev</p>
+                </div>
+
+                <!-- Transfer student form -->
+                <div>
+                    {% partial 'web-app/teacher/transfer-student-form' %}
+                </div>
+
+                <!-- Success message for transfering student -->
+                <div>
+                    {% partial 'web-app/teacher/transfer-student-success' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /**
+             * Function for triggering the finish button when
+             * values from all fields are selected
+             */
+            function activateFinishBtn() {
+                $('.transfer-student').removeAttr('disabled');
+                $('.transfer-student').removeClass('btn-gray-light');
+                $('.transfer-student').removeClass('text-white');
+                $('.transfer-student').addClass('btn-secondary');
+            }
+
+            function deactivateFinishBtn() {
+                $('.transfer-student').attr('disabled');
+                $('.transfer-student').addClass('btn-gray-light');
+                $('.transfer-student').addClass('text-white');
+                $('.transfer-student').removeClass('btn-secondary');
+            }
+
+            /** Validation for activeting the finish button. */
+            $(document.body).on('change', '.onChangeValue', function(){
+                if(
+                    ( "-1" !== $("#teacher").val()) &&
+                    ( "-1" !== $("#student").val()) 
+                ) {
+                    activateFinishBtn()
+                } else {
+                    deactivateFinishBtn()
+                }
+            });
+        });
+    </script>
+{% endput %}

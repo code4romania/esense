@@ -1,0 +1,75 @@
+description = "Add student partial"
+
+[viewBag]
+==
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+  </button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content border-0" style="background: transparent !important;">
+        <div class="rounded bg-white p-5">
+            <div class="d-flex align-items-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/add-yellow.svg'|theme }}">
+                <p class="p-0 m-0 ml-2 display-2 text-dark">Caută elev</p>
+            </div>
+            <div class="form-group mt-lg-2">
+                <div class="input-group">
+                    <input name='location' id="location" class="onChangeValue tagify--outside pl-0 shadow-none border-light rounded-right">
+                </div>
+            </div>
+        </div>
+        <div style="width: 5rem; height:10px; background:#c4c4c4; margin-left:5rem;"></div>
+        <div class="bg-white rounded p-5">
+            <div class="d-flex align-items-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/folder.svg'|theme }}">
+                <p class="p-0 m-0 ml-2 display-2 text-dark">Creează profil elev</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <p class="p-0 m-0 small text-dark">Nu ai găsit elevul pe care îl cauți? Creează profil nou pentru elev</p>
+                <a class="text-secondary display-4" href="">Creează profil elev</a>
+            </div>
+        </div>
+        <div class="rounded-bottom bg-white p-5">
+            <div class="form-group d-flex">
+                <textarea class="form-control" id="description" rows="3" placeholder="Mesajul tau"></textarea>
+            </div>
+            <div class="d-flex align-items-center justify-content-end mt-2">
+                <a role="button" class="mr-3 text-gray-2 display-4" data-dismiss="modal">Anuleaza</a>
+                <button type="button" class="btn btn-sm px-5 btn-secondary">Trimite</button>
+              </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        /** Tag outside auto search (tagify). */
+        var locationInput = document.querySelector('input[name=location]'),
+            tagify = new Tagify(locationInput, {
+                editTags: null, // single click to edit a tag
+                enforceWhitelist: true,
+                whitelist: [
+                    'dfdf'
+                ],
+                placeholder: "Cauta elev",
+                dropdown: {
+                    enabled: 1, // show suggestion after 1 typed character
+                    position: 'input', // position suggestions list next to typed text
+                },
+                templates: {
+                    dropdownItemNoMatch: function (data) {
+                        return `not found: ${data.value}`
+                    }
+                },
+            })
+
+        });
+    </script>
+{% endput %}

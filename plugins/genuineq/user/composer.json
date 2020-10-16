@@ -1,0 +1,15 @@
+{
+    "name": "genuineq/user",
+    "type": "october-plugin",
+    "description": "Custom user plugin for OctoberCMS",
+    "homepage": "https://www.genuineq.com",
+    "keywords": ["october", "user"],
+    "authors": [
+        {
+            "name": "genuineq",
+            "email": "office@genuineq.com"
+        }
+    ],
+    "require": {
+    }
+}

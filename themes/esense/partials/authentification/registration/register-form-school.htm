@@ -5,7 +5,7 @@ description = "Register from"
 <section class="my-5">
     <div class="container">
         <!-- Register form -->
-        <form method="POST" data-request="">
+        <form method="POST" data-request="onRegister">
             <div class="row">
                 <div class="col-12">
                     <div class="shadow-lg rounded bg-white p-0 p-md-5">
@@ -85,7 +85,7 @@ description = "Register from"
                 <!-- Submit button -->
                 <div class="col-12 mt-5 mb-5 mb-lg-0">
                     <div class="d-flex justify-content-end">
-                        <a role="button" type="submit" class="btn btn-sm btn-primary px-5">{{'registerPage.form.submit.btn.text'|_}}</a>
+                        <a id="sendForm" role="button" type="submit" class="btn btn-sm btn-primary px-5" onclick="sendForm()">{{'registerPage.form.submit.btn.text'|_}}</a>
                     </div>
                 </div>
             </div>

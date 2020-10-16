@@ -1,0 +1,56 @@
+// Tagify override variables
+// $self: &;
+$tags-border-color : #683099;
+$tags-hover-border-color : #683099;
+// $tags-focus-border-color : #3595f6 !default;
+// $tagMargin : 5px !default;
+// $tag-pad : .3em .5em !default;
+$tag-text-color : rgba(53, 53, 53, 0.73);
+// $tag-text-color--edit : black !default;
+$tag-bg : transparent;
+$tag-hover: transparent;
+$tag-remove : rgba(53, 53, 53, 0.73);
+$tag-remove-btn-bg: transparent;
+$tag-remove-btn-bg--hover: rgba(53, 53, 53, 0.73);
+// $tag-invalid-color : transparent;
+// $tag-invalid-bg : transparent;
+$tag-inset-shadow-size : none;
+$placeholder-color : rgba(53, 53, 53, 0.73);
+// $placeholder-color-focus : rgba($tag-text-color, .25) !default;
+// $input-color : inherit !default;
+// $tagify-dd-bg-color : white !default;
+// $tagify-dd-color-primary : rgb(53, 149, 246) !default;
+@import '../../../../node_modules/@yaireo/tagify/src/tagify';
+
+/* Tagify tags outside for search location
+======================================================================
+*/
+.tagify__tag {
+    border: 1px solid $tags-border-color;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.tagify__tag:hover {
+    background-color: transparent;
+}
+
+.tagify--outside {
+    border: 0;
+    flex: 1;
+}
+
+.tagify--outside .tagify__input {
+    order: -1;
+    flex: 100%;
+    transition: .1s;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding-bottom: 29px;
+    padding-top: 9px;
+    margin-top: -1px;
+    margin-left: 0;
+    margin-right: 0;
+    position: relative;
+    background-color: #fff;
+}

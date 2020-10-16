@@ -1,0 +1,24 @@
+plugin:
+    name: 'genuineq.timetable::lang.plugin.name'
+    description: 'genuineq.timetable::lang.plugin.description'
+    author: genuineq
+    icon: oc-icon-calendar
+    homepage: ''
+permissions:
+    genuineq.timetable.manage_records:
+        tab: 'genuineq.timetable::lang.plugin.name'
+        label: 'genuineq.timetable::lang.records.manage_records'
+navigation:
+    timetable:
+        label: 'genuineq.timetable::lang.plugin.name'
+        url: /genuineq/timetable/records
+        icon: icon-calendar
+        permissions:
+            - genuineq.timetable.manage_records
+        sideMenu:
+            records:
+                label: 'genuineq.timetable::lang.records.name'
+                url: /genuineq/timetable/records
+                icon: icon-list-alt
+                permissions:
+                    - genuineq.timetable.manage_records

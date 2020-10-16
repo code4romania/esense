@@ -3,10 +3,8 @@
 ***********************************************/
 
 .sidebar {
-    width: 6.5rem;
-    min-height: 100vh;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    z-index: 999;
+    width: 0;
+    overflow: hidden;
 }
 
 .sidebar .nav-item {
@@ -15,8 +13,8 @@
 
 .sidebar .nav-item .nav-link {
     text-align: center;
-    padding: 0.65rem 1rem;
-    width: 6.5rem;
+    padding: 0.65rem 0.5rem;
+    width: 6rem;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -29,6 +27,7 @@
     line-height: 20px;
     font-size: 14px;
     font-weight: 700;
+    font-family: 'TitilliumWeb-Regular', sans-serif;
 }
 
 .sidebar .nav-item.active .nav-link {
@@ -75,8 +74,10 @@
 }
 
 .sidebar.toggled {
-    width: 0 !important;
-    overflow: hidden;
+    width: 8rem;
+    min-height: 100vh;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    z-index: 999;
 }
 
 .sidebar.toggled #sidebarToggle::after {
@@ -124,7 +125,9 @@
     .sidebar .nav-item .nav-link span {
         padding-left: 15px;
         font-weight: 700;
-        font-size: 15px;
+        line-height: 25px;
+        font-size: 16px;
+        font-family: 'TitilliumWeb-Regular', sans-serif;
     }
 
     .sidebar.toggled {
@@ -134,7 +137,7 @@
 
     .sidebar.toggled .nav-item .nav-link {
         text-align: center;
-        width: 10rem;
+        width: 9rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -142,8 +145,9 @@
     }
     .sidebar.toggled .nav-item .nav-link span {
         font-size: 14px;
-        width: 9rem;
+        width: 8rem;
         padding-left: 0px;
         font-weight: 700;
+        font-family: 'TitilliumWeb-Regular', sans-serif;
     }
 }

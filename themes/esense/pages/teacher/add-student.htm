@@ -1,0 +1,241 @@
+title = "Add student"
+url = "/teacher/add-student"
+layout = "web-app"
+description = "Add new student page"
+is_hidden = 0
+==
+<div class="container-fluid px-lg-4">
+    <div class="row">
+
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="rounded shadow bg-white p-lg-4">
+
+                <div class="border-bottom">
+                    <p class="text-muted">{{'teacher.dashboard.student.add.profile.title'|_}}</p>
+                </div>
+
+                <form method="POST" data-request="">
+                    <div class="row mt-2">
+
+                        <div class="col-12">
+                            <div class="row">
+
+                                <div class="col-12 col-md-6">
+                                    <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
+                                    <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
+                                        <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <p class="p-0 m-0 pt-3 text-muted">{{'teacher.dashboard.student.add.profile.avatar'|_}}</p>
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                            <div class="d-flex">
+                                                <div class="avatars d-flex">
+                                                    <div class="predifined-avatar active-avatar d-block">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}">
+                                                    </div>
+                                                    <div class="predifined-avatar d-block ml-4">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-2.svg'|theme }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="add-avatar">
+                                                    <input name="avatar" class="d-none" type="file" id="avatar" name="studentAvatar" />
+                                                    <img id="add-avatar" class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                            <div class="d-flex">
+                                                <div class="avatars d-flex">
+                                                    <div class="predifined-avatar active-avatar d-block">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-1.svg'|theme }}">
+                                                    </div>
+                                                    <div class="predifined-avatar d-block ml-4">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="add-avatar">
+                                                    <input name="avatar" class="d-none" type="file" id="avatar" name="studentAvatar" />
+                                                    <img id="add-avatar" class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <p class="text-muted mt-5">{{'teacher.dashboard.student.add.profile.personal.data'|_}}</p>
+                            <p class="display-4 text-gray-light">{{'teacher.dashboard.student.add.profile.dob.label'|_}}</p>
+                            <div class="row">
+
+                                <div class="col-12 col-md-4 col-lg-1 pr-lg-0 mr-lg-0">
+                                    <div class="form-group register-select">
+                                        <select id="teacher" class="form-control selectpicker border outline-none onChangeValue" data-style="btn-white">
+                                        <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.day'|_}}</option>
+                                        <option value="">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-2 pr-lg-0 mr-lg-0">
+                                    <div class="form-group register-select">
+                                        <select id="teacher" class="form-control selectpicker border outline-none onChangeValue" data-style="btn-white">
+                                        <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.month'|_}}</option>
+                                        <option value="">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-2 pr-lg-0 mr-lg-0">
+                                    <div class="form-group register-select d-flex">
+                                        <select id="teacher" class="form-control selectpicker border outline-none onChangeValue" data-style="btn-white">
+                                        <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.year'|_}}</option>
+                                        <option value="">3</option>
+                                        </select>
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="form-group d-flex">
+                                <input type="text" class="form-control" id="last-name" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}">
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="form-group d-flex">
+                                <input type="text" class="form-control" id="first-name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}">
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group d-flex">
+                                <textarea class="form-control" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}"></textarea>
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row">
+
+                                <div class="col-12 col-md-6 ml-lg-0 pl-lg-0">
+                                    <div class="d-flex">
+                                        <div class="form-check">
+                                            <label class="form-check-label display-4 text-gray-light" for="exampleCheck1">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
+                                            <input id="exampleCheck1" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
+                                        </div>
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex">
+                                        <div class="form-check">
+                                            <label class="form-check-label display-4 text-gray-light" for="exampleCheck1">{{'teacher.dashboard.student.add.profile.checkbox2.label'|_}}</label>
+                                            <input id="exampleCheck1" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
+                                        </div>
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <p class="text-muted mt-5 mb-3">{{'teacher.dashboard.student.add.profile.contact.person'|_}}</p>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="form-group d-flex">
+                                <input type="text" class="form-control" id="last-name" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.last.name'|_}}">
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="form-group d-flex">
+                                <input type="text" class="form-control" id="first-name" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.first.name'|_}}">
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="form-group mr-3">
+                                <input type="email" class="form-control" id="last-name" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.email'|_}}">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="form-group d-flex">
+                                <input type="text" class="form-control" id="first-name" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.phone'|_}}">
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group mr-3">
+                                <textarea class="form-control" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.observations'|_}}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-12 my-4">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/add-gray.svg'|theme }}">
+                                <a class="ml-2 display-4 text-secondary2" href="">{{'teacher.dashboard.student.add.profile.contact.person.add.another.contact.person'|_}}</a>
+                            </div>
+                        </div>
+
+                         <!-- Submit button -->
+                        <div class="col-12 mb-5 mt-3">
+                            <div class="d-flex justify-content-end">
+                                <button  type="submit" class="transfer-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% partial 'web-app/teacher/add-student' %}
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /** Add file input functionlity for plus-icon img. */
+            $("#add-avatar").click(function () {
+                $("#avatar").trigger('click');
+            });
+
+            /** Submit form on image input change. */
+            $('#avatar').on('change',function(event){
+                if (event.target.files.length) {
+                    $('#avatar_form').submit();
+                }
+            });
+
+        });
+    </script>
+{% endput %}

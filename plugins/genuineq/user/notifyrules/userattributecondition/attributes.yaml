@@ -1,0 +1,20 @@
+# ===================================
+#  Condition Attribute Definitions
+# ===================================
+
+attributes:
+
+    name:
+        label: Name
+
+    surname:
+        label: Surname
+
+    username:
+        label: Login / Username
+
+    email:
+        label: Email address
+
+    email_notifications:
+        label: Email Notifications

@@ -1,7 +1,10 @@
 /***********************************************
 **************** Custom select *****************
 ***********************************************/
-
+// .bootstrap-select {
+//     position: relative;
+//     z-index: 10000 !important;
+// }
 .bootstrap-select .btn:focus {
     outline: none !important;
 }
@@ -33,7 +36,7 @@
     padding: 8px;
 }
 
-.register-select .dropdown-toggle{
+.register-select .dropdown-toggle {
     padding: 13px 8px;
     font-style: italic;
 }
@@ -59,3 +62,8 @@
     color: #838383;
     padding: 5px 8px;
 }
+
+// .register-select{
+//     position: relative;
+//     z-index: 9999 !important;
+// }

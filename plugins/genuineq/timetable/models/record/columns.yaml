@@ -1,0 +1,43 @@
+columns:
+    id:
+        label: Id
+        type: number
+        invisible: true
+    day:
+        label: 'genuineq.timetable::lang.record.day'
+        type: date
+        searchable: true
+        sortable: true
+    start_hour:
+        label: 'genuineq.timetable::lang.record.start_hour'
+        type: time
+        sortable: false
+    end_hour:
+        label: 'genuineq.timetable::lang.record.end_hour'
+        type: time
+        sortable: false
+    title:
+        label: 'genuineq.timetable::lang.record.title'
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: 'genuineq.timetable::lang.record.description'
+        type: text
+        searchable: true
+    feedback:
+        label: 'genuineq.timetable::lang.record.feedback'
+        type: text
+        searchable: true
+    created_at:
+        label: created_at
+        type: datetime
+        sortable: true
+    updated_at:
+        label: updated_at
+        type: datetime
+        sortable: true
+    deleted_at:
+        label: deleted_at
+        type: datetime
+        sortable: true
