@@ -5,7 +5,10 @@ use BackendMenu;
 
 class Records extends Controller
 {
-    public $implement = [        'Backend\Behaviors\ListController'    ];
+    public $implement = [
+        'Backend\Behaviors\ListController',
+        'Backend\Behaviors\FormController'
+    ];
 
     public $listConfig = 'config_list.yaml';
 
@@ -19,8 +22,4 @@ class Records extends Controller
 
         BackendMenu::setContext('Genuineq.Timetable', 'timetable', 'records');
     }
-
-
-    //INDEX.........................
-
 }
