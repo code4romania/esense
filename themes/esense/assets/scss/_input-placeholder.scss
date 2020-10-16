@@ -14,8 +14,19 @@
     line-height: 23px;
 }
 
+/***********************************************
+********* Checkbox background checked **********
+***********************************************/
+
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
     background-color: #fab954;
     border-color: #fab954;
     outline: 0;
 }
+
+/***********************************************
+*********** Rounded checkbox toggle ************
+***********************************************/
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20rem; }
+.toggle.ios .toggle-handle { border-radius: 50%; }
