@@ -54,9 +54,9 @@ $titillium-web-font-path: "../fonts/titillium-web/";
 $roboto-font-path:        "../fonts/roboto/";
 
 /** Font family. */
-$font-family-sans-serif: 'OpenSans-Regular', sans-serif;
-$font-family-titilium:   'TitilliumWeb-Regular', sans-serif;
-$font-family-base:       'OpenSans-Regular', sans-serif;
+// $font-family-sans-serif: 'OpenSans-Regular', sans-serif;
+// $font-family-titilium:   'TitilliumWeb-Regular', sans-serif;
+$font-family-base:       'OpenSans-Regular-nu', sans-serif;
 
 /** Font size base. */
 $font-size-base: 1.15rem;
@@ -73,7 +73,7 @@ $h5-font-size: 22px;
 $h6-font-size: 13px;
 
 // Heading font family
-$headings-font-family: $font-family-sans-serif;
+// $headings-font-family: $font-family-sans-serif;
 
 // Heading font weight
 $headings-font-weight: bold;
@@ -148,8 +148,8 @@ $border-radius: 4px;
 **************** Pills *************************
 ***********************************************/
 
-// $nav-pills-link-active-color: $blank !important;
-// $nav-pills-link-active-bg: $primary;
+$nav-pills-link-active-color: $light;
+$nav-pills-link-active-bg: $secondary;
 
 /***********************************************
 **************** Dropdown **********************
