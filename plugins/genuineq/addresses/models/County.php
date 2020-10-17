@@ -39,7 +39,10 @@ class County extends Model
 
     /** Cities relation. */
     public $hasMany = [
-        'cities' => 'Genuineq\Addresses\Models\City'
+        'cities' => [
+            'Genuineq\Addresses\Models\City',
+            'order' => 'name asc'
+        ]
     ];
 
     /***********************************************

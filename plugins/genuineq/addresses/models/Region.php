@@ -34,7 +34,10 @@ class Region extends Model
 
     /** County relation. */
     public $hasMany = [
-        'counties' => 'Genuineq\Addresses\Models\County'
+        'counties' => [
+            'Genuineq\Addresses\Models\County',
+            'order' => 'name asc'
+        ]
     ];
 
     /***********************************************
@@ -49,7 +52,7 @@ class Region extends Model
         $this->slug = str_slug($this->name, '-');
     }
 
-    
+
     /**
      * Function that is executed before the model is deleted.
      */
