@@ -2,6 +2,7 @@
 
 use Log;
 use Lang;
+use Event;
 use Validator;
 use ValidationException;
 use Genuineq\User\Helpers\PluginConfig;
@@ -61,6 +62,9 @@ class RegisterHelper
         /** Extract the validation rules and error messages. */
         $rules = self::rules();
         $messages = self::messages();
+
+        /** Fire event before validate. */
+        Event::fire('genuineq.user.beforeValidate', [&$data, &$rules, &$messages, post()]);
 
         /** Apply the validation rules. */
         $validation = Validator::make($data, $rules, $messages);

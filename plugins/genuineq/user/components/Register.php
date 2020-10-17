@@ -121,16 +121,24 @@ class Register extends ComponentBase
             /** Set the user type field. */
             $data['type'] = post('type');
 
-            /** Attempt to register the user. */
-            $user = RegisterLogic::register($data);
+            /** Filter out the registration requests that have an already registered school. */
+            if (-1 == post('school')) {
+                /** Attempt to register the user. */
+                $user = RegisterLogic::register($data);
 
-            if ('email' == RegisterHelper::getActivationMode()) {
-                /** Send activation email. */
-                EmailHelper::sendActivationEmail($user);
+                if ('email' == RegisterHelper::getActivationMode()) {
+                    /** Send activation email. */
+                    EmailHelper::sendActivationEmail($user);
 
-                Flash::success(Lang::get('genuineq.user::lang.component.register.message.activation_email_sent'));
+                    Flash::success(Lang::get('genuineq.user::lang.component.register.message.activation_email_sent'));
+                } else {
+                    Flash::success(Lang::get('genuineq.user::lang.component.register.message.registration_successful'));
+                }
             } else {
-                Flash::success(Lang::get('genuineq.user::lang.component.register.message.registration_successful'));
+                /** Fire event for already registered schools to notify a registration request. */
+                Event::fire('genuineq.user.notifySchool', [post()]);
+
+                Flash::success(Lang::get('genuineq.user::lang.component.register.message.registration_skiped'));
             }
 
             return Redirect::to('/');
