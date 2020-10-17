@@ -15,6 +15,7 @@ class RegisterHelper
     public static function rules()
     {
         return [
+            'surname' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'email' => 'required|between:6,255|email|unique:users',
             'password' => 'required|between:' . PluginConfig::getMinPasswordLength() . ',' . PluginConfig::getMaxPasswordLength() . '|confirmed',
@@ -29,6 +30,8 @@ class RegisterHelper
     public static function messages()
     {
         return [
+            'surname.required' => Lang::get('genuineq.user::lang.component.register.validation.name_required'),
+            'surname.regex' => Lang::get('genuineq.user::lang.component.register.validation.name_alpha'),
             'name.required' => Lang::get('genuineq.user::lang.component.register.validation.name_required'),
             'name.regex' => Lang::get('genuineq.user::lang.component.register.validation.name_alpha'),
             'email.required' => Lang::get('genuineq.user::lang.component.register.validation.email_required'),

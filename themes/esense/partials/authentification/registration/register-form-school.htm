@@ -41,14 +41,14 @@ description = "Register from"
                                 <!-- Contact person last name input -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="text" name="last_name" class="form-control" id="last_name" aria-describedby="last_nameHelp" placeholder="{{'registerPage.form.input.contact.person.last.name.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="text" name="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="{{'registerPage.form.input.contact.person.last.name.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
 
                                 <!-- Contact person first name input -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="text" name="first_name" class="form-control" id="first_name" aria-describedby="first_nameHelp" placeholder="{{'registerPage.form.input.contact.person.first.name.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{'registerPage.form.input.contact.person.first.name.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
 
@@ -62,9 +62,25 @@ description = "Register from"
                                 <!-- Contact person email input -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.contact.person.email.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.contact.person.email.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
+
+                                <!-- Password -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="{{'registerPage.form.input.password.placeholder'|_}}" style="font-style: italic;">
+                                    </div>
+                                </div>
+
+                                <!-- Password confirmation -->
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" aria-describedby="passwordConfirmationHelp" placeholder="{{'registerPage.form.input.password.confirmation.placeholder'|_}}" style="font-style: italic;">
+                                    </div>
+                                </div>
+
+                                <input name="type" type="text" id="type" class="d-none" value="school">
                             </div>
                         </div>
 
@@ -85,7 +101,7 @@ description = "Register from"
                 <!-- Submit button -->
                 <div class="col-12 mt-5 mb-5 mb-lg-0">
                     <div class="d-flex justify-content-end">
-                        <a id="sendForm" role="button" type="submit" class="btn btn-sm btn-primary px-5" onclick="sendForm()">{{'registerPage.form.submit.btn.text'|_}}</a>
+                        <button role="button" type="submit" class="btn btn-sm btn-primary px-5">{{'registerPage.form.submit.btn.text'|_}}</button>
                     </div>
                 </div>
             </div>
@@ -95,10 +111,31 @@ description = "Register from"
 
 {% put scripts %}
     <script type="text/javascript">
-        /**
-          * Function that extracts the cities of a county.
-          */
         $(document).ready(function () {
+            /**
+             * Extracts the initial cities.
+             */
+            $.request('onGetCities', {
+                data: {
+                    countyId: 1
+                },
+                success: function(data) {
+                    /* Reset the city select content. */
+                    $('#schoolCity').html('');
+
+                    /* Parse all received citied and add them. */
+                    for (const city in data) {
+                        $('#schoolCity').append(`<option value="${data[city]}">${city}</option>`);
+                    }
+
+                    /* Activate the select. */
+                    $('#schoolCity').prop("disabled", false);
+                }
+            });
+
+            /**
+             * Function that extracts the cities of a county.
+             */
             $('#schoolCounty').on('change', function() {
                 $.request('onGetCities', {
                     data: {
@@ -116,7 +153,7 @@ description = "Register from"
                         /* Activate the select. */
                         $('#schoolCity').prop("disabled", false);
                     }
-                })
+                });
             });
         });
     </script>

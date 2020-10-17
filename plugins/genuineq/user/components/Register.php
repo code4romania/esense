@@ -49,7 +49,7 @@ class Register extends ComponentBase
      */
     public function prepareVars()
     {
-        $this->page['user'] = $this->user();
+        // $this->page['user'] = $this->user();
     }
 
     /**
@@ -96,6 +96,7 @@ class Register extends ComponentBase
      */
     public function onRegister()
     {
+        Log::info('post : ' . print_r(post(), true));
         try {
             if (!UserSettings::get('allow_registration', true)) {
                 throw new ApplicationException(Lang::get('genuineq.user::lang.component.register.message.registration_disabled'));
@@ -107,15 +108,19 @@ class Register extends ComponentBase
 
             /** Extract the form data. */
             $data = [
+                'surname' => post('surname'),
                 'name' => post('name'),
                 'email' => post('email'),
                 'password' => post('password'),
                 'password_confirmation' => post('password_confirmation'),
-                'consent' => ('true' == post('consent')) ? (1) : (0),
+                'consent' => 1,
             ];
 
             /** Validate the form data. */
             RegisterHelper::validate($data);
+
+            /** Set the user type field. */
+            $data['type'] = post('type');
 
             /** Attempt to register the user. */
             $user = RegisterLogic::register($data);
@@ -123,9 +128,13 @@ class Register extends ComponentBase
             if ('email' == RegisterHelper::getActivationMode()) {
                 /** Send activation email. */
                 EmailHelper::sendActivationEmail($user);
+
+                Flash::success(Lang::get('genuineq.user::lang.component.register.message.activation_email_sent'));
+            } else {
+                Flash::success(Lang::get('genuineq.user::lang.component.register.message.registration_successful'));
             }
 
-            Flash::success(Lang::get('genuineq.user::lang.component.register.message.activation_email_sent'));
+            return Redirect::to('/');
         }
         catch (Exception $ex) {
             if (Request::ajax()){
