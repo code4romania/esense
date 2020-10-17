@@ -3,6 +3,11 @@ url = "/school/dashboard"
 layout = "web-app"
 description = "School dashboard panel"
 is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "school"
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
