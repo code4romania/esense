@@ -40,7 +40,7 @@ counties = 1
             </div>
 
             <div class="row">
-                <div id="teacherForm">
+                <div id="teacherForm" class="d-none">
                     {% partial 'authentification/registration/register-form-specialist' %}
                 </div>
                 <div id="schoolForm" class="d-none">
@@ -56,11 +56,20 @@ counties = 1
 
 {% put scripts %}
     <script type="text/javascript">
-        /**
-          * Function that toggles the display of forms based on the
-          *  selected value of the "selectRegisterForm" select.
-          */
         $(document).ready(function () {
+            /* Decide which form to display. */
+            if ('teacher' == $('#selectRegisterForm').val()) {
+                $('#teacherForm').removeClass('d-none');
+                $('#schoolForm').addClass('d-none');
+            } else {
+                $('#teacherForm').addClass('d-none');
+                $('#schoolForm').removeClass('d-none');
+            }
+
+            /**
+             * Function that toggles the display of forms based on the
+             *  selected value of the "selectRegisterForm" select.
+             */
             $('#selectRegisterForm').on('change', function() {
                 if ('teacher' == this.value) {
                     $('#teacherForm').removeClass('d-none');
