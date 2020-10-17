@@ -30,7 +30,7 @@ description = "Register from"
                                 <!-- Phone number input -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="number" name="phone_number" class="form-control" id="phone_number" aria-describedby="phone_numberHelp" placeholder="{{'registerPage.form.input.phone.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="number" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="{{'registerPage.form.input.phone.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
 
@@ -76,8 +76,11 @@ description = "Register from"
                                 <!-- School name select -->
                                 <div class="col-12">
                                     <div class="form-group register-select">
-                                        <select name="school_type" class="form-control border outline-none" data-style="btn-white">
+                                        <select name="school" class="form-control border outline-none" data-style="btn-white">
                                             <option value="-1">Școlarizare la domiciliu</option>
+                                            {% for key, school in schools %}
+                                                <option value="{{ key }}">{{ school }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
