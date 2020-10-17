@@ -109,7 +109,7 @@ class Login extends ComponentBase
                 'password' => post('password'),
             ];
 
-            LoginHelper::validate($data);
+            LoginHelper::validate($credentials);
 
             /** Check the login remember mode */
             switch ($this->rememberLoginMode()) {
@@ -145,9 +145,7 @@ class Login extends ComponentBase
             if (!$user->is_activated) {
                 Auth::logout();
 
-                EmailHelper::sendActivationEmail($user);
-                Flash::success(Lang::get('genuineq.user::lang.component.login.message.activation_email_sent'));
-                throw new ApplicationException(Lang::get('genuineq.user::lang.component.login.message.not_active_email_sent'));
+                throw new ApplicationException(Lang::get('genuineq.user::lang.component.login.message.not_active'));
             }
 
             /** Record IP address. */

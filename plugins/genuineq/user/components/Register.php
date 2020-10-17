@@ -49,7 +49,7 @@ class Register extends ComponentBase
      */
     public function prepareVars()
     {
-        // $this->page['user'] = $this->user();
+        $this->page['user'] = $this->user();
     }
 
     /**
@@ -96,7 +96,6 @@ class Register extends ComponentBase
      */
     public function onRegister()
     {
-        Log::info('post : ' . print_r(post(), true));
         try {
             if (!UserSettings::get('allow_registration', true)) {
                 throw new ApplicationException(Lang::get('genuineq.user::lang.component.register.message.registration_disabled'));
