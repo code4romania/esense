@@ -63,7 +63,7 @@ is_hidden = 0
                            <!-- Teacher avatar and name -->
                             <td>
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <div class="pl-2 py-3 d-flex align-items-center">
+                                    <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
                                         <div>
                                             <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                                         </div>
@@ -76,21 +76,21 @@ is_hidden = 0
 
                             <!-- Number of students row -->
                             <td>
-                                <div class="pl-2 py-3 d-flex align-items-center">
+                                <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
                                     <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">xx</p>
                                 </div>
                             </td>
 
                              <!-- Registration date row -->
                              <td>
-                                <div class="pl-2 py-3 d-flex align-items-center">
+                                <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
                                     <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">May 26,2019</p>
                                 </div>
                             </td>
 
                              <!-- Email row -->
                              <td>
-                                <div class="pl-2 py-3 d-flex align-items-center">
+                                <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
                                     <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">email@email.com</p>
                                 </div>
                             </td>
@@ -112,7 +112,7 @@ is_hidden = 0
             ***********************************************/
 
             $('#teachers-datatable').DataTable({
-                dom: '<"row"<"col-12"t>><"row bg-white p-3 rounded-bottom"<"col-6 d-flex align-items-center"l><"col-6 d-flex align-items-center justify-content-end"ip>>',
+                dom: '<"row"<"col-12"t>><"row bg-white p-3 rounded-bottom"<"col-12 col-lg-6 d-flex align-items-center"l><"col-12 col-lg-6 d-flex align-items-center justify-content-lg-end"ip>>',
                 lengthMenu: [
                     [5, 10, 25, 50, 100, -1],
                     [5, 10, 25, 50, 100]
