@@ -1,82 +1,82 @@
 <!-- Sidebar -->
 <ul class="navbar-nav sidebar accordion border-right" id="accordionSidebar" style="background: #F8F6F4;">
-	<!-- Sidebar - Brand -->
-	<a class="d-flex align-items-center justify-content-center" href="/">
-		<img class="img-fluid pb-5 pt-3 px-2" src="{{ 'assets/img/svg/logo.svg'|theme }}">
-	</a>
+    <!-- Sidebar - Brand -->
+    <a class="d-flex align-items-center justify-content-center" href="/">
+        <img class="img-fluid pb-5 pt-3 px-2" src="{{ 'assets/img/svg/logo.svg'|theme }}">
+    </a>
 
-	<!--
-	***********************************************
-	************** Teacher nav links **************
-	***********************************************
-	-->
+    <!--
+    ***********************************************
+    ************** Teacher nav links **************
+    ***********************************************
+    -->
 
-	<!-- Panou de administrare -->
-	<li class="nav-item mb-2 {% if this.page.url == "/teacher/dashboard" %} active {% endif %}">
-		<div class="vertical-border"></div>
-		<a class="nav-link" href="{{ 'teacher/administration-board'|page }}">
-			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
-			<span class="text-primary-dark">{{"side.nav.link_1"|_}}</span>
-		</a>
-	</li>
+    <!-- Panou de administrare -->
+    <li class="nav-item mb-2 {% if this.page.url == "/teacher/dashboard" %} active {% endif %}">
+        <div class="vertical-border"></div>
+        <a class="nav-link" href="{{ 'teacher/administration-board'|page }}">
+            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
+            <span class="text-primary-dark">{{"side.nav.link_1"|_}}</span>
+        </a>
+    </li>
 
-	<!-- Exercitii si jocuri -->
-	<li class="nav-item mb-2 {% if this.page.url == "/teacher/exercises/:category?" or this.page.url == "teacher/exercise/:slug" %} active {% endif %}">
-		<div class="vertical-border"></div>
-		<a class="nav-link" href="{{ 'teacher/exercises'|page }}">
-			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/zap.svg'|theme }}">
-			<span class="text-primary-dark">{{"side.nav.link_2"|_}}</span>
-		</a>
-	</li>
+    <!-- Exercitii si jocuri -->
+    <li class="nav-item mb-2 {% if this.page.url == "/teacher/exercises/:category?" or this.page.url == "teacher/exercise/:slug" %} active {% endif %}">
+        <div class="vertical-border"></div>
+        <a class="nav-link" href="{{ 'teacher/exercises'|page }}">
+            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/zap.svg'|theme }}">
+            <span class="text-primary-dark">{{"side.nav.link_2"|_}}</span>
+        </a>
+    </li>
 
-	<!-- Elevi mei -->
-	<li class="nav-item mb-2 {% if this.page.url == "/teacher/students" or this.page.url == "/teacher/student" or this.page.url == '/teacher/transfer-student' or this.page.url == '/teacher/add-student'  %} active {% endif %}">
-		<div class="vertical-border"></div>
-		<a class="nav-link" href="{{ 'teacher/my-students'|page }}">
-			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
-			<span class="text-primary-dark">{{"side.nav.link_3"|_}}</span>
-		</a>
-	</li>
+    <!-- Elevi mei -->
+    <li class="nav-item mb-2 {% if this.page.url == "/teacher/students" or this.page.url == "/teacher/student" or this.page.url == '/teacher/transfer-student' or this.page.url == '/teacher/add-student'  %} active {% endif %}">
+        <div class="vertical-border"></div>
+        <a class="nav-link" href="{{ 'teacher/my-students'|page }}">
+            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
+            <span class="text-primary-dark">{{"side.nav.link_3"|_}}</span>
+        </a>
+    </li>
 
-	<!-- Scoala -->
-	<li class="nav-item mb-2 {% if this.page.url == "/teacher/school"%} active {% endif %}">
-		<div class="vertical-border"></div>
-		<a class="nav-link" href="{{ 'teacher/school'|page }}">
-			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/sliders.svg'|theme }}">
-			<span class="text-primary-dark">{{"side.nav.link_4"|_}}</span>
-		</a>
-	</li>
+    <!-- Scoala -->
+    <li class="nav-item mb-2 {% if this.page.url == "/teacher/school"%} active {% endif %}">
+        <div class="vertical-border"></div>
+        <a class="nav-link" href="{{ 'teacher/school'|page }}">
+            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/sliders.svg'|theme }}">
+            <span class="text-primary-dark">{{"side.nav.link_4"|_}}</span>
+        </a>
+    </li>
 
-	<!-- Informatii utile -->
-	<li class="nav-item mb-2 {% if this.page.url == "/teacher/information/:slug?"%} active {% endif %}">
-		<div class="vertical-border"></div>
-		<a class="nav-link" href="{{ 'teacher/information'|page }}">
-			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/alert-circle.svg'|theme }}">
-			<span class="text-primary-dark">{{"side.nav.link_5"|_}}</span>
-		</a>
-	</li>
+    <!-- Informatii utile -->
+    <li class="nav-item mb-2 {% if this.page.url == "/teacher/information/:slug?"%} active {% endif %}">
+        <div class="vertical-border"></div>
+        <a class="nav-link" href="{{ 'teacher/information'|page }}">
+            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/alert-circle.svg'|theme }}">
+            <span class="text-primary-dark">{{"side.nav.link_5"|_}}</span>
+        </a>
+    </li>
 
-	<!-- Setari -->
-	<li class="nav-item mt-5 mb-2">
-		<div class="vertical-border"></div>
-		<a class="nav-link" href="tables.html">
-			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/settings.svg'|theme }}">
-			<span class="text-primary-dark">{{"side.nav.link_6"|_}}</span>
-		</a>
-	</li>
+    <!-- Setari -->
+    <li class="nav-item mt-5 mb-2">
+        <div class="vertical-border"></div>
+        <a class="nav-link" href="tables.html">
+            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/settings.svg'|theme }}">
+            <span class="text-primary-dark">{{"side.nav.link_6"|_}}</span>
+        </a>
+    </li>
 
-	<!-- Iesi din cont -->
-	<li class="nav-item mb-2">
-		<div class="vertical-border"></div>
-		<a class="nav-link" href="tables.html">
-			<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/exit.svg'|theme }}">
-			<span class="text-primary-dark">{{"side.nav.link_7"|_}}</span>
-		</a>
-	</li>
+    <!-- Iesi din cont -->
+    <li class="nav-item mb-2">
+        <div class="vertical-border"></div>
+        <a class="nav-link" data-request="onLogout" data-request-data="redirect: '{{ 'langing-pages/esense-home'|page }}'" href="">
+            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/exit.svg'|theme }}">
+            <span class="text-primary-dark">{{"side.nav.link_7"|_}}</span>
+        </a>
+    </li>
 
-	<!-- Sidebar Toggler (Sidebar) -->
-	<div class="text-center d-none d-md-inline mt-5">
-		<button class="rounded-circle border-0 bg-secondary text-white" id="sidebarToggle"></button>
-	</div>
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline mt-5">
+        <button class="rounded-circle border-0 bg-secondary text-white" id="sidebarToggle"></button>
+    </div>
 
 </ul>

@@ -1,5 +1,19 @@
 .donut {
-    --donut-size: 250px;
+  --donut-size: 250px;
+  --donut-border-width: 30px;
+  --donut-spacing: 0;
+  --donut-spacing-color: 255, 255, 255;
+  --donut-spacing-deg: calc(1deg * var(--donut-spacing));
+  border-radius: 50%;
+  height: var(--donut-size);
+  margin: 0px;
+  position: relative;
+  width: var(--donut-size);
+}
+
+@media screen and (max-width: 767px) {
+  .donut {
+    --donut-size: 200px;
     --donut-border-width: 30px;
     --donut-spacing: 0;
     --donut-spacing-color: 255, 255, 255;
@@ -9,6 +23,7 @@
     margin: 0px;
     position: relative;
     width: var(--donut-size);
+  }
 }
 
 .donut__label {

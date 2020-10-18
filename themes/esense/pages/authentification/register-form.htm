@@ -1,4 +1,4 @@
-title = "Register form"
+title = "Înregistrare"
 url = "/register-form"
 layout = "landing-page"
 description = "Formular de inregistrare"
@@ -6,8 +6,15 @@ is_hidden = 0
 
 [register]
 forceSecure = 0
+
+[addresses]
+counties = 1
+
+[profileStaticData]
+schools = 1
 ==
-{% component 'register' %}<section class="depre-proiect"></section>
+<section class="depre-proiect"></section>
+
 <div style="min-height: 50vh;">
     <section id="textSection" class="mt-5">
         <div class="container">
@@ -20,29 +27,31 @@ forceSecure = 0
             </div>
         </div>
     </section>
+
     <section>
         <div id="formContainer" class="container">
             <div id="selectRow" class="row">
                 <div class="col-12 col-lg-7">
                     <div class="form-group outline-none">
-                        <select id="selectForm" class="form-control selectpicker border outline-none"  data-style="btn-white">
-                            <option id="teacher" data-icon="fas fa-user mr-3">{{'registerPage.select.option_1.text'|_}}</option>
-                            <option id="school" data-icon="fas fa-city mr-2">{{'registerPage.select.option_2.text'|_}}</option>
+                        <select id="selectRegisterForm" class="form-control selectpicker border outline-none"  data-style="btn-white">
+                            <option value="teacher" data-icon="fas fa-user mr-3">{{'registerPage.select.option_1.text'|_}}</option>
+                            <option value="school" data-icon="fas fa-city mr-2">{{'registerPage.select.option_2.text'|_}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-12 col-lg-3">
-                    <a id="getButton" role="button" class="btn btn-sm btn-block btn-primary" onclick="getForm()">{{'registerPage.complete.form.btn.text'|_}}</a>
+                    <a role="button" class="btn btn-sm btn-block btn-primary">{{'registerPage.complete.form.btn.text'|_}}</a>
                 </div>
             </div>
+
             <div class="row">
-                <div id="teacherForm" style="display: none;">
+                <div id="teacherForm" class="d-none">
                     {% partial 'authentification/registration/register-form-specialist' %}
                 </div>
-                <div id="schoolForm" style="display: none;">
+                <div id="schoolForm" class="d-none">
                     {% partial 'authentification/registration/register-form-school' %}
                 </div>
-                <div id="successMessage" style="display: none;">
+                <div id="successMessage" class="d-none">
                     {% partial 'authentification/registration/registration-success-message' %}
                 </div>
             </div>
@@ -50,34 +59,31 @@ forceSecure = 0
     </section>
 </div>
 
-<script>
-    //function to get the selected form in the dropdown
-    function getForm() {
-        if(document.getElementById("teacher").selected == true){
-            document.getElementById("teacherForm").style.display = "block";
-        }
-        else if(document.getElementById("school").selected == true) {
-            document.getElementById("schoolForm").style.display = "block";
-        }
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /* Decide which form to display. */
+            if ('teacher' == $('#selectRegisterForm').val()) {
+                $('#teacherForm').removeClass('d-none');
+                $('#schoolForm').addClass('d-none');
+            } else {
+                $('#teacherForm').addClass('d-none');
+                $('#schoolForm').removeClass('d-none');
+            }
 
-        // document.getElementById("selectForm").disabled = true;
-        document.getElementById("getButton").style.display = "none";
-    }
-</script>
-
-<script>
-    //function to get the triggered event when a form is sent and the success message is shown
-    function sendForm() {
-        if(document.getElementById("teacher").selected == true){
-            document.getElementById("teacherForm").style.display = "none";
-        }
-        else if(document.getElementById("school").selected == true) {
-            document.getElementById("schoolForm").style.display = "none";
-        }
-
-        document.getElementById("textSection").style.display = "none";
-        document.getElementById("selectRow").style.display = "none";
-        document.getElementById("successMessage").style.display = "block";
-    }
-</script>
-
+            /**
+             * Function that toggles the display of forms based on the
+             *  selected value of the "selectRegisterForm" select.
+             */
+            $('#selectRegisterForm').on('change', function() {
+                if ('teacher' == this.value) {
+                    $('#teacherForm').removeClass('d-none');
+                    $('#schoolForm').addClass('d-none');
+                } else {
+                    $('#teacherForm').addClass('d-none');
+                    $('#schoolForm').removeClass('d-none');
+                }
+            });
+        });
+    </script>
+{% endput %}
