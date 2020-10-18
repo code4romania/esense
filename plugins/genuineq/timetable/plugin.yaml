@@ -11,14 +11,26 @@ permissions:
 navigation:
     timetable:
         label: 'genuineq.timetable::lang.plugin.name'
-        url: /genuineq/timetable/records
+        url: genuineq/timetable/records
         icon: icon-calendar
         permissions:
             - genuineq.timetable.manage_records
         sideMenu:
-            records:
-                label: 'genuineq.timetable::lang.records.name'
-                url: /genuineq/timetable/records
-                icon: icon-list-alt
+            'Add Record':
+                label: 'genuineq.timetable::lang.record.create'
+                url: genuineq/timetable/records/create
+                icon: icon-file
+                permissions:
+                    - genuineq.timetable.manage_records
+            'Edit Record':
+                label: 'genuineq.timetable::lang.record.update'
+                url: 'genuineq/timetable/records/update/:id'
+                icon: icon-edit
+                permissions:
+                    - genuineq.timetable.manage_records
+            'Preview Record':
+                label: 'genuineq.timetable::lang.record.preview'
+                url: 'genuineq/timetable/records/preview/:id'
+                icon: icon-folder-open
                 permissions:
                     - genuineq.timetable.manage_records

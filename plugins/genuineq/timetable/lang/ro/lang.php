@@ -6,6 +6,7 @@
     'records' => [
         'title' => 'Înregistrări',
         'manage_records' => 'Administrare înregistrări',
+        'name' => 'Înregistrări',
     ],
     'record' => [
         'day' => 'Ziua',
@@ -17,5 +18,13 @@
         'created_at' => 'Creat în:',
         'updated_at' => 'Actualizat în:',
         'deleted_at' => 'Șters în:',
+        'create' => 'Adaugă înregistrare',
+        'update' => 'Editează înregistrare',
+        'preview' => 'Previzualizează înregistrare',
+    ],
+    'flash' => [
+        'create' => 'Înregistrare creată cu succes',
+        'update' => 'Înregistrare actualiată cu succes',
+        'delete' => 'Înregistrare ștearsă cu succes',
     ],
 ];

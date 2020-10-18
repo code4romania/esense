@@ -30,14 +30,14 @@ columns:
         type: text
         searchable: true
     created_at:
-        label: created_at
+        label: 'genuineq.timetable::lang.record.created_at'
         type: datetime
         sortable: true
     updated_at:
-        label: updated_at
+        label: 'genuineq.timetable::lang.record.updated_at'
         type: datetime
         sortable: true
     deleted_at:
-        label: deleted_at
+        label: 'genuineq.timetable::lang.record.deleted_at'
         type: datetime
         sortable: true

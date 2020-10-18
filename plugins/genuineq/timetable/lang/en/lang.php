@@ -5,7 +5,7 @@
     ],
     'records' => [
         'title' => 'Records',
-        'manage_records' => 'Manage Records',
+        'manage_records' => 'Manage records',
         'name' => 'Records',
     ],
     'record' => [
@@ -18,5 +18,13 @@
         'created_at' => 'Created at:',
         'updated_at' => 'Updated at:',
         'deleted_at' => 'Deleted at:',
+        'create' => 'Add record',
+        'update' => 'Edit record',
+        'preview' => 'Preview record',
+    ],
+    'flash' => [
+        'create' => 'Record created successfully',
+        'update' => 'Record updated successfully',
+        'delete' => 'Record deleted successfully',
     ],
 ];

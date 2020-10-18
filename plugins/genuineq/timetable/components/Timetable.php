@@ -9,7 +9,6 @@ use October\Rain\Exception\ValidationException;
  * Class Timetable
  * @package Genuineq\Timetable\Components
  */
-
 class Timetable extends ComponentBase
 {
 
@@ -21,27 +20,34 @@ class Timetable extends ComponentBase
         ];
     }
 
-//    public function onSubmit()
-//    {
-//        $data = \Input::only([
-//            'day',
-//            'start_hour',
-//            'end_hour',
-//            'title',
-//            'description',
-//            'feedback',
-//        ]);
-//
-//        try {
-//            $this->validate($data);
-//        } catch (ValidationException $e) {
-//            echo "An error occured.".PHP_EOL;
-//        }
-//
-//
-//
-//
-//    }
+    public function onCreate()
+    {
+        /*
+        $data = \Input::only([
+            'day',
+            'start_hour',
+            'end_hour',
+            'title',
+            'description',
+            'feedback',
+        ]);
 
+        try {
+            $this->validate($data);
+        } catch (ValidationException $e) {
+            echo "An error occured.".PHP_EOL;
+        }
+*/
+    }
+
+    public function onUpdate()
+    {
+
+    }
+
+    public function onDelete()
+    {
+
+    }
 
 }
