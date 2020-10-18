@@ -7,25 +7,25 @@
 
     /** The available user types. */
     'userTypes' => [
-        'driver',
-        'administrator'
+        'specialist',
+        'school'
     ],
 
     /** The available user type options displayed in the admin view. */
     'userTypeOptions' => [
-        'driver' => 'Driver',
-        'administrator' => 'Administrator'
+        'specialist' => 'Specialist',
+        'school' => 'School'
     ],
 
     /** Login redirects based on user types. */
     'loginRedirects' => [
-        'driver' => '/',
-        'administrator' => '/'
+        'specialist' => 'teacher/administration-board',
+        'school' => 'school/administration-board'
     ],
 
     /** Profile page for each user type. */
     'profilePages' => [
-        'driver' => 'profile',
-        'administrator' => 'profile',
+        'specialist' => 'teacher/profile',
+        'school' => 'school/profile',
     ],
 ];

@@ -1,0 +1,10 @@
+name: Cities
+form: $/genuineq/addresses/models/city/fields.yaml
+modelClass: Genuineq\Addresses\Models\City
+defaultRedirect: genuineq/addresses/cities
+create:
+    redirect: 'genuineq/addresses/cities/update/:id'
+    redirectClose: genuineq/addresses/cities
+update:
+    redirect: genuineq/addresses/cities
+    redirectClose: genuineq/addresses/cities

@@ -1,0 +1,10 @@
+name: Counties
+form: $/genuineq/addresses/models/county/fields.yaml
+modelClass: Genuineq\Addresses\Models\County
+defaultRedirect: genuineq/addresses/counties
+create:
+    redirect: 'genuineq/addresses/counties/update/:id'
+    redirectClose: genuineq/addresses/counties
+update:
+    redirect: genuineq/addresses/counties
+    redirectClose: genuineq/addresses/counties

@@ -1,0 +1,6 @@
+columns:
+    name:
+        label: 'genuineq.addresses::lang.region.form-labels.name'
+        type: text
+        searchable: true
+        sortable: true

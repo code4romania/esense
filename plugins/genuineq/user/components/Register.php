@@ -107,25 +107,41 @@ class Register extends ComponentBase
 
             /** Extract the form data. */
             $data = [
+                'surname' => post('surname'),
                 'name' => post('name'),
                 'email' => post('email'),
                 'password' => post('password'),
                 'password_confirmation' => post('password_confirmation'),
-                'consent' => ('true' == post('consent')) ? (1) : (0),
+                'consent' => 1,
             ];
 
             /** Validate the form data. */
             RegisterHelper::validate($data);
 
-            /** Attempt to register the user. */
-            $user = RegisterLogic::register($data);
+            /** Set the user type field. */
+            $data['type'] = post('type');
 
-            if ('email' == RegisterHelper::getActivationMode()) {
-                /** Send activation email. */
-                EmailHelper::sendActivationEmail($user);
+            /** Filter out the registration requests that have an already registered school. */
+            if (-1 == post('school')) {
+                /** Attempt to register the user. */
+                $user = RegisterLogic::register($data);
+
+                if ('email' == RegisterHelper::getActivationMode()) {
+                    /** Send activation email. */
+                    EmailHelper::sendActivationEmail($user);
+
+                    Flash::success(Lang::get('genuineq.user::lang.component.register.message.activation_email_sent'));
+                } else {
+                    Flash::success(Lang::get('genuineq.user::lang.component.register.message.registration_successful'));
+                }
+            } else {
+                /** Fire event for already registered schools to notify a registration request. */
+                Event::fire('genuineq.user.notifySchool', [post()]);
+
+                Flash::success(Lang::get('genuineq.user::lang.component.register.message.registration_skiped'));
             }
 
-            Flash::success(Lang::get('genuineq.user::lang.component.register.message.activation_email_sent'));
+            return Redirect::to('/');
         }
         catch (Exception $ex) {
             if (Request::ajax()){
