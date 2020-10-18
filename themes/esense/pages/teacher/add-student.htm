@@ -3,6 +3,11 @@ url = "/teacher/add-student"
 layout = "web-app"
 description = "Add new student page"
 is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "specialist"
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">

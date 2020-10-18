@@ -1,0 +1,10 @@
+name: Specialists
+form: $/genuineq/profile/models/specialist/fields.yaml
+modelClass: Genuineq\Profile\Models\Specialist
+defaultRedirect: genuineq/profile/specialists
+create:
+    redirect: 'genuineq/profile/specialists/update/:id'
+    redirectClose: genuineq/profile/specialists
+update:
+    redirect: genuineq/profile/specialists
+    redirectClose: genuineq/profile/specialists

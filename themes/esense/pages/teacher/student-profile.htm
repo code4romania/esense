@@ -3,6 +3,11 @@ url = "/teacher/student"
 layout = "web-app"
 description = "Student profile"
 is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "specialist"
 ==
 <div class="container-fluid px-lg-4 mb-5">
     <div class="row">
