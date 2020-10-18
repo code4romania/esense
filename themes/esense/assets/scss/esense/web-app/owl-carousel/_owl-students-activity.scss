@@ -48,17 +48,15 @@
     outline: none;
 }
 
-@media screen and (max-width: 767px) {
-    .students-activity-owl-carousel .owl-prev {
+@media screen and (max-width: 757px) {
+    .owl-prev {
         top: 15px;
-        left: 0%;
-        transform: translate(0,-50%);
+        left: 3%;
     }
 
-    .students-activity-owl-carousel .owl-next {
+    .owl-next {
         top: 15px;
-        right: 0%;
-        transform: translate(0,-50%);
+        right: 1.5%;
     }
 }
 

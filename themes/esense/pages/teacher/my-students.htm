@@ -3,11 +3,6 @@ url = "/teacher/students"
 layout = "web-app"
 description = "All teacher students"
 is_hidden = 0
-
-[session]
-security = "user"
-allowedUserGroups[] = "registered"
-allowedUserTypes[] = "specialist"
 ==
 <div class="container-fluid px-lg-4 mb-5">
     <div class="row">
@@ -76,9 +71,6 @@ allowedUserTypes[] = "specialist"
                     </tbody>
                 </table>
             </div>
-
-            <!-- Add student modal -->
-            {% partial 'web-app/teacher/add-student' %}
         </div>
     </div>
 </div>
@@ -124,7 +116,7 @@ allowedUserTypes[] = "specialist"
                     }
                 }
             });
-            $('.added-content').html('<div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);"> <div class="col-12 col-lg-7"> <p class="text-medium-dark font-weight-bold">{{"teacher.dashboard.students.table.text"|_}} (x)</p> </div> <div class="col-12 col-lg-5"> <div class="d-flex align-items-center justify-content-start justify-content-lg-end"> <a href="{{"teacher/transfer-student"|page}}" class="btn btn-sm btn-outline-primary-light mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"> <i class="fas fa-exchange-alt mr-2"></i> {{"teacher.dashboard.students.table.transfer.btn.text"|_}} </a> <a data-toggle="modal" data-target="#exampleModalCenter" role="button" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i> {{"teacher.dashboard.students.table.add.btn.text"|_}} </a> </div> </div> </div>');
+            $('.added-content').html('<div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);"> <div class="col-12 col-lg-7"> <p class="text-medium-dark font-weight-bold">{{"teacher.dashboard.students.table.text"|_}} (x)</p> </div> <div class="col-12 col-lg-5"> <div class="d-flex align-items-center justify-content-start justify-content-lg-end"> <a href="{{"teacher/transfer-student"|page}}" class="btn btn-sm btn-outline-primary-light mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"> <i class="fas fa-exchange-alt mr-2"></i> {{"teacher.dashboard.students.table.transfer.btn.text"|_}} </a> <a href="{{"teacher/add-student"|page}}" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i> {{"teacher.dashboard.students.table.add.btn.text"|_}} </a> </div> </div> </div>');
         });
 
     </script>

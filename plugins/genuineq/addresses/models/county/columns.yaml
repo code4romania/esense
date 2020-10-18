@@ -1,6 +1,0 @@
-columns:
-    name:
-        label: 'genuineq.addresses::lang.county.form-labels.name'
-        type: text
-        searchable: true
-        sortable: true

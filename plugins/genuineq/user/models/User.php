@@ -206,17 +206,10 @@ class User extends UserBase
         return PluginConfig::getMinPasswordLength();
     }
 
+
     /***********************************************
      ****************** Ancestors ******************
      ***********************************************/
-
-    /**
-     * Accessor for getting the user name.
-     */
-    public function getFullNameAttribute()
-    {
-        return $this->name . ' ' . $this->surname;
-    }
 
     /**
      * Function that extracts the name initials.

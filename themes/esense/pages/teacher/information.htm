@@ -20,11 +20,6 @@ categorySlug = "introducere-platforma"
 areaSlug = "informations"
 recordPage = "teacher/information"
 recordPageSlug = "{{ :slug }}"
-
-[session]
-security = "user"
-allowedUserGroups[] = "registered"
-allowedUserTypes[] = "specialist"
 ==
 <?php
 function onEnd()
@@ -35,6 +30,7 @@ function onEnd()
 }
 ?>
 ==
+
 <div class="container-fluid px-lg-4 mb-5">
     <div class="row">
         <div class="col-12 col-md-6 col-lg-7">

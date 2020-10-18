@@ -1,7 +1,0 @@
-columns:
-    name:
-        label: 'genuineq.profile::lang.school.form-labels.name'
-        type: text
-    phone:
-        label: 'genuineq.profile::lang.school.form-labels.phone'
-        type: text

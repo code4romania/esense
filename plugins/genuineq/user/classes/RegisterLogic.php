@@ -4,6 +4,7 @@ use Log;
 use Auth;
 use Event;
 use Request;
+use ApplicationException;
 use Genuineq\User\Helpers\RegisterHelper;
 
 /**

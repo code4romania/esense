@@ -1,5 +1,0 @@
-fields:
-    name:
-        label: 'genuineq.addresses::lang.region.form-labels.name'
-        span: full
-        type: text
