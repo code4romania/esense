@@ -38,14 +38,16 @@
         </a>
     </li>
 
-    <!-- Scoala -->
-    <li class="nav-item mb-2 {% if this.page.url == "/teacher/school"%} active {% endif %}">
-        <div class="vertical-border"></div>
-        <a class="nav-link" href="{{ 'teacher/school'|page }}">
-            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/sliders.svg'|theme }}">
-            <span class="text-primary-dark">{{"side.nav.link_4"|_}}</span>
-        </a>
-    </li>
+    {% if user and 'specialist' == user.type and user.profile.school %}
+        <!-- Scoala -->
+        <li class="nav-item mb-2 {% if this.page.url == "/teacher/school"%} active {% endif %}">
+            <div class="vertical-border"></div>
+            <a class="nav-link" href="{{ 'teacher/school'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/sliders.svg'|theme }}">
+                <span class="text-primary-dark">{{"side.nav.link_4"|_}}</span>
+            </a>
+        </li>
+    {% endif %}
 
     <!-- Informatii utile -->
     <li class="nav-item mb-2 {% if this.page.url == "/teacher/information/:slug?"%} active {% endif %}">
