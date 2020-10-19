@@ -1,12 +1,10 @@
-tabs:
-    fields:
+fields:
         title:
             label: 'genuineq.timetable::lang.record.title'
             span: left
             placeholder: 'genuineq.timetable::lang.record.title'
             required: 1
             type: text
-            tab: _to_be_added
         day:
             label: 'genuineq.timetable::lang.record.day'
             mode: date
@@ -15,7 +13,6 @@ tabs:
             placeholder: 'genuineq.timetable::lang.record.day'
             required: 1
             type: datepicker
-            tab: _to_be_added
         start_hour:
             label: 'genuineq.timetable::lang.record.start_hour'
             mode: time
@@ -23,25 +20,21 @@ tabs:
             placeholder: 'genuineq.timetable::lang.record.start_hour'
             required: 1
             type: datepicker
-            tab: _to_be_added
         end_hour:
             label: 'genuineq.timetable::lang.record.end_hour'
             mode: time
             span: right
             required: 1
             type: datepicker
-            tab: _to_be_added
         description:
             label: 'genuineq.timetable::lang.record.description'
             size: ''
             span: left
             placeholder: 'genuineq.timetable::lang.record.description'
             type: textarea
-            tab: _to_be_added
         feedback:
             label: 'genuineq.timetable::lang.record.feedback'
             size: ''
             span: auto
             placeholder: 'genuineq.timetable::lang.record.feedback'
             type: textarea
-            tab: _to_be_added

@@ -4,6 +4,7 @@ namespace Genuineq\Timetable\Components;
 
 use Cms\Classes\ComponentBase;
 use October\Rain\Exception\ValidationException;
+use Genuineq\Timetable\Models\Record;
 
 /**
  * Class Timetable
