@@ -17,6 +17,7 @@ class BuilderTableCreateGenuineqProfileSpecialists extends Migration
             $table->integer('city_id')->unsigned();
             $table->integer('school_id')->unsigned()->nullable();
             $table->text('description')->nullable();
+            $table->boolean('archived')->default(false);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();
