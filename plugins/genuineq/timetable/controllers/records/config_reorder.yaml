@@ -1,0 +1,8 @@
+# ===================================
+#  Reorder Behavior Config
+# ===================================
+
+title: Records
+modelClass: Genuineq\Timetable\Models\Record
+toolbar:
+    buttons: reorder_toolbar

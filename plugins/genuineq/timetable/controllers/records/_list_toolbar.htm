@@ -1,5 +1,9 @@
 <div data-control="toolbar">
-            <button
+        <a href="<?= Backend::url('genuineq/timetable/records/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a>
+        <a href="<?= Backend::url('genuineq/timetable/records/update/:id') ?>" class="btn btn-primary oc-icon-edit"><?= e(trans('backend::lang.form.update_title')) ?></a>
+        <a href="<?= Backend::url('genuineq/timetable/records/preview/:id') ?>" class="btn btn-primary oc-icon-folder-open"><?= e(trans('backend::lang.form.preview_title')) ?></a>
+        <a href="<?= Backend::url('genuineq/timetable/records/reorder') ?>" class="btn btn-default oc-icon-list"><?= e(trans('backend::lang.reorder.default_title')) ?></a>
+        <button
         class="btn btn-default oc-icon-trash-o"
         disabled="disabled"
         onclick="$(this).data('request-data', {

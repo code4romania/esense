@@ -3,3 +3,6 @@
 1.0.2:
     - 'Created table genuineq_timetable_records'
     - builder_table_create_genuineq_timetable_records.php
+1.0.3:
+    - 'Updated table genuineq_timetable_records'
+    - builder_table_update_genuineq_timetable_records.php
