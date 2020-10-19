@@ -1,0 +1,17 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Seeder for OCookie table'
+    - seeder_o_cookie.php
+1.0.3:
+    - 'Seeder for System Settings table'
+    - seeder_system_settings.php
+1.0.4:
+    - 'Seeder for Rainlab Translate Locales table'
+    - seeder_rainlab_translate_locales.php
+1.0.5:
+    - 'Seeder for Janvince Smallrecords Categories table'
+    - seeder_janvince_smallrecords_categories.php
+1.0.6:
+    - 'Seeder for Janvince Smallrecords Areas table'
+    - seeder_janvince_smallrecords_areas.php

@@ -1,0 +1,6 @@
+plugin:
+    name: 'genuineq.initiator::lang.plugin.name'
+    description: 'genuineq.initiator::lang.plugin.description'
+    author: Genuineq
+    icon: oc-icon-pencil
+    homepage: ''
