@@ -122,7 +122,7 @@ class Register extends ComponentBase
             $data['type'] = post('type');
 
             /** Filter out the registration requests that have an already registered school. */
-            if (-1 == post('school')) {
+            if ((('teacher' == post('type')) && (-1 == post('school'))) || ('school' == post('type'))) {
                 /** Attempt to register the user. */
                 $user = RegisterLogic::register($data);
 
