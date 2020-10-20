@@ -1,40 +1,45 @@
 fields:
-        title:
-            label: 'genuineq.timetable::lang.record.title'
-            span: left
-            placeholder: 'genuineq.timetable::lang.record.title'
-            required: 1
-            type: text
-        day:
-            label: 'genuineq.timetable::lang.record.day'
-            mode: date
-            format: d-m-Y
-            span: right
-            placeholder: 'genuineq.timetable::lang.record.day'
-            required: 1
-            type: datepicker
-        start_hour:
-            label: 'genuineq.timetable::lang.record.start_hour'
-            mode: time
-            span: left
-            placeholder: 'genuineq.timetable::lang.record.start_hour'
-            required: 1
-            type: datepicker
-        end_hour:
-            label: 'genuineq.timetable::lang.record.end_hour'
-            mode: time
-            span: right
-            required: 1
-            type: datepicker
-        description:
-            label: 'genuineq.timetable::lang.record.description'
-            size: ''
-            span: left
-            placeholder: 'genuineq.timetable::lang.record.description'
-            type: textarea
-        feedback:
-            label: 'genuineq.timetable::lang.record.feedback'
-            size: ''
-            span: auto
-            placeholder: 'genuineq.timetable::lang.record.feedback'
-            type: textarea
+    title:
+        label: 'genuineq.timetable::lang.record.title'
+        span: left
+        placeholder: 'genuineq.timetable::lang.record.title'
+        required: 1
+        type: text
+
+    day:
+        label: 'genuineq.timetable::lang.record.day'
+        mode: date
+        format: d-m-Y
+        span: right
+        placeholder: 'genuineq.timetable::lang.record.day'
+        required: 1
+        type: datepicker
+
+    start_hour:
+        label: 'genuineq.timetable::lang.record.start_hour'
+        mode: time
+        span: left
+        placeholder: 'genuineq.timetable::lang.record.start_hour'
+        required: 1
+        type: datepicker
+
+    end_hour:
+        label: 'genuineq.timetable::lang.record.end_hour'
+        mode: time
+        span: right
+        required: 1
+        type: datepicker
+
+    description:
+        label: 'genuineq.timetable::lang.record.description'
+        size: ''
+        span: left
+        placeholder: 'genuineq.timetable::lang.record.description'
+        type: textarea
+
+    feedback:
+        label: 'genuineq.timetable::lang.record.feedback'
+        size: ''
+        span: auto
+        placeholder: 'genuineq.timetable::lang.record.feedback'
+        type: textarea
