@@ -50,6 +50,5 @@ class SeederCounties extends Seeder
         County::create(["id" => 40, "region_id" => 7, "slug" => "valcea",          "name" => "Valcea"]);
         County::create(["id" => 41, "region_id" => 3, "slug" => "vaslui",          "name" => "Vaslui"]);
         County::create(["id" => 42, "region_id" => 6, "slug" => "vrancea",         "name" => "Vrancea"]);
-        County::create(["id" => 43, "region_id" => 9, "slug" => "remote",          "name" => "Remote"]);
     }
 }
