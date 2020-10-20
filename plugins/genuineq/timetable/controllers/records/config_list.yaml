@@ -1,11 +1,7 @@
-# ===================================
-#  List Behavior Config
-# ===================================
-
 title: 'genuineq.timetable::lang.records.title'
 modelClass: Genuineq\Timetable\Models\Record
 list: $/genuineq/timetable/models/record/columns.yaml
-recordUrl: genuineq/timetable/records
+recordUrl: 'genuineq/timetable/records/update/:id'
 noRecordsMessage: 'backend::lang.list.no_records'
 recordsPerPage: '50'
 showSetup: true

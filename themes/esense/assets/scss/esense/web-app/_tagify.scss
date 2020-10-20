@@ -26,31 +26,52 @@ $placeholder-color : rgba(53, 53, 53, 0.73);
 ======================================================================
 */
 .tagify__tag {
-    border: 1px solid $tags-border-color;
-    border-radius: 4px;
+    border: none;
+    border-radius: 10px;
     margin: 5px;
-}
-
-.tagify__tag:hover {
-    background-color: transparent;
-}
-
-.tagify--outside {
-    border: 0;
-    flex: 1;
-}
-
-.tagify--outside .tagify__input {
-    order: -1;
-    flex: 100%;
-    transition: .1s;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding-bottom: 29px;
-    padding-top: 9px;
-    margin-top: -1px;
-    margin-left: 0;
-    margin-right: 0;
-    position: relative;
+    padding: 4px 8px;
     background-color: #fff;
+}
+
+.tagify {
+    width: 100% !important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #fab954;
+    height: 40px;
+    background-color: #F3F3F3;
+    border-radius: 2px;
+    font-size: 14px !important;
+}
+
+.tagify:focus,
+.tagify:active,
+.tagify:hover,
+.tagify:checked,
+.tagify:active {
+    border-bottom: 2px solid #fab954;
+    outline: 0 !important;
+}
+
+.tagify__dropdown {
+    border: none;
+    font-size: 14px !important;
+    outline: none !important;
+    box-shadow: none;
+    background-color: #fff;
+    left: 0;
+}
+
+.tagify__input::after {
+    width: 100% !important;
+}
+
+.tagify__dropdown__item--active {
+    background: #fab954;
+    color: #333;
+}
+
+.tagify.tagify--focus {
+    border-color: #fab954 !important;
 }

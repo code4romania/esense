@@ -44,3 +44,19 @@ ul.timeline > li.active:before {
     height: 20px;
     z-index: 400;
 }
+
+// .activity.timeline > li:last-child::before {
+//     bottom: 5%;
+// }
+
+.activity.timeline:before {
+    content: ' ';
+    display: inline-block;
+    position: absolute;
+    background:#C0C0C0;
+    top: 5px;
+    left: 29px;
+    width: 2px;
+    height: 80%;
+    z-index: 400;
+}

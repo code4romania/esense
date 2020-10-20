@@ -8,6 +8,19 @@ use Model;
 class Record extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    use \October\Rain\Database\Traits\SoftDelete;
+
+    protected $dates = ['deleted_at'];
+
+    /** Fillable fields. */
+    protected $fillable = [
+        'day',
+        'start_hour',
+        'end_hour',
+        'title',
+        'description',
+        'feedback',
+    ];
 
     /**
      * @var string The database table used by the model.

@@ -1,7 +1,7 @@
-title = "Archive"
+title = "Arhivă"
 url = "/school/archive"
 layout = "web-app"
-description = "All teacher students archived"
+description = "Arhivă"
 is_hidden = 0
 ==
 <div class="container-fluid px-lg-4">
@@ -12,7 +12,7 @@ is_hidden = 0
             <h4 class="text-gray-dark font-weight-light mb-4">Panou de administrare</h4>
         </div>
 
-        <!-- Teachers table -->
+        <!-- Students table -->
         <div class="col-12 my-5">
             <div class="table-responsive rounded p-3" style="overflow-x: hidden; background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
                 <div class="d-flex align-items-center justify-content-between mb-3">
@@ -60,7 +60,9 @@ is_hidden = 0
                             <td>
                                 <div class="pl-2 py-3 d-flex align-items-center">
                                     <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
-                                    <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/trash-bin.svg'|theme }}">
+                                    <a role="button" data-toggle="modal" data-target="#deleteStudentModal">
+                                        <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/trash-bin.svg'|theme }}">
+                                    </a>
                                     <div class="dropdown pt-2">
                                         <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
@@ -130,7 +132,9 @@ is_hidden = 0
                             <td>
                                 <div class="pl-2 py-3 d-flex align-items-center">
                                     <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
-                                    <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/trash-bin.svg'|theme }}">
+                                    <a role="button" data-toggle="modal" data-target="#deleteTeacherModal">
+                                        <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/trash-bin.svg'|theme }}">
+                                    </a>
                                     <div class="dropdown pt-2">
                                         <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
@@ -149,6 +153,11 @@ is_hidden = 0
         </div>
     </div>
 </div>
+
+<!-- Partial for delete a student -->
+{% partial 'web-app/school/delete-student' %}
+<!-- Partial for delete a student -->
+{% partial 'web-app/school/delete-teacher' %}
 
 {% put scripts %}
     <!-- Scripts for datatables -->
