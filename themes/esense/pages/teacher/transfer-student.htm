@@ -1,7 +1,7 @@
-title = "Transfer student"
+title = "Transferă elev"
 url = "/teacher/transfer-student"
 layout = "web-app"
-description = "Transfer student page"
+description = "Pagina de transfer a unui elev"
 is_hidden = 0
 
 [session]
@@ -63,7 +63,8 @@ allowedUserTypes[] = "specialist"
             $(document.body).on('change', '.onChangeValue', function(){
                 if(
                     ( "-1" !== $("#teacher").val()) &&
-                    ( "-1" !== $("#student").val())
+                    ( "-1" !== $("#student").val()) &&
+                    ($("#teacher-check").is(":checked"))
                 ) {
                     activateFinishBtn()
                 } else {
