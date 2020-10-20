@@ -1,7 +1,3 @@
-# ===================================
-#  Form Behavior Config
-# ===================================
-
 name: 'Manage Records'
 modelClass: Genuineq\Timetable\Models\Record
 form: $/genuineq/timetable/models/record/fields.yaml
@@ -13,7 +9,7 @@ create:
     flashSave: 'genuineq.timetable::lang.flash.create'
 update:
     title: 'genuineq.timetable::lang.record.update'
-    redirect: 'genuineq/timetable/records/update/:id'
+    redirect: genuineq/timetable/records
     redirectClose: genuineq/timetable/records
     flashSave: 'genuineq.timetable::lang.flash.update'
     flashDelete: 'genuineq.timetable::lang.flash.delete'

@@ -1,8 +1,0 @@
-<?php Block::put('breadcrumb') ?>
-    <ul>
-        <li><a href="<?= Backend::url('genuineq/timetable/records') ?>"><?= e(trans('genuineq.timetable::lang.records.title')) ?></a></li>
-        <li><?= e($this->pageTitle) ?></li>
-    </ul>
-<?php Block::endPut() ?>
-
-<?= $this->reorderRender() ?>
