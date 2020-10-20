@@ -1,7 +1,7 @@
-title = "Add student"
+title = "Adaugă elev"
 url = "/teacher/add-student"
 layout = "web-app"
-description = "Add new student page"
+description = "Pagina de adăugare a unui nou elev"
 is_hidden = 0
 
 [session]
@@ -37,7 +37,10 @@ allowedUserTypes[] = "specialist"
                                     <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
                                     <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                         <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
-                                        <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                        <div class="d-flex">
+                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                            <span class="text-danger ml-2">*</span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -56,28 +59,29 @@ allowedUserTypes[] = "specialist"
                                                 </div>
 
                                                 <div class="add-avatar">
-                                                    <input name="avatar" class="d-none" type="file" id="avatar" name="studentAvatar" />
-                                                    <img id="add-avatar" class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                    <img id="add-avatar" class="img-fluid ml-4 add-custom-avatar mt-1" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                             <div class="d-flex">
-                                                <div class="avatars d-flex">
-                                                    <div class="predifined-avatar active-avatar d-block">
+                                                <div class="avatars1 d-flex">
+                                                    <div class="predifined-avatar1 active-avatar1 d-block">
                                                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-1.svg'|theme }}">
                                                     </div>
-                                                    <div class="predifined-avatar d-block ml-4">
+                                                    <div class="predifined-avatar1 d-block ml-4">
                                                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}">
                                                     </div>
                                                 </div>
 
                                                 <div class="add-avatar">
-                                                    <input name="avatar" class="d-none" type="file" id="avatar" name="studentAvatar" />
-                                                    <img id="add-avatar" class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                    <img id="add-avatar" class="img-fluid ml-4 add-custom-avatar mt-1" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- Input for adding custom avatar -->
+                                        <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
+                                        <!-- Input for adding predifined avatar -->
                                     </div>
                                 </div>
                             </div>
@@ -88,27 +92,30 @@ allowedUserTypes[] = "specialist"
                             <p class="display-4 text-gray-light">{{'teacher.dashboard.student.add.profile.dob.label'|_}}</p>
                             <div class="row">
 
+                                <!-- Select day -->
                                 <div class="col-12 col-md-4 col-lg-1 pr-lg-0 mr-lg-0">
-                                    <div class="form-group register-select">
-                                        <select id="teacher" class="form-control selectpicker border outline-none onChangeValue" data-style="btn-white">
-                                        <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.day'|_}}</option>
-                                        <option value="">3</option>
+                                    <div class="form-group">
+                                        <select id="day" class="form-control border outline-none onChangeValue">
+                                            <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.day'|_}}</option>
+                                            <option value="">3</option>
                                         </select>
                                     </div>
                                 </div>
 
+                                <!-- Select month -->
                                 <div class="col-12 col-md-4 col-lg-2 pr-lg-0 mr-lg-0">
-                                    <div class="form-group register-select">
-                                        <select id="teacher" class="form-control selectpicker border outline-none onChangeValue" data-style="btn-white">
+                                    <div class="form-group">
+                                        <select id="month" class="form-control border outline-none onChangeValue">
                                         <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.month'|_}}</option>
                                         <option value="">3</option>
                                         </select>
                                     </div>
                                 </div>
 
+                                <!-- Select year -->
                                 <div class="col-12 col-md-4 col-lg-2 pr-lg-0 mr-lg-0">
-                                    <div class="form-group register-select d-flex">
-                                        <select id="teacher" class="form-control selectpicker border outline-none onChangeValue" data-style="btn-white">
+                                    <div class="form-group d-flex">
+                                        <select id="year" class="form-control border outline-none onChangeValue decorated">
                                         <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.year'|_}}</option>
                                         <option value="">3</option>
                                         </select>
@@ -118,23 +125,26 @@ allowedUserTypes[] = "specialist"
                             </div>
                         </div>
 
+                        <!-- Input last name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control" id="last-name" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}">
+                                <input type="text" class="form-control onChangeValue" id="last-name" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
 
+                        <!-- Input first name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control" id="first-name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}">
+                                <input type="text" class="form-control onChangeValue" id="first-name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
 
+                        <!-- Input diagnostic description -->
                         <div class="col-12">
                             <div class="form-group d-flex">
-                                <textarea class="form-control" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}"></textarea>
+                                <textarea class="form-control onChangeValue" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}"></textarea>
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -142,21 +152,23 @@ allowedUserTypes[] = "specialist"
                         <div class="col-12">
                             <div class="row">
 
+                                <!-- Select disability y/n -->
                                 <div class="col-12 col-md-6 ml-lg-0 pl-lg-0">
                                     <div class="d-flex">
                                         <div class="form-check">
-                                            <label class="form-check-label display-4 text-gray-light" for="exampleCheck1">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
-                                            <input id="exampleCheck1" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
+                                            <label class="form-check-label display-4 text-gray-light" for="disability1">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
+                                            <input class="onChangeValue" id="disability1" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
                                 </div>
 
+                                <!-- Select disability y/n -->
                                 <div class="col-12 col-md-6">
                                     <div class="d-flex">
                                         <div class="form-check">
-                                            <label class="form-check-label display-4 text-gray-light" for="exampleCheck1">{{'teacher.dashboard.student.add.profile.checkbox2.label'|_}}</label>
-                                            <input id="exampleCheck1" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
+                                            <label class="form-check-label display-4 text-gray-light" for="disability2">{{'teacher.dashboard.student.add.profile.checkbox2.label'|_}}</label>
+                                            <input class="onChangeValue" id="disability2" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -165,54 +177,113 @@ allowedUserTypes[] = "specialist"
                             </div>
                         </div>
 
-                        <div class="col-12">
-                            <p class="text-muted mt-5 mb-3">{{'teacher.dashboard.student.add.profile.contact.person'|_}}</p>
+
+                        <!-- First contact person -->
+                        <div class="px-lg-2">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+
+                                contactPersonLastNameId = 'contact_1_last_name_id'
+                                contactPersonFirstNameId = 'contact_1_first_name_id'
+                                contactPersonPhoneId = 'contact_1_phone_id'
+                                addContactPerson = 'add-contact-1'
+                                hideId = 'hide-1'
+                                contactPersonFormId = 'contact-1'
+
+                                contactPersonLastName = 'contact_1_last_name'
+                                contactPersonFirstName = 'contact_1_first_name'
+                                contactPersonEmail = 'contact_1_email'
+                                contactPersonPhone = 'contact_1_phone'
+                                contactPersonObservations = 'contact_1_observations'
+                            %}
                         </div>
 
-                        <div class="col-12 col-md-6">
-                            <div class="form-group d-flex">
-                                <input type="text" class="form-control" id="last-name" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.last.name'|_}}">
-                                <span class="text-danger ml-2">*</span>
-                            </div>
+                        <!-- First contact person -->
+                        <div id="person-2" class="px-lg-2 d-none">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+
+                                contactPersonLastNameId = 'contact_2_last_name_id'
+                                contactPersonFirstNameId = 'contact_2_first_name_id'
+                                contactPersonPhoneId = 'contact_2_phone_id'
+                                addContactPerson = 'add-contact-2'
+                                hideId = 'hide-2'
+                                contactPersonFormId = 'contact-2'
+
+                                contactPersonLastName = 'contact_2_last_name'
+                                contactPersonFirstName = 'contact_2_first_name'
+                                contactPersonEmail = 'contact_2_email'
+                                contactPersonPhone = 'contact_2_phone'
+                                contactPersonObservations = 'contact_2_observations'
+                            %}
                         </div>
 
-                        <div class="col-12 col-md-6">
-                            <div class="form-group d-flex">
-                                <input type="text" class="form-control" id="first-name" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.first.name'|_}}">
-                                <span class="text-danger ml-2">*</span>
-                            </div>
+                        <!-- First contact person -->
+                        <div id="person-3" class="px-lg-2 d-none">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+
+                                contactPersonLastNameId = 'contact_3_last_name_id'
+                                contactPersonFirstNameId = 'contact_3_first_name_id'
+                                contactPersonPhoneId = 'contact_3_phone_id'
+                                addContactPerson = 'add-contact-3'
+                                hideId = 'hide-3'
+                                contactPersonFormId = 'contact-3'
+
+                                contactPersonLastName = 'contact_3_last_name'
+                                contactPersonFirstName = 'contact_3_first_name'
+                                contactPersonEmail = 'contact_3_email'
+                                contactPersonPhone = 'contact_3_phone'
+                                contactPersonObservations = 'contact_3_observations'
+                            %}
                         </div>
 
-                        <div class="col-12 col-md-6">
-                            <div class="form-group mr-3">
-                                <input type="email" class="form-control" id="last-name" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.email'|_}}">
-                            </div>
+                        <!-- First contact person -->
+                        <div id="person-4" class="px-lg-2 d-none">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+
+                                contactPersonLastNameId = 'contact_4_last_name_id'
+                                contactPersonFirstNameId = 'contact_4_first_name_id'
+                                contactPersonPhoneId = 'contact_4_phone_id'
+                                addContactPerson = 'add-contact-4'
+                                hideId = 'hide-4'
+        
+                                contactPersonFormId = 'contact-4'
+                                contactPersonLastName = 'contact_4_last_name'
+                                contactPersonFirstName = 'contact_4_first_name'
+                                contactPersonEmail = 'contact_4_email'
+                                contactPersonPhone = 'contact_4_phone'
+                                contactPersonObservations = 'contact_4_observations'
+                            %}
                         </div>
 
-                        <div class="col-12 col-md-6">
-                            <div class="form-group d-flex">
-                                <input type="text" class="form-control" id="first-name" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.phone'|_}}">
-                                <span class="text-danger ml-2">*</span>
-                            </div>
+                        <!-- First contact person -->
+                        <div id="person-5" class="px-lg-2 d-none">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+
+                                contactPersonLastNameId = 'contact_5_last_name_id'
+                                contactPersonFirstNameId = 'contact_5_first_name_id'
+                                contactPersonPhoneId = 'contact_5_phone_id'
+                                addContactPerson = 'add-contact-5'
+                                hideId = 'hide-5'
+                                hideClass = 'd-none'
+                                contactPersonFormId = 'contact-5'
+
+                                contactPersonLastName = 'contact_5_last_name'
+                                contactPersonFirstName = 'contact_5_first_name'
+                                contactPersonEmail = 'contact_5_email'
+                                contactPersonPhone = 'contact_5_phone'
+                                contactPersonObservations = 'contact_5_observations'
+                            %}
                         </div>
 
-                        <div class="col-12">
-                            <div class="form-group mr-3">
-                                <textarea class="form-control" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.observations'|_}}"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-12 my-4">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/add-gray.svg'|theme }}">
-                                <a class="ml-2 display-4 text-secondary2" href="">{{'teacher.dashboard.student.add.profile.contact.person.add.another.contact.person'|_}}</a>
-                            </div>
-                        </div>
 
                          <!-- Submit button -->
                         <div class="col-12 mb-5 mt-3">
                             <div class="d-flex justify-content-end">
-                                <button  type="submit" class="transfer-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                                <button  type="submit" class="add-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
                             </div>
                         </div>
 
@@ -228,8 +299,8 @@ allowedUserTypes[] = "specialist"
         $(document).ready(function () {
 
             /** Add file input functionlity for plus-icon img. */
-            $("#add-avatar").click(function () {
-                $("#avatar").trigger('click');
+            $(".add-custom-avatar").click(function () {
+                $(".custom-avatar").trigger('click');
             });
 
             /** Submit form on image input change. */
@@ -239,13 +310,23 @@ allowedUserTypes[] = "specialist"
                 }
             });
 
-            // Get the container element
+            /** Function for adding a new contact person */
+            function addNewContact(link,form) {
+                $(link).on('click', function(){
+                    $(form).removeClass('d-none');
+                    $(link).addClass('d-none');
+                });
+            }
+
+            /** Call the function for adding a new contact person */
+            addNewContact('#hide-1', '#person-2');
+            addNewContact('#hide-2', '#person-3');
+            addNewContact('#hide-3', '#person-4');
+            addNewContact('#hide-4', '#person-5');
+
+            /** Change active on predifined avatars */
             var avatarsContainer = document.querySelector(".avatars");
-
-            // Get all buttons with class="btn" inside the container
             var avatars = avatarsContainer.getElementsByClassName("predifined-avatar");
-
-            // Loop through the buttons and add the active class to the current/clicked button
             for (var i = 0; i < avatars.length; i++) {
                 avatars[i].addEventListener("click", function() {
                     var current = document.getElementsByClassName("active-avatar");
@@ -253,6 +334,112 @@ allowedUserTypes[] = "specialist"
                     this.className += " active-avatar";
                 });
             }
+            var avatarsContainer1 = document.querySelector(".avatars1");
+            var avatars1 = avatarsContainer1.getElementsByClassName("predifined-avatar1");
+            for (var i = 0; i < avatars.length; i++) {
+                avatars1[i].addEventListener("click", function() {
+                    var current = document.getElementsByClassName("active-avatar1");
+                    current[0].className = current[0].className.replace(" active-avatar1", "");
+                    this.className += " active-avatar1";
+                });
+            }
+
+            /**
+             * Function for triggering the finish button when
+             * values from all fields are selected
+             */
+            function activateFinishBtn() {
+                $('.add-student').removeAttr('disabled');
+                $('.add-student').removeClass('btn-gray-light');
+                $('.add-student').removeClass('text-white');
+                $('.add-student').addClass('btn-secondary');
+            }
+
+            function deactivateFinishBtn() {
+                $('.add-student').attr('disabled');
+                $('.add-student').addClass('btn-gray-light');
+                $('.add-student').addClass('text-white');
+                $('.add-student').removeClass('btn-secondary');
+            }
+
+            /** Validation for activeting the finish button. */
+            $(document.body).on('change', '.onChangeValue', function(){
+                if(
+                    (0 !== $("#avatar").val().length) &&
+                    ( "-1" !== $("#day").val()) &&
+                    ( "-1" !== $("#month").val()) &&
+                    ( "-1" !== $("#year").val()) &&
+                    (0 !== $("#last-name").val().length) &&
+                    (0 !== $("#first-name").val().length) &&
+                    (0 !== $("#description").val().length) &&
+                    ($("#disability1").is(":checked")) &&
+                    ($("#disability2").is(":checked")) &&
+                    ((
+                        (
+                            (0 !== $("#contact_1_last_name_id").val().length) ||
+                            (0 !== $("#contact_1_first_name_id").val().length) ||
+                            (0 !== $("#contact_1_phone_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_1_last_name_id").val().length) &&
+                            (0 !== $("#contact_1_first_name_id").val().length) &&
+                            (0 !== $("#contact_1_phone_id").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#contact_2_last_name_id").val().length) ||
+                            (0 !== $("#contact_2_first_name_id").val().length) ||
+                            (0 !== $("#contact_2_phone_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_2_last_name_id").val().length) &&
+                            (0 !== $("#contact_2_first_name_id").val().length) &&
+                            (0 !== $("#contact_2_phone_id").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#contact_3_last_name_id").val().length) ||
+                            (0 !== $("#contact_3_first_name_id").val().length) ||
+                            (0 !== $("#contact_3_phone_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_3_last_name_id").val().length) &&
+                            (0 !== $("#contact_3_first_name_id").val().length) &&
+                            (0 !== $("#contact_3_phone_id").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#contact_4_last_name_id").val().length) ||
+                            (0 !== $("#contact_4_first_name_id").val().length) ||
+                            (0 !== $("#contact_4_phone_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_4_last_name_id").val().length) &&
+                            (0 !== $("#contact_4_first_name_id").val().length) &&
+                            (0 !== $("#contact_4_phone_id").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#contact_5_last_name_id").val().length) ||
+                            (0 !== $("#contact_5_first_name_id").val().length) ||
+                            (0 !== $("#contact_5_phone_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_5_last_name_id").val().length) &&
+                            (0 !== $("#contact_5_first_name_id").val().length) &&
+                            (0 !== $("#contact_5_phone_id").val().length)
+                        )
+                    ))
+                ) {
+                    activateFinishBtn()
+                } else {
+                    deactivateFinishBtn()
+                }
+            });
         });
     </script>
 {% endput %}
