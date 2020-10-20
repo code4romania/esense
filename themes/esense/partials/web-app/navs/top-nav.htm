@@ -1,59 +1,59 @@
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
-	<!-- Sidebar Toggle (Topbar) -->
-	<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-		<i class="fa fa-bars"></i>
-	</button>
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
 
-	<div class="d-none d-lg-block">
-		<div class="d-flex align-items-center">
-			<p class="p-0 m-0 pl-3 user-name">{{'teacher.dashboard.top.nav.welcome.message'|_}}&nbsp;{{ user.full_name }}</p>
-		</div>
-	</div>
+    <div class="d-none d-lg-block">
+        <div class="d-flex align-items-center">
+            <p class="p-0 m-0 pl-3 user-name">{{'teacher.dashboard.top.nav.welcome.message'|_}}&nbsp;{{ user.full_name }}</p>
+        </div>
+    </div>
 
-	<!-- Topbar Navbar -->
-	<ul class="navbar-nav ml-auto d-flex align-items-center">
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto d-flex align-items-center">
 
-		<!-- Topbar search desktop -->
-		<form class="form-inline my-auto navbar-search mr-3 d-none">
-			<div class="input-group d-flex align-items-center">
-				<input type="text" class="form-control" placeholder="{{'teacher.dashboard.top.nav.search.placeholder'|_}}">
-			</div>
-		</form>
-		<!-- Search mobile version -->
-		<li class="nav-item dropdown no-arrow d-none">
-			<a class="nav-link" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<i class="fas fa-search fa-fw"></i>
-			</a>
-			<!-- Dropdown - Messages -->
-			<div class="dropdown-menu dropdown-menu-center py-3 px-0 mx-0 top-nav-dropdown-search" aria-labelledby="searchDropdown">
-				<form class="form-inline mr-auto w-100 navbar-search">
-					<div class="input-group d-flex align-items-center justify-content-center px-3">
-						<input type="text" class="form-control" placeholder="{{'teacher.dashboard.top.nav.search.placeholder'|_}}">
-					</div>
-				</form>
-			</div>
-		</li>
+        <!-- Topbar search desktop -->
+        <form class="form-inline my-auto navbar-search mr-3 d-none">
+            <div class="input-group d-flex align-items-center">
+                <input type="text" class="form-control" placeholder="{{'teacher.dashboard.top.nav.search.placeholder'|_}}">
+            </div>
+        </form>
+        <!-- Search mobile version -->
+        <li class="nav-item dropdown no-arrow d-none">
+            <a class="nav-link" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-menu dropdown-menu-center py-3 px-0 mx-0 top-nav-dropdown-search" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group d-flex align-items-center justify-content-center px-3">
+                        <input type="text" class="form-control" placeholder="{{'teacher.dashboard.top.nav.search.placeholder'|_}}">
+                    </div>
+                </form>
+            </div>
+        </li>
 
-		<!-- Nav Item - Alerts -->
-		<li class="nav-item mr-2 ml-3">
-			<a class="nav-link" href="{{ 'teacher/notifications'|page }}">
-				<img class="img-fluid" src="{{ 'assets/img/svg/dashboard/top-nav/bell.svg'|theme }}">
-			</a>
-		</li>
+        <!-- Nav Item - Alerts -->
+        <li class="nav-item mr-2 ml-3">
+            <a class="nav-link" href="{{ 'teacher/notifications'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/top-nav/bell.svg'|theme }}">
+            </a>
+        </li>
 
-		<!-- Nav Item - User Information -->
-		<li class="nav-item mr-lg-3">
-			<img class="img-profile rounded-circle" width="40px" height="40px" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-		</li>
-		<!-- <li class="nav-item dropdown no-arrow">
-			<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-			</a>
-			<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown"></div>
-		</li> -->
+        <!-- Nav Item - User Information -->
+        <li class="nav-item mr-lg-3">
+            <img class="img-profile rounded-circle" width="40px" height="40px" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+        </li>
+        <!-- <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown"></div>
+        </li> -->
 
-	</ul>
+    </ul>
 
 </nav>
 <!-- End of Topbar -->
