@@ -30,6 +30,7 @@ description = "Navbar partial for drive grade"
                 </a>
             </li>
 
+
             <!-- Contact -->
             <li class="nav-item my-2 pl-3 my-md-0">
                 <a class="nav-link text-white display-4 roboto-family" href="{{ 'landing-pages/esense-home'|page }}#contact">
@@ -37,19 +38,36 @@ description = "Navbar partial for drive grade"
                 </a>
             </li>
 
-            <!-- Register -->
-            <li class="nav-item my-2 pl-4 my-md-0">
-                <a class="btn btn-outline-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/register-form'|page }}">
-                    {{'navbar.link_4'|_}}
-                </a>
-            </li>
+            {% if not user %}
+                <!-- Register -->
+                <li class="nav-item my-2 pl-4 my-md-0">
+                    <a class="btn btn-outline-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/register-form'|page }}">
+                        {{'navbar.link_4'|_}}
+                    </a>
+                </li>
 
-            <!-- Login -->
-            <li class="nav-item my-2 pl-4 my-md-0">
-                <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/login'|page }}">
-                    {{'navbar.link_5'|_}}
-                </a>
-            </li>
+                <!-- Login -->
+                <li class="nav-item my-2 pl-4 my-md-0">
+                    <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/login'|page }}">
+                        {{'navbar.link_5'|_}}
+                    </a>
+                </li>
+
+            {% elseif 'specialist' == user.type %}
+                 <!-- Dashboard -->
+                <li class="nav-item my-2 pl-4 my-md-0">
+                    <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'teacher/administration-board'|page }}">
+                        {{'navbar.link_6'|_}}
+                    </a>
+                </li>
+            {% else %}
+                <!-- Dashboard -->
+                <li class="nav-item my-2 pl-4 my-md-0">
+                    <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'school/administration-board'|page }}">
+                        {{'navbar.link_6'|_}}
+                    </a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </nav>
