@@ -139,7 +139,9 @@ allowedUserTypes[] = "school"
 
                             <td>
                                 <div class="pl-2 py-3 d-flex align-items-center">
-                                    <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
+                                    <a role="button" data-toggle="modal" data-target="#arhiveTeacherModal">
+                                        <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
+                                    </a>
                                     <div class="dropdown pt-2">
                                         <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
@@ -158,6 +160,9 @@ allowedUserTypes[] = "school"
         </div>
     </div>
 </div>
+
+<!-- Partial for archive a teacher -->
+{% partial 'web-app/school/archive-teacher' %}
 
 {% put scripts %}
     <!-- Scripts for datatables -->
