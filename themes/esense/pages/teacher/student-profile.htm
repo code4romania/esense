@@ -24,7 +24,7 @@ allowedUserTypes[] = "specialist"
                 <div class="row">
 
                     <!-- Student details and actions -->
-                    <div class="col-12">
+                    <div class="col-12 mb-5">
                         <div class="p-3 d-flex align-items-start justify-content-between">
                             <div class="d-flex flex-column flex-md-row">
                                 <img width="80" height="80" class="img-profile rounded-circle mb-2 mb-md-0" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
@@ -51,19 +51,23 @@ allowedUserTypes[] = "specialist"
                     </div>
 
                     <!-- Activity schedule -->
-                    <div class="col-12 my-5">
-                        <div class="shadow">
-                            <div class="row">
-                                <div class="col-6">
-                                    <ul class="activity timeline">
-                                        <li class="d-flex align-items-start flex-column">
-                                            <p class="p-0 m-0 small font-weight-light text-gray-dark">Stimulare - Denumire joc #1</p>
-                                            <p class="p-0 m-0 display-4 text-gray-dark">10:00/2h</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="pl-3 mb-4 d-flex align-items-center">
+                            <p class="p-0 m-0 text-gray-dark font-weight-bold">Program activitati</p>
+                            <a role="button">
+                                <img class="img-profile ml-4" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
+                            </a>
                         </div>
+                        <ul class="activity timeline">
+                            <li class="d-flex align-items-start flex-column">
+                                <p class="p-0 m-0 small font-weight-light text-gray-dark">Stimulare - Denumire joc #1</p>
+                                <p class="p-0 m-0 display-4 text-gray-dark">10:00/2h</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
+                        <div class="calendar-wrapper"></div>
                     </div>
 
                     <!-- Frequent exercises owl carousel -->
@@ -206,6 +210,23 @@ allowedUserTypes[] = "specialist"
                         }
                     }
                 }
+            });
+
+
+
+            function selectDate(date) {
+            $('.calendar-wrapper').updateCalendarOptions({date: date});
+            }
+
+            $('.calendar-wrapper').calendar({
+                weekDayLength: 1,
+                date: new Date(),
+                onClickDate: selectDate,
+                showYearDropdown: true,
+                prevButton: '<',
+                nextButton: '>',
+                todayButtonContent: '',
+                showTodayButton: false,
             });
         });
 
