@@ -1,11 +1,19 @@
 /***********************************************
 ************* Input placeholder ****************
 ***********************************************/
+input {
+    font-size: 14px !important;
+    color: #252525 !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    background: #fff !important;
+}
 
 ::placeholder {
     font-size: 14px;
     color: #ADB5BD !important;
     line-height: 21px;
+    font-style: italic;
 }
 
 .form-styles {
