@@ -11,6 +11,7 @@ class TableUpdateGenuineqStudentsStudents extends Migration
         Schema::table('genuineq_students_students', function($table)
         {
             $table->integer('specialist_id')->unsigned()->nullable();
+            $table->boolean('archived')->default(false);
         });
     }
 
@@ -19,6 +20,12 @@ class TableUpdateGenuineqStudentsStudents extends Migration
         if (Schema::hasColumn('genuineq_students_students', 'specialist_id')) {
             Schema::table('genuineq_students_students', function ($table) {
                 $table->dropColumn('specialist_id');
+            });
+        }
+
+        if (Schema::hasColumn('genuineq_students_students', 'archived')) {
+            Schema::table('genuineq_students_students', function ($table) {
+                $table->dropColumn('archived');
             });
         }
     }

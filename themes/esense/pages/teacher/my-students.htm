@@ -33,7 +33,7 @@ allowedUserTypes[] = "specialist"
                                         </div>
                                         <div class="d-flex flex-column ml-2">
                                             <a class="display-4 font-weight-light" href="{{ 'teacher/student-profile'|page({id: student.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
-                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ student.display_birthdate }}</h6>
+                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ student.birthdate|date("d/m/Y") }}</h6>
                                         </div>
                                     </div>
                                 </td>

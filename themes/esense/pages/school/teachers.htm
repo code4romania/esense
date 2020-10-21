@@ -80,7 +80,7 @@ allowedUserTypes[] = "school"
         <div class="col-12 my-5">
             <div class="table-responsive rounded p-3" style="overflow-x: hidden; background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <p class="font-weight-bold text-dark">{{'teacher.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">(xx)</span></p>
+                    <p class="font-weight-bold text-dark">{{'teacher.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">({{ user.profile.specialists.count }})</span></p>
                     <a href="{{"teacher/add-student"|page}}" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around px-2" style="width:160px;">
                         <i class="fas fa-user-edit mr-2"></i>
                         Adaugă profesor
@@ -101,59 +101,61 @@ allowedUserTypes[] = "school"
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                           <!-- Teacher avatar and name -->
-                            <td>
-                                <div class="d-flex align-items-center justify-content-between">
+                        {% for specialist in user.profile.specialists %}
+                            <tr>
+                            <!-- Teacher avatar and name -->
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="pl-2 py-3 d-flex align-items-center">
+                                            <div>
+                                                <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                            </div>
+                                            <div class="d-flex flex-column ml-2">
+                                                <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- Number of students row -->
+                                <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
-                                        <div>
-                                            <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-                                        </div>
-                                        <div class="d-flex flex-column ml-2">
-                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">database student name</p>
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ specialist.students.count }}</p>
+                                    </div>
+                                </td>
+
+                                <!-- Registration date row -->
+                                <td>
+                                    <div class="pl-2 py-3 d-flex align-items-center">
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ specialist.created_at|date("d/m/Y") }}</p>
+                                    </div>
+                                </td>
+
+                                <!-- Email row -->
+                                <td>
+                                    <div class="pl-2 py-3 d-flex align-items-center">
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ specialist.email }}</p>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="pl-2 py-3 d-flex align-items-center">
+                                        <a role="button" data-toggle="modal" data-target="#arhiveTeacherModal">
+                                            <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
+                                        </a>
+                                        <div class="dropdown pt-2">
+                                            <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
+                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-
-                            <!-- Number of students row -->
-                            <td>
-                                <div class="pl-2 py-3 d-flex align-items-center">
-                                    <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">xx</p>
-                                </div>
-                            </td>
-
-                             <!-- Registration date row -->
-                             <td>
-                                <div class="pl-2 py-3 d-flex align-items-center">
-                                    <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">May 26,2019</p>
-                                </div>
-                            </td>
-
-                             <!-- Email row -->
-                             <td>
-                                <div class="pl-2 py-3 d-flex align-items-center">
-                                    <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">email@email.com</p>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="pl-2 py-3 d-flex align-items-center">
-                                    <a role="button" data-toggle="modal" data-target="#arhiveTeacherModal">
-                                        <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
-                                    </a>
-                                    <div class="dropdown pt-2">
-                                        <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                            <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
-                                            <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
