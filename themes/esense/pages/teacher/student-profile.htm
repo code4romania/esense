@@ -1,5 +1,5 @@
 title = "Profil elev"
-url = "/teacher/student"
+url = "/teacher/student/:id"
 layout = "web-app"
 description = "Pagina de profil a elevului"
 is_hidden = 0
@@ -8,6 +8,8 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+
+[students]
 ==
 <div class="container-fluid px-lg-4 mb-5">
     <div class="row">
@@ -29,9 +31,17 @@ allowedUserTypes[] = "specialist"
                             <div class="d-flex flex-column flex-md-row">
                                 <img width="80" height="80" class="img-profile rounded-circle mb-2 mb-md-0" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                                 <div class="ml-3">
-                                    <p class="p-0 m-0 font-weight-bold text-dark" style="line-height: 25px;">Student Name</p>
-                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.varsta'|_}} x {{'teacher.dashboard.student.profile.ani'|_}}</p>
-                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.profesor'|_}} Profesor 1, Profesor 2</p>
+                                    <p class="p-0 m-0 font-weight-bold text-dark" style="line-height: 25px;">{{ student.full_name }}</p>
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.varsta'|_}} {{ student.age }}&nbsp;{{'teacher.dashboard.student.profile.ani'|_}}</p>
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.profesor'|_}}
+                                        {% for specialist in student.specialists %}
+                                            {% if loop.last %}
+                                                {{ specialist.full_name }}
+                                            {% else %}
+                                                {{ specialist.full_name }},&nbsp;
+                                            {% endif %}
+                                        {% endfor %}
+                                    </p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
