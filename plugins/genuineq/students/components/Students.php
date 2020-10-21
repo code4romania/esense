@@ -30,18 +30,15 @@ class Students extends ComponentBase
     }
 
     /**
-     * Executed when this component is initialized
-     */
-    public function prepareVars()
-    {
-    }
-
-    /**
      * Executed when this component is bound to a page or layout.
      */
     public function onRun()
     {
-        $this->prepareVars();
+        /** Check if a student is accessed. */
+        if ($this->param('id')) {
+            /** Extract the student and send it to the page. */
+            $this->page['student'] = Student::find($this->param('id'));
+        }
     }
 
     /***********************************************
