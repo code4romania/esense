@@ -169,7 +169,7 @@ class RecordDetail extends ComponentBase
         }
 
         $pluginManager = PluginManager::instance()->findByIdentifier('Rainlab.Translate');
-
+        
         $record = Record::query();
 
         /**
@@ -185,7 +185,7 @@ class RecordDetail extends ComponentBase
          *  Filter area
          */
         if( $this->property('areaSlug') ) {
-
+         
             $record->whereHas('area', function ($query) {
 
                 $query->where('slug', '=', $this->property('areaSlug'));
@@ -219,7 +219,7 @@ class RecordDetail extends ComponentBase
                         $query->where('slug', '=', $this->property('categorySlug'));
                     }
                 });
-            }
+            } 
         }
 
         /**
@@ -249,9 +249,9 @@ class RecordDetail extends ComponentBase
         $customFields = $record->area->custom_repeater_fields;
 
         foreach($customFields as $field) {
-
+            
             if($field['custom_repeater_field_name'] == $fieldName) {
-
+                
                 if($fieldKey and !empty($field[$fieldKey])) {
                     return $field[$fieldKey];
                 } else {

@@ -1,7 +1,7 @@
 <?php namespace Genuineq\Timetable\Controllers;
 
-use Backend\Classes\Controller;
 use BackendMenu;
+use Backend\Classes\Controller;
 use Genuineq\Timetable\Models\Record;
 
 class Records extends Controller
