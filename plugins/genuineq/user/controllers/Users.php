@@ -13,6 +13,7 @@ use Genuineq\User\Models\User;
 use Genuineq\User\Models\UserGroup;
 use Genuineq\User\Models\MailBlocker;
 use Genuineq\User\Models\Settings as UserSettings;
+use Genuineq\User\Helpers\EmailHelper;
 
 class Users extends Controller
 {
