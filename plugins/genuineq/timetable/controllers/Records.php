@@ -23,6 +23,6 @@ class Records extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Genuineq.Timetable', 'timetable');
+        BackendMenu::setContext('Genuineq.Timetable', 'timetable', 'records');
     }
 }

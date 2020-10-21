@@ -15,7 +15,7 @@ navigation:
             'Add Record':
                 label: 'genuineq.timetable::lang.record.create'
                 url: genuineq/timetable/records/create
-                icon: icon-file
+                icon: icon-plus
                 permissions:
                     - genuineq.timetable.manage_records
             Records:
