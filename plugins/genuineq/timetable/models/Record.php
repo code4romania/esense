@@ -12,7 +12,10 @@ class Record extends Model
 
     protected $dates = ['deleted_at'];
 
-    /** Fillable fields. */
+    /**
+     * The attributes that are mass assignable.
+     * @var array
+     */
     protected $fillable = [
         'day',
         'start_hour',
@@ -32,4 +35,19 @@ class Record extends Model
      */
     public $rules = [
     ];
+
+    /**
+     * Function that holds the validation rules.
+     */
+    public static function rules()
+    {
+        return [
+            'day' => 'required|date',
+            'start_hour' => 'required|time',
+            'end_hour' => 'required|time',
+            'title' => 'required|text',
+            'description' => 'required|text',
+            'feedback' => 'required|text',
+        ];
+    }
 }
