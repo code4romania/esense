@@ -1,0 +1,6 @@
+plugin:
+    name: 'genuineq.esense::lang.plugin.name'
+    description: 'genuineq.esense::lang.plugin.description'
+    author: genuineq
+    icon: oc-icon-plus
+    homepage: ''

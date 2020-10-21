@@ -44,4 +44,32 @@ class Student extends Model
         'contact_person_4' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_4_id'],
         'contact_person_5' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_5_id'],
     ];
+
+    /***********************************************
+     ****************** Accessors ******************
+     ***********************************************/
+
+    /**
+     * Accessor for getting the user name.
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->name . ' ' . $this->surname;
+    }
+
+    /**
+     * Accessor for getting the user name.
+     */
+    public function getDisplayBirthdateAttribute()
+    {
+        return date_format(date_create_from_format('Y-m-d', $this->birthdate), 'd/m/Y');
+    }
+
+    /**
+     * Accessor for getting the age.
+     */
+    public function getAgeAttribute()
+    {
+        return date_diff(date_create($this->birthdate), date_create('today'))->y;
+    }
 }
