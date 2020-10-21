@@ -47,7 +47,7 @@ class Timetable extends ComponentBase
      */
     public function onUpdate($id)
     {
-        $record = (new RecordModel)::find($id);
+        $record = RecordModel::find($id);
             $record->day = post('day');
             $record->start_hour = post('start_hour');
             $record->end_hour = post('end_hour');
@@ -60,6 +60,11 @@ class Timetable extends ComponentBase
 
     }
 
+    /**
+     * Delete the model with SoftDelete method (add `deleted_at` timestamp on record entry)
+     *
+     * @param RecordModel $record
+     */
     public function onDelete(RecordModel $record)
     {
         $record->runSoftDelete();
