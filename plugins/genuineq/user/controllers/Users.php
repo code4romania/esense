@@ -145,6 +145,9 @@ class Users extends Controller
 
         Flash::success(Lang::get('genuineq.user::lang.users.activated_success'));
 
+        /** Inform user via email of account activation. */
+        EmailHelper::sendWelcomeEmail($model);
+
         if ($redirect = $this->makeRedirect('update-close', $model)) {
             return $redirect;
         }
