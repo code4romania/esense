@@ -1,45 +1,47 @@
 fields:
     title:
-        label: 'genuineq.timetable::lang.record.title'
+        label: 'genuineq.timetable::lang.backend.timetable.fields.title'
         span: left
-        placeholder: 'genuineq.timetable::lang.record.title'
+        placeholder: 'genuineq.timetable::lang.backend.timetable.fields.title'
         required: 1
         type: text
-
+        comment: 'genuineq.timetable::lang.backend.timetable.fields.title_comment'
     day:
-        label: 'genuineq.timetable::lang.record.day'
+        label: 'genuineq.timetable::lang.backend.timetable.fields.day'
         mode: date
         format: d-m-Y
         span: right
-        placeholder: 'genuineq.timetable::lang.record.day'
+        placeholder: 'genuineq.timetable::lang.backend.timetable.fields.day'
         required: 1
         type: datepicker
-
+        comment: 'genuineq.timetable::lang.backend.timetable.fields.day_comment'
     start_hour:
-        label: 'genuineq.timetable::lang.record.start_hour'
+        label: 'genuineq.timetable::lang.backend.timetable.fields.start_hour'
         mode: time
         span: left
-        placeholder: 'genuineq.timetable::lang.record.start_hour'
+        placeholder: 'genuineq.timetable::lang.backend.timetable.fields.start_hour'
         required: 1
         type: datepicker
-
+        comment: 'genuineq.timetable::lang.backend.timetable.fields.start_hour_comment'
     end_hour:
-        label: 'genuineq.timetable::lang.record.end_hour'
+        label: 'genuineq.timetable::lang.backend.timetable.fields.end_hour'
         mode: time
         span: right
+        placeholder: 'genuineq.timetable::lang.backend.timetable.fields.end_hour'
         required: 1
         type: datepicker
-
+        comment: 'genuineq.timetable::lang.backend.timetable.fields.end_hour'
     description:
-        label: 'genuineq.timetable::lang.record.description'
+        label: 'genuineq.timetable::lang.backend.timetable.fields.description'
         size: ''
         span: left
-        placeholder: 'genuineq.timetable::lang.record.description'
+        placeholder: 'genuineq.timetable::lang.backend.timetable.fields.description'
         type: textarea
-
+        comment: 'genuineq.timetable::lang.backend.timetable.fields.description_comment'
     feedback:
-        label: 'genuineq.timetable::lang.record.feedback'
+        label: 'genuineq.timetable::lang.backend.timetable.fields.feedback'
         size: ''
         span: auto
-        placeholder: 'genuineq.timetable::lang.record.feedback'
+        placeholder: 'genuineq.timetable::lang.backend.timetable.fields.feedback'
         type: textarea
+        comment: 'genuineq.timetable::lang.backend.timetable.fields.feedback_comment'

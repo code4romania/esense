@@ -20,6 +20,9 @@ class Records extends Controller
         'genuineq.timetable.manage_records'
     ];
 
+    /**
+     * Records Controller constructor.
+     */
     public function __construct()
     {
         parent::__construct();
