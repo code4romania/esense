@@ -19,6 +19,10 @@
 /** Import Ocookie styles that override predefined ocookie plugin styles. */
 @import "ocookie";
 
+@import "datepicker";
+
+@import "calendar.scss";
+
 .form-control:focus {
     border-color: #ADB5BD;
     -webkit-box-shadow: none;
