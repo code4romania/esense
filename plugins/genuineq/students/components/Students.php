@@ -67,7 +67,7 @@ class Students extends ComponentBase
             'surname' => post('surname'),
             'name' => post('name'),
             'description' => post('description'),
-            'birthdate' => post('birthdate'),
+            'birthdate' => date_format(date_create_from_format('d-m-Y', post('birthdate')), 'Y-m-d'),
             'hearing_impairment' => ((Input::has('hearing_impairment')) ? (1) : (0)),
             'visual_impairment' => ((Input::has('visual_impairment')) ? (1) : (0)),
             // 'gender' => ''
@@ -78,7 +78,7 @@ class Students extends ComponentBase
             'surname' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'description' => 'required|string',
-            'birthdate' => 'required|date|date_format:d-m-Y',
+            'birthdate' => 'required|date|date_format:Y-m-d',
             'hearing_impairment' => 'boolean',
             'visual_impairment' => 'boolean',
             // 'gender' => 'required|in:male,female'
@@ -111,18 +111,10 @@ class Students extends ComponentBase
         }
 
         /** Fire event before student create. */
-        Event::fire('genuineq.students.create.before.student.create', [&$data, &$rules, &$messages, post()]);
+        Event::fire('genuineq.students.create.before.student.create', [&$data, post()]);
 
         /** Create the Student. */
-        $student = Student::create([
-            'surname' => $data['surname'],
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'birthdate' => date_format(date_create_from_format('d-m-Y', $data['birthdate']), 'Y-m-d'),
-            'hearing_impairment' => $data['hearing_impairment'],
-            'visual_impairment' => $data['visual_impairment'],
-            // 'gender' => $data['gender'],
-        ]);
+        $student = Student::create($data);
 
         /** Fire event after create. */
         Event::fire('genuineq.students.create.after.student.create', [$student]);
