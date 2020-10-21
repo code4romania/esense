@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav sidebar accordion border-right" id="accordionSidebar" style="background: #F8F6F4;">
+<ul class="navbar-nav sidebar accordion border-right min-vh-100" id="accordionSidebar" style="background: #F8F6F4;">
     <!-- Sidebar - Brand -->
     <a class="d-flex align-items-center justify-content-center" href="/">
         <img class="img-fluid pb-5 pt-3 px-2" src="{{ 'assets/img/svg/logo.svg'|theme }}">
@@ -11,52 +11,103 @@
     ***********************************************
     -->
 
-    <!-- Panou de administrare -->
-    <li class="nav-item mb-2 {% if this.page.url == "/teacher/dashboard" %} active {% endif %}">
-        <div class="vertical-border"></div>
-        <a class="nav-link" href="{{ 'teacher/administration-board'|page }}">
-            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
-            <span class="text-primary-dark">{{"side.nav.link_1"|_}}</span>
-        </a>
-    </li>
+    {% if 'teacher' == user.type %}
 
-    <!-- Exercitii si jocuri -->
-    <li class="nav-item mb-2 {% if this.page.url == "/teacher/exercises/:category?" or this.page.url == "teacher/exercise/:slug" %} active {% endif %}">
-        <div class="vertical-border"></div>
-        <a class="nav-link" href="{{ 'teacher/exercises'|page }}">
-            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/zap.svg'|theme }}">
-            <span class="text-primary-dark">{{"side.nav.link_2"|_}}</span>
-        </a>
-    </li>
-
-    <!-- Elevi mei -->
-    <li class="nav-item mb-2 {% if this.page.url == "/teacher/students" or this.page.url == "/teacher/student" or this.page.url == '/teacher/transfer-student' or this.page.url == '/teacher/add-student'  %} active {% endif %}">
-        <div class="vertical-border"></div>
-        <a class="nav-link" href="{{ 'teacher/my-students'|page }}">
-            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
-            <span class="text-primary-dark">{{"side.nav.link_3"|_}}</span>
-        </a>
-    </li>
-
-    {% if user and 'specialist' == user.type and user.profile.school %}
-        <!-- Scoala -->
-        <li class="nav-item mb-2 {% if this.page.url == "/teacher/school"%} active {% endif %}">
+        <!-- Panou de administrare -->
+        <li class="nav-item mb-2 {% if this.page.url == "/teacher/dashboard" %} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{ 'teacher/school'|page }}">
-                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/sliders.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_4"|_}}</span>
+            <a class="nav-link" href="{{ 'teacher/administration-board'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
+                <span class="text-primary-dark">{{"side.nav.link_1"|_}}</span>
             </a>
         </li>
+
+        <!-- Exercitii si jocuri -->
+        <li class="nav-item mb-2 {% if this.page.url == "/teacher/exercises/:category?" or this.page.url == "teacher/exercise/:slug" %} active {% endif %}">
+            <div class="vertical-border"></div>
+            <a class="nav-link" href="{{ 'teacher/exercises'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/zap.svg'|theme }}">
+                <span class="text-primary-dark">{{"side.nav.link_2"|_}}</span>
+            </a>
+        </li>
+
+        <!-- Elevi mei -->
+        <li class="nav-item mb-2 {% if this.page.url == "/teacher/students" or this.page.url == "/teacher/student" or this.page.url == '/teacher/transfer-student' or this.page.url == '/teacher/add-student'  %} active {% endif %}">
+            <div class="vertical-border"></div>
+            <a class="nav-link" href="{{ 'teacher/my-students'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
+                <span class="text-primary-dark">{{"side.nav.link_3"|_}}</span>
+            </a>
+        </li>
+
+        {% if user and 'specialist' == user.type and user.profile.school %}
+            <!-- Scoala -->
+            <li class="nav-item mb-2 {% if this.page.url == "/teacher/school"%} active {% endif %}">
+                <div class="vertical-border"></div>
+                <a class="nav-link" href="{{ 'teacher/school'|page }}">
+                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/sliders.svg'|theme }}">
+                    <span class="text-primary-dark">{{"side.nav.link_4"|_}}</span>
+                </a>
+            </li>
+        {% endif %}
+
+        <!-- Informatii utile -->
+        <li class="nav-item mb-2 {% if this.page.url == "/teacher/information/:slug?"%} active {% endif %}">
+            <div class="vertical-border"></div>
+            <a class="nav-link" href="{{ 'teacher/information'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/alert-circle.svg'|theme }}">
+                <span class="text-primary-dark">{{"side.nav.link_5"|_}}</span>
+            </a>
+        </li>
+
     {% endif %}
 
-    <!-- Informatii utile -->
-    <li class="nav-item mb-2 {% if this.page.url == "/teacher/information/:slug?"%} active {% endif %}">
-        <div class="vertical-border"></div>
-        <a class="nav-link" href="{{ 'teacher/information'|page }}">
-            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/alert-circle.svg'|theme }}">
-            <span class="text-primary-dark">{{"side.nav.link_5"|_}}</span>
-        </a>
-    </li>
+
+    <!--
+    ***********************************************
+    ************** School nav links **************
+    ***********************************************
+    -->
+
+    {% if 'school' == user.type %}
+
+        <!-- Panou de administrare -->
+        <li class="nav-item mb-2 {% if this.page.url == "/school/dashboard" %} active {% endif %}">
+            <div class="vertical-border"></div>
+            <a class="nav-link" href="{{ 'school/administration-board'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
+                <span class="text-primary-dark">{{"side.nav.link_1"|_}}</span>
+            </a>
+        </li>
+
+        <!-- Profesori -->
+        <li class="nav-item mb-2 {% if this.page.url == "/school/teachers" or this.page.url == "/school/teacher" %} active {% endif %}">
+            <div class="vertical-border"></div>
+            <a class="nav-link" href="{{ 'school/teachers'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/building.svg'|theme }}">
+                <span class="text-primary-dark">{{"side.nav.link_8"|_}}</span>
+            </a>
+        </li>
+
+        <!-- Elevi -->
+        <li class="nav-item mb-2 {% if this.page.url == "/school/students" or this.page.url == '/school/students' %} active {% endif %}">
+            <div class="vertical-border"></div>
+            <a class="nav-link" href="{{ 'school/students'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/user.svg'|theme }}">
+                <span class="text-primary-dark">{{"side.nav.link_9"|_}}</span>
+            </a>
+        </li>
+
+        <!-- Arhiva -->
+        <li class="nav-item mb-2 {% if this.page.url == "/school/archive" %} active {% endif %}">
+            <div class="vertical-border"></div>
+            <a class="nav-link" href="{{ 'school/archive'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/archive.svg'|theme }}">
+                <span class="text-primary-dark">{{"side.nav.link_10"|_}}</span>
+            </a>
+        </li>
+
+    {% endif %}
 
     <!-- Setari -->
     <li class="nav-item mt-5 mb-2">
