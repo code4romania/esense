@@ -8,6 +8,8 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+
+[students]
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
@@ -27,7 +29,7 @@ allowedUserTypes[] = "specialist"
                     <p class="text-muted">{{'teacher.dashboard.student.add.profile.title'|_}}</p>
                 </div>
 
-                <form method="POST" data-request="">
+                <form method="POST" data-request="onCreateStudent" >
                     <div class="row mt-2">
 
                         <div class="col-12">
@@ -37,6 +39,7 @@ allowedUserTypes[] = "specialist"
                                     <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
                                     <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                         <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
+
                                         <div class="d-flex">
                                             <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
                                             <span class="text-danger ml-2">*</span>
@@ -46,6 +49,7 @@ allowedUserTypes[] = "specialist"
 
                                 <div class="col-12 col-md-6">
                                     <p class="p-0 m-0 pt-3 text-muted">{{'teacher.dashboard.student.add.profile.avatar'|_}}</p>
+
                                     <div class="tab-content" id="v-pills-tabContent">
                                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                             <div class="d-flex">
@@ -63,6 +67,7 @@ allowedUserTypes[] = "specialist"
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                             <div class="d-flex">
                                                 <div class="avatars1 d-flex">
@@ -79,6 +84,7 @@ allowedUserTypes[] = "specialist"
                                                 </div>
                                             </div>
                                         </div>
+
                                         <!-- Input for adding custom avatar -->
                                         <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
                                         <!-- Input for adding predifined avatar -->
@@ -92,43 +98,21 @@ allowedUserTypes[] = "specialist"
                             <p class="display-4 text-gray-light">{{'teacher.dashboard.student.add.profile.dob.label'|_}}</p>
                             <div class="row">
 
-                                <!-- Select day -->
-                                <div class="col-12 col-md-4 col-lg-1 pr-lg-0 mr-lg-0">
-                                    <div class="form-group">
-                                        <select id="day" class="form-control border outline-none onChangeValue">
-                                            <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.day'|_}}</option>
-                                            <option value="">3</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- Select month -->
-                                <div class="col-12 col-md-4 col-lg-2 pr-lg-0 mr-lg-0">
-                                    <div class="form-group">
-                                        <select id="month" class="form-control border outline-none onChangeValue">
-                                        <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.month'|_}}</option>
-                                        <option value="">3</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- Select year -->
-                                <div class="col-12 col-md-4 col-lg-2 pr-lg-0 mr-lg-0">
+                                <!-- Select date -->
+                                <div class="col-12 col-md-4 col-lg-3 pr-lg-0 mr-lg-0">
                                     <div class="form-group d-flex">
-                                        <select id="year" class="form-control border outline-none onChangeValue decorated">
-                                        <option value="-1">{{'teacher.dashboard.student.add.profile.select.option.year'|_}}</option>
-                                        <option value="">3</option>
-                                        </select>
+                                        <input type="text" name="birthdate" id="birthdate" class="onChangeValue">
                                         <span class="text-danger ml-2">*</span>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
                         <!-- Input last name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control onChangeValue" id="last-name" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}">
+                                <input type="text" class="form-control onChangeValue" name="surname" id="surname" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -136,7 +120,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Input first name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control onChangeValue" id="first-name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}">
+                                <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -144,7 +128,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Input diagnostic description -->
                         <div class="col-12">
                             <div class="form-group d-flex">
-                                <textarea class="form-control onChangeValue" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}"></textarea>
+                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}"></textarea>
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -156,8 +140,8 @@ allowedUserTypes[] = "specialist"
                                 <div class="col-12 col-md-6 ml-lg-0 pl-lg-0">
                                     <div class="d-flex">
                                         <div class="form-check">
-                                            <label class="form-check-label display-4 text-gray-light" for="disability1">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
-                                            <input class="onChangeValue" id="disability1" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
+                                            <label class="form-check-label display-4 text-gray-light" for="hearing_impairment">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
+                                            <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -167,8 +151,8 @@ allowedUserTypes[] = "specialist"
                                 <div class="col-12 col-md-6">
                                     <div class="d-flex">
                                         <div class="form-check">
-                                            <label class="form-check-label display-4 text-gray-light" for="disability2">{{'teacher.dashboard.student.add.profile.checkbox2.label'|_}}</label>
-                                            <input class="onChangeValue" id="disability2" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
+                                            <label class="form-check-label display-4 text-gray-light" for="visual_impairment">{{'teacher.dashboard.student.add.profile.checkbox2.label'|_}}</label>
+                                            <input class="onChangeValue" name="visual_impairment" id="visual_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="Da" data-off="Nu" data-style="ios">
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -179,111 +163,109 @@ allowedUserTypes[] = "specialist"
 
 
                         <!-- First contact person -->
-                        <div class="px-lg-2">
+                        <div id="person-1" class="px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
-                                contactPersonLastNameId = 'contact_1_last_name_id'
-                                contactPersonFirstNameId = 'contact_1_first_name_id'
-                                contactPersonPhoneId = 'contact_1_phone_id'
+                                contactPersonLastNameId = 'contact_1_surname'
+                                contactPersonFirstNameId = 'contact_1_name'
+                                contactPersonPhoneId = 'contact_1_phone'
                                 addContactPerson = 'add-contact-1'
                                 hideId = 'hide-1'
                                 contactPersonFormId = 'contact-1'
 
-                                contactPersonLastName = 'contact_1_last_name'
-                                contactPersonFirstName = 'contact_1_first_name'
+                                contactPersonLastName = 'contact_1_surname'
+                                contactPersonFirstName = 'contact_1_name'
                                 contactPersonEmail = 'contact_1_email'
                                 contactPersonPhone = 'contact_1_phone'
                                 contactPersonObservations = 'contact_1_observations'
                             %}
                         </div>
 
-                        <!-- First contact person -->
+                        <!-- Second contact person -->
                         <div id="person-2" class="px-lg-2 d-none">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
-                                contactPersonLastNameId = 'contact_2_last_name_id'
-                                contactPersonFirstNameId = 'contact_2_first_name_id'
-                                contactPersonPhoneId = 'contact_2_phone_id'
+                                contactPersonLastNameId = 'contact_2_surname'
+                                contactPersonFirstNameId = 'contact_2_name'
+                                contactPersonPhoneId = 'contact_2_phone'
                                 addContactPerson = 'add-contact-2'
                                 hideId = 'hide-2'
                                 contactPersonFormId = 'contact-2'
 
-                                contactPersonLastName = 'contact_2_last_name'
-                                contactPersonFirstName = 'contact_2_first_name'
+                                contactPersonLastName = 'contact_2_surname'
+                                contactPersonFirstName = 'contact_2_name'
                                 contactPersonEmail = 'contact_2_email'
                                 contactPersonPhone = 'contact_2_phone'
                                 contactPersonObservations = 'contact_2_observations'
                             %}
                         </div>
 
-                        <!-- First contact person -->
+                        <!-- Third contact person -->
                         <div id="person-3" class="px-lg-2 d-none">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
-                                contactPersonLastNameId = 'contact_3_last_name_id'
-                                contactPersonFirstNameId = 'contact_3_first_name_id'
-                                contactPersonPhoneId = 'contact_3_phone_id'
+                                contactPersonLastNameId = 'contact_3_surname'
+                                contactPersonFirstNameId = 'contact_3_name'
+                                contactPersonPhoneId = 'contact_3_phone'
                                 addContactPerson = 'add-contact-3'
                                 hideId = 'hide-3'
                                 contactPersonFormId = 'contact-3'
 
-                                contactPersonLastName = 'contact_3_last_name'
-                                contactPersonFirstName = 'contact_3_first_name'
+                                contactPersonLastName = 'contact_3_surname'
+                                contactPersonFirstName = 'contact_3_name'
                                 contactPersonEmail = 'contact_3_email'
                                 contactPersonPhone = 'contact_3_phone'
                                 contactPersonObservations = 'contact_3_observations'
                             %}
                         </div>
 
-                        <!-- First contact person -->
+                        <!-- Forth contact person -->
                         <div id="person-4" class="px-lg-2 d-none">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
-                                contactPersonLastNameId = 'contact_4_last_name_id'
-                                contactPersonFirstNameId = 'contact_4_first_name_id'
-                                contactPersonPhoneId = 'contact_4_phone_id'
+                                contactPersonLastNameId = 'contact_4_surname'
+                                contactPersonFirstNameId = 'contact_4_name'
+                                contactPersonPhoneId = 'contact_4_phone'
                                 addContactPerson = 'add-contact-4'
                                 hideId = 'hide-4'
-        
                                 contactPersonFormId = 'contact-4'
-                                contactPersonLastName = 'contact_4_last_name'
-                                contactPersonFirstName = 'contact_4_first_name'
+
+                                contactPersonLastName = 'contact_4_surname'
+                                contactPersonFirstName = 'contact_4_name'
                                 contactPersonEmail = 'contact_4_email'
                                 contactPersonPhone = 'contact_4_phone'
                                 contactPersonObservations = 'contact_4_observations'
                             %}
                         </div>
 
-                        <!-- First contact person -->
+                        <!-- Fifth contact person -->
                         <div id="person-5" class="px-lg-2 d-none">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
-                                contactPersonLastNameId = 'contact_5_last_name_id'
-                                contactPersonFirstNameId = 'contact_5_first_name_id'
-                                contactPersonPhoneId = 'contact_5_phone_id'
+                                contactPersonLastNameId = 'contact_5_surname'
+                                contactPersonFirstNameId = 'contact_5_name'
+                                contactPersonPhoneId = 'contact_5_phone'
                                 addContactPerson = 'add-contact-5'
                                 hideId = 'hide-5'
-                                hideClass = 'd-none'
                                 contactPersonFormId = 'contact-5'
 
-                                contactPersonLastName = 'contact_5_last_name'
-                                contactPersonFirstName = 'contact_5_first_name'
+                                contactPersonLastName = 'contact_5_surname'
+                                contactPersonFirstName = 'contact_5_name'
                                 contactPersonEmail = 'contact_5_email'
                                 contactPersonPhone = 'contact_5_phone'
                                 contactPersonObservations = 'contact_5_observations'
                             %}
                         </div>
 
-
                          <!-- Submit button -->
                         <div class="col-12 mb-5 mt-3">
                             <div class="d-flex justify-content-end">
-                                <button  type="submit" class="add-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
                             </div>
                         </div>
 
@@ -294,24 +276,31 @@ allowedUserTypes[] = "specialist"
     </div>
 </div>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ro.min.js" integrity="sha512-OyKt3ZoVnoGpHGx10TMtzQTSDHKyGzHIXdOoOiaHcMJMGOR/ev9Y6ocEGd64HVPqGEwkg29xVVbavNjDPeg9GA==" crossorigin="anonymous"></script>
+
 {% put scripts %}
     <script type="text/javascript">
         $(document).ready(function () {
+
+            /** Initiate the datepicker plugin. */
+            $('#birthdate').datepicker({
+                format: "dd-mm-yyyy",
+                weekStart: 1,
+                clearBtn: true,
+                language: "ro",
+                orientation: "bottom auto",
+                autoclose: true
+            });
 
             /** Add file input functionlity for plus-icon img. */
             $(".add-custom-avatar").click(function () {
                 $(".custom-avatar").trigger('click');
             });
 
-            /** Submit form on image input change. */
-            $('#avatar').on('change',function(event){
-                if (event.target.files.length) {
-                    $('#avatar_form').submit();
-                }
-            });
-
             /** Function for adding a new contact person */
-            function addNewContact(link,form) {
+            function addNewContact(link, form) {
                 $(link).on('click', function(){
                     $(form).removeClass('d-none');
                     $(link).addClass('d-none');
@@ -334,6 +323,7 @@ allowedUserTypes[] = "specialist"
                     this.className += " active-avatar";
                 });
             }
+
             var avatarsContainer1 = document.querySelector(".avatars1");
             var avatars1 = avatarsContainer1.getElementsByClassName("predifined-avatar1");
             for (var i = 0; i < avatars.length; i++) {
@@ -345,7 +335,7 @@ allowedUserTypes[] = "specialist"
             }
 
             /**
-             * Function for triggering the finish button when
+             * Function for activating the finish button when
              * values from all fields are selected
              */
             function activateFinishBtn() {
@@ -355,6 +345,10 @@ allowedUserTypes[] = "specialist"
                 $('.add-student').addClass('btn-secondary');
             }
 
+            /**
+             * Function for deactivating the finish button when
+             * values from all fields are selected
+             */
             function deactivateFinishBtn() {
                 $('.add-student').attr('disabled');
                 $('.add-student').addClass('btn-gray-light');
@@ -365,73 +359,71 @@ allowedUserTypes[] = "specialist"
             /** Validation for activeting the finish button. */
             $(document.body).on('change', '.onChangeValue', function(){
                 if(
-                    (0 !== $("#avatar").val().length) &&
-                    ( "-1" !== $("#day").val()) &&
-                    ( "-1" !== $("#month").val()) &&
-                    ( "-1" !== $("#year").val()) &&
-                    (0 !== $("#last-name").val().length) &&
-                    (0 !== $("#first-name").val().length) &&
+                    // (0 !== $("#avatar").val().length) &&
+                    (0 !== $("#birthdate").val().length) &&
+                    (0 !== $("#surname").val().length) &&
+                    (0 !== $("#name").val().length) &&
                     (0 !== $("#description").val().length) &&
-                    ($("#disability1").is(":checked")) &&
-                    ($("#disability2").is(":checked")) &&
+                    // ($("#hearing_impairment").is(":checked")) &&
+                    // ($("#visual_impairment").is(":checked")) &&
                     ((
                         (
-                            (0 !== $("#contact_1_last_name_id").val().length) ||
-                            (0 !== $("#contact_1_first_name_id").val().length) ||
-                            (0 !== $("#contact_1_phone_id").val().length)
+                            (0 !== $("#contact_1_surname").val().length) ||
+                            (0 !== $("#contact_1_name").val().length) ||
+                            (0 !== $("#contact_1_phone").val().length)
                         ) &&
                         (
-                            (0 !== $("#contact_1_last_name_id").val().length) &&
-                            (0 !== $("#contact_1_first_name_id").val().length) &&
-                            (0 !== $("#contact_1_phone_id").val().length)
+                            (0 !== $("#contact_1_surname").val().length) &&
+                            (0 !== $("#contact_1_name").val().length) &&
+                            (0 !== $("#contact_1_phone").val().length)
                         )
                     ) ||
                     (
                         (
-                            (0 !== $("#contact_2_last_name_id").val().length) ||
-                            (0 !== $("#contact_2_first_name_id").val().length) ||
-                            (0 !== $("#contact_2_phone_id").val().length)
+                            (0 !== $("#contact_2_surname").val().length) ||
+                            (0 !== $("#contact_2_name").val().length) ||
+                            (0 !== $("#contact_2_phone").val().length)
                         ) &&
                         (
-                            (0 !== $("#contact_2_last_name_id").val().length) &&
-                            (0 !== $("#contact_2_first_name_id").val().length) &&
-                            (0 !== $("#contact_2_phone_id").val().length)
+                            (0 !== $("#contact_2_surname").val().length) &&
+                            (0 !== $("#contact_2_name").val().length) &&
+                            (0 !== $("#contact_2_phone").val().length)
                         )
                     ) ||
                     (
                         (
-                            (0 !== $("#contact_3_last_name_id").val().length) ||
-                            (0 !== $("#contact_3_first_name_id").val().length) ||
-                            (0 !== $("#contact_3_phone_id").val().length)
+                            (0 !== $("#contact_3_surname").val().length) ||
+                            (0 !== $("#contact_3_name").val().length) ||
+                            (0 !== $("#contact_3_phone").val().length)
                         ) &&
                         (
-                            (0 !== $("#contact_3_last_name_id").val().length) &&
-                            (0 !== $("#contact_3_first_name_id").val().length) &&
-                            (0 !== $("#contact_3_phone_id").val().length)
+                            (0 !== $("#contact_3_surname").val().length) &&
+                            (0 !== $("#contact_3_name").val().length) &&
+                            (0 !== $("#contact_3_phone").val().length)
                         )
                     ) ||
                     (
                         (
-                            (0 !== $("#contact_4_last_name_id").val().length) ||
-                            (0 !== $("#contact_4_first_name_id").val().length) ||
-                            (0 !== $("#contact_4_phone_id").val().length)
+                            (0 !== $("#contact_4_surname").val().length) ||
+                            (0 !== $("#contact_4_name").val().length) ||
+                            (0 !== $("#contact_4_phone").val().length)
                         ) &&
                         (
-                            (0 !== $("#contact_4_last_name_id").val().length) &&
-                            (0 !== $("#contact_4_first_name_id").val().length) &&
-                            (0 !== $("#contact_4_phone_id").val().length)
+                            (0 !== $("#contact_4_surname").val().length) &&
+                            (0 !== $("#contact_4_name").val().length) &&
+                            (0 !== $("#contact_4_phone").val().length)
                         )
                     ) ||
                     (
                         (
-                            (0 !== $("#contact_5_last_name_id").val().length) ||
-                            (0 !== $("#contact_5_first_name_id").val().length) ||
-                            (0 !== $("#contact_5_phone_id").val().length)
+                            (0 !== $("#contact_5_surname").val().length) ||
+                            (0 !== $("#contact_5_name").val().length) ||
+                            (0 !== $("#contact_5_phone").val().length)
                         ) &&
                         (
-                            (0 !== $("#contact_5_last_name_id").val().length) &&
-                            (0 !== $("#contact_5_first_name_id").val().length) &&
-                            (0 !== $("#contact_5_phone_id").val().length)
+                            (0 !== $("#contact_5_surname").val().length) &&
+                            (0 !== $("#contact_5_name").val().length) &&
+                            (0 !== $("#contact_5_phone").val().length)
                         )
                     ))
                 ) {

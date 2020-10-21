@@ -1,0 +1,29 @@
+fields:
+    name:
+        label: 'genuineq.students::lang.contact-person.form-labels.name'
+        span: left
+        type: text
+    surname:
+        label: 'genuineq.students::lang.contact-person.form-labels.surname'
+        span: right
+        type: text
+    email:
+        label: 'genuineq.students::lang.contact-person.form-labels.email'
+        span: left
+        type: text
+    phone:
+        label: 'genuineq.students::lang.contact-person.form-labels.phone'
+        span: right
+        type: text
+    student:
+        label: 'genuineq.students::lang.contact-person.form-labels.student'
+        nameFrom: ''
+        descriptionFrom: description
+        select: 'name, surname'
+        span: auto
+        type: relation
+    description:
+        label: 'genuineq.students::lang.contact-person.form-labels.description'
+        size: huge
+        span: full
+        type: richeditor

@@ -1,0 +1,8 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table genuineq_students_students'
+    - builder_table_create_genuineq_students_students.php
+1.0.3:
+    - 'Created table genuineq_students_contact_persons'
+    - builder_table_create_genuineq_students_contact_persons.php
