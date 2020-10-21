@@ -11,6 +11,33 @@
     box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+.datepicker-days {
+    width: 100%;
+}
+
+.datepicker-days thead tr:nth-child(2){
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.datepicker-days thead tr:nth-child(3){
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.datepicker-days tbody tr {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
 .datepicker-days tr th {
     padding: 10px 0 !important;
 }
@@ -18,11 +45,20 @@
 .datepicker-days tr th.prev,
 .datepicker-days tr th.next {
     color: #fab954 !important;
+    width: 40px !important;
+}
+.datepicker-days tr th.prev:hover,
+.datepicker-days tr th.next:hover {
+    background: transparent !important;
 }
 .datepicker-days .datepicker-switch {
     font-size: 18px !important;
     color: #2e294e !important;
     font-weight: 600 !important;
+}
+
+.datepicker-days .datepicker-switch:hover {
+    background: transparent !important;
 }
 
 .datepicker-days th.dow {
