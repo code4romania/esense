@@ -38,8 +38,8 @@ allowedUserTypes[] = "specialist"
                                     <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
                                     <div class="d-flex">
                                         <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
-                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-female-tab" data-gender="female" data-toggle="pill" href="#v-pills-female" role="tab" aria-controls="v-pills-female" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
+                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-male-tab" data-gender="male" data-toggle="pill" href="#v-pills-male" role="tab" aria-controls="v-pills-male" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -49,7 +49,7 @@ allowedUserTypes[] = "specialist"
                                     <p class="p-0 m-0 pt-3 text-muted">{{'teacher.dashboard.student.add.profile.avatar'|_}}</p>
 
                                     <div class="tab-content" id="v-pills-tabContent">
-                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        <div class="tab-pane fade show active" id="v-pills-female" role="tabpanel" aria-labelledby="v-pills-female-tab">
                                             <div class="d-flex">
                                                 <div class="avatars d-flex">
                                                     <div class="predifined-avatar active-avatar d-block">
@@ -66,7 +66,7 @@ allowedUserTypes[] = "specialist"
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                        <div class="tab-pane fade" id="v-pills-male" role="tabpanel" aria-labelledby="v-pills-male-tab">
                                             <div class="d-flex">
                                                 <div class="avatars1 d-flex">
                                                     <div class="predifined-avatar1 active-avatar1 d-block">
@@ -90,6 +90,9 @@ allowedUserTypes[] = "specialist"
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Input for gender -->
+                        <input name="gender" id="gender" class="d-none" type="text" value="female" />
 
                         <div class="col-12">
                             <p class="text-muted mt-5">{{'teacher.dashboard.student.add.profile.personal.data'|_}}</p>
@@ -290,6 +293,12 @@ allowedUserTypes[] = "specialist"
                 language: "ro",
                 orientation: "bottom auto",
                 autoclose: true
+            });
+
+            /** Function that handles gender switch on active tab toggle */
+            $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+                /* Set the gender value. */
+                $('#gender').val($(e.target).data('gender'));
             });
 
             /** Add file input functionlity for plus-icon img. */
