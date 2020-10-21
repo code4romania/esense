@@ -74,9 +74,9 @@ class Specialist extends Model
     /**
      * Accessor for getting the user name.
      */
-    public function getNameAttribute()
+    public function getFullNameAttribute()
     {
-        return ($this->user) ? ($this->user->name) : ('');
+        return ($this->user) ? ($this->user->full_name) : ('');
     }
 
     /**
