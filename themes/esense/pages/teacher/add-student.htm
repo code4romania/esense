@@ -34,16 +34,14 @@ allowedUserTypes[] = "specialist"
 
                         <div class="col-12">
                             <div class="row">
-
                                 <div class="col-12 col-md-6">
                                     <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
-                                    <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                        <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
-
-                                        <div class="d-flex">
+                                    <div class="d-flex">
+                                        <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
                                             <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
-                                            <span class="text-danger ml-2">*</span>
                                         </div>
+                                        <span class="text-danger ml-2">*</span>
                                     </div>
                                 </div>
 
@@ -99,9 +97,9 @@ allowedUserTypes[] = "specialist"
                             <div class="row">
 
                                 <!-- Select date -->
-                                <div class="col-12 col-md-4 col-lg-3 pr-lg-0 mr-lg-0">
+                                <div class="col-12 col-md-4 col-lg-5 pr-lg-0 mr-lg-0">
                                     <div class="form-group d-flex">
-                                        <input type="text" name="birthdate" id="birthdate" class="onChangeValue">
+                                        <input type="text" name="birthdate" id="birthdate" class="form-control onChangeValue">
                                         <span class="text-danger ml-2">*</span>
                                     </div>
                                 </div>
@@ -314,25 +312,25 @@ allowedUserTypes[] = "specialist"
             addNewContact('#hide-4', '#person-5');
 
             /** Change active on predifined avatars */
-            var avatarsContainer = document.querySelector(".avatars");
-            var avatars = avatarsContainer.getElementsByClassName("predifined-avatar");
-            for (var i = 0; i < avatars.length; i++) {
-                avatars[i].addEventListener("click", function() {
-                    var current = document.getElementsByClassName("active-avatar");
-                    current[0].className = current[0].className.replace(" active-avatar", "");
-                    this.className += " active-avatar";
-                });
-            }
+            // var avatarsContainer = document.querySelector(".avatars");
+            // var avatars = avatarsContainer.getElementsByClassName("predifined-avatar");
+            // for (var i = 0; i < avatars.length; i++) {
+            //     avatars[i].addEventListener("click", function() {
+            //         var current = document.getElementsByClassName("active-avatar");
+            //         current[0].className = current[0].className.replace(" active-avatar", "");
+            //         this.className += " active-avatar";
+            //     });
+            // }
 
-            var avatarsContainer1 = document.querySelector(".avatars1");
-            var avatars1 = avatarsContainer1.getElementsByClassName("predifined-avatar1");
-            for (var i = 0; i < avatars.length; i++) {
-                avatars1[i].addEventListener("click", function() {
-                    var current = document.getElementsByClassName("active-avatar1");
-                    current[0].className = current[0].className.replace(" active-avatar1", "");
-                    this.className += " active-avatar1";
-                });
-            }
+            // var avatarsContainer1 = document.querySelector(".avatars1");
+            // var avatars1 = avatarsContainer1.getElementsByClassName("predifined-avatar1");
+            // for (var i = 0; i < avatars.length; i++) {
+            //     avatars1[i].addEventListener("click", function() {
+            //         var current = document.getElementsByClassName("active-avatar1");
+            //         current[0].className = current[0].className.replace(" active-avatar1", "");
+            //         this.className += " active-avatar1";
+            //     });
+            // }
 
             /**
              * Function for activating the finish button when
