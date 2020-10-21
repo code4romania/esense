@@ -23,7 +23,7 @@ description = "Register from"
                                 <!-- County select -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group register-select">
-                                        <select name="county" id="schoolCounty" class="form-control border outline-none" data-style="btn-white">
+                                        <select name="county" id="schoolCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
                                             {% for key, county in counties %}
                                                 <option value="{{ key }}">{{ county }}</option>
                                             {% endfor %}
@@ -34,7 +34,7 @@ description = "Register from"
                                 <!-- City select -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group register-select">
-                                        <select name="city" id="schoolCity" class="form-control border outline-none" data-style="btn-white" disabled></select>
+                                        <select name="city" id="schoolCity" class="form-control border outline-none selectpicker" data-none-results-text="Niciun rezultat" data-live-search="true" data-style="btn-white" disabled></select>
                                     </div>
                                 </div>
 
@@ -130,6 +130,7 @@ description = "Register from"
 
                     /* Activate the select. */
                     $('#schoolCity').prop("disabled", false);
+                    $("#schoolCity").selectpicker("refresh");
                 }
             });
 
@@ -152,6 +153,7 @@ description = "Register from"
 
                         /* Activate the select. */
                         $('#schoolCity').prop("disabled", false);
+                        $("#schoolCity").selectpicker("refresh");
                     }
                 });
             });

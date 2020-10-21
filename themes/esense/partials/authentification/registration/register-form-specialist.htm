@@ -58,7 +58,7 @@ description = "Register from"
                                 <!-- County select -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group register-select">
-                                        <select name="county" id="specialistCounty" class="form-control border outline-none" data-style="btn-white">
+                                        <select name="county" id="specialistCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
                                             {% for key, county in counties %}
                                                 <option value="{{ key }}">{{ county }}</option>
                                             {% endfor %}
@@ -69,14 +69,14 @@ description = "Register from"
                                 <!-- City select -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group register-select">
-                                        <select name="city" id="specialistCity" class="form-control border outline-none" data-style="btn-white" disabled></select>
+                                        <select name="city" id="specialistCity" class="form-control border outline-none selectpicker" data-none-results-text="Niciun rezultat" data-live-search="true" data-style="btn-white" disabled></select>
                                     </div>
                                 </div>
 
                                 <!-- School name select -->
                                 <div class="col-12">
                                     <div class="form-group register-select">
-                                        <select name="school" class="form-control border outline-none" data-style="btn-white">
+                                        <select name="school" class="form-control border outline-none selectpicker" data-style="btn-white">
                                             <option value="-1">Școlarizare la domiciliu</option>
                                             {% for key, school in schools %}
                                                 <option value="{{ key }}">{{ school }}</option>
@@ -135,6 +135,7 @@ description = "Register from"
 
                     /* Activate the select. */
                     $('#specialistCity').prop("disabled", false);
+                    $("#specialistCity").selectpicker("refresh");
                 }
             });
 
@@ -157,6 +158,7 @@ description = "Register from"
 
                         /* Activate the select. */
                         $('#specialistCity').prop("disabled", false);
+                        $("#specialistCity").selectpicker("refresh");
                     }
                 })
             });
