@@ -211,9 +211,8 @@ class Session extends ComponentBase
 
             /** Check 'user' is the right type. */
             if (!empty($allowedUserTypes)) {
-                $userGroups = Auth::getUser()->groups->lists('code');
-                if (array_key_exists(Auth::getUser()->type, $userGroups)) {
-                    /** User doesn't have the right group. */
+                if (!in_array(Auth::getUser()->type, $allowedUserTypes)) {
+                    /** User is not the right type. */
                     return self::SECURITY_ERROR_WRONG_TYPE;
                 }
             }
