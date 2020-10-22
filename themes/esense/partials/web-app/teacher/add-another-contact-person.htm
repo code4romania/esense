@@ -9,7 +9,7 @@ description = "Add another contact person for new student"
     <!-- Contact person last name -->
     <div class="col-12 col-md-6">
         <div class="form-group d-flex">
-            <input name='{{contactPersonLastName}}' type="text" class="form-control onChangeValue" id="{{contactPersonLastNameId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.last.name'|_}}">
+            <input name='{{contactPersonLastName}}' type="text" class="form-control onChangeValue" id="{{contactPersonLastNameId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.last.name'|_}}" value="{{lastNameValue}}">
             <span class="text-danger ml-2">*</span>
         </div>
     </div>
@@ -17,7 +17,7 @@ description = "Add another contact person for new student"
     <!-- Contact person first name -->
     <div class="col-12 col-md-6">
         <div class="form-group d-flex">
-            <input name='{{contactPersonFirstName}}' type="text" class="form-control onChangeValue" id="{{contactPersonFirstNameId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.first.name'|_}}">
+            <input name='{{contactPersonFirstName}}' type="text" class="form-control onChangeValue" id="{{contactPersonFirstNameId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.first.name'|_}}" value="{{firstNameValue}}">
             <span class="text-danger ml-2">*</span>
         </div>
     </div>
@@ -25,14 +25,14 @@ description = "Add another contact person for new student"
     <!-- Contact person email -->
     <div class="col-12 col-md-6">
         <div class="form-group mr-3">
-            <input name='{{contactPersonEmail}}' type="email" class="form-control onChangeValue" id="{{contactPersonEmailId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.email'|_}}">
+            <input name='{{contactPersonEmail}}' type="email" class="form-control onChangeValue" id="{{contactPersonEmailId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.email'|_}}" value="{{emailValue}}">
         </div>
     </div>
 
     <!-- Contact person phone -->
     <div class="col-12 col-md-6">
         <div class="form-group d-flex">
-            <input name='{{contactPersonPhone}}' type="number" class="form-control onChangeValue" id="{{contactPersonPhoneId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.phone'|_}}">
+            <input name='{{contactPersonPhone}}' type="number" class="form-control onChangeValue" id="{{contactPersonPhoneId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.phone'|_}}" value="{{phoneValue}}">
             <span class="text-danger ml-2">*</span>
         </div>
     </div>
@@ -40,7 +40,9 @@ description = "Add another contact person for new student"
     <!-- Contact person observations -->
     <div class="col-12">
         <div class="form-group mr-3">
-            <textarea name="{{contactPersonObservations}}" class="form-control" id="{{contactPersonObservationsId}}" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.observations'|_}}"></textarea>
+            <textarea name="{{contactPersonObservations}}" class="form-control observations" id="{{contactPersonObservationsId}}" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.observations'|_}}">
+               {{textareaValue}}
+            </textarea>
         </div>
     </div>
 
