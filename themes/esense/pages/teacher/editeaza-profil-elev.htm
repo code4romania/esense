@@ -178,6 +178,7 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstNameId = 'contact_1_name'
                                 contactPersonPhoneId = 'contact_1_phone'
                                 addContactPerson = 'add-contact-1'
+                                contactPersonObservationsId = 'one'
                                 hideId = 'hide-1'
                                 hideClass = 'd-none'
                                 contactPersonFormId = 'contact-1'
@@ -205,6 +206,7 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstNameId = 'contact_2_name'
                                 contactPersonPhoneId = 'contact_2_phone'
                                 addContactPerson = 'add-contact-2'
+                                contactPersonObservationsId = 'two'
                                 hideId = 'hide-2'
                                 hideClass = 'd-none'
                                 contactPersonFormId = 'contact-2'
@@ -233,6 +235,7 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstNameId = 'contact_3_name'
                                 contactPersonPhoneId = 'contact_3_phone'
                                 addContactPerson = 'add-contact-3'
+                                contactPersonObservationsId = 'three'
                                 hideId = 'hide-3'
                                 hideClass = 'd-none'
                                 contactPersonFormId = 'contact-3'
@@ -260,6 +263,7 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstNameId = 'contact_4_name'
                                 contactPersonPhoneId = 'contact_4_phone'
                                 addContactPerson = 'add-contact-4'
+                                contactPersonObservationsId = 'four'
                                 hideId = 'hide-4'
                                 hideClass = 'd-none'
                                 contactPersonFormId = 'contact-4'
@@ -286,7 +290,7 @@ allowedUserTypes[] = "specialist"
                                 contactPersonLastNameId = 'contact_5_surname'
                                 contactPersonFirstNameId = 'contact_5_name'
                                 contactPersonPhoneId = 'contact_5_phone'
-                                contactPersonObservationsId = 'contact_5_observations_id'
+                                contactPersonObservationsId = 'five'
                                 addContactPerson = 'add-contact-5'
                                 hideId = 'hide-5'
                                 hideClass = 'd-none'
@@ -330,7 +334,12 @@ allowedUserTypes[] = "specialist"
 
             /** WYSWYG Editor. */
             $('#description').richText();
-            $('.observations').richText();
+            $('#one').richText();
+            $('#two').richText();
+            $('#three').richText();
+            $('#four').richText();
+            $('#five').richText();
+            
 
             /** Initiate the datepicker plugin. */
             $('#birthdate').datepicker({
