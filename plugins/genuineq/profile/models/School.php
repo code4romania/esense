@@ -55,13 +55,22 @@ class School extends Model
         ]
     ];
 
-    /**
-     * One-to-one relationship.
-     */
+    /** One-to-one relationship. */
     public $belongsTo = [
-        'school' => 'Genuineq\Profile\Models\School',
         'county' => 'Genuineq\Addresses\Models\County',
         'city' => 'Genuineq\Addresses\Models\City'
+    ];
+
+    /** One-to-many relationship. */
+    public $hasMany = [
+        'specialists' => [
+            'Genuineq\Profile\Models\Specialist',
+            'conditions' => 'archived = 0'
+        ],
+        'archivedSpecialists' => [
+            'Genuineq\Profile\Models\Specialist',
+            'conditions' => 'archived = 1'
+        ]
     ];
 
     /***********************************************

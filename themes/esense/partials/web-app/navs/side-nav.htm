@@ -40,7 +40,7 @@
             </a>
         </li>
 
-        {% if user and 'specialist' == user.type and user.profile.school %}
+        {% if user and 'specialist' == user.type and user.profile.affiliated %}
             <!-- Scoala -->
             <li class="nav-item mb-2 {% if this.page.url == "/teacher/school"%} active {% endif %}">
                 <div class="vertical-border"></div>
@@ -59,6 +59,17 @@
                 <span class="text-primary-dark">{{"side.nav.link_5"|_}}</span>
             </a>
         </li>
+
+        {% if user and 'specialist' == user.type and not user.profile.affiliated %}
+            <!-- Arhiva -->
+            <li class="nav-item mb-2 {% if this.page.url == "/teacher/archive" %} active {% endif %}">
+                <div class="vertical-border"></div>
+                <a class="nav-link" href="{{ 'teacher/archive'|page }}">
+                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/archive.svg'|theme }}">
+                    <span class="text-primary-dark">{{"side.nav.link_10"|_}}</span>
+                </a>
+            </li>
+        {% endif %}
 
     {% endif %}
 

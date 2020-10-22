@@ -87,6 +87,14 @@ class Specialist extends Model
         return ($this->user) ? ($this->user->email) : ('');
     }
 
+    /**
+     * Accessor for getting the information if the specialist is affiliated or not.
+     */
+    public function getAffiliatedAttribute()
+    {
+        return ($this->school) ? (true) : (false);
+    }
+
     /***********************************************
      ****************** Functions ******************
      ***********************************************/

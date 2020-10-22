@@ -67,7 +67,7 @@ class Students extends ComponentBase
             'birthdate' => date_format(date_create_from_format('d-m-Y', post('birthdate')), 'Y-m-d'),
             'hearing_impairment' => ((Input::has('hearing_impairment')) ? (1) : (0)),
             'visual_impairment' => ((Input::has('visual_impairment')) ? (1) : (0)),
-            // 'gender' => ''
+            'gender' => post('gender')
         ];
 
         /** Create the validation rules. */
@@ -78,7 +78,7 @@ class Students extends ComponentBase
             'birthdate' => 'required|date|date_format:Y-m-d',
             'hearing_impairment' => 'boolean',
             'visual_impairment' => 'boolean',
-            // 'gender' => 'required|in:male,female'
+            'gender' => 'required|in:male,female'
         ];
 
         /** Create the validation messages. */
@@ -94,8 +94,8 @@ class Students extends ComponentBase
             'birthdate.date_format' => Lang::get('genuineq.students::lang.components.students.validation.birthdate_date_format'),
             'hearing_impairment.boolean' => Lang::get('genuineq.students::lang.components.students.validation.hearing_impairment_boolean'),
             'visual_impairment.boolean' => Lang::get('genuineq.students::lang.components.students.validation.visual_impairment_boolean'),
-            // 'gender.required' => Lang::get('genuineq.students::lang.components.students.validation.gender_required'),
-            // 'gender.in' => Lang::get('genuineq.students::lang.components.students.validation.gender_in'),
+            'gender.required' => Lang::get('genuineq.students::lang.components.students.validation.gender_required'),
+            'gender.in' => Lang::get('genuineq.students::lang.components.students.validation.gender_in'),
         ];
 
         /** Fire event before student validation. */

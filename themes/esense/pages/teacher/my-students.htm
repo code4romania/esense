@@ -33,7 +33,7 @@ allowedUserTypes[] = "specialist"
                                         </div>
                                         <div class="d-flex flex-column ml-2">
                                             <a class="display-4 font-weight-light" href="{{ 'teacher/student-profile'|page({id: student.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
-                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ student.display_birthdate }}</h6>
+                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ student.birthdate|date("d/m/Y") }}</h6>
                                         </div>
                                     </div>
                                 </td>
@@ -138,10 +138,12 @@ allowedUserTypes[] = "specialist"
                                 {{"teacher.dashboard.students.table.text"|_}} ({{ user.profile.students.count }})\
                             </p> </div> <div class="col-12 col-lg-5">\
                             <div class="d-flex align-items-center justify-content-start justify-content-lg-end">\
-                                <a href="{{"teacher/transfer-student"|page}}" class="btn btn-sm btn-outline-primary-light mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"><i class="fas fa-exchange-alt mr-2"></i>\
-                                    {{"teacher.dashboard.students.table.transfer.btn.text"|_}}\
-                                </a>\
-                                {% if user and "specialist" == user.type and user.profile.school  %}\
+                                {% if user and "specialist" == user.type and user.profile.affiliated  %}\
+                                    <a href="{{"teacher/transfer-student"|page}}" class="btn btn-sm btn-outline-primary-light mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"><i class="fas fa-exchange-alt mr-2"></i>\
+                                        {{"teacher.dashboard.students.table.transfer.btn.text"|_}}\
+                                    </a>\
+                                {% endif %}\
+                                {% if user and "specialist" == user.type and user.profile.affiliated  %}\
                                     <a data-toggle="modal" data-target="#exampleModalCenter" role="button" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\
                                         {{"teacher.dashboard.students.table.add.btn.text"|_}}\
                                     </a>\

@@ -75,4 +75,20 @@ class EmailHelper
             $message->to($newUser->email, $newUser->name);
         });
     }
+
+    /**
+     * Sends the welcome to a user.
+     * @param  Genuineq\User\Models\User $user
+     * @return void
+     */
+    public static function sendWelcomeEmail($user)
+    {
+        $data = [
+            'name' => $user->name,
+        ];
+
+        Mail::send('genuineq.user::mail.welcome', $data, function($message) use ($user) {
+            $message->to($user->email, $user->name);
+        });
+    }
 }
