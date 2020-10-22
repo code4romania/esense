@@ -1,0 +1,461 @@
+title = "Editează profil elev"
+url = "/scoala/editeaza-profil-elev/:id"
+layout = "web-app"
+description = "Pagina de editare a elevuli"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "school"
+
+[students]
+==
+<div class="container-fluid px-lg-4">
+    <div class="row">
+
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page }}">{{'teacher.dashboard.edit.student.profile.back.link.text'|_}}</a>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <div class="rounded shadow bg-white p-lg-4">
+
+                <div class="border-bottom">
+                    <p class="text-muted">{{'teacher.dashboard.student.add.profile.title'|_}}</p>
+                </div>
+
+                <!-- Form for editing student -->
+                <form method="POST" data-request="onEditStudent" >
+                    <div class="row mt-2">
+
+                        <!-- Edit avatar -->
+                        <div class="col-12">
+                            <div class="row">
+                                <!-- Nav for switching gender -->
+                                <div class="col-12 col-md-6">
+                                    <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
+                                    <div class="d-flex">
+                                        <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
+                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                        </div>
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <p class="p-0 m-0 pt-3 text-muted">{{'teacher.dashboard.student.add.profile.avatar'|_}}</p>
+
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <!-- Girl avatars -->
+                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                            <div class="d-flex">
+                                                <div class="avatars d-none">
+                                                    <div class="predifined-avatar active-avatar d-block">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}">
+                                                    </div>
+                                                    <div class="predifined-avatar d-block ml-4">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-2.svg'|theme }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="add-avatar">
+                                                    <img id="add-avatar" class="img-fluid add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Boy avatars -->
+                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                            <div class="d-flex">
+                                                <div class="avatars1 d-none">
+                                                    <div class="predifined-avatar1 active-avatar1 d-block">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-1.svg'|theme }}">
+                                                    </div>
+                                                    <div class="predifined-avatar1 d-block ml-4">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="add-avatar">
+                                                    <img id="add-avatar" class="img-fluid  add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Input for adding custom avatar -->
+                                        <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
+                                        <!-- Input for adding predifined avatar -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Edit date of birth -->
+                        <div class="col-12">
+                            <p class="text-muted mt-5">{{'teacher.dashboard.student.add.profile.personal.data'|_}}</p>
+                            <p class="display-4 text-gray-light">{{'teacher.dashboard.student.add.profile.dob.label'|_}}</p>
+                            <div class="row">
+
+                                <!-- Select date -->
+                                <div class="col-12 col-md-4 col-lg-5 pr-lg-0 mr-lg-0">
+                                    <div class="form-group d-flex">
+                                        <input autocomplete="off" type="text" name="birthdate" id="birthdate" class="form-control onChangeValue" value="{{student.birthdate}}">
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Input last name -->
+                        <div class="col-12 col-md-6">
+                            <div class="form-group d-flex">
+                                <input  type="text" class="form-control onChangeValue" name="surname" id="surname" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}" value="{{student.surname}}">
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <!-- Input first name -->
+                        <div class="col-12 col-md-6">
+                            <div class="form-group d-flex">
+                                <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}" value="{{student.name}}">
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <!-- Teacher select -->
+                        <div class="col-12">
+                            <div class="form-group register-select mr-3">
+                                <select name="teacher" id="specialist" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
+                                    {# {% for key, county in counties %}
+                                        <option value="{{ key }}">{{ county }}</option>
+                                    {% endfor %} #}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Input diagnostic description -->
+                        <div class="col-12">
+                            <div class="form-group d-flex">
+                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}">
+                                    {{student.description|raw}}
+                                </textarea>
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row">
+
+                                <!-- Select disability y/n -->
+                                <div class="col-12 col-md-6 ml-lg-0 pl-lg-0">
+                                    <div class="d-flex">
+                                        <div class="form-check">
+                                            <label class="form-check-label display-4 text-gray-light" for="hearing_impairment">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
+                                            <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.hearing_impairment %} checked {% endif %}>
+                                        </div>
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                                <!-- Select disability y/n -->
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex">
+                                        <div class="form-check">
+                                            <label class="form-check-label display-4 text-gray-light" for="visual_impairment">{{'teacher.dashboard.student.add.profile.checkbox2.label'|_}}</label>
+                                            <input class="onChangeValue" name="visual_impairment" id="visual_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.visual_impairment %} checked {% endif %}>
+                                        </div>
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <!-- First contact person -->
+                        <div id="person-1" class="px-lg-2">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+
+                                contactPersonLastNameId = 'contact_1_surname'
+                                contactPersonFirstNameId = 'contact_1_name'
+                                contactPersonPhoneId = 'contact_1_phone'
+                                addContactPerson = 'add-contact-1'
+                                hideId = 'hide-1'
+                                hideClass = 'd-none'
+                                contactPersonFormId = 'contact-1'
+
+                                contactPersonLastName = 'contact_1_surname'
+                                contactPersonFirstName = 'contact_1_name'
+                                contactPersonEmail = 'contact_1_email'
+                                contactPersonPhone = 'contact_1_phone'
+                                contactPersonObservations = 'contact_1_observations' 
+
+                                lastNameValue = ((student.contact_person_1) ? (student.contact_person_1.surname) : (''))
+                                firstNameValue = ((student.contact_person_1) ? (student.contact_person_1.name) : (''))
+                                emailValue = ((student.contact_person_1) ? (student.contact_person_1.email) : (''))
+                                phoneValue = ((student.contact_person_1) ? (student.contact_person_1.phone) : (''))
+                                textareaValue = ((student.contact_person_1) ? (student.contact_person_1.description) : (''))
+                            %}
+                        </div>
+
+                        <!-- Second contact person -->
+                        <div id="person-2" class="px-lg-2">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+
+                                contactPersonLastNameId = 'contact_2_surname'
+                                contactPersonFirstNameId = 'contact_2_name'
+                                contactPersonPhoneId = 'contact_2_phone'
+                                addContactPerson = 'add-contact-2'
+                                hideId = 'hide-2'
+                                hideClass = 'd-none'
+                                contactPersonFormId = 'contact-2'
+
+                                contactPersonLastName = 'contact_2_surname'
+                                contactPersonFirstName = 'contact_2_name'
+                                contactPersonEmail = 'contact_2_email'
+                                contactPersonPhone = 'contact_2_phone'
+                                contactPersonObservations = 'contact_2_observations'
+
+                                lastNameValue = ((student.contact_person_2) ? (student.contact_person_2.surname) : (''))
+                                firstNameValue = ((student.contact_person_2) ? (student.contact_person_2.name) : (''))
+                                emailValue = ((student.contact_person_2) ? (student.contact_person_2.email) : (''))
+                                phoneValue = ((student.contact_person_2) ? (student.contact_person_2.phone) : (''))
+                                textareaValue = ((student.contact_person_2) ? (student.contact_person_2.description) : (''))
+                            %}
+                        </div>
+
+
+                        <!-- Third contact person -->
+                        <div id="person-3" class="px-lg-2">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+
+                                contactPersonLastNameId = 'contact_3_surname'
+                                contactPersonFirstNameId = 'contact_3_name'
+                                contactPersonPhoneId = 'contact_3_phone'
+                                addContactPerson = 'add-contact-3'
+                                hideId = 'hide-3'
+                                hideClass = 'd-none'
+                                contactPersonFormId = 'contact-3'
+
+                                contactPersonLastName = 'contact_3_surname'
+                                contactPersonFirstName = 'contact_3_name'
+                                contactPersonEmail = 'contact_3_email'
+                                contactPersonPhone = 'contact_3_phone'
+                                contactPersonObservations = 'contact_3_observations'
+
+                                lastNameValue = ((student.contact_person_3) ? (student.contact_person_3.surname) : (''))
+                                firstNameValue = ((student.contact_person_3) ? (student.contact_person_3.name) : (''))
+                                emailValue = ((student.contact_person_3) ? (student.contact_person_3.email) : (''))
+                                phoneValue = ((student.contact_person_3) ? (student.contact_person_3.phone) : (''))
+                                textareaValue = ((student.contact_person_3) ? (student.contact_person_3.description) : (''))
+                            %}
+                        </div>
+
+                        <!-- Forth contact person -->
+                        <div id="person-4" class="px-lg-2">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+                            
+                                contactPersonLastNameId = 'contact_4_surname'
+                                contactPersonFirstNameId = 'contact_4_name'
+                                contactPersonPhoneId = 'contact_4_phone'
+                                addContactPerson = 'add-contact-4'
+                                hideId = 'hide-4'
+                                hideClass = 'd-none'
+                                contactPersonFormId = 'contact-4'
+
+                                contactPersonLastName = 'contact_4_surname'
+                                contactPersonFirstName = 'contact_4_name'
+                                contactPersonEmail = 'contact_4_email'
+                                contactPersonPhone = 'contact_4_phone'
+                                contactPersonObservations = 'contact_4_observations'
+
+                                lastNameValue = ((student.contact_person_4) ? (student.contact_person_4.surname) : (''))
+                                firstNameValue = ((student.contact_person_4) ? (student.contact_person_4.name) : (''))
+                                emailValue = ((student.contact_person_4) ? (student.contact_person_4.email) : (''))
+                                phoneValue = ((student.contact_person_4) ? (student.contact_person_4.phone) : (''))
+                                textareaValue = ((student.contact_person_4) ? (student.contact_person_4.description) : (''))
+                            %}
+                        </div>
+
+                        <!-- Fifth contact person -->
+                        <div id="person-5" class="px-lg-2">
+                            {%
+                                partial 'web-app/teacher/add-another-contact-person'
+
+                                contactPersonLastNameId = 'contact_5_surname'
+                                contactPersonFirstNameId = 'contact_5_name'
+                                contactPersonPhoneId = 'contact_5_phone'
+                                contactPersonObservationsId = 'contact_5_observations_id'
+                                addContactPerson = 'add-contact-5'
+                                hideId = 'hide-5'
+                                hideClass = 'd-none'
+                                contactPersonFormId = 'contact-5'
+
+                                contactPersonLastName = 'contact_5_surname'
+                                contactPersonFirstName = 'contact_5_name'
+                                contactPersonEmail = 'contact_5_email'
+                                contactPersonPhone = 'contact_5_phone'
+                                contactPersonObservations = 'contact_5_observations'
+
+                                lastNameValue = ((student.contact_person_5) ? (student.contact_person_5.surname) : (''))
+                                firstNameValue = ((student.contact_person_5) ? (student.contact_person_5.name) : (''))
+                                emailValue = ((student.contact_person_5) ? (student.contact_person_5.email) : (''))
+                                phoneValue = ((student.contact_person_5) ? (student.contact_person_5.phone) : (''))
+                                textareaValue = ((student.contact_person_5) ? (student.contact_person_5.description) : (''))
+                            %}
+                        </div>
+
+                         <!-- Submit button -->
+                        <div class="col-12 mb-5 mt-3">
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ro.min.js" integrity="sha512-OyKt3ZoVnoGpHGx10TMtzQTSDHKyGzHIXdOoOiaHcMJMGOR/ev9Y6ocEGd64HVPqGEwkg29xVVbavNjDPeg9GA==" crossorigin="anonymous"></script>
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /** WYSWYG Editor. */
+            $('#description').richText();
+            $('.observations').richText();
+
+            /** Initiate the datepicker plugin. */
+            $('#birthdate').datepicker({
+                format: "dd-mm-yyyy",
+                weekStart: 1,
+                clearBtn: true,
+                language: "ro",
+                orientation: "bottom auto",
+                autoclose: true
+            });
+
+            /** Add file input functionlity for plus-icon img. */
+            $(".add-custom-avatar").click(function () {
+                $(".custom-avatar").trigger('click');
+            });
+
+            /**
+             * Function for activating the finish button when
+             * values from all fields are selected
+             */
+            function activateFinishBtn() {
+                $('.add-student').removeAttr('disabled');
+                $('.add-student').removeClass('btn-gray-light');
+                $('.add-student').removeClass('text-white');
+                $('.add-student').addClass('btn-secondary');
+            }
+
+            /**
+             * Function for deactivating the finish button when
+             * values from all fields are selected
+             */
+            function deactivateFinishBtn() {
+                $('.add-student').attr('disabled');
+                $('.add-student').addClass('btn-gray-light');
+                $('.add-student').addClass('text-white');
+                $('.add-student').removeClass('btn-secondary');
+            }
+
+            /** Validation for activeting the finish button. */
+            $(document.body).on('change', '.onChangeValue', function(){
+                if(
+                    // (0 !== $("#avatar").val().length) &&
+                    (0 !== $("#birthdate").val().length) &&
+                    (0 !== $("#surname").val().length) &&
+                    (0 !== $("#name").val().length) &&
+                    (0 !== $("#description").val().length) &&
+                    // ($("#hearing_impairment").is(":checked")) &&
+                    // ($("#visual_impairment").is(":checked")) &&
+                    ((
+                        (
+                            (0 !== $("#contact_1_surname").val().length) ||
+                            (0 !== $("#contact_1_name").val().length) ||
+                            (0 !== $("#contact_1_phone").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_1_surname").val().length) &&
+                            (0 !== $("#contact_1_name").val().length) &&
+                            (0 !== $("#contact_1_phone").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#contact_2_surname").val().length) ||
+                            (0 !== $("#contact_2_name").val().length) ||
+                            (0 !== $("#contact_2_phone").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_2_surname").val().length) &&
+                            (0 !== $("#contact_2_name").val().length) &&
+                            (0 !== $("#contact_2_phone").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#contact_3_surname").val().length) ||
+                            (0 !== $("#contact_3_name").val().length) ||
+                            (0 !== $("#contact_3_phone").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_3_surname").val().length) &&
+                            (0 !== $("#contact_3_name").val().length) &&
+                            (0 !== $("#contact_3_phone").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#contact_4_surname").val().length) ||
+                            (0 !== $("#contact_4_name").val().length) ||
+                            (0 !== $("#contact_4_phone").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_4_surname").val().length) &&
+                            (0 !== $("#contact_4_name").val().length) &&
+                            (0 !== $("#contact_4_phone").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#contact_5_surname").val().length) ||
+                            (0 !== $("#contact_5_name").val().length) ||
+                            (0 !== $("#contact_5_phone").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#contact_5_surname").val().length) &&
+                            (0 !== $("#contact_5_name").val().length) &&
+                            (0 !== $("#contact_5_phone").val().length)
+                        )
+                    ))
+                ) {
+                    activateFinishBtn()
+                } else {
+                    deactivateFinishBtn()
+                }
+            });
+        });
+    </script>
+{% endput %}

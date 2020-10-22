@@ -1,0 +1,244 @@
+title = "Profil elev"
+url = "/scoala/elev/:id"
+layout = "web-app"
+description = "Pagina de profil a elevului"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "specialist"
+
+[students]
+==
+<div class="container-fluid px-lg-4 mb-5">
+    <div class="row">
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page({id: student.id }) }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="bg-white rounded" style="box-shadow: 0px 0px 32px rgba(136, 152, 170, 0.15)">
+                <div class="row">
+
+                    <!-- Student details and actions -->
+                    <div class="col-12 mb-5">
+                        <div class="p-3 d-flex align-items-start justify-content-between">
+                            <div class="d-flex flex-column flex-md-row">
+                                <img width="80" height="80" class="img-profile rounded-circle mb-2 mb-md-0" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <div class="ml-3">
+                                    <p class="p-0 m-0 font-weight-bold text-dark" style="line-height: 25px;">{{ student.full_name }}</p>
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.varsta'|_}} {{ student.age }}&nbsp;{{'teacher.dashboard.student.profile.ani'|_}}</p>
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.profesor'|_}}
+                                        {% for specialist in student.specialists %}
+                                            {% if loop.last %}
+                                                {{ specialist.full_name }}
+                                            {% else %}
+                                                {{ specialist.full_name }},&nbsp;
+                                            {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <p class="p-0 m-0 mr-2 d-none d-md-block" style="line-height: 25px; color: #313131;">{{'teacher.dashboard.student.profile.actions.text'|_}}</p>
+                                <div class="dropdown">
+                                    <button class="btn shadow-none p-0 m-0" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img class="" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                        <a class="dropdown-item display-4" href="{{ 'teacher/editeaza-profil-elev'|page }}" style="color: #1A212C;">{{'student.options.link_1'|_}}</a>
+                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'student.options.link_2'|_}}</a>
+                                        <a class="dropdown-item display-4 text-danger" href="#">{{'student.options.link_3'|_}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity schedule -->
+                    <div class="col-12 col-lg-6">
+                        <div class="pl-3 mb-4 d-flex align-items-center">
+                            <p class="p-0 m-0 text-gray-dark font-weight-bold">Program activitati</p>
+                            <a role="button">
+                                <img class="img-profile ml-4" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
+                            </a>
+                        </div>
+                        <ul class="activity timeline">
+                            <li class="d-flex align-items-start flex-column">
+                                <p class="p-0 m-0 small font-weight-light text-gray-dark">Stimulare - Denumire joc #1</p>
+                                <p class="p-0 m-0 display-4 text-gray-dark">10:00/2h</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
+                        <div class="calendar-wrapper"></div>
+                    </div>
+
+                    <!-- Frequent exercises owl carousel -->
+                    <div class="col-12 mt-4">
+
+                        <div class="px-3 d-flex align-items-center justify-content-between">
+                            <p class="p-0 m-0 text-gray-dark font-weight-bold">Exercitii frecvente</p>
+                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
+                        </div>
+
+                        <div class="mt-4 px-3">
+                            <div class="exercises-owl-carousel owl-carousel owl-theme">
+                                <div class="item">
+                                    <div class="rounded bg-white" style="box-shadow: 0px 0px 32px rgba(136, 152, 170, 0.15);">
+                                        <div class="bg-white">
+                                            <p class="p-0 m-0 pl-3 text-gray-dark">Denumire joc #1</p>
+                                        </div>
+                                        <div class="">
+                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/exercise_1.svg'|theme }}">
+                                        </div>
+                                        <div class="p-3 bg-white d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/label.svg'|theme }}">
+                                                <p class="p-0 m-0 ml-2" style="font-size: 12px; color: #000000; line-height:16px;">Localizare</p>
+                                            </div>
+                                            <div>
+                                                <a href="" class="btn btn-sm btn-primary-dark">Detalii</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student profile table -->
+                    <div class="col-12 mt-5">
+                        <p class="text-gray-dark font-weight-bold px-3">Istoric activitati</p>
+
+                        <div class="table-responsive px-3" style="overflow-x: hidden;">
+                            <table id="students-datatable" class="table table-striped table-sm px-3 m-0" cellspacing="0" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
+                                <thead>
+                                    <tr>
+                                        <th class="no-sort"><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_1'|_}}</p></th>
+                                        <th class="no-sort"><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_2'|_}}</p></th>
+                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_3'|_}}</p></th>
+                                        <th class="no-sort"><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_4'|_}}</p></th>
+                                        <th class="no-sort"><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_5'|_}}</p></th>
+                                        <th class="no-sort"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                <span class="display-4 text-blue">Denumire joc</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                <span class="display-4 text-black">Categorie joc</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                <span class="display-4 text-black">05/19/2019</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                <span class="display-4 text-black">2 ore</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="pl-2 py-lg-3 d-flex align-items-center">
+                                                <div>
+                                                    <img width="30" height="30" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                                </div>
+                                                <div class="d-flex flex-column ml-2">
+                                                    <span class="display-4" style="color:#1a1a1a;">Maria Popsecu</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="pl-2 py-lg-4">
+                                                <div class="dropdown">
+                                                    <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">Editeaza profil</a>
+                                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">Adauga profesor</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% put scripts %}
+    <!-- Scripts for datatables -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#students-datatable').DataTable({
+                dom: '<"row"<"col-12 px-3"t>><"row bg-white p-3 rounded-bottom"<"col-6 d-flex align-items-center"l><"col-6 d-flex align-items-center justify-content-end"ip>>',
+                lengthMenu: [
+                    [5, 10, 25, 50, 100, -1],
+                    [5, 10, 25, 50, 100]
+                ],
+                responsive: true,
+                processing: true,
+                pagingType: 'simple',
+                language: {
+                    "info": "_PAGE_ - _PAGE_ of _PAGES_",
+                    'zeroRecords': "{{'studentsTableNoRecordsText'|_}}",
+                    'emptyPanes': "{{'studentsTableNoPanesText'|_}}",
+                    'emptyTable': "{{'studentsTableNoEntriesText'|_}}",
+                    'search': '',
+                    'searchPlaceholder': "Cauta un elev dupa nume",
+                    'lengthMenu': "{{'studentsTableNumberRowsText'|_}}: _MENU_",
+                    'paginate': {
+                        'first': '«',
+                        'previous': '‹',
+                        'next': '›',
+                        'last': '»',
+                    },
+                    'aria': {
+                        'paginate': {
+                            'first': "{{'studentsTablePaginationFirstText'|_}}",
+                            'previous': "{{'studentsTablePaginationLastText'|_}}",
+                            'next': "{{'studentsTablePaginationForwardText'|_}}",
+                            'last': "{{'studentsTablePaginationPreviousText'|_}}"
+                        }
+                    }
+                }
+            });
+
+
+
+            function selectDate(date) {
+            $('.calendar-wrapper').updateCalendarOptions({date: date});
+            }
+
+            $('.calendar-wrapper').calendar({
+                weekDayLength: 1,
+                date: new Date(),
+                onClickDate: selectDate,
+                showYearDropdown: true,
+                prevButton: '<',
+                nextButton: '>',
+                todayButtonContent: '',
+                showTodayButton: false,
+            });
+        });
+
+    </script>
+{% endput %}
