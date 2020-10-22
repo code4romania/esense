@@ -1,0 +1,208 @@
+title = "Editează profil profesor"
+url = "/scoala/editeaza-profil-profesor"
+layout = "web-app"
+description = "Pagina de editare a profilului"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "specialist"
+
+[addresses]
+counties = 1
+
+[profileStaticData]
+schools = 1
+==
+<div class="container-fluid px-lg-4 mb-5">
+    <div class="row">
+
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'spacialist/profil'|page }}">{{'teacher.dashboard.profile.back.link.text'|_}}</a>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <!-- Edit profile form -->
+            <form data-request='onEditSpecialist'>
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="shadow-lg rounded bg-white p-0 p-md-5">
+                            <div class="shadow rounded p-3 py-4">
+                                <p class="display-2 text-medium-dark form-styles p-0 m-0 mb-3">{{'teacher.dashboard.edit.profile.title'|_}}</p>
+
+                                <!-- Teacher avatar -->
+                                <div class="d-flex align-items-center mt-3 mb-4">
+                                    <p class="p-0 m-0 small text-gray-darl">{{'teacher.dashboard.profile.avatar.text'|_}}</p>
+                                    {% if user.avatar %}
+                                        <img class="img-fluid img-avatar add-custom-avatar ml-3" src="{{user.avatar.getThumb(80,80, { mode : 'crop' } )}}" alt="avatar">
+                                    {% else %}
+                                        <div class="add-avatar">
+                                            <img id="add-avatar" class="img-fluid add-custom-avatar ml-3" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                            <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="row">
+
+                                    <!-- School name select -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group register-select">
+                                            <select name="school" class="form-control border outline-none selectpicker" data-style="btn-white">
+                                                <option value="-1">{{'registerPage.form.input.school.name.placeholder'|_}}</option>
+                                                {% for key, school in schools %}
+                                                    <option value="{{ key }}">{{ school }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Last name input -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" name="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="{{'registerPage.form.input.last.name.placeholder'|_}}" style="font-style: italic;">
+                                        </div>
+                                    </div>
+
+                                    <!-- First name input -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{'registerPage.form.input.first.name.placeholder'|_}}" style="font-style: italic;">
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone number input -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="number" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="{{'registerPage.form.input.phone.placeholder'|_}}" style="font-style: italic;">
+                                        </div>
+                                    </div>
+
+                                    <!-- Email input -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.email.placeholder'|_}}" style="font-style: italic;">
+                                        </div>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="{{'registerPage.form.input.password.placeholder'|_}}" style="font-style: italic;">
+                                        </div>
+                                    </div>
+
+                                    <!-- County select -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group register-select">
+                                            <select name="county" id="specialistCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
+                                                {% for key, county in counties %}
+                                                    <option value="{{ key }}">{{ county }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- City select -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group register-select">
+                                            <select name="city" id="specialistCity" class="form-control border outline-none selectpicker" data-none-results-text="Niciun rezultat" data-live-search="true" data-style="btn-white" disabled></select>
+                                        </div>
+                                    </div>
+
+                                    <input name="type" type="text" id="type" class="d-none" value="specialist">
+                                </div>
+                            </div>
+
+                            <!-- Description input -->
+                            <div class="shadow rounded p-3 py-4 mt-5">
+                                <p class="display-2 text-medium-dark form-styles pl-3">{{'registerPage.form.title_2'|_}}</p>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit button -->
+                            <div class="col-12 mt-5 mb-5 mb-lg-0">
+                                <div class="d-flex justify-content-end">
+                                    <button role="button" type="submit" class="btn btn-sm btn-secondary px-5">{{'teacher.dashboard.edit.profile.btn.text'|_}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /** WYSWYG Editor. */
+            $('#description').richText();
+
+            /** Add file input functionlity for plus-icon img. */
+            $(".add-custom-avatar").click(function () {
+                $(".custom-avatar").trigger('click');
+            });
+
+            /**
+             * Extracts the initial cities.
+             */
+            $.request('onGetCities', {
+                data: {
+                    countyId: 1
+                },
+                success: function(data) {
+                    /* Reset the city select content. */
+                    $('#specialistCity').html('');
+
+                    /* Parse all received citied and add them. */
+                    for (const city in data) {
+                        $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                    }
+
+                    /* Activate the select. */
+                    $('#specialistCity').prop("disabled", false);
+                    $("#specialistCity").selectpicker("refresh");
+                }
+            });
+
+            /**
+             * Function that extracts the cities of a county.
+             */
+            $('#specialistCounty').on('change', function() {
+                $.request('onGetCities', {
+                    data: {
+                        countyId: this.value
+                    },
+                    success: function(data) {
+                        /* Reset the city select content. */
+                        $('#specialistCity').html('');
+
+                        /* Parse all received citied and add them. */
+                        for (const city in data) {
+                            $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                        }
+
+                        /* Activate the select. */
+                        $('#specialistCity').prop("disabled", false);
+                        $("#specialistCity").selectpicker("refresh");
+                    }
+                })
+            });
+        });
+    </script>
+{% endput %}

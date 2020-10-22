@@ -1,7 +1,7 @@
-title = "Adaugă elev"
-url = "/teacher/add-student"
+title = "Editează profil elev"
+url = "/specialist/editeaza-profil-elev/:id"
 layout = "web-app"
-description = "Pagina de adăugare a unui nou elev"
+description = "Pagina de editare a elevuli"
 is_hidden = 0
 
 [session]
@@ -18,9 +18,10 @@ allowedUserTypes[] = "specialist"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page }}">{{'teacher.dashboard.edit.student.profile.back.link.text'|_}}</a>
             </div>
         </div>
+
 
         <div class="col-12">
             <div class="rounded shadow bg-white p-lg-4">
@@ -29,17 +30,20 @@ allowedUserTypes[] = "specialist"
                     <p class="text-muted">{{'teacher.dashboard.student.add.profile.title'|_}}</p>
                 </div>
 
-                <form method="POST" data-request="onCreateStudent" >
+                <!-- Form for editing student -->
+                <form method="POST" data-request="onEditStudent" >
                     <div class="row mt-2">
 
+                        <!-- Edit avatar -->
                         <div class="col-12">
                             <div class="row">
+                                <!-- Nav for switching gender -->
                                 <div class="col-12 col-md-6">
                                     <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
                                     <div class="d-flex">
                                         <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-female-tab" data-gender="female" data-toggle="pill" href="#v-pills-female" role="tab" aria-controls="v-pills-female" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
-                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-male-tab" data-gender="male" data-toggle="pill" href="#v-pills-male" role="tab" aria-controls="v-pills-male" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
+                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -49,7 +53,8 @@ allowedUserTypes[] = "specialist"
                                     <p class="p-0 m-0 pt-3 text-muted">{{'teacher.dashboard.student.add.profile.avatar'|_}}</p>
 
                                     <div class="tab-content" id="v-pills-tabContent">
-                                        <div class="tab-pane fade show active" id="v-pills-female" role="tabpanel" aria-labelledby="v-pills-female-tab">
+                                        <!-- Girl avatars -->
+                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                             <div class="d-flex">
                                                 <div class="avatars d-none">
                                                     <div class="predifined-avatar active-avatar d-block">
@@ -66,7 +71,8 @@ allowedUserTypes[] = "specialist"
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane fade" id="v-pills-male" role="tabpanel" aria-labelledby="v-pills-male-tab">
+                                        <!-- Boy avatars -->
+                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                             <div class="d-flex">
                                                 <div class="avatars1 d-none">
                                                     <div class="predifined-avatar1 active-avatar1 d-block">
@@ -78,7 +84,7 @@ allowedUserTypes[] = "specialist"
                                                 </div>
 
                                                 <div class="add-avatar">
-                                                    <img id="add-avatar" class="img-fluid add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                    <img id="add-avatar" class="img-fluid  add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -91,9 +97,7 @@ allowedUserTypes[] = "specialist"
                             </div>
                         </div>
 
-                        <!-- Input for gender -->
-                        <input name="gender" id="gender" class="d-none" type="text" value="female" />
-
+                        <!-- Edit date of birth -->
                         <div class="col-12">
                             <p class="text-muted mt-5">{{'teacher.dashboard.student.add.profile.personal.data'|_}}</p>
                             <p class="display-4 text-gray-light">{{'teacher.dashboard.student.add.profile.dob.label'|_}}</p>
@@ -102,7 +106,7 @@ allowedUserTypes[] = "specialist"
                                 <!-- Select date -->
                                 <div class="col-12 col-md-4 col-lg-5 pr-lg-0 mr-lg-0">
                                     <div class="form-group d-flex">
-                                        <input autocomplete="off" type="text" name="birthdate" id="birthdate" class="form-control onChangeValue">
+                                        <input autocomplete="off" type="text" name="birthdate" id="birthdate" class="form-control onChangeValue" value="{{student.birthdate}}">
                                         <span class="text-danger ml-2">*</span>
                                     </div>
                                 </div>
@@ -113,7 +117,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Input last name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control onChangeValue" name="surname" id="surname" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}">
+                                <input  type="text" class="form-control onChangeValue" name="surname" id="surname" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}" value="{{student.surname}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -121,7 +125,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Input first name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}">
+                                <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}" value="{{student.name}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -129,7 +133,9 @@ allowedUserTypes[] = "specialist"
                         <!-- Input diagnostic description -->
                         <div class="col-12">
                             <div class="form-group d-flex">
-                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}"></textarea>
+                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}">
+                                    {{student.description|raw}}
+                                </textarea>
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -142,7 +148,7 @@ allowedUserTypes[] = "specialist"
                                     <div class="d-flex">
                                         <div class="form-check">
                                             <label class="form-check-label display-4 text-gray-light" for="hearing_impairment">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
-                                            <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios">
+                                            <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.hearing_impairment %} checked {% endif %}>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -153,7 +159,7 @@ allowedUserTypes[] = "specialist"
                                     <div class="d-flex">
                                         <div class="form-check">
                                             <label class="form-check-label display-4 text-gray-light" for="visual_impairment">{{'teacher.dashboard.student.add.profile.checkbox2.label'|_}}</label>
-                                            <input class="onChangeValue" name="visual_impairment" id="visual_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios">
+                                            <input class="onChangeValue" name="visual_impairment" id="visual_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.visual_impairment %} checked {% endif %}>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -174,18 +180,25 @@ allowedUserTypes[] = "specialist"
                                 addContactPerson = 'add-contact-1'
                                 contactPersonObservationsId = 'one'
                                 hideId = 'hide-1'
+                                hideClass = 'd-none'
                                 contactPersonFormId = 'contact-1'
 
                                 contactPersonLastName = 'contact_1_surname'
                                 contactPersonFirstName = 'contact_1_name'
                                 contactPersonEmail = 'contact_1_email'
                                 contactPersonPhone = 'contact_1_phone'
-                                contactPersonObservations = 'contact_1_observations'
+                                contactPersonObservations = 'contact_1_observations' 
+
+                                lastNameValue = ((student.contact_person_1) ? (student.contact_person_1.surname) : (''))
+                                firstNameValue = ((student.contact_person_1) ? (student.contact_person_1.name) : (''))
+                                emailValue = ((student.contact_person_1) ? (student.contact_person_1.email) : (''))
+                                phoneValue = ((student.contact_person_1) ? (student.contact_person_1.phone) : (''))
+                                textareaValue = ((student.contact_person_1) ? (student.contact_person_1.description) : (''))
                             %}
                         </div>
 
                         <!-- Second contact person -->
-                        <div id="person-2" class="px-lg-2 d-none">
+                        <div id="person-2" class="px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
@@ -195,6 +208,7 @@ allowedUserTypes[] = "specialist"
                                 addContactPerson = 'add-contact-2'
                                 contactPersonObservationsId = 'two'
                                 hideId = 'hide-2'
+                                hideClass = 'd-none'
                                 contactPersonFormId = 'contact-2'
 
                                 contactPersonLastName = 'contact_2_surname'
@@ -202,11 +216,18 @@ allowedUserTypes[] = "specialist"
                                 contactPersonEmail = 'contact_2_email'
                                 contactPersonPhone = 'contact_2_phone'
                                 contactPersonObservations = 'contact_2_observations'
+
+                                lastNameValue = ((student.contact_person_2) ? (student.contact_person_2.surname) : (''))
+                                firstNameValue = ((student.contact_person_2) ? (student.contact_person_2.name) : (''))
+                                emailValue = ((student.contact_person_2) ? (student.contact_person_2.email) : (''))
+                                phoneValue = ((student.contact_person_2) ? (student.contact_person_2.phone) : (''))
+                                textareaValue = ((student.contact_person_2) ? (student.contact_person_2.description) : (''))
                             %}
                         </div>
 
+
                         <!-- Third contact person -->
-                        <div id="person-3" class="px-lg-2 d-none">
+                        <div id="person-3" class="px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
@@ -216,6 +237,7 @@ allowedUserTypes[] = "specialist"
                                 addContactPerson = 'add-contact-3'
                                 contactPersonObservationsId = 'three'
                                 hideId = 'hide-3'
+                                hideClass = 'd-none'
                                 contactPersonFormId = 'contact-3'
 
                                 contactPersonLastName = 'contact_3_surname'
@@ -223,20 +245,27 @@ allowedUserTypes[] = "specialist"
                                 contactPersonEmail = 'contact_3_email'
                                 contactPersonPhone = 'contact_3_phone'
                                 contactPersonObservations = 'contact_3_observations'
+
+                                lastNameValue = ((student.contact_person_3) ? (student.contact_person_3.surname) : (''))
+                                firstNameValue = ((student.contact_person_3) ? (student.contact_person_3.name) : (''))
+                                emailValue = ((student.contact_person_3) ? (student.contact_person_3.email) : (''))
+                                phoneValue = ((student.contact_person_3) ? (student.contact_person_3.phone) : (''))
+                                textareaValue = ((student.contact_person_3) ? (student.contact_person_3.description) : (''))
                             %}
                         </div>
 
                         <!-- Forth contact person -->
-                        <div id="person-4" class="px-lg-2 d-none">
+                        <div id="person-4" class="px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
-
+                            
                                 contactPersonLastNameId = 'contact_4_surname'
                                 contactPersonFirstNameId = 'contact_4_name'
                                 contactPersonPhoneId = 'contact_4_phone'
                                 addContactPerson = 'add-contact-4'
                                 contactPersonObservationsId = 'four'
                                 hideId = 'hide-4'
+                                hideClass = 'd-none'
                                 contactPersonFormId = 'contact-4'
 
                                 contactPersonLastName = 'contact_4_surname'
@@ -244,20 +273,27 @@ allowedUserTypes[] = "specialist"
                                 contactPersonEmail = 'contact_4_email'
                                 contactPersonPhone = 'contact_4_phone'
                                 contactPersonObservations = 'contact_4_observations'
+
+                                lastNameValue = ((student.contact_person_4) ? (student.contact_person_4.surname) : (''))
+                                firstNameValue = ((student.contact_person_4) ? (student.contact_person_4.name) : (''))
+                                emailValue = ((student.contact_person_4) ? (student.contact_person_4.email) : (''))
+                                phoneValue = ((student.contact_person_4) ? (student.contact_person_4.phone) : (''))
+                                textareaValue = ((student.contact_person_4) ? (student.contact_person_4.description) : (''))
                             %}
                         </div>
 
                         <!-- Fifth contact person -->
-                        <div id="person-5" class="px-lg-2 d-none">
+                        <div id="person-5" class="px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_5_surname'
                                 contactPersonFirstNameId = 'contact_5_name'
                                 contactPersonPhoneId = 'contact_5_phone'
-                                addContactPerson = 'add-contact-5'
                                 contactPersonObservationsId = 'five'
+                                addContactPerson = 'add-contact-5'
                                 hideId = 'hide-5'
+                                hideClass = 'd-none'
                                 contactPersonFormId = 'contact-5'
 
                                 contactPersonLastName = 'contact_5_surname'
@@ -265,6 +301,12 @@ allowedUserTypes[] = "specialist"
                                 contactPersonEmail = 'contact_5_email'
                                 contactPersonPhone = 'contact_5_phone'
                                 contactPersonObservations = 'contact_5_observations'
+
+                                lastNameValue = ((student.contact_person_5) ? (student.contact_person_5.surname) : (''))
+                                firstNameValue = ((student.contact_person_5) ? (student.contact_person_5.name) : (''))
+                                emailValue = ((student.contact_person_5) ? (student.contact_person_5.email) : (''))
+                                phoneValue = ((student.contact_person_5) ? (student.contact_person_5.phone) : (''))
+                                textareaValue = ((student.contact_person_5) ? (student.contact_person_5.description) : (''))
                             %}
                         </div>
 
@@ -297,6 +339,7 @@ allowedUserTypes[] = "specialist"
             $('#three').richText();
             $('#four').richText();
             $('#five').richText();
+            
 
             /** Initiate the datepicker plugin. */
             $('#birthdate').datepicker({
@@ -308,51 +351,10 @@ allowedUserTypes[] = "specialist"
                 autoclose: true
             });
 
-            /** Function that handles gender switch on active tab toggle */
-            $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
-                /* Set the gender value. */
-                $('#gender').val($(e.target).data('gender'));
-            });
-
             /** Add file input functionlity for plus-icon img. */
             $(".add-custom-avatar").click(function () {
                 $(".custom-avatar").trigger('click');
             });
-
-            /** Function for adding a new contact person */
-            function addNewContact(link, form) {
-                $(link).on('click', function(){
-                    $(form).removeClass('d-none');
-                    $(link).addClass('d-none');
-                });
-            }
-
-            /** Call the function for adding a new contact person */
-            addNewContact('#hide-1', '#person-2');
-            addNewContact('#hide-2', '#person-3');
-            addNewContact('#hide-3', '#person-4');
-            addNewContact('#hide-4', '#person-5');
-
-            /** Change active on predifined avatars */
-            // var avatarsContainer = document.querySelector(".avatars");
-            // var avatars = avatarsContainer.getElementsByClassName("predifined-avatar");
-            // for (var i = 0; i < avatars.length; i++) {
-            //     avatars[i].addEventListener("click", function() {
-            //         var current = document.getElementsByClassName("active-avatar");
-            //         current[0].className = current[0].className.replace(" active-avatar", "");
-            //         this.className += " active-avatar";
-            //     });
-            // }
-
-            // var avatarsContainer1 = document.querySelector(".avatars1");
-            // var avatars1 = avatarsContainer1.getElementsByClassName("predifined-avatar1");
-            // for (var i = 0; i < avatars.length; i++) {
-            //     avatars1[i].addEventListener("click", function() {
-            //         var current = document.getElementsByClassName("active-avatar1");
-            //         current[0].className = current[0].className.replace(" active-avatar1", "");
-            //         this.className += " active-avatar1";
-            //     });
-            // }
 
             /**
              * Function for activating the finish button when

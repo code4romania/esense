@@ -1,5 +1,5 @@
 title = "Adaugă elev"
-url = "/teacher/add-student"
+url = "/scoala/adauga-elev"
 layout = "web-app"
 description = "Pagina de adăugare a unui nou elev"
 is_hidden = 0
@@ -7,7 +7,7 @@ is_hidden = 0
 [session]
 security = "user"
 allowedUserGroups[] = "registered"
-allowedUserTypes[] = "specialist"
+allowedUserTypes[] = "school"
 
 [students]
 ==
@@ -126,6 +126,19 @@ allowedUserTypes[] = "specialist"
                             </div>
                         </div>
 
+                        <!-- Teacher select -->
+                        <div class="col-12">
+                            <div class="form-group register-select mr-3">
+                                <select name="teacher" id="specialist" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
+                                    {# {% for key, county in counties %}
+                                        <option value="{{ key }}">{{ county }}</option>
+                                    {% endfor %} #}
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
                         <!-- Input diagnostic description -->
                         <div class="col-12">
                             <div class="form-group d-flex">
@@ -172,7 +185,6 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstNameId = 'contact_1_name'
                                 contactPersonPhoneId = 'contact_1_phone'
                                 addContactPerson = 'add-contact-1'
-                                contactPersonObservationsId = 'one'
                                 hideId = 'hide-1'
                                 contactPersonFormId = 'contact-1'
 
@@ -193,7 +205,6 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstNameId = 'contact_2_name'
                                 contactPersonPhoneId = 'contact_2_phone'
                                 addContactPerson = 'add-contact-2'
-                                contactPersonObservationsId = 'two'
                                 hideId = 'hide-2'
                                 contactPersonFormId = 'contact-2'
 
@@ -214,7 +225,6 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstNameId = 'contact_3_name'
                                 contactPersonPhoneId = 'contact_3_phone'
                                 addContactPerson = 'add-contact-3'
-                                contactPersonObservationsId = 'three'
                                 hideId = 'hide-3'
                                 contactPersonFormId = 'contact-3'
 
@@ -235,7 +245,6 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstNameId = 'contact_4_name'
                                 contactPersonPhoneId = 'contact_4_phone'
                                 addContactPerson = 'add-contact-4'
-                                contactPersonObservationsId = 'four'
                                 hideId = 'hide-4'
                                 contactPersonFormId = 'contact-4'
 
@@ -256,7 +265,6 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstNameId = 'contact_5_name'
                                 contactPersonPhoneId = 'contact_5_phone'
                                 addContactPerson = 'add-contact-5'
-                                contactPersonObservationsId = 'five'
                                 hideId = 'hide-5'
                                 contactPersonFormId = 'contact-5'
 
@@ -292,11 +300,7 @@ allowedUserTypes[] = "specialist"
 
             /** WYSWYG Editor. */
             $('#description').richText();
-            $('#one').richText();
-            $('#two').richText();
-            $('#three').richText();
-            $('#four').richText();
-            $('#five').richText();
+            $('.observations').richText();
 
             /** Initiate the datepicker plugin. */
             $('#birthdate').datepicker({

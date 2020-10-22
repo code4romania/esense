@@ -41,10 +41,10 @@ allowedUserTypes[] = "specialist"
                                     <div class="pl-2 py-3">
                                         <div class="d-flex flex-column">
                                             {% if student.hearing_impairment %}
-                                                <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">Auz</p>
+                                                <p class="p-0 m-0 display-4 text-gray-dark font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">Auz</p>
                                             {% endif %}
                                             {% if student.visual_impairment %}
-                                                <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">Vaz</p>
+                                                <p class="p-0 m-0 display-4 text-gray-dark font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">Vaz</p>
                                             {% endif %}
                                             {% if (not student.hearing_impairment) and (not student.visual_impairment) %}
                                                 <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">Niciuna</p>
@@ -72,7 +72,7 @@ allowedUserTypes[] = "specialist"
                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
+                                                <a class="dropdown-item display-4" href="{{ 'teacher/editeaza-profil-elev'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
                                                 <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@ allowedUserTypes[] = "specialist"
                     'emptyPanes': "{{'studentsTableNoPanesText'|_}}",
                     'emptyTable': "{{'studentsTableNoEntriesText'|_}}",
                     'search': '',
-                    'searchPlaceholder': "Cauta un elev dupa nume",
+                    'searchPlaceholder': "{{ 'studentsTableSearchPlaceholder'|_ }}",
                     'lengthMenu': "{{'studentsTableNumberRowsText'|_}}: _MENU_",
                     'paginate': {
                         'first': '«',

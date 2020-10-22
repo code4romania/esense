@@ -77,7 +77,7 @@ description = "Register from"
                                 <div class="col-12">
                                     <div class="form-group register-select">
                                         <select name="school" class="form-control border outline-none selectpicker" data-style="btn-white">
-                                            <option value="-1">Școlarizare la domiciliu</option>
+                                            <option value="-1">{{'registerPage.form.input.school.name.placeholder'|_}}</option>
                                             {% for key, school in schools %}
                                                 <option value="{{ key }}">{{ school }}</option>
                                             {% endfor %}

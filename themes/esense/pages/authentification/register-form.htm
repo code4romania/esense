@@ -84,6 +84,12 @@ schools = 1
                     $('#schoolForm').removeClass('d-none');
                 }
             });
+
+            $('form').on('ajaxSuccess', function() {
+                $('#teacherForm').addClass('d-none');
+                $('#schoolForm').addClass('d-none');
+                $('#successMessage').removeClass('d-none');
+            })
         });
     </script>
 {% endput %}
