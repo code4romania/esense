@@ -29,6 +29,9 @@
     ],
     'component' => [
         'timetable' => [
+            'name' => 'Timetable',
+            'description' => 'A simple controller for showing timetable',
+
             'validation' => [
                 'day_required' => 'Date is required.',
                 'day_date' => 'The format of this field must be a date.',
