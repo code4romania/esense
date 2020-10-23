@@ -2,6 +2,7 @@
 
 namespace Genuineq\Timetable\Components;
 
+use Redirect;
 use Cms\Classes\ComponentBase;
 use Genuineq\Timetable\Models\Record as RecordModel;
 
@@ -65,7 +66,7 @@ class Timetable extends ComponentBase
             $record->feedback = post('feedback');
         $record->save();
 
-        return $record;
+        return Redirect::refresh();
     }
 
     /**
