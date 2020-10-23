@@ -35,36 +35,15 @@
     ],
 
     'components' => [
-        'profile' => [
-            'name' => 'Profile',
-            'description' => 'Profile detailes',
-
-            'validation' => [
-                /** Required fields. */
-                'name_required' => 'Numele companiei este obligatoriu',
-                'name_string' => 'Numele companiei trebuie sa fie de tip string',
-                'registration_number_required' => 'Numărul de înregistrare al companiei este obligatoriu',
-                'registration_number_max' => 'Numărul de înregistrare al companiei trebuie sa aiba maxim 15 caractere',
-                'registration_number_unique' => 'Numărul de înregistrare al companiei a mai fost folosit. Va rugam sa va autentificati sau sa luati legatura cu persoaca care a creat contul pentru a va invita',
-                /** Optional fields. */
-                'description_string' => 'Descrierea companiei trebuie sa fie de tip string',
-                'domain_id_integer' => 'Domeniul companiei trebuie sa fie de tip numeric',
-                'video_string' => 'URL-ul catre videoclipul de prezentare al companiei trebuie sa fie de tip string',
-                'company_size_id_integer' => 'Dimensiunea companiei trebuie sa fie de tip intreg',
-                'email_email' => 'Adresa de email a companiei trebuie sa fie valida',
-                'website_string' => 'URl-ul catre site-ul de prezentare al companiei trebuie sa fie de tip string',
-                /** Candidate validation */
-                'domain_1_required' => 'Domeniul 1 este obligatoriu',
-                'domain_1_hard_keywords_required' => 'Competentele tehnice pentru domeniul 1 sunt obligatorii',
-                'domain_1_soft_keywords_required' => 'Competentele soft pentru domeniul 1 sunt obligatorii',
-                'domain_1_experience_required' => 'Experienta pentru domeniul 1 este obligatorie',
-                'education_level_required' => 'Nivelul de educatie este obligatoriu',
-                'contract_types_required' => 'Tipul contractului este obligatoriu',
-            ],
+        'specialist' => [
+            'name' => 'Specialist',
+            'description' => 'Allows to update, delete, archive and unarchive specialists.',
 
             'message' => [
-                'profile_update_successful' => 'Profilul companiei a fost actualizat cu succes',
-                'candidate_profile_update'  => 'Profilul a fost actualizat cu succes',
+                'specialist_archive_successful' => 'Arhivare cu succes',
+                'specialist_archive_failed' => 'Arhivarea a esuat',
+                'specialist_unzip_successful' => 'Dezarhivare cu succes',
+                'specialist_unzip_failed' => 'Dezarhivarea a esuat',
             ]
         ],
 
