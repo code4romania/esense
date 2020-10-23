@@ -12,8 +12,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Timetable',
-            'description' => 'Timetable for sessions scheduling',
+            'name'        => 'genuineq.timetable::lang.plugin.name',
+            'description' => 'genuineq.timetable::lang.plugin.description',
             'author'      => 'genuineq',
             'icon'        => 'oc-icon-calendar'
         ];

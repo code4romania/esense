@@ -29,6 +29,9 @@
     ],
     'component' => [
         'timetable' => [
+            'name' => 'Orar',
+            'description' => 'Un controler simplu pentru afișarea orarului',
+
             'validation' => [
                 'day_required' => 'Data este obligatorie.',
                 'day_date' => 'Formatul acestei rubrici trebuie să fie o dată calendaristică.',

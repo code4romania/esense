@@ -16,8 +16,8 @@ class Timetable extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name' => 'Timetable',
-            'description' => 'A simple timetable form controller'
+            'name' => 'genuineq.timetable::lang.component.name',
+            'description' => 'genuineq.timetable::lang.component.description'
         ];
     }
 
@@ -57,7 +57,6 @@ class Timetable extends ComponentBase
         $record->save();
 
         return $record;
-
     }
 
     /**
