@@ -32,4 +32,3 @@ package-lock.json
 /node_modules
 plugins/janvince/smallcontactform
 themes/esense/pages/contacto.htm
-config/brand.php
