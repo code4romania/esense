@@ -32,3 +32,4 @@ package-lock.json
 /node_modules
 plugins/janvince/smallcontactform
 themes/esense/pages/contacto.htm
+plugins/genuineq/profile/reportwidgets/totalschools/partials/_widget.htm
