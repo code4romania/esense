@@ -1,7 +1,7 @@
 <?php namespace Genuineq\Profile\ReportWidgets;
 
 use Lang;
-use Genuineq\User\Models\User;
+use Genuineq\Profile\Models\Specialist as SpecialistModel;
 use Backend\Classes\ReportWidgetBase;
 
 class TotalSpecialists extends ReportWidgetBase
@@ -13,7 +13,7 @@ class TotalSpecialists extends ReportWidgetBase
     {
         try {
             $this->vars['labelSpecialists'] = Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.frontend.label_specialists');
-            $this->vars['totalSpecialists'] = User::all()->where('type' , 'specialist')->count();
+            $this->vars['totalSpecialists'] = SpecialistModel::all()->where('description' , 'specialist')->count();
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
         }
