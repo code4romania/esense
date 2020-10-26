@@ -2,6 +2,8 @@
     padding-left: 0 !important
 }
 
+.exercise-detailes-owl-carousel .owl-prev,
+.exercise-detailes-owl-carousel .owl-next,
 .exercises-owl-carousel .owl-prev,
 .exercises-owl-carousel .owl-next {
     position: absolute;
@@ -12,6 +14,7 @@
     transform: translate(0, -50%);
 }
 
+.exercise-detailes-owl-carousel .owl-prev,
 .exercises-owl-carousel .owl-prev {
     left: 0;
     background-color: transparent !important;
@@ -19,6 +22,7 @@
     font-size: 35px !important;
 }
 
+.exercise-detailes-owl-carousel .owl-next,
 .exercises-owl-carousel .owl-next {
     right: 0;
     background-color: transparent !important;
