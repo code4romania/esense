@@ -1,0 +1,239 @@
+title = "Adaugă profesor"
+url = "/specialist/adauga-profesor"
+layout = "web-app"
+description = "Adaugă profesor"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "specialist"
+==
+<div class="container-fluid px-lg-4">
+    <div class="row">
+        <div class="col-12">
+            <form class="">
+        
+                    <div id="teacher-1">
+                        {%
+                            partial 'web-app/school/add-teacher'
+        
+                            lastNameId = 'teacher_1_last_name_id'
+                            firstNameId = 'teacher_1_first_name_id'
+                            phoneId = 'teacher_1_phone_id'
+                            emailId = 'teacher_1_email_id'
+                            hideId = 'hide-1'
+                            hideClass = ''
+        
+                            lastName = 'teacher_1_last_name'
+                            firstName = 'teacher_1_first_name'
+                            phone = 'teacher_1_phone'
+                            email = 'teacher_1_email'
+                        %}
+                    </div>
+        
+                    <div id="teacher-2" class="d-none">
+                        {%
+                            partial 'web-app/school/add-teacher'
+        
+                            lastNameId = 'teacher_2_last_name_id'
+                            firstNameId = 'teacher_2_first_name_id'
+                            phoneId = 'teacher_2_phone_id'
+                            emailId = 'teacher_2_email_id'
+                            hideId = 'hide-2'
+                            teacherFormId = 'teacher-2'
+        
+                            lastName = 'teacher_2_last_name'
+                            firstName = 'teacher_2_first_name'
+                            phone = 'teacher_2_phone'
+                            email = 'teacher_2_email'
+                        %}
+                    </div>
+        
+                    <div id="teacher-3" class="d-none">
+                        {%
+                            partial 'web-app/school/add-teacher'
+        
+                            lastNameId = 'teacher_3_last_name_id'
+                            firstNameId = 'teacher_3_first_name_id'
+                            phoneId = 'teacher_3_phone_id'
+                            emailId = 'teacher_3_email_id'
+                            hideId = 'hide-3'
+                            teacherFormId = 'teacher-3'
+        
+                            lastName = 'teacher_3_last_name'
+                            firstName = 'teacher_3_first_name'
+                            phone = 'teacher_3_phone'
+                            email = 'teacher_3_email'
+                        %}
+                    </div>
+        
+                    <div id="teacher-4" class="d-none">
+                        {%
+                            partial 'web-app/school/add-teacher'
+        
+                            lastNameId = 'teacher_4_last_name_id'
+                            firstNameId = 'teacher_4_first_name_id'
+                            phoneId = 'teacher_4_phone_id'
+                            emailId = 'teacher_4_email_id'
+                            hideId = 'hide-4'
+                            teacherFormId = 'teacher-4'
+        
+                            lastName = 'teacher_4_last_name'
+                            firstName = 'teacher_4_first_name'
+                            phone = 'teacher_4_phone'
+                            email = 'teacher_4_email'
+                        %}
+                    </div>
+        
+                    <div id="teacher-5" class="d-none">
+                        {%
+                            partial 'web-app/school/add-teacher'
+        
+                            lastNameId = 'teacher_5_last_name_id'
+                            firstNameId = 'teacher_5_first_name_id'
+                            phoneId = 'teacher_5_phone_id'
+                            emailId = 'teacher_5_email_id'
+                            teacherFormId = 'teacher-5'
+                            hideId = 'hide-5'
+                            hideClass = 'd-none'
+        
+                            lastName = 'teacher_5_last_name'
+                            firstName = 'teacher_5_first_name'
+                            phone = 'teacher_5_phone'
+                            email = 'teacher_5_email'
+                        %}
+                    </div>
+        
+                    <!-- Submit button -->
+                    <div class="col-12 mb-5 mt-3">
+                        <div class="d-flex justify-content-end">
+                            <button  type="submit" class="add-teacher btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                        </div>
+                    </div>
+        
+            </form>
+        </div>
+    </div>
+</div>
+{% put scripts %}
+    <!-- Scripts for datatables -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /** Function for adding a new teacher */
+            function addNewContact(link,form) {
+                $(link).on('click', function(){
+                    $(form).removeClass('d-none');
+                    $(link).addClass('d-none');
+                });
+            }
+
+            /** Call the function for adding a new teacher */
+            addNewContact('#hide-1', '#teacher-2');
+            addNewContact('#hide-2', '#teacher-3');
+            addNewContact('#hide-3', '#teacher-4');
+            addNewContact('#hide-4', '#teacher-5');
+
+            /**
+             * Function for triggering the finish button when
+             * values from all fields are selected
+             */
+             function activateFinishBtn() {
+                $('.add-teacher').removeAttr('disabled');
+                $('.add-teacher').removeClass('btn-gray-light');
+                $('.add-teacher').removeClass('text-white');
+                $('.add-teacher').addClass('btn-secondary');
+            }
+
+            function deactivateFinishBtn() {
+                $('.add-teacher').attr('disabled');
+                $('.add-teacher').addClass('btn-gray-light');
+                $('.add-teacher').addClass('text-white');
+                $('.add-teacher').removeClass('btn-secondary');
+            }
+
+            /** Validation for activeting the finish button. */
+            $(document.body).on('change', '.onChangeValue', function(){
+                if(
+                    ((
+                        (
+                            (0 !== $("#teacher_1_last_name_id").val().length) ||
+                            (0 !== $("#teacher_1_first_name_id").val().length) ||
+                            (0 !== $("#teacher_1_phone_id").val().length) ||
+                            (0 !== $("#teacher_1_email_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#teacher_1_last_name_id").val().length) &&
+                            (0 !== $("#teacher_1_first_name_id").val().length) &&
+                            (0 !== $("#teacher_1_phone_id").val().length) &&
+                            (0 !== $("#teacher_1_email_id").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#teacher_2_last_name_id").val().length) ||
+                            (0 !== $("#teacher_2_first_name_id").val().length) ||
+                            (0 !== $("#teacher_2_phone_id").val().length) ||
+                            (0 !== $("#teacher_2_email_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#teacher_2_last_name_id").val().length) &&
+                            (0 !== $("#teacher_2_first_name_id").val().length) &&
+                            (0 !== $("#teacher_2_phone_id").val().length) &&
+                            (0 !== $("#teacher_2_email_id").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#teacher_3_last_name_id").val().length) ||
+                            (0 !== $("#teacher_3_first_name_id").val().length) ||
+                            (0 !== $("#teacher_3_phone_id").val().length) ||
+                            (0 !== $("#teacher_3_email_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#teacher_3_last_name_id").val().length) &&
+                            (0 !== $("#teacher_3_first_name_id").val().length) &&
+                            (0 !== $("#teacher_3_phone_id").val().length) &&
+                            (0 !== $("#teacher_3_email_id").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#teacher_4_last_name_id").val().length) ||
+                            (0 !== $("#teacher_4_first_name_id").val().length) ||
+                            (0 !== $("#teacher_4_phone_id").val().length) ||
+                            (0 !== $("#teacher_4_email_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#teacher_4_last_name_id").val().length) &&
+                            (0 !== $("#teacher_4_first_name_id").val().length) &&
+                            (0 !== $("#teacher_4_phone_id").val().length) &&
+                            (0 !== $("#teacher_4_email_id").val().length)
+                        )
+                    ) ||
+                    (
+                        (
+                            (0 !== $("#teacher_5_last_name_id").val().length) ||
+                            (0 !== $("#teacher_5_first_name_id").val().length) ||
+                            (0 !== $("#teacher_5_phone_id").val().length) ||
+                            (0 !== $("#teacher_5_email_id").val().length)
+                        ) &&
+                        (
+                            (0 !== $("#teacher_5_last_name_id").val().length) &&
+                            (0 !== $("#teacher_5_first_name_id").val().length) &&
+                            (0 !== $("#teacher_5_phone_id").val().length) &&
+                            (0 !== $("#teacher_5_email_id").val().length)
+                        )
+                    ))
+                ) {
+                    activateFinishBtn()
+                } else {
+                    deactivateFinishBtn()
+                }
+            });
+        });
+    </script>
+{% endput %}
+
+
