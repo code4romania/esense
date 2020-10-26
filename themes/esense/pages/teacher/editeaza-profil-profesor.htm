@@ -24,16 +24,15 @@ schools = 1
 
         <!-- Back link -->
         <div class="col-12 my-3">
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="d-flex align-itmes-center">
+            <div class="d-flex align-items-center justify-content-end">
+                <div class="d-none">
                     <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
                     <a class="ml-3 text-black" href="{{ 'spacialist/profil'|page }}">{{'teacher.dashboard.profile.back.link.text'|_}}</a>
                 </div>
                 <div>
-                    <a role="button" data-toggle="modal" data-target="#changePasswodTeacherModal" class="btn btn-sm btn-secondary d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> 
-                        <!-- <img class="img-fluid" src="{{ 'assets/img/svg/password-icon.svg'|theme }}"> -->
+                    <a role="button" data-toggle="modal" data-target="#changePasswodTeacherModal" class="btn btn-sm btn-secondary d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;">
                         <i class="fas fa-lock"></i>
-                        Schimba parola
+                        {{'teacher.dashboard.edit.profile.change.password.btn'|_}}
                     </a>
                 </div>
             </div>
@@ -50,9 +49,9 @@ schools = 1
                                 <div class="col-12">
                                     <p class="display-2 text-medium-dark form-styles p-0 m-0 mb-3">{{'teacher.dashboard.profile.avatar.text'|_}}</p>
                                     <div class="d-flex align-items-center mt-3 mb-4">
-                                        <button role="button" type="submit" class="btn btn-sm btn-secondary d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> 
+                                        <button role="button" type="submit" class="btn btn-sm btn-secondary d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;">
                                             <i class="fas fa-user"></i>
-                                            Actualizeaza
+                                            {{'teacher.dashboard.edit.profile.btn.text'|_}}
                                         </button>
                                         {% if user.avatar %}
                                             <img id="add-avatar" class="img-fluid img-avatar rounded-circle add-custom-avatar ml-3" src="{{user.avatar.getThumb(80,80, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
@@ -180,7 +179,7 @@ schools = 1
                         } else {
                             $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
                         }
-                        
+
                     }
 
                     /* Activate the select. */

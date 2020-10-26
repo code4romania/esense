@@ -44,7 +44,21 @@
                 'specialist_archive_failed' => 'Arhivarea a esuat',
                 'specialist_unzip_successful' => 'Dezarhivare cu succes',
                 'specialist_unzip_failed' => 'Dezarhivarea a esuat',
-            ]
+                'specialist_delete_successful' => 'Ștergere cu succes',
+                'specialist_delete_failed' => 'Ștergere a esuat',
+            ],
+
+            'validation' => [
+                'surname_required' => 'Nume este obligatoriu',
+                'surname_string' => 'Numele poate conține doar litere, spațiu și caracterul -',
+                'name_required' => 'Prenumele este obligatoriu',
+                'name_string' => 'Prenumele poate conține doar litere, spațiu și caracterul -',
+                'phone.required' => 'Numărul de telefon este obligatoriu',
+                'phone.numeric' => 'Numărul de telefon poate să conțină doar cifre',
+                'email_between' => 'Adresa de email trebuie să aibă între 6 și 255 de caractere',
+                'email_email' => 'Adresa de email nu este validă',
+                'profile_update_successful' => 'Profilul a fost actualizat cu success',
+            ],
         ],
 
         'profile-static-data' => [

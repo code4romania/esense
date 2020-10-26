@@ -5,6 +5,11 @@ use Auth;
 use Lang;
 use Flash;
 use Redirect;
+use Validator;
+use Genuineq\User\Models\User;
+use Genuineq\Profile\Classes\UserData;
+use ValidationException;
+use ApplicationException;
 use Cms\Classes\ComponentBase;
 
 /**
@@ -46,6 +51,17 @@ class Specialist extends ComponentBase
      */
     public function onSpecialistUpdate()
     {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+
+        /** Extract the user */
+        $user = Auth::getUser();
+        /** Extract the user profile */
+        $profile = $user->profile;
+
+        /** Class with recived user data */
+        UserData::getData(post(), $user, $profile);
     }
 
     /**
@@ -109,5 +125,25 @@ class Specialist extends ComponentBase
      */
     public function onSpecialistDelete()
     {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+
+        /** Extract the user */
+        $user = Auth::getUser();
+
+        /** Extract the specialist that needs to be deleted. */
+        $specialist = $user->profile->archivedSpecialists->where('id', post('id'))->first();
+
+        if ($specialist) {
+            /** Delete the extracted specialist. */
+            $specialist->forceDelete();
+
+            Flash::success(Lang::get('genuineq.profile::lang.components.specialist.message.specialist_delete_successful'));
+        } else {
+            Flash::error(Lang::get('genuineq.profile::lang.components.specialist.message.specialist_delete_failed'));
+        }
+
+        return Redirect::refresh();
     }
 }
