@@ -155,8 +155,12 @@ allowedUserTypes[] = "school"
 
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
-                                        <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
-                                        <a role="button" data-toggle="modal" data-target="#deleteTeacherModal">
+
+                                        <a role="button" data-toggle="modal" data-target="#unzipSpecialistModal" data-name='{{ specialist.full_name }}' data-id='{{ specialist.id }}'>
+                                            <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
+                                        </a>
+
+                                        <a role="button" data-toggle="modal" data-target="#deleteTeacherModal" data-name='{{ specialist.full_name }}' data-id='{{ specialist.id }}'>
                                             <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/trash-bin.svg'|theme }}">
                                         </a>
 

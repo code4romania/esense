@@ -13,15 +13,41 @@ description = "Partial for confirming a specialist deletion."
                     </button>
                     <div class="d-flex align-items-center justify-content-center">
                         <img class="img-fluid" width="35px" height="35px" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar elev">
-                        <p class="p-0 m-0 display-4 text-dark ml-2">Nume profesor</p>
+                        <p id="specialistName" class="p-0 m-0 display-4 text-dark ml-2"></p>
                     </div>
                     <p class="text-center my-3 displa-1 text-dark">{{'school.teacher.profile.delete.teacher.title'|_}}</p>
                     <div class="d-flex align-items-center justify-content-center mt-5 mb-3">
                         <a role="button" class="mr-3 text-gray-2 display-4" data-dismiss="modal">{{'school.teacher.profile.delete.teacher.cancel'|_}}</a>
-                        <button type="submit" class="btn btn-sm px-5 btn-secondary">{{'school.teacher.profile.delete.teacher.delete'|_}}</button>
+                        <button id="deleteSpecialistSubmit" type="submit" class="btn btn-sm px-5 btn-secondary">{{'school.teacher.profile.delete.teacher.delete'|_}}</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+<script>
+    /** Populate the modal after opening. */
+    $('#deleteTeacherModal').on('show.bs.modal', function (event) {
+        /** Update the specialist name. */
+        $(this).find('#specialistName').text($(event.relatedTarget).data('name'));
+
+        /** Save the specialist ID. */
+        $(this).find('#deleteSpecialistSubmit').data('id', $(event.relatedTarget).data('id'));
+    });
+
+    /** Submit unzip request for specialist. */
+    $("#deleteSpecialistSubmit").on('click', function () {
+        /** Extract data from input. */
+        var $id = $('#deleteSpecialistSubmit').data('id');
+
+        /** Send the specialist unzip request. */
+        $.request(
+            'onSpecialistDelete', {
+                data: {
+                    id: $id,
+                },
+            }
+        );
+    });
+</script>
