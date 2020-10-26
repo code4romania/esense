@@ -14,7 +14,7 @@ allowedUserTypes[] = "school"
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">Panou de administrare</h4>
+            <h4 class="text-gray-dark font-weight-light mb-4">{{'school.dashboard.admninistration.title'|_}}</h4>
         </div>
 
           <!-- Students card -->
@@ -38,11 +38,11 @@ allowedUserTypes[] = "school"
         <div class="col-12 col-md-6 mt-4 mt-md-0">
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
-                    <h6 class="text-gray-light">Total profesori</h6>
+                    <h6 class="text-gray-light">{{'school.dashboard.teacher.card.title'|_}}</h6>
                     <h5 class="text-gray-dark">{{ user.profile.specialists.count }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
-                        <a class="ml-2 display-4 text-gray-light" href="{{ 'school/teachers'|page }}">Vezi toți profesorii</a>
+                        <a class="ml-2 display-4 text-gray-light" href="{{ 'school/teachers'|page }}">{{'school.dashboard.teacher.card.link'|_}}</a>
                     </div>
                 </div>
                 <div>
@@ -85,9 +85,9 @@ allowedUserTypes[] = "school"
             <div class="table-responsive rounded p-3" style="overflow-x: hidden; background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <p class="font-weight-bold text-dark">{{'teacher.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">({{ user.profile.specialists.count }})</span></p>
-                    <a href="{{"teacher/add-student"|page}}" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around px-2" style="width:160px;">
+                    <a href="{{"school/add-teacher"|page}}" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around px-2" style="width:160px;">
                         <i class="fas fa-user-edit mr-2"></i>
-                        Adaugă profesor
+                        {{'school.dashboard.administration.add.teacher.btn'|_}}
                     </a>
                 </div>
                 <table id="teachers-datatable" class="table table-striped table-sm pt-3 px-3 m-0" cellspacing="0">
