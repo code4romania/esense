@@ -379,4 +379,17 @@ return [
             'description' => 'Displays user notifications',
         ],
     ],
+
+    'reportwidgets' => [
+        'total_registration_requests' => [
+            'label' => 'Total registration requests',
+            'title' =>  'Total number of registration requests',
+            'title_default' => 'Total registration requests',
+            'title_validation' => '',
+
+            'frontend' => [
+                'label_registration_requests' => 'Total number of registration requests'
+            ],
+        ],
+    ],
 ];
