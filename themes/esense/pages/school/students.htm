@@ -46,20 +46,20 @@ allowedUserTypes[] = "school"
                                     <div class="pl-2 py-3">
                                         <div class="d-flex flex-column">
                                             {% if student.hearing_impairment %}
-                                                <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">Auz</p>
+                                                <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">{{'student.table.disability.hearing'|_}}</p>
                                             {% endif %}
                                             {% if student.visual_impairment %}
-                                                <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">Vaz</p>
+                                                <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">{{'student.table.disability.seeing'|_}}</p>
                                             {% endif %}
                                             {% if (not student.hearing_impairment) and (not student.visual_impairment) %}
-                                                <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">Niciuna</p>
+                                                <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">{{'student.table.disability.none'|_}}</p>
                                             {% endif %}
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="pl-2 py-3">
-                                        <p class="p-0 m-0 pt-2 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.age }}&nbsp;ani</p>
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.age }}&nbsp;{{'student.table.disability.years'|_}}</p>
                                     </div>
                                 </td>
                                 <td>
