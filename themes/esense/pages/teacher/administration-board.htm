@@ -90,7 +90,7 @@ allowedUserTypes[] = "specialist"
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'students.table.column_1.title'|_}}</p></th>
                             <!-- Age column -->
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'students.table.column_2.title'|_}}</p></th>
-                            <th></th>
+                            <th class="no-sort"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -267,6 +267,7 @@ allowedUserTypes[] = "specialist"
                 dom: '<"row"<"col-12 added-content">><"row"<"col-12"t>><"row bg-white"<"col-12 p-3 teacher-dashboard-pagination d-flex align-items-center justify-content-end"p>>',
                 responsive: true,
                 processing: true,
+                bSort: true,
                 pagingType: 'full_numbers',
                 language: {
                     "info": "_PAGE_ - _PAGE_ of _PAGES_",

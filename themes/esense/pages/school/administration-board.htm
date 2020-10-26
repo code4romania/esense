@@ -101,7 +101,7 @@ allowedUserTypes[] = "school"
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.teachers.table.column_3'|_}}</p></th>
                             <!-- Email column -->
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.teachers.table.column_4'|_}}</p></th>
-                            <th></th>
+                            <th class="no-sort"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -180,6 +180,7 @@ allowedUserTypes[] = "school"
                     [5, 10, 25, 50, 100, -1],
                     [5, 10, 25, 50, 100]
                 ],
+                bSort: true,
                 responsive: true,
                 processing: true,
                 pagingType: 'simple',

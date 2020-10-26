@@ -154,3 +154,129 @@ table.dataTable tbody tr:last-child {
     letter-spacing: 0.3px;
     color: #9FA2B4;
 }
+
+/***********************************************
+************** Datatables sorting **************
+***********************************************/
+
+table.dataTable thead>tr>th.sorting_asc,
+table.dataTable thead>tr>th.sorting_desc,
+table.dataTable thead>tr>th.sorting,
+table.dataTable thead>tr>td.sorting_asc,
+table.dataTable thead>tr>td.sorting_desc,
+table.dataTable thead>tr>td.sorting {
+    padding-left: 30px;
+}
+
+table.dataTable thead>tr>th:active,
+table.dataTable thead>tr>td:active {
+    outline: none;
+}
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    position: relative;
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:after {
+    position: absolute;
+    top: 50% !important;
+    transform: translateY(-50%);
+    left: 0;
+    display: block;
+    opacity: 0.3;
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:before {
+    left: 1em;
+    content: "\2191";
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+    left: 0.5em;
+    bottom: 0 !important;
+    content: "\2193";
+}
+
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:after {
+    opacity: 1;
+}
+
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:after {
+    opacity: 0;
+}
+
+div.dataTables_scrollHead table.dataTable {
+    margin-bottom: 0 !important;
+}
+
+div.dataTables_scrollBody table {
+    border-top: none;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+div.dataTables_scrollBody table thead .sorting:before,
+div.dataTables_scrollBody table thead .sorting_asc:before,
+div.dataTables_scrollBody table thead .sorting_desc:before,
+div.dataTables_scrollBody table thead .sorting:after,
+div.dataTables_scrollBody table thead .sorting_asc:after,
+div.dataTables_scrollBody table thead .sorting_desc:after {
+    display: none;
+}
+
+table.dataTable.table-sm>thead>tr>th :not(.sorting_disabled) {
+    padding-right: 20px;
+}
+
+table.dataTable.table-sm .sorting:before,
+table.dataTable.table-sm .sorting_asc:before,
+table.dataTable.table-sm .sorting_desc:before {
+    top: 5px;
+    right: 0.85em;
+}
+
+table.dataTable.table-sm .sorting:after,
+table.dataTable.table-sm .sorting_asc:after,
+table.dataTable.table-sm .sorting_desc:after {
+    top: 5px;
+}
+
+table.dataTable thead .no-sort.sorting:before,
+table.dataTable thead .no-sort.sorting_asc:before,
+table.dataTable thead .no-sort.sorting_desc:before,
+table.dataTable thead .no-sort.sorting_asc_disabled:before,
+table.dataTable thead .no-sort.sorting_desc_disabled:before {
+    display: none;
+}
+
+table.dataTable thead .no-sort.sorting:after,
+table.dataTable thead .no-sort.sorting_asc:after,
+table.dataTable thead .no-sort.sorting_desc:after,
+table.dataTable thead .no-sort.sorting_asc_disabled:after,
+table.dataTable thead .no-sort.sorting_desc_disabled:after {
+    display: none;
+}
