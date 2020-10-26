@@ -84,9 +84,20 @@
             'label' => 'Total specialists',
             'title' =>  'Total number of specialists',
             'title_default' => 'Total specialists',
+            'title_validation' => '',
 
             'frontend' => [
                 'label_specialists' => 'Total number of specialists'
+            ]
+        ],
+        'total_schools' => [
+            'label' => 'Total schools',
+            'title' =>  'Total number of schools',
+            'title_default' => 'Total schools',
+            'title_validation' => '',
+
+            'frontend' => [
+                'label_schools' => 'Total number of schools'
             ]
         ],
     ],
