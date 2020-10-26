@@ -1,6 +1,7 @@
 <?php namespace Genuineq\Students\Components;
 
 use Log;
+use Auth;
 use Lang;
 use Flash;
 use Event;
@@ -134,6 +135,89 @@ class Students extends ComponentBase
         /** Check if a redirect is required. */
         if ($redirectUrl) {
             return Redirect::to($redirectUrl);
+        }
+
+        return Redirect::refresh();
+    }
+
+    /**
+     * Function that archives a student.
+     */
+    public function onStudentArchive()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+
+        /** Extract the user */
+        $user = Auth::getUser();
+
+        /** Extract the student that needs to be archived. */
+        $student = $user->profile->students->where('id', post('id'))->first();
+
+        if ($student) {
+            /** Archive the extracted student. */
+            $student->archived = true;
+            $student->save();
+
+            Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_archive_successful'));
+        } else {
+            Flash::error(Lang::get('genuineq.students::lang.components.students.message.student_archive_failed'));
+        }
+
+        return Redirect::refresh();
+    }
+
+     /**
+     * Function that unzips a student.
+     */
+    public function onStudentUnzip()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+
+        /** Extract the user */
+        $user = Auth::getUser();
+
+        /** Extract the student that needs to be unziped. */
+        $student = $user->profile->archivedStudents->where('id', post('id'))->first();
+
+        if ($student) {
+            /** Unzip the extracted student. */
+            $student->archived = false;
+            $student->save();
+
+            Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_unzip_successful'));
+        } else {
+            Flash::error(Lang::get('genuineq.students::lang.components.students.message.student_unzip_failed'));
+        }
+
+        return Redirect::refresh();
+    }
+
+         /**
+     * Function that deletes a student.
+     */
+    public function onStudentDelete()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+
+        /** Extract the user */
+        $user = Auth::getUser();
+
+        /** Extract the student that needs to be deleted. */
+        $student = $user->profile->archivedStudents->where('id', post('id'))->first();
+        Log::info(print_r($student, true));
+        if ($student) {
+            /** Delete the extracted student. */
+            $student->forceDelete();
+
+            Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_delete_successful'));
+        } else {
+            Flash::error(Lang::get('genuineq.students::lang.components.students.message.student_delete_failed'));
         }
 
         return Redirect::refresh();

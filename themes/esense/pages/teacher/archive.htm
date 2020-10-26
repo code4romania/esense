@@ -8,13 +8,15 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+
+[students]
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">Panou de administrare</h4>
+            <h4 class="text-gray-dark font-weight-light mb-4">{{ 'teacher.dashboard.archive.title'|_ }}</h4>
         </div>
 
         <!-- Students table -->
@@ -29,7 +31,7 @@ allowedUserTypes[] = "specialist"
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.students.table.column_1'|_}}</p></th>
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.students.table.column_2'|_}}</p></th>
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.students.table.column_4'|_}}</p></th>
-                            <th></th>
+                            <th class="no-sort"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,11 +74,15 @@ allowedUserTypes[] = "specialist"
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
 
-                                        <a href="{{ 'teacher/student-profile'|page({id: student.id }) }}">
+                                        <a class="d-none" href="{{ 'teacher/student-profile'|page({id: student.id }) }}">
                                             <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
                                         </a>
 
-                                        <a role="button" data-toggle="modal" data-target="#deleteStudentModal">
+                                        <a role="button" data-toggle="modal" data-target="#unzipStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                            <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
+                                        </a>
+
+                                        <a role="button" data-toggle="modal" data-target="#deleteStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
                                             <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/trash-bin.svg'|theme }}">
                                         </a>
 
@@ -104,6 +110,8 @@ allowedUserTypes[] = "specialist"
 
 <!-- Partial for delete a student -->
 {% partial 'web-app/school/delete-student' %}
+<!-- Partial for unzip a student -->
+{% partial 'web-app/school/unzip-student' %}
 
 {% put scripts %}
     <!-- Scripts for datatables -->
