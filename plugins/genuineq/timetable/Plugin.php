@@ -22,7 +22,7 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'Genuineq\Timetable\Components\Timetable' => 'Timetable'
+            'Genuineq\Timetable\Components\Timetable' => 'timetable'
         ];
     }
 

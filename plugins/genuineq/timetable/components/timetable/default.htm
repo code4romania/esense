@@ -1,0 +1,46 @@
+
+<!-- **********************          TO BE MODIFIED *******************   -->
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-xs-12">
+
+            <h1> Timetable records </h1>
+
+        </div>
+
+        <div class="col-xs-12">
+
+            {% if records %}
+
+            <form class="form-behavior" method="POST" accept-charset="UTF-8"
+            data-request="onUpdate"
+            >
+                    {% for record in records %}
+
+                      <input  name="id" value=" {{ record.id }} " >
+                      <input  name="day" value=" {{ record.day }} " >
+                      <input  name="title" value=" {{ record.title }} " >
+                      <input  name="start_hour" value=" {{ record.start_hour }} " >
+                      <input  name="end_hour" value=" {{ record.end_hour }} " >
+                      <input  name="description" value=" {{ record.description }} " >
+                      <input  name="feedback" value=" {{ record.feedback }} " >
+                      <input  name="created_at" value=" {{ record.created_at }} " >
+                      <input  name="updated_at" value=" {{ record.updated_at }} " >
+                      <input  name="deleted_at" value=" {{ record.deleted_at }} " >
+
+                    {% endfor %}
+
+                    <button type="submit" role="button" name="submit" value="submit">UPDATE</button>
+
+            </form>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>

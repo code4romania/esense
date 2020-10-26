@@ -2,6 +2,7 @@
 
 namespace Genuineq\Timetable\Components;
 
+use Redirect;
 use Cms\Classes\ComponentBase;
 use Genuineq\Timetable\Models\Record as RecordModel;
 
@@ -16,9 +17,18 @@ class Timetable extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name' => 'genuineq.timetable::lang.component.name',
-            'description' => 'genuineq.timetable::lang.component.description'
+            'name' => 'genuineq.timetable::lang.component.timetable.name',
+            'description' => 'genuineq.timetable::lang.component.timetable.description'
         ];
+    }
+
+    /**
+     * Executed when this component is initialized
+     * Pass variables to templates
+     */
+    public function onRun()
+    {
+        $this->page['records'] = RecordModel::all();
     }
 
     /**
@@ -45,9 +55,9 @@ class Timetable extends ComponentBase
      *
      * @return RecordModel
      */
-    public function onUpdate($id)
+    public function onUpdate()
     {
-        $record = RecordModel::find($id);
+        $record = RecordModel::find(post('id'));
             $record->day = post('day');
             $record->start_hour = post('start_hour');
             $record->end_hour = post('end_hour');
@@ -56,7 +66,7 @@ class Timetable extends ComponentBase
             $record->feedback = post('feedback');
         $record->save();
 
-        return $record;
+        return Redirect::refresh();
     }
 
     /**
