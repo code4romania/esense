@@ -7,6 +7,7 @@ use Flash;
 use Redirect;
 use Validator;
 use Genuineq\User\Models\User;
+use Genuineq\Profile\Models\Specialist as SpecialistModel;
 use Genuineq\Profile\Classes\UserData;
 use ValidationException;
 use ApplicationException;
@@ -32,6 +33,9 @@ class Specialist extends ComponentBase
      */
     public function prepareVars()
     {
+        if($this->param('id')) {
+            $this->page['specialist'] = SpecialistModel::find($this->param('id'));
+        }
     }
 
     /**
