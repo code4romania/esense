@@ -18,7 +18,7 @@ allowedUserTypes[] = "school"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page }}">{{'teacher.dashboard.edit.student.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'specialist/my-students'|page }}">{{'teacher.dashboard.edit.student.profile.back.link.text'|_}}</a>
             </div>
         </div>
 
@@ -183,7 +183,7 @@ allowedUserTypes[] = "school"
                         <!-- First contact person -->
                         <div id="person-1" class="px-lg-2">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
+                                partial 'web-app/specialist/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_1_surname'
                                 contactPersonFirstNameId = 'contact_1_name'
@@ -197,7 +197,7 @@ allowedUserTypes[] = "school"
                                 contactPersonFirstName = 'contact_1_name'
                                 contactPersonEmail = 'contact_1_email'
                                 contactPersonPhone = 'contact_1_phone'
-                                contactPersonObservations = 'contact_1_observations' 
+                                contactPersonObservations = 'contact_1_observations'
 
                                 lastNameValue = ((student.contact_person_1) ? (student.contact_person_1.surname) : (''))
                                 firstNameValue = ((student.contact_person_1) ? (student.contact_person_1.name) : (''))
@@ -210,7 +210,7 @@ allowedUserTypes[] = "school"
                         <!-- Second contact person -->
                         <div id="person-2" class="px-lg-2">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
+                                partial 'web-app/specialist/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_2_surname'
                                 contactPersonFirstNameId = 'contact_2_name'
@@ -238,7 +238,7 @@ allowedUserTypes[] = "school"
                         <!-- Third contact person -->
                         <div id="person-3" class="px-lg-2">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
+                                partial 'web-app/specialist/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_3_surname'
                                 contactPersonFirstNameId = 'contact_3_name'
@@ -265,8 +265,8 @@ allowedUserTypes[] = "school"
                         <!-- Forth contact person -->
                         <div id="person-4" class="px-lg-2">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
-                            
+                                partial 'web-app/specialist/add-another-contact-person'
+
                                 contactPersonLastNameId = 'contact_4_surname'
                                 contactPersonFirstNameId = 'contact_4_name'
                                 contactPersonPhoneId = 'contact_4_phone'
@@ -292,7 +292,7 @@ allowedUserTypes[] = "school"
                         <!-- Fifth contact person -->
                         <div id="person-5" class="px-lg-2">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
+                                partial 'web-app/specialist/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_5_surname'
                                 contactPersonFirstNameId = 'contact_5_name'

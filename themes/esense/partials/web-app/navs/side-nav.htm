@@ -16,25 +16,25 @@
         <!-- Panou de administrare -->
         <li class="nav-item mb-2 {% if this.page.url == "/specialist/panou-de-administrare" %} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{ 'teacher/administration-board'|page }}">
+            <a class="nav-link" href="{{ 'specialist/administration-board'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
                 <span class="text-primary-dark">{{"side.nav.link_1"|_}}</span>
             </a>
         </li>
 
         <!-- Exercitii si jocuri -->
-        <li class="nav-item mb-2 {% if this.page.url == "/teacher/exercises/:category?" or this.page.url == "teacher/exercise/:slug" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/specialist/exercises/:category?" or this.page.url == "specialist/exercise/:slug" %} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{ 'teacher/exercises'|page }}">
+            <a class="nav-link" href="{{ 'specialist/exercises'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/zap.svg'|theme }}">
                 <span class="text-primary-dark">{{"side.nav.link_2"|_}}</span>
             </a>
         </li>
 
         <!-- Elevi mei -->
-        <li class="nav-item mb-2 {% if (this.page.url == "/teacher/students") or (this.page.url == "/teacher/student") or (this.page.url == '/teacher/transfer-student') or (this.page.url == '/teacher/add-student') or (this.page.url == '/specialist/editeaza-profil-elev/:id')  %} active {% endif %}">
+        <li class="nav-item mb-2 {% if (this.page.url == "/specialist/students") or (this.page.url == "/specialist/student") or (this.page.url == '/specialist/transfer-student') or (this.page.url == '/specialist/add-student') or (this.page.url == '/specialist/editeaza-profil-elev/:id')  %} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{ 'teacher/my-students'|page }}">
+            <a class="nav-link" href="{{ 'specialist/my-students'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
                 <span class="text-primary-dark">{{"side.nav.link_3"|_}}</span>
             </a>
@@ -42,9 +42,9 @@
 
         {% if user and 'specialist' == user.type and user.profile.affiliated %}
             <!-- Scoala -->
-            <li class="nav-item mb-2 {% if this.page.url == "/teacher/school"%} active {% endif %}">
+            <li class="nav-item mb-2 {% if this.page.url == "/specialist/school"%} active {% endif %}">
                 <div class="vertical-border"></div>
-                <a class="nav-link" href="{{ 'teacher/school'|page }}">
+                <a class="nav-link" href="{{ 'specialist/school'|page }}">
                     <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/sliders.svg'|theme }}">
                     <span class="text-primary-dark">{{"side.nav.link_4"|_}}</span>
                 </a>
@@ -52,9 +52,9 @@
         {% endif %}
 
         <!-- Informatii utile -->
-        <li class="nav-item mb-2 {% if this.page.url == "/teacher/information/:slug?"%} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/specialist/information/:slug?"%} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{ 'teacher/information'|page }}">
+            <a class="nav-link" href="{{ 'specialist/information'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/alert-circle.svg'|theme }}">
                 <span class="text-primary-dark">{{"side.nav.link_5"|_}}</span>
             </a>
@@ -62,9 +62,9 @@
 
         {% if user and 'specialist' == user.type and not user.profile.affiliated %}
             <!-- Arhiva -->
-            <li class="nav-item mb-2 {% if this.page.url == "/teacher/archive" %} active {% endif %}">
+            <li class="nav-item mb-2 {% if this.page.url == "/specialist/archive" %} active {% endif %}">
                 <div class="vertical-border"></div>
-                <a class="nav-link" href="{{ 'teacher/archive'|page }}">
+                <a class="nav-link" href="{{ 'specialist/archive'|page }}">
                     <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/archive.svg'|theme }}">
                     <span class="text-primary-dark">{{"side.nav.link_10"|_}}</span>
                 </a>
@@ -74,7 +74,7 @@
         <!-- Setari -->
         <li class="nav-item mt-5 mb-2 {% if this.page.url == "/specialist/editeaza-profil-profesor" %} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{'teacher/editeaza-profil-profesor'|page}}">
+            <a class="nav-link" href="{{'specialist/editeaza-profil-profesor'|page}}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/settings.svg'|theme }}">
                 <span class="text-primary-dark">{{"side.nav.link_6"|_}}</span>
             </a>

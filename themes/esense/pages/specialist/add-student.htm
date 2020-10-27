@@ -1,5 +1,5 @@
 title = "Adaugă elev"
-url = "/teacher/add-student"
+url = "/specialist/add-student"
 layout = "web-app"
 description = "Pagina de adăugare a unui nou elev"
 is_hidden = 0
@@ -18,7 +18,7 @@ allowedUserTypes[] = "specialist"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'specialist/my-students'|page }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
             </div>
         </div>
 
@@ -163,7 +163,7 @@ allowedUserTypes[] = "specialist"
                         <!-- First contact person -->
                         <div id="person-1" class="px-3 px-lg-2">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
+                                partial 'web-app/specialist/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_1_surname'
                                 contactPersonFirstNameId = 'contact_1_name'
@@ -184,7 +184,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Second contact person -->
                         <div id="person-2" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
+                                partial 'web-app/specialist/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_2_surname'
                                 contactPersonFirstNameId = 'contact_2_name'
@@ -205,7 +205,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Third contact person -->
                         <div id="person-3" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
+                                partial 'web-app/specialist/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_3_surname'
                                 contactPersonFirstNameId = 'contact_3_name'
@@ -226,7 +226,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Forth contact person -->
                         <div id="person-4" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
+                                partial 'web-app/specialist/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_4_surname'
                                 contactPersonFirstNameId = 'contact_4_name'
@@ -247,7 +247,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Fifth contact person -->
                         <div id="person-5" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/teacher/add-another-contact-person'
+                                partial 'web-app/specialist/add-another-contact-person'
 
                                 contactPersonLastNameId = 'contact_5_surname'
                                 contactPersonFirstNameId = 'contact_5_name'
