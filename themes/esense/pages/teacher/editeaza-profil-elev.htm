@@ -18,7 +18,7 @@ allowedUserTypes[] = "specialist"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'teacher/my-students'|page }}">{{'teacher.dashboard.edit.student.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'teacher/elev'|page({id: student.id }) }}">{{'teacher.dashboard.edit.student.profile.back.link.text'|_}}</a>
             </div>
         </div>
 
