@@ -58,6 +58,10 @@ class Plugin extends PluginBase
                 'label'   => 'genuineq.profile::lang.reportwidgets.total_specialists.label',
                 'context' => 'dashboard',
             ],
+            'Genuineq\Profile\ReportWidgets\TotalSchools' => [
+                'label'   => 'genuineq.profile::lang.reportwidgets.total_schools.label',
+                'context' => 'dashboard',
+            ],
         ];
     }
 
