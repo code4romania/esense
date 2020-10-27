@@ -27,6 +27,7 @@ class Plugin extends PluginBase
     {
         return [
             \Genuineq\Profile\Components\Specialist::class => 'specialist',
+            \Genuineq\Profile\Components\School::class => 'school',
             \Genuineq\Profile\Components\ProfileStaticData::class => 'profileStaticData'
         ];
     }
