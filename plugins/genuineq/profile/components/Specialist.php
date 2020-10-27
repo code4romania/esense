@@ -64,8 +64,12 @@ class Specialist extends ComponentBase
         /** Extract the user profile */
         $profile = $user->profile;
 
-        /** Class with recived user data */
-        UserData::getData(post(), $user, $profile);
+        /** Class with received user data */
+        UserData::updateData(post(), $user, $profile);
+
+        Flash::success(Lang::get('genuineq.profile::lang.components.specialist.message.profile_update_successful'));
+
+        return Redirect::refresh();
     }
 
     /**

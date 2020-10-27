@@ -9,7 +9,11 @@ use ValidationException;
 
 class UserData
 {
-    public static function getData($data, $user, $profile)
+    /**
+     * Function that updates the user and profile data
+     *  based on the received data.
+     */
+    public static function updateData($data, $user, $profile)
     {
         /** Extract the user profile validation rules. */
         $rules = [
@@ -25,13 +29,15 @@ class UserData
         /** Create the validation messages. */
         $messages = [
             'surname.required' => Lang::get('genuineq.profile::lang.components.specialist.validation.surname_required'),
-            'surname.regex' => Lang::get('genuineq.profile::lang.components.specialist.validation.surname_string'),
+            'surname.regex' => Lang::get('genuineq.profile::lang.components.specialist.validation.surname_regex'),
             'name.required' => Lang::get('genuineq.profile::lang.components.specialist.validation.name_required'),
-            'name.regex' => Lang::get('genuineq.profile::lang.components.specialist.validation.name_string'),
-            'phone.required' => Lang::get('genuineq.profile::lang.components.specialist.validation.birthdate_required'),
-            'phone.numeric' => Lang::get('genuineq.profile::lang.components.specialist.validation.birthdate_date'),
+            'name.regex' => Lang::get('genuineq.profile::lang.components.specialist.validation.name_regex'),
+            'phone.required' => Lang::get('genuineq.profile::lang.components.specialist.validation.phone_required'),
+            'phone.numeric' => Lang::get('genuineq.profile::lang.components.specialist.validation.phone_numeric'),
             'email.between' => Lang::get('genuineq.profile::lang.components.specialist.validation.email_between'),
             'email.email' => Lang::get('genuineq.profile::lang.components.specialist.validation.email_email'),
+            'county.required' => Lang::get('genuineq.profile::lang.components.specialist.validation.county_required'),
+            'city.required' => Lang::get('genuineq.profile::lang.components.specialist.validation.city_required'),
             'description.string' => Lang::get('genuineq.profile::lang.components.specialist.validation.description_string'),
         ];
 
@@ -41,20 +47,19 @@ class UserData
             throw new ValidationException($validation);
         }
 
-        /** Save the profile data. */
-        $user->surname = post('surname');
-        $user->name = post('name');
-        $user->email = post('email');
-        $profile->phone =  post('phone');
-        $profile->county_id = post('county');
-        $profile->city_id = post('city');
-        $profile->description = post('description');
+        /** Update and save the user data. */
+        $user->surname = $data['surname'];
+        $user->name = $data['name'];
+        $user->email = $data['email'];
 
         $user->save();
+
+        /** Update and save the profile data. */
+        $profile->phone =  $data['phone'];
+        $profile->county_id = $data['county'];
+        $profile->city_id = $data['city'];
+        $profile->description = $data['description'];
+
         $profile->save();
-
-        Flash::success(Lang::get('genuineq.profile::lang.components.specialist.validation.profile_update_successful'));
-
-        return Redirect::refresh();
     }
 }
