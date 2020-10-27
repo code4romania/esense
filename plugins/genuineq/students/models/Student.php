@@ -35,6 +35,13 @@ class Student extends Model
     ];
 
     /**
+     * Attach october cms file avatar to students model.
+     */
+    public $attachOne = [
+        'avatar' => \System\Models\File::class
+    ];
+
+    /**
      * One-to-one relationship.
      */
     public $belongsTo = [

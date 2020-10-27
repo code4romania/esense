@@ -11,6 +11,7 @@ use Redirect;
 use Validator;
 use ValidationException;
 use ApplicationException;
+use \System\Models\File;
 use Cms\Classes\ComponentBase;
 use Genuineq\Students\Models\Student;
 use Genuineq\Students\Models\ContactPerson;
@@ -113,6 +114,12 @@ class Students extends ComponentBase
 
         /** Create the Student. */
         $student = Student::create($data);
+
+        /** Add student avatar. */
+        if (Input::hasFile('avatar')) {
+            $student->avatar = Input::file('avatar');
+            $student->save();
+        }
 
         /** Fire event after create. */
         Event::fire('genuineq.students.create.after.student.create', [$student]);
