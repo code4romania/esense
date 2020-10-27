@@ -44,11 +44,17 @@
 
         <!-- Nav Item - User Information -->
         <li class="nav-item mr-lg-3">
-            {% if user.avatar %}
-            <img id="add-avatar" class="img-fluid img-avatar rounded-circle add-custom-avatar ml-2" src="{{user.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+            {% if 'specialist' == user.type %}
+                <a class="nav-link" href="{{'specialist/profile-edit'|page}}">
             {% else %}
-                <img id="add-avatar" width="40px" height="40px" class="img-fluid add-custom-avatar ml-2" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}" style="cursor: pointer;">
+                <a class="nav-link" href="{{'school/editeaza-profil-scoala'|page}}">
             {% endif %}
+                    {% if user.avatar %}
+                        <img class="img-fluid img-avatar rounded-circle ml-2" src="{{user.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                    {% else %}
+                        <img width="40px" height="40px" class="img-fluid ml-2" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}" alt="avatar" style="cursor: pointer;">
+                    {% endif %}
+                </a>
         </li>
     </ul>
 

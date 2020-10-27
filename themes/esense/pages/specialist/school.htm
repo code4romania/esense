@@ -1,7 +1,7 @@
 title = "Școală"
 url = "/specialist/school"
 layout = "web-app"
-description = "Pagina școlii"
+description = "Displays teacher affiliated school profile"
 is_hidden = 0
 
 [session]
@@ -49,7 +49,7 @@ allowedUserTypes[] = "specialist"
         <!-- Teachers table -->
         <div class="col-12 my-5">
             <div class="table-responsive rounded p-3" style="overflow-x: hidden; background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
-                <p class="font-weight-bold text-dark">{{'teacher.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">(xx)</span></p>
+                <p class="font-weight-bold text-dark">{{'teacher.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">({{ user.profile.school.specialists.count }})</span></p>
                 <table id="teachers-datatable" class="table table-striped table-sm pt-3 px-3 m-0" cellspacing="0">
                     <thead>
                         <tr>
@@ -64,42 +64,44 @@ allowedUserTypes[] = "specialist"
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                           <!-- Teacher avatar and name -->
-                            <td>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
-                                        <div>
-                                            <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-                                        </div>
-                                        <div class="d-flex flex-column ml-2">
-                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">database student name</p>
+                        {% for specialist in user.profile.school.specialists %}
+                            <tr>
+                            <!-- Teacher avatar and name -->
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
+                                            <div>
+                                                <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                            </div>
+                                            <div class="d-flex flex-column ml-2">
+                                                <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <!-- Number of students row -->
-                            <td>
-                                <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
-                                    <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">xx</p>
-                                </div>
-                            </td>
+                                <!-- Number of students row -->
+                                <td>
+                                    <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ specialist.students.count }}</p>
+                                    </div>
+                                </td>
 
-                             <!-- Registration date row -->
-                             <td>
-                                <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
-                                    <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">May 26,2019</p>
-                                </div>
-                            </td>
+                                <!-- Registration date row -->
+                                <td>
+                                    <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ specialist.created_at|date("d/m/Y") }}</p>
+                                    </div>
+                                </td>
 
-                             <!-- Email row -->
-                             <td>
-                                <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
-                                    <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">email@email.com</p>
-                                </div>
-                            </td>
-                        </tr>
+                                <!-- Email row -->
+                                <td>
+                                    <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ specialist.email }}</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

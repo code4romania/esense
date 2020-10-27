@@ -1,7 +1,7 @@
 title = "Transferă elev"
-url = "/specialist/transfer-student"
+url = "/specialist/student-transfer"
 layout = "web-app"
-description = "Pagina de transfer a unui elev"
+description = "Used for transfering a student"
 is_hidden = 0
 
 [session]
@@ -15,7 +15,7 @@ allowedUserTypes[] = "specialist"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'specialist/my-students'|page }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
             </div>
         </div>
         <div class="col-12">
@@ -26,12 +26,12 @@ allowedUserTypes[] = "specialist"
 
                 <!-- Transfer student form -->
                 <div>
-                    {% partial 'web-app/specialist/transfer-student-form' %}
+                    {% partial 'web-app/specialist/student-transfer-form' %}
                 </div>
 
                 <!-- Success message for transfering student -->
                 <div>
-                    {% partial 'web-app/specialist/transfer-student-success' %}
+                    {% partial 'web-app/specialist/student-transfer-success' %}
                 </div>
             </div>
         </div>

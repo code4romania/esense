@@ -19,7 +19,7 @@ allowedUserTypes[] = "school"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'specialist/my-students'|page }}">{{'school.dashboard.teacher.profile.back.link'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{'school.dashboard.teacher.profile.back.link'|_}}</a>
             </div>
         </div>
 
@@ -98,7 +98,7 @@ allowedUserTypes[] = "school"
                                                                     <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                                                 </button>
                                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                                    <a class="dropdown-item display-4" href="{{ 'specialist/editeaza-profil-elev'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
+                                                                    <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
                                                                     <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
                                                                 </div>
                                                             </div>
@@ -145,7 +145,7 @@ allowedUserTypes[] = "school"
                                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                                             </button>
                                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                                <a class="dropdown-item display-4" href="{{ 'specialist/editeaza-profil-elev'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
+                                                                <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
                                                                 <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
                                                             </div>
                                                         </div>
@@ -168,7 +168,7 @@ allowedUserTypes[] = "school"
 <!-- Partial for archive a student -->
 {% partial 'web-app/school/archive-student' %}
 <!-- Add student modal -->
-{% partial 'web-app/specialist/add-student' link = "school/adauga-elev"|page %}
+{% partial 'web-app/specialist/student-add' link = "school/adauga-elev"|page %}
 
 {% put scripts %}
     <!-- Scripts for datatables -->

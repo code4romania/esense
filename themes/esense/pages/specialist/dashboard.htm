@@ -1,5 +1,5 @@
 title = "Dashboard"
-url = "/specialist/panou-de-administrare"
+url = "/specialist/dashboard"
 layout = "web-app"
 description = "Dashboard"
 is_hidden = 0
@@ -25,7 +25,7 @@ allowedUserTypes[] = "specialist"
                     <h5 class="text-gray-dark">{{ user.profile.students.count }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
-                        <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/my-students'|page }}">{{'teacher.dashboard.admin.panel.students.card.link.text'|_}}</a>
+                        <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/students'|page }}">{{'teacher.dashboard.admin.panel.students.card.link.text'|_}}</a>
                     </div>
                 </div>
                 <div>
@@ -106,25 +106,22 @@ allowedUserTypes[] = "specialist"
                                                 <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                                             </div>
                                             <div class="d-flex flex-column ml-2">
-                                                <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</p>
+                                                <a class="display-4 font-weight-light" href="{{ 'specialist/student'|page({id: student.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
                                             </div>
                                         </div>
 
                                         <!-- Meniu optiuni mobile version -->
                                         <div class="pl-2 py-3 d-block d-md-none">
                                             <div class="d-flex align-items-center pt-2">
-                                             <a href="">
-                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/users.svg'|theme }}">
-                                             </a>
-                                             <div class="dropdown">
-                                                 <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                     <img class="img-fluid ml-1" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
-                                                 </button>
-                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                     <a class="dropdown-item display-4" href="{{ 'specialist/editeaza-profil-elev'|page({id: student.id }) }}" style="color: #1A212C;">{{'students.table.options.link_1'|_}}</a>
-                                                     <a class="dropdown-item display-4" href="{{ 'specialist/adauga-profesor'|page }}" style="color: #1A212C;">{{'students.table.options.link.2'|_}}</a>
-                                                 </div>
-                                             </div>
+                                                <div class="dropdown">
+                                                    <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <img class="img-fluid ml-1" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                                        <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'students.table.options.link_1'|_}}</a>
+                                                        <a class="dropdown-item display-4" href="{{ 'specialist/adauga-profesor'|page }}" style="color: #1A212C;">{{'students.table.options.link.2'|_}}</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                          </div>
 
@@ -141,19 +138,16 @@ allowedUserTypes[] = "specialist"
                                 <!-- Meniu optiuni desktop version -->
                                 <td>
                                     <div class="pl-2 py-3 d-none d-md-block">
-                                       <div class="d-flex align-items-center pt-2">
-                                        <a href="">
-                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/users.svg'|theme }}">
-                                        </a>
-                                        <div class="dropdown">
-                                            <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="img-fluid ml-1" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                <a class="dropdown-item display-4" href="{{ 'specialist/editeaza-profil-elev'|page({id: student.id }) }}" style="color: #1A212C;">{{'students.table.options.link_1'|_}}</a>
-                                                <a class="dropdown-item display-4" href="{{ 'specialist/adauga-profesor'|page }}" style="color: #1A212C;">{{'students.table.options.link.2'|_}}</a>
+                                        <div class="d-flex align-items-center pt-2">
+                                            <div class="dropdown">
+                                                <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="img-fluid ml-1" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                                    <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'students.table.options.link_1'|_}}</a>
+                                                    <a class="dropdown-item display-4" href="{{ 'specialist/adauga-profesor'|page }}" style="color: #1A212C;">{{'students.table.options.link.2'|_}}</a>
+                                                </div>
                                             </div>
-                                        </div>
                                        </div>
                                     </div>
                                 </td>
@@ -290,7 +284,7 @@ allowedUserTypes[] = "specialist"
                     }
                 }
             });
-            $('.added-content').html('<div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);"> <div class="col-12 col-lg-7"> <p class="display-2 font-weight-light text-gray-2">{{"students.table.title"|_}}</p> </div> <div class="col-12 col-lg-5"> <div class="d-flex align-items-center justify-content-start justify-content-lg-end"> <img class="img-fluid" src="{{ "assets/img/svg/dashboard/arrow-right.svg"|theme }}"><a class="ml-2 display-4 text-gray-light" href="{{ "specialist/my-students"|page }}">{{"students.table.all.students.link.text"|_}}</a> </div> </div> </div>');
+            $('.added-content').html('<div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);"> <div class="col-12 col-lg-7"> <p class="display-2 font-weight-light text-gray-2">{{"students.table.title"|_}}</p> </div> <div class="col-12 col-lg-5"> <div class="d-flex align-items-center justify-content-start justify-content-lg-end"> <img class="img-fluid" src="{{ "assets/img/svg/dashboard/arrow-right.svg"|theme }}"><a class="ml-2 display-4 text-gray-light" href="{{ "specialist/students"|page }}">{{"students.table.all.students.link.text"|_}}</a> </div> </div> </div>');
 
             /***********************************************
             ***************** Panel chart ******************
