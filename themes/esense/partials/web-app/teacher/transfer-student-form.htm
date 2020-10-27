@@ -2,7 +2,7 @@ description = "Transfer student form"
 
 [viewBag]
 ==
-<form method="POST" data-request="">
+<form method="POST" data-request="" class="min-vh-75">
     <div class="row mt-5">
 
         <div class="col-12 col-md-6">
@@ -23,7 +23,7 @@ description = "Transfer student form"
             </div>
         </div>
 
-        <div class="col-12 my-3">
+        <div class="col-12 my-3 mb-5 mb-md-0">
             <div class="custom-control form-control-lg custom-checkbox">
                 <input type="checkbox" class="custom-control-input onChangeValue" id="teacher-check">
                 <label class="custom-control-label display-4 text-gray-medium p-0 m-0" for="teacher-check" style="line-height: 30px;">{{'teacher.dashboard.transfer.student.checkbox.label'|_}}</label>
@@ -31,9 +31,9 @@ description = "Transfer student form"
         </div>
 
          <!-- Submit button -->
-        <div class="col-12 mb-5">
+        <div class="col-12 mb-5 mt-5 pt-5 pt-md-0 mt-md-0">
             <div class="d-flex justify-content-end">
-                <button  type="submit" class="transfer-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.transfer.student.btn.text'|_}}</button>
+                <a role="button" type="submit" class="transfer-student btn btn-sm text-white btn-gray-light px-lg-5" disabled>{{'teacher.dashboard.transfer.student.btn.text'|_}}</a>
             </div>
         </div>
 

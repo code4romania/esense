@@ -1,5 +1,5 @@
-title = "Editează profil profesor"
-url = "/specialist/editeaza-profil-profesor"
+title = "Editează profil școală"
+url = "/scoala/editeaza-profil-scoala"
 layout = "web-app"
 description = "Pagina de editare a profilului"
 is_hidden = 0
@@ -7,7 +7,7 @@ is_hidden = 0
 [session]
 security = "user"
 allowedUserGroups[] = "registered"
-allowedUserTypes[] = "specialist"
+allowedUserTypes[] = "school"
 
 [addresses]
 counties = 1
@@ -15,7 +15,7 @@ counties = 1
 [profileStaticData]
 schools = 1
 
-[specialist]
+[school]
 
 [account]
 ==
@@ -41,7 +41,7 @@ schools = 1
         <div class="col-12">
             <div class="row">
                 <div class="col-12">
-                    <div class="shadow-lg rounded bg-white  p-3 p-md-5">
+                    <div class="shadow-lg rounded bg-white p-0 p-md-5">
 
                         <!-- Teacher avatar -->
                         <form method="POST" data-request="onAvatarUpdate" data-request-validate data-request-flash data-request-files>
@@ -67,10 +67,17 @@ schools = 1
                         </form>
 
                         <!-- Edit profile form -->
-                        <form id="form" method="POST" data-request='onSpecialistUpdate'>
+                        <form id="form" method="POST" data-request='onSchoolUpdate'>
                             <div class="shadow rounded p-3 py-4">
                                 <p class="display-2 text-medium-dark form-styles p-0 m-0 mb-3">{{'teacher.dashboard.edit.profile.title'|_}}</p>
                                 <div class="row">
+                                    <!-- School name input -->
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input type="text" name="school_name" class="form-control" id="school_name" aria-describedby="school_nameHelp" placeholder="{{'registerPage.form.input.school.name.placeholder'|_}}" style="font-style:italic;" value="{{ user.profile.name }}">
+                                        </div>
+                                    </div>
+
                                     <!-- Last name input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
@@ -123,7 +130,7 @@ schools = 1
 
                             <!-- Description input -->
                             <div class="shadow rounded p-3 py-4 mt-5">
-                                <p class="display-2 text-medium-dark form-styles pl-lg-3">{{'registerPage.form.title_2'|_}}</p>
+                                <p class="display-2 text-medium-dark form-styles pl-3">{{'registerPage.form.title_2'|_}}</p>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <textarea class="form-control" name="description" id="description" rows="5">

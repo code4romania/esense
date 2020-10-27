@@ -29,13 +29,32 @@ allowedUserTypes[] = "specialist"
                         {% for student in user.profile.students %}
                             <tr>
                                 <td>
-                                    <div class="pl-2 py-3 d-flex align-items-center">
-                                        <div>
-                                            <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="pl-2 py-3 d-flex align-items-center">
+                                            <div>
+                                                <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                            </div>
+                                            <div class="d-flex flex-column ml-2">
+                                                <a class="display-4 font-weight-light" href="{{ 'teacher/student-profile'|page({id: student.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
+                                                <h6 class="p-0 m-0 font-weight-normal text-gray">{{ student.birthdate|date("d/m/Y") }}</h6>
+                                            </div>
                                         </div>
-                                        <div class="d-flex flex-column ml-2">
-                                            <a class="display-4 font-weight-light" href="{{ 'teacher/student-profile'|page({id: student.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
-                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ student.birthdate|date("d/m/Y") }}</h6>
+    
+                                        <div class="d-block d-md-none">
+                                            <div class="pl-2 py-3 d-flex align-items-center">
+                                                <a role="button" data-toggle="modal" data-target="#arhiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                                    <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
+                                                </a>
+                                                <div class="dropdown pt-2">
+                                                    <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                                        <a class="dropdown-item display-4" href="{{ 'teacher/editeaza-profil-elev'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
+                                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
@@ -68,17 +87,19 @@ allowedUserTypes[] = "specialist"
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="pl-2 py-3 d-flex align-items-center">
-                                        <a role="button" data-toggle="modal" data-target="#arhiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
-                                            <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
-                                        </a>
-                                        <div class="dropdown pt-2">
-                                            <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                <a class="dropdown-item display-4" href="{{ 'teacher/editeaza-profil-elev'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
-                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
+                                    <div class="d-none d-md-block">
+                                        <div class="pl-2 py-3 d-flex align-items-center">
+                                            <a role="button" data-toggle="modal" data-target="#arhiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                                <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
+                                            </a>
+                                            <div class="dropdown pt-2">
+                                                <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                                    <a class="dropdown-item display-4" href="{{ 'teacher/editeaza-profil-elev'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
+                                                    <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -146,9 +167,9 @@ allowedUserTypes[] = "specialist"
                             <p class="text-medium-dark font-weight-bold">\
                                 {{"teacher.dashboard.students.table.text"|_}} ({{ user.profile.students.count }})\
                             </p> </div> <div class="col-12 col-lg-5">\
-                            <div class="d-flex align-items-center justify-content-start justify-content-lg-end">\
+                            <div class="d-flex align-items-center justify-content-start justify-content-lg-end flex-column flex-md-row">\
                                 {% if user and "specialist" == user.type and user.profile.affiliated  %}\
-                                    <a href="{{"teacher/transfer-student"|page}}" class="btn btn-sm btn-outline-primary-light mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"><i class="fas fa-exchange-alt mr-2"></i>\
+                                    <a href="{{"teacher/transfer-student"|page}}" class="btn btn-sm btn-outline-primary-light mb-3 mb-md-0 mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"><i class="fas fa-exchange-alt mr-2"></i>\
                                         {{"teacher.dashboard.students.table.transfer.btn.text"|_}}\
                                     </a>\
                                 {% endif %}\
@@ -163,7 +184,8 @@ allowedUserTypes[] = "specialist"
                                 {% endif %}\
                             </div>\
                         </div>\
-                    </div>');
+                    </div>'
+                );
         });
 
     </script>

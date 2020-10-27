@@ -31,12 +31,40 @@ allowedUserTypes[] = "specialist"
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.students.table.column_1'|_}}</p></th>
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.students.table.column_2'|_}}</p></th>
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.students.table.column_4'|_}}</p></th>
-                            <th class="no-sort"></th>
+                            <th class="no-sort d-none d-md-block"></th>
+                            <th class="no-sort d-block d-md-none"></th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for student in user.profile.archivedStudents %}
                             <tr>
+                                <td class="d-block d-md-none">
+                                    <div class="pl-2 py-3 d-flex align-items-center justify-content-start justify-content-lg-end">
+
+                                        <a class="d-none" href="{{ 'teacher/student-profile'|page({id: student.id }) }}">
+                                            <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
+                                        </a>
+
+                                        <a role="button" data-toggle="modal" data-target="#unzipStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                            <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
+                                        </a>
+
+                                        <a role="button" data-toggle="modal" data-target="#deleteStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                            <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/trash-bin.svg'|theme }}">
+                                        </a>
+
+                                        <div class="dropdown pt-2">
+                                            <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
+                                            </button>
+
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
+                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
                                         <div>
@@ -71,7 +99,7 @@ allowedUserTypes[] = "specialist"
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="d-none d-md-block">
                                     <div class="pl-2 py-3 d-flex align-items-center">
 
                                         <a class="d-none" href="{{ 'teacher/student-profile'|page({id: student.id }) }}">
@@ -123,7 +151,7 @@ allowedUserTypes[] = "specialist"
             ***********************************************/
 
             $('#archived-students-table').DataTable({
-                dom: '<"row"<"col-12"t>><"row bg-white p-3 rounded-bottom"<"col-6 d-flex align-items-center"l><"col-6 d-flex align-items-center justify-content-end"ip>>',
+                dom: '<"row"<"col-12"t>><"row bg-white p-3 rounded-bottom"<"col-12 col-md-6 d-flex align-items-center"l><"col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-lg-end"ip>>',
                 lengthMenu: [
                     [5, 10, 25, 50, 100, -1],
                     [5, 10, 25, 50, 100]

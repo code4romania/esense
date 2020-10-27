@@ -24,7 +24,7 @@ allowedUserTypes[] = "specialist"
 
 
         <div class="col-12">
-            <div class="rounded shadow bg-white p-lg-4">
+            <div class="rounded shadow bg-white p-3 p-lg-4">
 
                 <div class="border-bottom">
                     <p class="text-muted">{{'teacher.dashboard.student.add.profile.title'|_}}</p>
@@ -42,8 +42,8 @@ allowedUserTypes[] = "specialist"
                                     <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
                                     <div class="d-flex">
                                         <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
-                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
+                                            <a class="nav-link ml-3 ml-lg-4 btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -145,7 +145,7 @@ allowedUserTypes[] = "specialist"
 
                                 <!-- Select disability y/n -->
                                 <div class="col-12 col-md-6 ml-lg-0 pl-lg-0">
-                                    <div class="d-flex">
+                                    <div class="d-flex mb-3 mb-md-0">
                                         <div class="form-check">
                                             <label class="form-check-label display-4 text-gray-light" for="hearing_impairment">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
                                             <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.hearing_impairment %} checked {% endif %}>
@@ -170,7 +170,7 @@ allowedUserTypes[] = "specialist"
 
 
                         <!-- First contact person -->
-                        <div id="person-1" class="px-lg-2">
+                        <div id="person-1" class="px-3 px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
@@ -187,7 +187,7 @@ allowedUserTypes[] = "specialist"
                                 contactPersonFirstName = 'contact_1_name'
                                 contactPersonEmail = 'contact_1_email'
                                 contactPersonPhone = 'contact_1_phone'
-                                contactPersonObservations = 'contact_1_observations' 
+                                contactPersonObservations = 'contact_1_observations'
 
                                 lastNameValue = ((student.contact_person_1) ? (student.contact_person_1.surname) : (''))
                                 firstNameValue = ((student.contact_person_1) ? (student.contact_person_1.name) : (''))
@@ -198,7 +198,7 @@ allowedUserTypes[] = "specialist"
                         </div>
 
                         <!-- Second contact person -->
-                        <div id="person-2" class="px-lg-2">
+                        <div id="person-2" class="px-3 px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
@@ -227,7 +227,7 @@ allowedUserTypes[] = "specialist"
 
 
                         <!-- Third contact person -->
-                        <div id="person-3" class="px-lg-2">
+                        <div id="person-3" class="px-3 px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
@@ -255,10 +255,10 @@ allowedUserTypes[] = "specialist"
                         </div>
 
                         <!-- Forth contact person -->
-                        <div id="person-4" class="px-lg-2">
+                        <div id="person-4" class="px-3 px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
-                            
+
                                 contactPersonLastNameId = 'contact_4_surname'
                                 contactPersonFirstNameId = 'contact_4_name'
                                 contactPersonPhoneId = 'contact_4_phone'
@@ -283,7 +283,7 @@ allowedUserTypes[] = "specialist"
                         </div>
 
                         <!-- Fifth contact person -->
-                        <div id="person-5" class="px-lg-2">
+                        <div id="person-5" class="px-3 px-lg-2">
                             {%
                                 partial 'web-app/teacher/add-another-contact-person'
 
@@ -313,7 +313,7 @@ allowedUserTypes[] = "specialist"
                          <!-- Submit button -->
                         <div class="col-12 mb-5 mt-3">
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-lg-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
                             </div>
                         </div>
 
@@ -339,7 +339,7 @@ allowedUserTypes[] = "specialist"
             $('#three').richText();
             $('#four').richText();
             $('#five').richText();
-            
+
 
             /** Initiate the datepicker plugin. */
             $('#birthdate').datepicker({
