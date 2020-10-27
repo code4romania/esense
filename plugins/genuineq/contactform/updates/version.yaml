@@ -1,0 +1,5 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table genuineq_contactform_messages'
+    - builder_table_create_genuineq_contactform_messages.php
