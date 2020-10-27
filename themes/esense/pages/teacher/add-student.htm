@@ -29,7 +29,7 @@ allowedUserTypes[] = "specialist"
                     <p class="text-muted">{{'teacher.dashboard.student.add.profile.title'|_}}</p>
                 </div>
 
-                <form method="POST" data-request="onCreateStudent" >
+                <form method="POST" data-request="onCreateStudent" data-request-validate data-request-flash data-request-files>
                     <div class="row mt-2">
 
                         <div class="col-12">
@@ -82,15 +82,12 @@ allowedUserTypes[] = "specialist"
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-- Input for adding custom avatar -->
-                                        <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
-                                        <!-- Input for adding predifined avatar -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <!-- Input for adding custom avatar -->
+                        <input name="avatar" id="avatar" class="d-none custom-avatar onChangeValue" type="file"/>
                         <!-- Input for gender -->
                         <input name="gender" id="gender" class="d-none" type="text" value="female" />
 
