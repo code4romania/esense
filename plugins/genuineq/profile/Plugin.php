@@ -3,8 +3,10 @@
 use Log;
 use Lang;
 use Mail;
+use Auth;
 use Event;
 use Input;
+use ApplicationException;
 use System\Classes\PluginBase;
 use Genuineq\User\Models\User;
 use Genuineq\Profile\Models\School;
@@ -167,6 +169,15 @@ class Plugin extends PluginBase
             $user->profile = $profile;
 
             $user->save();
+        });
+
+        /** Check is user is archived after login. */
+        Event::listen('genuineq.user.afterAuthenticate', function($component, $credentials) {
+            /** Check if authenticated usr is archived. */
+            if (Auth::getUser()->profile->archived) {
+                Auth::logout();
+                throw new ApplicationException(Lang::get('genuineq.profile::lang.components.login.message.user_archived'));
+            }
         });
 
         /** Notify a registered school that a teacher wants to register. */

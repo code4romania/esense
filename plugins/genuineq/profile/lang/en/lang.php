@@ -116,6 +116,12 @@
                 'slug_required' => 'Numele școlii este obligatoriu',
                 'slug_unique' => 'Aceasta școală este deja înregistrată. Vă rugăm să vă autentificați.'
             ]
+        ],
+
+        'login' => [
+            'message' => [
+                'user_archived' => 'Ne pare rău, utilizatorul este marcat ca arhivat.',
+            ]
         ]
     ],
 
