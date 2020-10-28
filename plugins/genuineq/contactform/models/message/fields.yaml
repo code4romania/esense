@@ -1,0 +1,24 @@
+fields:
+    first_name:
+        label: 'genuineq.contactform::lang.message.form-labels.first_name'
+        span: full
+        placeholder: 'genuineq.contactform::lang.message.form-labels.first_name'
+        default: ''
+        disabled: 0
+        type: text
+    last_name:
+        label: 'genuineq.contactform::lang.message.form-labels.last_name'
+        span: auto
+        placeholder: 'genuineq.contactform::lang.message.form-labels.last_name'
+        type: text
+    email:
+        label: 'genuineq.contactform::lang.message.form-labels.email'
+        span: auto
+        placeholder: 'genuineq.contactform::lang.message.form-labels.email'
+        type: text
+    message:
+        label: 'genuineq.contactform::lang.message.form-labels.message'
+        size: ''
+        span: full
+        placeholder: 'genuineq.contactform::lang.message.form-labels.message'
+        type: textarea
