@@ -1,29 +1,41 @@
-title = "Register form"
+title = "Înregistrare"
 url = "/register-form"
 layout = "landing-page"
 description = "Formular de inregistrare"
 is_hidden = 0
+
+[register]
+forceSecure = 0
+
+[addresses]
+counties = 1
+
+[profileStaticData]
+schools = 1
 ==
 <section class="depre-proiect"></section>
+
 <div style="min-height: 50vh;">
-    <section class="mt-5">
+    <section id="textSection" class="mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-4">
                     <h3 class="text-gray-dark font-weight-light mb-3" style="line-height: 38px;">{{'registerPage.register.title'|_}}</h3>
                     <p class="small text-muted" style="line-height: 22px; letter-spacing: -0,3px;">{{'registerPage.register.text'|_}}</p>
+                    <p class="small text-muted" style="line-height: 22px; letter-spacing: -0,3px;">{{'registerPage.register.text_2'|_}}</p>
                 </div>
             </div>
         </div>
     </section>
+
     <section>
-        <div class="container">
-            <div class="row">
+        <div id="formContainer" class="container">
+            <div id="selectRow" class="row">
                 <div class="col-12 col-lg-7">
                     <div class="form-group outline-none">
-                        <select class="form-control selectpicker border outline-none"  data-style="btn-white">
-                            <option data-icon="fas fa-user mr-3">{{'registerPage.select.option_1.text'|_}}</option>
-                            <option data-icon="fas fa-city mr-2">{{'registerPage.select.option_2.text'|_}}</option>
+                        <select id="selectRegisterForm" class="form-control selectpicker border outline-none"  data-style="btn-white">
+                            <option value="teacher" data-icon="fas fa-user mr-3">{{'registerPage.select.option_1.text'|_}}</option>
+                            <option value="school" data-icon="fas fa-city mr-2">{{'registerPage.select.option_2.text'|_}}</option>
                         </select>
                     </div>
                 </div>
@@ -31,10 +43,53 @@ is_hidden = 0
                     <a role="button" class="btn btn-sm btn-block btn-primary">{{'registerPage.complete.form.btn.text'|_}}</a>
                 </div>
             </div>
+
+            <div class="row">
+                <div id="teacherForm" class="d-none">
+                    {% partial 'authentification/registration/register-form-specialist' %}
+                </div>
+                <div id="schoolForm" class="d-none">
+                    {% partial 'authentification/registration/register-form-school' %}
+                </div>
+                <div id="successMessage" class="d-none">
+                    {% partial 'authentification/registration/registration-success-message' %}
+                </div>
+            </div>
         </div>
     </section>
 </div>
 
-{% partial 'authentification/registration/register-form-specialist' %}
-{% partial 'authentification/registration/register-form-school' %}
-{% partial 'authentification/registration/registration-success-message' %}
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /* Decide which form to display. */
+            if ('teacher' == $('#selectRegisterForm').val()) {
+                $('#teacherForm').removeClass('d-none');
+                $('#schoolForm').addClass('d-none');
+            } else {
+                $('#teacherForm').addClass('d-none');
+                $('#schoolForm').removeClass('d-none');
+            }
+
+            /**
+             * Function that toggles the display of forms based on the
+             *  selected value of the "selectRegisterForm" select.
+             */
+            $('#selectRegisterForm').on('change', function() {
+                if ('teacher' == this.value) {
+                    $('#teacherForm').removeClass('d-none');
+                    $('#schoolForm').addClass('d-none');
+                } else {
+                    $('#teacherForm').addClass('d-none');
+                    $('#schoolForm').removeClass('d-none');
+                }
+            });
+
+            $('form').on('ajaxSuccess', function() {
+                $('#teacherForm').addClass('d-none');
+                $('#schoolForm').addClass('d-none');
+                $('#successMessage').removeClass('d-none');
+            })
+        });
+    </script>
+{% endput %}

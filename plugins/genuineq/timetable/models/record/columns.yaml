@@ -1,0 +1,41 @@
+columns:
+    id:
+        label: Id
+        type: number
+        invisible: true
+    day:
+        label: 'genuineq.timetable::lang.backend.timetable.fields.day'
+        type: date
+        searchable: true
+        sortable: true
+    start_hour:
+        label: 'genuineq.timetable::lang.backend.timetable.fields.start_hour'
+        type: time
+    end_hour:
+        label: 'genuineq.timetable::lang.backend.timetable.fields.end_hour'
+        type: time
+    title:
+        label: 'genuineq.timetable::lang.backend.timetable.fields.title'
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: 'genuineq.timetable::lang.backend.timetable.fields.description'
+        type: text
+        searchable: true
+    feedback:
+        label: 'genuineq.timetable::lang.backend.timetable.fields.feedback'
+        type: text
+        searchable: true
+    created_at:
+        label: 'genuineq.timetable::lang.backend.timetable.columns.created_at'
+        type: datetime
+        sortable: true
+    updated_at:
+        label: 'genuineq.timetable::lang.backend.timetable.columns.updated_at'
+        type: datetime
+        sortable: true
+    deleted_at:
+        label: 'genuineq.timetable::lang.backend.timetable.columns.deleted_at'
+        type: datetime
+        sortable: true

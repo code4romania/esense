@@ -3,6 +3,11 @@ description = "Answers and questions"
 [staticPage]
 useContent = 1
 default = 0
+
+[session]
+security = "all"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
 ==
 <!-- FAQ -->
 {variable name="answersAndQuestionsTitle" label="Title" tab="Answers and Questions" type="text"}{/variable}

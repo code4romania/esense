@@ -1,4 +1,4 @@
-jQuery(function() {
+$(document).ready(function () {
     $('.testimonials-owl-carousel').owlCarousel({
         loop:true,
         margin:10,
@@ -9,4 +9,4 @@ jQuery(function() {
             }
         }
     })
-})
+});

@@ -1,0 +1,11 @@
+columns:
+    slug:
+        label: slug
+        type: text
+        searchable: true
+        sortable: true
+    phone:
+        label: phone
+        type: text
+        searchable: true
+        sortable: true

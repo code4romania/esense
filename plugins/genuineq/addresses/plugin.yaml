@@ -1,0 +1,24 @@
+plugin:
+    name: 'genuineq.addresses::lang.plugin.name'
+    description: 'genuineq.addresses::lang.plugin.description'
+    author: genuineq
+    icon: oc-icon-map-marker
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'genuineq.addresses::lang.plugin.backend-menu'
+        url: genuineq/addresses/cities
+        icon: icon-map-marker
+        sideMenu:
+            side-menu-item:
+                label: 'genuineq.addresses::lang.region.backend-menu'
+                url: genuineq/addresses/regions
+                icon: icon-tag
+            side-menu-item2:
+                label: 'genuineq.addresses::lang.county.backend-menu'
+                url: genuineq/addresses/counties
+                icon: icon-tags
+            side-menu-item3:
+                label: 'genuineq.addresses::lang.cities.backend-menu'
+                url: genuineq/addresses/cities
+                icon: icon-map-marker

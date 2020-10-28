@@ -1,0 +1,10 @@
+name: Students
+form: $/genuineq/students/models/student/fields.yaml
+modelClass: Genuineq\Students\Models\Student
+defaultRedirect: genuineq/students/students
+create:
+    redirect: 'genuineq/students/students/update/:id'
+    redirectClose: genuineq/students/students
+update:
+    redirect: genuineq/students/students
+    redirectClose: genuineq/students/students

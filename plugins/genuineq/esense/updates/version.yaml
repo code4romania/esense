@@ -1,0 +1,8 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Update table genuineq_students_students'
+    - table_update_genuineq_students_students.php
+1.0.3:
+    - 'Created table genuineq_esense_students_specialists'
+    - builder_table_create_genuineq_esense_students_specialists.php

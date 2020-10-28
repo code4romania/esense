@@ -1,0 +1,15 @@
+title: 'genuineq.timetable::lang.records.title'
+modelClass: Genuineq\Timetable\Models\Record
+list: $/genuineq/timetable/models/record/columns.yaml
+recordUrl: 'genuineq/timetable/records/update/:id'
+noRecordsMessage: 'genuineq.timetable::lang.component.timetable.messages.no_records'
+recordsPerPage: '50'
+showSetup: true
+showCheckboxes: true
+defaultSort:
+    column: day
+    direction: desc
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

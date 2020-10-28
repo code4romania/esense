@@ -1,0 +1,28 @@
+/** Import dashboard wrapper style. */
+@import "wrapper";
+
+/** Import top nav style. */
+@import "navs/top-nav";
+
+/** Import side nav style. */
+@import "navs/side-nav";
+
+/** Import datatables. */
+@import "datatables";
+
+/** Import owl carousel. */
+@import "owl-carousel/owl-students-activity";
+@import "owl-carousel/owl-exercises";
+
+/** Import donut chart. */
+@import "donut-chart";
+
+/** Import styles for timeline */
+@import "./timeline";
+
+/** Import active selected avatar. */
+@import "add-active-to-selected-avatar";
+
+@import "richtext";
+
+@import "tagify";

@@ -1,0 +1,20 @@
+plugin:
+    name: 'genuineq.students::lang.plugin.name'
+    description: 'genuineq.students::lang.plugin.description'
+    author: genuineq
+    icon: oc-icon-child
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'genuineq.students::lang.plugin.backend-menu'
+        url: genuineq/students/students
+        icon: icon-child
+        sideMenu:
+            side-menu-item:
+                label: 'genuineq.students::lang.student.backend-menu'
+                url: genuineq/students/students
+                icon: icon-child
+            side-menu-item2:
+                label: 'genuineq.students::lang.contact-person.backend-menu'
+                url: genuineq/students/contactpersons
+                icon: icon-mobile-phone

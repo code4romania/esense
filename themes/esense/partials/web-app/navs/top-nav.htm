@@ -1,0 +1,62 @@
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <div class="d-none d-lg-block">
+        <div class="d-flex align-items-center">
+            <p class="p-0 m-0 pl-3 user-name">{{'teacher.dashboard.top.nav.welcome.message'|_}}&nbsp;{{ user.full_name }}</p>
+        </div>
+    </div>
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto d-flex align-items-center">
+
+        <!-- Topbar search desktop -->
+        <form class="form-inline my-auto navbar-search mr-3 d-none">
+            <div class="input-group d-flex align-items-center">
+                <input type="text" class="form-control" placeholder="{{'teacher.dashboard.top.nav.search.placeholder'|_}}">
+            </div>
+        </form>
+        <!-- Search mobile version -->
+        <li class="nav-item dropdown no-arrow d-none">
+            <a class="nav-link" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-menu dropdown-menu-center py-3 px-0 mx-0 top-nav-dropdown-search" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group d-flex align-items-center justify-content-center px-3">
+                        <input type="text" class="form-control" placeholder="{{'teacher.dashboard.top.nav.search.placeholder'|_}}">
+                    </div>
+                </form>
+            </div>
+        </li>
+
+        <!-- Nav Item - Alerts -->
+        <li class="nav-item mr-2 ml-3">
+            <a class="nav-link" href="{{ 'specialist/notifications'|page }}">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/top-nav/bell.svg'|theme }}">
+            </a>
+        </li>
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item mr-lg-3">
+            {% if 'specialist' == user.type %}
+                <a class="nav-link" href="{{'specialist/profile-edit'|page}}">
+            {% else %}
+                <a class="nav-link" href="{{'school/profile-edit'|page}}">
+            {% endif %}
+                    {% if user.avatar %}
+                        <img class="img-fluid img-avatar rounded-circle ml-2" src="{{user.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                    {% else %}
+                        <img width="40px" height="40px" class="img-fluid ml-2" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}" alt="avatar" style="cursor: pointer;">
+                    {% endif %}
+                </a>
+        </li>
+    </ul>
+
+</nav>
+<!-- End of Topbar -->

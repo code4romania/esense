@@ -1,17 +1,22 @@
-title = "Esense"
+title = "E-Sense"
 url = "/"
 layout = "landing-page"
 description = "Home page"
 is_hidden = 0
+
+[session]
+security = "all"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
 ==
 <!-- Home section -->
 <section class="min-vh-100">
     <div class="container-fluid hero">
         <div class="container mt-md-5 mt-lg-0 py-md-5 py-lg-0">
             <div class="row min-vh-100">
-                <div class="col-12 col-lg-6 d-flex align-items-center order-2 order-lg-1">
-                    <div class="pr-lg-5 d-none d-lg-block">
-                        <h1 class="text-dark font-weight-bolder" style="line-height: 48px;">
+                <div class="col-12 col-lg-6 order-2 order-lg-1 d-flex align-items-center">
+                    <div class="d-none d-lg-block">
+                        <h1 class="text-dark text-left font-weight-bold p-0 m-0 pr-lg-5" style="line-height: 48px;">
                             {{ 'homePage.intro.section.title'|_ }}
                         </h1>
                         <a href="{{ 'authentification/register-form'|page }}" class="btn btn-sm btn-primary px-lg-5 mt-2">{{ 'homePage.intro.section.btn.text'|_ }}</a>
@@ -199,6 +204,8 @@ is_hidden = 0
                     </div>
                     <div class="row">
                         <div class="col-12 mt-5">
+
+
                             <form method="POST" data-request"">
                                 <div class="row">
 
@@ -207,12 +214,12 @@ is_hidden = 0
                                         <label class="display-4 text-muted px-3 px-lg-0" for="first_name" style="line-height: 21px;">{{'homePage.form.first.name.label'|_}}</label>
                                         <div class="input-group mb-3 px-3 px-lg-0 shadow-sm">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text bg-white border-light" id="basic-addon1">
+                                                <span class="input-group-text bg-white border-light">
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/user-form-icon.svg'|theme }}">
                                                 </span>
                                             </div>
-                                            <input type="text" id="first_name" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.first.name.placeholder'|_}}"
-                                                aria-label="first_name" aria-describedby="basic-addon1">
+                                            <input name="first_name" type="text" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.first.name.placeholder'|_}}"
+                                                aria-label="first_name" aria-describedby="basic-addon1" id="first_name">
                                         </div>
                                     </div>
 
@@ -221,12 +228,12 @@ is_hidden = 0
                                         <label class="display-4 text-muted px-3 px-lg-0" for="last_name" style="line-height: 21px;">{{'homePage.form.last.name.label'|_}}</label>
                                         <div class="input-group mb-3 px-3 px-lg-0 shadow-sm">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text bg-white border-light" id="basic-addon1">
+                                                <span class="input-group-text bg-white border-light">
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/form-label-icon.svg'|theme }}">
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.last.name.placeholder'|_}}"
-                                                aria-label="last_name" aria-describedby="basic-addon1">
+                                            <input name="last_name" type="text" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.last.name.placeholder'|_}}"
+                                                aria-label="last_name" aria-describedby="basic-addon1" id="last_name">
                                         </div>
                                     </div>
 
@@ -235,12 +242,12 @@ is_hidden = 0
                                         <label class="display-4 text-muted px-3 px-lg-0" for="email" style="line-height: 21px;">{{'homePage.form.email.label'|_}}</label>
                                         <div class="input-group mb-3 px-3 px-lg-0 shadow-sm">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text bg-white border-light" id="basic-addon1">
+                                                <span class="input-group-text bg-white border-light">
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/form-email-icon.svg'|theme }}">
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.email.placeholder'|_}}"
-                                                aria-label="email" aria-describedby="basic-addon1">
+                                            <input name="email" type="email" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.email.placeholder'|_}}"
+                                                aria-label="email" aria-describedby="basic-addon1" id="email">
                                         </div>
                                     </div>
 
@@ -248,19 +255,21 @@ is_hidden = 0
                                     <div class="col-12 mb-3">
                                         <div class="form-group px-3 px-lg-0">
                                             <label class="display-4 text-muted" for="message" style="line-height: 21px;">{{'homePage.form.message.label'|_}}</label>
-                                            <textarea class="form-control border-light shadow-sm" id="message"rows="4"></textarea>
+                                            <textarea name="message" class="form-control border-light shadow-sm" id="message" rows="4"></textarea>
                                         </div>
                                     </div>
 
                                     <!-- Submit btn -->
                                     <div class="col-12">
                                         <div class="d-flex justify-content-lg-end justify-content-center mb-3">
-                                            <a href="" role="button" type="submit" class="btn btn-sm btn-secondary px-5">{{'homePage.form.btn.text'|_}}</a>
+                                            <button name="submit"  role="button" type="submit" class="btn btn-sm btn-secondary px-5">{{'homePage.form.btn.text'|_}}</button>
                                         </div>
                                     </div>
 
                                 </div>
                             </form>
+
+
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,11 @@
+fields:
+    name:
+        label: 'genuineq.addresses::lang.county.form-labels.name'
+        span: left
+        type: text
+    region:
+        label: 'genuineq.addresses::lang.county.form-labels.region'
+        span: right
+        nameFrom: name
+        descriptionFrom: description
+        type: relation

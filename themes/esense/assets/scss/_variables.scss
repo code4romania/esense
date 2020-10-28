@@ -7,6 +7,7 @@ $primary:   #0e4870;
 $secondary: #fab954;
 $dark:      #2e294e;
 $light:     #F4F5F7;
+$danger:    #EA4335;
 
 /** Color for text muted. */
 $gray-600: #52567f;
@@ -23,6 +24,13 @@ $theme-colors: map-merge((
         "primary-light":  #0E4870,
         "gray-medium":    #E1E1E1,
         "medium-dark":    #252525,
+        "black":          #000000,
+        "gray-2":         #636363,
+        "rgba-black":     rgba(0,0,0,0.6),
+        "chart-red":      #F6744F,
+        "chart-yellow":   #FAB955,
+        "chart-green":    #1B997B,
+        "blue":           #3297D3,
     ),
     $theme-colors);
 
@@ -46,9 +54,9 @@ $titillium-web-font-path: "../fonts/titillium-web/";
 $roboto-font-path:        "../fonts/roboto/";
 
 /** Font family. */
-$font-family-sans-serif: 'OpenSans-Regular', sans-serif;
-$font-family-titilium:   'TitilliumWeb-Regular', sans-serif;
-$font-family-base:       'OpenSans-Regular', sans-serif;
+// $font-family-sans-serif: 'OpenSans-Regular', sans-serif;
+// $font-family-titilium:   'TitilliumWeb-Regular', sans-serif;
+$font-family-base:       'OpenSans-Regular-nu', sans-serif;
 
 /** Font size base. */
 $font-size-base: 1.15rem;
@@ -65,7 +73,7 @@ $h5-font-size: 22px;
 $h6-font-size: 13px;
 
 // Heading font family
-$headings-font-family: $font-family-sans-serif;
+// $headings-font-family: $font-family-sans-serif;
 
 // Heading font weight
 $headings-font-weight: bold;
@@ -140,17 +148,17 @@ $border-radius: 4px;
 **************** Pills *************************
 ***********************************************/
 
-// $nav-pills-link-active-color: $blank !important;
-// $nav-pills-link-active-bg: $primary;
+$nav-pills-link-active-color: $light;
+$nav-pills-link-active-bg: $secondary;
 
 /***********************************************
 **************** Dropdown **********************
 ***********************************************/
 
-// $dropdown-link-color: $primary;
-// $dropdown-link-hover-color: $blank;
-// $dropdown-link-hover-bg: $primary;
-// $dropdown-font-size:$display4-size;
+$dropdown-link-color: $primary;
+$dropdown-link-hover-color: $light;
+$dropdown-link-hover-bg: $secondary;
+$dropdown-font-size:$display4-size;
 
 /***********************************************
 ************** Responsive text *****************

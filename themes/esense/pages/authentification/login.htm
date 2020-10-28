@@ -1,8 +1,11 @@
-title = "Login"
+title = "Autentificare"
 url = "/login"
 layout = "authentification"
 description = "Login"
 is_hidden = 0
+
+[login]
+forceSecure = 0
 ==
 <section>
     <div class="container-fluid">
@@ -23,10 +26,10 @@ is_hidden = 0
         <div class="row">
             <div class="col-12 col-lg-4 offset-lg-4 bg-light pb-5 my-md-5 my-lg-0 rounded shadow">
                 <p class="py-5 display-2 text-center font-weight-light" style="line-height: 27px; color:#000;">{{'loginPage.form.title'|_}}</p>
-                <!-- Login form -->
-                <form method="POST" data-request"">
-                    <div class="row">
 
+                <!-- Login form -->
+                <form method="POST" data-request="onLogin">
+                    <div class="row">
                         <div class="col-12 mb-3">
                             <div class="input-group mb-3 px-lg-3">
                                 <div class="input-group-prepend">
@@ -34,9 +37,9 @@ is_hidden = 0
                                         <img class="img-fluid" src="{{ 'assets/img/svg/form-email-icon.svg'|theme }}">
                                     </span>
                                 </div>
+
                                 <!-- Email input -->
-                                <input type="email" name="email" class="form-control border-left-0 border-light pl-0" placeholder="{{'loginPage.form.email.placeholder'|_}}"
-                                    aria-label="email" aria-describedby="email-addon">
+                                <input type="email" name="email" class="form-control border-left-0 border-light pl-0" placeholder="{{'loginPage.form.email.placeholder'|_}}" aria-label="email" aria-describedby="email-addon">
                             </div>
                         </div>
 
@@ -47,9 +50,9 @@ is_hidden = 0
                                         <img class="img-fluid" src="{{ 'assets/img/svg/password-icon.svg'|theme }}">
                                     </span>
                                 </div>
+
                                 <!-- Password input -->
-                                <input type="pasword" name="password" class="form-control border-left-0 border-light pl-0" placeholder="{{'loginPage.form.password.placeholder'|_}}"
-                                    aria-label="password" aria-describedby="password-addon">
+                                <input type="password" name="password" class="form-control border-left-0 border-light pl-0" placeholder="{{'loginPage.form.password.placeholder'|_}}" aria-label="password" aria-describedby="password-addon">
                             </div>
                         </div>
 
@@ -61,10 +64,14 @@ is_hidden = 0
                         <div class="col-12">
                             <!-- Submit button -->
                             <div class="d-flex justify-content-center mb-1">
-                                <a href="" role="button" type="submit" class="btn bt-sm btn-lg btn-primary px-5">{{'loginPage.form.btn.text'|_}}</a>
+                                <button role="button" type="submit" class="btn bt-sm btn-lg btn-primary px-5">{{'loginPage.form.btn.text'|_}}</button>
                             </div>
+
                             <!-- Create account link -->
-                            <p class="small text-medium-dark text-center" style="font-family: 'Titillium Web', sans-serif;">{{'loginPage.form.new.account.text'|_}}<a class="text-secondary" href="{{ 'authentification/register-form'|page }}" style="text-decoration: underline;"> {{'loginPage.form.new.account.link.text'|_}}</a></p>
+                            <p class="small text-medium-dark text-center" style="font-family: 'Titillium Web', sans-serif;">
+                                {{'loginPage.form.new.account.text'|_}}
+                                <a class="text-secondary" href="{{ 'authentification/register-form'|page }}" style="text-decoration: underline;"> {{'loginPage.form.new.account.link.text'|_}}</a>
+                            </p>
                         </div>
                     </div>
                 </form>

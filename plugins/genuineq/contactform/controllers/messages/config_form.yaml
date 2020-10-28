@@ -1,0 +1,16 @@
+name: Messages
+modelClass: Genuineq\Contactform\Models\Message
+form: $/genuineq/contactform/models/message/fields.yaml
+defaultRedirect: genuineq/contactform/messages
+create:
+    title: 'genuineq.contactform::lang.message.backend-menu.create_message'
+    redirect: 'genuineq/contactform/messages/update/:id'
+    redirectClose: genuineq/contactform/messages
+    flashSave: 'genuineq.contactform::lang.message.backend-menu.flash.send_message.success'
+update:
+    title: 'genuineq.contactform::lang.message.backend-menu.update_message'
+    redirect: genuineq/contactform/messages
+    redirectClose: genuineq/contactform/messages
+    flashSave: 'genuineq.contactform::lang.message.backend-menu.flash.update_message.succes'
+preview:
+    title: 'genuineq.contactform::lang.message.backend-menu.preview_message'

@@ -7,7 +7,7 @@ description = "Authentification layout"
     <link href="{{ [
         'assets/scss/esense/landing-page/landing-page.scss',
     ]|theme }}" rel="stylesheet">
-    
+
     <body>
 
         {% flash %}
@@ -20,6 +20,8 @@ description = "Authentification layout"
         {% endflash %}
 
         {% page %}
+
+        {% partial 'footer-scripts' %}
 
     </body>
 

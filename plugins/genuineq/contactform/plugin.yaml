@@ -1,0 +1,20 @@
+plugin:
+    name: 'genuineq.contactform::lang.plugin.name'
+    description: 'genuineq.contactform::lang.plugin.description'
+    author: genuineq
+    icon: oc-icon-space-shuttle
+    homepage: ''
+navigation:
+    contactform:
+        label: 'genuineq.contactform::lang.message.backend-menu.name'
+        url: genuineq/contactform/messages
+        icon: icon-space-shuttle
+        sideMenu:
+            messages:
+                label: 'genuineq.contactform::lang.message.backend-menu.name'
+                url: genuineq/contactform/messages
+                icon: icon-th-list
+            sendmessage:
+                label: 'genuineq.contactform::lang.message.backend-menu.send_message'
+                url: genuineq/contactform/messages/create
+                icon: icon-send-o

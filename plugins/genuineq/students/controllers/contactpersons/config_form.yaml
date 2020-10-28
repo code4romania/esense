@@ -1,0 +1,10 @@
+name: ContactPersons
+form: $/genuineq/students/models/contactperson/fields.yaml
+modelClass: Genuineq\Students\Models\ContactPerson
+defaultRedirect: genuineq/students/contactpersons
+create:
+    redirect: 'genuineq/students/contactpersons/update/:id'
+    redirectClose: genuineq/students/contactpersons
+update:
+    redirect: genuineq/students/contactpersons
+    redirectClose: genuineq/students/contactpersons

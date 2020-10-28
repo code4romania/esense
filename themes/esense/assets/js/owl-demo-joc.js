@@ -1,4 +1,4 @@
-jQuery(function() {
+$(document).ready(function () {
     $('.demo-joc-owl-carousel').owlCarousel({
         loop:true,
         margin:10,
@@ -15,4 +15,4 @@ jQuery(function() {
             }
         }
     })
-})
+});

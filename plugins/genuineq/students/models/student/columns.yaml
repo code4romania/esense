@@ -1,0 +1,26 @@
+columns:
+    name:
+        label: 'genuineq.students::lang.student.form-labels.name'
+        type: text
+        searchable: true
+        sortable: true
+    surname:
+        label: 'genuineq.students::lang.student.form-labels.surname'
+        type: text
+        searchable: true
+        sortable: true
+    hearing_impairment:
+        label: 'genuineq.students::lang.student.form-labels.hearing_impairment'
+        type: switch
+        searchable: true
+        sortable: true
+    visual_impairment:
+        label: 'genuineq.students::lang.student.form-labels.visual_impairment'
+        type: switch
+        searchable: true
+        sortable: true
+    birthdate:
+        label: 'genuineq.students::lang.student.form-labels.birthdate'
+        type: date
+        searchable: true
+        sortable: true

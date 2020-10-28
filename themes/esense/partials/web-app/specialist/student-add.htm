@@ -1,0 +1,100 @@
+description = "Add student partial"
+
+[viewBag]
+==
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content border-0" style="background: transparent !important;">
+        <div id="search-student" class="rounded-top rounded-bottom bg-white pb-5 px-5 pt-5">
+            <div class="d-flex align-items-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/add-yellow.svg'|theme }}">
+                <p class="p-0 m-0 ml-2 display-2 text-dark">Caută elev</p>
+            </div>
+            <div class="form-group mt-3">
+                <div class="input-group">
+                    <input name='student' id="student" class="onChangeValue tagify pl-0 shadow-none">
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <a role="button" id="solicita-acces" class="btn btn-sm btn-secondary px-4 d-none" >Solicita acces</a>
+            </div>
+        </div>
+        <div id="spacer" style="width: 5rem; height:10px; background:#c4c4c4; margin-left:5rem;"></div>
+        <div id="creaza-profil" class="bg-white rounded p-5">
+            <div class="d-flex align-items-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/folder.svg'|theme }}">
+                <p class="p-0 m-0 ml-2 display-2 text-dark">Creează profil elev</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <p class="p-0 m-0 small text-dark">Nu ai găsit elevul pe care îl cauți? Creează profil nou pentru elev</p>
+                <a class="text-secondary display-4" href="{{link}}">Creează profil elev</a>
+            </div>
+        </div>
+        <div id="message" class="rounded-bottom bg-white pb-5 px-5 d-none">
+            <p class="p-0 m-0 py-2 small text-gray-2">mesaj trimis catre:<span class="font-weight-bold">student@email.com</span></p>
+            <form>
+                <div class="form-group d-flex">
+                    <textarea class="form-control" id="description" rows="3" placeholder="Mesajul tau"></textarea>
+                </div>
+                <div class="d-flex align-items-center justify-content-end mt-2">
+                    <a role="button" class="mr-3 text-gray-2 display-4" data-dismiss="modal">Anuleaza</a>
+                    <button type="submit" class="btn btn-sm px-5 btn-secondary">Trimite</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        /** Tag outside auto search (tagify). */
+        var studentInput = document.querySelector('input[name=student]'),
+            tagify = new Tagify(studentInput, {
+                editTags: null, // single click to edit a tag
+                enforceWhitelist: true,
+                whitelist: [
+                    'Nume elev 1',
+                    'Nume elev 2',
+                ],
+                placeholder: "Cauta elev",
+                dropdown: {
+                    enabled: 1, // show suggestion after 1 typed character
+                    position: 'input', // position suggestions list next to typed text
+                },
+                templates: {
+                    dropdownItemNoMatch: function (data) {
+                        return `not found: ${data.value}`
+                    }
+                },
+            });
+
+            $(document.body).on('change', '.onChangeValue', function() {
+                if(( 0 !== studentInput.value.length)) {
+                    $('#solicita-acces').removeClass('d-none')
+                } else {
+                    $('#solicita-acces').addClass('d-none');
+                    $('#spacer').removeClass('d-none');
+                    $('#creaza-profil').removeClass('d-none');
+                    $('#search-student').addClass('rounded-bottom');
+                    $('#search-student').addClass('pb-5');
+                    $('#message').addClass('d-none');
+
+                }
+            });
+
+            $('#solicita-acces').on('click', function() {
+                $('#spacer').addClass('d-none');
+                $('#creaza-profil').addClass('d-none');
+                $('#solicita-acces').addClass('d-none');
+                $('#search-student').removeClass('rounded-bottom');
+                $('#search-student').removeClass('pb-5');
+                $('#message').removeClass('d-none');
+            })
+
+        });
+    </script>
+{% endput %}
