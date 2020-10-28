@@ -38,6 +38,7 @@ class Plugin extends PluginBase
         /** Extend the Student model. */
         $this->studentExtendProperties();
         $this->studentExtendRelationships();
+        $this->studentExtendMethods();
         $this->studentExtendComponens();
 
         /** Extend the School model. */
@@ -60,7 +61,8 @@ class Plugin extends PluginBase
         /** Add extra fillable fields. */
         Student::extend(function($model) {
             $model->addFillable([
-                'specialist_id'
+                'owner_id',
+                'owner_type'
             ]);
         });
     }
@@ -72,10 +74,28 @@ class Plugin extends PluginBase
     {
         Student::extend(function($model) {
             /** Link "Specialist" model to "Student" model with one-to-many relation. */
-            $model->belongsTo['owner'] = ['Genuineq\Profile\Models\Specialist', 'key' => 'specialist_id'];
+            $model->morphTo['owner'] = [];
 
             /** Link "Specialist" model to "Student" model with many-to-many relation. */
             $model->belongsToMany['specialists'] = ['Genuineq\Profile\Models\Specialist', 'table' => 'genuineq_esense_students_specialists'];
+        });
+    }
+
+    /**
+     * Function that performs all the methods extensions of the Student model.
+     */
+    protected function studentExtendMethods()
+    {
+        Student::extend(function($model) {
+            /** Add attribute that chacks if owner is of type specialist. */
+            $model->addDynamicMethod('getOwnerIsSpecialistAttribute', function() use ($model) {
+                return 'Genuineq\Profile\Models\Specialist' == $model->owner_type;
+            });
+
+            /** Add attribute that chacks if owner is of type school. */
+            $model->addDynamicMethod('getOwnerIsSchoolAttribute', function() use ($model) {
+                return 'Genuineq\Profile\Models\School' == $model->owner_type;
+            });
         });
     }
 
@@ -92,12 +112,27 @@ class Plugin extends PluginBase
 
         Event::listen('genuineq.students.create.before.student.create', function(&$data, $inputs) {
             /** Add the owner ID to the data. */
-            $data['specialist_id'] = Auth::user()->profile->id;
+            if ('specialist' == Auth::getUser()->type) {
+                $data['owner_id'] = Auth::user()->profile->id;
+            } else {
+                $data['owner_id'] = $inputs['owner'];
+            }
+            $data['owner_type'] = 'Genuineq\Profile\Models\Specialist';
         });
 
         Event::listen('genuineq.students.create.after.student.create', function($student) {
             /** Create a specialist connection. */
-            $student->specialists()->attach(Auth::user()->profile->id);
+            $student->specialists()->attach($student->owner_id);
+        });
+
+        Event::listen('genuineq.students.update.before.student.update', function(&$data, $inputs) {
+            /** Add the owner ID to the data. */
+            if ('specialist' == Auth::getUser()->type) {
+                $data['owner_id'] = Auth::user()->profile->id;
+            } else {
+                $data['owner_id'] = $inputs['owner'];
+            }
+            $data['owner_type'] = 'Genuineq\Profile\Models\Specialist';
         });
     }
 
@@ -131,7 +166,7 @@ class Plugin extends PluginBase
                 $students = new Collection();
 
                 /** Parse all the in specialists.  */
-                foreach ($model->specialists as $specialist) {
+                foreach ($model->active_specialists as $specialist) {
                     $students = $students->merge($specialist->students);
                 }
 
@@ -143,7 +178,7 @@ class Plugin extends PluginBase
                 $archivedStudents = new Collection();
 
                 /** Parse all the in specialists.  */
-                foreach ($model->specialists as $specialist) {
+                foreach ($model->active_specialists as $specialist) {
                     $archivedStudents = $archivedStudents->merge($specialist->archivedStudents);
                 }
 
@@ -168,7 +203,7 @@ class Plugin extends PluginBase
     {
         Specialist::extend(function($model) {
             /** Link "Student" model to "Specialist" model with one-to-many relation. */
-            $model->hasMany['myStudents'] = 'Genuineq\Students\Models\Student';
+            $model->morphMany['myStudents'] = ['Genuineq\Students\Models\Student', 'name' => 'owner'];
 
             /** Link "Student" model to "Specialist" model with many-to-many relation. */
             $model->belongsToMany['students'] = [

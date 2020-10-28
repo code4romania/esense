@@ -17,10 +17,7 @@ class ExtendUserPluginUsersTable extends Migration
 
     public function down()
     {
-        if (
-            Schema::hasTable('users')
-            && Schema::hasColumns('users', ['profile_id', 'profile_type'])
-        ) {
+        if (Schema::hasTable('users') && Schema::hasColumns('users', ['profile_id', 'profile_type'])) {
             Schema::table('users', function ($table) {
                 $table->dropColumn(['profile_id', 'profile_type']);
             });
