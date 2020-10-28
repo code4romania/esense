@@ -7,14 +7,71 @@
     font-family: "SansSerif", sans-serif;
 }
 
+.cookie_container_rounded {
+    border-radius: 0.3em !important;
+}
+
 .cookie_container_right {
     flex-direction: row-reverse;
 }
 
 .cookie_container .cookie_btn {
-   max-width: 8em !important;
+    width: 33%;
+    max-width: 280px !important;
+    padding: 12px 0px !important;
+    background: #fab954 !important;
+    font-size: 14px !important;
+    color: #fff;
+    font-weight: 500 !important;
+    letter-spacing: 0.1px !important;
+    font-family: 'Roboto-Regular', sans-serif !important;
 }
 
-.cookie_container_rounded{
-    border-radius: 0.3em !important;
+.cookie_container .cookie_btn:hover,
+.cookie_container .cookie_btn:active {
+	background-color: #fba821 !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.cookie_message {
+    font-weight: 400 !important;
+    letter-spacing: 0.05px !important;
+    font-size: 15px !important;
+}
+
+.cookie_message a {
+    color: #fff !important;
+    text-decoration: underline !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+}
+
+.cookie_message a:hover {
+    color: #dfdaef !important;
+}
+
+
+@media screen and (max-width: 767px) {
+
+    .cookie_container .cookie_btn {
+        width: 80% !important;
+        max-width: 300px !important;
+        margin: 5px 0px;
+    }
+
+    .cookie_message {
+        text-align: center !important;
+        padding: 10px 0px !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+	.cookie_container .cookie_btn {
+        width: 30% !important;
+        max-width: 200px !important;
+        margin: 5px 0px;
+        padding: 15px 0px;
+    }
 }
