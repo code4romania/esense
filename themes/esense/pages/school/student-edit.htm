@@ -141,6 +141,17 @@ allowedUserTypes[] = "school"
                             </div>
                         </div>
 
+                        <!-- Teacher select -->
+                        <div class="col-12">
+                            <div class="form-group register-select mr-3">
+                                <select name="owner" id="specialist" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
+                                    {% for key, specialist in user.profile.active_specialists %}
+                                        <option value="{{ specialist.id }}" {% if specialist.id == student.owner_id %} selected{% endif %}>{{ specialist.full_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
                         <!-- Input diagnostic description -->
                         <div class="col-12">
                             <div class="form-group d-flex">

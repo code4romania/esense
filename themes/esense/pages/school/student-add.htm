@@ -129,7 +129,7 @@ allowedUserTypes[] = "school"
                         <!-- Teacher select -->
                         <div class="col-12">
                             <div class="form-group register-select mr-3">
-                                <select name="teacher" id="specialist" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
+                                <select name="owner" id="specialist" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
                                     {% for key, specialist in user.profile.active_specialists %}
                                         <option value="{{ specialist.id }}">{{ specialist.full_name }}</option>
                                     {% endfor %}
