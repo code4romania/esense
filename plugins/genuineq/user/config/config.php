@@ -19,13 +19,13 @@
 
     /** Login redirects based on user types. */
     'loginRedirects' => [
-        'specialist' => 'teacher/administration-board',
-        'school' => 'school/administration-board'
+        'specialist' => 'specialist/dashboad',
+        'school' => 'school/dashboard'
     ],
 
     /** Profile page for each user type. */
     'profilePages' => [
-        'specialist' => 'teacher/profile',
+        'specialist' => 'specialist/profile',
         'school' => 'school/profile',
     ],
 ];
