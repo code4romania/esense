@@ -8,7 +8,7 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            \Genuineq\Students\Components\Students::class => 'students'
+            \Genuineq\Students\Components\Student::class => 'student'
         ];
     }
 

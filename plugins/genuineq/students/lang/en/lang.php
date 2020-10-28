@@ -73,6 +73,7 @@
 
             'message' => [
                 'success_creation' => 'Elevul a fost adăugat cu succes',
+                'success_update' => 'Elevul a fost actualizat cu succes',
             ],
         ]
     ]

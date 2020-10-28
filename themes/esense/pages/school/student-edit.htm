@@ -9,7 +9,7 @@ security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "school"
 
-[students]
+[student]
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
@@ -31,7 +31,7 @@ allowedUserTypes[] = "school"
                 </div>
 
                 <!-- Form for editing student -->
-                <form method="POST" data-request="onEditStudent" >
+                <form method="POST" data-request="onUpdateStudent" data-request-validate data-request-flash data-request-files>
                     <div class="row mt-2">
 
                         <!-- Edit avatar -->
@@ -42,8 +42,8 @@ allowedUserTypes[] = "school"
                                     <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
                                     <div class="d-flex">
                                         <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
-                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                            <a class="nav-link {% if student.gender == 'female' %} active {% endif %} btn btn-sm btn-outline border-dark px-5" id="v-pills-home-tab" data-gender="female" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
+                                            <a class="nav-link {% if student.gender == 'male' %} active {% endif %} ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-profile-tab" data-gender="male" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -54,44 +54,55 @@ allowedUserTypes[] = "school"
 
                                     <div class="tab-content" id="v-pills-tabContent">
                                         <!-- Girl avatars -->
-                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        <div class="tab-pane fade {% if student.gender == 'female' %} show active {% endif %}" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                             <div class="d-flex">
-                                                <div class="avatars d-none">
-                                                    <div class="predifined-avatar active-avatar d-block">
-                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}">
-                                                    </div>
-                                                    <div class="predifined-avatar d-block ml-4">
-                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-2.svg'|theme }}">
-                                                    </div>
-                                                </div>
+                                                {% if student.avatar and student.gender == 'female' %}
+                                                    <img id="add-avatar" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{user.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                                                {% else %}
 
-                                                <div class="add-avatar">
-                                                    <img id="add-avatar" class="img-fluid add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
-                                                </div>
+                                                    <div class="avatars d-none">
+                                                        <div class="predifined-avatar active-avatar d-block">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}">
+                                                        </div>
+                                                        <div class="predifined-avatar d-block ml-4">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-2.svg'|theme }}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="add-avatar">
+                                                        <img id="add-avatar" class="img-fluid add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                    </div>
+                                                {% endif %}
                                             </div>
                                         </div>
 
                                         <!-- Boy avatars -->
-                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                        <div class="tab-pane fade {% if student.gender == 'male' %} show active {% endif %}" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                             <div class="d-flex">
-                                                <div class="avatars1 d-none">
-                                                    <div class="predifined-avatar1 active-avatar1 d-block">
-                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-1.svg'|theme }}">
-                                                    </div>
-                                                    <div class="predifined-avatar1 d-block ml-4">
-                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}">
-                                                    </div>
-                                                </div>
+                                                {% if student.avatar and student.gender == 'male' %}
+                                                    <img id="add-avatar" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{user.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                                                {% else %}
 
-                                                <div class="add-avatar">
-                                                    <img id="add-avatar" class="img-fluid  add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
-                                                </div>
+                                                    <div class="avatars1 d-none">
+                                                        <div class="predifined-avatar1 active-avatar1 d-block">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-1.svg'|theme }}">
+                                                        </div>
+                                                        <div class="predifined-avatar1 d-block ml-4">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="add-avatar">
+                                                        <img id="add-avatar" class="img-fluid  add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                    </div>
+                                                {% endif %}
                                             </div>
                                         </div>
 
                                         <!-- Input for adding custom avatar -->
                                         <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
-                                        <!-- Input for adding predifined avatar -->
+                                        <!-- Input for gender -->
+                                        <input name="gender" id="gender" class="d-none" type="text" value="female" />
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +117,7 @@ allowedUserTypes[] = "school"
                                 <!-- Select date -->
                                 <div class="col-12 col-md-4 col-lg-5 pr-lg-0 mr-lg-0">
                                     <div class="form-group d-flex">
-                                        <input autocomplete="off" type="text" name="birthdate" id="birthdate" class="form-control onChangeValue" value="{{student.birthdate}}">
+                                        <input autocomplete="off" type="text" name="birthdate" id="birthdate" class="form-control onChangeValue" value="{{ student.birthdate|date("d-m-Y") }}">
                                         <span class="text-danger ml-2">*</span>
                                     </div>
                                 </div>
@@ -127,17 +138,6 @@ allowedUserTypes[] = "school"
                             <div class="form-group d-flex">
                                 <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}" value="{{student.name}}">
                                 <span class="text-danger ml-2">*</span>
-                            </div>
-                        </div>
-
-                        <!-- Teacher select -->
-                        <div class="col-12">
-                            <div class="form-group register-select mr-3">
-                                <select name="teacher" id="specialist" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
-                                    {# {% for key, county in counties %}
-                                        <option value="{{ key }}">{{ county }}</option>
-                                    {% endfor %} #}
-                                </select>
                             </div>
                         </div>
 
@@ -179,6 +179,7 @@ allowedUserTypes[] = "school"
                             </div>
                         </div>
 
+                        <input name="id" class="d-none" type="text" id="id" value="{{ student.id }}"/>
 
                         <!-- First contact person -->
                         <div id="person-1" class="px-lg-2">
@@ -351,6 +352,12 @@ allowedUserTypes[] = "school"
                 language: "ro",
                 orientation: "bottom auto",
                 autoclose: true
+            });
+
+            /** Function that handles gender switch on active tab toggle */
+            $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+                /* Set the gender value. */
+                $('#gender').val($(e.target).data('gender'));
             });
 
             /** Add file input functionlity for plus-icon img. */

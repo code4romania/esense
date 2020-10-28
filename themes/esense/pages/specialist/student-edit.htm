@@ -9,7 +9,7 @@ security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
 
-[students]
+[student]
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
@@ -42,8 +42,8 @@ allowedUserTypes[] = "specialist"
                                     <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
                                     <div class="d-flex">
                                         <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link {% if student.gender == 'female' %} active {% endif %} btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
-                                            <a class="nav-link {% if student.gender == 'male' %} active {% endif %} ml-3 ml-lg-4 btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                            <a class="nav-link {% if student.gender == 'female' %} active {% endif %} btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-home-tab" data-gender="female" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
+                                            <a class="nav-link {% if student.gender == 'male' %} active {% endif %} ml-3 ml-lg-4 btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-profile-tab" data-gender="male" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -100,7 +100,9 @@ allowedUserTypes[] = "specialist"
 
                                         <!-- Input for adding custom avatar -->
                                         <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
-                                        <!-- Input for adding predifined avatar -->
+                                        <!-- Input for gender -->
+                                        <input name="gender" id="gender" class="d-none" type="text" value="female" />
+
                                     </div>
                                 </div>
                             </div>
@@ -358,6 +360,12 @@ allowedUserTypes[] = "specialist"
                 language: "ro",
                 orientation: "bottom auto",
                 autoclose: true
+            });
+
+            /** Function that handles gender switch on active tab toggle */
+            $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+                /* Set the gender value. */
+                $('#gender').val($(e.target).data('gender'));
             });
 
             /** Add file input functionlity for plus-icon img. */
