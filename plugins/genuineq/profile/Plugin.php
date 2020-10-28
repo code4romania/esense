@@ -38,6 +38,7 @@ class Plugin extends PluginBase
     {
         return [
             'genuineq.profile::mail.new_teacher',
+            'genuineq.profile::mail.new_affiliation',
         ];
     }
 

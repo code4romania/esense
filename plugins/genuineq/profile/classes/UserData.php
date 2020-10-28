@@ -19,7 +19,7 @@ class UserData
         $rules = [
             'surname' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
-            'phone' => 'required|numeric',
+            'phone' => 'numeric',
             'email' => 'required|between:6,255|email',
             'county' => 'required',
             'city' => 'required',
@@ -32,7 +32,7 @@ class UserData
             'surname.regex' => Lang::get('genuineq.profile::lang.components.specialist.validation.surname_regex'),
             'name.required' => Lang::get('genuineq.profile::lang.components.specialist.validation.name_required'),
             'name.regex' => Lang::get('genuineq.profile::lang.components.specialist.validation.name_regex'),
-            'phone.required' => Lang::get('genuineq.profile::lang.components.specialist.validation.phone_required'),
+            // 'phone.required' => Lang::get('genuineq.profile::lang.components.specialist.validation.phone_required'),
             'phone.numeric' => Lang::get('genuineq.profile::lang.components.specialist.validation.phone_numeric'),
             'email.between' => Lang::get('genuineq.profile::lang.components.specialist.validation.email_between'),
             'email.email' => Lang::get('genuineq.profile::lang.components.specialist.validation.email_email'),

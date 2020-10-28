@@ -67,10 +67,11 @@ schools = 1
                         </form>
 
                         <!-- Edit profile form -->
-                        <form id="form" method="POST" data-request='onSpecialistUpdate'>
+                        <form id="form" method="POST" data-request='onSpecialistProfileUpdate'>
                             <div class="shadow rounded p-3 py-4">
                                 <p class="display-2 text-medium-dark form-styles p-0 m-0 mb-3">{{'teacher.dashboard.edit.profile.title'|_}}</p>
                                 <div class="row">
+
                                     <!-- Last name input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
@@ -117,7 +118,6 @@ schools = 1
                                         </div>
                                     </div>
 
-                                    <input name="type" type="text" id="type" class="d-none" value="specialist">
                                 </div>
                             </div>
 
@@ -202,7 +202,11 @@ schools = 1
 
                         /* Parse all received citied and add them. */
                         for (const city in data) {
-                            $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                            if( data[city] == {{ user.profile.city_id }} ) {
+                                $('#specialistCity').append(`<option value="${data[city]}" selected>${city}</option>`);
+                            } else {
+                                $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                            }
                         }
 
                         /* Activate the select. */

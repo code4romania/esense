@@ -40,12 +40,6 @@
             'description' => 'Allows to update, delete, archive and unarchive specialists.',
 
             'message' => [
-                'specialist_archive_successful' => 'Arhivare cu succes',
-                'specialist_archive_failed' => 'Arhivarea a esuat',
-                'specialist_unzip_successful' => 'Dezarhivare cu succes',
-                'specialist_unzip_failed' => 'Dezarhivarea a esuat',
-                'specialist_delete_successful' => 'Ștergere cu succes',
-                'specialist_delete_failed' => 'Ștergere a esuat',
                 'profile_update_successful' => 'Profilul a fost actualizat cu success',
             ],
 
@@ -74,8 +68,20 @@
             ],
 
             'message' => [
+                'archive_successful' => 'Arhivare cu succes',
+                'archive_failed' => 'Arhivarea a esuat',
+                'unzip_successful' => 'Dezarhivare cu succes',
+                'unzip_failed' => 'Dezarhivarea a esuat',
+                'delete_successful' => 'Ștergere cu succes',
+                'delete_failed' => 'Ștergere a esuat',
+                'update_successful' => 'Specialistul a fost actualizat cu success',
                 'profile_update_successful' => 'Profilul a fost actualizat cu success',
-                'user_invite_successful' => 'Invitație trimisă cu succes',
+                'user_invite_successful' => 'Invitație trimisă cu succes către specialistul ',
+                'user_invite_failed' => 'Invitație eșuată pentru specialistul ',
+                'user_already_affiliated_1' => 'Specialistul ',
+                'user_already_affiliated_2' => ' este deja afiliat',
+                'user_is_school_1' => 'Specialistul ',
+                'user_is_school_2' => ' este deja inscris ca scoala',
             ],
 
             'validation' => [

@@ -6,13 +6,13 @@ use Lang;
 use Flash;
 use Redirect;
 use Validator;
-use Genuineq\User\Models\User;
-use Genuineq\Profile\Models\Specialist as SpecialistModel;
-use Genuineq\Profile\Classes\UserData;
-use Genuineq\User\Helpers\RedirectHelper;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
+use Genuineq\User\Models\User;
+use Genuineq\User\Helpers\RedirectHelper;
+use Genuineq\Profile\Models\Specialist as SpecialistModel;
+use Genuineq\Profile\Classes\UserData;
 
 /**
  * Specialist component
@@ -54,7 +54,7 @@ class Specialist extends ComponentBase
     /**
      * Function that updates a specialist.
      */
-    public function onSpecialistUpdate()
+    public function onSpecialistProfileUpdate()
     {
         if (!Auth::check()) {
             return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
@@ -69,89 +69,6 @@ class Specialist extends ComponentBase
         UserData::updateData(post(), $user, $profile);
 
         Flash::success(Lang::get('genuineq.profile::lang.components.specialist.message.profile_update_successful'));
-
-        return Redirect::refresh();
-    }
-
-    /**
-     * Function that archives a specialist.
-     */
-    public function onSpecialistArchive()
-    {
-        if (!Auth::check()) {
-            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
-        }
-
-        /** Extract the user */
-        $user = Auth::getUser();
-
-        /** Extract the specialist that needs to be archived. */
-        $specialist = $user->profile->specialists->where('id', post('id'))->first();
-
-        if ($specialist) {
-            /** Archive the extracted specialist. */
-            $specialist->archived = true;
-            $specialist->save();
-
-            Flash::success(Lang::get('genuineq.profile::lang.components.specialist.message.specialist_archive_successful'));
-        } else {
-            Flash::error(Lang::get('genuineq.profile::lang.components.specialist.message.specialist_archive_failed'));
-        }
-
-        return Redirect::refresh();
-    }
-
-    /**
-     * Function that unzips a specialist.
-     */
-    public function onSpecialistUnzip()
-    {
-        if (!Auth::check()) {
-            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
-        }
-
-        /** Extract the user */
-        $user = Auth::getUser();
-
-        /** Extract the specialist that needs to be unziped. */
-        $specialist = $user->profile->archivedSpecialists->where('id', post('id'))->first();
-
-        if ($specialist) {
-            /** Unzip the extracted specialist. */
-            $specialist->archived = false;
-            $specialist->save();
-
-            Flash::success(Lang::get('genuineq.profile::lang.components.specialist.message.specialist_unzip_successful'));
-        } else {
-            Flash::error(Lang::get('genuineq.profile::lang.components.specialist.message.specialist_unzip_failed'));
-        }
-
-        return Redirect::refresh();
-    }
-
-    /**
-     * Function that deletes a specialist.
-     */
-    public function onSpecialistDelete()
-    {
-        if (!Auth::check()) {
-            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
-        }
-
-        /** Extract the user */
-        $user = Auth::getUser();
-
-        /** Extract the specialist that needs to be deleted. */
-        $specialist = $user->profile->archivedSpecialists->where('id', post('id'))->first();
-
-        if ($specialist) {
-            /** Delete the extracted specialist. */
-            $specialist->forceDelete();
-
-            Flash::success(Lang::get('genuineq.profile::lang.components.specialist.message.specialist_delete_successful'));
-        } else {
-            Flash::error(Lang::get('genuineq.profile::lang.components.specialist.message.specialist_delete_failed'));
-        }
 
         return Redirect::refresh();
     }

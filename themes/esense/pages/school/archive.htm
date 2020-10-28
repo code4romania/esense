@@ -11,6 +11,8 @@ allowedUserTypes[] = "school"
 
 [specialist]
 
+[school]
+
 [students]
 ==
 <div class="container-fluid px-lg-4">
@@ -75,8 +77,7 @@ allowedUserTypes[] = "school"
                                 </td>
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
-
-                                        <a role="button" data-toggle="modal" data-target="#unzipStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                        <a class="display-4 font-weight-light" href="{{ 'school/student'|page({id: student.id}) }}">
                                             <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
                                         </a>
 
@@ -137,7 +138,7 @@ allowedUserTypes[] = "school"
                                             {% endif %}
 
                                             <div class="d-flex flex-column ml-2">
-                                                <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</p>
+                                                <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({id: specialist.id}) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -159,8 +160,7 @@ allowedUserTypes[] = "school"
 
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
-
-                                        <a role="button" data-toggle="modal" data-target="#unzipSpecialistModal" data-name='{{ specialist.full_name }}' data-id='{{ specialist.id }}'>
+                                        <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({id: specialist.id}) }}">
                                             <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
                                         </a>
 

@@ -14,6 +14,10 @@ counties = 1
 
 [profileStaticData]
 schools = 1
+
+[specialist]
+
+[school]
 ==
 <div class="container-fluid px-lg-4 mb-5">
     <div class="row">
@@ -28,7 +32,7 @@ schools = 1
 
         <div class="col-12">
             <!-- Edit profile form -->
-            <form data-request='onEditSpecialist'>
+            <form data-request='onSpecialistUpdate' data-request-data='id: {{ specialist.id }}'>
                 <div class="row">
 
                     <div class="col-12">
@@ -39,8 +43,8 @@ schools = 1
                                 <!-- Teacher avatar -->
                                 <div class="d-flex align-items-center mt-3 mb-4">
                                     <p class="p-0 m-0 small text-gray-darl">{{'teacher.dashboard.profile.avatar.text'|_}}</p>
-                                    {% if user.avatar %}
-                                        <img class="img-fluid img-avatar add-custom-avatar ml-3" src="{{user.avatar.getThumb(80,80, { mode : 'crop' } )}}" alt="avatar">
+                                    {% if specialist.avatar %}
+                                        <img class="img-fluid img-avatar add-custom-avatar ml-3" src="{{specialist.avatar.getThumb(80,80, { mode : 'crop' } )}}" alt="avatar">
                                     {% else %}
                                         <div class="add-avatar">
                                             <img id="add-avatar" class="img-fluid add-custom-avatar ml-3" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
@@ -55,35 +59,28 @@ schools = 1
                                     <!-- Last name input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <input type="text" name="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="{{'registerPage.form.input.last.name.placeholder'|_}}" style="font-style: italic;">
+                                            <input type="text" name="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="{{'registerPage.form.input.last.name.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.surname }}">
                                         </div>
                                     </div>
 
                                     <!-- First name input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{'registerPage.form.input.first.name.placeholder'|_}}" style="font-style: italic;">
+                                            <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{'registerPage.form.input.first.name.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.name }}">
                                         </div>
                                     </div>
 
                                     <!-- Phone number input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <input type="number" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="{{'registerPage.form.input.phone.placeholder'|_}}" style="font-style: italic;">
+                                            <input type="number" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="{{'registerPage.form.input.phone.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.phone }}">
                                         </div>
                                     </div>
 
                                     <!-- Email input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.email.placeholder'|_}}" style="font-style: italic;">
-                                        </div>
-                                    </div>
-
-                                    <!-- Password -->
-                                    <div class="col-12 col-lg-6">
-                                        <div class="form-group">
-                                            <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="{{'registerPage.form.input.password.placeholder'|_}}" style="font-style: italic;">
+                                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.email.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.email }}">
                                         </div>
                                     </div>
 
@@ -105,7 +102,6 @@ schools = 1
                                         </div>
                                     </div>
 
-                                    <input name="type" type="text" id="type" class="d-none" value="specialist">
                                 </div>
                             </div>
 
@@ -114,7 +110,9 @@ schools = 1
                                 <p class="display-2 text-medium-dark form-styles pl-3">{{'registerPage.form.title_2'|_}}</p>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+                                        <textarea class="form-control" name="description" id="description" rows="5">
+                                            {{ specialist.description|raw }}
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +157,11 @@ schools = 1
 
                     /* Parse all received citied and add them. */
                     for (const city in data) {
-                        $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                        if( data[city] == {{ specialist.city_id }} ) {
+                            $('#specialistCity').append(`<option value="${data[city]}" selected>${city}</option>`);
+                        } else {
+                            $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                        }
                     }
 
                     /* Activate the select. */
@@ -182,7 +184,11 @@ schools = 1
 
                         /* Parse all received citied and add them. */
                         for (const city in data) {
-                            $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                            if( data[city] == {{ specialist.city_id }} ) {
+                                $('#specialistCity').append(`<option value="${data[city]}" selected>${city}</option>`);
+                            } else {
+                                $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                            }
                         }
 
                         /* Activate the select. */
