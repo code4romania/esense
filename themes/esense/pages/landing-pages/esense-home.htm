@@ -8,6 +8,8 @@ is_hidden = 0
 security = "all"
 allowedUserGroups[] = "registered"
 allowedUserGroups[] = "guest"
+
+[contactform]
 ==
 <!-- Home section -->
 <section class="min-vh-100">
@@ -205,9 +207,10 @@ allowedUserGroups[] = "guest"
                     <div class="row">
                         <div class="col-12 mt-5">
 
-
-                            <form method="POST" data-request"">
+                            <form method="POST" data-request="onSubmit">
                                 <div class="row">
+
+<!--            Fill some fields with specific data if an user is authenticated  => loggedUser    -->
 
                                     <!-- First name -->
                                     <div class="col-12 col-md-6 mb-3">
@@ -218,7 +221,7 @@ allowedUserGroups[] = "guest"
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/user-form-icon.svg'|theme }}">
                                                 </span>
                                             </div>
-                                            <input name="first_name" type="text" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.first.name.placeholder'|_}}"
+                                            <input name="first_name" type="text" value="{{ loggedUser.first_name }}" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.first.name.placeholder'|_}}"
                                                 aria-label="first_name" aria-describedby="basic-addon1" id="first_name">
                                         </div>
                                     </div>
@@ -232,7 +235,7 @@ allowedUserGroups[] = "guest"
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/form-label-icon.svg'|theme }}">
                                                 </span>
                                             </div>
-                                            <input name="last_name" type="text" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.last.name.placeholder'|_}}"
+                                            <input name="last_name" type="text" value="{{ loggedUser.last_name }}" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.last.name.placeholder'|_}}"
                                                 aria-label="last_name" aria-describedby="basic-addon1" id="last_name">
                                         </div>
                                     </div>
@@ -246,7 +249,7 @@ allowedUserGroups[] = "guest"
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/form-email-icon.svg'|theme }}">
                                                 </span>
                                             </div>
-                                            <input name="email" type="email" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.email.placeholder'|_}}"
+                                            <input name="email" type="email" value="{{ loggedUser.email }}" class="form-control border-left-0 border-light pl-0" placeholder="{{'homePage.form.email.placeholder'|_}}"
                                                 aria-label="email" aria-describedby="basic-addon1" id="email">
                                         </div>
                                     </div>

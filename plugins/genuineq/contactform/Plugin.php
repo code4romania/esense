@@ -14,15 +14,15 @@ class Plugin extends PluginBase
             'name'        => 'genuineq.contactform::lang.plugin.name',
             'description' => 'genuineq.contactform::lang.plugin.description',
             'author'      => 'genuineq',
-            'icon'        => 'oc-icon-calendar'
+            'icon'        => 'space-shuttle'
         ];
     }
 
     public function registerComponents()
     {
-//        return [
-//            'Genuineq\ContactForm\Components\ContactForm' => 'contactform'
-//        ];
+        return [
+            'Genuineq\ContactForm\Components\ContactForm' => 'contactform'
+        ];
     }
 
     public function registerSettings()

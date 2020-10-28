@@ -6,15 +6,15 @@ plugin:
     homepage: ''
 navigation:
     contactform:
-        label: 'genuineq.contactform::lang.message.backend-menu.name'
+        label: 'genuineq.contactform::lang.backend.name'
         url: genuineq/contactform/messages
         icon: icon-space-shuttle
         sideMenu:
             messages:
-                label: 'genuineq.contactform::lang.message.backend-menu.name'
+                label: 'genuineq.contactform::lang.backend.name'
                 url: genuineq/contactform/messages
                 icon: icon-th-list
             sendmessage:
-                label: 'genuineq.contactform::lang.message.backend-menu.send_message'
+                label: 'genuineq.contactform::lang.backend.send_message'
                 url: genuineq/contactform/messages/create
                 icon: icon-send-o
