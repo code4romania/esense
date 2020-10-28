@@ -207,6 +207,13 @@ class School extends ComponentBase
                 } elseif ('specialist' == $specialistUser->type) {
                     /** The specialist exist and is NOT affiliated. Affiliate it. */
 
+                    /** Extract specialist profile. */
+                    $specialistProfile = $specialistUser->profile;
+
+                    /** Update the specialist profile and save it. */
+                    $specialistProfile->school_id = $user->profile->id;
+                    $specialistProfile->save();
+
                     $data = [
                         'name' => $specialistUser->full_name,
                         'school_name' => $user->profile->name
