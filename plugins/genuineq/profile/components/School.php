@@ -6,7 +6,11 @@ use Lang;
 use Flash;
 use Redirect;
 use Validator;
+use Cms\Classes\Page;
 use Genuineq\User\Models\User;
+use Genuineq\Profile\Models\Specialist;
+use Genuineq\User\Helpers\RedirectHelper;
+use Genuineq\User\Helpers\UserInviteHelper;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
@@ -24,6 +28,23 @@ class School extends ComponentBase
             'name'        => 'genuineq.profile::lang.components.school.name',
             'description' => 'genuineq.profile::lang.components.school.description'
         ];
+    }
+
+    public function defineProperties()
+    {
+        return [
+            'resetPage' => [
+                'title'       => 'genuineq.profile::lang.components.school.backend.reset_page',
+                'description' => 'genuineq.profile::lang.components.school.backend.reset_page_desc',
+                'type'        => 'dropdown',
+                'default'     => ''
+            ],
+        ];
+    }
+
+    public function getResetPageOptions()
+    {
+        return [''=>'- refresh page -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     /**
@@ -111,6 +132,62 @@ class School extends ComponentBase
         $profile->save();
 
         Flash::success(Lang::get('genuineq.profile::lang.components.school.message.profile_update_successful'));
+
+        return Redirect::refresh();
+    }
+
+    /**
+     * Function used for inviting specialists.
+     */
+    public function onSpecialistsInvite()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+
+        /** Extract the user. */
+        $user = Auth::getUser();
+
+        /**
+         * Parse all inputs and add specialists.
+         * There can ONLY be added MAX 5 specilists at a time.
+         */
+        for ($index = 0; $index < 5; $index++) {
+            /** Check if specialists with index $index exists. */
+            if (post('specialist_' . $index . '_surname') && post('specialist_' . $index . '_name') && post('specialist_' . $index . '_email') && post('specialist_' . $index . '_phone')) {
+                /** Extract the data. */
+                $data = [
+                    'surname' => post('specialist_' . $index . '_surname'),
+                    'name' => post('specialist_' . $index . '_name'),
+                    'email' => post('specialist_' . $index . '_email'),
+                    'type' => post('specialist_' . $index . '_type')
+                ];
+
+                /** Create user and send invite. */
+                $newUser = UserInviteHelper::inviteUser($user, $data, (($this->property('resetPage')) ? ($this->property('resetPage')) : ($this->currentPageUrl())));
+
+                /** Create user profile. */
+                $profile = new Specialist([
+                    'slug' => Specialist::slug($user->full_name),
+                    'phone' => post('phone'),
+                    'county_id' => $user->profile->county_id,
+                    'city_id' => $user->profile->city_id,
+                    'school_id' => $user->profile->id,
+                    'description' => ''
+                    ]
+                );
+
+                /** Save the profile. */
+                $profile->save();
+
+                /** Link profile and user. */
+                $newUser->profile = $profile;
+
+                $newUser->save();
+            }
+        }
+
+        Flash::success(Lang::get('genuineq.profile::lang.components.school.message.user_invite_successful'));
 
         return Redirect::refresh();
     }

@@ -1,0 +1,213 @@
+title = "Adaugă profesor"
+url = "/school/specialist-add"
+layout = "web-app"
+description = "Used for adding a specialist"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "school"
+
+[account]
+
+[school]
+resetPage = "authentification/reset-password"
+==
+<div class="container-fluid px-lg-4">
+    <div class="row">
+        <div class="col-12">
+            <form class="px-lg-4" data-request="onSpecialistsInvite">
+
+                <div id="specialist-1" class="px-3">
+                    {%
+                        partial 'web-app/school/specialist-form'
+
+                        lastNameId = 'specialist_1_surname_id'
+                        firstNameId = 'specialist_1_name_id'
+                        phoneId = 'specialist_1_phone_id'
+                        emailId = 'specialist_1_email_id'
+                        typeId = 'specialist_1_type_id'
+                        hideId = 'hide-1'
+                        hideClass = ''
+
+                        lastName = 'specialist_1_surname'
+                        firstName = 'specialist_1_name'
+                        phone = 'specialist_1_phone'
+                        email = 'specialist_1_email'
+                        type = 'specialist_1_type'
+                    %}
+                </div>
+
+                <div id="specialist-2" class="px-3 d-none">
+                    {%
+                        partial 'web-app/school/specialist-form'
+
+                        lastNameId = 'specialist_2_surname_id'
+                        firstNameId = 'specialist_2_name_id'
+                        phoneId = 'specialist_2_phone_id'
+                        emailId = 'specialist_2_email_id'
+                        typeId = 'specialist_2_type_id'
+                        hideId = 'hide-2'
+                        specialistFormId = 'specialist-2'
+
+                        lastName = 'specialist_2_surname'
+                        firstName = 'specialist_2_name'
+                        phone = 'specialist_2_phone'
+                        email = 'specialist_2_email'
+                        type = 'specialist_2_type'
+                    %}
+                </div>
+
+                <div id="specialist-3" class="px-3 d-none">
+                    {%
+                        partial 'web-app/school/specialist-form'
+
+                        lastNameId = 'specialist_3_surname_id'
+                        firstNameId = 'specialist_3_name_id'
+                        phoneId = 'specialist_3_phone_id'
+                        emailId = 'specialist_3_email_id'
+                        typeId = 'specialist_3_type_id'
+                        hideId = 'hide-3'
+                        specialistFormId = 'specialist-3'
+
+                        lastName = 'specialist_3_surname'
+                        firstName = 'specialist_3_name'
+                        phone = 'specialist_3_phone'
+                        email = 'specialist_3_email'
+                        type = 'specialist_3_type'
+                    %}
+                </div>
+
+                <div id="specialist-4" class="px-3 d-none">
+                    {%
+                        partial 'web-app/school/specialist-form'
+
+                        lastNameId = 'specialist_4_surname_id'
+                        firstNameId = 'specialist_4_name_id'
+                        phoneId = 'specialist_4_phone_id'
+                        emailId = 'specialist_4_email_id'
+                        typeId = 'specialist_4_type_id'
+                        hideId = 'hide-4'
+                        specialistFormId = 'specialist-4'
+
+                        lastName = 'specialist_4_surname'
+                        firstName = 'specialist_4_name'
+                        phone = 'specialist_4_phone'
+                        email = 'specialist_4_email'
+                        type = 'specialist_4_type'
+                    %}
+                </div>
+
+                <div id="specialist-5" class="px-3 d-none">
+                    {%
+                        partial 'web-app/school/specialist-form'
+
+                        lastNameId = 'specialist_5_surname_id'
+                        firstNameId = 'specialist_5_name_id'
+                        phoneId = 'specialist_5_phone_id'
+                        emailId = 'specialist_5_email_id'
+                        typeId = 'specialist_5_type_id'
+                        specialistFormId = 'specialist-5'
+                        hideId = 'hide-5'
+                        hideClass = 'd-none'
+
+                        lastName = 'specialist_5_surname'
+                        firstName = 'specialist_5_name'
+                        phone = 'specialist_5_phone'
+                        email = 'specialist_5_email'
+                        type = 'specialist_5_type'
+                    %}
+                </div>
+
+                <!-- Submit button -->
+                <div class="col-12 mb-5 mt-3">
+                    <div class="d-flex justify-content-end">
+                        <button  type="submit" class="add-specialist btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                    </div>
+                </div>
+
+        </form>
+        </div>
+    </div>
+</div>
+{% put scripts %}
+    <!-- Scripts for datatables -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /** Function for adding a new specialist */
+            function addNewContact(link,form) {
+                $(link).on('click', function(){
+                    $(form).removeClass('d-none');
+                    $(link).addClass('d-none');
+                });
+            }
+
+            /** Call the function for adding a new specialist */
+            addNewContact('#hide-1', '#specialist-2');
+            addNewContact('#hide-2', '#specialist-3');
+            addNewContact('#hide-3', '#specialist-4');
+            addNewContact('#hide-4', '#specialist-5');
+
+            /**
+             * Function for triggering the finish button when
+             * values from all fields are selected
+             */
+             function activateFinishBtn() {
+                $('.add-specialist').removeAttr('disabled');
+                $('.add-specialist').removeClass('btn-gray-light');
+                $('.add-specialist').removeClass('text-white');
+                $('.add-specialist').addClass('btn-secondary');
+            }
+
+            function deactivateFinishBtn() {
+                $('.add-specialist').attr('disabled');
+                $('.add-specialist').addClass('btn-gray-light');
+                $('.add-specialist').addClass('text-white');
+                $('.add-specialist').removeClass('btn-secondary');
+            }
+
+            /** Validation for activeting the finish button. */
+            $(document.body).on('change', '.onChangeValue', function(){
+                if(
+                    (
+                        ((0 !== $("#specialist_1_surname_id").val().length) && ((0 == $("#specialist_1_name_id").val().length) || (0 == $("#specialist_1_phone_id").val().length) || (0 == $("#specialist_1_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_1_name_id").val().length) && ((0 == $("#specialist_1_surname_id").val().length) || (0 == $("#specialist_1_phone_id").val().length) || (0 == $("#specialist_1_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_1_phone_id").val().length) && ((0 == $("#specialist_1_surname_id").val().length) || (0 == $("#specialist_1_name_id").val().length) || (0 == $("#specialist_1_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_1_phone_id").val().length) && ((0 == $("#specialist_1_surname_id").val().length) || (0 == $("#specialist_1_name_id").val().length) || (0 == $("#specialist_1_email_id").val().length) ))
+                    ) ||
+                    (
+                        ((0 !== $("#specialist_2_surname_id").val().length) && ((0 == $("#specialist_2_name_id").val().length) || (0 == $("#specialist_2_phone_id").val().length) || (0 == $("#specialist_2_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_2_name_id").val().length) && ((0 == $("#specialist_2_surname_id").val().length) || (0 == $("#specialist_2_phone_id").val().length) || (0 == $("#specialist_2_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_2_phone_id").val().length) && ((0 == $("#specialist_2_surname_id").val().length) || (0 == $("#specialist_2_name_id").val().length) || (0 == $("#specialist_2_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_2_phone_id").val().length) && ((0 == $("#specialist_2_surname_id").val().length) || (0 == $("#specialist_2_name_id").val().length) || (0 == $("#specialist_2_email_id").val().length) ))
+                    ) ||
+                    (
+                        ((0 !== $("#specialist_3_surname_id").val().length) && ((0 == $("#specialist_3_name_id").val().length) || (0 == $("#specialist_3_phone_id").val().length) || (0 == $("#specialist_3_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_3_name_id").val().length) && ((0 == $("#specialist_3_surname_id").val().length) || (0 == $("#specialist_3_phone_id").val().length) || (0 == $("#specialist_3_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_3_phone_id").val().length) && ((0 == $("#specialist_3_surname_id").val().length) || (0 == $("#specialist_3_name_id").val().length) || (0 == $("#specialist_3_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_3_phone_id").val().length) && ((0 == $("#specialist_3_surname_id").val().length) || (0 == $("#specialist_3_name_id").val().length) || (0 == $("#specialist_3_email_id").val().length) ))
+                    ) ||
+                    (
+                        ((0 !== $("#specialist_4_surname_id").val().length) && ((0 == $("#specialist_4_name_id").val().length) || (0 == $("#specialist_4_phone_id").val().length) || (0 == $("#specialist_4_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_4_name_id").val().length) && ((0 == $("#specialist_4_surname_id").val().length) || (0 == $("#specialist_4_phone_id").val().length) || (0 == $("#specialist_4_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_4_phone_id").val().length) && ((0 == $("#specialist_4_surname_id").val().length) || (0 == $("#specialist_4_name_id").val().length) || (0 == $("#specialist_4_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_4_phone_id").val().length) && ((0 == $("#specialist_4_surname_id").val().length) || (0 == $("#specialist_4_name_id").val().length) || (0 == $("#specialist_4_email_id").val().length) ))
+                    ) ||
+                    (
+                        ((0 !== $("#specialist_5_surname_id").val().length) && ((0 == $("#specialist_5_name_id").val().length) || (0 == $("#specialist_5_phone_id").val().length) || (0 == $("#specialist_5_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_5_name_id").val().length) && ((0 == $("#specialist_5_surname_id").val().length) || (0 == $("#specialist_5_phone_id").val().length) || (0 == $("#specialist_5_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_5_phone_id").val().length) && ((0 == $("#specialist_5_surname_id").val().length) || (0 == $("#specialist_5_name_id").val().length) || (0 == $("#specialist_5_email_id").val().length) )) ||
+                        ((0 !== $("#specialist_5_phone_id").val().length) && ((0 == $("#specialist_5_surname_id").val().length) || (0 == $("#specialist_5_name_id").val().length) || (0 == $("#specialist_5_email_id").val().length) ))
+                    )
+                )
+                {
+                    deactivateFinishBtn()
+                } else {
+                    activateFinishBtn()
+                }
+            });
+        });
+    </script>
+{% endput %}

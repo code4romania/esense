@@ -41,7 +41,7 @@
         </li>
 
         {% if user and 'specialist' == user.type and user.profile.affiliated %}
-            <!-- Scoala -->
+            <!-- School -->
             <li class="nav-item mb-2 {% if this.page.url == "/specialist/school"%} active {% endif %}">
                 <div class="vertical-border"></div>
                 <a class="nav-link" href="{{ 'specialist/school'|page }}">
@@ -94,16 +94,16 @@
         <!-- Panou de administrare -->
         <li class="nav-item mb-2 {% if this.page.url == "/school/dashboard" %} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{ 'school/administration-board'|page }}">
+            <a class="nav-link" href="{{ 'school/dashboard'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
                 <span class="text-primary-dark">{{"side.nav.link_1"|_}}</span>
             </a>
         </li>
 
         <!-- Profesori -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/teachers" or this.page.url == "/school/teacher" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/specialists" or this.page.url == "/school/teacher" %} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{ 'school/teachers'|page }}">
+            <a class="nav-link" href="{{ 'school/specialists'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/building.svg'|theme }}">
                 <span class="text-primary-dark">{{"side.nav.link_8"|_}}</span>
             </a>
@@ -128,9 +128,9 @@
         </li>
 
         <!-- Setari -->
-        <li class="nav-item mt-5 mb-2 {% if this.page.url == "/scoala/editeaza-profil-scoala" %} active {% endif %}">
+        <li class="nav-item mt-5 mb-2 {% if this.page.url == "/school/profile-edit" %} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{'school/editeaza-profil-scoala'|page}}">
+            <a class="nav-link" href="{{'school/profile-edit'|page}}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/settings.svg'|theme }}">
                 <span class="text-primary-dark">{{"side.nav.link_6"|_}}</span>
             </a>

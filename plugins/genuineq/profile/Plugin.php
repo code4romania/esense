@@ -4,6 +4,7 @@ use Log;
 use Lang;
 use Mail;
 use Event;
+use Input;
 use System\Classes\PluginBase;
 use Genuineq\User\Models\User;
 use Genuineq\Profile\Models\School;
@@ -122,7 +123,7 @@ class Plugin extends PluginBase
         /** Add extra fields and validation rules. */
         Event::listen('genuineq.user.beforeValidate', function(&$data, &$rules, &$messages, $postData) {
             /** Check user type. */
-            if ('school' == $postData['type']) {
+            if (Input::has('type') && ('school' == $postData['type'])) {
                 /** Add the school slug to be validated. */
                 $data['slug'] = School::slug($postData['school_name']);
                 /** Add the validation rules. */

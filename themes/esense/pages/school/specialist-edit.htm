@@ -1,13 +1,13 @@
 title = "Editează profil profesor"
-url = "/scoala/editeaza-profil-profesor"
+url = "/school/specialist-edit/:id"
 layout = "web-app"
-description = "Pagina de editare a profilului"
+description = "Used for editing a specialist"
 is_hidden = 0
 
 [session]
 security = "user"
 allowedUserGroups[] = "registered"
-allowedUserTypes[] = "specialist"
+allowedUserTypes[] = "school"
 
 [addresses]
 counties = 1
@@ -22,7 +22,7 @@ schools = 1
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'spacialist/profil'|page }}">{{'teacher.dashboard.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'school/specialists'|page }}">{{'school.specilist-edit.back.link.text'|_}}</a>
             </div>
         </div>
 
@@ -51,18 +51,6 @@ schools = 1
 
 
                                 <div class="row">
-
-                                    <!-- School name select -->
-                                    <div class="col-12 col-lg-6">
-                                        <div class="form-group register-select">
-                                            <select name="school" class="form-control border outline-none selectpicker" data-style="btn-white">
-                                                <option value="-1">{{'registerPage.form.input.school.name.placeholder'|_}}</option>
-                                                {% for key, school in schools %}
-                                                    <option value="{{ key }}">{{ school }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
 
                                     <!-- Last name input -->
                                     <div class="col-12 col-lg-6">

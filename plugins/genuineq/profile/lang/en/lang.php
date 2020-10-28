@@ -68,8 +68,14 @@
             'name' => 'School',
             'description' => 'Allows to update schools',
 
+            'backend' => [
+                'reset_page' => 'Password reset page',
+                'reset_page_desc' => 'The page for password reset'
+            ],
+
             'message' => [
                 'profile_update_successful' => 'Profilul a fost actualizat cu success',
+                'user_invite_successful' => 'Invitație trimisă cu succes',
             ],
 
             'validation' => [

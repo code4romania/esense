@@ -292,7 +292,7 @@ return [
                 'email_required' => 'Adresa de email este obligatorie',
                 'email_between' => 'Adresa de email trebuie să aibă între 6 și 255 de caractere',
                 'email_email' => 'Adresa de email nu este validă',
-                'email_unique' => 'Adresa de email este deja folosită. Va rugăm să va autentificați',
+                'email_unique' => 'Adresa de email este deja folosită.',
                 'password_required' => 'Parola este obligatorie',
                 'password_between_1' => 'Parola trebuie să aibă între ',
                 'password_between_2' => ' și ',

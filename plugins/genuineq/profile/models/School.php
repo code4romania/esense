@@ -93,6 +93,26 @@ class School extends Model
         return ($this->user) ? ($this->user->email) : ('');
     }
 
+    /**
+     * Accessor for getting the active teachers.
+     */
+    public function getActiveSpecialistsAttribute()
+    {
+        return $this->specialists()->whereHas('user', function ($query) {
+            $query->whereNotNull('last_login');
+        })->get();
+    }
+
+    /**
+     * Accessor for getting the inactive teachers.
+     */
+    public function getInactiveSpecialistsAttribute()
+    {
+        return $this->specialists()->whereHas('user', function ($query) {
+            $query->whereNull('last_login');
+        })->get();
+    }
+
     /***********************************************
      ****************** Functions ******************
      ***********************************************/

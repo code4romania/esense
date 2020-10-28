@@ -22,6 +22,7 @@ use Genuineq\User\Models\Settings as UserSettings;
 use Genuineq\User\Helpers\RedirectHelper;
 use Genuineq\User\Helpers\RegisterHelper;
 use Genuineq\User\Helpers\EmailHelper;
+use Genuineq\User\Helpers\UserInviteHelper;
 use Genuineq\User\Helpers\PluginConfig;
 
 /**
@@ -266,34 +267,8 @@ class Account extends ComponentBase
             return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
         }
 
-        /** Extract the user */
-        $user = Auth::getUser();
-
-        /** Generate a random password. */
-        $password = str_random(16);
-
-        /** Extract the form data. */
-        $data = [
-            'name' => post('name'),
-            'email' => post('email'),
-            'password' => $password,
-            'password_confirmation' => $password,
-            'type' => 'company',
-            'consent' => 1
-        ];
-
-        /** Validate the data. */
-        RegisterHelper::validate($data);
-
-        /** Register new user. */
-        $newUser = Auth::register($data, /*$activate*/true, /*$autoLogin*/false);
-
-        /** Set the user profile. */
-        $newUser->profile_id = $user->profile_id;
-        $newUser->profile_type = $user->profile_type;
-        $newUser->save();
-
-        EmailHelper::sendInviteEmail($newUser, $user, (($this->property('resetPage')) ? ($this->property('resetPage')) : ($this->currentPageUrl())));
+        /** Create user and send invite. */
+        UserInviteHelper::inviteUser(Auth::getUser(), $data, (($this->property('resetPage')) ? ($this->property('resetPage')) : ($this->currentPageUrl())));
 
         Flash::success(Lang::get('genuineq.user::lang.component.account.message.user_invite_successful'));
 

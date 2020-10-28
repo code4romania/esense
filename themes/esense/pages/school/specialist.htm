@@ -1,7 +1,7 @@
 title = "Profil profesor"
 url = "/school/specialist/:id"
 layout = "web-app"
-description = "Profil profesor"
+description = "Displays a specialists details"
 is_hidden = 0
 
 [session]
@@ -19,7 +19,7 @@ allowedUserTypes[] = "school"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{'school.dashboard.teacher.profile.back.link'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'school/specialists'|page }}">{{'school.dashboard.teacher.profile.back.link'|_}}</a>
             </div>
         </div>
 
@@ -51,7 +51,7 @@ allowedUserTypes[] = "school"
                                         <img class="" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'student.options.link_1'|_}}</a>
+                                        <a class="dropdown-item display-4" href="{{ 'school/specialist-edit'|page({id: specialist.id }) }}" style="color: #1A212C;">{{'student.options.link_1'|_}}</a>
                                         <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'student.options.link_2'|_}}</a>
                                         <a class="dropdown-item display-4 text-danger" href="#">{{'student.options.link_3'|_}}</a>
                                     </div>
@@ -83,7 +83,7 @@ allowedUserTypes[] = "school"
                                                             <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{student.avatar.getThumb(35,35, { mode : 'crop' } )}}" alt="avatar">
                                                         </div>
                                                         <div class="d-flex flex-column ml-2">
-                                                            <a class="display-4 font-weight-light" href="{{ 'specialist/elev'|page({id: student.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
+                                                            <a class="display-4 font-weight-light" href="{{ 'school/student'|page({id: student.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
                                                             <h6 class="p-0 m-0 font-weight-normal text-gray">{{ student.birthdate|date("d/m/Y") }}</h6>
                                                         </div>
                                                     </div>
@@ -98,7 +98,7 @@ allowedUserTypes[] = "school"
                                                                     <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                                                 </button>
                                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                                    <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
+                                                                    <a class="dropdown-item display-4" href="{{ 'school/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
                                                                     <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
                                                                 </div>
                                                             </div>
@@ -145,7 +145,7 @@ allowedUserTypes[] = "school"
                                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                                             </button>
                                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                                <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
+                                                                <a class="dropdown-item display-4" href="{{ 'school/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
                                                                 <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
                                                             </div>
                                                         </div>
@@ -168,7 +168,7 @@ allowedUserTypes[] = "school"
 <!-- Partial for archive a student -->
 {% partial 'web-app/school/archive-student' %}
 <!-- Add student modal -->
-{% partial 'web-app/specialist/student-add' link = "school/adauga-elev"|page %}
+{% partial 'web-app/specialist/student-add' link = "school/student-add"|page %}
 
 {% put scripts %}
     <!-- Scripts for datatables -->
@@ -222,7 +222,7 @@ allowedUserTypes[] = "school"
                 </div>\
                 <div class="col-12 col-lg-5">\
                     <div class="d-flex align-items-center justify-content-start justify-content-lg-end">\
-                        <a href="{{"school/transfera-elev"|page}}" class="btn btn-sm btn-outline-primary-light mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;">\
+                        <a href="{{"school/student-transfer"|page}}" class="btn btn-sm btn-outline-primary-light mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;">\
                             <i class="fas fa-exchange-alt mr-2"></i> {{"teacher.dashboard.students.table.transfer.btn.text"|_}}\
                         </a>\
                         <a data-toggle="modal" data-target="#exampleModalCenter" role="button" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\

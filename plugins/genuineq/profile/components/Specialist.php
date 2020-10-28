@@ -9,6 +9,7 @@ use Validator;
 use Genuineq\User\Models\User;
 use Genuineq\Profile\Models\Specialist as SpecialistModel;
 use Genuineq\Profile\Classes\UserData;
+use Genuineq\User\Helpers\RedirectHelper;
 use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
