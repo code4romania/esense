@@ -173,7 +173,7 @@ class Student extends ComponentBase
 
         $redirectUrl = null;
         /** Fire event before finish. */
-        Event::fire('genuineq.students.create.before.finish', [&$redirectUrl, $student]);
+        Event::fire('genuineq.students.update.before.finish', [&$redirectUrl, $student]);
 
         /** Check if a redirect is required. */
         if ($redirectUrl) {

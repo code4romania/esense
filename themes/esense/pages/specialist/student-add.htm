@@ -164,7 +164,7 @@ allowedUserTypes[] = "specialist"
                         <!-- First contact person -->
                         <div id="person-1" class="px-3 px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_1_surname_id'
                                 contactPersonFirstNameId = 'contact_1_name_id'
@@ -186,7 +186,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Second contact person -->
                         <div id="person-2" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_2_surname_id'
                                 contactPersonFirstNameId = 'contact_2_name_id'
@@ -208,7 +208,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Third contact person -->
                         <div id="person-3" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_3_surname_id'
                                 contactPersonFirstNameId = 'contact_3_name_id'
@@ -230,7 +230,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Forth contact person -->
                         <div id="person-4" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_4_surname_id'
                                 contactPersonFirstNameId = 'contact_4_name_id'
@@ -252,7 +252,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Fifth contact person -->
                         <div id="person-5" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_5_surname_id'
                                 contactPersonFirstNameId = 'contact_5_name_id'
@@ -285,7 +285,7 @@ allowedUserTypes[] = "specialist"
     </div>
 </div>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ro.min.js" integrity="sha512-OyKt3ZoVnoGpHGx10TMtzQTSDHKyGzHIXdOoOiaHcMJMGOR/ev9Y6ocEGd64HVPqGEwkg29xVVbavNjDPeg9GA==" crossorigin="anonymous"></script>
 
@@ -360,7 +360,6 @@ allowedUserTypes[] = "specialist"
 
             /** Validation for activeting the finish button. */
             $(document.body).on('change', '.onChangeValue', function(){
-                console.log($('#description').val());
                 if(
                     (
                         ((0 !== $("#birthdate").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
@@ -369,7 +368,7 @@ allowedUserTypes[] = "specialist"
                         ((0 !== $('#description').length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
                         ((0 !== $("#contact_1_surname_id").val().length) && ((0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) )) ||
                         ((0 !== $("#contact_1_name_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) )) ||
-                        ((0 !== $("#contact_1_phone_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) )) 
+                        ((0 !== $("#contact_1_phone_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) ))
                     ) ||
                     (
                         ((0 !== $("#contact_2_surname_id").val().length) && ((0 == $("#contact_2_name_id").val().length) || (0 == $("#contact_2_phone_id").val().length) )) ||
@@ -379,18 +378,18 @@ allowedUserTypes[] = "specialist"
                     (
                         ((0 !== $("#contact_3_surname_id").val().length) && ((0 == $("#contact_3_name_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
                         ((0 !== $("#contact_3_name_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
-                        ((0 !== $("#contact_3_phone_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) ||(0 == $("#contact_3_name_id").val().length) )) 
+                        ((0 !== $("#contact_3_phone_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) ||(0 == $("#contact_3_name_id").val().length) ))
                     ) ||
                     (
                         ((0 !== $("#contact_4_surname_id").val().length) && ((0 == $("#contact_4_name_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
                         ((0 !== $("#contact_4_name_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
-                        ((0 !== $("#contact_4_phone_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) ||(0 == $("#contact_4_name_id").val().length) )) 
+                        ((0 !== $("#contact_4_phone_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) ||(0 == $("#contact_4_name_id").val().length) ))
                     ) ||
                     (
                         ((0 !== $("#contact_5_surname_id").val().length) && ((0 == $("#contact_5_name_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
                         ((0 !== $("#contact_5_name_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
-                        ((0 !== $("#contact_5_phone_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) ||(0 == $("#contact_5_name_id").val().length) )) 
-                    ) 
+                        ((0 !== $("#contact_5_phone_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) ||(0 == $("#contact_5_name_id").val().length) ))
+                    )
                 ) {
                     deactivateFinishBtn()
                 } else {

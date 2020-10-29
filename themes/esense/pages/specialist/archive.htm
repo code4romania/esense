@@ -108,11 +108,7 @@ allowedUserTypes[] = "specialist"
                                 <td class="d-none d-md-block">
                                     <div class="pl-2 py-3 d-flex align-items-center">
 
-                                        <a class="d-none" href="{{ 'specialist/student'|page({id: student.id }) }}">
-                                            <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
-                                        </a>
-
-                                        <a role="button" data-toggle="modal" data-target="#unzipStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                        <a href="{{ 'specialist/student'|page({id: student.id }) }}">
                                             <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
                                         </a>
 
@@ -126,8 +122,9 @@ allowedUserTypes[] = "specialist"
                                             </button>
 
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
-                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
+                                                <a class="dropdown-item display-4" role="button" data-toggle="modal" data-target="#unzipStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' style="color: #1A212C;">
+                                                    {{'teacher.dashboard.students.table.options.unzip'|_}}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -143,9 +140,9 @@ allowedUserTypes[] = "specialist"
 </div>
 
 <!-- Partial for delete a student -->
-{% partial 'web-app/school/delete-student' %}
+{% partial 'web-app/general/student-delete' %}
 <!-- Partial for unzip a student -->
-{% partial 'web-app/school/unzip-student' %}
+{% partial 'web-app/general/student-unzip' %}
 
 {% put scripts %}
     <!-- Scripts for datatables -->
