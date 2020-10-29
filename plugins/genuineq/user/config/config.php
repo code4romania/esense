@@ -19,7 +19,7 @@
 
     /** Login redirects based on user types. */
     'loginRedirects' => [
-        'specialist' => 'specialist/dashboad',
+        'specialist' => 'specialist/dashboard',
         'school' => 'school/dashboard'
     ],
 
