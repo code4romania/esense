@@ -125,7 +125,9 @@ allowedUserTypes[] = "specialist"
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
                                                         <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'students.table.options.link_1'|_}}</a>
-                                                        <a class="dropdown-item display-4" href="{{ 'specialist/adauga-profesor'|page }}" style="color: #1A212C;">{{'students.table.options.link.2'|_}}</a>
+                                                        {% if user.profile.affiliated %}
+                                                            <a class="dropdown-item display-4" href="{{ 'specialist/adauga-profesor'|page }}" style="color: #1A212C;">{{'students.table.options.link.2'|_}}</a>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,7 +153,6 @@ allowedUserTypes[] = "specialist"
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
                                                     <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'students.table.options.link_1'|_}}</a>
-                                                    <a class="dropdown-item display-4" href="{{ 'specialist/adauga-profesor'|page }}" style="color: #1A212C;">{{'students.table.options.link.2'|_}}</a>
                                                 </div>
                                             </div>
                                        </div>

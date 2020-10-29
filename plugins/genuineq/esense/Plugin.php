@@ -77,7 +77,11 @@ class Plugin extends PluginBase
             $model->morphTo['owner'] = [];
 
             /** Link "Specialist" model to "Student" model with many-to-many relation. */
-            $model->belongsToMany['specialists'] = ['Genuineq\Profile\Models\Specialist', 'table' => 'genuineq_esense_students_specialists'];
+            $model->belongsToMany['specialists'] = [
+                'Genuineq\Profile\Models\Specialist',
+                'table' => 'genuineq_esense_students_specialists',
+                'pivot' => ['approved']
+            ];
         });
     }
 
@@ -123,19 +127,23 @@ class Plugin extends PluginBase
 
         Event::listen('genuineq.students.create.after.student.create', function($student) {
             /** Create a specialist connection. */
-            $student->specialists()->attach($student->owner_id);
+            $student->specialists()->attach($student->owner_id, ['approved' => true]);
         });
         /************ Student CREATE end ************/
 
         /************ Student UPDATE start ************/
-        Event::listen('genuineq.students.update.before.student.update', function(&$data, $inputs) {
-            /** Add the owner ID to the data. */
-            if ('specialist' == Auth::getUser()->type) {
-                $data['owner_id'] = Auth::user()->profile->id;
-            } else {
-                $data['owner_id'] = $inputs['owner'];
+        Event::listen('genuineq.students.student.update.start', function(&$component, $inputs, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
             }
-            $data['owner_type'] = 'Genuineq\Profile\Models\Specialist';
+        });
+
+        Event::listen('genuineq.students.update.before.student.update', function(&$student, $inputs) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract the student that needs to be archived. */
+            $student = $user->profile->allStudents()->where('id', $inputs['id'])->first();
         });
         /************ Student UPDATE end ************/
 
@@ -170,7 +178,7 @@ class Plugin extends PluginBase
             $student = $user->profile->archivedStudents->where('id', $inputs['id'])->first();
         });
         /************ Student UNZIP end ************/
-        
+
         /************ Student DELETE start ************/
         Event::listen('genuineq.students.student.delete.start', function(&$component, $inputs, &$redirectUrl) {
             if (!Auth::check()) {
@@ -217,7 +225,7 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getStudentsAttribute', function() use ($model) {
                 $students = new Collection();
 
-                /** Parse all the in specialists.  */
+                /** Parse students all the in specialists. */
                 foreach ($model->active_specialists as $specialist) {
                     $students = $students->merge($specialist->students);
                 }
@@ -229,12 +237,12 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getArchivedStudentsAttribute', function() use ($model) {
                 $archivedStudents = new Collection();
 
-                /** Parse all the in specialists.  */
+                /** Parse all students the in active specialists. */
                 foreach ($model->active_specialists as $specialist) {
                     $archivedStudents = $archivedStudents->merge($specialist->archivedStudents);
                 }
 
-                /** Parse all the in archived specialists.  */
+                /** Parse all the students in archived specialists.  */
                 foreach ($model->archivedSpecialists as $specialist) {
                     $archivedStudents = $archivedStudents->merge($specialist->archivedStudents);
                 }
@@ -246,12 +254,12 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getAllStudentsAttribute', function() use ($model) {
                 $allStudents = new Collection();
 
-                /** Parse all the in specialists.  */
+                /** Parse all students the in active specialists. */
                 foreach ($model->active_specialists as $specialist) {
                     $allStudents = $allStudents->merge($specialist->allStudents);
                 }
 
-                /** Parse all the in archived specialists.  */
+                /** Parse all students the in archived specialists.  */
                 foreach ($model->archivedSpecialists as $specialist) {
                     $allStudents = $allStudents->merge($specialist->allStudents);
                 }

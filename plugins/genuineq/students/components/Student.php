@@ -141,11 +141,11 @@ class Student extends ComponentBase
         /** Validate the student data. */
         $this->validateStudentData($data, post());
 
-        /** Fire event before student update. */
-        Event::fire('genuineq.students.update.before.student.update', [&$data, post()]);
-
         /** Extract the student. */
         $student = StudentModel::find(post('id'));
+
+        /** Fire event before student update. */
+        Event::fire('genuineq.students.update.before.student.update', [&$student, post()]);
 
         /** Update the student. */
         $student->update($data);
