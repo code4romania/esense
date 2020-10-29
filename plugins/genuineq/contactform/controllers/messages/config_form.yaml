@@ -4,7 +4,7 @@ form: $/genuineq/contactform/models/message/fields.yaml
 defaultRedirect: genuineq/contactform/messages
 create:
     title: 'genuineq.contactform::lang.backend.create_message'
-    redirect: 'genuineq/contactform/messages/update/:id'
+    redirect: genuineq/contactform/messages
     redirectClose: genuineq/contactform/messages
     flashSave: 'genuineq.contactform::lang.backend.flash.send_message.success'
 update:
