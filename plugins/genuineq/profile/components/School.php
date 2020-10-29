@@ -246,12 +246,16 @@ class School extends ComponentBase
         /** Extract the specialist that needs to be updated. */
         $specialist = Auth::getUser()->profile->specialists()->where('id', post('id'))->first();
 
-        /** Class with received user data */
-        UserData::updateData(post(), $specialist->user, $specialist);
+        if($specialist) {
+            /** Class with received user data */
+            UserData::updateData(post(), $specialist->user, $specialist);
 
-        Flash::success(Lang::get('genuineq.profile::lang.components.school.message.update_successful'));
+            Flash::success(Lang::get('genuineq.profile::lang.components.school.message.update_successful'));
 
-        return Redirect::refresh();
+            return Redirect::refresh();
+        } else {
+            return Redirect::guest($this->pageUrl(RedirectHelper::accessDenied()));
+        }
     }
 
     /**
@@ -275,11 +279,11 @@ class School extends ComponentBase
             $specialist->save();
 
             Flash::success(Lang::get('genuineq.profile::lang.components.school.message.archive_successful'));
-        } else {
-            Flash::error(Lang::get('genuineq.profile::lang.components.school.message.archive_failed'));
-        }
 
-        return Redirect::refresh();
+            return Redirect::refresh();
+        } else {
+            return Redirect::guest($this->pageUrl(RedirectHelper::accessDenied()));
+        } 
     }
 
     /**
@@ -303,11 +307,11 @@ class School extends ComponentBase
             $specialist->save();
 
             Flash::success(Lang::get('genuineq.profile::lang.components.school.message.unzip_successful'));
-        } else {
-            Flash::error(Lang::get('genuineq.profile::lang.components.school.message.unzip_failed'));
-        }
 
-        return Redirect::refresh();
+            return Redirect::refresh();
+        } else {
+            return Redirect::guest($this->pageUrl(RedirectHelper::accessDenied()));
+        }
     }
 
     /**
@@ -330,10 +334,10 @@ class School extends ComponentBase
             $specialist->forceDelete();
 
             Flash::success(Lang::get('genuineq.profile::lang.components.school.message.delete_successful'));
-        } else {
-            Flash::error(Lang::get('genuineq.profile::lang.components.school.message.delete_failed'));
-        }
 
-        return Redirect::refresh();
+            return Redirect::refresh();
+        } else {
+            return Redirect::guest($this->pageUrl(RedirectHelper::accessDenied()));
+        }   
     }
 }
