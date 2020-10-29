@@ -4,7 +4,7 @@ description = "Partial pentru a arhiva un elev"
 ==
 <!-- Modal -->
 <form>
-    <div class="modal fade" id="arhiveStudentModal" tabindex="-1" role="dialog" aria-labelledby="arhiveStudentModal" aria-hidden="true">
+    <div class="modal fade" id="archiveStudentModal" tabindex="-1" role="dialog" aria-labelledby="archiveStudentModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -28,7 +28,7 @@ description = "Partial pentru a arhiva un elev"
 
 <script>
     /** Populate the modal after opening. */
-    $('#arhiveStudentModal').on('show.bs.modal', function (event) {
+    $('#archiveStudentModal').on('show.bs.modal', function (event) {
         /** Update the specialist name. */
         $(this).find('#studentName').text($(event.relatedTarget).data('name'));
 
