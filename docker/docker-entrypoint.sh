@@ -51,10 +51,10 @@ php artisan config:cache
 php artisan october:mirror public --relative
 
 # Remove the media folder public link if exists
-rm -f ./public/storage/app/media
+#rm -f ./public/storage/app/media
 
 # Create the media folder public link
-ln -s ../../../storage/app/media ./storage/app/media
+#ln -s ../../../storage/app/media ./storage/app/media
 
 # Change public folder ownership
 chown -R www-data:www-data /var/www

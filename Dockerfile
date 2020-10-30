@@ -17,8 +17,8 @@ RUN apt-get update \
 RUN apt-get update \
     && add-apt-repository -y ppa:ondrej/php \
     && apt-get update \
-    && apt-get install -y php7.2-fpm php7.2-ctype php7.2-curl php7.2-xml php7.2-fileinfo php7.2-gd \
-                          php7.2-json php7.2-mbstring php7.2-mysql php7.2-sqlite3 php7.2-zip
+    && apt-get install -y php7.4-fpm php7.4-ctype php7.4-curl php7.4-xml php7.4-fileinfo php7.4-gd \
+                          php7.4-json php7.4-mbstring php7.4-mysql php7.4-sqlite3 php7.4-zip
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -52,7 +52,7 @@ COPY ./.htaccess /var/www/.htaccess
 COPY ./.jshintrc /var/www/.jshintrc
 COPY ./artisan /var/www/artisan
 COPY ./composer.json /var/www/composer.json
-COPY ./composer.lock /var/www/composer.lock
+#COPY ./composer.lock /var/www/composer.lock
 COPY ./package.json /var/www/package.json
 COPY ./phpcs.xml /var/www/phpcs.xml
 COPY ./phpunit.xml /var/www/phpunit.xml
@@ -77,9 +77,9 @@ RUN mkdir /var/www/storage \
 # Copy nginx configuration
 COPY ./docker/default /etc/nginx/sites-available/default
 # Copy php fpm configuration
-COPY ./docker/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
+COPY ./docker/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 # Copy php configuration
-COPY ./docker/php.ini /etc/php/7.2/fpm/php.ini
+COPY ./docker/php.ini /etc/php/7.4/fpm/php.ini
 # Copy supervisord configuration
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
