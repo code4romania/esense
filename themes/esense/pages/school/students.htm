@@ -35,7 +35,7 @@ allowedUserTypes[] = "school"
                                     <div class="pl-2 py-3 d-flex align-items-center">
                                         <div>
                                             {% if student.avatar %}
-                                                <img class="img-fluid img-avatar rounded-circle" src="{{user.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
+                                                <img class="img-fluid img-avatar rounded-circle" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
                                             {% elseif student.gender == 'female' %}
                                                 <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
                                             {% else %}
@@ -78,7 +78,7 @@ allowedUserTypes[] = "school"
                                 </td>
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
-                                        <a role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                        <a role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}'>
                                             <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
                                         </a>
                                         <div class="dropdown pt-2">
@@ -103,6 +103,8 @@ allowedUserTypes[] = "school"
 
 <!-- Partial for archiving a teacher -->
 {% partial 'web-app/general/student-archive' %}
+<!-- Paratial for searching a student -->
+{% partial 'web-app/general/student-add' %}
 
 {% put scripts %}
     <!-- Scripts for datatables -->
@@ -156,7 +158,7 @@ allowedUserTypes[] = "school"
                 </div>\
                 <div class="col-12 col-lg-5">\
                     <div class="d-flex align-items-center justify-content-start justify-content-lg-end">\
-                        <a href="{{"school/student-add"|page}}" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;">\
+                        <a data-toggle="modal" data-target="#addStudentModal" role="button" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;">\
                             <i class="fas fa-user-edit mr-2"></i> {{"teacher.dashboard.students.table.add.btn.text"|_}}\
                         </a>\
                     </div>\

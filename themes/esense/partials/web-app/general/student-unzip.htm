@@ -13,7 +13,7 @@ description = "Partial for confirming a student dearchivation."
                     </button>
 
                     <div class="d-flex align-items-center justify-content-center">
-                        <img class="img-fluid" width="35px" height="35px" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar elev">
+                        <img class="img-fluid img-avatar rounded-circle" width="40" height="40" id="studentAvatar" alt="avatar"/>
                         <p id="studentName" class="p-0 m-0 display-4 text-dark ml-2"></p>
                     </div>
 
@@ -37,6 +37,9 @@ description = "Partial for confirming a student dearchivation."
     $('#unzipStudentModal').on('show.bs.modal', function (event) {
         /** Update the student name. */
         $(this).find('#studentName').text($(event.relatedTarget).data('name'));
+
+        /** Update the student avatar. */
+        $(this).find('#studentAvatar').attr("src", $(event.relatedTarget).data('avatar'));
 
         /** Save the student ID. */
         $(this).find('#unzipStudentSubmit').data('id', $(event.relatedTarget).data('id'));
