@@ -1,16 +1,13 @@
 <?php namespace Genuineq\Students\Components;
 
 use Log;
-use Auth;
 use Lang;
 use Flash;
 use Event;
 use Input;
-use Request;
 use Redirect;
 use Validator;
 use ValidationException;
-use ApplicationException;
 use \System\Models\File;
 use Cms\Classes\ComponentBase;
 use Genuineq\Students\Models\Student as StudentModel;

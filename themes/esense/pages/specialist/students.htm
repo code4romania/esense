@@ -10,6 +10,8 @@ allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
 
 [student]
+
+[studentAccess]
 ==
 <div class="container-fluid px-lg-4 mb-5">
     <div class="row">
@@ -121,8 +123,10 @@ allowedUserTypes[] = "specialist"
     </div>
 </div>
 
-<!-- Add student modal -->
-{% partial 'web-app/specialist/student-add' link = "specialist/student-add"|page %}
+{% if user.profile.affiliated  %}
+    <!-- Add student modal -->
+    {% partial 'web-app/specialist/student-add' link = "specialist/student-add"|page %}
+{% endif %}
 <!-- Partial for archive a student -->
 {% partial 'web-app/general/student-archive' %}
 
@@ -176,13 +180,13 @@ allowedUserTypes[] = "specialist"
                                 {{"teacher.dashboard.students.table.text"|_}} ({{ user.profile.students.count }})\
                             </p> </div> <div class="col-12 col-lg-5">\
                             <div class="d-flex align-items-center justify-content-start justify-content-lg-end flex-column flex-md-row">\
-                                {% if user and "specialist" == user.type and user.profile.affiliated  %}\
+                                {% if user.profile.affiliated  %}\
                                     <a href="{{"specialist/student-transfer"|page}}" class="btn btn-sm btn-outline-primary-light mb-3 mb-md-0 mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"><i class="fas fa-exchange-alt mr-2"></i>\
                                         {{"teacher.dashboard.students.table.transfer.btn.text"|_}}\
                                     </a>\
                                 {% endif %}\
-                                {% if user and "specialist" == user.type and user.profile.affiliated  %}\
-                                    <a data-toggle="modal" data-target="#exampleModalCenter" role="button" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\
+                                {% if user.profile.affiliated  %}\
+                                    <a data-toggle="modal" data-target="#addStudentModal" role="button" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\
                                         {{"teacher.dashboard.students.table.add.btn.text"|_}}\
                                     </a>\
                                 {% else %}\

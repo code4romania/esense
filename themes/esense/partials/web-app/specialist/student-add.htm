@@ -17,11 +17,11 @@ description = "Add student partial"
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <a role="button" id="solicita-acces" class="btn btn-sm btn-secondary px-4 d-none" >Solicita acces</a>
+                <a role="button" id="request-access" class="btn btn-sm btn-secondary px-4 d-none" >Solicita acces</a>
             </div>
         </div>
         <div id="spacer" style="width: 5rem; height:10px; background:#c4c4c4; margin-left:5rem;"></div>
-        <div id="creaza-profil" class="bg-white rounded p-5">
+        <div id="create-profile" class="bg-white rounded p-5">
             <div class="d-flex align-items-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/folder.svg'|theme }}">
                 <p class="p-0 m-0 ml-2 display-2 text-dark">Creează profil elev</p>
@@ -31,17 +31,18 @@ description = "Add student partial"
                 <a class="text-secondary display-4" href="{{link}}">Creează profil elev</a>
             </div>
         </div>
-        <div id="message" class="rounded-bottom bg-white pb-5 px-5 d-none">
+
+        <div id="message-container" class="rounded-bottom bg-white pb-5 px-5 d-none">
             <p class="p-0 m-0 py-2 small text-gray-2">mesaj trimis catre:<span class="font-weight-bold">student@email.com</span></p>
-            <form>
-                <div class="form-group d-flex">
-                    <textarea class="form-control" id="description" rows="3" placeholder="Mesajul tau"></textarea>
-                </div>
-                <div class="d-flex align-items-center justify-content-end mt-2">
-                    <a role="button" class="mr-3 text-gray-2 display-4" data-dismiss="modal">Anuleaza</a>
-                    <button type="submit" class="btn btn-sm px-5 btn-secondary">Trimite</button>
-                </div>
-            </form>
+
+            <div class="form-group d-flex">
+                <textarea class="form-control" id="message" rows="3" placeholder="Mesajul tau"></textarea>
+            </div>
+            <div class="d-flex align-items-center justify-content-end mt-2">
+                <a role="button" id="cancel-request" class="mr-3 text-gray-2 display-4" data-dismiss="modal">Anuleaza</a>
+                <button id="send-request" class="btn btn-sm px-5 btn-secondary">Trimite</button>
+            </div>
+
         </div>
     </div>
 </div>
@@ -53,18 +54,20 @@ description = "Add student partial"
 
         /** Tag outside auto search (tagify). */
         var studentInput = document.querySelector('input[name=student]'),
-            tagify = new Tagify(studentInput, {
+            students = new Tagify(studentInput, {
                 editTags: null, // single click to edit a tag
                 enforceWhitelist: true,
                 whitelist: [
-                    'Nume elev 1',
-                    'Nume elev 2',
+                    {% for key, student in user.profile.school_students %}
+                        {'value':'{{ student.full_name }}', 'name':'{{ student.id }}'},
+                    {% endfor %}
                 ],
-                placeholder: "Cauta elev",
+                placeholder: "{{'teacher.student.add.modal.search.placeholder'|_}}",
                 dropdown: {
                     enabled: 1, // show suggestion after 1 typed character
                     position: 'input', // position suggestions list next to typed text
                 },
+                maxTags: 1,
                 templates: {
                     dropdownItemNoMatch: function (data) {
                         return `not found: ${data.value}`
@@ -74,27 +77,56 @@ description = "Add student partial"
 
             $(document.body).on('change', '.onChangeValue', function() {
                 if(( 0 !== studentInput.value.length)) {
-                    $('#solicita-acces').removeClass('d-none')
+                    $('#request-access').removeClass('d-none')
                 } else {
-                    $('#solicita-acces').addClass('d-none');
+                    $('#request-access').addClass('d-none');
                     $('#spacer').removeClass('d-none');
-                    $('#creaza-profil').removeClass('d-none');
+                    $('#create-profile').removeClass('d-none');
                     $('#search-student').addClass('rounded-bottom');
                     $('#search-student').addClass('pb-5');
-                    $('#message').addClass('d-none');
+                    $('#message-container').addClass('d-none');
 
                 }
             });
 
-            $('#solicita-acces').on('click', function() {
+            $('#request-access').on('click', function() {
                 $('#spacer').addClass('d-none');
-                $('#creaza-profil').addClass('d-none');
-                $('#solicita-acces').addClass('d-none');
+                $('#create-profile').addClass('d-none');
+                $('#request-access').addClass('d-none');
                 $('#search-student').removeClass('rounded-bottom');
                 $('#search-student').removeClass('pb-5');
-                $('#message').removeClass('d-none');
+                $('#message-container').removeClass('d-none');
             })
 
+            /** Function that clears and closes the modal. */
+            $('#cancel-request').on('click', function() {
+                /** Clear the values. */
+                students.removeAllTags();
+                $('#message').val('');
+
+                $('#request-access').addClass('d-none');
+                $('#spacer').removeClass('d-none');
+                $('#create-profile').removeClass('d-none');
+                $('#search-student').addClass('rounded-bottom');
+                $('#search-student').addClass('pb-5');
+                $('#message-container').addClass('d-none');
+            })
+
+            /** Function that sends the request to the backend. */
+            $('#send-request').on('click', function() {
+                var $student = $('#student').val();
+                var $message = $('#message').val();
+
+                /** Send a student access request. */
+                $.request(
+                    'onCreateStudentAccessRequest', {
+                        data: {
+                            student: $student,
+                            message: $message,
+                        }
+                    }
+                );
+            })
         });
     </script>
 {% endput %}

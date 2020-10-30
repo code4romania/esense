@@ -24,9 +24,12 @@ class Plugin extends PluginBase
         'Genuineq.Timetable'
     ];
 
-    /** Function for registering Esense component. */
+    /** Function for registering Profile component. */
     public function registerComponents()
     {
+        return [
+            \Genuineq\Esense\Components\StudentAccess::class => 'studentAccess'
+        ];
     }
 
     public function registerSettings()
@@ -47,6 +50,7 @@ class Plugin extends PluginBase
 
         /** Extend the Specialist model. */
         $this->specialistExtendRelationships();
+        $this->specialistExtendMethods();
     }
 
     /***********************************************
@@ -80,7 +84,8 @@ class Plugin extends PluginBase
             $model->belongsToMany['specialists'] = [
                 'Genuineq\Profile\Models\Specialist',
                 'table' => 'genuineq_esense_students_specialists',
-                'pivot' => ['approved']
+                'pivot' => ['approved', 'message', 'seen'],
+                'timestamps' => true
             ];
         });
     }
@@ -256,12 +261,17 @@ class Plugin extends PluginBase
 
                 /** Parse all students the in active specialists. */
                 foreach ($model->active_specialists as $specialist) {
-                    $allStudents = $allStudents->merge($specialist->allStudents);
+                    $allStudents = $allStudents->union($specialist->allStudents);
+                }
+
+                /** Parse all students the in inactive specialists. */
+                foreach ($model->inactive_specialists as $specialist) {
+                    $allStudents = $allStudents->union($specialist->allStudents);
                 }
 
                 /** Parse all students the in archived specialists.  */
                 foreach ($model->archivedSpecialists as $specialist) {
-                    $allStudents = $allStudents->merge($specialist->allStudents);
+                    $allStudents = $allStudents->union($specialist->allStudents);
                 }
 
                 return $allStudents;
@@ -286,14 +296,18 @@ class Plugin extends PluginBase
             $model->belongsToMany['students'] = [
                 'Genuineq\Students\Models\Student',
                 'table' => 'genuineq_esense_students_specialists',
+                'pivot' => ['approved', 'message', 'seen'],
+                'timestamps' => true,
                 'order' => 'name asc',
-                'conditions' => 'archived = 0'
+                'conditions' => 'archived = 0 AND approved = 1'
             ];
 
             /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
             $model->belongsToMany['archivedStudents'] = [
                 'Genuineq\Students\Models\Student',
                 'table' => 'genuineq_esense_students_specialists',
+                'pivot' => ['approved', 'message', 'seen'],
+                'timestamps' => true,
                 'order' => 'name asc',
                 'conditions' => 'archived = 1'
             ];
@@ -302,7 +316,54 @@ class Plugin extends PluginBase
             $model->belongsToMany['allStudents'] = [
                 'Genuineq\Students\Models\Student',
                 'table' => 'genuineq_esense_students_specialists',
-               ];
+                'pivot' => ['approved', 'message', 'seen'],
+                'timestamps' => true,
+            ];
+
+            /** Link "Owner" model to "Specialist" model with one-to-many-through relation. */
+            $model->hasManyThrough['accessNotifications'] = [
+                'Genuineq\Profile\Models\Specialist',
+                'through' => 'Genuineq\Students\Models\Student',
+            ];
+        });
+    }
+
+    /**
+     * Function that performs all the methods extensions of the Specialist model.
+     */
+    protected function specialistExtendMethods()
+    {
+        Specialist::extend(function($model) {
+            /** Add school students attribute. */
+            $model->addDynamicMethod('getSchoolStudentsAttribute', function() use ($model) {
+                $schoolStudents = $model->school->all_students;
+
+                foreach ($model->allStudents as $specialistStudent) {
+                    foreach ($schoolStudents as $key => $schoolStudent) {
+                        if ($schoolStudent->id == $specialistStudent->id) {
+                            $schoolStudents->forget($key);
+                        }
+                    }
+                }
+
+                return $schoolStudents;
+            });
+
+            /** Add access notifications attribute. */
+            $model->addDynamicMethod('getAccessNotificationsAttribute', function() use ($model) {
+                $notifications = new Collection();
+
+                foreach ($model->myStudents as $key => $student) {
+                    $notifications = $notifications->merge($student->specialists()->wherePivot('seen', 0)->wherePivot('approved', 0)->get());
+                }
+
+                return $notifications;
+            });
+
+            /** Add notifications attribute. */
+            $model->addDynamicMethod('getAccessNotificationsStudent', function($candidateId) use ($model) {
+                return Student::find($candidateId);
+            });
         });
     }
 }

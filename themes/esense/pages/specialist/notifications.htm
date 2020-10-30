@@ -8,6 +8,8 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+
+[studentAccess]
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
@@ -31,70 +33,68 @@ allowedUserTypes[] = "specialist"
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <!-- Transfer type row -->
-                            <td>
-                                <div class="pl-2 py-3">
-                                    <div class="d-flex align-items-center pt-2">
-                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/transfer-recived.svg'|theme }}">
-                                        <p class="p-0 m-0 font-weight-light display-4 ml-2" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">Primire elev</p>
+                        {% for notification in user.profile.access_notifications %}
+                            <tr>
+                                <!-- Transfer type row -->
+                                <td>
+                                    <div class="pl-2 py-3">
+                                        <div class="d-flex align-items-center pt-2">
+                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/transfer-recived.svg'|theme }}">
+                                            <p class="p-0 m-0 font-weight-light display-4 ml-2" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{'teacher.notifications.access_request'|_}}</p>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-center pt-2">
-                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/student-transfer.svg'|theme }}">
-                                        <p class="p-0 m-0 font-weight-light display-4 ml-2" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">Transfer elev</p>
-                                    </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <!-- Profesor name row -->
-                            <td>
-                                <div class="pl-2 py-3 d-flex align-items-center">
-                                    <div>
-                                        <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <!-- Profesor name row -->
+                                <td>
+                                    <div class="pl-2 py-3 d-flex align-items-center">
+                                        <div>
+                                            <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                        </div>
+                                        <div class="d-flex flex-column ml-2">
+                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.full_name }}</p>
+                                            <h6 class="p-0 m-0 font-weight-normal text-gray">profesor</h6>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column ml-2">
-                                        <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">Profesor name</p>
-                                        <h6 class="p-0 m-0 font-weight-normal text-gray">profesor</h6>
-                                    </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <!-- Student name row -->
-                            <td>
-                                <div class="pl-2 py-3 d-flex align-items-center">
-                                    <div>
-                                        <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <!-- Student name row -->
+                                <td>
+                                    <div class="pl-2 py-3 d-flex align-items-center">
+                                        <div>
+                                            <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                        </div>
+                                        <div class="d-flex flex-column ml-2">
+                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.getAccessNotificationsStudent(notification.pivot.student_id).full_name }}</p>
+                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ notification.getAccessNotificationsStudent(notification.pivot.student_id).birthdate|date("d-m-Y") }}</h6>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column ml-2">
-                                        <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">Student Name</p>
-                                        <h6 class="p-0 m-0 font-weight-normal text-gray">22/10/2014</h6>
-                                    </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <!-- Recived date row -->
-                            <td>
-                                <div class="pl-2 py-3">
-                                    <div class="d-flex align-items-center pt-2">
-                                        <p class="p-0 m-0 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">May 26, 2019</p>
+                                <!-- Recived date row -->
+                                <td>
+                                    <div class="pl-2 py-3">
+                                        <div class="d-flex align-items-center pt-2">
+                                            <p class="p-0 m-0 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.pivot.created_at|date("d-m-Y") }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <!-- Actions column -->
-                            <td>
-                                <div class="pl-2 py-3">
-                                    <div class="d-flex align-items-center">
-                                        <a href="" role="button">
-                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/delete.svg'|theme }}">
-                                        </a>
-                                        <a href="" role="button">
-                                            <img class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/accept.svg'|theme }}">
-                                        </a>
+                                <!-- Actions column -->
+                                <td>
+                                    <div class="pl-2 py-3">
+                                        <div class="d-flex align-items-center">
+                                            <a role="button" class="decline-request" data-student="{{ notification.pivot.student_id }}" data-specialist="{{ notification.pivot.specialist_id }}">
+                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/delete.svg'|theme }}">
+                                            </a>
+                                            <a role="button" class="accept-request" data-student="{{ notification.pivot.student_id }}" data-specialist="{{ notification.pivot.specialist_id }}">
+                                                <img class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/accept.svg'|theme }}">
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -143,6 +143,38 @@ allowedUserTypes[] = "specialist"
                     }
                 }
             });
+
+            /** Function that sends the accept request to the backend. */
+            $('.accept-request').on('click', function() {
+                var $student = $('.accept-request').data('student');
+                var $specialist = $('.accept-request').data('specialist');
+
+                /** Send an accept student access request. */
+                $.request(
+                    'onAcceptStudentAccessRequest', {
+                        data: {
+                            student: $student,
+                            specialist: $specialist,
+                        }
+                    }
+                );
+            })
+
+            /** Function that sends the decline request to the backend. */
+            $('.decline-request').on('click', function() {
+                var $student = $('.decline-request').data('student');
+                var $specialist = $('.decline-request').data('specialist');
+
+                /** Send an decline student access request. */
+                $.request(
+                    'onDeclineStudentAccessRequest', {
+                        data: {
+                            student: $student,
+                            specialist: $specialist,
+                        }
+                    }
+                );
+            })
         });
     </script>
 {% endput %}
