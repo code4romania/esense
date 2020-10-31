@@ -106,8 +106,6 @@ class Student extends ComponentBase
         if ($redirectUrl) {
             return Redirect::to($redirectUrl);
         }
-
-        return Redirect::refresh();
     }
 
     /**
