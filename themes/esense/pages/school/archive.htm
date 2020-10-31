@@ -133,11 +133,9 @@ allowedUserTypes[] = "school"
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="pl-2 py-3 d-flex align-items-center">
                                             {% if specialist.user.avatar %}
-                                                <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{specialist.user.avatar.getThumb(35,35, { mode : 'crop' } )}}" alt="avatar">
+                                                <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{specialist.user.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
                                             {% else %}
-                                            <div>
-                                                <img class="img-fluid add-custom-avatar" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
-                                            </div>
+                                                <img class="img-fluid add-custom-avatar" width="40px" height="40px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
                                             {% endif %}
 
                                             <div class="d-flex flex-column ml-2">
@@ -167,7 +165,7 @@ allowedUserTypes[] = "school"
                                             <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
                                         </a>
 
-                                        <a role="button" data-toggle="modal" data-target="#deleteTeacherModal" data-name='{{ specialist.full_name }}' data-id='{{ specialist.id }}'>
+                                        <a role="button" data-toggle="modal" data-target="#deleteTeacherModal" data-name='{{ specialist.full_name }}' data-id='{{ specialist.id }}' data-avatar='{% if specialist.user.avatar %}{{specialist.user.avatar.getThumb(40,40, { mode : 'crop' } )}}{% else %}{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}{% endif %}'>
                                             <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/trash-bin.svg'|theme }}">
                                         </a>
 
@@ -177,7 +175,7 @@ allowedUserTypes[] = "school"
                                             </button>
 
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;" data-toggle="modal" data-target="#unzipSpecialistModal" data-name='{{ specialist.full_name }}' data-id='{{ specialist.id }}'>
+                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;" data-toggle="modal" data-target="#unzipSpecialistModal" data-name='{{ specialist.full_name }}' data-id='{{ specialist.id }}' data-avatar='{% if specialist.user.avatar %}{{specialist.user.avatar.getThumb(40,40, { mode : 'crop' } )}}{% else %}{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}{% endif %}'>
                                                     {{'school.archive.specialists.table.options.unzip'|_}}
                                                 </a>
                                             </div>
