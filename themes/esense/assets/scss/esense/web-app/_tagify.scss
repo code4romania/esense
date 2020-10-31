@@ -75,3 +75,97 @@ $placeholder-color : rgba(53, 53, 53, 0.73);
 .tagify.tagify--focus {
     border-color: #fab954 !important;
 }
+
+
+
+  .tagify{
+    width: 100%;
+    max-width: 700px;
+    background: rgba(white, .8);
+  }
+
+  /* Suggestions items */
+  .tagify__dropdown.users-list {
+    $avatar-size: 36px;
+    font-size: 14px;
+
+    .tagify__dropdown__item{
+        padding: .5em .7em;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0 1em;
+        grid-template-areas: "avatar name teacher"
+                             "avatar birthdate teacher";
+
+        &:hover .tagify__dropdown__item__avatar-wrap{
+            transform: scale(1.2);
+        }
+
+        &__avatar-wrap{
+          grid-area: avatar;
+          width: $avatar-size;
+          height: $avatar-size;
+          border-radius: 50%;
+          overflow: hidden;
+          background: #EEE;
+          transition: .1s ease-out;
+        }
+    }
+
+    img{
+        width: 100%;
+        vertical-align: top;
+    }
+
+    strong{
+        grid-area: name;
+        width: 100%;
+        align-self: center;
+        font-weight: 500;
+    }
+
+    span{
+        grid-area: birthdate;
+        width: 100%;
+        font-size: .9em;
+        opacity: .6;
+    }
+
+
+    .label{
+        grid-area: teacher;
+        width: 100%;
+        align-self: center;
+        font-weight: 500;
+    }
+
+    .addAll{
+        border-bottom: 1px solid #DDD;
+        gap: 0;
+    }
+  }
+
+
+  /* Tags items */
+  .tagify__tag{
+      white-space: nowrap;
+
+      &:hover .tagify__tag__avatar-wrap{
+          transform: scale(1.6) translateX(-10%);
+      }
+
+      .tagify__tag__avatar-wrap{
+          width: 16px;
+          height: 16px;
+          white-space: normal;
+          background: silver;
+          border-radius: 50%;
+          margin-right: 5px;
+          transition: .12s ease-out;
+      }
+
+      img{
+          width: 100%;
+          vertical-align: top;
+      }
+  }

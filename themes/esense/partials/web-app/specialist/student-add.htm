@@ -52,28 +52,86 @@ description = "Add student partial"
     <script type="text/javascript">
         $(document).ready(function () {
 
-        /** Tag outside auto search (tagify). */
-        var studentInput = document.querySelector('input[name=student]'),
-            students = new Tagify(studentInput, {
-                editTags: null, // single click to edit a tag
+            /** WYSWYG Editor. */
+            $('#message').richText();
+
+            /** Get tagify input in variable. */
+            var studentInput = document.querySelector('input[name=student]');
+
+            /** Make userList variable for tagify whiteList. */
+            var usersList = [
+                {% for student in user.profile.school_students %}
+                {
+                    "value": "{{ student.id }}",
+                    "name": "{{ student.full_name }}",
+                    "avatar": "{% if student.avatar %}{{student.avatar.getThumb(30,30, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}",
+                    "birthdate": "{{ student.birthdate }}",
+                    "teacher": "{{ student.owner.user.full_name }}"
+                },
+                {% endfor %}
+            ];
+
+            /** Add template for student name or birthdate */
+            function tagTemplate(tagData){
+                return `
+                    <tag title="${(tagData.title || tagData.birthdate)}"
+                            contenteditable='false'
+                            spellcheck='false'
+                            tabIndex="-1"
+                            class="${this.settings.classNames.tag} ${tagData.class ? tagData.class : ""}"
+                            ${this.getAttributes(tagData)}>
+                        <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
+                        <div>
+                            <div class='tagify__tag__avatar-wrap'>
+                                <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
+                            </div>
+                            <span class='tagify__tag-text'>${tagData.name}</span>
+                        </div>
+                    </tag>
+                `
+            };
+
+            /** Added sugestion dropdown list */
+            function suggestionItemTemplate(tagData){
+                return `
+                    <div ${this.getAttributes(tagData)}
+                        class='tagify__dropdown__item ${tagData.class ? tagData.class : ""}'
+                        tabindex="0"
+                        role="option">
+                        ${ tagData.avatar ? `
+                        <div class='tagify__dropdown__item__avatar-wrap'>
+                            <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
+                        </div>` : ''
+                        }
+                        <strong>${tagData.name}</strong>
+                        <span>Data nasterii: ${tagData.birthdate}</span>
+                        <label>Profesor: ${tagData.teacher}</label>
+                    </div>
+                `
+            }
+
+            /** Initialize Tagify on the above input node reference. */
+            var tagify = new Tagify(studentInput, {
                 enforceWhitelist: true,
-                whitelist: [
-                    {% for key, student in user.profile.school_students %}
-                        {'value':'{{ student.full_name }}', 'name':'{{ student.id }}'},
-                    {% endfor %}
-                ],
-                placeholder: "{{'teacher.student.add.modal.search.placeholder'|_}}",
-                dropdown: {
-                    enabled: 1, // show suggestion after 1 typed character
-                    position: 'input', // position suggestions list next to typed text
-                },
+                skipInvalid: true, // do not remporarily add invalid tags
                 maxTags: 1,
-                templates: {
-                    dropdownItemNoMatch: function (data) {
-                        return `not found: ${data.value}`
-                    }
+                dropdown: {
+                    closeOnSelect: true,
+                    enabled: 0,
+                    classname: 'users-list',
+                    searchKeys: ['name', 'teacher']  // very important to set by which keys to search for suggesttions when typing
                 },
-            });
+                templates: {
+                    tag: tagTemplate,
+                    dropdownItem: suggestionItemTemplate
+                },
+                whitelist: usersList
+            })
+
+            // tagify.on('dropdown:show dropdown:updated', onDropdownShow)
+            // tagify.on('dropdown:select', onSelectSuggestion)
+
+
 
             $(document.body).on('change', '.onChangeValue', function() {
                 if(( 0 !== studentInput.value.length)) {
