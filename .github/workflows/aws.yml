@@ -48,17 +48,17 @@ jobs:
     - uses: actions/checkout@v1
     - name: Copy ENV Laravel Configuration for CI
       run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
-    - name: Install Dependencies (PHP vendors)
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-    - name: Generate key
-      run: php artisan key:generate
-    - name: Create DB and schemas
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
-        php artisan migrate
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      run: vendor/bin/phpunit plugins/genuineq/tms/tests/
+    #- name: Install Dependencies (PHP vendors)
+    #  run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+    #- name: Generate key
+    #  run: php artisan key:generate
+    #- name: Create DB and schemas
+    #  run: |
+    #    mkdir -p database
+    #    touch database/database.sqlite
+    #    php artisan migrate
+    #- name: Execute tests (Unit and Feature tests) via PHPUnit
+    #  run: vendor/bin/phpunit plugins/genuineq/tms/tests/
 
     - name: Checkout
       uses: actions/checkout@v2
@@ -78,7 +78,7 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: production
+        ECR_REPOSITORY: e-sense
         IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
@@ -98,13 +98,13 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: .github/workflows/tms-app-prod-td.json
-        container-name: app
+        container-name: application
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: tms-app-prod
-        cluster: production
+        service: application
+        cluster: e-sense
         wait-for-service-stability: false
