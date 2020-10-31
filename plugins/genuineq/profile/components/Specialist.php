@@ -10,6 +10,7 @@ use ValidationException;
 use ApplicationException;
 use Cms\Classes\ComponentBase;
 use Genuineq\User\Models\User;
+use Genuineq\User\Helpers\UserInviteHelper;
 use Genuineq\User\Helpers\RedirectHelper;
 use Genuineq\Profile\Models\Specialist as SpecialistModel;
 use Genuineq\Profile\Classes\UserData;
@@ -164,8 +165,8 @@ class Specialist extends ComponentBase
                 }
             }
         }
-
-        return Redirect::refresh();
+        
+        return Redirect::to('school/specialists');
     }
 
     /**
