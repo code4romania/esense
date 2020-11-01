@@ -9,6 +9,7 @@ use Genuineq\User\Helpers\RedirectHelper;
 use Genuineq\Profile\Models\Specialist;
 use Genuineq\Profile\Models\School;
 use Genuineq\Students\Models\Student;
+use Genuineq\Esense\Models\StudentTransfer;
 
 class Plugin extends PluginBase
 {
@@ -28,7 +29,7 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            \Genuineq\Esense\Components\StudentAccess::class => 'studentAccess'
+            \Genuineq\Esense\Components\StudentActions::class => 'studentActions'
         ];
     }
 
@@ -135,7 +136,7 @@ class Plugin extends PluginBase
             $student->specialists()->attach($student->owner_id, ['approved' => true]);
         });
 
-        
+
         Event::listen('genuineq.students.create.before.finish', function(&$redirectUrl, $student) {
             /** Redirect to all students page. */
             if ('specialist' == Auth::getUser()->type) {
@@ -143,7 +144,7 @@ class Plugin extends PluginBase
             } else {
                 $redirectUrl = 'school/students';
             }
-            
+
         });
         /************ Student CREATE end ************/
 
@@ -336,6 +337,9 @@ class Plugin extends PluginBase
                 'Genuineq\Profile\Models\Specialist',
                 'through' => 'Genuineq\Students\Models\Student',
             ];
+
+            /** Link "StudentTransfer" model to "Specialist" model with one-to-many relation. */
+            $model->hasMany['transferRequests'] = ['Genuineq\Esense\Models\StudentTransfer', 'key' => 'from_specialist_id'];
         });
     }
 
@@ -371,9 +375,14 @@ class Plugin extends PluginBase
                 return $notifications;
             });
 
-            /** Add notifications attribute. */
+            /** Add access notifications attribute. */
             $model->addDynamicMethod('getAccessNotificationsStudent', function($candidateId) use ($model) {
                 return Student::find($candidateId);
+            });
+
+            /** Add transfer notifications attribute. */
+            $model->addDynamicMethod('getTransferNotificationsAttribute', function() use ($model) {
+                return $model->transferRequests()->whereNull('approved')->get();
             });
         });
     }

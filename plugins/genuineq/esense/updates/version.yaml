@@ -6,3 +6,6 @@
 1.0.3:
     - 'Created table genuineq_esense_students_specialists'
     - builder_table_create_genuineq_esense_students_specialists.php
+1.0.4:
+    - 'Created table genuineq_esense_students_transfers'
+    - builder_table_create_genuineq_esense_students_transfers.php
