@@ -1,5 +1,5 @@
 name: Messages
-modelClass: Genuineq\Contactform\Models\Message
+modelClass: Genuineq\ContactForm\Models\Message
 form: $/genuineq/contactform/models/message/fields.yaml
 defaultRedirect: genuineq/contactform/messages
 create:
@@ -11,6 +11,6 @@ update:
     title: 'genuineq.contactform::lang.backend.update_message'
     redirect: genuineq/contactform/messages
     redirectClose: genuineq/contactform/messages
-    flashSave: 'genuineq.contactform::lang.backend.flash.update_message.succes'
+    flashSave: 'genuineq.contactform::lang.backend.flash.update_message.success'
 preview:
     title: 'genuineq.contactform::lang.backend.preview_message'
