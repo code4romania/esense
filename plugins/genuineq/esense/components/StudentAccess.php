@@ -52,7 +52,7 @@ class StudentAccess extends ComponentBase
         $user = Auth::getuser();
 
         /** Extract the student ID and the student. */
-        $studentId = json_decode(post('student'), true)[0]['name'];
+        $studentId = json_decode(post('student'), true)[0]['value'];
         $student = Student::find($studentId);
 
         /** Create the request access. */
@@ -109,14 +109,12 @@ class StudentAccess extends ComponentBase
         /** Extract the user. */
         $user = Auth::getuser();
 
-        Log::info(post());
-
         /** Extract the student. */
         $student = $user->profile->myStudents()->whereId(post('student'))->first();
 
         if ($student) {
             /** Decline the request */
-            $student->specialists()->updateExistingPivot(post('specialist'), ['seen' => 1, 'approved' => 0]);
+            $student->specialists()->detach(post('specialist'));
 
             Flash::success(Lang::get('genuineq.esense::lang.components.studentAccess.message.success_decline'));
         } else {
