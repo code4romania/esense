@@ -3,6 +3,7 @@
 use Log;
 use Auth;
 use Lang;
+use Mail;
 use Flash;
 use Redirect;
 use Validator;
@@ -114,8 +115,8 @@ class Specialist extends ComponentBase
                         $newUser = UserInviteHelper::inviteUser($user, $data, (($this->property('resetPage')) ? ($this->property('resetPage')) : ($this->currentPageUrl())));
 
                         /** Create user profile. */
-                        $profile = new Specialist([
-                            'slug' => Specialist::slug($user->full_name),
+                        $profile = new SpecialistModel([
+                            'slug' => SpecialistModel::slug($user->full_name),
                             'phone' => post('phone'),
                             'county_id' => $user->profile->county_id,
                             'city_id' => $user->profile->city_id,
@@ -134,7 +135,7 @@ class Specialist extends ComponentBase
 
                         Flash::success(Lang::get('genuineq.profile::lang.components.school.message.user_invite_successful') . $index);
                     } catch (Exception $exception) {
-                        Flash::error(Lang::get('genuineq.profile::lang.components.school.message.user_already_affiliated_1') . $index);
+                        Flash::error(Lang::get('genuineq.profile::lang.components.school.message.specialist_create_error') . $index);
                     }
                 } elseif (('specialist' == $specialistUser->type) && $specialistUser->profile->school) {
                     /** The specialist exist and IS affiliated. */
@@ -160,12 +161,12 @@ class Specialist extends ComponentBase
 
                     Flash::success(Lang::get('genuineq.profile::lang.components.school.message.user_invite_successful') . $index);
                 } else {
-                    /** The user exists ans registered as a SCHOOL */
+                    /** The user exists and is registered as a SCHOOL */
                     Flash::error(Lang::get('genuineq.profile::lang.components.school.message.user_is_school_1') . $index . Lang::get('genuineq.profile::lang.components.school.message.user_is_school_2'));
                 }
             }
         }
-        
+
         return Redirect::to('school/specialists');
     }
 

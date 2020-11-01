@@ -172,9 +172,9 @@ class Plugin extends PluginBase
         });
 
         /** Check is user is archived after login. */
-        Event::listen('genuineq.user.afterAuthenticate', function($component, $credentials) {
+        Event::listen('genuineq.user.afterAuthenticate', function($component, $user) {
             /** Check if authenticated usr is archived. */
-            if (Auth::getUser()->profile->archived) {
+            if ($user->profile->archived) {
                 Auth::logout();
                 throw new ApplicationException(Lang::get('genuineq.profile::lang.components.login.message.user_archived'));
             }
