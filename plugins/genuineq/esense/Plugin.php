@@ -134,6 +134,17 @@ class Plugin extends PluginBase
             /** Create a specialist connection. */
             $student->specialists()->attach($student->owner_id, ['approved' => true]);
         });
+
+        
+        Event::listen('genuineq.students.create.before.finish', function(&$redirectUrl, $student) {
+            /** Redirect to all students page. */
+            if ('specialist' == Auth::getUser()->type) {
+                $redirectUrl = 'specialist/students';
+            } else {
+                $redirectUrl = 'school/students';
+            }
+            
+        });
         /************ Student CREATE end ************/
 
         /************ Student UPDATE start ************/

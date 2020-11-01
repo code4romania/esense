@@ -45,7 +45,11 @@ allowedUserTypes[] = "school"
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="pl-2 py-3 d-flex align-items-center">
                                             <div>
-                                                <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                                {% if specialist.user.avatar %}
+                                                <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{specialist.user.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
+                                                {% else %}
+                                                    <img class="img-fluid add-custom-avatar" width="40px" height="40px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
+                                                {% endif %}
                                             </div>
                                             <div class="d-flex flex-column ml-2">
                                                 <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</p>
@@ -112,11 +116,9 @@ allowedUserTypes[] = "school"
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="pl-2 py-3 d-flex align-items-center">
                                             {% if specialist.user.avatar %}
-                                                <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{specialist.user.avatar.getThumb(35,35, { mode : 'crop' } )}}" alt="avatar">
+                                                <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{specialist.user.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
                                             {% else %}
-                                            <div>
-                                                <img class="img-fluid add-custom-avatar" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
-                                            </div>
+                                                <img class="img-fluid add-custom-avatar" width="40px" height="40px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
                                             {% endif %}
                                             <div class="d-flex flex-column ml-2">
                                                 <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({id: specialist.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</a>
@@ -148,7 +150,7 @@ allowedUserTypes[] = "school"
 
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
-                                        <a role="button" data-toggle="modal" data-target="#arhiveTeacherModal" data-name='{{ specialist.full_name }}' data-id='{{ specialist.id }}'>
+                                        <a role="button" data-toggle="modal" data-target="#arhiveTeacherModal" data-name='{{ specialist.full_name }}' data-id='{{ specialist.id }}' data-avatar='{% if specialist.user.avatar %}{{specialist.user.avatar.getThumb(40,40, { mode : 'crop' } )}}{% else %}{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}{% endif %}'>
                                             <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
                                         </a>
 

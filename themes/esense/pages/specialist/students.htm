@@ -97,7 +97,7 @@ allowedUserTypes[] = "specialist"
                                 <td>
                                     <div class="d-none d-md-block">
                                         <div class="pl-2 py-3 d-flex align-items-center">
-                                            <a role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                            <a role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}'>
                                                 <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
                                             </a>
                                             <div class="dropdown pt-2">
