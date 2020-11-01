@@ -4,7 +4,7 @@ description = "Partial pentru a arhiva un elev"
 ==
 <!-- Modal -->
 <form>
-    <div class="modal fade" id="arhiveStudentModal" tabindex="-1" role="dialog" aria-labelledby="arhiveStudentModal" aria-hidden="true">
+    <div class="modal fade" id="archiveStudentModal" tabindex="-1" role="dialog" aria-labelledby="archiveStudentModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -12,7 +12,7 @@ description = "Partial pentru a arhiva un elev"
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <div class="d-flex align-items-center justify-content-center">
-                        <img class="img-fluid" width="35px" height="35px" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar elev">
+                        <img class="img-fluid img-avatar rounded-circle" width="40" height="40" id="studentAvatar" alt="avatar"/>
                         <p id="studentName" class="p-0 m-0 display-4 text-dark ml-2"></p>
                     </div>
                     <p class="text-center my-3 displa-1 text-dark">{{'school.teacher.profile.archive.student.title'|_}}</p>
@@ -28,20 +28,23 @@ description = "Partial pentru a arhiva un elev"
 
 <script>
     /** Populate the modal after opening. */
-    $('#arhiveStudentModal').on('show.bs.modal', function (event) {
-        /** Update the specialist name. */
+    $('#archiveStudentModal').on('show.bs.modal', function (event) {
+        /** Update the student name. */
         $(this).find('#studentName').text($(event.relatedTarget).data('name'));
 
-        /** Save the specialist ID. */
+        /** Update the student avatar. */
+        $(this).find('#studentAvatar').attr("src", $(event.relatedTarget).data('avatar'));
+
+        /** Save the student ID. */
         $(this).find('#studentArchiveSubmit').data('id', $(event.relatedTarget).data('id'));
     });
 
-    /** Submit archive request for specialist. */
+    /** Submit archive request for student. */
     $("#studentArchiveSubmit").on('click', function () {
         /** Extract data from input. */
         var $id = $('#studentArchiveSubmit').data('id');
 
-        /** Send the specialist archive request. */
+        /** Send the student archive request. */
         $.request(
             'onStudentArchive', {
                 data: {

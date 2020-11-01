@@ -13,6 +13,7 @@ description = "Partial for confirming a specialist archivation."
                     </button>
 
                     <div class="d-flex align-items-center justify-content-center">
+                        <img class="img-fluid img-avatar rounded-circle" width="40" height="40" id="specialistAvatar" alt="avatar"/>
                         <p id="specialistName" class="p-0 m-0 display-4 text-dark ml-2"></p>
                     </div>
 
@@ -36,6 +37,9 @@ description = "Partial for confirming a specialist archivation."
     $('#arhiveTeacherModal').on('show.bs.modal', function (event) {
         /** Update the specialist name. */
         $(this).find('#specialistName').text($(event.relatedTarget).data('name'));
+
+        /** Update the specialist avatar. */
+        $(this).find('#specialistAvatar').attr("src", $(event.relatedTarget).data('avatar'));
 
         /** Save the specialist ID. */
         $(this).find('#specialistArchiveSubmit').data('id', $(event.relatedTarget).data('id'));

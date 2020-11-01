@@ -11,7 +11,7 @@ allowedUserTypes[] = "school"
 
 [account]
 
-[school]
+[specialist]
 resetPage = "authentification/reset-password"
 ==
 <div class="container-fluid px-lg-4">
@@ -127,10 +127,11 @@ resetPage = "authentification/reset-password"
                     </div>
                 </div>
 
-        </form>
+            </form>
         </div>
     </div>
 </div>
+
 {% put scripts %}
     <!-- Scripts for datatables -->
     <script type="text/javascript">
@@ -175,31 +176,31 @@ resetPage = "authentification/reset-password"
                         ((0 !== $("#specialist_1_surname_id").val().length) && ((0 == $("#specialist_1_name_id").val().length) || (0 == $("#specialist_1_phone_id").val().length) || (0 == $("#specialist_1_email_id").val().length) )) ||
                         ((0 !== $("#specialist_1_name_id").val().length) && ((0 == $("#specialist_1_surname_id").val().length) || (0 == $("#specialist_1_phone_id").val().length) || (0 == $("#specialist_1_email_id").val().length) )) ||
                         ((0 !== $("#specialist_1_phone_id").val().length) && ((0 == $("#specialist_1_surname_id").val().length) || (0 == $("#specialist_1_name_id").val().length) || (0 == $("#specialist_1_email_id").val().length) )) ||
-                        ((0 !== $("#specialist_1_phone_id").val().length) && ((0 == $("#specialist_1_surname_id").val().length) || (0 == $("#specialist_1_name_id").val().length) || (0 == $("#specialist_1_email_id").val().length) ))
+                        ((0 !== $("#specialist_1_email_id").val().length) && ((0 == $("#specialist_1_surname_id").val().length) || (0 == $("#specialist_1_name_id").val().length) || (0 == $("#specialist_1_email_id").val().length) ))
                     ) ||
                     (
                         ((0 !== $("#specialist_2_surname_id").val().length) && ((0 == $("#specialist_2_name_id").val().length) || (0 == $("#specialist_2_phone_id").val().length) || (0 == $("#specialist_2_email_id").val().length) )) ||
                         ((0 !== $("#specialist_2_name_id").val().length) && ((0 == $("#specialist_2_surname_id").val().length) || (0 == $("#specialist_2_phone_id").val().length) || (0 == $("#specialist_2_email_id").val().length) )) ||
                         ((0 !== $("#specialist_2_phone_id").val().length) && ((0 == $("#specialist_2_surname_id").val().length) || (0 == $("#specialist_2_name_id").val().length) || (0 == $("#specialist_2_email_id").val().length) )) ||
-                        ((0 !== $("#specialist_2_phone_id").val().length) && ((0 == $("#specialist_2_surname_id").val().length) || (0 == $("#specialist_2_name_id").val().length) || (0 == $("#specialist_2_email_id").val().length) ))
+                        ((0 !== $("#specialist_2_email_id").val().length) && ((0 == $("#specialist_2_surname_id").val().length) || (0 == $("#specialist_2_name_id").val().length) || (0 == $("#specialist_2_email_id").val().length) ))
                     ) ||
                     (
                         ((0 !== $("#specialist_3_surname_id").val().length) && ((0 == $("#specialist_3_name_id").val().length) || (0 == $("#specialist_3_phone_id").val().length) || (0 == $("#specialist_3_email_id").val().length) )) ||
                         ((0 !== $("#specialist_3_name_id").val().length) && ((0 == $("#specialist_3_surname_id").val().length) || (0 == $("#specialist_3_phone_id").val().length) || (0 == $("#specialist_3_email_id").val().length) )) ||
                         ((0 !== $("#specialist_3_phone_id").val().length) && ((0 == $("#specialist_3_surname_id").val().length) || (0 == $("#specialist_3_name_id").val().length) || (0 == $("#specialist_3_email_id").val().length) )) ||
-                        ((0 !== $("#specialist_3_phone_id").val().length) && ((0 == $("#specialist_3_surname_id").val().length) || (0 == $("#specialist_3_name_id").val().length) || (0 == $("#specialist_3_email_id").val().length) ))
+                        ((0 !== $("#specialist_3_email_id").val().length) && ((0 == $("#specialist_3_surname_id").val().length) || (0 == $("#specialist_3_name_id").val().length) || (0 == $("#specialist_3_email_id").val().length) ))
                     ) ||
                     (
                         ((0 !== $("#specialist_4_surname_id").val().length) && ((0 == $("#specialist_4_name_id").val().length) || (0 == $("#specialist_4_phone_id").val().length) || (0 == $("#specialist_4_email_id").val().length) )) ||
                         ((0 !== $("#specialist_4_name_id").val().length) && ((0 == $("#specialist_4_surname_id").val().length) || (0 == $("#specialist_4_phone_id").val().length) || (0 == $("#specialist_4_email_id").val().length) )) ||
                         ((0 !== $("#specialist_4_phone_id").val().length) && ((0 == $("#specialist_4_surname_id").val().length) || (0 == $("#specialist_4_name_id").val().length) || (0 == $("#specialist_4_email_id").val().length) )) ||
-                        ((0 !== $("#specialist_4_phone_id").val().length) && ((0 == $("#specialist_4_surname_id").val().length) || (0 == $("#specialist_4_name_id").val().length) || (0 == $("#specialist_4_email_id").val().length) ))
+                        ((0 !== $("#specialist_4_email_id").val().length) && ((0 == $("#specialist_4_surname_id").val().length) || (0 == $("#specialist_4_name_id").val().length) || (0 == $("#specialist_4_email_id").val().length) ))
                     ) ||
                     (
                         ((0 !== $("#specialist_5_surname_id").val().length) && ((0 == $("#specialist_5_name_id").val().length) || (0 == $("#specialist_5_phone_id").val().length) || (0 == $("#specialist_5_email_id").val().length) )) ||
                         ((0 !== $("#specialist_5_name_id").val().length) && ((0 == $("#specialist_5_surname_id").val().length) || (0 == $("#specialist_5_phone_id").val().length) || (0 == $("#specialist_5_email_id").val().length) )) ||
                         ((0 !== $("#specialist_5_phone_id").val().length) && ((0 == $("#specialist_5_surname_id").val().length) || (0 == $("#specialist_5_name_id").val().length) || (0 == $("#specialist_5_email_id").val().length) )) ||
-                        ((0 !== $("#specialist_5_phone_id").val().length) && ((0 == $("#specialist_5_surname_id").val().length) || (0 == $("#specialist_5_name_id").val().length) || (0 == $("#specialist_5_email_id").val().length) ))
+                        ((0 !== $("#specialist_5_email_id").val().length) && ((0 == $("#specialist_5_surname_id").val().length) || (0 == $("#specialist_5_name_id").val().length) || (0 == $("#specialist_5_email_id").val().length) ))
                     )
                 )
                 {

@@ -27,7 +27,7 @@ schools = 1
             <div class="d-flex align-items-center justify-content-end">
                 <div class="d-none">
                     <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                    <a class="ml-3 text-black" href="{{ 'spacialist/profil'|page }}">{{'teacher.dashboard.profile.back.link.text'|_}}</a>
+                    <a class="ml-3 text-black" href="{{ 'spacialist/dashboard'|page }}">{{'teacher.dashboard.profile.back.link.text'|_}}</a>
                 </div>
                 <div>
                     <a role="button" data-toggle="modal" data-target="#changePasswodTeacherModal" class="btn btn-sm btn-secondary d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;">
@@ -147,7 +147,7 @@ schools = 1
     </div>
 </div>
 
-{% partial 'web-app/specialist/schimba-parola' %}
+{% partial 'web-app/general/password-change' %}
 
 {% put scripts %}
     <script type="text/javascript">

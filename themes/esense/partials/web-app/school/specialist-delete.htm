@@ -12,7 +12,7 @@ description = "Partial for confirming a specialist deletion."
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <div class="d-flex align-items-center justify-content-center">
-                        <img class="img-fluid" width="35px" height="35px" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar elev">
+                        <img class="img-fluid img-avatar rounded-circle" width="40" height="40" id="specialistAvatar" alt="avatar"/>
                         <p id="specialistName" class="p-0 m-0 display-4 text-dark ml-2"></p>
                     </div>
                     <p class="text-center my-3 displa-1 text-dark">{{'school.teacher.profile.delete.teacher.title'|_}}</p>
@@ -31,6 +31,9 @@ description = "Partial for confirming a specialist deletion."
     $('#deleteTeacherModal').on('show.bs.modal', function (event) {
         /** Update the specialist name. */
         $(this).find('#specialistName').text($(event.relatedTarget).data('name'));
+
+        /** Update the specialist avatar. */
+        $(this).find('#specialistAvatar').attr("src", $(event.relatedTarget).data('avatar'));
 
         /** Save the specialist ID. */
         $(this).find('#deleteSpecialistSubmit').data('id', $(event.relatedTarget).data('id'));

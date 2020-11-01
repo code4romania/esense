@@ -280,3 +280,7 @@ table.dataTable thead .no-sort.sorting_asc_disabled:after,
 table.dataTable thead .no-sort.sorting_desc_disabled:after {
     display: none;
 }
+
+tr {
+    background: #fff !important;
+}

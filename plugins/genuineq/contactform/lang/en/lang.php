@@ -10,22 +10,31 @@
             'email' => 'Email',
             'message' => 'Message',
         ],
-        'backend-menu' => [
-            'name' => 'Messages',
-            'send_message' => 'Send Message',
-            'create_message' => 'Create Message',
-            'update_message' => 'Update Message',
-            'preview_message' => 'Preview Message',
+    ],
 
-            'flash' => [
-                'send_message' => [
-                    'success' => 'Message sent',
-                    'fail' => 'Message not sent',
-                ],
-                'update_message' => [
-                    'success' => 'Message updated',
-                    'fail' => 'Message not updated'
-                ],
+    'component' => [
+        'contactform' => [
+            'name' => 'contactform',
+            'description' => 'Contact Form frontend controller'
+        ],
+    ],
+
+    'backend' => [
+        'name' => 'Messages',
+        'send_message' => 'Send Message',
+        'create_message' => 'Create Message',
+        'update_message' => 'Update Message',
+        'delete_message' => 'Delete Message',
+        'preview_message' => 'Preview Message',
+
+        'flash' => [
+            'send_message' => [
+                'success' => 'Message sent',
+                'fail' => 'Message not sent',
+            ],
+            'update_message' => [
+                'success' => 'Message updated',
+                'fail' => 'Message not updated'
             ],
         ],
     ],

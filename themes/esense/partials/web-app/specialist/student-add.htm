@@ -3,7 +3,7 @@ description = "Add student partial"
 [viewBag]
 ==
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalTitle" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content border-0" style="background: transparent !important;">
         <div id="search-student" class="rounded-top rounded-bottom bg-white pb-5 px-5 pt-5">
@@ -17,11 +17,11 @@ description = "Add student partial"
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <a role="button" id="solicita-acces" class="btn btn-sm btn-secondary px-4 d-none" >Solicita acces</a>
+                <a role="button" id="request-access" class="btn btn-sm btn-secondary px-4 d-none" >Solicita acces</a>
             </div>
         </div>
         <div id="spacer" style="width: 5rem; height:10px; background:#c4c4c4; margin-left:5rem;"></div>
-        <div id="creaza-profil" class="bg-white rounded p-5">
+        <div id="create-profile" class="bg-white rounded p-5">
             <div class="d-flex align-items-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/folder.svg'|theme }}">
                 <p class="p-0 m-0 ml-2 display-2 text-dark">Creează profil elev</p>
@@ -31,17 +31,18 @@ description = "Add student partial"
                 <a class="text-secondary display-4" href="{{link}}">Creează profil elev</a>
             </div>
         </div>
-        <div id="message" class="rounded-bottom bg-white pb-5 px-5 d-none">
+
+        <div id="message-container" class="rounded-bottom bg-white pb-5 px-5 d-none">
             <p class="p-0 m-0 py-2 small text-gray-2">mesaj trimis catre:<span class="font-weight-bold">student@email.com</span></p>
-            <form>
-                <div class="form-group d-flex">
-                    <textarea class="form-control" id="description" rows="3" placeholder="Mesajul tau"></textarea>
-                </div>
-                <div class="d-flex align-items-center justify-content-end mt-2">
-                    <a role="button" class="mr-3 text-gray-2 display-4" data-dismiss="modal">Anuleaza</a>
-                    <button type="submit" class="btn btn-sm px-5 btn-secondary">Trimite</button>
-                </div>
-            </form>
+
+            <div class="form-group d-flex">
+                <textarea class="form-control" id="message" rows="3" placeholder="Mesajul tau"></textarea>
+            </div>
+            <div class="d-flex align-items-center justify-content-end mt-2">
+                <a role="button" id="cancel-request" class="mr-3 text-gray-2 display-4" data-dismiss="modal">Anuleaza</a>
+                <button id="send-request" class="btn btn-sm px-5 btn-secondary">Trimite</button>
+            </div>
+
         </div>
     </div>
 </div>
@@ -51,50 +52,139 @@ description = "Add student partial"
     <script type="text/javascript">
         $(document).ready(function () {
 
-        /** Tag outside auto search (tagify). */
-        var studentInput = document.querySelector('input[name=student]'),
-            tagify = new Tagify(studentInput, {
-                editTags: null, // single click to edit a tag
+            /** WYSWYG Editor. */
+            $('#message').richText();
+
+            /** Get tagify input in variable. */
+            var studentInput = document.querySelector('input[name=student]');
+
+            /** Make userList variable for tagify whiteList. */
+            var usersList = [
+                {% for student in user.profile.school_students %}
+                {
+                    "value": "{{ student.id }}",
+                    "name": "{{ student.full_name }}",
+                    "avatar": "{% if student.avatar %}{{student.avatar.getThumb(30,30, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}",
+                    "birthdate": "{{ student.birthdate }}",
+                    "teacher": "{{ student.owner.user.full_name }}"
+                },
+                {% endfor %}
+            ];
+
+            /** Add template for student name or birthdate */
+            function tagTemplate(tagData){
+                return `
+                    <tag title="${(tagData.title || tagData.birthdate)}"
+                            contenteditable='false'
+                            spellcheck='false'
+                            tabIndex="-1"
+                            class="${this.settings.classNames.tag} ${tagData.class ? tagData.class : ""}"
+                            ${this.getAttributes(tagData)}>
+                        <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
+                        <div>
+                            <div class='tagify__tag__avatar-wrap'>
+                                <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
+                            </div>
+                            <span class='tagify__tag-text'>${tagData.name}</span>
+                        </div>
+                    </tag>
+                `
+            };
+
+            /** Added sugestion dropdown list */
+            function suggestionItemTemplate(tagData){
+                return `
+                    <div ${this.getAttributes(tagData)}
+                        class='tagify__dropdown__item ${tagData.class ? tagData.class : ""}'
+                        tabindex="0"
+                        role="option">
+                        ${ tagData.avatar ? `
+                        <div class='tagify__dropdown__item__avatar-wrap'>
+                            <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
+                        </div>` : ''
+                        }
+                        <strong>${tagData.name}</strong>
+                        <span>Data nasterii: ${tagData.birthdate}</span>
+                        <label>Profesor: ${tagData.teacher}</label>
+                    </div>
+                `
+            }
+
+            /** Initialize Tagify on the above input node reference. */
+            var tagify = new Tagify(studentInput, {
                 enforceWhitelist: true,
-                whitelist: [
-                    'Nume elev 1',
-                    'Nume elev 2',
-                ],
-                placeholder: "Cauta elev",
+                skipInvalid: true, // do not remporarily add invalid tags
+                maxTags: 1,
                 dropdown: {
-                    enabled: 1, // show suggestion after 1 typed character
-                    position: 'input', // position suggestions list next to typed text
+                    closeOnSelect: true,
+                    enabled: 0,
+                    classname: 'users-list',
+                    searchKeys: ['name', 'teacher']  // very important to set by which keys to search for suggesttions when typing
                 },
                 templates: {
-                    dropdownItemNoMatch: function (data) {
-                        return `not found: ${data.value}`
-                    }
+                    tag: tagTemplate,
+                    dropdownItem: suggestionItemTemplate
                 },
-            });
+                whitelist: usersList
+            })
+
+            // tagify.on('dropdown:show dropdown:updated', onDropdownShow)
+            // tagify.on('dropdown:select', onSelectSuggestion)
+
+
 
             $(document.body).on('change', '.onChangeValue', function() {
                 if(( 0 !== studentInput.value.length)) {
-                    $('#solicita-acces').removeClass('d-none')
+                    $('#request-access').removeClass('d-none')
                 } else {
-                    $('#solicita-acces').addClass('d-none');
+                    $('#request-access').addClass('d-none');
                     $('#spacer').removeClass('d-none');
-                    $('#creaza-profil').removeClass('d-none');
+                    $('#create-profile').removeClass('d-none');
                     $('#search-student').addClass('rounded-bottom');
                     $('#search-student').addClass('pb-5');
-                    $('#message').addClass('d-none');
+                    $('#message-container').addClass('d-none');
 
                 }
             });
 
-            $('#solicita-acces').on('click', function() {
+            $('#request-access').on('click', function() {
                 $('#spacer').addClass('d-none');
-                $('#creaza-profil').addClass('d-none');
-                $('#solicita-acces').addClass('d-none');
+                $('#create-profile').addClass('d-none');
+                $('#request-access').addClass('d-none');
                 $('#search-student').removeClass('rounded-bottom');
                 $('#search-student').removeClass('pb-5');
-                $('#message').removeClass('d-none');
+                $('#message-container').removeClass('d-none');
             })
 
+            /** Function that clears and closes the modal. */
+            $('#cancel-request').on('click', function() {
+                /** Clear the values. */
+                students.removeAllTags();
+                $('#message').val('');
+
+                $('#request-access').addClass('d-none');
+                $('#spacer').removeClass('d-none');
+                $('#create-profile').removeClass('d-none');
+                $('#search-student').addClass('rounded-bottom');
+                $('#search-student').addClass('pb-5');
+                $('#message-container').addClass('d-none');
+            })
+
+            /** Function that sends the request to the backend. */
+            $('#send-request').on('click', function() {
+                var $student = $('#student').val();
+                var $message = $('#message').val();
+
+                /** Send a student access request. */
+                $.request(
+                    'onCreateStudentAccessRequest', {
+                        data: {
+                            student: $student,
+                            message: $message,
+                        }
+                    }
+                );
+            })
         });
     </script>
 {% endput %}

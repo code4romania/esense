@@ -14,7 +14,7 @@
     {% if 'specialist' == user.type %}
 
         <!-- Panou de administrare -->
-        <li class="nav-item mb-2 {% if this.page.url == "/specialist/panou-de-administrare" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/specialist/dashboard" %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'specialist/dashboard'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
@@ -92,7 +92,7 @@
     {% if 'school' == user.type %}
 
         <!-- Panou de administrare -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/dashboard" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/dashboard" or this.page.url == "/school/specialist-add" %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/dashboard'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
@@ -110,7 +110,7 @@
         </li>
 
         <!-- Elevi -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/students" or this.page.url == '/school/students' %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/students" or this.page.url == '/school/students' or this.page.url == "/school/student-add" %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/students'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/user.svg'|theme }}">

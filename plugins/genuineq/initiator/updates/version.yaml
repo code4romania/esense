@@ -15,3 +15,9 @@
 1.0.6:
     - 'Seeder for Janvince Smallrecords Areas table'
     - seeder_janvince_smallrecords_areas.php
+1.0.7:
+    - 'Seeder for Janvince Smallrecords Records table'
+    - seeder_janvince_smallrecords_records.php
+1.0.8:
+    - 'Seeder for Janvince Smallrecords Records Category table'
+    - seeder_janvince_smallrecords_records_categories.php

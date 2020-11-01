@@ -1,16 +1,13 @@
 <?php namespace Genuineq\Students\Components;
 
 use Log;
-use Auth;
 use Lang;
 use Flash;
 use Event;
 use Input;
-use Request;
 use Redirect;
 use Validator;
 use ValidationException;
-use ApplicationException;
 use \System\Models\File;
 use Cms\Classes\ComponentBase;
 use Genuineq\Students\Models\Student as StudentModel;
@@ -109,8 +106,6 @@ class Student extends ComponentBase
         if ($redirectUrl) {
             return Redirect::to($redirectUrl);
         }
-
-        return Redirect::refresh();
     }
 
     /**
@@ -141,11 +136,11 @@ class Student extends ComponentBase
         /** Validate the student data. */
         $this->validateStudentData($data, post());
 
-        /** Fire event before student update. */
-        Event::fire('genuineq.students.update.before.student.update', [&$data, post()]);
-
         /** Extract the student. */
         $student = StudentModel::find(post('id'));
+
+        /** Fire event before student update. */
+        Event::fire('genuineq.students.update.before.student.update', [&$student, post()]);
 
         /** Update the student. */
         $student->update($data);
@@ -173,7 +168,7 @@ class Student extends ComponentBase
 
         $redirectUrl = null;
         /** Fire event before finish. */
-        Event::fire('genuineq.students.create.before.finish', [&$redirectUrl, $student]);
+        Event::fire('genuineq.students.update.before.finish', [&$redirectUrl, $student]);
 
         /** Check if a redirect is required. */
         if ($redirectUrl) {
@@ -188,15 +183,20 @@ class Student extends ComponentBase
      */
     public function onStudentArchive()
     {
-        if (!Auth::check()) {
-            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        /** Define redirect url variable. */
+        $redirectUrl = null;
+        Event::fire('genuineq.students.student.archive.start', [&$this, post(), &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
         }
 
-        /** Extract the user */
-        $user = Auth::getUser();
-
         /** Extract the student that needs to be archived. */
-        $student = $user->profile->students->where('id', post('id'))->first();
+        $student = StudentModel::find(post('id'));
+
+        /** Fire event before student archive. */
+        Event::fire('genuineq.students.student.before.archive', [&$student, post()]);
 
         if ($student) {
             /** Archive the extracted student. */
@@ -204,11 +204,11 @@ class Student extends ComponentBase
             $student->save();
 
             Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_archive_successful'));
+
+            return Redirect::refresh();
         } else {
             Flash::error(Lang::get('genuineq.students::lang.components.students.message.student_archive_failed'));
         }
-
-        return Redirect::refresh();
     }
 
     /**
@@ -216,15 +216,20 @@ class Student extends ComponentBase
      */
     public function onStudentUnzip()
     {
-        if (!Auth::check()) {
-            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        /** Define redirect url variable. */
+        $redirectUrl = null;
+        Event::fire('genuineq.students.student.unzip.start', [&$this, post(), &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
         }
 
-        /** Extract the user */
-        $user = Auth::getUser();
-
         /** Extract the student that needs to be unziped. */
-        $student = $user->profile->archivedStudents->where('id', post('id'))->first();
+        $student = StudentModel::find(post('id'));
+
+        /** Fire event before student unzip. */
+        Event::fire('genuineq.students.student.before.unzip', [&$student, post()]);
 
         if ($student) {
             /** Unzip the extracted student. */
@@ -232,11 +237,11 @@ class Student extends ComponentBase
             $student->save();
 
             Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_unzip_successful'));
+
+            return Redirect::refresh();
         } else {
             Flash::error(Lang::get('genuineq.students::lang.components.students.message.student_unzip_failed'));
         }
-
-        return Redirect::refresh();
     }
 
     /**
@@ -244,26 +249,31 @@ class Student extends ComponentBase
      */
     public function onStudentDelete()
     {
-        if (!Auth::check()) {
-            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        /** Define redirect url variable. */
+        $redirectUrl = null;
+        Event::fire('genuineq.students.student.delete.start', [&$this, post(), &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
         }
 
-        /** Extract the user */
-        $user = Auth::getUser();
-
         /** Extract the student that needs to be deleted. */
-        $student = $user->profile->archivedStudents->where('id', post('id'))->first();
+        $student = StudentModel::find(post('id'));
+
+        /** Fire event before student unzipe. */
+        Event::fire('genuineq.students.student.before.delete', [&$student, post()]);
 
         if ($student) {
             /** Delete the extracted student. */
             $student->forceDelete();
 
             Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_delete_successful'));
+
+            return Redirect::refresh();
         } else {
             Flash::error(Lang::get('genuineq.students::lang.components.students.message.student_delete_failed'));
         }
-
-        return Redirect::refresh();
     }
 
     /***********************************************

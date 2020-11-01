@@ -127,7 +127,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Input diagnostic description -->
                         <div class="col-12">
                             <div class="form-group d-flex">
-                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}"></textarea>
+                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3"></textarea>
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -164,13 +164,14 @@ allowedUserTypes[] = "specialist"
                         <!-- First contact person -->
                         <div id="person-1" class="px-3 px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_1_surname'
-                                contactPersonFirstNameId = 'contact_1_name'
-                                contactPersonPhoneId = 'contact_1_phone'
+                                contactPersonLastNameId = 'contact_1_surname_id'
+                                contactPersonFirstNameId = 'contact_1_name_id'
+                                contactPersonPhoneId = 'contact_1_phone_id'
+                                contactPersonEmailId = 'contact_1_email_id'
+                                contactPersonObservationsId = 'contact_1_observations_id'
                                 addContactPerson = 'add-contact-1'
-                                contactPersonObservationsId = 'one'
                                 hideId = 'hide-1'
                                 contactPersonFormId = 'contact-1'
 
@@ -185,13 +186,14 @@ allowedUserTypes[] = "specialist"
                         <!-- Second contact person -->
                         <div id="person-2" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_2_surname'
-                                contactPersonFirstNameId = 'contact_2_name'
-                                contactPersonPhoneId = 'contact_2_phone'
+                                contactPersonLastNameId = 'contact_2_surname_id'
+                                contactPersonFirstNameId = 'contact_2_name_id'
+                                contactPersonPhoneId = 'contact_2_phone_id'
+                                contactPersonEmailId = 'contact_2_email_id'
+                                contactPersonObservationsId = 'contact_2_observations_id'
                                 addContactPerson = 'add-contact-2'
-                                contactPersonObservationsId = 'two'
                                 hideId = 'hide-2'
                                 contactPersonFormId = 'contact-2'
 
@@ -206,13 +208,14 @@ allowedUserTypes[] = "specialist"
                         <!-- Third contact person -->
                         <div id="person-3" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_3_surname'
-                                contactPersonFirstNameId = 'contact_3_name'
-                                contactPersonPhoneId = 'contact_3_phone'
+                                contactPersonLastNameId = 'contact_3_surname_id'
+                                contactPersonFirstNameId = 'contact_3_name_id'
+                                contactPersonPhoneId = 'contact_3_phone_id'
+                                contactPersonEmailId = 'contact_3_email_id'
+                                contactPersonObservationsId = 'contact_3_observations_id'
                                 addContactPerson = 'add-contact-3'
-                                contactPersonObservationsId = 'three'
                                 hideId = 'hide-3'
                                 contactPersonFormId = 'contact-3'
 
@@ -227,13 +230,14 @@ allowedUserTypes[] = "specialist"
                         <!-- Forth contact person -->
                         <div id="person-4" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_4_surname'
-                                contactPersonFirstNameId = 'contact_4_name'
-                                contactPersonPhoneId = 'contact_4_phone'
+                                contactPersonLastNameId = 'contact_4_surname_id'
+                                contactPersonFirstNameId = 'contact_4_name_id'
+                                contactPersonPhoneId = 'contact_4_phone_id'
+                                contactPersonEmailId = 'contact_4_email_id'
+                                contactPersonObservationsId = 'contact_4_observations_id'
                                 addContactPerson = 'add-contact-4'
-                                contactPersonObservationsId = 'four'
                                 hideId = 'hide-4'
                                 contactPersonFormId = 'contact-4'
 
@@ -248,13 +252,14 @@ allowedUserTypes[] = "specialist"
                         <!-- Fifth contact person -->
                         <div id="person-5" class="px-3 px-lg-2 d-none">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_5_surname'
-                                contactPersonFirstNameId = 'contact_5_name'
-                                contactPersonPhoneId = 'contact_5_phone'
+                                contactPersonLastNameId = 'contact_5_surname_id'
+                                contactPersonFirstNameId = 'contact_5_name_id'
+                                contactPersonPhoneId = 'contact_5_phone_id'
+                                contactPersonEmailId = 'contact_5_email_id'
+                                contactPersonObservationsId = 'contact_5_observations_id'
                                 addContactPerson = 'add-contact-5'
-                                contactPersonObservationsId = 'five'
                                 hideId = 'hide-5'
                                 contactPersonFormId = 'contact-5'
 
@@ -280,7 +285,7 @@ allowedUserTypes[] = "specialist"
     </div>
 </div>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ro.min.js" integrity="sha512-OyKt3ZoVnoGpHGx10TMtzQTSDHKyGzHIXdOoOiaHcMJMGOR/ev9Y6ocEGd64HVPqGEwkg29xVVbavNjDPeg9GA==" crossorigin="anonymous"></script>
 
@@ -290,11 +295,11 @@ allowedUserTypes[] = "specialist"
 
             /** WYSWYG Editor. */
             $('#description').richText();
-            $('#one').richText();
-            $('#two').richText();
-            $('#three').richText();
-            $('#four').richText();
-            $('#five').richText();
+            $('#contact_1_observations_id').richText();
+            $('#contact_2_observations_id').richText();
+            $('#contact_3_observations_id').richText();
+            $('#contact_4_observations_id').richText();
+            $('#contact_5_observations_id').richText();
 
             /** Initiate the datepicker plugin. */
             $('#birthdate').datepicker({
@@ -331,27 +336,6 @@ allowedUserTypes[] = "specialist"
             addNewContact('#hide-3', '#person-4');
             addNewContact('#hide-4', '#person-5');
 
-            /** Change active on predifined avatars */
-            // var avatarsContainer = document.querySelector(".avatars");
-            // var avatars = avatarsContainer.getElementsByClassName("predifined-avatar");
-            // for (var i = 0; i < avatars.length; i++) {
-            //     avatars[i].addEventListener("click", function() {
-            //         var current = document.getElementsByClassName("active-avatar");
-            //         current[0].className = current[0].className.replace(" active-avatar", "");
-            //         this.className += " active-avatar";
-            //     });
-            // }
-
-            // var avatarsContainer1 = document.querySelector(".avatars1");
-            // var avatars1 = avatarsContainer1.getElementsByClassName("predifined-avatar1");
-            // for (var i = 0; i < avatars.length; i++) {
-            //     avatars1[i].addEventListener("click", function() {
-            //         var current = document.getElementsByClassName("active-avatar1");
-            //         current[0].className = current[0].className.replace(" active-avatar1", "");
-            //         this.className += " active-avatar1";
-            //     });
-            // }
-
             /**
              * Function for activating the finish button when
              * values from all fields are selected
@@ -377,77 +361,39 @@ allowedUserTypes[] = "specialist"
             /** Validation for activeting the finish button. */
             $(document.body).on('change', '.onChangeValue', function(){
                 if(
-                    // (0 !== $("#avatar").val().length) &&
-                    (0 !== $("#birthdate").val().length) &&
-                    (0 !== $("#surname").val().length) &&
-                    (0 !== $("#name").val().length) &&
-                    (0 !== $("#description").val().length) &&
-                    // ($("#hearing_impairment").is(":checked")) &&
-                    // ($("#visual_impairment").is(":checked")) &&
-                    ((
-                        (
-                            (0 !== $("#contact_1_surname").val().length) ||
-                            (0 !== $("#contact_1_name").val().length) ||
-                            (0 !== $("#contact_1_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_1_surname").val().length) &&
-                            (0 !== $("#contact_1_name").val().length) &&
-                            (0 !== $("#contact_1_phone").val().length)
-                        )
+                    (
+                        ((0 !== $("#birthdate").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
+                        ((0 !== $("#surname").val().length)  && ((0 == $("#birthdate").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
+                        ((0 !== $("#name").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#description").val().length) || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
+                        ((0 !== $('#description').length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_1_surname_id").val().length) && ((0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) )) ||
+                        ((0 !== $("#contact_1_name_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) )) ||
+                        ((0 !== $("#contact_1_phone_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#description").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_2_surname").val().length) ||
-                            (0 !== $("#contact_2_name").val().length) ||
-                            (0 !== $("#contact_2_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_2_surname").val().length) &&
-                            (0 !== $("#contact_2_name").val().length) &&
-                            (0 !== $("#contact_2_phone").val().length)
-                        )
+                        ((0 !== $("#contact_2_surname_id").val().length) && ((0 == $("#contact_2_name_id").val().length) || (0 == $("#contact_2_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_2_name_id").val().length) && ((0 == $("#contact_2_surname_id").val().length) || (0 == $("#contact_2_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_2_phone_id").val().length) && ((0 == $("#contact_2_surname_id").val().length) ||(0 == $("#contact_2_name_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_3_surname").val().length) ||
-                            (0 !== $("#contact_3_name").val().length) ||
-                            (0 !== $("#contact_3_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_3_surname").val().length) &&
-                            (0 !== $("#contact_3_name").val().length) &&
-                            (0 !== $("#contact_3_phone").val().length)
-                        )
+                        ((0 !== $("#contact_3_surname_id").val().length) && ((0 == $("#contact_3_name_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_3_name_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_3_phone_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) ||(0 == $("#contact_3_name_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_4_surname").val().length) ||
-                            (0 !== $("#contact_4_name").val().length) ||
-                            (0 !== $("#contact_4_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_4_surname").val().length) &&
-                            (0 !== $("#contact_4_name").val().length) &&
-                            (0 !== $("#contact_4_phone").val().length)
-                        )
+                        ((0 !== $("#contact_4_surname_id").val().length) && ((0 == $("#contact_4_name_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_4_name_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_4_phone_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) ||(0 == $("#contact_4_name_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_5_surname").val().length) ||
-                            (0 !== $("#contact_5_name").val().length) ||
-                            (0 !== $("#contact_5_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_5_surname").val().length) &&
-                            (0 !== $("#contact_5_name").val().length) &&
-                            (0 !== $("#contact_5_phone").val().length)
-                        )
-                    ))
+                        ((0 !== $("#contact_5_surname_id").val().length) && ((0 == $("#contact_5_name_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_5_name_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_5_phone_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) ||(0 == $("#contact_5_name_id").val().length) ))
+                    )
                 ) {
-                    activateFinishBtn()
-                } else {
                     deactivateFinishBtn()
+                } else {
+                    activateFinishBtn()
                 }
             });
         });

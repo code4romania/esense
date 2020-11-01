@@ -24,9 +24,12 @@ class Plugin extends PluginBase
         'Genuineq.Timetable'
     ];
 
-    /** Function for registering Esense component. */
+    /** Function for registering Profile component. */
     public function registerComponents()
     {
+        return [
+            \Genuineq\Esense\Components\StudentAccess::class => 'studentAccess'
+        ];
     }
 
     public function registerSettings()
@@ -47,6 +50,7 @@ class Plugin extends PluginBase
 
         /** Extend the Specialist model. */
         $this->specialistExtendRelationships();
+        $this->specialistExtendMethods();
     }
 
     /***********************************************
@@ -77,7 +81,12 @@ class Plugin extends PluginBase
             $model->morphTo['owner'] = [];
 
             /** Link "Specialist" model to "Student" model with many-to-many relation. */
-            $model->belongsToMany['specialists'] = ['Genuineq\Profile\Models\Specialist', 'table' => 'genuineq_esense_students_specialists'];
+            $model->belongsToMany['specialists'] = [
+                'Genuineq\Profile\Models\Specialist',
+                'table' => 'genuineq_esense_students_specialists',
+                'pivot' => ['approved', 'message', 'seen'],
+                'timestamps' => true
+            ];
         });
     }
 
@@ -104,6 +113,7 @@ class Plugin extends PluginBase
      */
     protected function studentExtendComponens()
     {
+        /************ Student CREATE start ************/
         Event::listen('genuineq.students.student.create.start', function(&$component, $inputs, &$redirectUrl) {
             if (!Auth::check()) {
                 $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
@@ -122,18 +132,84 @@ class Plugin extends PluginBase
 
         Event::listen('genuineq.students.create.after.student.create', function($student) {
             /** Create a specialist connection. */
-            $student->specialists()->attach($student->owner_id);
+            $student->specialists()->attach($student->owner_id, ['approved' => true]);
         });
 
-        Event::listen('genuineq.students.update.before.student.update', function(&$data, $inputs) {
-            /** Add the owner ID to the data. */
+        
+        Event::listen('genuineq.students.create.before.finish', function(&$redirectUrl, $student) {
+            /** Redirect to all students page. */
             if ('specialist' == Auth::getUser()->type) {
-                $data['owner_id'] = Auth::user()->profile->id;
+                $redirectUrl = 'specialist/students';
             } else {
-                $data['owner_id'] = $inputs['owner'];
+                $redirectUrl = 'school/students';
             }
-            $data['owner_type'] = 'Genuineq\Profile\Models\Specialist';
+            
         });
+        /************ Student CREATE end ************/
+
+        /************ Student UPDATE start ************/
+        Event::listen('genuineq.students.student.update.start', function(&$component, $inputs, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
+            }
+        });
+
+        Event::listen('genuineq.students.update.before.student.update', function(&$student, $inputs) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract the student that needs to be archived. */
+            $student = $user->profile->allStudents()->where('id', $inputs['id'])->first();
+        });
+        /************ Student UPDATE end ************/
+
+        /************ Student ARCHIVE start ************/
+        Event::listen('genuineq.students.student.archive.start', function(&$component, $inputs, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
+            }
+        });
+
+        Event::listen('genuineq.students.student.before.archive', function(&$student, $inputs) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract the student that needs to be archived. */
+            $student = $user->profile->allStudents()->where('id', $inputs['id'])->first();
+        });
+        /************ Student ARCHIVE end ************/
+
+        /************ Student UNZIP start ************/
+        Event::listen('genuineq.students.student.unzip.start', function(&$component, $inputs, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
+            }
+        });
+
+        Event::listen('genuineq.students.student.before.unzip', function(&$student, $inputs) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract the student that needs to be unziped. */
+            $student = $user->profile->archivedStudents->where('id', $inputs['id'])->first();
+        });
+        /************ Student UNZIP end ************/
+
+        /************ Student DELETE start ************/
+        Event::listen('genuineq.students.student.delete.start', function(&$component, $inputs, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
+            }
+        });
+
+        Event::listen('genuineq.students.student.before.delete', function(&$student, $inputs) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract the student that needs to be deleted. */
+            $student = $user->profile->archivedStudents->where('id', $inputs['id'])->first();
+        });
+        /************ Student DELETE end ************/
     }
 
     /***********************************************
@@ -165,7 +241,7 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getStudentsAttribute', function() use ($model) {
                 $students = new Collection();
 
-                /** Parse all the in specialists.  */
+                /** Parse students all the in specialists. */
                 foreach ($model->active_specialists as $specialist) {
                     $students = $students->merge($specialist->students);
                 }
@@ -177,17 +253,39 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getArchivedStudentsAttribute', function() use ($model) {
                 $archivedStudents = new Collection();
 
-                /** Parse all the in specialists.  */
+                /** Parse all students the in active specialists. */
                 foreach ($model->active_specialists as $specialist) {
                     $archivedStudents = $archivedStudents->merge($specialist->archivedStudents);
                 }
 
-                /** Parse all the in archived specialists.  */
+                /** Parse all the students in archived specialists.  */
                 foreach ($model->archivedSpecialists as $specialist) {
                     $archivedStudents = $archivedStudents->merge($specialist->archivedStudents);
                 }
 
                 return $archivedStudents;
+            });
+
+            /** Add all students attribute. */
+            $model->addDynamicMethod('getAllStudentsAttribute', function() use ($model) {
+                $allStudents = new Collection();
+
+                /** Parse all students the in active specialists. */
+                foreach ($model->active_specialists as $specialist) {
+                    $allStudents = $allStudents->union($specialist->allStudents);
+                }
+
+                /** Parse all students the in inactive specialists. */
+                foreach ($model->inactive_specialists as $specialist) {
+                    $allStudents = $allStudents->union($specialist->allStudents);
+                }
+
+                /** Parse all students the in archived specialists.  */
+                foreach ($model->archivedSpecialists as $specialist) {
+                    $allStudents = $allStudents->union($specialist->allStudents);
+                }
+
+                return $allStudents;
             });
         });
     }
@@ -209,17 +307,74 @@ class Plugin extends PluginBase
             $model->belongsToMany['students'] = [
                 'Genuineq\Students\Models\Student',
                 'table' => 'genuineq_esense_students_specialists',
+                'pivot' => ['approved', 'message', 'seen'],
+                'timestamps' => true,
                 'order' => 'name asc',
-                'conditions' => 'archived = 0'
+                'conditions' => 'archived = 0 AND approved = 1'
             ];
 
             /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
             $model->belongsToMany['archivedStudents'] = [
                 'Genuineq\Students\Models\Student',
                 'table' => 'genuineq_esense_students_specialists',
+                'pivot' => ['approved', 'message', 'seen'],
+                'timestamps' => true,
                 'order' => 'name asc',
                 'conditions' => 'archived = 1'
             ];
+
+            /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
+            $model->belongsToMany['allStudents'] = [
+                'Genuineq\Students\Models\Student',
+                'table' => 'genuineq_esense_students_specialists',
+                'pivot' => ['approved', 'message', 'seen'],
+                'timestamps' => true,
+            ];
+
+            /** Link "Owner" model to "Specialist" model with one-to-many-through relation. */
+            $model->hasManyThrough['accessNotifications'] = [
+                'Genuineq\Profile\Models\Specialist',
+                'through' => 'Genuineq\Students\Models\Student',
+            ];
+        });
+    }
+
+    /**
+     * Function that performs all the methods extensions of the Specialist model.
+     */
+    protected function specialistExtendMethods()
+    {
+        Specialist::extend(function($model) {
+            /** Add school students attribute. */
+            $model->addDynamicMethod('getSchoolStudentsAttribute', function() use ($model) {
+                $schoolStudents = $model->school->all_students;
+
+                foreach ($model->allStudents as $specialistStudent) {
+                    foreach ($schoolStudents as $key => $schoolStudent) {
+                        if ($schoolStudent->id == $specialistStudent->id) {
+                            $schoolStudents->forget($key);
+                        }
+                    }
+                }
+
+                return $schoolStudents;
+            });
+
+            /** Add access notifications attribute. */
+            $model->addDynamicMethod('getAccessNotificationsAttribute', function() use ($model) {
+                $notifications = new Collection();
+
+                foreach ($model->myStudents as $key => $student) {
+                    $notifications = $notifications->merge($student->specialists()->wherePivot('seen', 0)->wherePivot('approved', 0)->get());
+                }
+
+                return $notifications;
+            });
+
+            /** Add notifications attribute. */
+            $model->addDynamicMethod('getAccessNotificationsStudent', function($candidateId) use ($model) {
+                return Student::find($candidateId);
+            });
         });
     }
 }

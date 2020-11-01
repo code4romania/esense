@@ -35,12 +35,14 @@
             </div>
         </li>
 
-        <!-- Nav Item - Alerts -->
-        <li class="nav-item mr-2 ml-3">
-            <a class="nav-link" href="{{ 'specialist/notifications'|page }}">
-                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/top-nav/bell.svg'|theme }}">
-            </a>
-        </li>
+        {% if user and 'specialist' == user.type and user.profile.affiliated %}
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item mr-2 ml-3">
+                <a class="nav-link" href="{{ 'specialist/notifications'|page }}">
+                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/top-nav/bell.svg'|theme }}">
+                </a>
+            </li>
+        {% endif %}
 
         <!-- Nav Item - User Information -->
         <li class="nav-item mr-lg-3">

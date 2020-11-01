@@ -18,7 +18,7 @@ allowedUserTypes[] = "specialist"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'specialist/student'|page({id: student.id }) }}">{{'teacher.dashboard.edit.student.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{'teacher.dashboard.edit.student.profile.back.link.text'|_}}</a>
             </div>
         </div>
 
@@ -31,7 +31,7 @@ allowedUserTypes[] = "specialist"
                 </div>
 
                 <!-- Form for editing student -->
-                <form method="POST" data-request="onEditStudent" data-request-validate data-request-flash data-request-files>
+                <form method="POST" data-request="onUpdateStudent" data-request-validate data-request-flash data-request-files>
                     <div class="row mt-2">
 
                         <!-- Edit avatar -->
@@ -117,7 +117,7 @@ allowedUserTypes[] = "specialist"
                                 <!-- Select date -->
                                 <div class="col-12 col-md-4 col-lg-5 pr-lg-0 mr-lg-0">
                                     <div class="form-group d-flex">
-                                        <input autocomplete="off" type="text" name="birthdate" id="birthdate" class="form-control onChangeValue" value="{{student.birthdate}}">
+                                        <input autocomplete="off" type="text" name="birthdate" id="birthdate" class="form-control onChangeValue" value="{{ student.birthdate|date("d-m-Y") }}">
                                         <span class="text-danger ml-2">*</span>
                                     </div>
                                 </div>
@@ -179,11 +179,12 @@ allowedUserTypes[] = "specialist"
                             </div>
                         </div>
 
+                        <input name="id" class="d-none" type="text" id="id" value="{{ student.id }}"/>
 
                         <!-- First contact person -->
                         <div id="person-1" class="px-3 px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_1_surname'
                                 contactPersonFirstNameId = 'contact_1_name'
@@ -211,7 +212,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Second contact person -->
                         <div id="person-2" class="px-3 px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_2_surname'
                                 contactPersonFirstNameId = 'contact_2_name'
@@ -240,7 +241,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Third contact person -->
                         <div id="person-3" class="px-3 px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_3_surname'
                                 contactPersonFirstNameId = 'contact_3_name'
@@ -268,7 +269,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Forth contact person -->
                         <div id="person-4" class="px-3 px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_4_surname'
                                 contactPersonFirstNameId = 'contact_4_name'
@@ -296,7 +297,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Fifth contact person -->
                         <div id="person-5" class="px-3 px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_5_surname'
                                 contactPersonFirstNameId = 'contact_5_name'

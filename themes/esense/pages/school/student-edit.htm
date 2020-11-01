@@ -57,7 +57,7 @@ allowedUserTypes[] = "school"
                                         <div class="tab-pane fade {% if student.gender == 'female' %} show active {% endif %}" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                             <div class="d-flex">
                                                 {% if student.avatar and student.gender == 'female' %}
-                                                    <img id="add-avatar" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{user.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                                                    <img id="add-avatar" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{student.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
                                                 {% else %}
 
                                                     <div class="avatars d-none">
@@ -195,7 +195,7 @@ allowedUserTypes[] = "school"
                         <!-- First contact person -->
                         <div id="person-1" class="px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_1_surname'
                                 contactPersonFirstNameId = 'contact_1_name'
@@ -222,7 +222,7 @@ allowedUserTypes[] = "school"
                         <!-- Second contact person -->
                         <div id="person-2" class="px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_2_surname'
                                 contactPersonFirstNameId = 'contact_2_name'
@@ -250,7 +250,7 @@ allowedUserTypes[] = "school"
                         <!-- Third contact person -->
                         <div id="person-3" class="px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_3_surname'
                                 contactPersonFirstNameId = 'contact_3_name'
@@ -277,7 +277,7 @@ allowedUserTypes[] = "school"
                         <!-- Forth contact person -->
                         <div id="person-4" class="px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_4_surname'
                                 contactPersonFirstNameId = 'contact_4_name'
@@ -304,7 +304,7 @@ allowedUserTypes[] = "school"
                         <!-- Fifth contact person -->
                         <div id="person-5" class="px-lg-2">
                             {%
-                                partial 'web-app/specialist/add-another-contact-person'
+                                partial 'web-app/general/student-contact-person'
 
                                 contactPersonLastNameId = 'contact_5_surname'
                                 contactPersonFirstNameId = 'contact_5_name'
