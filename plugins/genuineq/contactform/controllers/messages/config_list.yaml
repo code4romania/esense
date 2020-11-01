@@ -1,7 +1,7 @@
 title: Messages
 modelClass: Genuineq\Contactform\Models\Message
 list: $/genuineq/contactform/models/message/columns.yaml
-recordUrl: 'genuineq/contactform/messages/preview/:id'
+recordUrl: 'genuineq/contactform/messages/update/:id'
 noRecordsMessage: 'backend::lang.list.no_records'
 recordsPerPage: '50'
 showSetup: true
@@ -13,3 +13,6 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
+
+# Link URL for each message to show a popup reply for
+recordOnClick: "$.popup({ handler: 'onReplyForm', extraData: { record_id: ':id' } })"

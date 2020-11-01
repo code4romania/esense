@@ -5,20 +5,27 @@ fields:
         placeholder: 'genuineq.contactform::lang.message.form-labels.first_name'
         default: ''
         disabled: 0
+        context:
+            - create
+            - preview
         type: text
     last_name:
         label: 'genuineq.contactform::lang.message.form-labels.last_name'
         span: auto
         placeholder: 'genuineq.contactform::lang.message.form-labels.last_name'
+        context:
+            - create
+            - preview
         type: text
     email:
         label: 'genuineq.contactform::lang.message.form-labels.email'
         span: auto
         placeholder: 'genuineq.contactform::lang.message.form-labels.email'
+        disabled: 1
         type: text
     message:
         label: 'genuineq.contactform::lang.message.form-labels.message'
-        size: ''
+        size: huge
         span: full
         placeholder: 'genuineq.contactform::lang.message.form-labels.message'
         type: textarea

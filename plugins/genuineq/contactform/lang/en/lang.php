@@ -19,22 +19,38 @@
         ],
     ],
 
+    'reportwidgets' => [
+        'total_messages' => [
+            'label' => 'Total messages',
+            'title' =>  'Total number of messages',
+            'title_default' => 'Total messages',
+            'title_validation' => '',
+        ],
+    ],
+
     'backend' => [
         'name' => 'Messages',
         'send_message' => 'Send Message',
         'create_message' => 'Create Message',
-        'update_message' => 'Update Message',
-        'delete_message' => 'Delete Message',
         'preview_message' => 'Preview Message',
+        'delete_message' => 'Delete Message',
+        'reply_to_message' => 'Reply to message',
+        'reply_to_all_messages' => 'Reply to all selected messages',
+
+        'preview' => [
+            'record_not_found' => 'Message not found',
+        ],
+
+        'reply' => [
+            'reply_button' => 'Reply',
+            'reply_and_close' => 'Reply and close',
+            'exit_reply' => 'Cancel reply',
+        ],
 
         'flash' => [
             'send_message' => [
                 'success' => 'Message sent',
                 'fail' => 'Message not sent',
-            ],
-            'update_message' => [
-                'success' => 'Message updated',
-                'fail' => 'Message not updated'
             ],
         ],
     ],
