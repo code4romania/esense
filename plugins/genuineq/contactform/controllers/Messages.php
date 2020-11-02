@@ -119,12 +119,12 @@ class Messages extends Controller
         $parts = explode("@", $receiverEmail);
 
         /* Extract domain name from email address */
-        $domain = $parts[1] /*. '.'*/;
+        $domain = $parts[1];
 
         /* Check domain validity and throw an error if fails */
         if (! /* NOT */checkdnsrr($domain, 'MX')) {
             throw new \InvalidArgumentException('Invalid receiver email format: DOMAIN incorrect');
-        }else{
+        } else {
             return true;
         }
 
