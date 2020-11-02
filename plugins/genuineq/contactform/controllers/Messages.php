@@ -36,13 +36,10 @@ class Messages extends Controller
         $messageToReply = MessageModel::find(post('record_id'));
 
         /* Add variables to view */
-        $this->vars['recordId'] = $id = $messageToReply->id;
-        $this->vars['first_name'] = $first_name = $messageToReply->first_name;
-        $this->vars['last_name'] = $last_name = $messageToReply->last_name;
-        $this->vars['email'] = $email = $messageToReply->email;
-        $this->vars['message'] = $message = $messageToReply->message;
+        $this->vars['recordId'] = $messageToReply->id;
+        $this->vars['email'] = $messageToReply->email;
 
-        return $this->makePartial('reply_form', [$first_name, $last_name, $email, $message]);
+        return $this->makePartial('reply_form');
 
     }
 
