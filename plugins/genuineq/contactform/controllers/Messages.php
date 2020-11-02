@@ -1,11 +1,13 @@
 <?php namespace Genuineq\ContactForm\Controllers;
 
+use Log;
+use Lang;
 use Mail;
+use Flash;
 use BackendMenu;
 use Carbon\Carbon;
 use Backend\Classes\Controller;
 use Genuineq\ContactForm\Models\Message as MessageModel;
-use Egulias\EmailValidator\Exception\DomainAcceptsNoMail as DomainException;
 
 class Messages extends Controller
 {
@@ -40,22 +42,27 @@ class Messages extends Controller
         $this->vars['email'] = $email = $messageToReply->email;
         $this->vars['message'] = $message = $messageToReply->message;
 
-        return $this->makePartial('reply_form');
+        return $this->makePartial('reply_form', [$first_name, $last_name, $email, $message]);
 
     }
 
+
+    /***********************************************
+     ************* Reply to the message ************
+     ***********************************************/
+
     /**
-     * Function that keep the logic for Reply to messages
+     * Function that keeps the logic for Reply to messages
      * @return mixed
      */
     public function onReply()
     {
 
-        $email = post('email'); /* Email value from hidden field, because in view is disabled */
-        $message = post('Message[message]');
+        $receiverEmail = post('email'); /* Email value from hidden field, because in view is disabled */
+        $messageToReply = wordwrap(post('Message[message]'), 70); /* Wrap  text to 70 chars line long */
 
-        $bodyMessage =  [
-            'text' => $message,
+        $bodyMessage = [
+            'text' => $messageToReply,
             'raw' => true
         ];
 
@@ -64,33 +71,63 @@ class Messages extends Controller
             'message' => strip_tags(post('Message[message]')),
         ];
 
-        /* SEND email */
+        /* try to SEND email */
         try {
-            Mail::send($bodyMessage, $data, function ($message2) use ($email) {
-                $message2->to($email);
-            });
-        }catch (DomainException $ex) {
-            $this->vars['error'] = $ex->getMessage();
+
+            if ($this->validateReceiverEmail($receiverEmail)) {
+                Mail::send($bodyMessage, $data, function ($message) use ($receiverEmail) {
+                    $message->subject(Lang::get('genuineq.contactform::lang.backend.email.subject'));
+                    $message->to($receiverEmail);
+                });
+
+                /* Create/Save reply message to database if no errors occurs */
+                MessageModel::create([
+                    'first_name' => 'Admin', /* required / can be empty string, but not NULL */
+                    'email' => $receiverEmail,
+                    'message' => $messageToReply,
+                ]);
+
+                /* Set replied_at timestamp to the reply message */
+                $modelToUpdate = MessageModel::find(post('record_id'));
+                $modelToUpdate->replied_at = Carbon::createFromTimestamp(time());
+                $modelToUpdate->save();
+
+            }
+
+        } catch (\InvalidArgumentException $ex) {
+
+            /* Write error to log and flash a message to admin frontend */
+            Log::error('Invalid user email address at message with id = ' . post('record_id') . '. Error: ' . $ex);
+            Flash::error(Lang::get('genuineq.contactform::lang.backend.flash.invalid_email'), 20);
         }
 
-
-        /* Create/Save reply message to database */
-        MessageModel::create([
-            'first_name' => '',
-            'last_name' => '',
-            'email' => $email,
-            'message' => $message,
-            'replied_at' => time(),
-        ]);
-
-
-        /* Set replied_at timestamp on message to the reply message */
-        $modelToUpdate = MessageModel::find(post('record_id'));
-        $modelToUpdate->replied_at = Carbon::createFromTimestamp(time());
-        $modelToUpdate->save();
-
-
         return $this->listRefresh();
+    }
+
+
+    /***********************************************
+     ********** Email validation function **********
+     ***********************************************/
+
+    /**
+     * Function that validate email address from the message you want to reply
+     * @param $receiverEmail
+     * @return bool
+     */
+    private function validateReceiverEmail($receiverEmail)
+    {
+        $parts = explode("@", $receiverEmail);
+
+        /* Extract domain name from email address */
+        $domain = $parts[1] /*. '.'*/;
+
+        /* Check domain validity and throw an error if fails */
+        if (! /* NOT */checkdnsrr($domain, 'MX')) {
+            throw new \InvalidArgumentException('Invalid receiver email format: DOMAIN incorrect');
+        }else{
+            return true;
+        }
+
     }
 
 

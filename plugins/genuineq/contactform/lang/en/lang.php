@@ -47,11 +47,16 @@
             'exit_reply' => 'Cancel reply',
         ],
 
+        'email' => [
+            'subject' => 'Reply to your message',
+        ],
+
         'flash' => [
             'send_message' => [
                 'success' => 'Message sent',
                 'fail' => 'Message not sent',
             ],
+            'invalid_email' => 'Invalid email address. Please check if domain name (@example.com) is correct.'
         ],
     ],
 ];
