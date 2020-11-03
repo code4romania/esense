@@ -1,0 +1,206 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:eu-central-1:172019762325:task-definition/esense:15",
+    "containerDefinitions": [
+        {
+            "name": "application",
+            "image": "172019762325.dkr.ecr.eu-central-1.amazonaws.com/e-sense:1.0.4",
+            "cpu": 0,
+            "memoryReservation": 256,
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "CMS_CONVERT_LINE_ENDINGS",
+                    "value": "true"
+                },
+                {
+                    "name": "APP_ENV",
+                    "value": "production"
+                },
+                {
+                    "name": "MAIL_ENCRYPTION",
+                    "value": "tls"
+                },
+                {
+                    "name": "CMS_ROUTES_CACHE",
+                    "value": "true"
+                },
+                {
+                    "name": "DB_PORT",
+                    "value": "3306"
+                },
+                {
+                    "name": "MAIL_HOST",
+                    "value": "smtp.gmail.com"
+                },
+                {
+                    "name": "APP_NAME",
+                    "value": "e-Sense"
+                },
+                {
+                    "name": "SESSION_LIFETIME",
+                    "value": "120"
+                },
+                {
+                    "name": "APP_KEY",
+                    "value": "base64:9/6zNsm0+pPZU2bId7XyXfzZzji4iVejAAojxq6E2Bo="
+                },
+                {
+                    "name": "QUEUE_DRIVER",
+                    "value": "sync"
+                },
+                {
+                    "name": "CMS_ACTIVE_THEME",
+                    "value": "esense"
+                },
+                {
+                    "name": "CMS_ASSET_DEEP_HASHING",
+                    "value": "true"
+                },
+                {
+                    "name": "SESSION_DRIVER",
+                    "value": "database"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "value": "esense"
+                },
+                {
+                    "name": "CMS_ASSET_MINIFY",
+                    "value": "true"
+                },
+                {
+                    "name": "MAIL_DRIVER",
+                    "value": "smtp"
+                },
+                {
+                    "name": "APP_URL",
+                    "value": "http://www.esense.ro"
+                },
+                {
+                    "name": "APP_DEBUG",
+                    "value": "false"
+                },
+                {
+                    "name": "CMS_ASSET_CACHE",
+                    "value": "true"
+                },
+                {
+                    "name": "CMS_LINK_POLICY",
+                    "value": "secure"
+                },
+                {
+                    "name": "MAIL_USERNAME",
+                    "value": "bosutar.cosmin@gmail.com"
+                },
+                {
+                    "name": "CMS_ENABLE_CSRF",
+                    "value": "true"
+                },
+                {
+                    "name": "APP_LOG",
+                    "value": "daily"
+                },
+                {
+                    "name": "MAIL_NAME",
+                    "value": "e-Sense"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "esense-db.ce7zqk4ctcb0.eu-central-1.rds.amazonaws.com"
+                },
+                {
+                    "name": "MAIL_PORT",
+                    "value": "587"
+                },
+                {
+                    "name": "CMS_BACKEND_FORCE_REMEMBER",
+                    "value": "null"
+                },
+                {
+                    "name": "CMS_BACKEND_URI",
+                    "value": "backend-esense"
+                },
+                {
+                    "name": "CMS_BACKEND_FORCE_SECURE",
+                    "value": "false"
+                },
+                {
+                    "name": "CMS_EDGE_UPDATES",
+                    "value": "false"
+                },
+                {
+                    "name": "CACHE_DRIVER",
+                    "value": "file"
+                },
+                {
+                    "name": "DB_DATABASE",
+                    "value": "esense"
+                },
+                {
+                    "name": "MAIL_PASSWORD",
+                    "value": "fvhrfpdivugwgoga"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "value": "FLW2SVlLIJmJwAEjzU3y2hQ4kK"
+                }
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "esense-efs",
+                    "containerPath": "/var/www/storage/app"
+                }
+            ],
+            "volumesFrom": []
+        }
+    ],
+    "family": "esense",
+    "executionRoleArn": "arn:aws:iam::172019762325:role/ecsTaskExecutionRole",
+    "networkMode": "bridge",
+    "revision": 15,
+    "volumes": [
+        {
+            "name": "esense-efs",
+            "efsVolumeConfiguration": {
+                "fileSystemId": "fs-f31653ab",
+                "rootDirectory": "/",
+                "transitEncryption": "DISABLED",
+                "authorizationConfig": {
+                    "iam": "DISABLED"
+                }
+            }
+        }
+    ],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "ecs.capability.efs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2"
+    ],
+    "requiresCompatibilities": [
+        "EC2"
+    ]
+}
