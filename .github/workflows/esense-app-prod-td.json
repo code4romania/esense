@@ -1,5 +1,4 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:eu-central-1:172019762325:task-definition/esense:15",
     "containerDefinitions": [
         {
             "name": "application",
@@ -149,7 +148,7 @@
                 },
                 {
                     "name": "DB_PASSWORD",
-                    "value": "$SB_PASSWORD"
+                    "value": "$DB_PASSWORD"
                 }
             ],
             "mountPoints": [
@@ -164,7 +163,6 @@
     "family": "esense",
     "executionRoleArn": "arn:aws:iam::172019762325:role/ecsTaskExecutionRole",
     "networkMode": "bridge",
-    "revision": 15,
     "volumes": [
         {
             "name": "esense-efs",
@@ -178,28 +176,7 @@
             }
         }
     ],
-    "status": "ACTIVE",
-    "requiresAttributes": [
-        {
-            "name": "com.amazonaws.ecs.capability.ecr-auth"
-        },
-        {
-            "name": "ecs.capability.efs"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
-        },
-        {
-            "name": "ecs.capability.execution-role-ecr-pull"
-        }
-    ],
     "placementConstraints": [],
-    "compatibilities": [
-        "EC2"
-    ],
     "requiresCompatibilities": [
         "EC2"
     ]
