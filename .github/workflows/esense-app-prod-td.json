@@ -49,7 +49,7 @@
                 },
                 {
                     "name": "APP_KEY",
-                    "value": "base64:9/6zNsm0+pPZU2bId7XyXfzZzji4iVejAAojxq6E2Bo="
+                    "value": "$APP_KEY"
                 },
                 {
                     "name": "QUEUE_DRIVER",
@@ -97,7 +97,7 @@
                 },
                 {
                     "name": "MAIL_USERNAME",
-                    "value": "bosutar.cosmin@gmail.com"
+                    "value": "$MAIL_USERNAME"
                 },
                 {
                     "name": "CMS_ENABLE_CSRF",
@@ -113,7 +113,7 @@
                 },
                 {
                     "name": "DB_HOST",
-                    "value": "esense-db.ce7zqk4ctcb0.eu-central-1.rds.amazonaws.com"
+                    "value": "$DB_HOST"
                 },
                 {
                     "name": "MAIL_PORT",
@@ -145,11 +145,11 @@
                 },
                 {
                     "name": "MAIL_PASSWORD",
-                    "value": "fvhrfpdivugwgoga"
+                    "value": "$MAIL_PASSWORD"
                 },
                 {
                     "name": "DB_PASSWORD",
-                    "value": "FLW2SVlLIJmJwAEjzU3y2hQ4kK"
+                    "value": "$SB_PASSWORD"
                 }
             ],
             "mountPoints": [
