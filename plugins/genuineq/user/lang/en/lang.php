@@ -391,5 +391,17 @@ return [
                 'label_registration_requests' => 'Total number of registration requests'
             ],
         ],
+
+        'reg_requests_table' => [
+            'label' => 'Registration requests table',
+            'title' =>  'Registration requests',
+            'title_default' => 'Registration requests table',
+            'title_validation' => '',
+
+            'frontend' => [
+                'label_registration_requests' => 'Registration requests table'
+            ],
+        ],
     ],
+
 ];

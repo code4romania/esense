@@ -90,7 +90,7 @@ class Plugin extends PluginBase
     }
 
     /***********************************************
-     ********** Register report widgets ************
+     ***************** Register widgets ************
      ***********************************************/
 
     public function registerReportWidgets()
@@ -100,8 +100,16 @@ class Plugin extends PluginBase
                 'label'   => 'genuineq.user::lang.reportwidgets.total_registration_requests.label',
                 'context' => 'dashboard',
             ],
+
+            'Genuineq\User\ReportWidgets\RegRequestsTable' => [
+                'label'   => 'genuineq.user::lang.formwidgets.reg_requests_table.label',
+                'context' => 'dashboard',
+            ],
         ];
     }
+
+
+
 
 
     public function registerPermissions()
