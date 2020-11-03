@@ -1,6 +1,6 @@
 name: 'Manage Records'
-modelClass: Genuineq\Timetable\Models\Record
 form: $/genuineq/timetable/models/record/fields.yaml
+modelClass: Genuineq\Timetable\Models\Record
 defaultRedirect: genuineq/timetable/records
 create:
     title: 'genuineq.timetable::lang.record.create'

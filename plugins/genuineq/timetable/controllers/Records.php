@@ -2,7 +2,6 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
-use Genuineq\Timetable\Models\Record;
 
 class Records extends Controller
 {
@@ -10,7 +9,7 @@ class Records extends Controller
 
     public $implement = [
         'Backend\Behaviors\ListController',
-        'Backend\Behaviors\FormController',
+        'Backend\Behaviors\FormController'
     ];
 
     public $listConfig = 'config_list.yaml';

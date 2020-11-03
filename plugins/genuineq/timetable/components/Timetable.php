@@ -28,7 +28,7 @@ class Timetable extends ComponentBase
      */
     public function onRun()
     {
-        $this->page['records'] = RecordModel::all();
+        // $this->page['records'] = RecordModel::all();
     }
 
     /**

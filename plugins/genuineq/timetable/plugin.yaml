@@ -12,13 +12,7 @@ navigation:
         permissions:
             - genuineq.timetable.manage_records
         sideMenu:
-            'Add Record':
-                label: 'genuineq.timetable::lang.record.create'
-                url: genuineq/timetable/records/create
-                icon: icon-plus
-                permissions:
-                    - genuineq.timetable.manage_records
-            Records:
+            records:
                 label: 'genuineq.timetable::lang.records.title'
                 url: genuineq/timetable/records
                 icon: icon-list
