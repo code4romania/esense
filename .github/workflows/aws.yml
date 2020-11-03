@@ -90,14 +90,14 @@ jobs:
     - name: Replace image in config
       uses: datamonsters/replace-action@v2
       with:
-        files: .github/workflows/tms-app-prod-td.json
-        replacements: '$APP_KEY=${{ secrets.APP_KEY }},$DB_HOST=${{ secrets.DB_HOST }},$DB_PASSWORD=${{ secrets.DB_PASSWORD }},$MAIL_HOST=${{ secrets.MAIL_HOST }},$MAIL_USERNAME=${{ secrets.MAIL_USERNAME }},$MAIL_PORT=${{ secrets.MAIL_PORT }},$MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }},$MAIL_ENCRYPTION=${{ secrets.MAIL_ENCRYPTION }}'
+        files: .github/workflows/esense-app-prod-td.json
+        replacements: '$APP_KEY=${{ secrets.APP_KEY }},$DB_HOST=${{ secrets.DB_HOST }},$DB_PASSWORD=${{ secrets.DB_PASSWORD }},$MAIL_USERNAME=${{ secrets.MAIL_USERNAME }},$MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}'
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: .github/workflows/tms-app-prod-td.json
+        task-definition: .github/workflows/esense-app-prod-td.json
         container-name: application
         image: ${{ steps.build-image.outputs.image }}
 
