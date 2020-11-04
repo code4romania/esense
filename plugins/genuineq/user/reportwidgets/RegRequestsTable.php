@@ -2,7 +2,9 @@
 
 use DB;
 use Lang;
+use Exception;
 use Backend\Classes\ReportWidgetBase;
+use Genuineq\User\Models\User as UserModel;
 
 /**
  * Class RegRequestsTable
@@ -43,53 +45,48 @@ class RegRequestsTable extends ReportWidgetBase
     }
 
 
-
     /**
-     * Function that show replyForm at click on a list item
+     * Function that show RequestDetailsForm at click on a list item
      * @return false|mixed
      */
     public function onRequestForm()
     {
-        /*Get the selected record ID */
-        $this->asExtension('FormController')->update(post('record_id'));
+        /* Get the selected record ID */
+        $this->asExtension('FormController')->preview(post('record_id'));
 
         /* Get all model fields */
-        $messageToReply = MessageModel::find(post('record_id'));
+        $request = UserModel::find(post('record_id'));
 
         /* Add variables to view */
-        $this->vars['recordId'] = $messageToReply->id;
-        $this->vars['email'] = $messageToReply->email;
+        $this->vars['recordId'] = $request->id;
+        $this->vars['isActivated'] = $request->is_activated;
 
-        return $this->makePartial('reply_form');
+        return $this->makePartial('preview_request');
 
     }
 
-
     /***********************************************
-     **************** Reply to message *************
+     **************** Activate account *************
      ***********************************************/
 
     /**
      * Function that keeps the logic for Reply to messages
      * @return mixed
      */
-    public function onReply()
+    public function onRequest()
     {
+        if ($userRequest = UserModel::find(post('record_id'))) {
+            $userRequest->is_activated = 1;
+            $userRequest->save();
 
-        $receiverEmail = post('email'); /* Email value from hidden field, because in view is disabled */
-        $messageToReply = wordwrap(post('Message[message]'), 70); /* Wrap  text to 70 chars line long */
+            Flash::success(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.success'));
 
-        $bodyMessage = [
-            'text' => $messageToReply,
-            'raw' => true
-        ];
+            return $this->listRefresh();
 
-        $data = [
-            'email' => post('email'),
-            'message' => strip_tags(post('Message[message]')),
-        ];
+        } else {
 
-
+            Flash::fail( Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail') );
+        }
     }
 
 

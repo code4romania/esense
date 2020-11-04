@@ -1,6 +1,7 @@
 <?php namespace Genuineq\User\Controllers;
 
 use Auth;
+use Genuineq\User\ReportWidgets\RegRequestsTable;
 use Lang;
 use Flash;
 use Response;

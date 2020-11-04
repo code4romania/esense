@@ -102,7 +102,7 @@ class Plugin extends PluginBase
             ],
 
             'Genuineq\User\ReportWidgets\RegRequestsTable' => [
-                'label'   => 'genuineq.user::lang.formwidgets.reg_requests_table.label',
+                'label'   => 'genuineq.user::lang.reportwidgets.reg_requests_table.label',
                 'context' => 'dashboard',
             ],
         ];
