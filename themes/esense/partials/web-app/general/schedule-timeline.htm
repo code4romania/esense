@@ -11,7 +11,7 @@ description = "Partial for displaying a day schedule timeline."
             <p class="p-0 m-0 small font-weight-light text-gray-dark">
                 {{ lesson.title }}
 
-                <a role="button">
+                <a role="button" href="{{ 'specialist/lesson'|page({id: lesson.id }) }}" class="edit-lesson">
                     <img class="img-profile ml-4" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
                 </a>
             </p>

@@ -32,7 +32,8 @@
 
             'message' => [
                 'no_access' => 'Nu aveți acces la elevul specificat.',
-                'save_successful' => 'Sesiunea de joc a fost salvată cu succes.'
+                'save_successful' => 'Sesiunea de joc a fost salvată cu succes.',
+                'lesson_updated_successfully' => 'Lesson updated successfully.',
             ]
         ]
     ],

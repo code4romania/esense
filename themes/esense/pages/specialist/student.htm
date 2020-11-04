@@ -138,51 +138,49 @@ allowedUserTypes[] = "specialist"
                                 </thead>
                                 <tbody>
                                     {% for lesson in student.lessons %}
-                                    <tr>
-                                        <td>
-                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                <span class="display-4 text-blue">{{ lesson.title }}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                <span class="display-4 text-black">{{ lesson.category }}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                <span class="display-4 text-black">{{ lesson.day|date("d/m/Y") }}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                <span class="display-4 text-black">{{ lesson.duration }}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-3 d-flex align-items-center">
-                                                <div>
-                                                    {% if lesson.connection.specialist.user.avatar %}
-                                                        <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{ lesson.connection.specialist.user.avatar.getThumb(30, 30, { mode : 'crop' }) }}" alt="specialist-avatar">
-                                                    {% else %}
-                                                        <img class="img-fluid add-custom-avatar" width="30px" height="30px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
-                                                    {% endif %}
+                                        <tr>
+                                            <td>
+                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                    <span class="display-4 text-blue">{{ lesson.title }}</span>
                                                 </div>
-                                                <div class="d-flex flex-column ml-2">
-                                                    <span class="display-4" style="color:#1a1a1a;">{{ lesson.connection.specialist.full_name }}</span>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                    <span class="display-4 text-black">{{ lesson.category }}</span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-4">
-                                                <div class="dropdown">
-                                                    <button class="btn shadow-none" type="button">
-                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
-                                                    </button>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                    <span class="display-4 text-black">{{ lesson.day|date("d/m/Y") }}</span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                    <span class="display-4 text-black">{{ lesson.duration }}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-3 d-flex align-items-center">
+                                                    <div>
+                                                        {% if lesson.connection.specialist.user.avatar %}
+                                                            <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{ lesson.connection.specialist.user.avatar.getThumb(30, 30, { mode : 'crop' }) }}" alt="specialist-avatar">
+                                                        {% else %}
+                                                            <img class="img-fluid add-custom-avatar" width="30px" height="30px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="d-flex flex-column ml-2">
+                                                        <span class="display-4" style="color:#1a1a1a;">{{ lesson.connection.specialist.full_name }}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-4">
+                                                    <a role="button" href="{{ 'specialist/lesson'|page({id: lesson.id }) }}">
+                                                        <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
@@ -194,7 +192,7 @@ allowedUserTypes[] = "specialist"
     </div>
 </div>
 
-<!-- Partial for archive a student -->
+<!-- Partial for archiving a student -->
 {% partial 'web-app/general/student-archive' %}
 
 {% put scripts %}
@@ -256,6 +254,7 @@ allowedUserTypes[] = "specialist"
                 });
             }
 
+            /** Intialize the calendar. */
             $('.calendar-wrapper').calendar({
                 weekDayLength: 1,
                 date: new Date(),
