@@ -4,17 +4,3 @@ plugin:
     author: genuineq
     icon: oc-icon-user
     homepage: ''
-navigation:
-    main-menu-item:
-        label: 'genuineq.profile::lang.plugin.backend-menu'
-        url: genuineq/profile/schools
-        icon: icon-users
-        sideMenu:
-            side-menu-item:
-                label: 'genuineq.profile::lang.school.backend-menu'
-                url: genuineq/profile/schools
-                icon: icon-building
-            side-menu-item2:
-                label: 'genuineq.profile::lang.specialist.backend-menu'
-                url: genuineq/profile/specialists
-                icon: icon-user

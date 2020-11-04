@@ -1,0 +1,161 @@
+<div class="report-widget">
+    <h3><?= e($this->property('title')) ?></h3>
+
+    <div class="scoreboard">
+        <div data-control="listwidget">
+
+<?php if($regRequestsTable): ?>
+
+            <div class="scoreboard-item title-value">
+
+<!--LIST of requests-->
+                <div class="layout-row">
+
+                    <div class="toolbar-widget list-header" id="Toolbar-listToolbar">
+
+                        <div class="control-toolbar">
+
+                            <!-- Control Panel -->
+                            <div class="toolbar-item toolbar-primary">
+                                <div data-control="toolbar">
+                                    <a href="<?= Backend::url('genuineq/user/users/update/:id') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a>
+                                    <button
+                                        class="btn btn-default oc-icon-trash-o"
+                                        disabled="disabled"
+                                        onclick="$(this).data('request-data', {
+                                                checked: $('.control-list').listWidget('getChecked')
+                                            })"
+                                        data-request="onDelete"
+                                        data-request-confirm="<?= e(trans('backend::lang.list.delete_selected_confirm')) ?>"
+                                        data-trigger-action="enable"
+                                        data-trigger=".control-list input[type=checkbox]"
+                                        data-trigger-condition="checked"
+                                        data-request-success="$(this).prop('disabled', true)"
+                                        data-stripe-load-indicator>
+                                        <?= e(trans('backend::lang.list.delete_selected')) ?>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- List Search -->
+                            <div class="toolbar-item" data-calculate-width="" style="width: 110px;">
+                                <div class="loading-indicator-container size-input-text">
+                                    <input placeholder="Cautare..." type="text" name="listToolbarSearch[term]" value=""
+                                           data-request="listToolbarSearch::onSubmit"
+                                           data-request-complete="if($(this).val().length) {$(this).next().show()} else {$(this).next().hide()};"
+                                           data-track-input="" data-load-indicator=""
+                                           data-load-indicator-opaque=""
+                                           class="form-control icon search growable"
+                                           autocomplete="off">
+                                    <button class="clear-input-text" type="button" value="" style="display: none;"
+                                            onclick="$(this).prev().val('');$(this).prev().request();">
+                                        <i class="icon-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                <div class="list-widget list-scrollable-container scroll-after" id="Lists">
+                    <div class="control-list list-scrollable" data-control="listwidget">
+                        <table class="table data" data-control="rowlink">
+                            <thead>
+                            <tr>
+                                <th class="list-checkbox">
+                                    <div class="checkbox custom-checkbox nolabel">
+                                        <input type="checkbox" id="Lists-checkboxAll">
+                                        <label for="Lists-checkboxAll"></label>
+                                    </div>
+                                </th>
+
+                                <th class="sort-desc list-cell-name-id list-cell-type-number  ">
+                                    <a href="javascript:;" data-request="list::onSort" data-stripe-load-indicator=""
+                                       data-request-data="sortColumn: 'id', page: 1">
+                                        id </a>
+                                </th>
+                                <th class="sort-desc list-cell-name-first_name list-cell-type-text  ">
+                                    <a href="javascript:;" data-request="list::onSort" data-stripe-load-indicator=""
+                                       data-request-data="sortColumn: 'first name', page: 1">
+                                        first name </a>
+                                </th>
+                                <th class="sort-desc list-cell-name-last_name list-cell-type-text  ">
+                                    <a href="javascript:;" data-request="list::onSort" data-stripe-load-indicator=""
+                                       data-request-data="sortColumn: 'last name', page: 1">
+                                        last name </a>
+                                </th>
+                                <th class="sort-desc list-cell-name-email list-cell-type-text  ">
+                                    <a href="javascript:;" data-request="list::onSort" data-stripe-load-indicator=""
+                                       data-request-data="sortColumn: 'email', page: 1">
+                                        email </a>
+                                </th>
+                                <th class="sort-desc active list-cell-name-created_at list-cell-type-datetime  ">
+                                    <a href="javascript:;" data-request="list::onSort" data-stripe-load-indicator=""
+                                       data-request-data="sortColumn: 'created_at', page: 1">
+                                        created_at </a>
+                                </th>
+
+                                <th class="text-info">
+                                    <a href="javascript:;" title="Aprobare" data-control="popup"
+                                       data-handler="list::onLoadSetup"></a>
+                                </th>
+                            </tr>
+
+                            </thead>
+
+                            <tbody>
+
+<?php foreach ($regRequestsTable as $regRequest): ?>
+
+                            <tr class="rowlink" tabindex="0">
+                                <td class="list-checkbox nolink">
+                                    <div class="checkbox custom-checkbox nolabel">
+                                        <input type="checkbox" name="checked[]" id="Lists-checkbox-30" value="30" autocomplete="off">
+                                        <label for="Lists-checkbox-30">Check</label>
+                                    </div>
+                                </td>
+
+                                <td class="list-cell-index-1 list-cell-name-id list-cell-type-number   ">
+                                    <a onclick="$.popup({ handler: 'onRequestForm', extraData: { record_id: ':id' } })"
+                                       href="javascript:;"
+                                       style="display: none;">
+                                        <?= $regRequest->id ?></a>
+
+                                </td>
+
+                                <td class="list-cell-index-2 list-cell-name-last_name list-cell-type-text">
+                                    <?= $regRequest->last_name ?>
+                                </td>
+
+                                <td class="list-cell-index-2 list-cell-name-first_name list-cell-type-text">
+                                    <?= $regRequest->first_name ?>
+                                </td>
+
+                                <td class="list-cell-index-4 list-cell-name-email list-cell-type-text">
+                                    <?= $regRequest->email ?>
+                                </td>
+
+                                <td class="list-cell-index-7 list-cell-name-created_at list-cell-type-datetime">
+                                    <time datetime="2020-11-03 16:56:49" data-datetime-control="1" data-format-alias="dateTimeLongMin"
+                                          data-disposable=""><?= $regRequest->created_at ?>
+                                    </time>
+                                </td>
+                            </tr>
+<?php endforeach ?>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                </div>
+
+            </div>
+
+<?php endif ?>
+
+        </div>
+    </div>
+
+</div>

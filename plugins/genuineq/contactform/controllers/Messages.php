@@ -45,7 +45,7 @@ class Messages extends Controller
 
 
     /***********************************************
-     ************* Reply to the message ************
+     **************** Reply to message *************
      ***********************************************/
 
     /**
@@ -89,16 +89,18 @@ class Messages extends Controller
                 $modelToUpdate->replied_at = Carbon::createFromTimestamp(time());
                 $modelToUpdate->save();
 
+                Flash::success(Lang::get('genuineq.contactform::lang.backend.flash.send_message.success'), 20);
+
+                return $this->listRefresh();
             }
 
         } catch (\InvalidArgumentException $ex) {
 
             /* Write error to log and flash a message to admin frontend */
-            Log::error('Invalid user email address at message with id = ' . post('record_id') . '. Error: ' . $ex);
+            Log::error('Invalid user email address in the message with id = ' . post('record_id') . '. Error: ' . $ex);
             Flash::error(Lang::get('genuineq.contactform::lang.backend.flash.invalid_email'), 20);
         }
 
-        return $this->listRefresh();
     }
 
 

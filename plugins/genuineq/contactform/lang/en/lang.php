@@ -53,7 +53,7 @@
 
         'flash' => [
             'send_message' => [
-                'success' => 'Message sent',
+                'success' => 'Message successfully sent',
                 'fail' => 'Message not sent',
             ],
             'invalid_email' => 'Invalid email address. Please check if domain name (@example.com) is correct.'
