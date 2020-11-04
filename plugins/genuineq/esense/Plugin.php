@@ -10,6 +10,8 @@ use Genuineq\Profile\Models\Specialist;
 use Genuineq\Profile\Models\School;
 use Genuineq\Students\Models\Student;
 use Genuineq\Esense\Models\StudentTransfer;
+use Genuineq\Esense\Models\Connection;
+use Genuineq\Timetable\Models\Lesson;
 
 class Plugin extends PluginBase
 {
@@ -52,6 +54,9 @@ class Plugin extends PluginBase
         /** Extend the Specialist model. */
         $this->specialistExtendRelationships();
         $this->specialistExtendMethods();
+
+        /** Extend the Lesson model. */
+        $this->lessonExtendRelationships();
     }
 
     /***********************************************
@@ -84,7 +89,7 @@ class Plugin extends PluginBase
             /** Link "Specialist" model to "Student" model with many-to-many relation. */
             $model->belongsToMany['specialists'] = [
                 'Genuineq\Profile\Models\Specialist',
-                'table' => 'genuineq_esense_students_specialists',
+                'table' => 'genuineq_esense_connections',
                 'pivot' => ['approved', 'message', 'seen'],
                 'timestamps' => true
             ];
@@ -307,7 +312,7 @@ class Plugin extends PluginBase
             /** Link "Student" model to "Specialist" model with many-to-many relation. */
             $model->belongsToMany['students'] = [
                 'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_students_specialists',
+                'table' => 'genuineq_esense_connections',
                 'pivot' => ['approved', 'message', 'seen'],
                 'timestamps' => true,
                 'order' => 'name asc',
@@ -317,7 +322,7 @@ class Plugin extends PluginBase
             /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
             $model->belongsToMany['archivedStudents'] = [
                 'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_students_specialists',
+                'table' => 'genuineq_esense_connections',
                 'pivot' => ['approved', 'message', 'seen'],
                 'timestamps' => true,
                 'order' => 'name asc',
@@ -327,7 +332,7 @@ class Plugin extends PluginBase
             /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
             $model->belongsToMany['allStudents'] = [
                 'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_students_specialists',
+                'table' => 'genuineq_esense_connections',
                 'pivot' => ['approved', 'message', 'seen'],
                 'timestamps' => true,
             ];
@@ -384,6 +389,21 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getTransferNotificationsAttribute', function() use ($model) {
                 return $model->transferRequests()->whereNull('approved')->get();
             });
+        });
+    }
+
+    /***********************************************
+     *8************ Lesson extensions **************
+     ***********************************************/
+
+    /**
+     * Function that performs all the relationships extensions of the Lesson model.
+     */
+    protected function lessonExtendRelationships()
+    {
+        Lesson::extend(function($model) {
+            /** Link "Connection" model to "Lesson" model with one-to-many relation. */
+            $model->belongsTo['connection'] = 'Genuineq\Esense\Models\Connection';
         });
     }
 }

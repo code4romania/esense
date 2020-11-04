@@ -4,10 +4,10 @@ namespace Genuineq\Timetable\Components;
 
 use Redirect;
 use Cms\Classes\ComponentBase;
-use Genuineq\Timetable\Models\Record as RecordModel;
+use Genuineq\Timetable\Models\Lesson;
 
 /**
- * Class Timetable as front-end controller -> Create|Update|Delete on RecordModel
+ * Class Timetable as front-end controller -> Create|Update|Delete on Lesson
  * @package Genuineq\Timetable\Components
  */
 class Timetable extends ComponentBase
@@ -28,17 +28,17 @@ class Timetable extends ComponentBase
      */
     public function onRun()
     {
-        // $this->page['records'] = RecordModel::all();
+        // $this->page['lessons'] = Lesson::all();
     }
 
     /**
-     * Create a timetable record based on input values
+     * Create a timetable lesson based on input values
      *
-     * @return RecordModel
+     * @return Lesson
      */
     public function onCreate()
     {
-        $record = (new RecordModel)::create([
+        $lesson = (new Lesson)::create([
             'day' => post('day'),
             'start_hour' => post('start_hour'),
             'end_hour' => post('end_hour'),
@@ -47,36 +47,36 @@ class Timetable extends ComponentBase
             'feedback' => post('feedback'),
         ]);
 
-        return $record;
+        return $lesson;
     }
 
     /**
      * Update the model with new input data
      *
-     * @return RecordModel
+     * @return Lesson
      */
     public function onUpdate()
     {
-        $record = RecordModel::find(post('id'));
-            $record->day = post('day');
-            $record->start_hour = post('start_hour');
-            $record->end_hour = post('end_hour');
-            $record->title = post('title');
-            $record->description = post('description');
-            $record->feedback = post('feedback');
-        $record->save();
+        $lesson = Lesson::find(post('id'));
+            $lesson->day = post('day');
+            $lesson->start_hour = post('start_hour');
+            $lesson->end_hour = post('end_hour');
+            $lesson->title = post('title');
+            $lesson->description = post('description');
+            $lesson->feedback = post('feedback');
+        $lesson->save();
 
         return Redirect::refresh();
     }
 
     /**
-     * Delete the model with SoftDelete method (add `deleted_at` timestamp on record entry)
+     * Delete the model with SoftDelete method (add `deleted_at` timestamp on lesson entry)
      *
-     * @param RecordModel $record
+     * @param Lesson $lesson
      */
-    public function onDelete(RecordModel $record)
+    public function onDelete(Lesson $lesson)
     {
-        $record->runSoftDelete();
+        $lesson->runSoftDelete();
     }
 
 }

@@ -3,9 +3,9 @@
 use BackendMenu;
 use Backend\Classes\Controller;
 
-class Records extends Controller
+class Lessons extends Controller
 {
-    protected $recordId;
+    protected $lessonId;
 
     public $implement = [
         'Backend\Behaviors\ListController',
@@ -16,15 +16,15 @@ class Records extends Controller
     public $formConfig = 'config_form.yaml';
 
     public $requiredPermissions = [
-        'genuineq.timetable.manage_records'
+        'genuineq.timetable.manage_lessons'
     ];
 
     /**
-     * Records Controller constructor.
+     * Lessons Controller constructor.
      */
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Genuineq.Timetable', 'timetable', 'records');
+        BackendMenu::setContext('Genuineq.Timetable', 'timetable', 'lessons');
     }
 }

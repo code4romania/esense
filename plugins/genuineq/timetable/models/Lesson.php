@@ -4,9 +4,9 @@ use Lang;
 use Model;
 
 /**
- * Timetable record Model
+ * Timetable lesson Model
  */
-class Record extends Model
+class Lesson extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\SoftDelete;
@@ -29,7 +29,7 @@ class Record extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'genuineq_timetable_records';
+    public $table = 'genuineq_timetable_lessons';
 
     /**
      * @var array Validation rules
@@ -68,10 +68,10 @@ class Record extends Model
             'title.string' => Lang::get('genuineq.timetable::lang.component.timetable.validation.title_string'),
             'description.text' => Lang::get('genuineq.timetable::lang.component.timetable.validation.description_text'),
             'feedback.text' => Lang::get('genuineq.timetable::lang.component.timetable.validation.feedback_text'),
-            'record_created_successfully' => Lang::get('genuineq.timetable::lang.component.timetable.message.record_created_successfully'),
-            'record_updated_successfully' => Lang::get('genuineq.timetable::lang.component.timetable.message.record_updated_successfully'),
-            'record_deleted_successfully' => Lang::get('genuineq.timetable::lang.component.timetable.message.record_deleted_successfully'),
-            'no_records' => Lang::get('genuineq.timetable::lang.component.timetable.message.no_records'),
+            'lesson_created_successfully' => Lang::get('genuineq.timetable::lang.component.timetable.message.lesson_created_successfully'),
+            'lesson_updated_successfully' => Lang::get('genuineq.timetable::lang.component.timetable.message.lesson_updated_successfully'),
+            'lesson_deleted_successfully' => Lang::get('genuineq.timetable::lang.component.timetable.message.lesson_deleted_successfully'),
+            'no_lessons' => Lang::get('genuineq.timetable::lang.component.timetable.message.no_lessons'),
         ];
     }
 }

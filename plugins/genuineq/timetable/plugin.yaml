@@ -7,12 +7,12 @@ plugin:
 navigation:
     timetable:
         label: 'genuineq.timetable::lang.plugin.name'
-        url: genuineq/timetable/records
+        url: genuineq/timetable/lessons
         icon: icon-calendar
         permissions:
-            - genuineq.timetable.manage_records
+            - genuineq.timetable.manage_lessons
         sideMenu:
-            records:
-                label: 'genuineq.timetable::lang.records.title'
-                url: genuineq/timetable/records
+            lessons:
+                label: 'genuineq.timetable::lang.lessons.title'
+                url: genuineq/timetable/lessons
                 icon: icon-list
