@@ -4,9 +4,9 @@
         'description' => 'Orar pentru planificarea sesiunilor',
     ],
     'lessons' => [
-        'title' => 'Înregistrări',
-        'manage_lessons' => 'Administrare înregistrări',
-        'name' => 'Înregistrări',
+        'title' => 'Lecții',
+        'manage_lessons' => 'Administrare lecții',
+        'name' => 'Lecții',
     ],
     'lesson' => [
         'day' => 'Ziua',
@@ -18,14 +18,14 @@
         'created_at' => 'Creat în',
         'updated_at' => 'Actualizat în',
         'deleted_at' => 'Șters în',
-        'create' => 'Adaugă înregistrare',
-        'update' => 'Editează înregistrare',
-        'delete' => 'Șterge înregistrare',
+        'create' => 'Adaugă lecție',
+        'update' => 'Editează lecție',
+        'delete' => 'Șterge lecție',
     ],
     'flash' => [
-        'create' => 'Înregistrare creată cu succes.',
-        'update' => 'Înregistrare actualizată cu succes.',
-        'delete' => 'Înregistrare ștearsă cu succes.',
+        'create' => 'Lecție creată cu succes.',
+        'update' => 'Lecție actualizată cu succes.',
+        'delete' => 'Lecție ștearsă cu succes.',
     ],
     'component' => [
         'timetable' => [
@@ -45,17 +45,17 @@
                 'feedback_text' => '',
             ],
             'messages' => [
-                'lesson_created_successfully' => 'Înregistrarea a fost creată cu succes.',
-                'lesson_updated_successfully' => 'Înregistrarea a fost actualizată cu succes.',
-                'lesson_deleted_successfully' => 'Înregistrarea a fost ștearsă cu succes.',
-                'no_lessons' => 'Nu au fost găsite înregistrări.'
+                'lesson_created_successfully' => 'Lecția a fost creată cu succes.',
+                'lesson_updated_successfully' => 'Lecția a fost actualizată cu succes.',
+                'lesson_deleted_successfully' => 'Lecția a fost ștearsă cu succes.',
+                'no_lessons' => 'Nu au fost găsite lecții.'
             ],
         ],
     ],
     'backend' => [
         'timetable' => [
             'fields' => [
-                'lessons' => 'Înregistrări',
+                'lessons' => 'Lecții',
                 'day' => 'Ziua',
                 'day_comment' => 'Selectați data.',
                 'start_hour' => 'Ora începerii',
@@ -82,12 +82,12 @@
                 'deleted_at' => 'Șters în',
             ],
             'form' => [
-                'create' => 'Adaugă înregistrare',
-                'update' => 'Editează înregistrare',
-                'delete' => 'Șterge înregistrare',
+                'create' => 'Adaugă lecție',
+                'update' => 'Editează lecție',
+                'delete' => 'Șterge lecție',
             ],
             'list' => [
-                'delete_selected_confirm' => 'Sunteți sigur(ă) că doriți să ștergeți înregistrările selectate?'
+                'delete_selected_confirm' => 'Sunteți sigur(ă) că doriți să ștergeți lecțiile selectate?'
             ],
         ],
     ],
