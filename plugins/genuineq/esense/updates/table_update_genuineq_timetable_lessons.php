@@ -11,6 +11,7 @@ class TableUpdateGenuineqTimetableRecords extends Migration
         Schema::table('genuineq_timetable_lessons', function($table)
         {
             $table->integer('connection_id')->unsigned();
+            $table->string('category')->nullable();
         });
     }
 
@@ -19,6 +20,12 @@ class TableUpdateGenuineqTimetableRecords extends Migration
         if (Schema::hasColumns('genuineq_timetable_lessons', 'connection_id')) {
             Schema::table('genuineq_timetable_lessons', function ($table) {
                 $table->dropColumn('connection_id');
+            });
+        }
+
+        if (Schema::hasColumns('genuineq_timetable_lessons', 'category')) {
+            Schema::table('genuineq_timetable_lessons', function ($table) {
+                $table->dropColumn('category');
             });
         }
     }

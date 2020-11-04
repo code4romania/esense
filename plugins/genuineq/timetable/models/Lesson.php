@@ -2,6 +2,7 @@
 
 use Lang;
 use Model;
+use Carbon\Carbon;
 
 /**
  * Timetable lesson Model
@@ -73,5 +74,14 @@ class Lesson extends Model
             'lesson_deleted_successfully' => Lang::get('genuineq.timetable::lang.component.timetable.message.lesson_deleted_successfully'),
             'no_lessons' => Lang::get('genuineq.timetable::lang.component.timetable.message.no_lessons'),
         ];
+    }
+
+    /***********************************************
+     ***************** Accessors *******************
+     ***********************************************/
+
+    public function getDurationAttribute()
+    {
+        return round(Carbon::parse($this->end_hour)->floatDiffInHours($this->start_hour), /*precision*/1);
     }
 }

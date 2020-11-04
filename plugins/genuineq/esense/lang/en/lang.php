@@ -24,6 +24,16 @@
                 'transfer_request_success_decline' => 'Cererea de transfer a fost respinsă cu success.',
                 'transfer_request_failed_decline' => 'Cererea de transfer nu a putut fi refuzată.',
             ],
+        ],
+
+        'lessonsActions' => [
+            'name' => 'Lessons Access',
+            'description' => 'Allows to extract, edit and view lessons',
+
+            'message' => [
+                'no_access' => 'Nu aveți acces la elevul specificat.',
+                'save_successful' => 'Sesiunea de joc a fost salvată cu succes.'
+            ]
         ]
     ],
 ];

@@ -3,6 +3,7 @@
 use Log;
 use Auth;
 use Event;
+use Carbon\Carbon;
 use System\Classes\PluginBase;
 use Illuminate\Support\Collection;
 use Genuineq\User\Helpers\RedirectHelper;
@@ -31,7 +32,8 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            \Genuineq\Esense\Components\StudentActions::class => 'studentActions'
+            \Genuineq\Esense\Components\StudentActions::class => 'studentActions',
+            \Genuineq\Esense\Components\LessonsActions::class => 'lessonsActions'
         ];
     }
 
@@ -57,6 +59,7 @@ class Plugin extends PluginBase
 
         /** Extend the Lesson model. */
         $this->lessonExtendRelationships();
+        $this->lessonExtendProperties();
     }
 
     /***********************************************
@@ -93,6 +96,12 @@ class Plugin extends PluginBase
                 'pivot' => ['approved', 'message', 'seen'],
                 'timestamps' => true
             ];
+
+            /** Link "Connection" model to "Student" model with has-many relation. */
+            $model->hasMany['connections'] = ['Genuineq\Esense\Models\Connection', 'key' => 'student_id'];
+
+            /** Link "Lesson" model to "Student" model with has-many-through relation. */
+            $model->hasManyThrough['lessons'] = ['Genuineq\Timetable\Models\Lesson', 'through' => 'Genuineq\Esense\Models\Connection'];
         });
     }
 
@@ -110,6 +119,21 @@ class Plugin extends PluginBase
             /** Add attribute that chacks if owner is of type school. */
             $model->addDynamicMethod('getOwnerIsSchoolAttribute', function() use ($model) {
                 return 'Genuineq\Profile\Models\School' == $model->owner_type;
+            });
+
+            /** Add today lessons attribute. */
+            $model->addDynamicMethod('getTodayLessonsAttribute', function() use ($model) {
+                return $model->lessons()->where('day', Carbon::now()->format('Y-m-d'))->get();
+            });
+
+            /** Add today lessons attribute. */
+            $model->addDynamicMethod('getDateLessons', function($date) use ($model) {
+                return $model->lessons()->where('day', Carbon::parse($date)->format('Y-m-d'))->get();
+            });
+
+            /** Add get connection attribute. */
+            $model->addDynamicMethod('getConnection', function($specialist) use ($model) {
+                return $model->connections->where('specialist_id', $specialist)->first();
             });
         });
     }
@@ -345,6 +369,12 @@ class Plugin extends PluginBase
 
             /** Link "StudentTransfer" model to "Specialist" model with one-to-many relation. */
             $model->hasMany['transferRequests'] = ['Genuineq\Esense\Models\StudentTransfer', 'key' => 'from_specialist_id'];
+
+            /** Link "Connection" model to "Specialist" model with has-many relation. */
+            $model->hasMany['connections'] = ['Genuineq\Esense\Models\Connection', 'key' => 'specialist_id'];
+
+            /** Link "Lesson" model to "Specialist" model with has-many-through relation. */
+            $model->hasManyThrough['lessons'] = ['Genuineq\Timetable\Models\Lesson', 'through' => 'Genuineq\Esense\Models\Connection'];
         });
     }
 
@@ -389,11 +419,26 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getTransferNotificationsAttribute', function() use ($model) {
                 return $model->transferRequests()->whereNull('approved')->get();
             });
+
+            /** Add today lessons attribute. */
+            $model->addDynamicMethod('getTodayLessonsAttribute', function() use ($model) {
+                return $model->lessons()->where('day', Carbon::now()->format('Y-m-d'))->get();
+            });
+
+            /** Add today lessons attribute. */
+            $model->addDynamicMethod('getDateLessons', function($date) use ($model) {
+                return $model->lessons()->where('day', Carbon::parse($date)->format('Y-m-d'))->get();
+            });
+
+            /** Add get connection attribute. */
+            $model->addDynamicMethod('getConnection', function($student) use ($model) {
+                return $model->connections()->where('student_id', $student)->first();
+            });
         });
     }
 
     /***********************************************
-     *8************ Lesson extensions **************
+     ************** Lesson extensions **************
      ***********************************************/
 
     /**
@@ -404,6 +449,22 @@ class Plugin extends PluginBase
         Lesson::extend(function($model) {
             /** Link "Connection" model to "Lesson" model with one-to-many relation. */
             $model->belongsTo['connection'] = 'Genuineq\Esense\Models\Connection';
+        });
+    }
+
+    /**
+     * Function that performs all the properties extensions of the Lesson model.
+     */
+    protected function lessonExtendProperties()
+    {
+        /**
+         * Add extra fillable fields.
+         */
+        Lesson::extend(function($model) {
+            $model->addFillable([
+                'connection_id',
+                'category'
+            ]);
         });
     }
 }
