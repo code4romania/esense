@@ -3,12 +3,12 @@
         'name' => 'Orar',
         'description' => 'Orar pentru planificarea sesiunilor',
     ],
-    'records' => [
+    'lessons' => [
         'title' => 'Înregistrări',
-        'manage_records' => 'Administrare înregistrări',
+        'manage_lessons' => 'Administrare înregistrări',
         'name' => 'Înregistrări',
     ],
-    'record' => [
+    'lesson' => [
         'day' => 'Ziua',
         'start_hour' => 'Ora începerii',
         'end_hour' => 'Ora finalizării',
@@ -45,17 +45,17 @@
                 'feedback_text' => '',
             ],
             'messages' => [
-                'record_created_successfully' => 'Înregistrarea a fost creată cu succes.',
-                'record_updated_successfully' => 'Înregistrarea a fost actualizată cu succes.',
-                'record_deleted_successfully' => 'Înregistrarea a fost ștearsă cu succes.',
-                'no_records' => 'Nu au fost găsite înregistrări.'
+                'lesson_created_successfully' => 'Înregistrarea a fost creată cu succes.',
+                'lesson_updated_successfully' => 'Înregistrarea a fost actualizată cu succes.',
+                'lesson_deleted_successfully' => 'Înregistrarea a fost ștearsă cu succes.',
+                'no_lessons' => 'Nu au fost găsite înregistrări.'
             ],
         ],
     ],
     'backend' => [
         'timetable' => [
             'fields' => [
-                'records' => 'Înregistrări',
+                'lessons' => 'Înregistrări',
                 'day' => 'Ziua',
                 'day_comment' => 'Selectați data.',
                 'start_hour' => 'Ora începerii',

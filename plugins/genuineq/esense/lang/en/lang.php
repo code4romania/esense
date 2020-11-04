@@ -5,17 +5,36 @@
     ],
 
     'components' => [
-        'studentAccess' => [
+        'studentActions' => [
             'name' => 'Student Access',
             'description' => 'Allows to create, accept and decline student access requests.',
 
             'message' => [
-                'success_creation' => 'Cererea de acces a fost creată cu success.',
-                'success_approval' => 'Cererea de acces a fost aprobată cu success.',
-                'failed_approval' => 'Cererea de acces nu a putut fi aprobată.',
-                'success_decline' => 'Cererea de acces a fost respinsă cu success.',
-                'failed_decline' => 'Cererea de acces nu a putut fi refuzată.',
+                'access_request_success_creation' => 'Cererea de acces a fost creată cu success.',
+                // 'access_request_failed_creation' => 'Cererea de acces nu a putut fi a fost creată.',
+                'access_request_success_approval' => 'Cererea de acces a fost aprobată cu success.',
+                'access_request_failed_approval' => 'Cererea de acces nu a putut fi aprobată.',
+                'access_request_success_decline' => 'Cererea de acces a fost respinsă cu success.',
+                'access_request_failed_decline' => 'Cererea de acces nu a putut fi refuzată.',
+
+                'transfer_request_success_creation' => 'Cererea de transfer a fost creată cu success.',
+                'transfer_request_failed_creation' => 'Cererea de transfer nu a putut fi a fost creată.',
+                'transfer_request_success_approval' => 'Cererea de transfer a fost aprobată cu success.',
+                'transfer_request_failed_approval' => 'Cererea de transfer nu a putut fi aprobată.',
+                'transfer_request_success_decline' => 'Cererea de transfer a fost respinsă cu success.',
+                'transfer_request_failed_decline' => 'Cererea de transfer nu a putut fi refuzată.',
             ],
+        ],
+
+        'lessonsActions' => [
+            'name' => 'Lessons Access',
+            'description' => 'Allows to extract, edit and view lessons',
+
+            'message' => [
+                'no_access' => 'Nu aveți acces la elevul specificat.',
+                'save_successful' => 'Sesiunea de joc a fost salvată cu succes.',
+                'lesson_updated_successfully' => 'Lesson updated successfully.',
+            ]
         ]
     ],
 ];

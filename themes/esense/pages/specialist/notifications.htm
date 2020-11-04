@@ -9,27 +9,35 @@ security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
 
-[studentAccess]
+[studentActions]
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'specialist/dashboard'|page }}">{{ 'specialist.notifications.back'|_ }}</a>
+            </div>
+        </div>
+
         <!-- Notifications table -->
-        <div class="col-12 my-5">
+        <div class="col-12 mb-5">
             <div class="table-responsive p-3" style="overflow-x: hidden; background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
-                <p class="font-weight-bold text-dark">{{'teacher.dashboard.notifications.table.title'|_}}</p>
+                <p class="font-weight-bold text-dark">{{ 'specialist.notifications.table.title'|_ }}</p>
                 <table id="notifications-datatable" class="table table-striped table-sm pt-3 px-3 m-0 p-3" cellspacing="0">
                     <thead>
                         <tr>
                             <!-- Transfer type column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.notifications.table.column_1'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{ 'specialist.notifications.table.header.column.type'|_}}</p></th>
                             <!-- Profesor name column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.notifications.table.column_2'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{ 'specialist.notifications.table.header.column.specialist'|_}}</p></th>
                             <!-- Student name column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.notifications.table.column_3'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{ 'specialist.notifications.table.header.column.student'|_}}</p></th>
                             <!-- Recived date column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.notifications.table.column_4'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{ 'specialist.notifications.table.header.column.date'|_}}</p></th>
                             <!-- Actions column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.notifications.table.column_5'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{ 'specialist.notifications.table.header.column.action'|_}}</p></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,12 +48,12 @@ allowedUserTypes[] = "specialist"
                                     <div class="pl-2 py-3">
                                         <div class="d-flex align-items-center pt-2">
                                             <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/transfer-recived.svg'|theme }}">
-                                            <p class="p-0 m-0 font-weight-light display-4 ml-2" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{'teacher.notifications.access_request'|_}}</p>
+                                            <p class="p-0 m-0 font-weight-light display-4 ml-2" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ 'specialist.notifications.table.row.access_request'|_ }}</p>
                                         </div>
                                     </div>
                                 </td>
 
-                                <!-- Profesor name row -->
+                                <!-- Specialist name row -->
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
                                         <div>
@@ -53,7 +61,7 @@ allowedUserTypes[] = "specialist"
                                         </div>
                                         <div class="d-flex flex-column ml-2">
                                             <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.full_name }}</p>
-                                            <h6 class="p-0 m-0 font-weight-normal text-gray">profesor</h6>
+                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ 'specialist.notifications.table.row.specialist'|_ }}</h6>
                                         </div>
                                     </div>
                                 </td>
@@ -71,7 +79,7 @@ allowedUserTypes[] = "specialist"
                                     </div>
                                 </td>
 
-                                <!-- Recived date row -->
+                                <!-- Received date row -->
                                 <td>
                                     <div class="pl-2 py-3">
                                         <div class="d-flex align-items-center pt-2">
@@ -84,10 +92,73 @@ allowedUserTypes[] = "specialist"
                                 <td>
                                     <div class="pl-2 py-3">
                                         <div class="d-flex align-items-center">
-                                            <a role="button" class="decline-request" data-student="{{ notification.pivot.student_id }}" data-specialist="{{ notification.pivot.specialist_id }}">
+                                            <a role="button" class="decline-access-request" data-student="{{ notification.pivot.student_id }}" data-specialist="{{ notification.pivot.specialist_id }}">
                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/delete.svg'|theme }}">
                                             </a>
-                                            <a role="button" class="accept-request" data-student="{{ notification.pivot.student_id }}" data-specialist="{{ notification.pivot.specialist_id }}">
+                                            <a role="button" class="accept-access-request" data-student="{{ notification.pivot.student_id }}" data-specialist="{{ notification.pivot.specialist_id }}">
+                                                <img class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/accept.svg'|theme }}">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        {% for transferRequest in user.profile.transfer_notifications %}
+                            <tr>
+                                <!-- Transfer type row -->
+                                <td>
+                                    <div class="pl-2 py-3">
+                                        <div class="d-flex align-items-center pt-2">
+                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/transfer-recived.svg'|theme }}">
+                                            <p class="p-0 m-0 font-weight-light display-4 ml-2" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ 'specialist.notifications.table.row.transfer_request'|_ }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- Specialist name row -->
+                                <td>
+                                    <div class="pl-2 py-3 d-flex align-items-center">
+                                        <div>
+                                            <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                        </div>
+                                        <div class="d-flex flex-column ml-2">
+                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ transferRequest.toSpecialist.full_name }}</p>
+                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ 'specialist.notifications.table.row.specialist'|_ }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- Student name row -->
+                                <td>
+                                    <div class="pl-2 py-3 d-flex align-items-center">
+                                        <div>
+                                            <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                        </div>
+                                        <div class="d-flex flex-column ml-2">
+                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ transferRequest.student.full_name }}</p>
+                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ transferRequest.student.birthdate|date("d-m-Y") }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- Received date row -->
+                                <td>
+                                    <div class="pl-2 py-3">
+                                        <div class="d-flex align-items-center pt-2">
+                                            <p class="p-0 m-0 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ transferRequest.created_at|date("d-m-Y") }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- Actions column -->
+                                <td>
+                                    <div class="pl-2 py-3">
+                                        <div class="d-flex align-items-center">
+                                            <a role="button" class="decline-transfer-request" data-student="{{ transferRequest.student_id }}" data-specialist="{{ transferRequest.to_specialist_id }}">
+                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/delete.svg'|theme }}">
+                                            </a>
+                                            <a role="button" class="accept-transfer-request" data-student="{{ transferRequest.student_id }}" data-specialist="{{ transferRequest.to_specialist_id }}">
                                                 <img class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/accept.svg'|theme }}">
                                             </a>
                                         </div>
@@ -144,10 +215,10 @@ allowedUserTypes[] = "specialist"
                 }
             });
 
-            /** Function that sends the accept request to the backend. */
-            $('.accept-request').on('click', function() {
-                var $student = $('.accept-request').data('student');
-                var $specialist = $('.accept-request').data('specialist');
+            /** Function that sends the accept access request to the backend. */
+            $('.accept-access-request').on('click', function() {
+                var $student = $('.accept-access-request').data('student');
+                var $specialist = $('.accept-access-request').data('specialist');
 
                 /** Send an accept student access request. */
                 $.request(
@@ -158,12 +229,12 @@ allowedUserTypes[] = "specialist"
                         }
                     }
                 );
-            })
+            });
 
-            /** Function that sends the decline request to the backend. */
-            $('.decline-request').on('click', function() {
-                var $student = $('.decline-request').data('student');
-                var $specialist = $('.decline-request').data('specialist');
+            /** Function that sends the decline access request to the backend. */
+            $('.decline-access-request').on('click', function() {
+                var $student = $('.decline-access-request').data('student');
+                var $specialist = $('.decline-access-request').data('specialist');
 
                 /** Send an decline student access request. */
                 $.request(
@@ -174,7 +245,39 @@ allowedUserTypes[] = "specialist"
                         }
                     }
                 );
-            })
+            });
+
+            /** Function that sends the accept transfer request to the backend. */
+            $('.accept-transfer-request').on('click', function() {
+                var $student = $('.accept-transfer-request').data('student');
+                var $specialist = $('.accept-transfer-request').data('specialist');
+
+                /** Send an accept student transfer request. */
+                $.request(
+                    'onAcceptStudentTransferRequest', {
+                        data: {
+                            student: $student,
+                            specialist: $specialist,
+                        }
+                    }
+                );
+            });
+
+            /** Function that sends the decline transfer request to the backend. */
+            $('.decline-transfer-request').on('click', function() {
+                var $student = $('.decline-transfer-request').data('student');
+                var $specialist = $('.decline-transfer-request').data('specialist');
+
+                /** Send an decline student transfer request. */
+                $.request(
+                    'onDeclineStudentTransferRequest', {
+                        data: {
+                            student: $student,
+                            specialist: $specialist,
+                        }
+                    }
+                );
+            });
         });
     </script>
 {% endput %}

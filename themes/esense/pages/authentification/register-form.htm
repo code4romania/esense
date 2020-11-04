@@ -33,7 +33,7 @@ schools = 1
             <div id="selectRow" class="row">
                 <div class="col-12 col-lg-7">
                     <div class="form-group outline-none">
-                        <select id="selectRegisterForm" class="form-control selectpicker border outline-none"  data-style="btn-white">
+                        <select id="selectRegisterForm" class="form-control selectpicker border outline-none" data-style="btn-white">
                             <option value="teacher" data-icon="fas fa-user mr-3">{{'registerPage.select.option_1.text'|_}}</option>
                             <option value="school" data-icon="fas fa-city mr-2">{{'registerPage.select.option_2.text'|_}}</option>
                         </select>
@@ -84,12 +84,6 @@ schools = 1
                     $('#schoolForm').removeClass('d-none');
                 }
             });
-
-            $('form').on('ajaxSuccess', function() {
-                $('#teacherForm').addClass('d-none');
-                $('#schoolForm').addClass('d-none');
-                $('#successMessage').removeClass('d-none');
-            })
         });
     </script>
 {% endput %}

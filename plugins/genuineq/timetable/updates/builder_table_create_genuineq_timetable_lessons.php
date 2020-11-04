@@ -3,11 +3,11 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateGenuineqTimetableRecords extends Migration
+class BuilderTableCreateGenuineqTimetableLessons extends Migration
 {
     public function up()
     {
-        Schema::create('genuineq_timetable_records', function($table)
+        Schema::create('genuineq_timetable_lessons', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
@@ -25,6 +25,6 @@ class BuilderTableCreateGenuineqTimetableRecords extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('genuineq_timetable_records');
+        Schema::dropIfExists('genuineq_timetable_lessons');
     }
 }

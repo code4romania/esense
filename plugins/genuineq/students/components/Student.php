@@ -399,7 +399,7 @@ class Student extends ComponentBase
             'surname' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'phone' => 'required|numeric',
-            'email' => 'required|between:6,255|email|unique:users',
+            'email' => 'between:6,255|email|unique:users',
             'description' => 'string',
         ];
 
@@ -448,7 +448,7 @@ class Student extends ComponentBase
             'surname' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'phone' => 'required|numeric',
-            'email' => 'required|between:6,255|email|unique:users',
+            'email' => 'between:6,255|email|unique:users',
             'description' => 'string',
         ];
 

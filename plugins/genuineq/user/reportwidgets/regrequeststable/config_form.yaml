@@ -1,0 +1,11 @@
+name: Registration Requests Table
+modelClass: Genuineq\User\Models\User
+form: $/genuineq/user/models/user/fields.yaml
+defaultRedirect: genuineq/user/users
+create:
+    redirect: genuineq/user/users/update/:id
+    redirectClose: genuineq/user/users
+update:
+    redirect: genuineq/user/users/update/:id
+    redirectClose: genuineq/user/users/preview/:id
+

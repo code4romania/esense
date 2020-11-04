@@ -1,5 +1,5 @@
 1.0.1:
     - 'Initialize plugin.'
 1.0.2:
-    - 'Created table genuineq_timetable_records'
-    - builder_table_create_genuineq_timetable_records.php
+    - 'Created table genuineq_timetable_lessons'
+    - builder_table_create_genuineq_timetable_lessons.php

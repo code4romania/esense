@@ -130,13 +130,13 @@ class Login extends ComponentBase
             /** Authenticate the user. */
             $user = Auth::authenticate($credentials, $remember);
 
-            /** Fire the afterAuthenticate event. */
-            Event::fire('genuineq.user.afterAuthenticate', [$this, $credentials]);
-
             /** Check if authentication was successful. */
             if (!$user) {
                 throw new ApplicationException(Lang::get('genuineq.user::lang.component.login.message.wrong_credentials'));
             }
+
+            /** Fire the afterAuthenticate event. */
+            Event::fire('genuineq.user.afterAuthenticate', [$this, $user]);
 
             /** Check if the user is banned. */
             if ($user->isBanned()) {

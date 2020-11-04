@@ -14,7 +14,3 @@ navigation:
                 label: 'genuineq.contactform::lang.backend.name'
                 url: genuineq/contactform/messages
                 icon: icon-th-list
-            sendmessage:
-                label: 'genuineq.contactform::lang.backend.send_message'
-                url: genuineq/contactform/messages/create
-                icon: icon-send-o

@@ -82,6 +82,7 @@
                 'user_already_affiliated_2' => ' este deja afiliat',
                 'user_is_school_1' => 'Specialistul ',
                 'user_is_school_2' => ' este deja inscris ca scoala',
+                'specialist_create_error' => "A apărut o problema. Vă rugăm să încercați din nou"
             ],
 
             'validation' => [
