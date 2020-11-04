@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class TableUpdateGenuineqTimetableRecords extends Migration
+class TableUpdateGenuineqTimetableLessons extends Migration
 {
 
     public function up()
