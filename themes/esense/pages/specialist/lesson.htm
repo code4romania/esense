@@ -21,31 +21,31 @@ allowedUserTypes[] = "specialist"
             </div>
         </div>
 
+        <div class="col-12 col-md-6 col-lg-8">
+            <img class="img-fluid w-100" src="{{ 'assets/img/svg/dashboard/exercise/exercise_1.svg'|theme }}">
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <p class="text-gray-dark font-weight-bold">{{ lesson.title }}</p>
+            <div class="d-flex align-items-center mb-2">
+                <img class="img-fluid" src="{{ 'assets/img/svg/small-tag-icon.svg'|theme }}">
+                <p class="p-0 m-0 display-4 pl-3" style="color: #000;">{{ lesson.category }}</p>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/clock.svg'|theme }}">
+                <span class="ml-2 display-4 text-black"> {{ lesson.duration }} {{ 'specialist.lesson.hours'|_ }}</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/calendar.svg'|theme }}">
+                <span class="ml-2 display-4 text-black">{{ lesson.day|date("d/m/Y") }}</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/user.svg'|theme }}">
+                <span class="ml-2 display-4 text-black">{{ lesson.connection.student.full_name }}</span>
+            </div>
+        </div>
+
         <form action="POST" data-request="onUpdateStudentLesson">
-            <div class="col-12 col-md-6 col-lg-8">
-                <img class="img-fluid w-100" src="{{ 'assets/img/svg/dashboard/exercise/exercise_1.svg'|theme }}">
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4">
-                <p class="text-gray-dark font-weight-bold">{{ lesson.title }}</p>
-                <div class="d-flex align-items-center mb-2">
-                    <img class="img-fluid" src="{{ 'assets/img/svg/small-tag-icon.svg'|theme }}">
-                    <p class="p-0 m-0 display-4 pl-3" style="color: #000;">{{ lesson.category }}</p>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/clock.svg'|theme }}">
-                    <span class="ml-2 display-4 text-black"> {{ lesson.duration }} {{ 'specialist.lesson.hours'|_ }}</span>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/calendar.svg'|theme }}">
-                    <span class="ml-2 display-4 text-black">{{ lesson.day|date("d/m/Y") }}</span>
-                </div>
-                <div class="d-flex align-items-center mb-2">
-                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/user.svg'|theme }}">
-                    <span class="ml-2 display-4 text-black">{{ lesson.connection.student.full_name }}</span>
-                </div>
-            </div>
-
             <div class="col-12 mt-5">
                 <div class="d-flex align-items-center mb-3">
                     <p class="p-0 m-0 text-black font-weigh-bold">{{'specialist.lesson.description'|_}}</p>
@@ -70,7 +70,7 @@ allowedUserTypes[] = "specialist"
                 </div>
             </div>
 
-            <input type="text" class="d-none" value="{{ lesson.id }}"></input>
+            <input name="lesson" type="text" class="d-none" value="{{ lesson.id }}"></input>
             <button type="submit" class="btn btn-sm px-5 btn-secondary">{{'teacher.dashboard.change.password.change.btn'|_}}</button>
         </form>
 

@@ -7,6 +7,8 @@ use Auth;
 use Flash;
 use Request;
 use Redirect;
+use Validator;
+use ValidationException;
 use Cms\Classes\ComponentBase;
 use Genuineq\User\Helpers\RedirectHelper;
 use Genuineq\Students\Models\Student;
@@ -117,14 +119,14 @@ class LessonsActions extends ComponentBase
 
             /** Create the validation rules. */
             $rules = [
-                'description' => 'text',
-                'feedback' => 'text',
+                'description' => 'string',
+                'feedback' => 'string',
             ];
 
             /** Create the validation messages. */
             $messages = [
-                'description.text' => Lang::get('genuineq.timetable::lang.component.timetable.validation.description_text'),
-                'feedback.text' => Lang::get('genuineq.timetable::lang.component.timetable.validation.feedback_text'),
+                'description.string' => Lang::get('genuineq.esense::lang.component.lessonsActions.validation.description_string'),
+                'feedback.string' => Lang::get('genuineq.esense::lang.component.lessonsActions.validation.feedback_string'),
             ];
 
             /** Apply the validation rules. */

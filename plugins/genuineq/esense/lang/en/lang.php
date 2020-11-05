@@ -33,7 +33,15 @@
             'message' => [
                 'no_access' => 'Nu aveți acces la elevul specificat.',
                 'save_successful' => 'Sesiunea de joc a fost salvată cu succes.',
-                'lesson_updated_successfully' => 'Lesson updated successfully.',
+                // 'lesson_updated_successfully' => 'Lesson updated successfully.',
+                'lesson_updated_successfully' => 'Lecția a fost actualizată cu succes.',
+            ],
+
+            'validation' => [
+                // 'description_string' => 'The description has to be of type string',
+                // 'feedback_string' => 'The feedback has to be of type string'
+                'description_string' => 'Descrierea trebuie să fie de tip string',
+                'feedback_string' => 'Feedback-ul trebuie să fie de tip string'
             ]
         ]
     ],
