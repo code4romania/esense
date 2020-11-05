@@ -9,8 +9,8 @@ use System\Classes\SettingsManager;
 use Illuminate\Foundation\AliasLoader;
 use Genuineq\User\Classes\UserRedirector;
 use Genuineq\User\Models\MailBlocker;
-use Genuineq\User\Models\User;
 use RainLab\Notify\Classes\Notifier;
+use Genuineq\User\Models\User as UserModel;
 use RainLab\Notify\NotifyRules\SaveDatabaseAction;
 
 class Plugin extends PluginBase
@@ -23,11 +23,11 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'genuineq.user::lang.plugin.name',
+            'name' => 'genuineq.user::lang.plugin.name',
             'description' => 'genuineq.user::lang.plugin.description',
-            'author'      => 'genuineq',
-            'icon'        => 'icon-user',
-            'homepage'    => 'https://www.genuineq.com'
+            'author' => 'genuineq',
+            'icon' => 'icon-user',
+            'homepage' => 'https://www.genuineq.com'
         ];
     }
 
@@ -36,7 +36,7 @@ class Plugin extends PluginBase
         $alias = AliasLoader::getInstance();
         $alias->alias('Auth', 'Genuineq\User\Facades\Auth');
 
-        App::singleton('user.auth', function() {
+        App::singleton('user.auth', function () {
             return \Genuineq\User\Classes\AuthManager::instance();
         });
 
@@ -56,7 +56,7 @@ class Plugin extends PluginBase
         });
 
         /** Apply user-based mail blocking */
-        Event::listen('mailer.prepareSend', function($mailer, $view, $message) {
+        Event::listen('mailer.prepareSend', function ($mailer, $view, $message) {
             return MailBlocker::filterMessage($view, $message);
         });
 
@@ -68,11 +68,11 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            \Genuineq\User\Components\Account::class       => 'account',
+            \Genuineq\User\Components\Account::class => 'account',
             \Genuineq\User\Components\PasswordReset::class => 'passwordReset',
-            \Genuineq\User\Components\Session::class       => 'session',
-            \Genuineq\User\Components\Login::class         => 'login',
-            \Genuineq\User\Components\Register::class      => 'register',
+            \Genuineq\User\Components\Session::class => 'session',
+            \Genuineq\User\Components\Login::class => 'login',
+            \Genuineq\User\Components\Register::class => 'register',
             \Genuineq\User\Components\Notifications::class => 'notifications',
         ];
     }
@@ -97,150 +97,253 @@ class Plugin extends PluginBase
     {
         return [
             'Genuineq\User\ReportWidgets\TotalRegistrationRequests' => [
-                'label'   => 'genuineq.user::lang.reportwidgets.total_registration_requests.label',
+                'label' => 'genuineq.user::lang.reportwidgets.total_registration_requests.label',
                 'context' => 'dashboard',
             ],
 
             'Genuineq\User\ReportWidgets\RegRequestsTable' => [
-                'label'   => 'genuineq.user::lang.formwidgets.reg_requests_table.label',
+                'label' => 'genuineq.user::lang.reportwidgets.reg_requests_table.label',
                 'context' => 'dashboard',
             ],
         ];
     }
 
+    /******************************************************
+     ************************ Extend User Fields **********
+     ******************************************************/
 
-
-
-
-    public function registerPermissions()
+    public function boot()
     {
-        return [
-            'genuineq.users.access_users' => [
-                'tab'   => 'genuineq.user::lang.plugin.tab',
-                'label' => 'genuineq.user::lang.plugin.access_users'
-            ],
-            'genuineq.users.access_groups' => [
-                'tab'   => 'genuineq.user::lang.plugin.tab',
-                'label' => 'genuineq.user::lang.plugin.access_groups'
-            ],
-            'genuineq.users.access_settings' => [
-                'tab'   => 'genuineq.user::lang.plugin.tab',
-                'label' => 'genuineq.user::lang.plugin.access_settings'
-            ],
-            'genuineq.users.impersonate_user' => [
-                'tab'   => 'genuineq.user::lang.plugin.tab',
-                'label' => 'genuineq.user::lang.plugin.impersonate_user'
-            ],
-        ];
-    }
 
-    public function registerNavigation()
-    {
-        return [
-            'user' => [
-                'label'       => 'genuineq.user::lang.users.menu_label',
-                'url'         => Backend::url('genuineq/user/users'),
-                'icon'        => 'icon-user',
-                'iconSvg'     => 'plugins/genuineq/user/assets/images/user-icon.svg',
-                'permissions' => ['genuineq.users.*'],
-                'order'       => 500,
+        UserModel::extend(function ($model) {
+            $model->addFillable([
+                'user',
+                'phone',
+                'county',
+                'city',
+                'description',
+            ]);
 
-                'sideMenu' => [
-                    'users' => [
-                        'label' => 'genuineq.user::lang.users.menu_label',
-                        'icon'        => 'icon-user',
-                        'url'         => Backend::url('genuineq/user/users'),
-                        'permissions' => ['genuineq.users.access_users']
+
+            UserModel::extend(function ($model) {
+                $model->hasMany['school'] = ['\Genuineq\Profile\Models\School'];
+            });
+
+            $model->bindEvent('model.getAttribute', function ($attribute, $value) {
+                if ($attribute == 'school') {
+                    return 'school';
+                }
+            });
+
+        });
+
+        /* must check */
+//        /* if ($formWidget->isNested === false){ */
+        /* Extend all backend form usage */
+        Event::listen('backend.form.extendFields', function ($widget) {
+
+
+            if ($widget->model instanceof \Genuineq\Profile\Models\School) {
+
+                /* Only for the School model */
+                $widget->addFields([
+                    'user' => [
+                        'label' => 'genuineq.profile::lang.school.form-labels.contact_name',
+                        'nameFrom' => 'name',
+                        'descriptionFrom' => 'description',
+                        'span' => 'left',
+                        'readOnly' => '1',
+                        'context' => [
+                            '- update',
+                            '- preview',
+                        ],
+                        'type' => 'relation',
                     ],
-                    'usergroups' => [
-                        'label'       => 'genuineq.user::lang.groups.menu_label',
-                        'icon'        => 'icon-users',
-                        'url'         => Backend::url('genuineq/user/usergroups'),
-                        'permissions' => ['genuineq.users.access_groups']
+                    'phone' => [
+                        'label' => 'genuineq.profile::lang.school.form-labels.phone',
+                        'span' => 'right',
+                        'type' => 'text',
+                    ],
+                    'county' => [
+                        'label' => 'genuineq.profile::lang.school.form-labels.county',
+                        'nameFrom' => 'name',
+                        'descriptionFrom' => 'description',
+                        'span' => 'left',
+                        'type' => 'relation',
+                    ],
+                    'city' => [
+                        'label' => 'genuineq.profile::lang.school.form-labels.city',
+                        'nameFrom' => 'name',
+                        'descriptionFrom' => 'description',
+                        'span' => 'right',
+                        'type' => 'relation',
+                    ],
+                    'description' => [
+                        'label' => 'genuineq.profile::lang.school.form-labels.description',
+                        'size' => 'large',
+                        'span' => 'full',
+                        'type' => 'richeditor',
+                    ],]);
+
+
+            } elseif ($widget->model instanceof \Genuineq\Profile\Models\Specialist) {
+
+                /* Only for the Specialist model */
+                $widget->addFields([
+                    'birthday' => [
+                        'label' => 'Birthday',
+                        'comment' => 'Select the users birthday',
+                        'type' => 'datepicker'
                     ]
+                ]);
+            } else {
+
+                return;
+            }
+
+        });
+
+  /*  } */ /* end first if */
+
+}
+
+
+public
+function registerPermissions()
+{
+    return [
+        'genuineq.users.access_users' => [
+            'tab' => 'genuineq.user::lang.plugin.tab',
+            'label' => 'genuineq.user::lang.plugin.access_users'
+        ],
+        'genuineq.users.access_groups' => [
+            'tab' => 'genuineq.user::lang.plugin.tab',
+            'label' => 'genuineq.user::lang.plugin.access_groups'
+        ],
+        'genuineq.users.access_settings' => [
+            'tab' => 'genuineq.user::lang.plugin.tab',
+            'label' => 'genuineq.user::lang.plugin.access_settings'
+        ],
+        'genuineq.users.impersonate_user' => [
+            'tab' => 'genuineq.user::lang.plugin.tab',
+            'label' => 'genuineq.user::lang.plugin.impersonate_user'
+        ],
+    ];
+}
+
+public
+function registerNavigation()
+{
+    return [
+        'user' => [
+            'label' => 'genuineq.user::lang.users.menu_label',
+            'url' => Backend::url('genuineq/user/users'),
+            'icon' => 'icon-user',
+            'iconSvg' => 'plugins/genuineq/user/assets/images/user-icon.svg',
+            'permissions' => ['genuineq.users.*'],
+            'order' => 500,
+
+            'sideMenu' => [
+                'users' => [
+                    'label' => 'genuineq.user::lang.users.menu_label',
+                    'icon' => 'icon-user',
+                    'url' => Backend::url('genuineq/user/users'),
+                    'permissions' => ['genuineq.users.access_users']
+                ],
+                'usergroups' => [
+                    'label' => 'genuineq.user::lang.groups.menu_label',
+                    'icon' => 'icon-users',
+                    'url' => Backend::url('genuineq/user/usergroups'),
+                    'permissions' => ['genuineq.users.access_groups']
                 ]
             ]
-        ];
-    }
+        ]
+    ];
+}
 
-    public function registerSettings()
-    {
-        return [
-            'settings' => [
-                'label'       => 'genuineq.user::lang.settings.menu_label',
-                'description' => 'genuineq.user::lang.settings.menu_description',
-                'category'    => SettingsManager::CATEGORY_USERS,
-                'icon'        => 'icon-cog',
-                'class'       => 'Genuineq\User\Models\Settings',
-                'order'       => 500,
-                'permissions' => ['genuineq.users.access_settings']
-            ]
-        ];
-    }
+public
+function registerSettings()
+{
+    return [
+        'settings' => [
+            'label' => 'genuineq.user::lang.settings.menu_label',
+            'description' => 'genuineq.user::lang.settings.menu_description',
+            'category' => SettingsManager::CATEGORY_USERS,
+            'icon' => 'icon-cog',
+            'class' => 'Genuineq\User\Models\Settings',
+            'order' => 500,
+            'permissions' => ['genuineq.users.access_settings']
+        ]
+    ];
+}
 
-    public function registerMailTemplates()
-    {
-        return [
-            'genuineq.user::mail.activate',
-            'genuineq.user::mail.welcome',
-            'genuineq.user::mail.restore',
-            'genuineq.user::mail.new_user',
-            'genuineq.user::mail.reactivate',
-            'genuineq.user::mail.invite',
-        ];
-    }
+public
+function registerMailTemplates()
+{
+    return [
+        'genuineq.user::mail.activate',
+        'genuineq.user::mail.welcome',
+        'genuineq.user::mail.restore',
+        'genuineq.user::mail.new_user',
+        'genuineq.user::mail.reactivate',
+        'genuineq.user::mail.invite',
+    ];
+}
 
-    public function registerNotificationRules()
-    {
-        return [
-            'events' => [
-                \Genuineq\User\NotifyRules\UserActivatedEvent::class,
-                \Genuineq\User\NotifyRules\UserRegisteredEvent::class,
+public
+function registerNotificationRules()
+{
+    return [
+        'events' => [
+            \Genuineq\User\NotifyRules\UserActivatedEvent::class,
+            \Genuineq\User\NotifyRules\UserRegisteredEvent::class,
+        ],
+        'actions' => [],
+        'conditions' => [
+            \Genuineq\User\NotifyRules\UserAttributeCondition::class
+        ],
+        'groups' => [
+            'user' => [
+                'label' => 'User',
+                'icon' => 'icon-user'
             ],
-            'actions' => [],
-            'conditions' => [
-                \Genuineq\User\NotifyRules\UserAttributeCondition::class
-            ],
-            'groups' => [
-                'user' => [
-                    'label' => 'User',
-                    'icon' => 'icon-user'
-                ],
-            ],
-        ];
+        ],
+    ];
+}
+
+protected
+function bindNotificationEvents()
+{
+    if (!class_exists(Notifier::class)) {
+        return;
     }
 
-    protected function bindNotificationEvents()
-    {
-        if (!class_exists(Notifier::class)) {
-            return;
-        }
+    Notifier::bindEvents([
+        'genuineq.user.activate' => \Genuineq\User\NotifyRules\UserActivatedEvent::class,
+        'genuineq.user.register' => \Genuineq\User\NotifyRules\UserRegisteredEvent::class
+    ]);
 
-        Notifier::bindEvents([
-            'genuineq.user.activate' => \Genuineq\User\NotifyRules\UserActivatedEvent::class,
-            'genuineq.user.register' => \Genuineq\User\NotifyRules\UserRegisteredEvent::class
+    Notifier::instance()->registerCallback(function ($manager) {
+        $manager->registerGlobalParams([
+            'user' => Auth::getUser()
         ]);
+    });
+}
 
-        Notifier::instance()->registerCallback(function($manager) {
-            $manager->registerGlobalParams([
-                'user' => Auth::getUser()
-            ]);
-        });
+protected
+function extendSaveDatabaseAction()
+{
+    if (!class_exists(SaveDatabaseAction::class)) {
+        return;
     }
 
-    protected function extendSaveDatabaseAction()
-    {
-        if (!class_exists(SaveDatabaseAction::class)) {
-            return;
-        }
-
-        SaveDatabaseAction::extend(function ($action) {
-            $action->addTableDefinition([
-                'label' => 'User notifications',
-                'class' => User::class,
-                'relation' => 'notifications',
-                'param' => 'user'
-            ]);
-        });
-    }
+    SaveDatabaseAction::extend(function ($action) {
+        $action->addTableDefinition([
+            'label' => 'User notifications',
+            'class' => UserModel::class,
+            'relation' => 'notifications',
+            'param' => 'user'
+        ]);
+    });
+}
 }

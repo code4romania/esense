@@ -1,0 +1,14 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+school:
+    label: genuineq.profile::lang.school.backend-menu
+    manage:
+        form: $/genuineq/profile/models/school/fields.yaml
+        list: $/genuineq/profile/models/school/columns.yaml
+        showSearch: true
+    view:
+        list: $/genuineq/profile/models/school/columns.yaml
+        toolbarButtons: create|add|remove
+        showSearch: true

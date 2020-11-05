@@ -399,7 +399,13 @@ return [
             'title_validation' => '',
 
             'frontend' => [
+                'activate_button' => 'Activate account(s)',
                 'label_registration_requests' => 'Registration requests table'
+            ],
+
+            'flash' => [
+                'success' => 'Account was successfully activated',
+                'fail' => 'Failed to activate that account',
             ],
         ],
     ],
