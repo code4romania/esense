@@ -197,9 +197,9 @@ allowedUserTypes[] = "school"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_1_surname'
-                                contactPersonFirstNameId = 'contact_1_name'
-                                contactPersonPhoneId = 'contact_1_phone'
+                                contactPersonLastNameId = 'contact_1_surname_id'
+                                contactPersonFirstNameId = 'contact_1_name_id'
+                                contactPersonPhoneId = 'contact_1_phone_id'
                                 addContactPerson = 'add-contact-1'
                                 hideId = 'hide-1'
                                 hideClass = 'd-none'
@@ -224,9 +224,9 @@ allowedUserTypes[] = "school"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_2_surname'
-                                contactPersonFirstNameId = 'contact_2_name'
-                                contactPersonPhoneId = 'contact_2_phone'
+                                contactPersonLastNameId = 'contact_2_surname_id'
+                                contactPersonFirstNameId = 'contact_2_name_id'
+                                contactPersonPhoneId = 'contact_2_phone_id'
                                 addContactPerson = 'add-contact-2'
                                 hideId = 'hide-2'
                                 hideClass = 'd-none'
@@ -252,9 +252,9 @@ allowedUserTypes[] = "school"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_3_surname'
-                                contactPersonFirstNameId = 'contact_3_name'
-                                contactPersonPhoneId = 'contact_3_phone'
+                                contactPersonLastNameId = 'contact_3_surname_id'
+                                contactPersonFirstNameId = 'contact_3_name_id'
+                                contactPersonPhoneId = 'contact_3_phone_id'
                                 addContactPerson = 'add-contact-3'
                                 hideId = 'hide-3'
                                 hideClass = 'd-none'
@@ -279,9 +279,9 @@ allowedUserTypes[] = "school"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_4_surname'
-                                contactPersonFirstNameId = 'contact_4_name'
-                                contactPersonPhoneId = 'contact_4_phone'
+                                contactPersonLastNameId = 'contact_4_surname_id'
+                                contactPersonFirstNameId = 'contact_4_name_id'
+                                contactPersonPhoneId = 'contact_4_phone_id'
                                 addContactPerson = 'add-contact-4'
                                 hideId = 'hide-4'
                                 hideClass = 'd-none'
@@ -306,9 +306,9 @@ allowedUserTypes[] = "school"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_5_surname'
-                                contactPersonFirstNameId = 'contact_5_name'
-                                contactPersonPhoneId = 'contact_5_phone'
+                                contactPersonLastNameId = 'contact_5_surname_id'
+                                contactPersonFirstNameId = 'contact_5_name_id'
+                                contactPersonPhoneId = 'contact_5_phone_id'
                                 contactPersonObservationsId = 'contact_5_observations_id'
                                 addContactPerson = 'add-contact-5'
                                 hideId = 'hide-5'
@@ -352,7 +352,11 @@ allowedUserTypes[] = "school"
         $(document).ready(function () {
 
             /** WYSWYG Editor. */
-            $('#description').richText();
+            $('#description').richText({
+                id:'diagnostic', 
+                class: 'onChangeValue',
+                useParagraph:true
+            });
             $('.observations').richText();
 
             /** Initiate the datepicker plugin. */
@@ -399,79 +403,41 @@ allowedUserTypes[] = "school"
             }
 
             /** Validation for activeting the finish button. */
-            $(document.body).on('change', '.onChangeValue', function(){
+            $(document.body).on('change blur', '.onChangeValue', function(){
                 if(
-                    // (0 !== $("#avatar").val().length) &&
-                    (0 !== $("#birthdate").val().length) &&
-                    (0 !== $("#surname").val().length) &&
-                    (0 !== $("#name").val().length) &&
-                    (0 !== $("#description").val().length) &&
-                    // ($("#hearing_impairment").is(":checked")) &&
-                    // ($("#visual_impairment").is(":checked")) &&
-                    ((
-                        (
-                            (0 !== $("#contact_1_surname").val().length) ||
-                            (0 !== $("#contact_1_name").val().length) ||
-                            (0 !== $("#contact_1_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_1_surname").val().length) &&
-                            (0 !== $("#contact_1_name").val().length) &&
-                            (0 !== $("#contact_1_phone").val().length)
-                        )
+                    (
+                        ((0 !== $("#birthdate").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
+                        ((0 !== $("#surname").val().length)  && ((0 == $("#birthdate").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
+                        ((0 !== $("#name").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
+                        ((0 !== $("#diagnostic .richText-editor").text().length) && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_1_surname_id").val().length) && ((0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  )) ||
+                        ((0 !== $("#contact_1_name_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  )) ||
+                        ((0 !== $("#contact_1_phone_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_2_surname").val().length) ||
-                            (0 !== $("#contact_2_name").val().length) ||
-                            (0 !== $("#contact_2_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_2_surname").val().length) &&
-                            (0 !== $("#contact_2_name").val().length) &&
-                            (0 !== $("#contact_2_phone").val().length)
-                        )
+                        ((0 !== $("#contact_2_surname_id").val().length) && ((0 == $("#contact_2_name_id").val().length) || (0 == $("#contact_2_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_2_name_id").val().length) && ((0 == $("#contact_2_surname_id").val().length) || (0 == $("#contact_2_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_2_phone_id").val().length) && ((0 == $("#contact_2_surname_id").val().length) ||(0 == $("#contact_2_name_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_3_surname").val().length) ||
-                            (0 !== $("#contact_3_name").val().length) ||
-                            (0 !== $("#contact_3_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_3_surname").val().length) &&
-                            (0 !== $("#contact_3_name").val().length) &&
-                            (0 !== $("#contact_3_phone").val().length)
-                        )
+                        ((0 !== $("#contact_3_surname_id").val().length) && ((0 == $("#contact_3_name_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_3_name_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_3_phone_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) ||(0 == $("#contact_3_name_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_4_surname").val().length) ||
-                            (0 !== $("#contact_4_name").val().length) ||
-                            (0 !== $("#contact_4_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_4_surname").val().length) &&
-                            (0 !== $("#contact_4_name").val().length) &&
-                            (0 !== $("#contact_4_phone").val().length)
-                        )
+                        ((0 !== $("#contact_4_surname_id").val().length) && ((0 == $("#contact_4_name_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_4_name_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_4_phone_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) ||(0 == $("#contact_4_name_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_5_surname").val().length) ||
-                            (0 !== $("#contact_5_name").val().length) ||
-                            (0 !== $("#contact_5_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_5_surname").val().length) &&
-                            (0 !== $("#contact_5_name").val().length) &&
-                            (0 !== $("#contact_5_phone").val().length)
-                        )
-                    ))
+                        ((0 !== $("#contact_5_surname_id").val().length) && ((0 == $("#contact_5_name_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_5_name_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_5_phone_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) ||(0 == $("#contact_5_name_id").val().length) ))
+                    )
                 ) {
-                    activateFinishBtn()
-                } else {
                     deactivateFinishBtn()
+                } else {
+                    activateFinishBtn()
                 }
             });
         });
