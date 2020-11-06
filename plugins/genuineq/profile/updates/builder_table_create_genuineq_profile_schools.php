@@ -22,7 +22,7 @@ class BuilderTableCreateGenuineqProfileSchools extends Migration
             $table->timestamp('deleted_at')->nullable();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('genuineq_profile_schools');

@@ -90,12 +90,14 @@
                         <th class="sort-desc list-cell-name-name list-cell-type-text">
                             <a href="#"> name </a>
                         </th>
-                        <th class="sort-desc list-cell-name-surname list-cell-type-text">
-                            <a href="#"> surname </a>
-                        </th>
                         <th class="sort-desc list-cell-name-email list-cell-type-text">
                             <a href="#"> email </a>
                         </th>
+
+                        <th class="sort-desc list-cell-name-email list-cell-type-text">
+                            <a href="#"> created_ip_address </a>
+                        </th>
+
                         <th class="sort-desc active list-cell-name-created_at list-cell-type-datetime">
                             <a href="#"> created_at </a>
                         </th>
@@ -131,15 +133,15 @@
                             <?= $regRequest->name ?>
                         </td>
 
-                        <td class="list-cell-index-3 list-cell-name-surname list-cell-type-text">
-                            <?= $regRequest->surname ?>
-                        </td>
-
-                        <td class="list-cell-index-4 list-cell-name-email list-cell-type-text">
+                        <td class="list-cell-index-3 list-cell-name-email list-cell-type-text">
                             <?= $regRequest->email ?>
                         </td>
 
-                        <td class="list-cell-index-5 list-cell-name-created_at list-cell-type-datetime">
+                        <td class="list-cell-index-3 list-cell-name-email list-cell-type-text">
+                            <?= $regRequest->created_ip_address ?>
+                        </td>
+
+                        <td class="list-cell-index-4 list-cell-name-created_at list-cell-type-datetime">
                             <time datetime="<?= $regRequest->created_at ?>" data-datetime-control="1"
                                   data-format-alias="dateTimeLongMin"
                                   data-disposable=""><?= $regRequest->created_at ?>

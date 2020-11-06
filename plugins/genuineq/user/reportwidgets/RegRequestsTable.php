@@ -29,7 +29,7 @@ class RegRequestsTable extends ReportWidgetBase
             $this->vars['labelRegRequestsTable'] = Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.label_registration_requests');
 
             /** Get no of inactive user accounts (== user requests) from database  */
-            $this->vars['regRequestsTable'] = DB::select('SELECT * FROM users WHERE is_activated = ?', [0]);
+            $this->vars['regRequestsTable'] = UserModel::where('is_activated', 0)->get();
 
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
@@ -59,14 +59,14 @@ class RegRequestsTable extends ReportWidgetBase
     public function onRequestForm()
     {
         /* Get the selected record ID */
-        $this->asExtension('FormController')->preview(post('record_id'));
+//        $this->asExtension('FormController')->preview(post('record_id'));
 
         /* Get all model fields */
-        $request = UserModel::find(post('record_id'));
+        $userModel = UserModel::find(post('record_id'));
 
         /* Add variables to view */
-        $this->vars['recordId'] = $request->id;
-        $this->vars['isActivated'] = $request->is_activated;
+        $this->vars['recordId'] = $userModel->id;
+        $this->vars['isActivated'] = $userModel->is_activated;
 
         return $this->makePartial('preview_request');
 
