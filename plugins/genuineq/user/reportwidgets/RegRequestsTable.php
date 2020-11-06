@@ -2,6 +2,7 @@
 
 use DB;
 use Lang;
+use Flash;
 use Exception;
 use Backend\Classes\ReportWidgetBase;
 use Genuineq\User\Models\User as UserModel;
