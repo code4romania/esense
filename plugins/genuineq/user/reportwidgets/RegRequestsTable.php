@@ -13,13 +13,6 @@ use Genuineq\User\Models\User as UserModel;
  */
 class RegRequestsTable extends ReportWidgetBase
 {
-//    public $hiddenActions = ['run'];
-//
-//    public $implement = ['\Backend\Behaviors\ListController','\Backend\Behaviors\FormController'];
-//    public $listConfig = 'config_requests_list.yaml';
-//    public $formConfig = 'config_requests_form.yaml';
-
-
     /**
      * Renders the widget.
      */
