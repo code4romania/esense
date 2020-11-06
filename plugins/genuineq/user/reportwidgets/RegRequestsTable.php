@@ -23,7 +23,7 @@ class RegRequestsTable extends ReportWidgetBase
             $this->vars['labelRegRequestsTable'] = Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.label_registration_requests');
 
             /** Get no of inactive user accounts (== user requests) from database  */
-            $this->vars['regRequestsTable'] = UserModel::where('is_activated', 0)->get();
+            $this->vars['userRequests'] = UserModel::where('is_activated', 0)->get();
 
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
