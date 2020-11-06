@@ -92,7 +92,7 @@ class RegRequestsTable extends ReportWidgetBase
 
         } else {
 
-            Flash::fail( Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail') );
+            Flash::error( Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail') );
         }
     }
 
