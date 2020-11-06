@@ -1,0 +1,18 @@
+title: Registration Requests
+modelClass: Genuineq\User\Models\User
+list: $/genuineq/user/models/user/columns.yaml
+recordUrl: 'genuineq/user/users/preview/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: '10'
+showSetup: true
+showCheckboxes: true
+defaultSort:
+    column: created_at
+    direction: desc
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+
+# Link URL for each message to show a popup reply for
+recordOnClick: "$.popup({ handler: 'onRequestForm', extraData: { record_id: ':id' } })"

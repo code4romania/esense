@@ -12,6 +12,12 @@ use Genuineq\User\Models\User as UserModel;
  */
 class RegRequestsTable extends ReportWidgetBase
 {
+//    public $hiddenActions = ['run'];
+//
+//    public $implement = ['\Backend\Behaviors\ListController','\Backend\Behaviors\FormController'];
+//    public $listConfig = 'config_requests_list.yaml';
+//    public $formConfig = 'config_requests_form.yaml';
+
 
     /**
      * Renders the widget.
@@ -22,7 +28,7 @@ class RegRequestsTable extends ReportWidgetBase
             $this->vars['labelRegRequestsTable'] = Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.label_registration_requests');
 
             /** Get no of inactive user accounts (== user requests) from database  */
-            $this->vars['regRequestsTable'] = DB::select('SELECT * FROM backend_users WHERE is_activated = ?', [0]);
+            $this->vars['regRequestsTable'] = DB::select('SELECT * FROM users WHERE is_activated = ?', [0]);
 
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
@@ -46,7 +52,7 @@ class RegRequestsTable extends ReportWidgetBase
 
 
     /**
-     * Function that show RequestDetailsForm at click on a list item
+     * Function that show RequestForm at click on a list item
      * @return false|mixed
      */
     public function onRequestForm()
