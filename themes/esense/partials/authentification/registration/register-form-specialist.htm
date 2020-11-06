@@ -10,48 +10,48 @@ description = "Register from"
                 <div class="col-12">
                     <div class="shadow-lg rounded bg-white p-0 p-md-5">
                         <div class="shadow rounded p-3 py-4">
-                            <p class="display-2 text-medium-dark form-styles p-0 m-0 mb-3">{{'registerPage.form.title_1'|_}}</p>
+                            <p class="display-2 text-medium-dark form-styles p-0 m-0 mb-3">{{'partial.register.specialist.form.title'|_}}</p>
 
                             <div class="row">
                                 <!-- Last name input -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="text" name="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="{{'registerPage.form.input.last.name.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="text" name="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="{{'partial.register.specialist.form.surname.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
 
                                 <!-- First name input -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{'registerPage.form.input.first.name.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{'partial.register.specialist.form.name.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
 
                                 <!-- Phone number input -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="number" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="{{'registerPage.form.input.phone.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="number" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="{{'partial.register.specialist.form.phone.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
 
                                 <!-- Email input -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.email.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'partial.register.specialist.form.email.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
 
                                 <!-- Password -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="{{'registerPage.form.input.password.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="{{'partial.register.specialist.form.password.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
 
                                 <!-- Password confirmation -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" aria-describedby="passwordConfirmationHelp" placeholder="{{'registerPage.form.input.password.confirmation.placeholder'|_}}" style="font-style: italic;">
+                                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" aria-describedby="passwordConfirmationHelp" placeholder="{{'partial.register.specialist.form.password.confirmation.placeholder'|_}}" style="font-style: italic;">
                                     </div>
                                 </div>
 
@@ -77,7 +77,7 @@ description = "Register from"
                                 <div class="col-12">
                                     <div class="form-group register-select">
                                         <select name="school" class="form-control border outline-none selectpicker" data-style="btn-white">
-                                            <option value="-1">{{'registerPage.form.input.school.name.placeholder'|_}}</option>
+                                            <option value="-1">{{'partial.register.specialist.school.default.option'|_}}</option>
                                             {% for key, school in schools %}
                                                 <option value="{{ key }}">{{ school }}</option>
                                             {% endfor %}
@@ -91,7 +91,7 @@ description = "Register from"
 
                         <!-- Description input -->
                         <div class="shadow rounded p-3 py-4 mt-5">
-                            <p class="display-2 text-medium-dark form-styles pl-3">{{'registerPage.form.title_2'|_}}</p>
+                            <p class="display-2 text-medium-dark form-styles pl-3">{{'partial.register.specialist.form.description.label'|_}}</p>
                             <div class="col-12">
                                 <div class="form-group">
                                     <textarea class="form-control" name="description" id="description" rows="5"></textarea>
@@ -106,7 +106,7 @@ description = "Register from"
                 <!-- Submit button -->
                 <div class="col-12 mt-5 mb-5 mb-lg-0">
                     <div class="d-flex justify-content-end">
-                        <button role="button" type="submit" class="btn btn-sm btn-primary px-5">{{'registerPage.form.submit.btn.text'|_}}</button>
+                        <button role="button" type="submit" class="btn btn-sm btn-primary px-5">{{'partial.register.specialist.form.submit.button'|_}}</button>
                     </div>
                 </div>
             </div>
