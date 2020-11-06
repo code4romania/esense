@@ -14,7 +14,7 @@
 
     'component' => [
         'contactform' => [
-            'name' => 'contactform',
+            'name' => 'Formular de contact',
             'description' => 'Controler frontend pentru formularul de contact'
         ],
     ],
