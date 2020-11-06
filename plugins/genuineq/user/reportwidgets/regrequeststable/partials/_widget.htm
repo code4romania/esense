@@ -1,12 +1,7 @@
 <div class="report-widget">
     <h3><?= e($this->property('title')) ?></h3>
 
-    <!--    <div class="scoreboard">-->
-    <!--        <div data-control="listwidget">-->
-
     <?php if($regRequestsTable): ?>
-
-    <!--            <div class="scoreboard-item title-value">-->
 
     <!--LIST of requests-->
     <div class="layout-row">
@@ -45,23 +40,6 @@
                             data-request-success="$(this).prop('disabled', true)"
                             data-stripe-load-indicator>
                             <?= e(trans('backend::lang.list.delete_selected')) ?>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- List Search -->
-                <div class="toolbar-item" data-calculate-width="" style="width: 110px;">
-                    <div class="loading-indicator-container size-input-text">
-                        <input placeholder="Cautare..." type="text" name="listToolbarSearch[term]" value=""
-                               data-request="listToolbarSearch::onSubmit"
-                               data-request-complete="if($(this).val().length) {$(this).next().show()} else {$(this).next().hide()};"
-                               data-track-input="" data-load-indicator=""
-                               data-load-indicator-opaque=""
-                               class="form-control icon search growable"
-                               autocomplete="off">
-                        <button class="clear-input-text" type="button" value="" style="display: none;"
-                                onclick="$(this).prev().val('');$(this).prev().request();">
-                            <i class="icon-times"></i>
                         </button>
                     </div>
                 </div>

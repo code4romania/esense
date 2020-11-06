@@ -3,6 +3,7 @@
 use DB;
 use Lang;
 use Flash;
+use Redirect;
 use Exception;
 use Backend\Classes\ReportWidgetBase;
 use Genuineq\User\Models\User as UserModel;
@@ -51,15 +52,11 @@ class RegRequestsTable extends ReportWidgetBase
      */
     public function onRequestForm()
     {
-        /* Get the selected record ID */
-//        $this->asExtension('FormController')->preview(post('record_id'));
-
-        /* Get all model fields */
+        /* Get all user model fields from DB */
         $userModel = UserModel::find(post('record_id'));
 
-        /* Add variables to view */
-        $this->vars['recordId'] = $userModel->id;
-        $this->vars['isActivated'] = $userModel->is_activated;
+        /* Add userModel variable to modal view */
+        $this->vars['userModel'] = $userModel;
 
         return $this->makePartial('preview_request');
 
@@ -70,21 +67,20 @@ class RegRequestsTable extends ReportWidgetBase
      ***********************************************/
 
     /**
-     * Function that keeps the logic for Reply to messages
+     * Function that keeps the logic for Activate account
      * @return mixed
      */
     public function onRequest()
     {
-        if ($userRequest = UserModel::find(post('record_id'))) {
-            $userRequest->is_activated = 1;
-            $userRequest->save();
+        if ($userModel = UserModel::find(post('record_id'))) {
+            $userModel->is_activated = 1;
+            $userModel->save();
 
             Flash::success(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.success'));
 
-            return $this->listRefresh();
+            return Redirect::refresh();
 
         } else {
-
             Flash::error( Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail') );
         }
     }

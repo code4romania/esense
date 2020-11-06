@@ -399,7 +399,7 @@ return [
             'title_validation' => '',
 
             'frontend' => [
-                'activate_button' => 'Activate account(s)',
+                'activate_button' => 'Activate account',
                 'label_registration_requests' => 'Registration requests table',
                 'preview' => 'Preview request details',
             ],
