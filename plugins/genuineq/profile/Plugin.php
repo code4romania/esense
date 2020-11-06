@@ -102,10 +102,10 @@ class Plugin extends PluginBase
         User::extend(function ($model) {
             $model->addFillable([
                 'phone',
-                'county',
-                'city',
+                'county_id',
+                'city_id',
                 'description',
-                'school',
+                'school_id',
             ]);
         });
 
