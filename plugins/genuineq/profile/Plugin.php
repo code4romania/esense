@@ -105,7 +105,6 @@ class Plugin extends PluginBase
                 'county',
                 'city',
                 'description',
-
                 'school',
             ]);
         });
@@ -123,8 +122,8 @@ class Plugin extends PluginBase
 
 
                 /** Extend the user backend form. */
-            if ($widget->model instanceof \Genuineq\Profile\Models\School ||
-                $widget->model instanceof \Genuineq\Profile\Models\Specialist) {
+//            if ($widget->model instanceof \Genuineq\Profile\Models\School ||
+//                $widget->model instanceof \Genuineq\Profile\Models\Specialist) {
 
                 /* Add fields if Specialist or School model */
                 $widget->addFields([
@@ -155,7 +154,7 @@ class Plugin extends PluginBase
                     ],
                 ]);
 
-            }
+//            }
 
 //            }  /*from isNested*/
 
