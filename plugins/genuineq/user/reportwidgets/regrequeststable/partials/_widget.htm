@@ -1,7 +1,7 @@
 <div class="report-widget">
     <h3><?= e($this->property('title')) ?></h3>
 
-    <?php if($userRequests): ?>
+<?php if($userRequests): ?>
 
     <!--LIST of requests-->
     <div class="layout-row">
@@ -22,6 +22,7 @@
                             data-trigger-action="enable"
                             data-trigger=".control-list input[type=checkbox]"
                             data-trigger-condition="checked"
+                            data-popup-load-indicator
                             data-request-success="$(this).prop('disabled', true)">
                             <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.activate_button')) ?>
                         </button>
@@ -62,21 +63,21 @@
                             </div>
                         </th>
 
-                        <th class="sort-desc list-cell-name-id list-cell-type-number">
+                        <th class="list-cell-name-id list-cell-type-number">
                             <a href="#"> id </a>
                         </th>
-                        <th class="sort-desc list-cell-name-name list-cell-type-text">
+                        <th class="list-cell-name-name list-cell-type-text">
                             <a href="#"> name </a>
                         </th>
-                        <th class="sort-desc list-cell-name-email list-cell-type-text">
+                        <th class="list-cell-name-email list-cell-type-text">
                             <a href="#"> email </a>
                         </th>
 
-                        <th class="sort-desc list-cell-name-email list-cell-type-text">
+                        <th class="list-cell-name-email list-cell-type-text">
                             <a href="#"> created_ip_address </a>
                         </th>
 
-                        <th class="sort-desc active list-cell-name-created_at list-cell-type-datetime">
+                        <th class="list-cell-name-created_at list-cell-type-datetime">
                             <a href="#"> created_at </a>
                         </th>
                     </tr>
@@ -88,13 +89,12 @@
 <?php foreach ($userRequests as $userModel): ?>
 
                     <tr class="rowlink">
+
                         <td class="list-checkbox nolink">
                             <div class="checkbox custom-checkbox nolabel">
-                                <input type="checkbox" name="checked[]" id="Lists-checkbox-<?= $userModel->id ?>"
-                                       value="<?= $userModel->id ?>"
-                                       autocomplete="off">
-                                <label
-                                    for="Lists-checkbox-<?= $userModel->id ?>"><?= e(trans('backend::lang.list.check')) ?></label>
+                                <input type="checkbox" name="checked" id="Lists-checkbox-<?= $userModel->id ?>"
+                                       value="<?= $userModel->id ?>" autocomplete="off">
+                                <label for="Lists-checkbox-<?= $userModel->id ?>"><?= e(trans('backend::lang.list.check')) ?></label>
                             </div>
                         </td>
 
@@ -115,11 +115,11 @@
                             <?= $userModel->email ?>
                         </td>
 
-                        <td class="list-cell-index-3 list-cell-name-email list-cell-type-text">
+                        <td class="list-cell-index-4 list-cell-name-email list-cell-type-text">
                             <?= $userModel->created_ip_address ?>
                         </td>
 
-                        <td class="list-cell-index-4 list-cell-name-created_at list-cell-type-datetime">
+                        <td class="list-cell-index-5 list-cell-name-created_at list-cell-type-datetime">
                             <time datetime="<?= $userModel->created_at ?>" data-datetime-control="1"
                                   data-format-alias="dateTimeLongMin"
                                   data-disposable=""><?= $userModel->created_at ?>
@@ -138,11 +138,8 @@
 
     </div>
 
-    <!--            </div>-->
-
-    <?php endif ?>
+<?php endif ?>
 
 </div>
-</div>
 
-</div>
+<script src="\modules\backend\widgets\lists\assets\js\october.list.js"></script>
