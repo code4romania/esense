@@ -1,6 +1,8 @@
 <?php namespace Genuineq\ContactForm\Components;
 
 use Log;
+use Lang;
+use Flash;
 use Redirect;
 use Validator;
 use Cms\Classes\ComponentBase;
@@ -30,13 +32,7 @@ class ContactForm extends ComponentBase
      */
     public function onRun()
     {
-        /** NEED TO BE UPDATED ********************* */
-//        if($loggedUser) {
-//            $this->page['loggedUser'] = UserModel::all()->where('first_name', '=', $firstName)->where('last_name', '=', $lastName)->where('email', '=', $email);
-//        }
     }
-
-
 
     /**
      * Create a message based on input values
@@ -56,7 +52,7 @@ class ContactForm extends ComponentBase
                 MessageModel::rules()
             );
 
-            (new MessageModel)::create([
+            MessageModel::create([
                 'first_name' => post('first_name'),
                 'last_name' => post('last_name'),
                 'email' => post('email'),
@@ -68,6 +64,7 @@ class ContactForm extends ComponentBase
             return;
         }
 
+        Flash::success(Lang::get('genuineq.contactform::lang.backend.flash.send_message.success'));
         return Redirect::refresh();
     }
 

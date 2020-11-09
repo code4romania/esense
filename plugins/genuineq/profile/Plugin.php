@@ -48,7 +48,6 @@ class Plugin extends PluginBase
     {
         /** Extend the "Genuineq\User\Models\User" model. */
         $this->userExtendRelationships();
-        $this->userExtendBackendForm();
         $this->userExtendComponents();
     }
 
@@ -82,15 +81,6 @@ class Plugin extends PluginBase
         User::extend(function ($model) {
             /** Link "Profile" model to user model. */
             $model->morphTo['profile'] = [];
-
-            $model->belongsTo['city'] = [
-                'Genuineq\Addresses\Models\City',
-                'table' => 'genuineq_addresses_cities',
-            ];
-            $model->belongsTo['county'] = [
-                'Genuineq\Addresses\Models\County',
-                'table' => 'genuineq_addresses_counties',
-            ];
         });
     }
 
@@ -99,69 +89,34 @@ class Plugin extends PluginBase
      */
     protected function userExtendBackendForm()
     {
-        User::extend(function ($model) {
-            $model->addFillable([
-                'phone',
-                'county_id',
-                'city_id',
-                'description',
-                'school_id',
-            ]);
-        });
-
-        /** Listen to backend event to extend forms user. */
+        /** Listen to backend extend forms user. */
         Event::listen('backend.form.extendFields', function ($widget) {
 
-            // Only for the School or Specialist controller
-//            if (!$widget->getController() instanceof \Genuineq\Profile\Controllers\Specialists ||
-//                !$widget->getController() instanceof \Genuineq\Profile\Controllers\Schools) {
-//                return;
-//            }
+            /** Extend the user backend form. */
+            if ($widget->model instanceof \Genuineq\User\Models\User) {
 
-//            if($widget->isNested === false) {
-
-
-                /** Extend the user backend form. */
-//            if ($widget->model instanceof \Genuineq\Profile\Models\School ||
-//                $widget->model instanceof \Genuineq\Profile\Models\Specialist) {
-
-                /* Add fields if Specialist or School model */
+                /** Add an extra users profile_type text type field. */
                 $widget->addFields([
-                    'phone' => [
-                        'label' => 'genuineq.profile::lang.school.form-labels.phone',
-                        'span' => 'right',
+                    'profile_type' => [
+                        'label' => 'genuineq.profile::lang.backendForm.user.profile_type.label',
+                        'comment' => 'genuineq.profile::lang.backendForm.user.profile_type.comment',
                         'type' => 'text',
+                        'span' => 'auto',
+                        'context' => 'preview',
                     ],
-                    'county' => [
-                        'label' => 'genuineq.profile::lang.school.form-labels.county',
-                        'nameFrom' => 'name',
-                        'descriptionFrom' => 'description',
-                        'span' => 'left',
-                        'type' => 'relation',
-                    ],
-                    'city' => [
-                        'label' => 'genuineq.profile::lang.school.form-labels.city',
-                        'nameFrom' => 'name',
-                        'descriptionFrom' => 'description',
-                        'span' => 'right',
-                        'type' => 'relation',
-                    ],
-                    'description' => [
-                        'label' => 'genuineq.profile::lang.school.form-labels.description',
-                        'size' => 'large',
-                        'span' => 'full',
-                        'type' => 'richeditor',
+
+                    /** Add an extra users profile_id text type field. */
+                    'profile_id' => [
+                        'label' => 'genuineq.profile::lang.backendForm.user.profile_id.label',
+                        'comment' => 'genuineq.profile::lang.backendForm.user.profile_id.comment',
+                        'type' => 'text',
+                        'span' => 'auto',
+                        'context' => 'preview',
                     ],
                 ]);
-
-//            }
-
-//            }  /*from isNested*/
-
+            }
+                
         });
-
-
-
     }
 
     /**

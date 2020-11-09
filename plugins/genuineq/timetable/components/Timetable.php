@@ -38,7 +38,7 @@ class Timetable extends ComponentBase
      */
     public function onCreate()
     {
-        $lesson = (new Lesson)::create([
+        $lesson = Lesson::create([
             'day' => post('day'),
             'start_hour' => post('start_hour'),
             'end_hour' => post('end_hour'),

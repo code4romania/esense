@@ -3,6 +3,7 @@
 use DB;
 use Lang;
 use Flash;
+use Redirect;
 use Exception;
 use Backend\Classes\ReportWidgetBase;
 use Genuineq\User\Models\User as UserModel;
@@ -13,13 +14,6 @@ use Genuineq\User\Models\User as UserModel;
  */
 class RegRequestsTable extends ReportWidgetBase
 {
-//    public $hiddenActions = ['run'];
-//
-//    public $implement = ['\Backend\Behaviors\ListController','\Backend\Behaviors\FormController'];
-//    public $listConfig = 'config_requests_list.yaml';
-//    public $formConfig = 'config_requests_form.yaml';
-
-
     /**
      * Renders the widget.
      */
@@ -29,7 +23,7 @@ class RegRequestsTable extends ReportWidgetBase
             $this->vars['labelRegRequestsTable'] = Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.label_registration_requests');
 
             /** Get no of inactive user accounts (== user requests) from database  */
-            $this->vars['regRequestsTable'] = DB::select('SELECT * FROM users WHERE is_activated = ?', [0]);
+            $this->vars['userRequests'] = UserModel::where('is_activated', 0)->orderBy('created_at', 'DESC')->get();
 
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
@@ -58,15 +52,12 @@ class RegRequestsTable extends ReportWidgetBase
      */
     public function onRequestForm()
     {
-        /* Get the selected record ID */
-        $this->asExtension('FormController')->preview(post('record_id'));
+        /* Get all user model fields from DB by selected id */
+        $userModel = UserModel::find(post('record_id'));
 
-        /* Get all model fields */
-        $request = UserModel::find(post('record_id'));
+        /* Add userModel variable to modal view */
+        $this->vars['userModel'] = $userModel;
 
-        /* Add variables to view */
-        $this->vars['recordId'] = $request->id;
-        $this->vars['isActivated'] = $request->is_activated;
 
         return $this->makePartial('preview_request');
 
@@ -77,24 +68,44 @@ class RegRequestsTable extends ReportWidgetBase
      ***********************************************/
 
     /**
-     * Function that keeps the logic for Reply to messages
+     * Function that Activate account on request
      * @return mixed
      */
     public function onRequest()
     {
-        if ($userRequest = UserModel::find(post('record_id'))) {
-            $userRequest->is_activated = 1;
-            $userRequest->save();
+        if ([] != post('record_id')) {
+            $this->activateUser(post('record_id'));
+            /** Go to show success message */
+            goto success;
 
+        }elseif ([] != post('checked')) {
+
+            /** Iterate IDs and get the corresponding user, then activate it */
+            foreach (post('checked') as $accountId) {
+                $this->activateUser($accountId);
+            }
+
+            success:
             Flash::success(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.success'));
 
-            return $this->listRefresh();
+            /* Refreshing the page */
+            return Redirect::refresh();
 
         } else {
-
-            Flash::error( Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail') );
+            Flash::error(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail'));
+            return;
         }
     }
 
+    /**
+     * Function that Activate account by user ID
+     * @param $accountId
+     */
+    private function activateUser($accountId)
+    {
+        $userModel = UserModel::find($accountId);
+        $userModel->is_activated = 1;
+        $userModel->save();
+    }
 
 }
