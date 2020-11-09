@@ -62,7 +62,6 @@ class RegRequestsTable extends ReportWidgetBase
         $this->vars['isActivated'] = $request->is_activated;
 
         return $this->makePartial('preview_request');
-
     }
 
     /***********************************************
@@ -82,12 +81,8 @@ class RegRequestsTable extends ReportWidgetBase
             Flash::success(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.success'));
 
             return $this->listRefresh();
-
         } else {
-
-            Flash::fail( Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail') );
+            Flash::fail(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail'));
         }
     }
-
-
 }
