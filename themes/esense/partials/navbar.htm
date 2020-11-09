@@ -19,14 +19,14 @@ description = "Navbar partial for drive grade"
             <!-- Despre proiect -->
             <li class="nav-item my-2 pl-3 my-md-0">
                 <a class="nav-link text-white display-4 roboto-family" href="{{ 'landing-pages/about-project'|page }}">
-                    {{'navbar.link_1'|_}}
+                    {{'partial.navbar.link_1'|_}}
                 </a>
             </li>
 
             <!-- FAQ -->
             <li class="nav-item my-2 pl-3 my-md-0">
                 <a class="nav-link text-white display-4 roboto-family" href="{{ 'intrebari-si-raspunsuri'|staticPage }}">
-                    {{'navbar.link_2'|_}}
+                    {{'partial.navbar.link_2'|_}}
                 </a>
             </li>
 
@@ -34,7 +34,7 @@ description = "Navbar partial for drive grade"
             <!-- Contact -->
             <li class="nav-item my-2 pl-3 my-md-0">
                 <a class="nav-link text-white display-4 roboto-family" href="{{ 'landing-pages/esense-home'|page }}#contact">
-                    {{'navbar.link_3'|_}}
+                    {{'partial.navbar.link_3'|_}}
                 </a>
             </li>
 
@@ -42,14 +42,14 @@ description = "Navbar partial for drive grade"
                 <!-- Register -->
                 <li class="nav-item my-2 pl-4 my-md-0">
                     <a class="btn btn-outline-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/register-form'|page }}">
-                        {{'navbar.link_4'|_}}
+                        {{'partial.navbar.link_4'|_}}
                     </a>
                 </li>
 
                 <!-- Login -->
                 <li class="nav-item my-2 pl-4 my-md-0">
                     <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/login'|page }}">
-                        {{'navbar.link_5'|_}}
+                        {{'partial.navbar.link_5'|_}}
                     </a>
                 </li>
 
@@ -57,14 +57,14 @@ description = "Navbar partial for drive grade"
                  <!-- Dashboard -->
                 <li class="nav-item my-2 pl-4 my-md-0">
                     <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'specialist/dashboard'|page }}">
-                        {{'navbar.link_6'|_}}
+                        {{'partial.navbar.link_6'|_}}
                     </a>
                 </li>
             {% else %}
                 <!-- Dashboard -->
                 <li class="nav-item my-2 pl-4 my-md-0">
                     <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'school/dashboard'|page }}">
-                        {{'navbar.link_6'|_}}
+                        {{'partial.navbar.link_6'|_}}
                     </a>
                 </li>
             {% endif %}
