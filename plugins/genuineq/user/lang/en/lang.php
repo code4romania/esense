@@ -400,7 +400,8 @@ return [
 
             'frontend' => [
                 'activate_button' => 'Activate account(s)',
-                'label_registration_requests' => 'Registration requests table'
+                'label_registration_requests' => 'Registration requests table',
+                'preview' => 'Preview request details',
             ],
 
             'flash' => [

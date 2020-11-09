@@ -48,7 +48,6 @@ class Plugin extends PluginBase
     {
         /** Extend the "Genuineq\User\Models\User" model. */
         $this->userExtendRelationships();
-        $this->userExtendBackendForm();
         $this->userExtendComponents();
     }
 
@@ -60,11 +59,11 @@ class Plugin extends PluginBase
     {
         return [
             'Genuineq\Profile\ReportWidgets\TotalSpecialists' => [
-                'label'   => 'genuineq.profile::lang.reportwidgets.total_specialists.label',
+                'label' => 'genuineq.profile::lang.reportwidgets.total_specialists.label',
                 'context' => 'dashboard',
             ],
             'Genuineq\Profile\ReportWidgets\TotalSchools' => [
-                'label'   => 'genuineq.profile::lang.reportwidgets.total_schools.label',
+                'label' => 'genuineq.profile::lang.reportwidgets.total_schools.label',
                 'context' => 'dashboard',
             ],
         ];
@@ -79,7 +78,7 @@ class Plugin extends PluginBase
      */
     protected function userExtendRelationships()
     {
-        User::extend(function($model) {
+        User::extend(function ($model) {
             /** Link "Profile" model to user model. */
             $model->morphTo['profile'] = [];
         });
@@ -91,30 +90,32 @@ class Plugin extends PluginBase
     protected function userExtendBackendForm()
     {
         /** Listen to backend extend forms user. */
-        Event::listen('backend.form.extendFields', function($widget) {
+        Event::listen('backend.form.extendFields', function ($widget) {
+
             /** Extend the user backend form. */
             if ($widget->model instanceof \Genuineq\User\Models\User) {
 
                 /** Add an extra users profile_type text type field. */
                 $widget->addFields([
                     'profile_type' => [
-                        'label'    => 'genuineq.profile::lang.backendForm.user.profile_type.label',
-                        'comment'  => 'genuineq.profile::lang.backendForm.user.profile_type.comment',
-                        'type'     => 'text',
-                        'span'     => 'auto',
-                        'context'  => 'preview',
+                        'label' => 'genuineq.profile::lang.backendForm.user.profile_type.label',
+                        'comment' => 'genuineq.profile::lang.backendForm.user.profile_type.comment',
+                        'type' => 'text',
+                        'span' => 'auto',
+                        'context' => 'preview',
                     ],
 
                     /** Add an extra users profile_id text type field. */
                     'profile_id' => [
-                        'label'    => 'genuineq.profile::lang.backendForm.user.profile_id.label',
-                        'comment'  => 'genuineq.profile::lang.backendForm.user.profile_id.comment',
-                        'type'     => 'text',
-                        'span'     => 'auto',
-                        'context'  => 'preview',
-                    ]
+                        'label' => 'genuineq.profile::lang.backendForm.user.profile_id.label',
+                        'comment' => 'genuineq.profile::lang.backendForm.user.profile_id.comment',
+                        'type' => 'text',
+                        'span' => 'auto',
+                        'context' => 'preview',
+                    ],
                 ]);
             }
+                
         });
     }
 
@@ -124,7 +125,7 @@ class Plugin extends PluginBase
     protected function userExtendComponents()
     {
         /** Add extra fields and validation rules. */
-        Event::listen('genuineq.user.beforeValidate', function(&$data, &$rules, &$messages, $postData) {
+        Event::listen('genuineq.user.beforeValidate', function (&$data, &$rules, &$messages, $postData) {
             /** Check user type. */
             if (Input::has('type') && ('school' == $postData['type'])) {
                 /** Add the school slug to be validated. */
@@ -138,18 +139,18 @@ class Plugin extends PluginBase
         });
 
         /** Create user profile after user registration. */
-        Event::listen('genuineq.user.register', function($user, $data) {
+        Event::listen('genuineq.user.register', function ($user, $data) {
             $profile = null;
 
             /** Create user profile based on user type. */
             if ('specialist' == $user->type) {
                 $profile = new Specialist([
-                    'slug' => Specialist::slug($user->full_name),
-                    'phone' => $data['phone'],
-                    'county_id' => $data['county'],
-                    'city_id' => $data['city'],
-                    'school_id' => null,
-                    'description' => $data['description']
+                        'slug' => Specialist::slug($user->full_name),
+                        'phone' => $data['phone'],
+                        'county_id' => $data['county'],
+                        'city_id' => $data['city'],
+                        'school_id' => null,
+                        'description' => $data['description']
                     ]
                 );
             } else {
@@ -172,7 +173,7 @@ class Plugin extends PluginBase
         });
 
         /** Check is user is archived after login. */
-        Event::listen('genuineq.user.afterAuthenticate', function($component, $user) {
+        Event::listen('genuineq.user.afterAuthenticate', function ($component, $user) {
             /** Check if authenticated usr is archived. */
             if ($user->profile->archived) {
                 Auth::logout();
@@ -181,11 +182,11 @@ class Plugin extends PluginBase
         });
 
         /** Notify a registered school that a teacher wants to register. */
-        Event::listen('genuineq.user.notifySchool', function($data) {
+        Event::listen('genuineq.user.notifySchool', function ($data) {
             /** Extract the school. */
             $school = School::find($data['school']);
             /** Extract the school user. */
-            $user =  $school->user;
+            $user = $school->user;
 
             $data = [
                 'name' => $school->contact_name,
@@ -199,7 +200,7 @@ class Plugin extends PluginBase
                 'teacher_description' => $data['description'],
             ];
 
-            Mail::send('genuineq.profile::mail.new_teacher', $data, function($message) use ($user) {
+            Mail::send('genuineq.profile::mail.new_teacher', $data, function ($message) use ($user) {
                 $message->to($user->email, $user->full_name);
             });
         });
