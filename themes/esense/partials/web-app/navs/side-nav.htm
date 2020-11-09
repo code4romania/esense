@@ -101,7 +101,7 @@
         </li>
 
         <!-- Profesori -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/specialists" or this.page.url == "/school/teacher" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/specialists" or this.page.url == "/school/specialist/:id" or this.page.url == "/school/specialist-edit/:id" %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/specialists'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/building.svg'|theme }}">
@@ -110,7 +110,7 @@
         </li>
 
         <!-- Elevi -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/students" or this.page.url == '/school/students' or this.page.url == "/school/student-add" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/students" or this.page.url == '/school/student/:id' or this.page.url == "/school/student-add" or this.page.url == '/school/student-edit/:id' %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/students'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/user.svg'|theme }}">
