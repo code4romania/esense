@@ -4,12 +4,12 @@ description = "Add another contact person for new student"
 ==
 <div class="row" id="{{contactPersonFormId}}">
     <div class="col-12">
-        <p class="text-muted mt-5 mb-3">{{'teacher.dashboard.student.add.profile.contact.person'|_}}</p>
+        <p class="text-muted mt-5 mb-3">{{'page.specialist.dashboard.student.add.profile.contact.person.title'|_}}</p>
     </div>
     <!-- Contact person last name -->
     <div class="col-12 col-md-6">
         <div class="form-group d-flex">
-            <input name='{{contactPersonLastName}}' type="text" class="form-control onChangeValue" id="{{contactPersonLastNameId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.last.name'|_}}" value="{{lastNameValue}}">
+            <input name='{{contactPersonLastName}}' type="text" class="form-control onChangeValue" id="{{contactPersonLastNameId}}" placeholder="{{'page.specialist.dashboard.student.add.profile.contact.person.last.name'|_}}" value="{{lastNameValue}}">
             <span class="text-danger ml-2">*</span>
         </div>
     </div>
@@ -17,7 +17,7 @@ description = "Add another contact person for new student"
     <!-- Contact person first name -->
     <div class="col-12 col-md-6">
         <div class="form-group d-flex">
-            <input name='{{contactPersonFirstName}}' type="text" class="form-control onChangeValue" id="{{contactPersonFirstNameId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.first.name'|_}}" value="{{firstNameValue}}">
+            <input name='{{contactPersonFirstName}}' type="text" class="form-control onChangeValue" id="{{contactPersonFirstNameId}}" placeholder="{{'page.specialist.dashboard.student.add.profile.contact.person.first.name'|_}}" value="{{firstNameValue}}">
             <span class="text-danger ml-2">*</span>
         </div>
     </div>
@@ -25,22 +25,23 @@ description = "Add another contact person for new student"
     <!-- Contact person email -->
     <div class="col-12 col-md-6">
         <div class="form-group mr-3">
-            <input name='{{contactPersonEmail}}' type="email" class="form-control onChangeValue" id="{{contactPersonEmailId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.email'|_}}" value="{{emailValue}}">
+            <input name='{{contactPersonEmail}}' type="email" class="form-control onChangeValue" id="{{contactPersonEmailId}}" placeholder="{{'page.specialist.dashboard.student.add.profile.contact.person.email'|_}}" value="{{emailValue}}">
         </div>
     </div>
 
     <!-- Contact person phone -->
     <div class="col-12 col-md-6">
         <div class="form-group d-flex">
-            <input name='{{contactPersonPhone}}' type="number" class="form-control onChangeValue" id="{{contactPersonPhoneId}}" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.phone'|_}}" value="{{phoneValue}}">
+            <input name='{{contactPersonPhone}}' type="number" class="form-control onChangeValue" id="{{contactPersonPhoneId}}" placeholder="{{'page.specialist.dashboard.student.add.profile.contact.person.phone'|_}}" value="{{phoneValue}}">
             <span class="text-danger ml-2">*</span>
         </div>
     </div>
 
     <!-- Contact person observations -->
     <div class="col-12">
+        <label class="small" style="color: #BFB5BD;">{{'page.specialist.dashboard.student.add.profile.contact.person.observations'|_}}</label>
         <div class="form-group mr-3">
-            <textarea name="{{contactPersonObservations}}" class="form-control observations onChangeValue" id="{{contactPersonObservationsId}}" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.contact.person.observations'|_}}">
+            <textarea name="{{contactPersonObservations}}" class="form-control observations onChangeValue" id="{{contactPersonObservationsId}}" rows="3">
                {{textareaValue}}
             </textarea>
         </div>
@@ -50,7 +51,7 @@ description = "Add another contact person for new student"
     <div class="col-12 my-4 {{hideClass}}" id="{{hideId}}">
         <div class="d-flex align-items-center justify-content-center">
             <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/add-gray.svg'|theme }}">
-            <span class="ml-2 display-4 text-secondary2" style="cursor: pointer;">{{'teacher.dashboard.student.add.profile.contact.person.add.another.contact.person'|_}}</span>
+            <span class="ml-2 display-4 text-secondary2" style="cursor: pointer;">{{'page.specialist.dashboard.student.add.profile.contact.person.add.another.contact.person'|_}}</span>
         </div>
     </div>
 </div>

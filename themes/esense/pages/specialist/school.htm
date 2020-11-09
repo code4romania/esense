@@ -14,7 +14,7 @@ allowedUserTypes[] = "specialist"
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">{{'teacher.dashboard.school.title'|_}}</h4>
+            <h4 class="text-gray-dark font-weight-light mb-4">{{ user.profile.school.name }}</h4>
         </div>
 
         <!-- Teachers activity chart -->
@@ -22,20 +22,20 @@ allowedUserTypes[] = "specialist"
             <div class="rounded bg-white shadow p-3">
                 <div class="row mb-4">
                     <div class="col-12 col-md-12 col-lg-6">
-                        <p class="p-0 m-0 font-weight-light display-2 text-gray-dark">{{'teacher.dashboard.admin.panel.chart.title'|_}}</p>
-                        <p class="display-4 text-gray-light pt-2">{{'teacher.dashboard.admin.panel.chart.subtitle'|_}}</p>
+                        <p class="p-0 m-0 font-weight-light display-2 text-gray-dark">{{'page.specialist.dashboard.admin.panel.chart.title'|_}}</p>
+                        <p class="display-4 text-gray-light pt-2">{{'page.specialist.dashboard.admin.panel.chart.subtitle'|_}}</p>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="form-group register-select">
                             <select class="form-control selectpicker border outline-none" data-style="btn-white">
-                            <option>tot anul</option>
+                            <option>xxxx</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="form-group register-select">
                             <select class="form-control selectpicker border outline-none" data-style="btn-white">
-                            <option>2020</option>
+                            <option>xxxx</option>
                             </select>
                         </div>
                     </div>
@@ -49,18 +49,18 @@ allowedUserTypes[] = "specialist"
         <!-- Teachers table -->
         <div class="col-12 my-5">
             <div class="table-responsive rounded p-3" style="overflow-x: hidden; background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
-                <p class="font-weight-bold text-dark">{{'teacher.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">({{ user.profile.school.specialists.count }})</span></p>
+                <p class="font-weight-bold text-dark">{{'page.specialist.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">({{ user.profile.school.specialists.count }})</span></p>
                 <table id="teachers-datatable" class="table table-striped table-sm pt-3 px-3 m-0" cellspacing="0">
                     <thead>
                         <tr>
                             <!-- Teacher name column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.teachers.table.column_1'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.school.table.column_1'|_}}</p></th>
                             <!-- Number of students column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.teachers.table.column_2'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.school.table.column_2'|_}}</p></th>
                             <!-- Registration date column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.teachers.table.column_3'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.school.table.column_3'|_}}</p></th>
                             <!-- Email column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.teachers.table.column_4'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.school.table.column_4'|_}}</p></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -134,12 +134,12 @@ allowedUserTypes[] = "specialist"
                 pagingType: 'simple',
                 language: {
                     "info": "_PAGE_ - _PAGE_ of _PAGES_",
-                    'zeroRecords': "{{'studentsTableNoRecordsText'|_}}",
-                    'emptyPanes': "{{'studentsTableNoPanesText'|_}}",
-                    'emptyTable': "{{'studentsTableNoEntriesText'|_}}",
+                    'zeroRecords': "{{'general.datatable.zeroRecords'|_}}",
+                    'emptyPanes': "{{'general.datatable.emptyPanes'|_}}",
+                    'emptyTable': "{{'general.datatable.emptyTable'|_}}",
                     'search': '',
                     'searchPlaceholder': "Cauta un elev dupa nume",
-                    'lengthMenu': "{{'studentsTableNumberRowsText'|_}}: _MENU_",
+                    'lengthMenu': "{{'general.datatable.lengthMenu'|_}}: _MENU_",
                     'paginate': {
                         'first': '«',
                         'previous': '‹',
@@ -148,10 +148,10 @@ allowedUserTypes[] = "specialist"
                     },
                     'aria': {
                         'paginate': {
-                            'first': "{{'studentsTablePaginationFirstText'|_}}",
-                            'previous': "{{'studentsTablePaginationLastText'|_}}",
-                            'next': "{{'studentsTablePaginationForwardText'|_}}",
-                            'last': "{{'studentsTablePaginationPreviousText'|_}}"
+                            'first': "{{'general.datatable.first'|_}}",
+                            'previous': "{{'general.datatable.previous'|_}}",
+                            'next': "{{'general.datatable.next'|_}}",
+                            'last': "{{'general.datatable.last'|_}}"
                         }
                     }
                 }
