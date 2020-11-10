@@ -13,6 +13,7 @@ use Genuineq\Students\Models\Student;
 use Genuineq\Esense\Models\StudentTransfer;
 use Genuineq\Esense\Models\Connection;
 use Genuineq\Timetable\Models\Lesson;
+use Genuineq\User\Models\User;
 
 class Plugin extends PluginBase
 {
@@ -49,6 +50,25 @@ class Plugin extends PluginBase
 
     public function registerSettings()
     {
+    }
+
+    public function registerSchedule($schedule)
+    {
+        /**
+         * Daily task that checks if there are any users
+         *  that have not activated their accounts for more than 30 days.
+         */
+        $schedule->call(function () {
+            /** Extract all users that are not activated and are older that 30 days. */
+            $inactiveUsers = User::whereNull('activated_at')->whereDate('created_at', '<', Carbon::now()->subDays(30)->format('Y-m-d'))->get();
+
+            /** Delete all extracted users and the profiles. */
+            foreach ($inactiveUsers as $key => $user) {
+                $profile = $user->profile;
+                $profile->forceDelete();
+                $user->forceDelete();
+            }
+        })->daily();
     }
 
     public function boot()
