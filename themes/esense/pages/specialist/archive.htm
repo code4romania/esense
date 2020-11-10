@@ -16,21 +16,21 @@ allowedUserTypes[] = "specialist"
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">{{ 'teacher.dashboard.archive.title'|_ }}</h4>
+            <h4 class="text-gray-dark font-weight-light mb-4">{{ 'page.specialist.dashboard.archive.title'|_ }}</h4>
         </div>
 
         <!-- Students table -->
         <div class="col-12 my-5">
             <div class="table-responsive rounded p-3" style="overflow-x: hidden; background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <p class="font-weight-bold text-dark">Elevi <span class="text-gray-medium font-weight-normal">({{ user.profile.archivedStudents.count }})</span></p>
+                    <p class="font-weight-bold text-dark">{{ 'page.specialist.dashboard.archive.students.number'|_ }}<span class="text-gray-medium font-weight-normal">({{ user.profile.archivedStudents.count }})</span></p>
                 </div>
                 <table id="archived-students-table" class="table table-striped table-sm pt-3 px-3 m-0" cellspacing="0">
                     <thead>
                         <tr>
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.students.table.column_1'|_}}</p></th>
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.students.table.column_2'|_}}</p></th>
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'teacher.dashboard.students.table.column_4'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.archive.students.table.column_1'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.archive.students.table.column_2'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.archive.students.table.column_4'|_}}</p></th>
                             <th class="no-sort d-none d-md-block"></th>
                             <th class="no-sort d-block d-md-none"></th>
                         </tr>
@@ -59,8 +59,8 @@ allowedUserTypes[] = "specialist"
                                             </button>
 
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_1'|_}}</a>
-                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'teacher.dashboard.students.table.options.link_2'|_}}</a>
+                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'page.specialist.dashboard.archive.students.table.options.link_1'|_}}</a>
+                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'page.specialist.dashboard.archive.students.table.options.link_2'|_}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -86,13 +86,13 @@ allowedUserTypes[] = "specialist"
                                     <div class="pl-2 py-3">
                                         <div class="d-flex flex-column">
                                             {% if student.hearing_impairment %}
-                                                <p class="p-0 m-0 display-4 text-gray font-weight-light pt-2" style="letter-spacing: 0.2px; line-height:20px;">Auz</p>
+                                                <p class="p-0 m-0 display-4 text-gray font-weight-light pt-2" style="letter-spacing: 0.2px; line-height:20px;">{{'page.specialist.dashboard.archive.disability.hearing'|_}}</p>
                                             {% endif %}
                                             {% if student.visual_impairment %}
-                                                <p class="p-0 m-0 display-4 text-gray font-weight-light pt-2" style="letter-spacing: 0.2px; line-height:20px;">Vaz</p>
+                                                <p class="p-0 m-0 display-4 text-gray font-weight-light pt-2" style="letter-spacing: 0.2px; line-height:20px;">{{'page.specialist.dashboard.archive.disability.seeing'|_}}</p>
                                             {% endif %}
                                             {% if (not student.hearing_impairment) and (not student.visual_impairment) %}
-                                                <p class="p-0 m-0 display-4 text-gray font-weight-light pt-2" style="letter-spacing: 0.2px; line-height:20px;">Niciuna</p>
+                                                <p class="p-0 m-0 display-4 text-gray font-weight-light pt-2" style="letter-spacing: 0.2px; line-height:20px;">{{'page.specialist.dashboard.archive.disability.none'|_}}</p>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@ allowedUserTypes[] = "specialist"
 
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
                                                 <a class="dropdown-item display-4" role="button" data-toggle="modal" data-target="#unzipStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}' style="color: #1A212C;">
-                                                    {{'teacher.dashboard.students.table.options.unzip'|_}}
+                                                    {{'page.specialist.dashboard.students.table.options.unzip'|_}}
                                                 </a>
                                             </div>
                                         </div>
@@ -138,7 +138,7 @@ allowedUserTypes[] = "specialist"
 
     </div>
 </div>
-
+{{'page.specialist.dashboard.students.table.options.unzip'|_}}
 <!-- Partial for delete a student -->
 {% partial 'web-app/general/student-delete' %}
 <!-- Partial for unzip a student -->
@@ -164,12 +164,12 @@ allowedUserTypes[] = "specialist"
                 pagingType: 'simple',
                 language: {
                     "info": "_PAGE_ - _PAGE_ of _PAGES_",
-                    'zeroRecords': "{{'studentsTableNoRecordsText'|_}}",
-                    'emptyPanes': "{{'studentsTableNoPanesText'|_}}",
-                    'emptyTable': "{{'studentsTableNoEntriesText'|_}}",
+                    'zeroRecords': "{{'general.datatable.zeroRecords'|_}}",
+                    'emptyPanes': "{{'general.datatable.emptyPanes'|_}}",
+                    'emptyTable': "{{'general.datatable.emptyTable'|_}}",
                     'search': '',
                     'searchPlaceholder': "Cauta un elev dupa nume",
-                    'lengthMenu': "{{'studentsTableNumberRowsText'|_}}: _MENU_",
+                    'lengthMenu': "{{'general.datatable.lengthMenu'|_}}: _MENU_",
                     'paginate': {
                         'first': '«',
                         'previous': '‹',
@@ -178,10 +178,10 @@ allowedUserTypes[] = "specialist"
                     },
                     'aria': {
                         'paginate': {
-                            'first': "{{'studentsTablePaginationFirstText'|_}}",
-                            'previous': "{{'studentsTablePaginationLastText'|_}}",
-                            'next': "{{'studentsTablePaginationForwardText'|_}}",
-                            'last': "{{'studentsTablePaginationPreviousText'|_}}"
+                            'first': "{{'general.datatable.first'|_}}",
+                            'previous': "{{'general.datatable.previous'|_}}",
+                            'next': "{{'general.datatable.next'|_}}",
+                            'last': "{{'general.datatable.last'|_}}"
                         }
                     }
                 }

@@ -18,7 +18,7 @@
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'specialist/dashboard'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_1"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_1"|_}}</span>
             </a>
         </li>
 
@@ -27,7 +27,7 @@
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'specialist/exercises'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/zap.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_2"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_2"|_}}</span>
             </a>
         </li>
 
@@ -36,7 +36,7 @@
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'specialist/students'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_3"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_3"|_}}</span>
             </a>
         </li>
 
@@ -46,7 +46,7 @@
                 <div class="vertical-border"></div>
                 <a class="nav-link" href="{{ 'specialist/school'|page }}">
                     <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/sliders.svg'|theme }}">
-                    <span class="text-primary-dark">{{"side.nav.link_4"|_}}</span>
+                    <span class="text-primary-dark">{{"partial.navs.side.nav.link_4"|_}}</span>
                 </a>
             </li>
         {% endif %}
@@ -56,7 +56,7 @@
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'specialist/information'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/alert-circle.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_5"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_5"|_}}</span>
             </a>
         </li>
 
@@ -66,7 +66,7 @@
                 <div class="vertical-border"></div>
                 <a class="nav-link" href="{{ 'specialist/archive'|page }}">
                     <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/archive.svg'|theme }}">
-                    <span class="text-primary-dark">{{"side.nav.link_10"|_}}</span>
+                    <span class="text-primary-dark">{{"partial.navs.side.nav.link_10"|_}}</span>
                 </a>
             </li>
         {% endif %}
@@ -76,7 +76,7 @@
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{'specialist/profile-edit'|page}}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/settings.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_6"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_6"|_}}</span>
             </a>
         </li>
 
@@ -96,25 +96,25 @@
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/dashboard'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_1"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_1"|_}}</span>
             </a>
         </li>
 
         <!-- Profesori -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/specialists" or this.page.url == "/school/teacher" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/specialists" or this.page.url == "/school/specialist/:id" or this.page.url == "/school/specialist-edit/:id" %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/specialists'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/building.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_8"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_8"|_}}</span>
             </a>
         </li>
 
         <!-- Elevi -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/students" or this.page.url == '/school/students' or this.page.url == "/school/student-add" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/students" or this.page.url == '/school/student/:id' or this.page.url == "/school/student-add" or this.page.url == '/school/student-edit/:id' %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/students'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/user.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_9"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_9"|_}}</span>
             </a>
         </li>
 
@@ -123,7 +123,7 @@
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/archive'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/archive.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_10"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_10"|_}}</span>
             </a>
         </li>
 
@@ -132,7 +132,7 @@
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{'school/profile-edit'|page}}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/settings.svg'|theme }}">
-                <span class="text-primary-dark">{{"side.nav.link_6"|_}}</span>
+                <span class="text-primary-dark">{{"partial.navs.side.nav.link_6"|_}}</span>
             </a>
         </li>
 
@@ -143,7 +143,7 @@
         <div class="vertical-border"></div>
         <a class="nav-link" data-request="onLogout" data-request-data="redirect: '{{ 'langing-pages/esense-home'|page }}'" href="">
             <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/exit.svg'|theme }}">
-            <span class="text-primary-dark">{{"side.nav.link_7"|_}}</span>
+            <span class="text-primary-dark">{{"partial.navs.side.nav.link_7"|_}}</span>
         </a>
     </li>
 

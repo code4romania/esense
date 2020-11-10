@@ -37,6 +37,16 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerMailTemplates()
+    {
+        return [
+            'genuineq.esense::mail.transfer_accepted',
+            'genuineq.esense::mail.transfer_rejected',
+            'genuineq.esense::mail.access_granted',
+            'genuineq.esense::mail.access_rejected',
+        ];
+    }
+
     public function registerSettings()
     {
     }

@@ -24,7 +24,7 @@ schools = 1
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'school/specialists'|page }}">{{'school.specilist-edit.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'school/specialists'|page }}">{{'page.school.dashboard.specilists.back.link.text'|_}}</a>
             </div>
         </div>
 
@@ -36,11 +36,11 @@ schools = 1
                     <div class="col-12">
                         <div class="shadow-lg rounded bg-white p-0 p-md-5">
                             <div class="shadow rounded p-3 py-4">
-                                <p class="display-2 text-medium-dark form-styles p-0 m-0 mb-3">{{'teacher.dashboard.edit.profile.title'|_}}</p>
+                                <p class="display-2 text-medium-dark form-styles p-0 m-0 mb-3">{{'page.school.dashboard.edit.profile.title'|_}}</p>
 
                                 <!-- Teacher avatar -->
                                 <div class="d-flex align-items-center mt-3 mb-4">
-                                    <p class="p-0 m-0 small text-gray-darl">{{'teacher.dashboard.profile.avatar.text'|_}}</p>
+                                    <p class="p-0 m-0 small text-gray-darl">{{'page.school.dashboard.profile.avatar.text'|_}}</p>
                                     {% if specialist.avatar %}
                                         <img class="img-fluid img-avatar add-custom-avatar ml-3" src="{{specialist.avatar.getThumb(80,80, { mode : 'crop' } )}}" alt="avatar">
                                     {% else %}
@@ -57,35 +57,35 @@ schools = 1
                                     <!-- Last name input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <input type="text" name="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="{{'registerPage.form.input.last.name.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.surname }}">
+                                            <input type="text" name="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="{{'page.school.dashboard.edit.form.input.last.name.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.surname }}">
                                         </div>
                                     </div>
 
                                     <!-- First name input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{'registerPage.form.input.first.name.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.name }}">
+                                            <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{'page.school.dashboard.edit.form.input.first.name.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.name }}">
                                         </div>
                                     </div>
 
                                     <!-- Phone number input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <input type="number" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="{{'registerPage.form.input.phone.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.phone }}">
+                                            <input type="number" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="{{'page.school.dashboard.edit.form.input.phone.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.phone }}">
                                         </div>
                                     </div>
 
                                     <!-- Email input -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'registerPage.form.input.email.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.email }}">
+                                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'page.school.dashboard.edit.form.input.email.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.email }}">
                                         </div>
                                     </div>
 
                                     <!-- County select -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group register-select">
-                                            <select name="county" id="specialistCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
+                                            <select name="county" id="specialistCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="{{'page.school.dashboard.edit.select.no.result'|_}}" data-style="btn-white">
                                                 {% for key, county in counties %}
                                                     <option value="{{ key }}">{{ county }}</option>
                                                 {% endfor %}
@@ -96,7 +96,7 @@ schools = 1
                                     <!-- City select -->
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group register-select">
-                                            <select name="city" id="specialistCity" class="form-control border outline-none selectpicker" data-none-results-text="Niciun rezultat" data-live-search="true" data-style="btn-white" disabled></select>
+                                            <select name="city" id="specialistCity" class="form-control border outline-none selectpicker" data-none-results-text="{{'page.school.dashboard.edit.select.no.result'|_}}" data-live-search="true" data-style="btn-white" disabled></select>
                                         </div>
                                     </div>
 
@@ -105,7 +105,7 @@ schools = 1
 
                             <!-- Description input -->
                             <div class="shadow rounded p-3 py-4 mt-5">
-                                <p class="display-2 text-medium-dark form-styles pl-3">{{'registerPage.form.title_2'|_}}</p>
+                                <p class="display-2 text-medium-dark form-styles pl-3">{{'page.school.dashboard.specialist.edit.form.description'|_}}</p>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <textarea class="form-control" name="description" id="description" rows="5">
@@ -118,7 +118,7 @@ schools = 1
                             <!-- Submit button -->
                             <div class="col-12 mt-5 mb-5 mb-lg-0">
                                 <div class="d-flex justify-content-end">
-                                    <button role="button" type="submit" class="btn btn-sm btn-secondary px-5">{{'teacher.dashboard.edit.profile.btn.text'|_}}</button>
+                                    <button role="button" type="submit" class="btn btn-sm btn-secondary px-5">{{'page.school.dashboard.edit.profile.btn.text'|_}}</button>
                                 </div>
                             </div>
                         </div>

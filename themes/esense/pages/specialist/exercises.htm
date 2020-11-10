@@ -46,10 +46,10 @@ allowedUserTypes[] = "specialist"
 <div class="container-fluid px-lg-4 mb-5">
     <div class="row">
         <div class="col-12 col-md-6">
-            <p class="text-gray-dark mt-3 font-weight-bold" style="line-height: 25px;">{{'teacher.dashboard.exercises.select.label'|_}}</p>
+            <p class="text-gray-dark mt-3 font-weight-bold" style="line-height: 25px;">{{'page.specialist.dashboard.exercises.select.label'|_}}</p>
             <div class="form-group register-select mb-5 exercises-select" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <select class="form-control border outline-none selectpicker" data-style="btn-white" onchange="location = this.value;">
-                <option value="{{categories.property('categoriesPage') ? categories.property('categoriesPage')|page({(categories.paramName('categoriesPageSlug')):(category.slug)})}}">{{'teacher.dashboard.exercises.select.default.option'|_}}</option>
+                <option value="{{categories.property('categoriesPage') ? categories.property('categoriesPage')|page({(categories.paramName('categoriesPageSlug')):(category.slug)})}}">{{'page.specialist.dashboard.exercises.select.all.option'|_}}</option>
                 {% for category in categoryDetail.getChildren() %}
                     <option value="{{categories.property('categoriesPage') ? categories.property('categoriesPage')|page({(categories.paramName('categoriesPageSlug')):(category.slug)})}}" {{ category.slug == categories.property('categoriesPageSlug') ? 'selected'}}>
                         {{ category.name }}
@@ -81,7 +81,7 @@ allowedUserTypes[] = "specialist"
                         </p>
                     </div>
                     <div>
-                        <a href="{{records.property('recordPage') ? records.property('recordPage')|page({(records.paramName('recordPageSlug')):(record.slug)})}}" class="btn btn-sm btn-primary-dark">{{'teacher.exercise.card.btn.text'|_}}</a>
+                        <a href="{{records.property('recordPage') ? records.property('recordPage')|page({(records.paramName('recordPageSlug')):(record.slug)})}}" class="btn btn-sm btn-primary-dark">{{'page.specialist.dashboard.exercise.card.btn.text'|_}}</a>
                     </div>
                 </div>
             </div>

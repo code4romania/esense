@@ -18,7 +18,7 @@ allowedUserTypes[] = "school"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'school/students'|page }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'school/students'|page }}">{{'page.school.dashboard.student.profile.back.link.text'|_}}</a>
             </div>
         </div>
 
@@ -26,7 +26,7 @@ allowedUserTypes[] = "school"
             <div class="rounded shadow bg-white p-lg-4">
 
                 <div class="border-bottom">
-                    <p class="text-muted">{{'teacher.dashboard.student.add.profile.title'|_}}</p>
+                    <p class="text-muted">{{'page.school.dashboard.student.add.profile.title'|_}}</p>
                 </div>
 
                 <form method="POST" data-request="onCreateStudent" data-request-validate data-request-flash data-request-files>
@@ -35,18 +35,18 @@ allowedUserTypes[] = "school"
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-12 col-md-6">
-                                    <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
+                                    <p class="py-3 text-muted">{{'page.school.dashboard.student.add.profile.gen.title'|_}}</p>
                                     <div class="d-flex">
                                         <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-female-tab" data-gender="female" data-toggle="pill" href="#v-pills-female" role="tab" aria-controls="v-pills-female" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
-                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-male-tab" data-gender="male" data-toggle="pill" href="#v-pills-male" role="tab" aria-controls="v-pills-male" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                            <a class="nav-link active btn btn-sm btn-outline border-dark px-5" id="v-pills-female-tab" data-gender="female" data-toggle="pill" href="#v-pills-female" role="tab" aria-controls="v-pills-female" aria-selected="true">{{'page.school.dashboard.student.add.gen.fata'|_}}</a>
+                                            <a class="nav-link ml-4 btn btn-sm btn-outline border-dark px-5" id="v-pills-male-tab" data-gender="male" data-toggle="pill" href="#v-pills-male" role="tab" aria-controls="v-pills-male" aria-selected="false">{{'page.school.dashboard.student.add.gen.baiat'|_}}</a>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                                    <p class="p-0 m-0 pt-3 text-muted">{{'teacher.dashboard.student.add.profile.avatar'|_}}</p>
+                                    <p class="p-0 m-0 pt-3 text-muted">{{'page.school.dashboard.student.add.profile.avatar'|_}}</p>
 
                                     <div class="tab-content" id="v-pills-tabContent">
                                         <div class="tab-pane fade show active" id="v-pills-female" role="tabpanel" aria-labelledby="v-pills-female-tab">
@@ -95,8 +95,8 @@ allowedUserTypes[] = "school"
                         <input name="gender" id="gender" class="d-none" type="text" value="female" />
 
                         <div class="col-12">
-                            <p class="text-muted mt-5">{{'teacher.dashboard.student.add.profile.personal.data'|_}}</p>
-                            <p class="display-4 text-gray-light">{{'teacher.dashboard.student.add.profile.dob.label'|_}}</p>
+                            <p class="text-muted mt-5">{{'page.school.dashboard.student.add.profile.personal.data'|_}}</p>
+                            <p class="display-4 text-gray-light">{{'page.school.dashboard.student.add.profile.dob.label'|_}}</p>
                             <div class="row">
 
                                 <!-- Select date -->
@@ -113,7 +113,7 @@ allowedUserTypes[] = "school"
                         <!-- Input last name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control onChangeValue" name="surname" id="surname" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}">
+                                <input type="text" class="form-control onChangeValue" name="surname" id="surname" placeholder="{{'page.school.dashboard.student.add.profile.input.last.name'|_}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -121,7 +121,7 @@ allowedUserTypes[] = "school"
                         <!-- Input first name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}">
+                                <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'page.school.dashboard.student.add.profile.input.first.name'|_}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -129,7 +129,7 @@ allowedUserTypes[] = "school"
                         <!-- Teacher select -->
                         <div class="col-12">
                             <div class="form-group register-select mr-3">
-                                <select name="owner" id="specialist" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
+                                <select name="owner" id="specialist" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="{{'page.school.dashboard.student.add.specialist.select.no.result'|_}}" data-style="btn-white">
                                     {% for key, specialist in user.profile.active_specialists %}
                                         <option value="{{ specialist.id }}">{{ specialist.full_name }}</option>
                                     {% endfor %}
@@ -141,8 +141,9 @@ allowedUserTypes[] = "school"
 
                         <!-- Input diagnostic description -->
                         <div class="col-12">
+                            <label class="small text-gray-light">{{'page.school.dashboard.student.add.profile.textarea.diagnostic'|_}}</label>
                             <div class="form-group d-flex">
-                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}"></textarea>
+                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3"></textarea>
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -154,8 +155,8 @@ allowedUserTypes[] = "school"
                                 <div class="col-12 col-md-6 ml-lg-0 pl-lg-0">
                                     <div class="d-flex">
                                         <div class="form-check">
-                                            <label class="form-check-label display-4 text-gray-light" for="hearing_impairment">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
-                                            <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios">
+                                            <label class="form-check-label display-4 text-gray-light" for="hearing_impairment">{{'page.school.dashboard.student.add.profile.checkbox1.label'|_}}</label>
+                                            <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'page.school.dashboard.student.toggle.yes'|_}}" data-off="{{'page.school.dashboard.student.toggle.no'|_}}" data-style="ios">
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -165,8 +166,8 @@ allowedUserTypes[] = "school"
                                 <div class="col-12 col-md-6">
                                     <div class="d-flex">
                                         <div class="form-check">
-                                            <label class="form-check-label display-4 text-gray-light" for="visual_impairment">{{'teacher.dashboard.student.add.profile.checkbox2.label'|_}}</label>
-                                            <input class="onChangeValue" name="visual_impairment" id="visual_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios">
+                                            <label class="form-check-label display-4 text-gray-light" for="visual_impairment">{{'page.school.dashboard.student.add.profile.checkbox2.label'|_}}</label>
+                                            <input class="onChangeValue" name="visual_impairment" id="visual_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'page.school.dashboard.student.toggle.yes'|_}}" data-off="{{'page.school.dashboard.student.toggle.no'|_}}" data-style="ios">
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -289,7 +290,7 @@ allowedUserTypes[] = "school"
                          <!-- Submit button -->
                         <div class="col-12 mb-5 mt-3">
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'page.school.dashboard.student.add.profile.submit.btn.text'|_}}</button>
                             </div>
                         </div>
 

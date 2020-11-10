@@ -4,6 +4,7 @@ use App;
 use Log;
 use Lang;
 use Auth;
+use Mail;
 use Flash;
 use Request;
 use Redirect;
@@ -86,9 +87,20 @@ class StudentActions extends ComponentBase
         /** Extract the student. */
         $student = $user->profile->myStudents()->whereId(post('student'))->first();
 
+        /** pass variables to mail view */
+        $data = [
+            'name' => $student->name,
+        ];
+
         if ($student) {
             /** Approve the request */
             $student->specialists()->updateExistingPivot(post('specialist'), ['seen' => 1, 'approved' => 1]);
+
+            /** Send access granted info email */
+            Mail::send('genuineq.esense::mail.access_granted', $data, function($message) use ($student)
+            {
+                $message->to($student->email);
+            });
 
             Flash::success(Lang::get('genuineq.esense::lang.components.studentActions.message.access_request_success_approval'));
 
@@ -113,9 +125,20 @@ class StudentActions extends ComponentBase
         /** Extract the student. */
         $student = $user->profile->myStudents()->whereId(post('student'))->first();
 
+        /** pass variables to mail view */
+        $data = [
+            'name' => $student->name,
+        ];
+
         if ($student) {
             /** Decline the request */
             $student->specialists()->detach(post('specialist'));
+
+            /** Send access granted info email */
+            Mail::send('genuineq.esense::mail.access_rejected', $data, function($message) use ($student)
+            {
+                $message->to($student->email);
+            });
 
             Flash::success(Lang::get('genuineq.esense::lang.components.studentActions.message.access_request_success_decline'));
 
@@ -199,6 +222,11 @@ class StudentActions extends ComponentBase
             $student->owner_id = post('specialist');
             $student->save();
 
+            /** pass variables to mail view */
+            $data = [
+                'name' => $student->name,
+            ];
+
             /** Create specialist connection for new owner. */
             if (!$student->specialists()->whereId($student->owner_id)->first()) {
                 $student->specialists()->attach($student->owner_id, ['approved' => true]);
@@ -216,6 +244,12 @@ class StudentActions extends ComponentBase
             foreach ($user->profile->access_notifications->where('student_id', $student->id) as $key => $accessRequest) {
                 $student->specialists()->detach($accessRequest);
             }
+
+            /** Send access granted info email */
+            Mail::send('genuineq.esense::mail.transfer_accepted', $data, function($message) use ($student)
+            {
+                $message->to($student->email);
+            });
 
             Flash::success(Lang::get('genuineq.esense::lang.components.studentActions.message.transfer_request_success_approval'));
 
@@ -242,10 +276,21 @@ class StudentActions extends ComponentBase
         /** Extract the transfer request. */
         $transferRequest = $user->profile->transferRequests()->where('student_id', post('student'))->where('to_specialist_id', post('specialist'))->whereNull('approved')->first();
 
+        /** pass variables to mail view */
+        $data = [
+            'name' => $student->name,
+        ];
+
         if ($transferRequest) {
             /** Approve the request */
             $transferRequest->approved = false;
             $transferRequest->save();
+
+            /** Send access granted info email */
+            Mail::send('genuineq.esense::mail.transfer_rejected', $data, function($message) use ($student)
+            {
+                $message->to($student->email);
+            });
 
             Flash::success(Lang::get('genuineq.esense::lang.components.studentActions.message.transfer_request_success_decline'));
 
