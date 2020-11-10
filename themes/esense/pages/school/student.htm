@@ -10,6 +10,8 @@ allowedUserGroups[] = "registered"
 allowedUserTypes[] = "school"
 
 [student]
+
+[lessonsActions]
 ==
 <div class="container-fluid px-lg-4 mb-5">
     <div class="row">
@@ -17,7 +19,7 @@ allowedUserTypes[] = "school"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'school/students'|page({id: student.id }) }}">{{'teacher.dashboard.student.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{ 'page.school.dashboard.back.students.link'|_ }}</a>
             </div>
         </div>
 
@@ -29,11 +31,18 @@ allowedUserTypes[] = "school"
                     <div class="col-12 mb-5">
                         <div class="p-3 d-flex align-items-start justify-content-between">
                             <div class="d-flex flex-column flex-md-row">
-                                <img width="80" height="80" class="img-profile rounded-circle mb-2 mb-md-0" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                {% if student.avatar %}
+                                    <img class="img-profile rounded-circle mb-2 mb-md-0" src="{{ student.avatar.getThumb(80, 80, { mode : 'crop' } ) }}" alt="avatar">
+                                {% elseif student.gender == 'female' %}
+                                    <img class="img-profile rounded-circle mb-2 mb-md-0" width="80" height="80" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
+                                {% else %}
+                                    <img class="img-profile rounded-circle mb-2 mb-md-0" width="80" height="80" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}" alt="avatar">
+                                {% endif %}
+
                                 <div class="ml-3">
                                     <p class="p-0 m-0 font-weight-bold text-dark" style="line-height: 25px;">{{ student.full_name }}</p>
-                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.varsta'|_}} {{ student.age }}&nbsp;{{'teacher.dashboard.student.profile.ani'|_}}</p>
-                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{'teacher.dashboard.student.profile.profesor'|_}}
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{ 'page.school.dashboard.student.age.label'|_ }} {{ student.age }}&nbsp;{{ 'page.school.dashboard.student.years.text'|_ }}</p>
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{ 'page.school.dashboard.student.specialist.name'|_ }}
                                         {% for specialist in student.specialists %}
                                             {% if loop.last %}
                                                 {{ specialist.full_name }}
@@ -44,16 +53,29 @@ allowedUserTypes[] = "school"
                                     </p>
                                 </div>
                             </div>
+
                             <div class="d-flex align-items-center">
-                                <p class="p-0 m-0 mr-2 d-none d-md-block" style="line-height: 25px; color: #313131;">{{'teacher.dashboard.student.profile.actions.text'|_}}</p>
+                                <p class="p-0 m-0 mr-2 d-none d-md-block" style="line-height: 25px; color: #313131;">{{ 'page.school.dashboard.student.actions'|_ }}</p>
                                 <div class="dropdown">
                                     <button class="btn shadow-none p-0 m-0" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img class="" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                     </button>
+
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                        <a class="dropdown-item display-4" href="{{ 'school/student-edit'|page({id: student.id}) }}" style="color: #1A212C;">{{'student.options.link_1'|_}}</a>
-                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'student.options.link_2'|_}}</a>
-                                        <a class="dropdown-item display-4 text-danger" href="#">{{'student.options.link_3'|_}}</a>
+
+                                        <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id}) }}" style="color: #1A212C;">
+                                            {{ 'page.school.dashboard.student.options.edit'|_ }}
+                                        </a>
+
+                                        <a class="dropdown-item display-4" style="color: #1A212C;" role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                            {{ 'page.school.dashboard.student.options.archive'|_ }}
+                                        </a>
+
+                                        {% if user.profile.affiliated %}
+                                            <a class="dropdown-item display-4" href="#" style="color: #1A212C;">
+                                                {{ 'page.school.dashboard.student.options.invite_specialist'|_ }}
+                                            </a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -61,19 +83,8 @@ allowedUserTypes[] = "school"
                     </div>
 
                     <!-- Activity schedule -->
-                    <div class="col-12 col-lg-6">
-                        <div class="pl-3 mb-4 d-flex align-items-center">
-                            <p class="p-0 m-0 text-gray-dark font-weight-bold">Program activitati</p>
-                            <a role="button">
-                                <img class="img-profile ml-4" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
-                            </a>
-                        </div>
-                        <ul class="activity timeline">
-                            <li class="d-flex align-items-start flex-column">
-                                <p class="p-0 m-0 small font-weight-light text-gray-dark">Stimulare - Denumire joc #1</p>
-                                <p class="p-0 m-0 display-4 text-gray-dark">10:00/2h</p>
-                            </li>
-                        </ul>
+                    <div class="col-12 col-lg-6" id="schedule-timeline">
+                        {% partial 'web-app/general/schedule-timeline' title='page.school.dashboard.student.profile.schedule_timeline'|_ lessons=student.today_lessons %}
                     </div>
 
                     <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
@@ -82,10 +93,8 @@ allowedUserTypes[] = "school"
 
                     <!-- Frequent exercises owl carousel -->
                     <div class="col-12 mt-4">
-
                         <div class="px-3 d-flex align-items-center justify-content-between">
-                            <p class="p-0 m-0 text-gray-dark font-weight-bold">Exercitii frecvente</p>
-                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
+                            <p class="p-0 m-0 text-gray-dark font-weight-bold">{{ 'page.school.dashboard.student.profile.frequent_exercises'|_ }}</p>
                         </div>
 
                         <div class="mt-4 px-3">
@@ -95,14 +104,17 @@ allowedUserTypes[] = "school"
                                         <div class="bg-white">
                                             <p class="p-0 m-0 pl-3 text-gray-dark">Denumire joc #1</p>
                                         </div>
+
                                         <div class="">
                                             <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/exercise_1.svg'|theme }}">
                                         </div>
+
                                         <div class="p-3 bg-white d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/label.svg'|theme }}">
                                                 <p class="p-0 m-0 ml-2" style="font-size: 12px; color: #000000; line-height:16px;">Localizare</p>
                                             </div>
+
                                             <div>
                                                 <a href="" class="btn btn-sm btn-primary-dark">Detalii</a>
                                             </div>
@@ -115,66 +127,66 @@ allowedUserTypes[] = "school"
 
                     <!-- Student profile table -->
                     <div class="col-12 mt-5">
-                        <p class="text-gray-dark font-weight-bold px-3">Istoric activitati</p>
+                        <p class="text-gray-dark font-weight-bold px-3">{{ 'page.school.dashboard.student.profile.exercises'|_ }}</p>
 
                         <div class="table-responsive px-3" style="overflow-x: hidden;">
                             <table id="students-datatable" class="table table-striped table-sm px-3 m-0" cellspacing="0" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
                                 <thead>
                                     <tr>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_1'|_}}</p></th>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_2'|_}}</p></th>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_3'|_}}</p></th>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_4'|_}}</p></th>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{'teacher.dashboard.student.profile.table.column_5'|_}}</p></th>
+                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.lesson'|_ }}</p></th>
+                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.category'|_ }}</p></th>
+                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.date'|_ }}</p></th>
+                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.length'|_ }}</p></th>
+                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.specialist'|_ }}</p></th>
                                         <th class="no-sort"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                <span class="display-4 text-blue">Denumire joc</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                <span class="display-4 text-black">Categorie joc</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                <span class="display-4 text-black">05/19/2019</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                <span class="display-4 text-black">2 {{'teacher.dashboard.activty.history.hours'|_}}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-3 d-flex align-items-center">
-                                                <div>
-                                                    <img width="30" height="30" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                    {% for lesson in student.lessons %}
+                                        <tr>
+                                            <td>
+                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                    <span class="display-4 text-blue">{{ lesson.title }}</span>
                                                 </div>
-                                                <div class="d-flex flex-column ml-2">
-                                                    <span class="display-4" style="color:#1a1a1a;">Maria Popsecu</span>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                    <span class="display-4 text-black">{{ lesson.category }}</span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="pl-2 py-lg-4">
-                                                <div class="dropdown">
-                                                    <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">Editeaza profil</a>
-                                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">Adauga profesor</a>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                    <span class="display-4 text-black">{{ lesson.day|date("d/m/Y") }}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
+                                                    <span class="display-4 text-black">{{ lesson.duration }}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-3 d-flex align-items-center">
+                                                    <div>
+                                                        {% if lesson.connection.specialist.user.avatar %}
+                                                            <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{ lesson.connection.specialist.user.avatar.getThumb(30, 30, { mode : 'crop' }) }}" alt="specialist-avatar">
+                                                        {% else %}
+                                                            <img class="img-fluid add-custom-avatar" width="30px" height="30px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="d-flex flex-column ml-2">
+                                                        <span class="display-4" style="color:#1a1a1a;">{{ lesson.connection.specialist.full_name }}</span>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <div class="pl-2 py-lg-4">
+                                                    <a role="button" href="{{ 'specialist/lesson'|page({id: lesson.id }) }}">
+                                                        <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -184,12 +196,16 @@ allowedUserTypes[] = "school"
         </div>
     </div>
 </div>
+
+<!-- Partial for archiving a student -->
+{% partial 'web-app/general/student-archive' %}
+
 {% put scripts %}
     <!-- Scripts for datatables -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('#students-datatable').DataTable({
-                dom: '<"row"<"col-12 px-3"t>><"row bg-white p-3 rounded-bottom"<"col-6 d-flex align-items-center"l><"col-6 d-flex align-items-center justify-content-end"ip>>',
+                dom: '<"row"<"col-12 px-3"t>><"row bg-white p-3 rounded-bottom"<"col-12 col-lg-6 d-flex align-items-center"l><"col-12 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-end"ip>>',
                 lengthMenu: [
                     [5, 10, 25, 50, 100, -1],
                     [5, 10, 25, 50, 100]
@@ -200,12 +216,11 @@ allowedUserTypes[] = "school"
                 pagingType: 'simple',
                 language: {
                     "info": "_PAGE_ - _PAGE_ of _PAGES_",
-                    'zeroRecords': "{{'studentsTableNoRecordsText'|_}}",
-                    'emptyPanes': "{{'studentsTableNoPanesText'|_}}",
-                    'emptyTable': "{{'studentsTableNoEntriesText'|_}}",
+                    'zeroRecords': "{{'general.datatable.zeroRecords'|_}}",
+                    'emptyPanes': "{{'general.datatable.emptyPanes'|_}}",
+                    'emptyTable': "{{'general.datatable.emptyTable'|_}}",
                     'search': '',
-                    'searchPlaceholder': "Cauta un elev dupa nume",
-                    'lengthMenu': "{{'studentsTableNumberRowsText'|_}}: _MENU_",
+                    'lengthMenu': "{{'general.datatable.lengthMenu'|_}}: _MENU_",
                     'paginate': {
                         'first': '«',
                         'previous': '‹',
@@ -214,10 +229,10 @@ allowedUserTypes[] = "school"
                     },
                     'aria': {
                         'paginate': {
-                            'first': "{{'studentsTablePaginationFirstText'|_}}",
-                            'previous': "{{'studentsTablePaginationLastText'|_}}",
-                            'next': "{{'studentsTablePaginationForwardText'|_}}",
-                            'last': "{{'studentsTablePaginationPreviousText'|_}}"
+                            'first': "{{'general.datatable.first'|_}}",
+                            'previous': "{{'general.datatable.previous'|_}}",
+                            'next': "{{'general.datatable.next'|_}}",
+                            'last': "{{'general.datatable.last'|_}}"
                         }
                     }
                 }
@@ -226,9 +241,25 @@ allowedUserTypes[] = "school"
 
 
             function selectDate(date) {
-            $('.calendar-wrapper').updateCalendarOptions({date: date});
+                /** Update the calendar. */
+                $('.calendar-wrapper').updateCalendarOptions({date: date});
+
+                /** Extract the formated date. */
+                var $_date = new Date(date);
+                var $formatedDate = $_date.getFullYear() + '-' + ((2 > ($_date.getMonth() + 1).length) ? ('0' + ($_date.getMonth() + 1)) : ($_date.getMonth() + 1)) + '-' + ((2 > $_date.getDate().length) ? ('0' + $_date.getDate()) : ($_date.getDate()))
+
+                $.request('onGetStudentDateLessons', {
+                    data: {
+                        student: {{ student.id }},
+                        date: $formatedDate
+                    },
+                    update: {
+                        'web-app/general/schedule-timeline': '#schedule-timeline'
+                    }
+                });
             }
 
+            /** Intialize the calendar. */
             $('.calendar-wrapper').calendar({
                 weekDayLength: 1,
                 date: new Date(),
