@@ -3,38 +3,38 @@
 return [
     'plugin' => [
         'name' => 'CORS',
-        'description' => 'Cross-Origin Resource Sharing.',
+        'description' => 'Partajarea resurselor între origini.',
     ],
     'permissions' => [
-        'settings' => 'Manage CORS',
+        'settings' => 'Gestionați CORS',
     ],
     'settings' => [
         'menu_label' => 'CORS',
-        'menu_description' => 'Configure the CORS',
+        'menu_description' => 'Configurare CORS',
         'fields' => [
             'supportsCredentials' => [
-                'label' => 'Support credentials',
-                'comment' => "Enable it to support credentials between domains."
+                'label' => 'acreditări de asistență',
+                'comment' => "Activați-l pentru a accepta acreditări între domenii."
             ],
             'allowedOrigins' => [
-                'label' => 'Allowed Origins',
-                'comment' => 'The domains that do requests to your site (use * for all domains).'
+                'label' => 'Origini permise',
+                'comment' => 'Domeniile care fac cereri către site-ul dvs. (utilizați * pentru toate domeniile).'
             ],
             'allowedHeaders' => [
-                'label' => 'Allowed Headers',
-                'comment' => 'The headers that are supported.'
+                'label' => 'Anteturi permise',
+                'comment' => 'Anteturile acceptate.'
             ],
             'allowedMethods' => [
-                'label' => 'Allowed Methods',
-                'comment' => 'The HTTP methods that can be requested (use * for all methods).'
+                'label' => 'Metode permise',
+                'comment' => 'Metodele HTTP care pot fi solicitate (utilizați * pentru toate metodele).'
             ],
             'exposedHeaders' => [
-                'label' => 'Exposed Headers',
-                'comment' => 'The headers that can be exposed.'
+                'label' => 'Anteturi expuse',
+                'comment' => 'Anteturile care pot fi expuse.'
             ],
             'maxAge' => [
-                'label' => 'Max Age',
-                'comment' => 'Set Access-Control-Max-Age to this value.'
+                'label' => 'Vârstă maximă',
+                'comment' => 'Setați Controlul-Accesului-Pe-Baza-Vârstei-Maxime la această valoare.'
             ]
         ]
     ]
