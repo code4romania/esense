@@ -1,13 +1,13 @@
 <?php return [
     'plugin' => [
         'name' => 'ESense',
-        'description' => 'Built 100% custom for ESense project, connects all other plugins.'
+        'description' => 'Construit 100% personalizat pentru proiectul ESense, conectând toate celelalte pluginuri.'
     ],
 
     'components' => [
         'studentActions' => [
-            'name' => 'Student Access',
-            'description' => 'Allows to create, accept and decline student access requests.',
+            'name' => 'Acces student',
+            'description' => 'Permite crearea, acceptul și refuzul crererilor de acces al elevilor.',
 
             'message' => [
                 'access_request_success_creation' => 'Cererea de acces a fost creată cu success.',
@@ -27,22 +27,19 @@
         ],
 
         'lessonsActions' => [
-            'name' => 'Lessons Access',
-            'description' => 'Allows to extract, edit and view lessons',
+            'name' => 'Acces lecții',
+            'description' => 'Permite extragerea, editarea și vizualizarea lecțiilor',
 
             'message' => [
                 'no_access' => 'Nu aveți acces la elevul specificat.',
                 'save_successful' => 'Sesiunea de joc a fost salvată cu succes.',
-                // 'lesson_updated_successfully' => 'Lesson updated successfully.',
                 'lesson_updated_successfully' => 'Lecția a fost actualizată cu succes.',
             ],
 
             'validation' => [
-                // 'description_string' => 'The description has to be of type string',
-                // 'feedback_string' => 'The feedback has to be of type string'
-                'description_string' => 'Descrierea trebuie să fie de tip string',
-                'feedback_string' => 'Feedback-ul trebuie să fie de tip string'
-            ]
-        ]
+                'description_string' => 'Descrierea trebuie să fie de tip șir de caractere',
+                'feedback_string' => 'Feedback-ul trebuie să fie de tip șir de caractere'
+            ],
+        ],
     ],
 ];
