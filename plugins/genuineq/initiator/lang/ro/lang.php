@@ -1,6 +1,6 @@
 <?php return [
     'plugin' => [
-        'name' => 'Initiator',
-        'description' => 'Plugin used for initiating a project.'
+        'name' => 'Inițializator',
+        'description' => 'Plugin folosit pentru inițializarea unui proiect.'
     ]
 ];
