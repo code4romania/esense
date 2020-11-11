@@ -8,7 +8,7 @@ is_hidden = 0
 activeOnly = 0
 areaSlug = "exercises"
 categorySlug = "{{ :category }}"
-useMainCategory = 1
+useMainCategory = 0
 useMultiCategories = 1
 tagSlug = "{{ :tag }}"
 recordPage = "specialist/exercise"
@@ -21,21 +21,22 @@ orderByDirection = "ASC"
 [categories]
 activeOnly = 0
 rootOnly = 0
-parentCategorySlug = 0
+parentCategorySlug = "jocuri"
 areaSlug = "exercises"
-activeRecordsOnly = 0
+activeRecordsOnly = 1
 useMainCategory = 1
+useMultiCategories = 1
 categoriesPage = "specialist/exercises"
 categoriesPageSlug = "{{ :category }}"
-categoryPage = "category"
+categoryPage = "specialist/exercises"
 categoryPageSlug = "{{ :category }}"
 limit = 10
 
 [categoryDetail category]
 activeOnly = 1
 categorySlug = "jocuri"
-areaSlug = "informations"
-recordPage = "specialist/information"
+areaSlug = "exercises"
+recordPage = "specialist/exercise"
 recordPageSlug = "{{ :slug }}"
 
 [session]
