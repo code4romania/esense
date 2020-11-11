@@ -1,106 +1,104 @@
-<?php
-
-return [
+<?php return [
     'plugin' => [
         'name' => 'JWTAuth',
-        'description' => 'JSON Web Token Authentication.',
+        'description' => 'Simbol de autentificare web JSON.',
     ],
     'permissions' => [
-        'settings' => 'Manage JWTAuth',
+        'settings' => 'Gestionați JWTAuth',
     ],
     'settings' => [
         'menu_label' => 'JWTAuth',
-        'menu_description' => 'Configure the JWTAuth',
+        'menu_description' => 'Configurați JWTAuth',
         'tabs' => [
-            'urls' => 'URL Settings',
-            'extras' => 'Authorization Settings'
+            'urls' => 'Setări URL',
+            'extras' => 'Setări de autorizare'
         ],
         'fields' => [
             'secret' => [
-                'label' => 'JWT Secret',
-                'comment' => "It's used to generate your token. Used only for HS256, HS384 & HS512 algorithms."
+                'label' => 'Secret JWT',
+                'comment' => "Este folosit pentru a genera simbolul dvs. Se folosește numai pentru algoritmii HS256, HS384 și HS512."
             ],
             'keys_public' => [
-                'label' => 'Public key',
-                'comment' => 'A path or resource to your public key.'
+                'label' => 'Cheie publică',
+                'comment' => 'O cale sau o resursă către cheia dvs. publică.'
             ],
             'keys_private' => [
-                'label' => 'Private key',
-                'comment' => 'A path or resource to your private key.'
+                'label' => 'Cheie privată',
+                'comment' => 'O cale sau o resursă către cheia dvs. privată.'
             ],
             'keys_passphrase' => [
-                'label' => 'Passphrase',
-                'comment' => 'The passphrase for your private key.'
+                'label' => 'Expresie de acces',
+                'comment' => 'Expresia de acces pentru cheia dvs. privată.'
             ],
             'ttl' => [
-                'label' => 'Time to live',
-                'comment' => 'Specify the length of time (in minutes) that the token will be valid for.'
+                'label' => 'Durata',
+                'comment' => 'Specificați durata (în minute) pentru care va fi valabil simbolul.'
             ],
             'refresh_ttl' => [
-                'label' => 'Refresh time to live',
-                'comment' => 'Specify the length of time (in minutes) that the token can be refreshed within.'
+                'label' => 'Reînnoiește durata',
+                'comment' => 'Specificați durata (în minute) în care simbolul poate fi reînnoit.'
             ],
             'algo' => [
-                'label' => 'Hashing algorithm',
-                'comment' => 'Specify the hashing algorithm that will be used to sign the token.'
+                'label' => 'Algoritm de mixare',
+                'comment' => 'Specificați algoritmul de mixare care va fi utilizat pentru semnarea simbolului.'
             ],
             'required_claims' => [
-                'label' => 'Required Claims',
-                'comment' => 'Specify the required claims that must exist in any token.'
+                'label' => 'Revendicări necesare',
+                'comment' => 'Specificați revendicările necesare care trebuie să existe în orice simbol.'
             ],
             'persistent_claims' => [
-                'label' => 'Persistent Claims',
-                'comment' => 'Specify the claim keys to be persisted when refreshing a token.'
+                'label' => 'Revendicări persistente',
+                'comment' => 'Specificați cheile de revendicare care vor persista la reînnoirea unui simbol.'
             ],
             'lock_subject' => [
-                'label' => 'Lock subject',
-                'comment' => 'This will determine whether a `prv` claim is automatically added to the token.'
+                'label' => 'Blocați subiectul',
+                'comment' => 'Aceasta va determina dacă o revendicare `prv` este adăugată automat la simbol.'
             ],
             'leeway' => [
-                'label' => 'Leeway',
-                'comment' => 'This property gives the jwt timestamp claims some "leeway".'
+                'label' => 'Libertate de mișcare',
+                'comment' => 'Această proprietate oferă amprentei temporale a revendicărilor jwt o anumită "libertate de mișcare".'
             ],
             'blacklist_enabled' => [
-                'label' => 'Enable Blacklist',
-                'comment' => 'In order to invalidate tokens, you must have the blacklist enabled.'
+                'label' => 'Activați lista neagră',
+                'comment' => 'Pentru a invalida simbolurile, trebuie să aveți lista neagră activată.'
             ],
             'blacklist_grace_period' => [
-                'label' => 'Blacklist Grace Period',
-                'comment' => 'Set grace period in seconds to prevent parallel request failure.'
+                'label' => 'Perioada de grație a listei negre',
+                'comment' => 'Setați perioada de grație (în secunde) pentru a preveni eșecul în cazul unei cereri paralele.'
             ],
             'decrypt_cookies' => [
-                'label' => 'Encrypt the cookies',
-                'comment' => 'Switch it off if you want to decrypt cookies.'
+                'label' => 'Criptați cookie-urile',
+                'comment' => 'Opriți-l dacă doriți să decriptați cookie-urile.'
             ],
             'help_urls' => [
-                'title' => 'READ IT FIRST!',
+                'title' => 'CITEȘTE ÎNTÂI!',
                 'content' => "
-                    <p>There is two ways to configure these URLs, and It'll depend of your application structure.</p>
+                    <p> Există două moduri de configurare a acestor adrese URL și va depinde de structura aplicației dvs. </p>
 
-                    <p><strong>Same domain</strong>: In this case you just need to inform the URI,
-                    and the system will considering that the base url is the same that your
-                    OctoberCMS installation.<p>
+                    <p> <strong> Același domeniu </strong>: În acest caz, trebuie doar să informați URI-ul,
+                    iar sistemul va lua în considerare că adresa URL de bază este aceeași cu cea a dvs.
+                    Instalare OctoberCMS. <p>
 
-                    <p><strong>External domain</strong>: If your OctoberCMS and your front-end application
-                    are hosted in different domain you need to specify the full URL.</p>
+                    <p> <strong> Domeniu extern </strong>: dacă OctoberCMS și aplicația dvs. front-end
+                    sunt găzduite în domenii diferite, trebuie să specificați adresa URL completă. </p>
 
-                    <p>Also is important to remember that the both URLs must have the parameter
-                    <i>{code}</i> that will be replaced for the <i>activation code</i> or
-                    the <i>reset code</i> automatically.</p>
+                    <p> De asemenea, este important să rețineți că ambele adrese URL trebuie să aibă parametrul
+                    <i> {code} </i> care va fi înlocuit pentru <i> codul de activare </i> sau
+                    <i> codul de resetare </i> automat. </p>
                 "
             ],
             'activation_url' => [
-                'label' => 'Account activation',
+                'label' => 'Activarea contului',
                 'comment' => ''
             ],
             'reset_password_url' => [
-                'label' => 'Password reset URL',
+                'label' => 'URL de resetare a parolei',
                 'comment' => ''
             ],
             'reset_password_page' => [
-                'label' => 'Password reset page',
+                'label' => 'Pagina de resetare a parolei',
                 'comment' => ''
-            ]
-        ]
-    ]
+            ],
+        ],
+    ],
 ];
