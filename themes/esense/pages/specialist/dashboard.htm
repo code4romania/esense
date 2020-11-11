@@ -10,6 +10,8 @@ allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
 
 [student]
+
+[lessonsActions]
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
@@ -193,80 +195,43 @@ allowedUserTypes[] = "specialist"
                             <div class="item">
                                 <div class="row">
                                     <!-- Student name and avatar -->
-                            <div class="col-11 col-md-12">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <div style="width: 40px; height:40px">
-                                        {% if student.avatar %}
-                                            <img class="img-fluid img-avatar rounded-circle" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
-                                        {% elseif student.gender == 'female' %}
-                                            <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
-                                        {% else %}
-                                            <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}" alt="avatar">
-                                        {% endif %}
+                                    <div class="col-11 col-md-12">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <div style="width: 40px; height:40px">
+                                                {% if student.avatar %}
+                                                    <img class="img-fluid img-avatar rounded-circle" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
+                                                {% elseif student.gender == 'female' %}
+                                                    <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
+                                                {% else %}
+                                                    <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}" alt="avatar">
+                                                {% endif %}
+                                            </div>
+                                            <div class="d-flex flex-column ml-2">
+                                                <h6 class="p-0 m-0 font-weight-bold" style="color: #525F7F;">{{ student.full_name }}</h6>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column ml-2">
-                                        <h6 class="p-0 m-0 font-weight-bold" style="color: #525F7F;">{{ student.full_name }}</h6>
+                                    
+                                    <!-- Student donut chart -->
+                                    <div class="col-12 d-flex align-items-center justify-content-center py-3">
+                                        <canvas id="donut-{{student.id}}" width="400px" height="400px"></canvas>
                                     </div>
-                                </div>
-                            </div>
 
-                                <!-- Student donut chart database details in style -->
-                                <div class="col-11 col-md-12">
-                                    <div class="d-flex align-items-center justify-content-center mt-3">
-                                        <div class="donut" style="--first: .60; --second: .30; --third: .10; --fourth: .02; --fifth: .02; --donut-spacing: 0;">
-                                            <div class="donut__slice donut__slice__first"></div>
-                                            <div class="donut__slice donut__slice__second"></div>
-                                            <div class="donut__slice donut__slice__third"></div>
-                                            <!-- <div class="donut__slice donut__slice__fourth"></div>
-                                            <div class="donut__slice donut__slice__fifth"></div> -->
-                                            <div class="donut__label">
-                                                <div class="donut__label__heading">
-                                                    <p class="display-4 text-rgba-black">xxx&nbsp;{{'page.specialist.dashboard.donut.chart.games.number'|_}}</p>
-                                                    </div>
-                                            </div>
-                                            </div>
-                                    </div>
-                                </div>
-                                </div>
-
-                                <!-- Student chart legend -->
-                                <div class="row mt-4 pb-3 px-lg-5">
-                                    <div class="col-6 offset-4 col-md-4 offset-md-0">
-                                        <div class="d-flex align-items-center justify-content-lg-center">
-                                            <div class="dot rounded-circle bg-chart-red" style="height: 10px; width: 10px;"></div>
-                                            <p class="p-0 m-0 ml-2 text-rgba-black" style="font-size: 12px;">{{'page.spacialist.dashboard.donut.chart.legend_1'|_}}</p>
+                                    <!-- Student lesson description -->
+                                    <div class="col-12 border-top py-3"></div>
+                                    <div class="col-1">
+                                        <div class="d-flex justify-content-center" style="width: 30px; height: 30px;">
+                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/edit.svg'|theme }}">
                                         </div>
                                     </div>
-                                    <div class="col-6 offset-4 col-md-4 offset-md-0">
-                                        <div class="d-flex align-items-center justify-content-lg-center">
-                                            <div class="dot rounded-circle bg-chart-yellow" style="height: 10px; width: 10px;"></div>
-                                            <p class="p-0 m-0 ml-2 text-rgba-black" style="font-size: 12px;">{{'page.spacialist.dashboard.donut.chart.legend_2'|_}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 offset-4 col-md-4 offset-md-0">
-                                        <div class="d-flex align-items-center justify-content-lg-center">
-                                            <div class="dot rounded-circle bg-chart-green" style="height: 10px; width: 10px;"></div>
-                                            <p class="p-0 m-0 ml-2 text-rgba-black" style="font-size: 12px;">{{'page.spacialist.dashboard.donut.chart.legend_3'|_}}</p>
+                                    <div class="col-10">
+                                        <div class="pl-1 pl-lg-0">
+                                            <p class="p-0 m-0 small text-rgba-black font-weight-normal">{{'page.specialist.dashboard.donut.chart.despre'|_}}&nbsp;<span class="font-weight-bold">{{ student.full_name }}</span></p>
+                                            <p class="p-0 m-0 py-1 display-4 text-rgba-black">{{student.description|raw}}</p>
+                                            <a class="display-4 text-blue" href="">{{'page.specialist.dashboard.donut.chart.link'|_}}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="border-top bg-white py-3">
-                                    <div class="row">
-                                        <div class="col-1 pr-0 mr-0">
-                                            <div class="d-flex justify-content-center" style="width: 30px; height: 30px;">
-                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/edit.svg'|theme }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-10">
-                                            <div class="pl-1 pl-lg-0">
-                                                <p class="p-0 m-0 small text-rgba-black font-weight-normal">{{'page.specialist.dashboard.donut.chart.despre'|_}}&nbsp;<span class="font-weight-bold">{{ student.full_name }}</span></p>
-                                                <p class="p-0 m-0 py-1 display-4 text-rgba-black">{{student.description|raw}}</p>
-                                                <a class="display-4 text-blue" href="">{{'page.specialist.dashboard.donut.chart.link'|_}}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         {% endfor %}
                     </div>
@@ -357,6 +322,70 @@ allowedUserTypes[] = "specialist"
                     }
                 });
             }
+
+            /***********************************************
+            ***************** Donut chart ******************
+            ***********************************************/
+            {% for student in user.profile.unarchivedStudents %}
+            {% for lesson in student.lessons %} 
+                var ctx = document.getElementById("donut-{{student.id}}");
+                var donutChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [
+                            "{{'page.spacialist.dashboard.donut.chart.legend_1'|_}}", 
+                            "{{'page.spacialist.dashboard.donut.chart.legend_2'|_}}", 
+                            "{{'page.spacialist.dashboard.donut.chart.legend_3'|_}}"
+                        ],
+                        datasets: [{
+                        label: 'legend',
+                        
+                        // {% for lesson in student.lessons %}  
+                            data: [
+
+                                {{ lesson.connection_id }},
+
+                                0, 
+
+                                0 
+                            ],
+                        // {% endfor %}
+                        
+                        backgroundColor: [
+                            '#F6744F',
+                            '#FAB955',
+                            '#1B997B',
+                        ],
+                        borderWidth: 0
+                        }]
+                    },
+
+                    options: {
+                        cutoutPercentage: 75,
+                        responsive: false,
+                        elements: {
+                            center: {
+                            text: "{{lesson.count}} {{'page.specialist.dashboard.donut.chart.games.number'|_}}",
+                            color: 'rgba(0, 0, 0, 0.6)',
+                            fontStyle: 'Open Sans', 
+                            sidePadding: 20, 
+                            minFontSize: 20, 
+                            lineHeight: 25 
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                fontColor: 'rgba(0, 0, 0, 0.6)',
+                                usePointStyle: true,
+                                padding: 25
+                            }
+                        }
+                    }
+                });
+                {% endfor %}
+            {% endfor %}
         });
     </script>
 {% endput %}
