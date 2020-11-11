@@ -5,12 +5,16 @@ use Model;
 /**
  * Model
  */
-class StudentTransfer extends Model
+class TransferRequest extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\SoftDelete;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /** Fillable fields */
     protected $fillable = [
@@ -22,7 +26,7 @@ class StudentTransfer extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'genuineq_esense_students_transfers';
+    public $table = 'genuineq_esense_transfers_requests';
 
     /**
      * @var array Validation rules

@@ -63,7 +63,7 @@ description = "Add student partial"
                     "name": "{{ student.full_name }}",
                     "avatar": "{% if student.avatar %}{{student.avatar.getThumb(30,30, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}",
                     "birthdate": "{{ student.birthdate }}",
-                    "teacher": "{{ student.owner.user.full_name }}"
+                    "teacher": "{{ student.owner.id }}"
                 },
                 {% endfor %}
             ];

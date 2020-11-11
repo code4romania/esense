@@ -60,7 +60,6 @@ class RegRequestsTable extends ReportWidgetBase
 
 
         return $this->makePartial('preview_request');
-
     }
 
     /***********************************************

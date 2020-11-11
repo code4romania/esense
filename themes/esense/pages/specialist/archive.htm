@@ -49,7 +49,7 @@ allowedUserTypes[] = "specialist"
                                             <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
                                         </a>
 
-                                        <a role="button" data-toggle="modal" data-target="#deleteStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                        <a role="button" data-toggle="modal" data-target="#deleteStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}'>
                                             <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/trash-bin.svg'|theme }}">
                                         </a>
 
@@ -59,8 +59,13 @@ allowedUserTypes[] = "specialist"
                                             </button>
 
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'page.specialist.dashboard.archive.students.table.options.link_1'|_}}</a>
-                                                <a class="dropdown-item display-4" href="#" style="color: #1A212C;">{{'page.specialist.dashboard.archive.students.table.options.link_2'|_}}</a>
+                                                <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id}) }}" style="color: #1A212C;">
+                                                    {{ 'page.specialist.dashboard.student.options.edit'|_ }}
+                                                </a>
+
+                                                <a class="dropdown-item display-4" role="button" data-toggle="modal" data-target="#unzipStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}' style="color: #1A212C;">
+                                                    {{'page.specialist.dashboard.students.table.options.unzip'|_}}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -122,6 +127,10 @@ allowedUserTypes[] = "specialist"
                                             </button>
 
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                                <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id}) }}" style="color: #1A212C;">
+                                                    {{ 'page.specialist.dashboard.student.options.edit'|_ }}
+                                                </a>
+
                                                 <a class="dropdown-item display-4" role="button" data-toggle="modal" data-target="#unzipStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}' style="color: #1A212C;">
                                                     {{'page.specialist.dashboard.students.table.options.unzip'|_}}
                                                 </a>

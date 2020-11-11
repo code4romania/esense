@@ -12,7 +12,11 @@ class Lesson extends Model
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\SoftDelete;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at',
+        'created_at',
+        'updated_at'
+    ];
 
     /**
      * The attributes that are mass assignable.

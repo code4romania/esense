@@ -4,11 +4,14 @@
     - 'Update table genuineq_students_students'
     - table_update_genuineq_students_students.php
 1.0.3:
-    - 'Created table genuineq_esense_connections'
-    - builder_table_create_genuineq_esense_connections.php
+    - 'Created table genuineq_esense_students_specialists'
+    - builder_table_create_genuineq_esense_students_specialists.php
 1.0.4:
-    - 'Created table genuineq_esense_students_transfers'
-    - builder_table_create_genuineq_esense_students_transfers.php
+    - 'Created table genuineq_esense_access_requests'
+    - builder_table_create_genuineq_esense_access_requests.php
 1.0.5:
+    - 'Created table genuineq_esense_transfers_requests'
+    - builder_table_create_genuineq_esense_transfers_requests.php
+1.0.6:
     - 'Update table genuineq_timetable_lessons'
     - table_update_genuineq_timetable_lessons.php

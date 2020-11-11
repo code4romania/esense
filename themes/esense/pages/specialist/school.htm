@@ -49,7 +49,7 @@ allowedUserTypes[] = "specialist"
         <!-- Teachers table -->
         <div class="col-12 my-5">
             <div class="table-responsive rounded p-3" style="overflow-x: hidden; background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
-                <p class="font-weight-bold text-dark">{{'page.specialist.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">({{ user.profile.school.specialists.count }})</span></p>
+                <p class="font-weight-bold text-dark">{{'page.specialist.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">({{ user.profile.school.active_specialists.count }})</span></p>
                 <table id="teachers-datatable" class="table table-striped table-sm pt-3 px-3 m-0" cellspacing="0">
                     <thead>
                         <tr>
@@ -64,7 +64,7 @@ allowedUserTypes[] = "specialist"
                         </tr>
                     </thead>
                     <tbody>
-                        {% for specialist in user.profile.school.specialists %}
+                        {% for specialist in user.profile.school.active_specialists %}
                             <tr>
                             <!-- Teacher avatar and name -->
                                 <td>

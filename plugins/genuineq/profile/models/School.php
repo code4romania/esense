@@ -64,6 +64,9 @@ class School extends Model
     /** One-to-many relationship. */
     public $hasMany = [
         'specialists' => [
+            'Genuineq\Profile\Models\Specialist'
+        ],
+        'unarchivedSpecialists' => [
             'Genuineq\Profile\Models\Specialist',
             'conditions' => 'archived = 0'
         ],
@@ -98,7 +101,7 @@ class School extends Model
      */
     public function getActiveSpecialistsAttribute()
     {
-        return $this->specialists()->whereHas('user', function ($query) {
+        return $this->unarchivedSpecialists()->whereHas('user', function ($query) {
             $query->whereNotNull('last_login');
         })->get();
     }
@@ -108,7 +111,7 @@ class School extends Model
      */
     public function getInactiveSpecialistsAttribute()
     {
-        return $this->specialists()->whereHas('user', function ($query) {
+        return $this->unarchivedSpecialists()->whereHas('user', function ($query) {
             $query->whereNull('last_login');
         })->get();
     }

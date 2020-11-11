@@ -41,7 +41,7 @@ allowedUserTypes[] = "specialist"
                         </tr>
                     </thead>
                     <tbody>
-                        {% for notification in user.profile.access_notifications %}
+                        {% for notification in user.profile.access_requests %}
                             <tr>
                                 <!-- Transfer type row -->
                                 <td>
@@ -60,7 +60,7 @@ allowedUserTypes[] = "specialist"
                                             <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                                         </div>
                                         <div class="d-flex flex-column ml-2">
-                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.full_name }}</p>
+                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.toSpecialist.full_name }}</p>
                                             <h6 class="p-0 m-0 font-weight-normal text-gray">{{ 'page.specialist.dashboard.notifications.table.row.specialist'|_ }}</h6>
                                         </div>
                                     </div>
@@ -73,8 +73,8 @@ allowedUserTypes[] = "specialist"
                                             <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                                         </div>
                                         <div class="d-flex flex-column ml-2">
-                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.getAccessNotificationsStudent(notification.pivot.student_id).full_name }}</p>
-                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ notification.getAccessNotificationsStudent(notification.pivot.student_id).birthdate|date("d-m-Y") }}</h6>
+                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.student.full_name }}</p>
+                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ notification.student.birthdate|date("d-m-Y") }}</h6>
                                         </div>
                                     </div>
                                 </td>
@@ -83,7 +83,7 @@ allowedUserTypes[] = "specialist"
                                 <td>
                                     <div class="pl-2 py-3">
                                         <div class="d-flex align-items-center pt-2">
-                                            <p class="p-0 m-0 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.pivot.created_at|date("d-m-Y") }}</p>
+                                            <p class="p-0 m-0 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.created_at|date("d-m-Y") }}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -92,10 +92,10 @@ allowedUserTypes[] = "specialist"
                                 <td>
                                     <div class="pl-2 py-3">
                                         <div class="d-flex align-items-center">
-                                            <a role="button" class="decline-access-request" data-student="{{ notification.pivot.student_id }}" data-specialist="{{ notification.pivot.specialist_id }}">
+                                            <a role="button" class="decline-access-request" data-student="{{ notification.student_id }}" data-specialist="{{ notification.to_specialist_id }}">
                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/delete.svg'|theme }}">
                                             </a>
-                                            <a role="button" class="accept-access-request" data-student="{{ notification.pivot.student_id }}" data-specialist="{{ notification.pivot.specialist_id }}">
+                                            <a role="button" class="accept-access-request" data-student="{{ notification.student_id }}" data-specialist="{{ notification.to_specialist_id }}">
                                                 <img class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/accept.svg'|theme }}">
                                             </a>
                                         </div>
@@ -104,7 +104,7 @@ allowedUserTypes[] = "specialist"
                             </tr>
                         {% endfor %}
 
-                        {% for transferRequest in user.profile.transfer_notifications %}
+                        {% for notification in user.profile.transfer_requests %}
                             <tr>
                                 <!-- Transfer type row -->
                                 <td>
@@ -123,7 +123,7 @@ allowedUserTypes[] = "specialist"
                                             <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                                         </div>
                                         <div class="d-flex flex-column ml-2">
-                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ transferRequest.toSpecialist.full_name }}</p>
+                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.toSpecialist.full_name }}</p>
                                             <h6 class="p-0 m-0 font-weight-normal text-gray">{{ 'page.specialist.dashboard.notifications.table.row.specialist'|_ }}</h6>
                                         </div>
                                     </div>
@@ -136,8 +136,8 @@ allowedUserTypes[] = "specialist"
                                             <img width="40" height="40" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                                         </div>
                                         <div class="d-flex flex-column ml-2">
-                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ transferRequest.student.full_name }}</p>
-                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ transferRequest.student.birthdate|date("d-m-Y") }}</h6>
+                                            <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.student.full_name }}</p>
+                                            <h6 class="p-0 m-0 font-weight-normal text-gray">{{ notification.student.birthdate|date("d-m-Y") }}</h6>
                                         </div>
                                     </div>
                                 </td>
@@ -146,7 +146,7 @@ allowedUserTypes[] = "specialist"
                                 <td>
                                     <div class="pl-2 py-3">
                                         <div class="d-flex align-items-center pt-2">
-                                            <p class="p-0 m-0 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ transferRequest.created_at|date("d-m-Y") }}</p>
+                                            <p class="p-0 m-0 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ notification.created_at|date("d-m-Y") }}</p>
                                         </div>
                                     </div>
                                 </td>
@@ -155,10 +155,10 @@ allowedUserTypes[] = "specialist"
                                 <td>
                                     <div class="pl-2 py-3">
                                         <div class="d-flex align-items-center">
-                                            <a role="button" class="decline-transfer-request" data-student="{{ transferRequest.student_id }}" data-specialist="{{ transferRequest.to_specialist_id }}">
+                                            <a role="button" class="decline-transfer-request" data-student="{{ notification.student_id }}" data-specialist="{{ notification.to_specialist_id }}">
                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/delete.svg'|theme }}">
                                             </a>
-                                            <a role="button" class="accept-transfer-request" data-student="{{ transferRequest.student_id }}" data-specialist="{{ transferRequest.to_specialist_id }}">
+                                            <a role="button" class="accept-transfer-request" data-student="{{ notification.student_id }}" data-specialist="{{ notification.to_specialist_id }}">
                                                 <img class="img-fluid ml-4" src="{{ 'assets/img/svg/dashboard/accept.svg'|theme }}">
                                             </a>
                                         </div>

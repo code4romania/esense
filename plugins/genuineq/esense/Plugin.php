@@ -10,9 +10,10 @@ use Genuineq\User\Helpers\RedirectHelper;
 use Genuineq\Profile\Models\Specialist;
 use Genuineq\Profile\Models\School;
 use Genuineq\Students\Models\Student;
-use Genuineq\Esense\Models\StudentTransfer;
+use Genuineq\Esense\Models\TransferRequest;
 use Genuineq\Esense\Models\Connection;
 use Genuineq\Timetable\Models\Lesson;
+use Genuineq\User\Models\User;
 
 class Plugin extends PluginBase
 {
@@ -49,6 +50,25 @@ class Plugin extends PluginBase
 
     public function registerSettings()
     {
+    }
+
+    public function registerSchedule($schedule)
+    {
+        /**
+         * Daily task that checks if there are any users
+         *  that have not activated their accounts for more than 30 days.
+         */
+        $schedule->call(function () {
+            /** Extract all users that are not activated and are older that 30 days. */
+            $inactiveUsers = User::whereNull('activated_at')->whereDate('created_at', '<', Carbon::now()->subDays(30)->format('Y-m-d'))->get();
+
+            /** Delete all extracted users and the profiles. */
+            foreach ($inactiveUsers as $key => $user) {
+                $profile = $user->profile;
+                $profile->forceDelete();
+                $user->forceDelete();
+            }
+        })->daily();
     }
 
     public function boot()
@@ -102,9 +122,7 @@ class Plugin extends PluginBase
             /** Link "Specialist" model to "Student" model with many-to-many relation. */
             $model->belongsToMany['specialists'] = [
                 'Genuineq\Profile\Models\Specialist',
-                'table' => 'genuineq_esense_connections',
-                'pivot' => ['approved', 'message', 'seen'],
-                'timestamps' => true
+                'table' => 'genuineq_esense_students_specialists'
             ];
 
             /** Link "Connection" model to "Student" model with has-many relation. */
@@ -172,7 +190,7 @@ class Plugin extends PluginBase
 
         Event::listen('genuineq.students.create.after.student.create', function($student) {
             /** Create a specialist connection. */
-            $student->specialists()->attach($student->owner_id, ['approved' => true]);
+            $student->specialists()->attach($student->owner_id);
         });
 
 
@@ -199,7 +217,7 @@ class Plugin extends PluginBase
             $user = Auth::getUser();
 
             /** Extract the student that needs to be archived. */
-            $student = $user->profile->allStudents()->where('id', $inputs['id'])->first();
+            $student = $user->profile->unarchivedStudents->where('id', $inputs['id'])->first();
         });
         /************ Student UPDATE end ************/
 
@@ -215,7 +233,7 @@ class Plugin extends PluginBase
             $user = Auth::getUser();
 
             /** Extract the student that needs to be archived. */
-            $student = $user->profile->allStudents()->where('id', $inputs['id'])->first();
+            $student = $user->profile->unarchivedStudents->where('id', $inputs['id'])->first();
         });
         /************ Student ARCHIVE end ************/
 
@@ -248,6 +266,14 @@ class Plugin extends PluginBase
 
             /** Extract the student that needs to be deleted. */
             $student = $user->profile->archivedStudents->where('id', $inputs['id'])->first();
+
+            /** Remove all student lessons. */
+            foreach ($student->lessons as $key => $lesson) {
+                $lesson->forceDelete();
+            }
+
+            /** Remove all specialists connections. */
+            $student->specialists()->detach();
         });
         /************ Student DELETE end ************/
     }
@@ -281,9 +307,26 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getStudentsAttribute', function() use ($model) {
                 $students = new Collection();
 
-                /** Parse students all the in specialists. */
+                /** Parse all students from the active specialists. */
                 foreach ($model->active_specialists as $specialist) {
-                    $students = $students->merge($specialist->students);
+                    $students = $students->union($specialist->students);
+                }
+
+                /** Parse all students from the archived specialists.  */
+                foreach ($model->archivedSpecialists as $specialist) {
+                    $students = $students->union($specialist->students);
+                }
+
+                return $students;
+            });
+
+            /** Add unarchived students attribute. */
+            $model->addDynamicMethod('getUnarchivedStudentsttribute', function() use ($model) {
+                $students = new Collection();
+
+                /** Parse students all from the specialists. */
+                foreach ($model->active_specialists as $specialist) {
+                    $students = $students->merge($specialist->unarchivedStudents);
                 }
 
                 return $students;
@@ -293,39 +336,17 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getArchivedStudentsAttribute', function() use ($model) {
                 $archivedStudents = new Collection();
 
-                /** Parse all students the in active specialists. */
+                /** Parse all students from the active specialists. */
                 foreach ($model->active_specialists as $specialist) {
                     $archivedStudents = $archivedStudents->merge($specialist->archivedStudents);
                 }
 
-                /** Parse all the students in archived specialists.  */
+                /** Parse all the students from the archived specialists.  */
                 foreach ($model->archivedSpecialists as $specialist) {
                     $archivedStudents = $archivedStudents->merge($specialist->archivedStudents);
                 }
 
                 return $archivedStudents;
-            });
-
-            /** Add all students attribute. */
-            $model->addDynamicMethod('getAllStudentsAttribute', function() use ($model) {
-                $allStudents = new Collection();
-
-                /** Parse all students the in active specialists. */
-                foreach ($model->active_specialists as $specialist) {
-                    $allStudents = $allStudents->union($specialist->allStudents);
-                }
-
-                /** Parse all students the in inactive specialists. */
-                foreach ($model->inactive_specialists as $specialist) {
-                    $allStudents = $allStudents->union($specialist->allStudents);
-                }
-
-                /** Parse all students the in archived specialists.  */
-                foreach ($model->archivedSpecialists as $specialist) {
-                    $allStudents = $allStudents->union($specialist->allStudents);
-                }
-
-                return $allStudents;
             });
         });
     }
@@ -346,39 +367,28 @@ class Plugin extends PluginBase
             /** Link "Student" model to "Specialist" model with many-to-many relation. */
             $model->belongsToMany['students'] = [
                 'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_connections',
-                'pivot' => ['approved', 'message', 'seen'],
-                'timestamps' => true,
-                'order' => 'name asc',
-                'conditions' => 'archived = 0 AND approved = 1'
+                'table' => 'genuineq_esense_students_specialists'
+            ];
+
+            /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
+            $model->belongsToMany['unarchivedStudents'] = [
+                'Genuineq\Students\Models\Student',
+                'table' => 'genuineq_esense_students_specialists',
+                'conditions' => 'archived = 0'
             ];
 
             /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
             $model->belongsToMany['archivedStudents'] = [
                 'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_connections',
-                'pivot' => ['approved', 'message', 'seen'],
-                'timestamps' => true,
-                'order' => 'name asc',
+                'table' => 'genuineq_esense_students_specialists',
                 'conditions' => 'archived = 1'
             ];
 
-            /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
-            $model->belongsToMany['allStudents'] = [
-                'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_connections',
-                'pivot' => ['approved', 'message', 'seen'],
-                'timestamps' => true,
-            ];
+            /** Link "TransferRequest" model to "Specialist" model with one-to-many relation. */
+            $model->hasMany['transferRequests'] = ['Genuineq\Esense\Models\TransferRequest', 'key' => 'from_specialist_id'];
 
-            /** Link "Owner" model to "Specialist" model with one-to-many-through relation. */
-            $model->hasManyThrough['accessNotifications'] = [
-                'Genuineq\Profile\Models\Specialist',
-                'through' => 'Genuineq\Students\Models\Student',
-            ];
-
-            /** Link "StudentTransfer" model to "Specialist" model with one-to-many relation. */
-            $model->hasMany['transferRequests'] = ['Genuineq\Esense\Models\StudentTransfer', 'key' => 'from_specialist_id'];
+            /** Link "AccessRequest" model to "Specialist" model with one-to-many relation. */
+            $model->hasMany['accessRequests'] = ['Genuineq\Esense\Models\AccessRequest', 'key' => 'from_specialist_id'];
 
             /** Link "Connection" model to "Specialist" model with has-many relation. */
             $model->hasMany['connections'] = ['Genuineq\Esense\Models\Connection', 'key' => 'specialist_id'];
@@ -396,9 +406,11 @@ class Plugin extends PluginBase
         Specialist::extend(function($model) {
             /** Add school students attribute. */
             $model->addDynamicMethod('getSchoolStudentsAttribute', function() use ($model) {
-                $schoolStudents = $model->school->all_students;
+                /** Extract all school students. */
+                $schoolStudents = $model->school->students;
 
-                foreach ($model->allStudents as $specialistStudent) {
+                /** Remove from school students all students of the current specialist. */
+                foreach ($model->students as $specialistStudent) {
                     foreach ($schoolStudents as $key => $schoolStudent) {
                         if ($schoolStudent->id == $specialistStudent->id) {
                             $schoolStudents->forget($key);
@@ -410,23 +422,12 @@ class Plugin extends PluginBase
             });
 
             /** Add access notifications attribute. */
-            $model->addDynamicMethod('getAccessNotificationsAttribute', function() use ($model) {
-                $notifications = new Collection();
-
-                foreach ($model->myStudents as $key => $student) {
-                    $notifications = $notifications->merge($student->specialists()->wherePivot('seen', 0)->wherePivot('approved', 0)->get());
-                }
-
-                return $notifications;
-            });
-
-            /** Add access notifications attribute. */
-            $model->addDynamicMethod('getAccessNotificationsStudent', function($candidateId) use ($model) {
-                return Student::find($candidateId);
+            $model->addDynamicMethod('getAccessRequestsAttribute', function() use ($model) {
+                return $model->accessRequests()->whereSeen(false)->whereApproved(false)->get();
             });
 
             /** Add transfer notifications attribute. */
-            $model->addDynamicMethod('getTransferNotificationsAttribute', function() use ($model) {
+            $model->addDynamicMethod('getTransferRequestsAttribute', function() use ($model) {
                 return $model->transferRequests()->whereNull('approved')->get();
             });
 
