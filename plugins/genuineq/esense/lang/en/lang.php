@@ -11,7 +11,7 @@
 
             'message' => [
                 'access_request_success_creation' => 'Cererea de acces a fost creată cu success.',
-                // 'access_request_failed_creation' => 'Cererea de acces nu a putut fi a fost creată.',
+                'access_request_failed_creation' => 'Cererea de acces nu a putut fi a fost creată.',
                 'access_request_success_approval' => 'Cererea de acces a fost aprobată cu success.',
                 'access_request_failed_approval' => 'Cererea de acces nu a putut fi aprobată.',
                 'access_request_success_decline' => 'Cererea de acces a fost respinsă cu success.',

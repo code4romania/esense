@@ -42,15 +42,6 @@
             'name' => 'Students',
             'description' => 'Handels the CRUD operations for students.',
 
-            'message' => [
-                'student_archive_successful' => 'Arhivare cu succes',
-                'student_archive_failed' => 'Arhivarea a esuat',
-                'student_unzip_successful' => 'Dezarhivare cu succes',
-                'student_unzip_failed' => 'Dezarhivarea a esuat',
-                'student_delete_successful' => 'Ștergere cu succes',
-                'student_delete_failed' => 'Ștergerea a esuat',
-            ],
-
             'validation' => [
                 'surname_required' => 'Nume este obligatoriu',
                 'surname_string' => 'Numele poate conține doar litere, spațiu și caracterul -',
@@ -72,6 +63,12 @@
             ],
 
             'message' => [
+                'student_archive_successful' => 'Arhivare cu succes',
+                'student_archive_failed' => 'Arhivarea a esuat',
+                'student_unzip_successful' => 'Dezarhivare cu succes',
+                'student_unzip_failed' => 'Dezarhivarea a esuat',
+                'student_delete_successful' => 'Ștergere cu succes',
+                'student_delete_failed' => 'Ștergerea a esuat',
                 'success_creation' => 'Elevul a fost adăugat cu succes',
                 'success_update' => 'Elevul a fost actualizat cu succes',
             ],
