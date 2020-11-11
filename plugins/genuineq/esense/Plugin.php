@@ -321,7 +321,7 @@ class Plugin extends PluginBase
             });
 
             /** Add unarchived students attribute. */
-            $model->addDynamicMethod('getUnarchivedStudentsttribute', function() use ($model) {
+            $model->addDynamicMethod('getUnarchivedStudentsAttribute', function() use ($model) {
                 $students = new Collection();
 
                 /** Parse students all from the specialists. */
