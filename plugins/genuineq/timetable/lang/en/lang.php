@@ -3,15 +3,18 @@
         'name' => 'Timetable',
         'description' => 'Timetable for sessions scheduling',
     ],
+
     'lessons' => [
         'title' => 'Lessons',
         'manage_lessons' => 'Manage lessons',
         'name' => 'Lessons',
     ],
+
     'lesson' => [
         'day' => 'Day',
         'start_hour' => 'Start hour',
         'end_hour' => 'End hour',
+        'duration' => 'Duration',
         'title' => 'Title',
         'description' => 'Description',
         'feedback' => 'Feedback',
@@ -22,11 +25,13 @@
         'update' => 'Edit lesson',
         'delete' => 'Delete lesson',
     ],
+
     'flash' => [
         'create' => 'Lesson created successfully.',
         'update' => 'Lesson updated successfully.',
         'delete' => 'Lesson deleted successfully.',
     ],
+
     'component' => [
         'timetable' => [
             'name' => 'Timetable',
@@ -44,6 +49,7 @@
                 'description_text' => '',
                 'feedback_text' => '',
             ],
+
             'messages' => [
                 'lesson_created_successfully' => 'Lesson created successfully.',
                 'lesson_updated_successfully' => 'Lesson updated successfully.',
@@ -52,6 +58,7 @@
             ],
         ],
     ],
+
     'backend' => [
         'timetable' => [
             'fields' => [
@@ -62,6 +69,8 @@
                 'start_hour_comment' => 'Select the start hour.',
                 'end_hour' => 'End hour',
                 'end_hour_comment' => 'Select the end hour.',
+                'duration' => 'Duration',
+                'duration_comment' => 'Total duration in seconds',
                 'title' => 'Title',
                 'title_comment' => 'Insert a descriptive title.',
                 'description' => 'Description',
@@ -69,11 +78,13 @@
                 'feedback' => 'Feedback',
                 'feedback_comment' => 'Add a feedback.',
             ],
+
             'columns' => [
                 'id' => 'id',
                 'day' => 'Day',
                 'start_hour' => 'Start hour',
                 'end_hour' => 'End hour',
+                'duration' => 'Duration',
                 'title' => 'Title',
                 'description' => 'Description',
                 'feedback' => 'Feedback',
@@ -81,11 +92,13 @@
                 'updated_at' => 'Updated at',
                 'deleted_at' => 'Deleted at',
             ],
+
             'form' => [
                 'create' => 'Add lesson',
                 'update' => 'Edit lesson',
                 'delete' => 'Delete lesson',
             ],
+
             'list' => [
                 'delete_selected_confirm' => 'Are you sure you want to delete selected items?'
             ],

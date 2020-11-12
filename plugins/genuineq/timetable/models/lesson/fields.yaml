@@ -35,6 +35,15 @@ fields:
         type: datepicker
         comment: 'genuineq.timetable::lang.backend.timetable.fields.end_hour'
 
+    duration:
+        label: 'genuineq.timetable::lang.backend.timetable.fields.duration'
+        mode: time
+        span: left
+        placeholder: 'genuineq.timetable::lang.backend.timetable.fields.duration'
+        required: 1
+        type: number
+        comment: 'genuineq.timetable::lang.backend.timetable.fields.duration'
+
     description:
         label: 'genuineq.timetable::lang.backend.timetable.fields.description'
         size: huge

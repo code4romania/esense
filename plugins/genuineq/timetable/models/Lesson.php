@@ -26,6 +26,7 @@ class Lesson extends Model
         'day',
         'start_hour',
         'end_hour',
+        'duration',
         'title',
         'description',
         'feedback',

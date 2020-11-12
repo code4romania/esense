@@ -14,6 +14,7 @@ class BuilderTableCreateGenuineqTimetableLessons extends Migration
             $table->date('day');
             $table->time('start_hour');
             $table->time('end_hour');
+            $table->integer('duration')->unsigned()->default(0);
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->text('feedback')->nullable();
