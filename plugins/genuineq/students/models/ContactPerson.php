@@ -18,7 +18,7 @@ class ContactPerson extends Model
         'name',
         'phone',
         'email',
-        'description',
+        'description'
     ];
 
     /**
