@@ -1,0 +1,14 @@
+1.0.1:
+    - 'First version of Data'
+1.0.2:
+    - 'Migration with the Schools'
+    - seeder_data_schools.php
+1.0.3:
+    - 'Migration with the Specialists'
+    - seeder_data_specialists.php
+1.0.4:
+    - 'Migration with the Students'
+    - seeder_data_students.php
+1.0.5:
+    - 'Migration with the Lessons'
+    - seeder_data_lessons.php

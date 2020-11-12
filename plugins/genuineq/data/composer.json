@@ -1,0 +1,16 @@
+{
+    "name": "genuineq/data",
+    "type": "october-plugin",
+    "description": "Data for initial deployment or developing process.",
+    "homepage": "https://www.genuineq.com",
+    "keywords": ["october", "faker"],
+    "authors": [
+        {
+            "name": "genuineq",
+            "email": "office@genuineq.com"
+        }
+    ],
+    "require": {
+        "fzaninotto/faker": "^1.5"
+    }
+}
