@@ -7,10 +7,21 @@ use Model;
  */
 class Connection extends Model
 {
+    /** Fillable fields */
+    protected $fillable = [
+        'student_id',
+        'specialist_id'
+    ];
+
     /**
      * @var string The database table used by the model.
      */
     public $table = 'genuineq_esense_students_specialists';
+
+    /**
+     * Disable timestamps for this model.
+     */
+    public $timestamps = false;
 
     /**
      * @var array Validation rules
