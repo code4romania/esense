@@ -1,40 +1,40 @@
 <?php return [
     'plugin' => [
-        'name' => 'Addresses',
-        'description' => 'All Romanian addresses',
-        'backend-menu' => 'Addresses',
+        'name' => 'Adrese',
+        'description' => 'Toate adresele românești',
+        'backend-menu' => 'Adrese',
     ],
 
     'region' => [
         'form-labels' => [
-            'name' => 'Name'
+            'name' => 'Nume'
         ],
 
-        'backend-menu' => 'Regions',
+        'backend-menu' => 'Regiuni',
     ],
 
     'county' => [
         'form-labels' => [
-            'name' => 'Name',
-            'region' => 'Region'
+            'name' => 'Nume',
+            'region' => 'Regiune'
         ],
 
-        'backend-menu' => 'Counties',
+        'backend-menu' => 'Județe',
     ],
 
     'cities' => [
         'form-labels' => [
-            'name' => 'Name',
-            'county' => 'County'
+            'name' => 'Nume',
+            'county' => 'Județ'
         ],
 
-        'backend-menu' => 'Cities',
+        'backend-menu' => 'Orașe',
     ],
 
     'components' => [
         'addresses' => [
-            'name' => 'Addresses',
-            'description' => 'Allows to manipulate addresses'
-        ]
-    ]
+            'name' => 'Adrese',
+            'description' => 'Permite manipularea adreselor'
+        ],
+    ],
 ];

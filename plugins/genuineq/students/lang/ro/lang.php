@@ -1,46 +1,46 @@
 <?php return [
     'plugin' => [
-        'name' => 'Students',
-        'description' => 'Contains the structure and login for students and contact persons.',
-        'backend-menu' => 'Students'
+        'name' => 'Studenți',
+        'description' => 'Conține structura și datele de conectare pentru studenți și persoane de contact.',
+        'backend-menu' => 'Studenți'
     ],
 
     'student' => [
         'form-labels' => [
             'name' => 'Name',
-            'surname' => 'Surname',
-            'description' => 'Description',
-            'hearing_impairment' => 'Hearing impairement',
-            'visual_impairment' => 'Visual impairement',
-            'birthdate' => 'Birthdata',
-            'gender' => 'Gender',
-            'contact_person_1' => 'Contact Person 1',
-            'contact_person_2' => 'Contact Person 2',
-            'contact_person_3' => 'Contact Person 3',
-            'contact_person_4' => 'Contact Person 4',
-            'contact_person_5' => 'Contact Person 5'
+            'surname' => 'Prenume',
+            'description' => 'Descriere',
+            'hearing_impairment' => 'Deficiență auditivă',
+            'visual_impairment' => 'Deficiență vizuală',
+            'birthdate' => 'Data nașterii',
+            'gender' => 'Gen',
+            'contact_person_1' => 'Persoana de contact 1',
+            'contact_person_2' => 'Persoana de contact 2',
+            'contact_person_3' => 'Persoana de contact 3',
+            'contact_person_4' => 'Persoana de contact 4',
+            'contact_person_5' => 'Persoana de contact 5'
         ],
 
-        'backend-menu' => 'Students'
+        'backend-menu' => 'Studenți'
     ],
 
     'contact-person' => [
         'form-labels' => [
             'name' => 'Name',
-            'surname' => 'Surname',
+            'surname' => 'Prenume',
             'email' => 'Email',
-            'phone' => 'Phone',
-            'description' => 'Description',
+            'phone' => 'Telefon',
+            'description' => 'Descriere',
             'student' => 'Student'
         ],
 
-        'backend-menu' => 'Contact Persons'
+        'backend-menu' => 'Persoane de contact'
     ],
 
     'components' => [
         'students' => [
-            'name' => 'Students',
-            'description' => 'Handels the CRUD operations for students.',
+            'name' => 'Studenți',
+            'description' => 'Tratează operațiunile CRUD pentru studenți.',
 
             'validation' => [
                 'surname_required' => 'Nume este obligatoriu',
@@ -48,12 +48,12 @@
                 'name_required' => 'Prenumele este obligatoriu',
                 'name_string' => 'Prenumele poate conține doar litere, spațiu și caracterul -',
                 'description_required' => 'Descrierea este obligatorie',
-                'description_string' => 'Descrierea trebuie să fie de tip string',
+                'description_string' => 'Descrierea trebuie să fie de tip șir de caractere',
                 'birthdate_required' => 'Data de naștere este obligatorie',
                 'birthdate_date' => 'Data de naștere trebuie să fie validă',
                 'birthdate_date_format' => 'Data de naștere trebuie să aibă următorul format: zz/ll/aaaa',
-                'hearing_impairment_boolean' => 'Valoarea câmpului de deficiențe auz poate să fie doar "Da" sau "Nu"',
-                'visual_impairment_boolean' => 'Valoarea câmpului de deficiențe văz poate să fie doar "Da" sau "Nu"',
+                'hearing_impairment_boolean' => 'Valoarea câmpului de deficiență auz poate să fie doar "Da" sau "Nu"',
+                'visual_impairment_boolean' => 'Valoarea câmpului de deficiență văz poate să fie doar "Da" sau "Nu"',
                 'gender_required' => 'Genul este obligatoriu',
                 'gender_in' => 'Genul poate să fie doar "Masculin" sau "Feminin"',
                 'phone.required' => 'Numărul de telefon este obligatoriu',
@@ -64,11 +64,11 @@
 
             'message' => [
                 'student_archive_successful' => 'Arhivare cu succes',
-                'student_archive_failed' => 'Arhivarea a esuat',
+                'student_archive_failed' => 'Arhivarea a eșuat',
                 'student_unzip_successful' => 'Dezarhivare cu succes',
-                'student_unzip_failed' => 'Dezarhivarea a esuat',
+                'student_unzip_failed' => 'Dezarhivarea a eșuat',
                 'student_delete_successful' => 'Ștergere cu succes',
-                'student_delete_failed' => 'Ștergerea a esuat',
+                'student_delete_failed' => 'Ștergerea a eșuat',
                 'success_creation' => 'Elevul a fost adăugat cu succes',
                 'success_update' => 'Elevul a fost actualizat cu succes',
             ],

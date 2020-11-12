@@ -35,6 +35,6 @@
         'addresses' => [
             'name' => 'Addresses',
             'description' => 'Allows to manipulate addresses'
-        ]
-    ]
+        ],
+    ],
 ];

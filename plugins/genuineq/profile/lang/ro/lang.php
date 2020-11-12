@@ -1,50 +1,50 @@
 <?php return [
     'plugin' => [
-        'name' => 'Profile',
-        'description' => 'Extends the user plugin and creates profile for it.',
-        'backend-menu' => 'Profiles'
+        'name' => 'Profil',
+        'description' => 'Extinde pluginul utilizator și creează profilul pentru acesta.',
+        'backend-menu' => 'Profiluri'
     ],
 
     'school' => [
         'form-labels' => [
-            'contact_name' => 'Contact Name',
-            'contact_email' => 'Contact Email',
-            'name' => 'Name',
-            'phone' => 'Phone',
-            'description' => 'Description',
-            'county' => 'County',
-            'city' => 'City'
+            'contact_name' => 'Nume contact',
+            'contact_email' => 'E-mail de contact',
+            'name' => 'Nume',
+            'phone' => 'Telefon',
+            'description' => 'Descriere',
+            'county' => 'Județ',
+            'city' => 'Oraș'
         ],
 
-        'backend-menu' => 'Schools'
+        'backend-menu' => 'Școli'
     ],
 
     'specialist' => [
         'form-labels' => [
-            'user' => 'User',
-            'name' => 'Name',
+            'user' => 'Utilizator',
+            'name' => 'Nume',
             'email' => 'Email',
-            'phone' => 'Phone',
-            'county' => 'County',
-            'city' => 'City',
-            'school' => 'School',
-            'description' => 'Description'
+            'phone' => 'Telefon',
+            'county' => 'Județ',
+            'city' => 'Oraș',
+            'school' => 'Școală',
+            'description' => 'Descriere'
         ],
 
-        'backend-menu' => 'Specialists'
+        'backend-menu' => 'Specialiști'
     ],
 
     'components' => [
         'specialist' => [
             'name' => 'Specialist',
-            'description' => 'Allows to update, delete, archive and unarchive specialists.',
+            'description' => 'Permite actualizarea, ștergerea, arhivarea și dezarhivarea specialiștilor.',
 
             'message' => [
                 'profile_update_successful' => 'Profilul a fost actualizat cu success',
             ],
 
             'validation' => [
-                'surname_required' => 'Nume este obligatoriu',
+                'surname_required' => 'Numele este obligatoriu',
                 'surname_regex' => 'Numele poate conține doar litere, spațiu și caracterul -',
                 'name_required' => 'Prenumele este obligatoriu',
                 'name_regex' => 'Prenumele poate conține doar litere, spațiu și caracterul -',
@@ -54,17 +54,17 @@
                 'email_email' => 'Adresa de email nu este validă',
                 'county_required' => 'Județul este obligatoriu',
                 'city_required' => 'Localitatea este obligatorie',
-                'description_string' => 'Descrierea trebuie să fie de tip string',
+                'description_string' => 'Descrierea trebuie să fie de tip șir de caractere',
             ],
         ],
 
         'school' => [
-            'name' => 'School',
-            'description' => 'Allows to update schools',
+            'name' => 'Școală',
+            'description' => 'Permite actualizarea școlilor',
 
             'backend' => [
-                'reset_page' => 'Password reset page',
-                'reset_page_desc' => 'The page for password reset'
+                'reset_page' => 'Pagina de resetare a parolei',
+                'reset_page_desc' => 'Pagina pentru resetarea parolei'
             ],
 
             'message' => [
@@ -73,7 +73,7 @@
                 'unzip_successful' => 'Dezarhivare cu succes',
                 'unzip_failed' => 'Dezarhivarea a esuat',
                 'delete_successful' => 'Ștergere cu succes',
-                'delete_failed' => 'Ștergere a esuat',
+                'delete_failed' => 'Ștergerea a eșuat',
                 'update_successful' => 'Specialistul a fost actualizat cu success',
                 'profile_update_successful' => 'Profilul a fost actualizat cu success',
                 'user_invite_successful' => 'Invitație trimisă cu succes către specialistul ',
@@ -81,12 +81,12 @@
                 'user_already_affiliated_1' => 'Specialistul ',
                 'user_already_affiliated_2' => ' este deja afiliat',
                 'user_is_school_1' => 'Specialistul ',
-                'user_is_school_2' => ' este deja inscris ca scoala',
-                'specialist_create_error' => "A apărut o problema. Vă rugăm să încercați din nou"
+                'user_is_school_2' => ' este deja înscris ca școală',
+                'specialist_create_error' => 'A apărut o problemă. Vă rugăm să încercați din nou'
             ],
 
             'validation' => [
-                'surname_required' => 'Nume este obligatoriu',
+                'surname_required' => 'Numele este obligatoriu',
                 'surname_regex' => 'Numele poate conține doar litere, spațiu și caracterul -',
                 'name_required' => 'Prenumele este obligatoriu',
                 'name_regex' => 'Prenumele poate conține doar litere, spațiu și caracterul -',
@@ -98,69 +98,69 @@
                 'city_required' => 'Localitatea este obligatorie',
                 'school_name_required' => 'Numele școlii este obligatoriu',
                 'school_name_string' => 'Numele școlii poate conține doar litere, spațiu și caracterul -',
-                'description_string' => 'Descrierea trebuie să fie de tip string',
+                'description_string' => 'Descrierea trebuie să fie de tip șir de caractere',
             ],
         ],
 
         'profile-static-data' => [
-            'name' => 'Profile Static Data',
-            'description' => 'Allows to extract profile static data',
+            'name' => 'Date statice ale profilului',
+            'description' => 'Permite extragerea datelor statice ale profilului',
 
             'property' => [
-                'schools_title' => 'Schools',
-                'schools_description' => 'Extract the already registered schools'
-            ]
+                'schools_title' => 'Școli',
+                'schools_description' => 'Extrageți școlile deja înregistrate'
+            ],
         ],
 
         'register' => [
             'validation' => [
                 'slug_required' => 'Numele școlii este obligatoriu',
                 'slug_unique' => 'Aceasta școală este deja înregistrată. Vă rugăm să vă autentificați.'
-            ]
+            ],
         ],
 
         'login' => [
             'message' => [
                 'user_archived' => 'Ne pare rău, utilizatorul este marcat ca arhivat.',
-            ]
-        ]
+            ],
+        ],
     ],
 
     'reportwidgets' => [
         'total_specialists' => [
-            'label' => 'Total specialists',
-            'title' =>  'Total number of specialists',
-            'title_default' => 'Total specialists',
+            'label' => 'Total specialiști',
+            'title' => 'Numărul total de specialiști',
+            'title_default' => 'Total specialiști',
             'title_validation' => '',
 
             'frontend' => [
-                'label_specialists' => 'Total number of specialists'
-            ]
+                'label_specialists' => 'Numărul total de specialiști'
+            ],
         ],
 
         'total_schools' => [
-            'label' => 'Total schools',
-            'title' =>  'Total number of schools',
-            'title_default' => 'Total schools',
+            'label' => 'Total școli',
+            'title' => 'Numărul total de școli',
+            'title_default' => 'Total școli',
             'title_validation' => '',
 
             'frontend' => [
-                'label_schools' => 'Total number of schools'
-            ]
+                'label_schools' => 'Numărul total de școli'
+            ],
         ],
     ],
 
     'backendForm' => [
         'user' => [
             'profile_type' => [
-                'label' => 'Profile type',
-                'comment' => 'Display user type'
+                'label' => 'Tipul de profil',
+                'comment' => 'Afișează tipul de utilizator'
             ],
 
             'profile_id' => [
-                'label' => 'Profile id',
-                'comment' => 'Display user id'
-            ]
-        ]
-    ]
+                'label' => 'ID profil',
+                'comment' => 'Afișează ID-ul utilizatorului'
+            ],
+        ],
+    ],
 ];

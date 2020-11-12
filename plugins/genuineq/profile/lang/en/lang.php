@@ -40,21 +40,21 @@
             'description' => 'Allows to update, delete, archive and unarchive specialists.',
 
             'message' => [
-                'profile_update_successful' => 'Profilul a fost actualizat cu success',
+                'profile_update_successful' => 'Profile successfully updated',
             ],
 
             'validation' => [
-                'surname_required' => 'Nume este obligatoriu',
-                'surname_regex' => 'Numele poate conține doar litere, spațiu și caracterul -',
-                'name_required' => 'Prenumele este obligatoriu',
-                'name_regex' => 'Prenumele poate conține doar litere, spațiu și caracterul -',
-                'phone_required' => 'Numărul de telefon este obligatoriu',
-                'phone_numeric' => 'Numărul de telefon poate să conțină doar cifre',
-                'email_between' => 'Adresa de email trebuie să aibă între 6 și 255 de caractere',
-                'email_email' => 'Adresa de email nu este validă',
-                'county_required' => 'Județul este obligatoriu',
-                'city_required' => 'Localitatea este obligatorie',
-                'description_string' => 'Descrierea trebuie să fie de tip string',
+                'surname_required' => 'Name required',
+                'surname_regex' => 'Name can only contain letters, space and character -',
+                'name_required' => 'First name required',
+                'name_regex' => 'First name can only contain letters, space and character -',
+                'phone_required' => 'Phone number required',
+                'phone_numeric' => 'Phone number can only contain digits',
+                'email_between' => 'Email address must be between 6 and 255 characters',
+                'email_email' => 'Email address is invalid',
+                'county_required' => 'County required',
+                'city_required' => 'City required',
+                'description_string' => 'Description must be string',
             ],
         ],
 
@@ -68,37 +68,37 @@
             ],
 
             'message' => [
-                'archive_successful' => 'Arhivare cu succes',
-                'archive_failed' => 'Arhivarea a esuat',
-                'unzip_successful' => 'Dezarhivare cu succes',
-                'unzip_failed' => 'Dezarhivarea a esuat',
-                'delete_successful' => 'Ștergere cu succes',
-                'delete_failed' => 'Ștergere a esuat',
-                'update_successful' => 'Specialistul a fost actualizat cu success',
-                'profile_update_successful' => 'Profilul a fost actualizat cu success',
-                'user_invite_successful' => 'Invitație trimisă cu succes către specialistul ',
-                'user_invite_failed' => 'Invitație eșuată pentru specialistul ',
-                'user_already_affiliated_1' => 'Specialistul ',
-                'user_already_affiliated_2' => ' este deja afiliat',
-                'user_is_school_1' => 'Specialistul ',
-                'user_is_school_2' => ' este deja inscris ca scoala',
-                'specialist_create_error' => "A apărut o problema. Vă rugăm să încercați din nou"
+                'archive_successful' => 'Archive Successfully',
+                'archive_failed' => 'Archiving failed',
+                'unzip_successful' => 'Unzip successfully',
+                'unzip_failed' => 'Unzip failed',
+                'delete_successful' => 'Delete successfully',
+                'delete_failed' => 'Delete failed',
+                'update_successful' => 'The specialist was successfully updated',
+                'profile_update_successful' => 'Profile successfully updated',
+                'user_invite_successful' => 'Invitation successfully sent to specialist',
+                'user_invite_failed' => 'Failed invitation for specialist',
+                'user_already_affiliated_1' => 'Specialist',
+                'user_already_affiliated_2' => 'is already affiliated',
+                'user_is_school_1' => 'Specialist',
+                'user_is_school_2' => 'is already registered as a school',
+                'specialist_create_error' => "There was a problem. Please try again"
             ],
 
             'validation' => [
-                'surname_required' => 'Nume este obligatoriu',
-                'surname_regex' => 'Numele poate conține doar litere, spațiu și caracterul -',
-                'name_required' => 'Prenumele este obligatoriu',
-                'name_regex' => 'Prenumele poate conține doar litere, spațiu și caracterul -',
-                'phone_required' => 'Numărul de telefon este obligatoriu',
-                'phone_numeric' => 'Numărul de telefon poate să conțină doar cifre',
-                'email_between' => 'Adresa de email trebuie să aibă între 6 și 255 de caractere',
-                'email_email' => 'Adresa de email nu este validă',
-                'county_required' => 'Județul este obligatoriu',
-                'city_required' => 'Localitatea este obligatorie',
-                'school_name_required' => 'Numele școlii este obligatoriu',
-                'school_name_string' => 'Numele școlii poate conține doar litere, spațiu și caracterul -',
-                'description_string' => 'Descrierea trebuie să fie de tip string',
+                'surname_required' => 'Name required',
+                'surname_regex' => 'Name can only contain letters, space and character -',
+                'name_required' => 'First name required',
+                'name_regex' => 'First name can only contain letters, space and character -',
+                'phone_required' => 'Phone number required',
+                'phone_numeric' => 'Phone number can only contain digits',
+                'email_between' => 'Email address must be between 6 and 255 characters',
+                'email_email' => 'Email address is invalid',
+                'county_required' => 'County required',
+                'city_required' => 'City required',
+                'school_name_required' => 'School name required',
+                'school_name_string' => 'School name can only contain letters, space and character -',
+                'description_string' => 'Description must be string',
             ],
         ],
 
@@ -109,27 +109,27 @@
             'property' => [
                 'schools_title' => 'Schools',
                 'schools_description' => 'Extract the already registered schools'
-            ]
+            ],
         ],
 
         'register' => [
             'validation' => [
-                'slug_required' => 'Numele școlii este obligatoriu',
-                'slug_unique' => 'Aceasta școală este deja înregistrată. Vă rugăm să vă autentificați.'
-            ]
+                'slug_required' => 'School name required',
+                'slug_unique' => 'This school is already registered. Please sign in.'
+            ],
         ],
 
         'login' => [
             'message' => [
-                'user_archived' => 'Ne pare rău, utilizatorul este marcat ca arhivat.',
-            ]
-        ]
+                'user_archived' => 'Sorry, the user is marked as archived.',
+            ],
+        ],
     ],
 
     'reportwidgets' => [
         'total_specialists' => [
             'label' => 'Total specialists',
-            'title' =>  'Total number of specialists',
+            'title' => 'Total number of specialists',
             'title_default' => 'Total specialists',
             'title_validation' => '',
 
@@ -140,7 +140,7 @@
 
         'total_schools' => [
             'label' => 'Total schools',
-            'title' =>  'Total number of schools',
+            'title' => 'Total number of schools',
             'title_default' => 'Total schools',
             'title_validation' => '',
 
