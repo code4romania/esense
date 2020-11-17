@@ -2,31 +2,31 @@
 
 return [
     'plugin' => [
-        'name' => 'Awesome Icons List',
-        'description' => 'The latest Font Awesome icons list as a backend form widget'
+        'name' => 'Lista iconițelor FontAwesome',
+        'description' => 'Cea mai recentă listă de iconițe de la Font Awesome ca widget pentru panoul de administrare'
     ],
     'components' => [
         'fontawesomecsslink' => [
-            'name' => 'Font Awesome CSS Link',
-            'description' => 'The latest Font Awesome css link'
+            'name' => 'Legătură CSS către Font Awesome',
+            'description' => 'Cea mai recentă legătură CSS de la Font Awesome'
         ]
     ],
     'formwidgets' => [
         'awesomeiconslist' => [
-            'empty_label' => 'Nothing Selected',
-            'empty_option' => 'Select icon...'
+            'empty_label' => 'Nimic selectat',
+            'empty_option' => 'Selectează iconița...'
         ]
     ],
     'settings' => [
-        'name' => 'Awesome Icons Links',
-        'description' => 'Set the latest Font Awesome 5 link information',
-        'fontawesome_link' => 'Font Awesome Link',
-        'fontawesome_link_placeholder' => 'Put the relevant Font Awesome link',
-        'fontawesome_link_attributes' => 'Link Attributes',
-        'fontawesome_link_attributes_prompt' => 'Add a new link attribute',
-        'fontawesome_link_attributes_attribute' => 'Attribute',
-        'fontawesome_link_attributes_attribute_placeholder' => 'Enter attribute name',
-        'fontawesome_link_attributes_value' => 'Value',
-        'fontawesome_link_attributes_value_placeholder' => 'Enter attribute value',
+        'name' => 'Legături pentru iconițele FontAwesome',
+        'description' => 'Setează informații despre legătura pentru Font Awesome 5',
+        'fontawesome_link' => 'Legătură către Font Awesome',
+        'fontawesome_link_placeholder' => 'Introdu legătura corespunzătoare pentru Font Awesome',
+        'fontawesome_link_attributes' => 'Atributele legăturii',
+        'fontawesome_link_attributes_prompt' => 'Adaugă un nou atribut al legăturii',
+        'fontawesome_link_attributes_attribute' => 'Atribut',
+        'fontawesome_link_attributes_attribute_placeholder' => 'Introdu numele atributului',
+        'fontawesome_link_attributes_value' => 'Valoare',
+        'fontawesome_link_attributes_value_placeholder' => 'Introdu valoarea atributului',
     ]
 ];
