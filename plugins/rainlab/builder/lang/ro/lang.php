@@ -3,10 +3,10 @@
 return [
     'plugin' => [
         'name' => 'Constructor',
-        'description' => 'Oferă instrumente vizuale pentru construirea pluginurilor din October.',
+        'description' => 'Oferă instrumente vizuale pentru construirea pluginurilor din OctoberCMS.',
         'add' => 'Creează plugin',
-        'no_records' => 'Nici un plugin găsit',
-        'no_name' => 'Nici un nume',
+        'no_records' => 'Niciun plugin găsit',
+        'no_name' => 'Niciun nume',
         'search' => 'Caută...',
         'filter_description' => 'Afișează toate pluginurile sau numai pluginurile tale.',
         'settings' => 'Setări',
