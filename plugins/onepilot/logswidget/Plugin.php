@@ -10,8 +10,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Logs Widget',
-            'description' => 'Show an overview of site errors direct on your OctoberCMS dashboard',
+            'name'        => 'onepilot.logswidget::lang.plugin.name',
+            'description' => 'onepilot.logswidget::lang.plugin.description',
             'author'      => '1Pilot.io',
             'icon'        => 'icon-file-text-o',
             'homepage'    => 'https://1pilot.io',
@@ -25,7 +25,7 @@ class Plugin extends PluginBase
     {
         return [
             ReportWidgets\ErrorsOverview::class => [
-                'label'       => 'Errors Logs Overview',
+                'label'       => 'onepilot.logswidget::lang.reportwidgets.label',
                 'context'     => 'dashboard',
                 'permissions' => ['system.access_logs'],
             ],
