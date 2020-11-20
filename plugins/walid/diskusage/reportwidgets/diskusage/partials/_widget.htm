@@ -1,7 +1,7 @@
 <div class="report-widget">
 
     <?php if ($error): ?>
-        <h3>Disk Usge</h3>
+        <h3><?= e(trans('walid.diskusage::lang.reportwidgets.label')) ?></h3>
         <p><?= $error ?></p>
     <?php else: ?>
     <h3><?= $disk['name'] ?></h3>

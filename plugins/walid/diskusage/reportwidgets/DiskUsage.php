@@ -1,6 +1,7 @@
 <?php namespace Walid\DiskUsage\ReportWidgets;
 
 use Log;
+use Lang;
 use Backend;
 use Backend\Classes\ReportWidgetBase;
 use Walid\DiskUsage\Models\Settings;
@@ -60,7 +61,7 @@ class DiskUsage extends ReportWidgetBase
             }));
 
             if (!$disk) {
-                $this->error = 'Unable to find disk, please <a href="'.$this->getPluginSettingsUrl().'">add some disks</a> then select a disk from widget options';
+                $this->error = Lang::get('walid.diskusage::lang.reportwidgets.find_disk_error_1') . $this->getPluginSettingsUrl(). Lang::get('walid.diskusage::lang.reportwidgets.find_disk_error_2');
                 return null;
             }
 

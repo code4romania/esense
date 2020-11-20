@@ -4,23 +4,23 @@
 
 fields:
     disks:
-        label: Disks
+        label: 'walid.diskusage::lang.backend.disks'
         type: repeater
-        prompt: Add new disk
+        prompt: 'walid.diskusage::lang.backend.addnew'
         form:
             fields:
                 name:
                     type: text
                     span: auto
-                    label: Disk name
-                    comment: Displayed as widget title
+                    label: 'walid.diskusage::lang.backend.form.name.label'
+                    comment: 'walid.diskusage::lang.backend.form.name.comment'
                 path:
                     type: text
                     span: auto
-                    label: Disk path
-                    comment: Full path to mounted disk
+                    label: 'walid.diskusage::lang.backend.form.path.label'
+                    comment: 'walid.diskusage::lang.backend.form.path.comment'
                 description:
                     type: textarea
                     span: auto
-                    label: Description
-                    comment: What is this hard disk is used for?
+                    label: 'walid.diskusage::lang.backend.form.description.label'
+                    comment: 'walid.diskusage::lang.backend.form.description.comment'

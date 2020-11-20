@@ -47,7 +47,7 @@ class Plugin extends PluginBase
     {
         return [
             ReportWidgets\DiskUsage::class => [
-                'label'   => 'Disk Usage',
+                'label'   => 'walid.diskusage::lang.reportwidgets.label',
                 'context' => 'dashboard'
             ],
         ];
@@ -57,8 +57,8 @@ class Plugin extends PluginBase
     {
         return [
             'settings' => [
-                'label'       => 'Disk usage',
-                'description' => 'Manage disk name and path',
+                'label'       => 'walid.diskusage::lang.plugin.name',
+                'description' => 'walid.diskusage::lang.plugin.description',
                 'category'    => 'System',
                 'icon'        => 'icon-cog',
                 'class'       => Models\Settings::class,
