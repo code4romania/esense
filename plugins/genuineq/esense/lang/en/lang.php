@@ -34,6 +34,9 @@
                 'no_access' => 'You do not have access to the specified student.',
                 'save_successful' => 'The game session was saved successfully.',
                 'lesson_updated_successfully' => 'Lesson updated successfully.',
+                'invalid_date' => 'The date must be today and in format YYYY-MM-DD.',
+                'invalid_hours' => 'The start hour must be smaller than the end hour.',
+                'invalid_category' => 'The categoty must be among: ',
             ],
 
             'validation' => [

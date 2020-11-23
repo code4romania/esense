@@ -34,6 +34,9 @@
                 'no_access' => 'Nu aveți acces la elevul specificat.',
                 'save_successful' => 'Sesiunea de joc a fost salvată cu succes.',
                 'lesson_updated_successfully' => 'Lecția a fost actualizată cu succes.',
+                'invalid_date' => 'Data trebuie să fie astăzi și să aibă formatul YYYY-MM-DD.',
+                'invalid_hours' => 'Ora de început trebuie să fie mai mică decât ora de încheiere.',
+                'invalid_category' => 'Categoria trebuie să fie printre următoarele: ',
             ],
 
             'validation' => [
