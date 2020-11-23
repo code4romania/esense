@@ -292,11 +292,21 @@ class Plugin extends PluginBase
     protected function schoolExtendRelationships()
     {
         School::extend(function($model) {
-            /** Link "School" model to "Student" model with one-to-many-through relation. */
-            $model->hasManyThrough['studentsRelationship'] = [
+            /** Link "Student" model to "School" model with one-to-many relation. */
+            $model->morphMany['myStudents'] = ['Genuineq\Students\Models\Student', 'name' => 'owner'];
+
+            /** Link "Student" model to archived "School" model with one-to-many relation. */
+            $model->belongsToMany['myUnarchivedStudents'] = [
                 'Genuineq\Students\Models\Student',
-                'through' => 'Genuineq\Profile\Models\Specialist',
-                'order' => 'name desc'
+                'name' => 'owner',
+                'conditions' => 'archived = 0'
+            ];
+
+            /** Link "Student" model to archived "School" model with one-to-many relation. */
+            $model->belongsToMany['myArchivedStudents'] = [
+                'Genuineq\Students\Models\Student',
+                'name' => 'owner',
+                'conditions' => 'archived = 1'
             ];
         });
     }
@@ -313,27 +323,38 @@ class Plugin extends PluginBase
 
                 /** Parse all students from the active specialists. */
                 foreach ($model->active_specialists as $specialist) {
-                    $students = $students->union($specialist->students);
+                    $students = $students->merge($specialist->students);
                 }
 
                 /** Parse all students from the archived specialists.  */
                 foreach ($model->archivedSpecialists as $specialist) {
-                    $students = $students->union($specialist->students);
+                    $students = $students->merge($specialist->students);
                 }
 
-                return $students;
+                /** Add the school students. */
+                $students = $students->merge($model->myStudents);
+
+                return $students->unique('id')->sortBy('name');
             });
 
             /** Add unarchived students attribute. */
             $model->addDynamicMethod('getUnarchivedStudentsAttribute', function() use ($model) {
-                $students = new Collection();
+                $unarchivedStudents = new Collection();
 
                 /** Parse all students from the active specialists. */
                 foreach ($model->active_specialists as $specialist) {
-                    $students = $students->merge($specialist->unarchivedStudents);
+                    $unarchivedStudents = $unarchivedStudents->merge($specialist->unarchivedStudents);
                 }
 
-                return $students->sortBy('name');
+                /** Parse all the students from the archived specialists.  */
+                foreach ($model->archivedSpecialists as $specialist) {
+                    $unarchivedStudents = $unarchivedStudents->merge($specialist->unarchivedStudents);
+                }
+
+                /** Add the school students. */
+                $students = $students->merge($model->myUnarchivedStudents);
+
+                return $unarchivedStudents->unique('id')->sortBy('name');
             });
 
             /** Add archived students attribute. */
@@ -350,7 +371,10 @@ class Plugin extends PluginBase
                     $archivedStudents = $archivedStudents->merge($specialist->archivedStudents);
                 }
 
-                return $archivedStudents;
+                /** Add the school students. */
+                $students = $students->merge($model->myArchivedStudents);
+
+                return $archivedStudents->unique('id')->sortBy('name');
             });
 
             /** Add get month lessons duration function. */
