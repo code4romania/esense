@@ -297,14 +297,14 @@ class Plugin extends PluginBase
             $model->morphMany['myStudents'] = ['Genuineq\Students\Models\Student', 'name' => 'owner'];
 
             /** Link "Student" model to archived "School" model with one-to-many relation. */
-            $model->belongsToMany['myUnarchivedStudents'] = [
+            $model->morphMany['myUnarchivedStudents'] = [
                 'Genuineq\Students\Models\Student',
                 'name' => 'owner',
                 'conditions' => 'archived = 0'
             ];
 
             /** Link "Student" model to archived "School" model with one-to-many relation. */
-            $model->belongsToMany['myArchivedStudents'] = [
+            $model->morphMany['myArchivedStudents'] = [
                 'Genuineq\Students\Models\Student',
                 'name' => 'owner',
                 'conditions' => 'archived = 1'
@@ -353,7 +353,7 @@ class Plugin extends PluginBase
                 }
 
                 /** Add the school students. */
-                $students = $students->merge($model->myUnarchivedStudents);
+                $unarchivedStudents = $unarchivedStudents->merge($model->myUnarchivedStudents);
 
                 return $unarchivedStudents->unique('id')->sortBy('name');
             });
@@ -373,7 +373,7 @@ class Plugin extends PluginBase
                 }
 
                 /** Add the school students. */
-                $students = $students->merge($model->myArchivedStudents);
+                $archivedStudents = $archivedStudents->merge($model->myArchivedStudents);
 
                 return $archivedStudents->unique('id')->sortBy('name');
             });
