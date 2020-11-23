@@ -3,3 +3,6 @@
 1.0.2:
     - 'Created table genuineq_contactform_messages'
     - builder_table_create_genuineq_contactform_messages.php
+1.0.3:
+    - 'Updated table genuineq_contactform_messages'
+    - builder_table_update_genuineq_contactform_messages.php
