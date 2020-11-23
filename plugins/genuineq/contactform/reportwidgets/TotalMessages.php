@@ -12,7 +12,7 @@ class TotalMessages extends ReportWidgetBase
     public function render()
     {
         try {
-            $this->vars['labelMessages'] = Lang::get('genuineq.contactform::lang.reportwidgets.total_messages.title');
+            $this->vars['labelMessages'] = Lang::get('genuineq.contactform::lang.reportwidgets.total_messages.label');
 
             /** Get no of messages from database  */
             $this->vars['totalMessages'] = DB::table('genuineq_contactform_messages')->count();
@@ -28,11 +28,9 @@ class TotalMessages extends ReportWidgetBase
     {
         return [
             'title' => [
-                'title' => Lang::get('genuineq.contactform::lang.reportwidgets.total_messages.title'),
-                'default' => Lang::get('genuineq.contactform::lang.reportwidgets.total_messages.title_default'),
+                'title' => Lang::get('genuineq.contactform::lang.reportwidgets.total_messages.label'),
                 'type' => 'string',
                 'validationPattern' => '^.+$',
-                'validationMessage' => Lang::get('genuineq.contactform::lang.reportwidgets.total_messages.title_validation'),
             ]
         ];
     }

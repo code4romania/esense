@@ -24,8 +24,6 @@
         'total_messages' => [
             'label' => 'Total messages',
             'title' =>  'Total number of messages',
-            'title_default' => 'Total messages',
-            'title_validation' => '',
         ],
     ],
 
