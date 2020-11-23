@@ -15,7 +15,7 @@ class TotalRegistrationRequests extends ReportWidgetBase
             $this->vars['labelRegistrationRequests'] = Lang::get('genuineq.user::lang.reportwidgets.total_registration_requests.frontend.label_registration_requests');
 
             /** Get no of inactive user accounts (== user requests) from database  */
-            $this->vars['totalRegistrationRequests'] = DB::table('backend_users')->select()->where('is_activated', '=', 0)->count();
+            $this->vars['totalRegistrationRequests'] = DB::table('users')->select()->where('is_activated', '=', 0)->count();
 
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();

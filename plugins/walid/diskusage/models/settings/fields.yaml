@@ -1,0 +1,26 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    disks:
+        label: 'walid.diskusage::lang.backend.disks'
+        type: repeater
+        prompt: 'walid.diskusage::lang.backend.addnew'
+        form:
+            fields:
+                name:
+                    type: text
+                    span: auto
+                    label: 'walid.diskusage::lang.backend.form.name.label'
+                    comment: 'walid.diskusage::lang.backend.form.name.comment'
+                path:
+                    type: text
+                    span: auto
+                    label: 'walid.diskusage::lang.backend.form.path.label'
+                    comment: 'walid.diskusage::lang.backend.form.path.comment'
+                description:
+                    type: textarea
+                    span: auto
+                    label: 'walid.diskusage::lang.backend.form.description.label'
+                    comment: 'walid.diskusage::lang.backend.form.description.comment'

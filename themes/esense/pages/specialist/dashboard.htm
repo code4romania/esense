@@ -8,24 +8,30 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+
+[student]
+
+[lessonsActions]
+
+[chartsActions]
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">{{'teacher.dashboard.admin.panel.title'|_}}</h4>
+            <h4 class="text-gray-dark font-weight-light mb-4">{{'page.specialist.dashboard.title'|_}}</h4>
         </div>
 
         <!-- Students card -->
         <div class="col-12 col-md-6">
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
-                    <h6 class="text-gray-light">{{'teacher.dashboard.admin.panel.students.card.title'|_}}</h6>
-                    <h5 class="text-gray-dark">{{ user.profile.students.count }}</h5>
+                    <h6 class="text-gray-light">{{'page.specialist.dashboard.students.card.title'|_}}</h6>
+                    <h5 class="text-gray-dark">{{ user.profile.unarchivedStudents.count }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
-                        <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/students'|page }}">{{'teacher.dashboard.admin.panel.students.card.link.text'|_}}</a>
+                        <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/students'|page }}">{{'page.specialist.dashboard.students.card.link'|_}}</a>
                     </div>
                 </div>
                 <div>
@@ -38,11 +44,11 @@ allowedUserTypes[] = "specialist"
         <div class="col-12 col-md-6 mt-5 mt-md-0">
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
-                    <h6 class="text-gray-light">{{'teacher.dashboard.admin.panel.exercises.card.title'|_}}</h6>
-                    <h5 class="text-gray-dark">x</h5>
+                    <h6 class="text-gray-light">{{'page.specialist.dashboard.exercises.title'|_}}</h6>
+                    <h5 class="text-gray-dark">{{ user.profile.getExercisesNumber }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
-                        <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/exercises'|page }}">{{'teacher.dashboard.admin.panel.exercises.card.link.text'|_}}</a>
+                        <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/exercises'|page }}">{{'page.specialist.dashboard.exercises.link'|_}}</a>
                     </div>
                 </div>
                 <div>
@@ -52,32 +58,9 @@ allowedUserTypes[] = "specialist"
         </div>
 
         <!-- Students activity chart -->
-        <div class="col-12 mt-5">
-            <div class="rounded bg-white shadow p-3">
-                <div class="row mb-4">
-                    <div class="col-12 col-md-12 col-lg-6">
-                        <p class="p-0 m-0 font-weight-light display-2 text-gray-dark">{{'teacher.dashboard.admin.panel.chart.title'|_}}</p>
-                        <p class="display-4 text-gray-light pt-2">{{'teacher.dashboard.admin.panel.chart.subtitle'|_}}</p>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="form-group register-select">
-                            <select class="form-control selectpicker border outline-none" data-style="btn-white">
-                            <option>{{'dashboard.chart.all.year.option'|_}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="form-group register-select">
-                            <select class="form-control selectpicker border outline-none" data-style="btn-white">
-                            <option>2020</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <canvas id="chLine" height="100"></canvas>
-                </div>
-            </div>
+        <div id="activity-chart-container" class="col-12 mt-5">
+            <!-- Partial for student activity chart -->
+            {% partial 'web-app/specialist/activity-chart' year = 'now'|date('Y') years = user.profile.lessons_years durations = user.profile.getYearLessonsDurations('now'|date('Y')) %}
         </div>
 
         <!-- Students table -->
@@ -87,14 +70,14 @@ allowedUserTypes[] = "specialist"
                     <thead>
                         <tr>
                             <!-- Name column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'students.table.column_1.title'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_1.title'|_}}</p></th>
                             <!-- Age column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'students.table.column_2.title'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_2.title'|_}}</p></th>
                             <th class="no-sort"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for student in user.profile.students %}
+                        {% for student in user.profile.unarchivedStudents %}
                             <tr>
                                 <!-- Student name row -->
                                 <td>
@@ -123,15 +106,19 @@ allowedUserTypes[] = "specialist"
                                                     <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <img class="img-fluid ml-1" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                                     </button>
+
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                        <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'students.table.options.link_1'|_}}</a>
-                                                        {% if user.profile.affiliated %}
-                                                            <a class="dropdown-item display-4" href="{{ 'specialist/adauga-profesor'|page }}" style="color: #1A212C;">{{'students.table.options.link.2'|_}}</a>
-                                                        {% endif %}
+                                                        <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">
+                                                            {{'page.specialist.dashboard.students.table.dropdown.options.link_1'|_}}
+                                                        </a>
+
+                                                        <a class="dropdown-item display-4" style="color: #1A212C;" role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}'>
+                                                            {{ 'page.specialist.dashboard.student.options.archive'|_ }}
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
-                                         </div>
+                                        </div>
 
                                     </div>
                                 </td>
@@ -139,7 +126,7 @@ allowedUserTypes[] = "specialist"
                                 <!-- Student age row -->
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
-                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ student.age }}&nbsp;{{'students.table.age.text'|_}}</p>
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ student.age }}&nbsp;{{'page.specialist.dashboard.students.table.age.text'|_}}</p>
                                     </div>
                                 </td>
 
@@ -151,8 +138,15 @@ allowedUserTypes[] = "specialist"
                                                 <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <img class="img-fluid ml-1" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                                 </button>
+
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                    <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">{{'students.table.options.link_1'|_}}</a>
+                                                    <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">
+                                                        {{'page.specialist.dashboard.students.table.dropdown.options.link_1'|_}}
+                                                    </a>
+
+                                                    <a class="dropdown-item display-4" style="color: #1A212C;" role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}'>
+                                                        {{ 'page.specialist.dashboard.student.options.archive'|_ }}
+                                                    </a>
                                                 </div>
                                             </div>
                                        </div>
@@ -170,90 +164,53 @@ allowedUserTypes[] = "specialist"
             <div class="card bg-white border-0 rounded px-3" style="box-shadow: 0px 0px 32px rgba(136, 152, 170, 0.15);">
                 <div class="border-bottom py-3">
                     <div class="d-flex align-items-center justify-content-between">
-                        <p class="p-0 m-0 display-2 font-weight-light text-gray-2">{{'teacher.dashboard.game.activity.title'|_}}</p>
+                        <p class="p-0 m-0 display-2 font-weight-light text-gray-2">{{'page.specialist.dashboard.game.activity.title'|_}}</p>
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/calendar-icon.svg'|theme }}">
                     </div>
                 </div>
                 <div class="py-3">
                     <div class="students-activity-owl-carousel owl-carousel owl-theme owl-responsive-0">
-                        {% for student in user.profile.students %}
+                        {% for student in user.profile.unarchivedStudents %}
                             <div class="item">
                                 <div class="row">
                                     <!-- Student name and avatar -->
-                            <div class="col-11 col-md-12">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <div style="width: 40px; height:40px">
-                                        {% if student.avatar %}
-                                            <img class="img-fluid img-avatar rounded-circle" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
-                                        {% elseif student.gender == 'female' %}
-                                            <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
-                                        {% else %}
-                                            <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}" alt="avatar">
-                                        {% endif %}
+                                    <div class="col-11 col-md-12">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <div style="width: 40px; height:40px">
+                                                {% if student.avatar %}
+                                                    <img class="img-fluid img-avatar rounded-circle" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
+                                                {% elseif student.gender == 'female' %}
+                                                    <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
+                                                {% else %}
+                                                    <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}" alt="avatar">
+                                                {% endif %}
+                                            </div>
+                                            <div class="d-flex flex-column ml-2">
+                                                <h6 class="p-0 m-0 font-weight-bold" style="color: #525F7F;">{{ student.full_name }}</h6>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column ml-2">
-                                        <h6 class="p-0 m-0 font-weight-bold" style="color: #525F7F;">{{ student.full_name }}</h6>
-                                    </div>
-                                </div>
-                            </div>
 
-                                <!-- Student donut chart database details in style -->
-                                <div class="col-11 col-md-12">
-                                    <div class="d-flex align-items-center justify-content-center mt-3">
-                                        <div class="donut" style="--first: .60; --second: .30; --third: .10; --fourth: .02; --fifth: .02; --donut-spacing: 0;">
-                                            <div class="donut__slice donut__slice__first"></div>
-                                            <div class="donut__slice donut__slice__second"></div>
-                                            <div class="donut__slice donut__slice__third"></div>
-                                            <!-- <div class="donut__slice donut__slice__fourth"></div>
-                                            <div class="donut__slice donut__slice__fifth"></div> -->
-                                            <div class="donut__label">
-                                                <div class="donut__label__heading">
-                                                    <p class="display-4 text-rgba-black">xxx {{'teacher.dashboard.admin.panel.donut.chart.games.number'|_}}</p>
-                                                    </div>
-                                            </div>
-                                            </div>
+                                    <!-- Student donut chart -->
+                                    <div class="col-12 d-flex align-items-center justify-content-center py-3">
+                                        <canvas id="donut-{{student.id}}" width="400px" height="400px"></canvas>
                                     </div>
-                                </div>
-                                </div>
 
-                                <!-- Student chart legend -->
-                                <div class="row mt-4 pb-3 px-lg-5">
-                                    <div class="col-6 offset-4 col-md-4 offset-md-0">
-                                        <div class="d-flex align-items-center justify-content-lg-center">
-                                            <div class="dot rounded-circle bg-chart-red" style="height: 10px; width: 10px;"></div>
-                                            <p class="p-0 m-0 ml-2 text-rgba-black" style="font-size: 12px;">{{'teacher.dashboard.admin.panel.donut.chart.legend_1'|_}}</p>
+                                    <!-- Student lesson description -->
+                                    <div class="col-12 border-top py-3"></div>
+                                    <div class="col-1">
+                                        <div class="d-flex justify-content-center" style="width: 30px; height: 30px;">
+                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/edit.svg'|theme }}">
                                         </div>
                                     </div>
-                                    <div class="col-6 offset-4 col-md-4 offset-md-0">
-                                        <div class="d-flex align-items-center justify-content-lg-center">
-                                            <div class="dot rounded-circle bg-chart-yellow" style="height: 10px; width: 10px;"></div>
-                                            <p class="p-0 m-0 ml-2 text-rgba-black" style="font-size: 12px;">{{'teacher.dashboard.admin.panel.donut.chart.legend_2'|_}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 offset-4 col-md-4 offset-md-0">
-                                        <div class="d-flex align-items-center justify-content-lg-center">
-                                            <div class="dot rounded-circle bg-chart-green" style="height: 10px; width: 10px;"></div>
-                                            <p class="p-0 m-0 ml-2 text-rgba-black" style="font-size: 12px;">{{'teacher.dashboard.admin.panel.donut.chart.legend_3'|_}}</p>
+                                    <div class="col-10">
+                                        <div class="pl-1 pl-lg-0">
+                                            <p class="p-0 m-0 small text-rgba-black font-weight-normal">{{'page.specialist.dashboard.donut.chart.despre'|_}}&nbsp;<span class="font-weight-bold">{{ student.full_name }}</span></p>
+                                            <p class="p-0 m-0 py-1 display-4 text-rgba-black">{{student.description|raw}}</p>
+                                            <a class="display-4 text-blue" href="{{ 'specialist/student-edit'|page({id: student.id }) }}">{{'page.specialist.dashboard.donut.chart.link'|_}}</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="border-top bg-white py-3">
-                                    <div class="row">
-                                        <div class="col-1 pr-0 mr-0">
-                                            <div class="d-flex justify-content-center" style="width: 30px; height: 30px;">
-                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/edit.svg'|theme }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-10">
-                                            <div class="pl-1 pl-lg-0">
-                                                <p class="p-0 m-0 small text-rgba-black font-weight-normal">{{'teacher.dashboard.admin.panel.donut.chart.student.despre'|_}} <span class="font-weight-bold">Daniel</span></p>
-                                                <p class="p-0 m-0 py-1 display-4 text-rgba-black">Condimentum egestas eu ac varius eu, varius nec, sit viverra. Lectus aliquam et vitae id nec sociis amet augue mattis. </p>
-                                                <a class="display-4 text-blue" href="">{{'teacher.dashboard.admin.panel.donut.chart.link.text'|_}}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         {% endfor %}
                     </div>
@@ -262,6 +219,9 @@ allowedUserTypes[] = "specialist"
         </div>
     </div>
 </div>
+
+<!-- Partial for archiving a student -->
+{% partial 'web-app/general/student-archive' %}
 
 {% put scripts %}
     <script type="text/javascript">
@@ -272,75 +232,112 @@ allowedUserTypes[] = "specialist"
             ***********************************************/
 
             $('#students-datatable').DataTable({
-                dom: '<"row"<"col-12 added-content">><"row"<"col-12"t>><"row bg-white"<"col-12 p-3 teacher-dashboard-pagination d-flex align-items-center justify-content-end"p>>',
+                dom: '<"row"<"col-12"><"col-12 added-content">><"row"<"col-12"t>><"row bg-white p-3 rounded-bottom"<"col-6 d-flex align-items-center"l><"col-6 d-flex align-items-center justify-content-end"ip>>',
+                lengthMenu: [
+                    [5, 10, 25, 50, 100, -1],
+                    [5, 10, 25, 50, 100]
+                ],
+                bSort: true,
                 responsive: true,
                 processing: true,
-                bSort: true,
-                pagingType: 'full_numbers',
+                pagingType: 'simple',
                 language: {
                     "info": "_PAGE_ - _PAGE_ of _PAGES_",
-                    'zeroRecords': "{{'studentsTableNoRecordsText'|_}}",
-                    'emptyPanes': "{{'studentsTableNoPanesText'|_}}",
-                    'emptyTable': "{{'studentsTableNoEntriesText'|_}}",
+                    'zeroRecords': "{{'general.datatable.zeroRecords'|_}}",
+                    'emptyPanes': "{{'general.datatable.emptyPanes'|_}}",
+                    'emptyTable': "{{'general.datatable.emptyTable'|_}}",
                     'search': '',
-                    'searchPlaceholder': "Cauta un elev dupa nume",
+                    'searchPlaceholder': "{{'page.specialist.dashboard.students.table.search.placeholder'|_}}",
+                    'lengthMenu': "{{'general.datatable.lengthMenu'|_}}: _MENU_",
                     'paginate': {
-                        'first': false,
+                        'first': '«',
                         'previous': '‹',
                         'next': '›',
-                        'last': false,
+                        'last': '»',
                     },
                     'aria': {
                         'paginate': {
-                            'previous': "{{'studentsTablePaginationLastText'|_}}",
-                            'next': "{{'studentsTablePaginationNextText'|_}}",
+                            'first': "{{'general.datatable.first'|_}}",
+                            'previous': "{{'general.datatable.previous'|_}}",
+                            'next': "{{'general.datatable.next'|_}}",
+                            'last': "{{'general.datatable.last'|_}}"
                         }
                     }
                 }
             });
-            $('.added-content').html('<div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);"> <div class="col-12 col-lg-7"> <p class="display-2 font-weight-light text-gray-2">{{"students.table.title"|_}}</p> </div> <div class="col-12 col-lg-5"> <div class="d-flex align-items-center justify-content-start justify-content-lg-end"> <img class="img-fluid" src="{{ "assets/img/svg/dashboard/arrow-right.svg"|theme }}"><a class="ml-2 display-4 text-gray-light" href="{{ "specialist/students"|page }}">{{"students.table.all.students.link.text"|_}}</a> </div> </div> </div>');
+            $('.added-content').html('\
+                <div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">\
+                    <div class="col-12 col-lg-7">\
+                        <p class="display-2 font-weight-light text-gray-2">{{"page.specialist.students.table.title"|_}}</p>\
+                    </div>\
+                    <div class="col-12 col-lg-5">\
+                        <div class="d-flex align-items-center justify-content-start justify-content-lg-end">\
+                            <img class="img-fluid" src="{{ "assets/img/svg/dashboard/arrow-right.svg"|theme }}">\
+                            <a class="ml-2 display-4 text-gray-light" href="{{ "specialist/students"|page }}">{{"page.specialist.dashboard.students.table.all.students.link.text"|_}}</a>\
+                        </div>\
+                    </div>\
+                </div>'
+            );
 
             /***********************************************
-            ***************** Panel chart ******************
+            ***************** Donut chart ******************
             ***********************************************/
+            {% for student in user.profile.unarchivedStudents %}
+                var donutChart = new Chart($("#donut-{{student.id}}"), {
+                    type: 'doughnut',
+                    data: {
+                        labels: [
+                            "{{'page.spacialist.dashboard.donut.chart.legend_1'|_}}",
+                            "{{'page.spacialist.dashboard.donut.chart.legend_2'|_}}",
+                            "{{'page.spacialist.dashboard.donut.chart.legend_3'|_}}"
+                        ],
+                        datasets: [{
+                            label: 'legend',
+                                data: [
+                                    {% for category in user.profile.exercises_categories %}
+                                        {{ user.profile.getStudentCategoryLessonsDuration(student.id, category.slug) }},
+                                    {% endfor %}
+                                ],
 
-            /** Chart colors. */
-            var colors = ['#A6CEE3','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+                            backgroundColor: [
+                                {% for category in user.profile.exercises_categories %}
+                                    {% if loop.first %}
+                                        '#F6744F',
+                                    {% else %}
+                                        '{{user.profile.getCategoryColor(category.slug)}}',
+                                    {% endif %}
+                                {% endfor %}
+                            ],
 
-            /** Large line chart. */
-            var chLine = document.getElementById("chLine");
+                            borderWidth: 0
+                        }]
+                    },
 
-            /** Chart data. */
-            var chartData = {
-                labels: ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"],
-                datasets: [{
-                    data: [1, 2, 4, 3, 2, 3, 5, 0, 2, 4, 0, 2],
-                    backgroundColor: 'transparent',
-                    borderColor: colors[0],
-                    borderWidth: 2,
-                    pointBackgroundColor: colors[0]
-                }]
-            };
-
-            /** Chart options */
-            if (chLine) {
-                new Chart(chLine, {
-                    type: 'line',
-                    data: chartData,
                     options: {
-                        responsive: true,
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: false,
-                                    precision:0,
-                                }
-                            }]
+                        cutoutPercentage: 75,
+                        responsive: false,
+                        elements: {
+                            center: {
+                                text: "{{ user.profile.getStudentLessonsCount(student.id) }} {{'page.specialist.dashboard.donut.chart.games.number'|_}}",
+                                color: 'rgba(0, 0, 0, 0.6)',
+                                fontStyle: 'Open Sans',
+                                sidePadding: 20,
+                                minFontSize: 20,
+                                lineHeight: 25
+                            }
                         },
-                        legend: { display: false }
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                fontColor: 'rgba(0, 0, 0, 0.6)',
+                                usePointStyle: true,
+                                padding: 25
+                            }
+                        }
                     }
                 });
-            }
+            {% endfor %}
         });
     </script>
 {% endput %}

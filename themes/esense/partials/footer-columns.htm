@@ -2,83 +2,61 @@ description = "Partial that displayes the footer columns"
 
 [viewBag]
 ==
-<section class="w-100 bg-secondary2 pt-3 py-5">
-    <div class="container pt-3">
-        <div class="row">
-
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="d-flex flex-column">
-                    <a class="text-white mb-3" href="{{ 'termeni-si-conditii'|staticPage }}" style="line-height: 25px;">{{'footer.columns.link_1'|_}}</a>
-                    <a class="text-white mb-3" href="{{ 'politica-de-confidentialitate'|staticPage }}" style="line-height: 25px;">{{'footer.columns.link_2'|_}}</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="d-flex flex-column align-items-lg-center">
+<section class="w-100 bg-secondary2">
+    <div class="container py-5">
+        <div class="row mt-3 pb-5">
+            <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center justify-content-center">
+                <div class="d-flex align-items-center justify-content-center my-3 my-lg-0">
+                    <span class="text-white" style="line-height: 25px; font-size:12px;">{{'footer.columns.proiect.implemented.text'|_}}</span>
                     <div>
-                        <div class="mb-3">
-                            <a class="text-white" href="{{ 'intrebari-si-raspunsuri'|staticPage }}" style="line-height: 25px;">{{'footer.columns.link_3'|_}}</a>
-                        </div>
-                        <div class="mb-3">
-                            <a class="text-white" href="{{ 'authentification/register-form'|page }}" style="line-height: 25px;">{{'footer.columns.link_4'|_}}</a>
-                        </div>
+                        <img class="img-fluid ml-1" height="80px" src="{{ 'assets/img/svg/esense-footer-columns-logo.svg'|theme }}" alt="Logo pentru Fundația Sense Internationl Romania">
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="d-flex flex-column align-items-lg-center">
+            <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center justify-content-center my-3 my-lg-0">
+                <div class="d-flex align-items-center">
+                    <span class="text-white" style="line-height: 25px; font-size:12px;">{{'footer.columns.proiect.developed.text'|_}}</span>
                     <div>
-                        <div class="mb-3">
-                            <a class="text-white" href="{{ 'landing-pages/about-project'|page }}" style="line-height: 25px;">{{'footer.columns.link_5'|_}}</a>
-                        </div>
-                        <div class="mb-3">
-                            <a class="text-white" href="{{ 'landing-pages/esense-home'|page }}#contact" style="line-height: 25px;">{{'footer.columns.link_6'|_}}</a>
-                        </div>
+                        <img class="img-fluid ml-2" src="{{ 'assets/img/svg/footer-columns-code-for-romania-logo.svg'|theme }}" alt="Logo pentru Code for Romania">
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6 col-lg-2">
-                <div class="d-flex flex-column align-items-lg-end">
+            <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center justify-content-center my-3 my-lg-0">
+                <div class="d-flex align-items-center justify-content-center">
+                    <span class="text-white" style="line-height: 25px; font-size:12px;">{{'footer.columns.proiect.financed.text'|_}}</span>
                     <div>
-                        <div class="mb-3">
-                            <a class="text-white" target="_blank" href="https://www.fundatiaorange.ro/" style="line-height: 25px;">{{'footer.columns.link_7'|_}}</a>
-                        </div>
-                        <div class="mb-3">
-                            <a class="text-white" target="_blank" href="https://code4.ro/ro/" style="line-height: 25px;">{{'footer.columns.link_8'|_}}</a>
-                        </div>
+                        <img class="img-fluid ml-2" src="{{ 'assets/img/svg/footer-orange-logo.svg'|theme }}" alt="Logo pentru compania Orange">
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row pt-lg-5 mt-lg-5">
-            <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                <div class="d-flex align-items-center">
-                    <span class="text-white mt-3" style="line-height: 25px;">{{'footer.columns.proiect.implemented.text'|_}}</span>
-                    <div>
-                        <img class="img-fluid ml-md-2" src="{{ 'assets/img/svg/esense-footer-columns-logo.svg'|theme }}">
-                    </div>
-                </div>
+        <div class="row mt-3">
+            <div class="col-12 d-flex align-items-center justify-content-between flex-column flex-lg-row">
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{'landing-pages/esense-home'|page}}#parteneri" style="line-height: 25px;">{{'partial.footer.columns.link1'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{ 'landing-pages/about-project'|page }}" style="line-height: 25px;">{{'partial.footer.columns.link2'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{ 'intrebari-si-raspunsuri'|staticPage }}" style="line-height: 25px;">{{'partial.footer.columns.link3'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{ 'politica-de-confidentialitate'|staticPage }}" style="line-height: 25px;">{{'partial.footer.columns.link4'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{ 'termeni-si-conditii'|staticPage }}" style="line-height: 25px;">{{'partial.footer.columns.link5'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0 btn btn-lg btn-success px-lg-5 py-lg-3 d-none" style="line-height: 21px; font-size:14px;" href="">{{'partial.footer.columns.link6'|_}}</a>
             </div>
-
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="d-flex align-items-baseline">
-                    <span class="text-white" style="line-height: 25px;">{{'footer.columns.proiect.financed.text'|_}}</span>
-                    <div class="d-flex align-items-baseline">
-                        <span class="font-weight-bolder ml-2 mr-1" style="color: #fff; font-size: 20px;">{{'homePage.despre.proiect.orange.text'|_}}</span>
-                        <img class="img-fluid" src="{{ 'assets/img/svg/orange-logo.svg'|theme }}">
-                    </div>
+            <div class="col-12 border-top m-0 p-0 my-5"></div>
+            <div class="col-12 d-flex align-items-center justify-content-between flex-column flex-lg-row mb-3">
+                <div class="my-2 my-lg-0">
+                    <p class="p-0 m-0 display-4 text-white">{{'partial.footer.columns.info.text1'|_}}</p>
                 </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-lg-end">
-                <div class="d-flex align-items-center mt-lg-n3">
-                    <span class="text-white pb-1" style="line-height: 25px;">{{'footer.columns.proiect.developed.text'|_}}</span>
-                    <div class="mt-lg-n4">
-                        <img class="img-fluid" src="{{ 'assets/img/svg/footer-columns-code-for-romania-logo.svg'|theme }}">
-                    </div>
+                <div class="my-2 my-lg-0">
+                    <p class="p-0 m-0 display-4 text-white">{{'partial.footer.columns.info.text2'|_}}</p>
+                </div>
+                <div class="d-flex align-items-center my-2 my-lg-0">
+                    <p class="p-0 m-0 display-4 text-white">{{'partial.footer.columns.info.text3'|_}}</p>
+                    <a class="ml-2 text-white display-4" style="text-decoration: underline;" href="mailto:contact@esense.ro" target="_blank">{{'partial.footer.columns.info.email'|_}}</a>
+                </div>
+                <div class="d-flex align-items-center my-2 my-lg-0">
+                    <p class="p-0 m-0 display-4 text-white">{{'partial.footer.columns.info.text4'|_}}</p>
+                    <a class="ml-2 text-white display-4" style="text-decoration: underline;" href="http://surdocecitate.ro" target="_blank">{{'partial.footer.columns.info.website'|_}}</a>
                 </div>
             </div>
         </div>

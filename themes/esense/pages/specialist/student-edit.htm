@@ -18,7 +18,7 @@ allowedUserTypes[] = "specialist"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{'teacher.dashboard.edit.student.profile.back.link.text'|_}}</a>
+                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{'page.specialist.dashboard.student.back.link'|_}}</a>
             </div>
         </div>
 
@@ -27,7 +27,7 @@ allowedUserTypes[] = "specialist"
             <div class="rounded shadow bg-white p-3 p-lg-4">
 
                 <div class="border-bottom">
-                    <p class="text-muted">{{'teacher.dashboard.student.add.profile.title'|_}}</p>
+                    <p class="text-muted">{{'page.specialist.dashboard.student.add.profile.title'|_}}</p>
                 </div>
 
                 <!-- Form for editing student -->
@@ -39,18 +39,22 @@ allowedUserTypes[] = "specialist"
                             <div class="row">
                                 <!-- Nav for switching gender -->
                                 <div class="col-12 col-md-6">
-                                    <p class="py-3 text-muted">{{'teacher.dashboard.student.add.profile.gen.title'|_}}</p>
+                                    <p class="py-3 text-muted">{{'page.specialist.dashboard.student.add.profile.gen.title'|_}}</p>
                                     <div class="d-flex">
                                         <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link {% if student.gender == 'female' %} active {% endif %} btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-home-tab" data-gender="female" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">{{'teacher.dashboard.student.add.gen.fata'|_}}</a>
-                                            <a class="nav-link {% if student.gender == 'male' %} active {% endif %} ml-3 ml-lg-4 btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-profile-tab" data-gender="male" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{'teacher.dashboard.student.add.gen.baiat'|_}}</a>
+                                            <a class="nav-link onChangeValue {% if student.gender == 'female' %} active {% endif %} btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-home-tab" data-gender="female" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                                {{'page.specialist.dashboard.student.add.gen.fata'|_}}
+                                            </a>
+                                            <a class="nav-link onChangeValue {% if student.gender == 'male' %} active {% endif %} ml-3 ml-lg-4 btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-profile-tab" data-gender="male" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                                                {{'page.specialist.dashboard.student.add.gen.baiat'|_}}
+                                            </a>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                                    <p class="p-0 m-0 pt-3 text-muted">{{'teacher.dashboard.student.add.profile.avatar'|_}}</p>
+                                    <p class="p-0 m-0 pt-3 text-muted">{{'page.specialist.dashboard.student.add.profile.avatar'|_}}</p>
 
                                     <div class="tab-content" id="v-pills-tabContent">
                                         <!-- Girl avatars -->
@@ -101,7 +105,7 @@ allowedUserTypes[] = "specialist"
                                         <!-- Input for adding custom avatar -->
                                         <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
                                         <!-- Input for gender -->
-                                        <input name="gender" id="gender" class="d-none" type="text" value="female" />
+                                        <input name="gender" id="gender" class="d-none onChangeValue" type="text" value="{{student.gender}}" />
 
                                     </div>
                                 </div>
@@ -110,8 +114,8 @@ allowedUserTypes[] = "specialist"
 
                         <!-- Edit date of birth -->
                         <div class="col-12">
-                            <p class="text-muted mt-5">{{'teacher.dashboard.student.add.profile.personal.data'|_}}</p>
-                            <p class="display-4 text-gray-light">{{'teacher.dashboard.student.add.profile.dob.label'|_}}</p>
+                            <p class="text-muted mt-5">{{'page.specialist.dashboard.student.edit.profile.personal.data'|_}}</p>
+                            <p class="display-4 text-gray-light">{{'page.specialist.dashboard.student.edit.profile.dob.label'|_}}</p>
                             <div class="row">
 
                                 <!-- Select date -->
@@ -128,7 +132,7 @@ allowedUserTypes[] = "specialist"
                         <!-- Input last name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input  type="text" class="form-control onChangeValue" name="surname" id="surname" placeholder="{{'teacher.dashboard.student.add.profile.input.last.name'|_}}" value="{{student.surname}}">
+                                <input  type="text" class="form-control onChangeValue" name="surname" id="surname" placeholder="{{'page.specialist.dashboard.student.profile.input.last.name'|_}}" value="{{student.surname}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
@@ -136,15 +140,16 @@ allowedUserTypes[] = "specialist"
                         <!-- Input first name -->
                         <div class="col-12 col-md-6">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'teacher.dashboard.student.add.profile.input.first.name'|_}}" value="{{student.name}}">
+                                <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'page.specialist.dashboard.student.profile.input.first.name'|_}}" value="{{student.name}}">
                                 <span class="text-danger ml-2">*</span>
                             </div>
                         </div>
 
                         <!-- Input diagnostic description -->
                         <div class="col-12">
+                            <label class="small" style="color: #BFB5BD;">{{'page.specialist.dashboard.student.profile.input.diagnostic'|_}}</label>
                             <div class="form-group d-flex">
-                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3" placeholder="{{'teacher.dashboard.student.add.profile.textarea.diagnostic'|_}}">
+                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3">
                                     {{student.description|raw}}
                                 </textarea>
                                 <span class="text-danger ml-2">*</span>
@@ -158,8 +163,8 @@ allowedUserTypes[] = "specialist"
                                 <div class="col-12 col-md-6 ml-lg-0 pl-lg-0">
                                     <div class="d-flex mb-3 mb-md-0">
                                         <div class="form-check">
-                                            <label class="form-check-label display-4 text-gray-light" for="hearing_impairment">{{'teacher.dashboard.student.add.profile.checkbox1.label'|_}}</label>
-                                            <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.hearing_impairment %} checked {% endif %}>
+                                            <label class="form-check-label display-4 text-gray-light" for="hearing_impairment">{{'page.specialist.dashboard.student.add.profile.checkbox1.label'|_}}</label>
+                                            <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'page.specialist.dashboard.student.toggle.yes'|_}}" data-off="{{'page.specialist.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.hearing_impairment %} checked {% endif %}>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -169,8 +174,8 @@ allowedUserTypes[] = "specialist"
                                 <div class="col-12 col-md-6">
                                     <div class="d-flex">
                                         <div class="form-check">
-                                            <label class="form-check-label display-4 text-gray-light" for="visual_impairment">{{'teacher.dashboard.student.add.profile.checkbox2.label'|_}}</label>
-                                            <input class="onChangeValue" name="visual_impairment" id="visual_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'teacher.dashboard.student.toggle.yes'|_}}" data-off="{{'teacher.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.visual_impairment %} checked {% endif %}>
+                                            <label class="form-check-label display-4 text-gray-light" for="visual_impairment">{{'page.specialist.dashboard.student.add.profile.checkbox2.label'|_}}</label>
+                                            <input class="onChangeValue" name="visual_impairment" id="visual_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'page.specialist.dashboard.student.toggle.yes'|_}}" data-off="{{'page.specialist.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.visual_impairment %} checked {% endif %}>
                                         </div>
                                         <span class="text-danger ml-2">*</span>
                                     </div>
@@ -186,9 +191,9 @@ allowedUserTypes[] = "specialist"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_1_surname'
-                                contactPersonFirstNameId = 'contact_1_name'
-                                contactPersonPhoneId = 'contact_1_phone'
+                                contactPersonLastNameId = 'contact_1_surname_id'
+                                contactPersonFirstNameId = 'contact_1_name_id'
+                                contactPersonPhoneId = 'contact_1_phone_id'
                                 addContactPerson = 'add-contact-1'
                                 contactPersonObservationsId = 'one'
                                 hideId = 'hide-1'
@@ -214,9 +219,9 @@ allowedUserTypes[] = "specialist"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_2_surname'
-                                contactPersonFirstNameId = 'contact_2_name'
-                                contactPersonPhoneId = 'contact_2_phone'
+                                contactPersonLastNameId = 'contact_2_surname_id'
+                                contactPersonFirstNameId = 'contact_2_name_id'
+                                contactPersonPhoneId = 'contact_2_phone_id'
                                 addContactPerson = 'add-contact-2'
                                 contactPersonObservationsId = 'two'
                                 hideId = 'hide-2'
@@ -243,9 +248,9 @@ allowedUserTypes[] = "specialist"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_3_surname'
-                                contactPersonFirstNameId = 'contact_3_name'
-                                contactPersonPhoneId = 'contact_3_phone'
+                                contactPersonLastNameId = 'contact_3_surname_id'
+                                contactPersonFirstNameId = 'contact_3_name_id'
+                                contactPersonPhoneId = 'contact_3_phone_id'
                                 addContactPerson = 'add-contact-3'
                                 contactPersonObservationsId = 'three'
                                 hideId = 'hide-3'
@@ -271,9 +276,9 @@ allowedUserTypes[] = "specialist"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_4_surname'
-                                contactPersonFirstNameId = 'contact_4_name'
-                                contactPersonPhoneId = 'contact_4_phone'
+                                contactPersonLastNameId = 'contact_4_surname_id'
+                                contactPersonFirstNameId = 'contact_4_name_id'
+                                contactPersonPhoneId = 'contact_4_phone_id'
                                 addContactPerson = 'add-contact-4'
                                 contactPersonObservationsId = 'four'
                                 hideId = 'hide-4'
@@ -299,9 +304,9 @@ allowedUserTypes[] = "specialist"
                             {%
                                 partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_5_surname'
-                                contactPersonFirstNameId = 'contact_5_name'
-                                contactPersonPhoneId = 'contact_5_phone'
+                                contactPersonLastNameId = 'contact_5_surname_id'
+                                contactPersonFirstNameId = 'contact_5_name_id'
+                                contactPersonPhoneId = 'contact_5_phone_id'
                                 contactPersonObservationsId = 'five'
                                 addContactPerson = 'add-contact-5'
                                 hideId = 'hide-5'
@@ -325,7 +330,7 @@ allowedUserTypes[] = "specialist"
                          <!-- Submit button -->
                         <div class="col-12 mb-5 mt-3">
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-lg-5" disabled>{{'teacher.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-lg-5" disabled>{{'page.specialist.dashboard.student.edit.profile.submit.btn.text'|_}}</button>
                             </div>
                         </div>
 
@@ -345,7 +350,11 @@ allowedUserTypes[] = "specialist"
         $(document).ready(function () {
 
             /** WYSWYG Editor. */
-            $('#description').richText();
+            $('#description').richText({
+                id:'diagnostic', 
+                class: 'onChangeValue',
+                useParagraph:true
+            });
             $('#one').richText();
             $('#two').richText();
             $('#three').richText();
@@ -396,80 +405,43 @@ allowedUserTypes[] = "specialist"
                 $('.add-student').removeClass('btn-secondary');
             }
 
-            /** Validation for activeting the finish button. */
-            $(document.body).on('change', '.onChangeValue', function(){
+             /** Validation for activeting the finish button. */
+             $(document.body).on('change blur', '.onChangeValue', function(){
                 if(
-                    // (0 !== $("#avatar").val().length) &&
-                    (0 !== $("#birthdate").val().length) &&
-                    (0 !== $("#surname").val().length) &&
-                    (0 !== $("#name").val().length) &&
-                    (0 !== $("#description").val().length) &&
-                    // ($("#hearing_impairment").is(":checked")) &&
-                    // ($("#visual_impairment").is(":checked")) &&
-                    ((
-                        (
-                            (0 !== $("#contact_1_surname").val().length) ||
-                            (0 !== $("#contact_1_name").val().length) ||
-                            (0 !== $("#contact_1_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_1_surname").val().length) &&
-                            (0 !== $("#contact_1_name").val().length) &&
-                            (0 !== $("#contact_1_phone").val().length)
-                        )
+                    (
+                        ((0 !== $("#birthdate").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#surname").val().length)  && ((0 == $("#birthdate").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#name").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#diagnostic .richText-editor").text().length) && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#contact_1_surname_id").val().length) && ((0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#contact_1_name_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#contact_1_phone_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length) || (0 == $("#gender").val().length)  )) ||
+                        ((0 !== $("#gender").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length) || (0 == $("#contact_1_phone_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_2_surname").val().length) ||
-                            (0 !== $("#contact_2_name").val().length) ||
-                            (0 !== $("#contact_2_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_2_surname").val().length) &&
-                            (0 !== $("#contact_2_name").val().length) &&
-                            (0 !== $("#contact_2_phone").val().length)
-                        )
+                        ((0 !== $("#contact_2_surname_id").val().length) && ((0 == $("#contact_2_name_id").val().length) || (0 == $("#contact_2_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_2_name_id").val().length) && ((0 == $("#contact_2_surname_id").val().length) || (0 == $("#contact_2_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_2_phone_id").val().length) && ((0 == $("#contact_2_surname_id").val().length) ||(0 == $("#contact_2_name_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_3_surname").val().length) ||
-                            (0 !== $("#contact_3_name").val().length) ||
-                            (0 !== $("#contact_3_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_3_surname").val().length) &&
-                            (0 !== $("#contact_3_name").val().length) &&
-                            (0 !== $("#contact_3_phone").val().length)
-                        )
+                        ((0 !== $("#contact_3_surname_id").val().length) && ((0 == $("#contact_3_name_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_3_name_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_3_phone_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) ||(0 == $("#contact_3_name_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_4_surname").val().length) ||
-                            (0 !== $("#contact_4_name").val().length) ||
-                            (0 !== $("#contact_4_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_4_surname").val().length) &&
-                            (0 !== $("#contact_4_name").val().length) &&
-                            (0 !== $("#contact_4_phone").val().length)
-                        )
+                        ((0 !== $("#contact_4_surname_id").val().length) && ((0 == $("#contact_4_name_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_4_name_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_4_phone_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) ||(0 == $("#contact_4_name_id").val().length) ))
                     ) ||
                     (
-                        (
-                            (0 !== $("#contact_5_surname").val().length) ||
-                            (0 !== $("#contact_5_name").val().length) ||
-                            (0 !== $("#contact_5_phone").val().length)
-                        ) &&
-                        (
-                            (0 !== $("#contact_5_surname").val().length) &&
-                            (0 !== $("#contact_5_name").val().length) &&
-                            (0 !== $("#contact_5_phone").val().length)
-                        )
-                    ))
+                        ((0 !== $("#contact_5_surname_id").val().length) && ((0 == $("#contact_5_name_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_5_name_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_5_phone_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) ||(0 == $("#contact_5_name_id").val().length) ))
+                    )
                 ) {
-                    activateFinishBtn()
-                } else {
                     deactivateFinishBtn()
+                } else {
+                    activateFinishBtn()
                 }
             });
         });

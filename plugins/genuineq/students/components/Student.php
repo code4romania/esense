@@ -265,6 +265,27 @@ class Student extends ComponentBase
         Event::fire('genuineq.students.student.before.delete', [&$student, post()]);
 
         if ($student) {
+            /** Check if contact person 1 is defined. */
+            if($student->contact_person_1){
+                $student->contact_person_1->forceDelete();
+            }
+            /** Check if contact person 2 is defined. */
+            if($student->contact_person_2){
+                $student->contact_person_2->forceDelete();
+            }
+            /** Check if contact person 3 is defined. */
+            if($student->contact_person_3){
+                $student->contact_person_3->forceDelete();
+            }
+            /** Check if contact person 4 is defined. */
+            if($student->contact_person_4){
+                $student->contact_person_4->forceDelete();
+            }
+            /** Check if contact person 5 is defined. */
+            if($student->contact_person_5){
+                $student->contact_person_5->forceDelete();
+            }
+
             /** Delete the extracted student. */
             $student->forceDelete();
 

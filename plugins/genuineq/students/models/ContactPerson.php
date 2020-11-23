@@ -8,7 +8,6 @@ use Model;
 class ContactPerson extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-
     use \October\Rain\Database\Traits\SoftDelete;
 
     protected $dates = ['deleted_at'];
@@ -19,7 +18,7 @@ class ContactPerson extends Model
         'name',
         'phone',
         'email',
-        'description',
+        'description'
     ];
 
     /**

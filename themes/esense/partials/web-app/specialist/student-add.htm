@@ -9,7 +9,7 @@ description = "Add student partial"
         <div id="search-student" class="rounded-top rounded-bottom bg-white pb-5 px-5 pt-5">
             <div class="d-flex align-items-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/add-yellow.svg'|theme }}">
-                <p class="p-0 m-0 ml-2 display-2 text-dark">{{ 'specialist.students.student.add.modal.title'|_ }}</p>
+                <p class="p-0 m-0 ml-2 display-2 text-dark">{{ 'partial.specialist.student.add.modal.title'|_ }}</p>
             </div>
 
             <div class="form-group mt-3">
@@ -22,22 +22,22 @@ description = "Add student partial"
         <div id="create-profile" class="bg-white rounded p-5">
             <div class="d-flex align-items-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/folder.svg'|theme }}">
-                <p class="p-0 m-0 ml-2 display-2 text-dark">{{ 'specialist.students.student.add.modal.create.title'|_ }}</p>
+                <p class="p-0 m-0 ml-2 display-2 text-dark">{{ 'partial.specialist.student.add.modal.create.title'|_ }}</p>
             </div>
             <div class="d-flex align-items-center justify-content-between mt-3">
-                <p class="p-0 m-0 small text-dark">{{ 'specialist.students.student.add.modal.create.text'|_ }}</p>
-                <a class="text-secondary display-4" href="{{link}}">{{ 'specialist.students.student.add.modal.create.link'|_ }}</a>
+                <p class="p-0 m-0 small text-dark">{{ 'partial.specialist.student.add.modal.create.text'|_ }}</p>
+                <a class="text-secondary display-4" href="{{link}}">{{ 'partial.specialist.student.add.modal.create.link'|_ }}</a>
             </div>
         </div>
 
         <div id="message-container" class="rounded-bottom bg-white pb-5 px-5 d-none">
             <div class="form-group d-flex">
-                <textarea class="form-control" id="message" rows="3" placeholder="Mesajul tau"></textarea>
+                <textarea class="form-control" id="message" rows="3" placeholder="{{ 'partial.specialist.student.message.placeholder'|_ }}"></textarea>
             </div>
 
             <div class="d-flex align-items-center justify-content-end mt-2">
-                <a role="button" id="cancel-request" class="mr-3 text-gray-2 display-4" data-dismiss="modal">{{ 'specialist.students.student.add.modal.cancel'|_ }}</a>
-                <button id="send-request" class="btn btn-sm px-5 btn-secondary">{{ 'specialist.students.student.add.modal.submit'|_ }}</button>
+                <a role="button" id="cancel-request" class="mr-3 text-gray-2 display-4" data-dismiss="modal">{{ 'partial.specialist.student.add.modal.cancel'|_ }}</a>
+                <button id="send-request" class="btn btn-sm px-5 btn-secondary">{{ 'partial.specialist.student.add.modal.submit'|_ }}</button>
             </div>
 
         </div>
@@ -63,7 +63,7 @@ description = "Add student partial"
                     "name": "{{ student.full_name }}",
                     "avatar": "{% if student.avatar %}{{student.avatar.getThumb(30,30, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}",
                     "birthdate": "{{ student.birthdate }}",
-                    "teacher": "{{ student.owner.user.full_name }}"
+                    "teacher": "{{ student.owner.id }}"
                 },
                 {% endfor %}
             ];

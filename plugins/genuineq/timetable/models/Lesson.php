@@ -12,7 +12,12 @@ class Lesson extends Model
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\SoftDelete;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'day',
+        'deleted_at',
+        'created_at',
+        'updated_at'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +27,7 @@ class Lesson extends Model
         'day',
         'start_hour',
         'end_hour',
+        'duration',
         'title',
         'description',
         'feedback',

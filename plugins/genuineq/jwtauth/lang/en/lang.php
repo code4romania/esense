@@ -1,6 +1,4 @@
-<?php
-
-return [
+<?php return [
     'plugin' => [
         'name' => 'JWTAuth',
         'description' => 'JSON Web Token Authentication.',
@@ -66,7 +64,7 @@ return [
             ],
             'blacklist_grace_period' => [
                 'label' => 'Blacklist Grace Period',
-                'comment' => 'Set grace period in seconds to prevent parallel request failure.'
+                'comment' => 'Set grace period (in seconds) to prevent parallel request failure.'
             ],
             'decrypt_cookies' => [
                 'label' => 'Encrypt the cookies',
@@ -100,7 +98,7 @@ return [
             'reset_password_page' => [
                 'label' => 'Password reset page',
                 'comment' => ''
-            ]
-        ]
-    ]
+            ],
+        ],
+    ],
 ];

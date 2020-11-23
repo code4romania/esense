@@ -5,6 +5,7 @@ use Auth;
 use Lang;
 use Mail;
 use Flash;
+use Event;
 use Redirect;
 use Validator;
 use ValidationException;
@@ -266,6 +267,10 @@ class Specialist extends ComponentBase
         $specialist = $user->profile->archivedSpecialists()->where('id', post('id'))->first();
 
         if ($specialist) {
+
+            /** Fire event before specialist is deleted. */
+            Event::fire('genuineq.specialist.change.student.owner.before.delete', [$specialist]);
+
             /** Delete the extracted specialist. */
             $specialist->forceDelete();
 

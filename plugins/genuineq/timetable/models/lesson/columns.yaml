@@ -1,18 +1,18 @@
 columns:
     title:
-        label: 'genuineq.timetable::lang.backend.timetable.fields.title'
+        label: 'genuineq.timetable::lang.backend.timetable.columns.title'
         type: text
         searchable: true
         sortable: true
 
     description:
-        label: 'genuineq.timetable::lang.backend.timetable.fields.description'
+        label: 'genuineq.timetable::lang.backend.timetable.columns.description'
         type: text
         searchable: true
         invisible: true
 
     feedback:
-        label: 'genuineq.timetable::lang.backend.timetable.fields.feedback'
+        label: 'genuineq.timetable::lang.backend.timetable.columns.feedback'
         type: text
         searchable: true
         invisible: true
@@ -23,18 +23,25 @@ columns:
         invisible: true
 
     day:
-        label: 'genuineq.timetable::lang.backend.timetable.fields.day'
+        label: 'genuineq.timetable::lang.backend.timetable.columns.day'
         type: date
         searchable: true
         sortable: true
 
     start_hour:
-        label: 'genuineq.timetable::lang.backend.timetable.fields.start_hour'
+        label: 'genuineq.timetable::lang.backend.timetable.columns.start_hour'
         type: time
 
     end_hour:
-        label: 'genuineq.timetable::lang.backend.timetable.fields.end_hour'
+        label: 'genuineq.timetable::lang.backend.timetable.columns.end_hour'
         type: time
+
+    duration:
+        type: number
+        label: 'genuineq.timetable::lang.backend.timetable.columns.duration'
+        searchable: true
+        sortable: true
+        invisible: true
 
     created_at:
         label: 'genuineq.timetable::lang.backend.timetable.columns.created_at'

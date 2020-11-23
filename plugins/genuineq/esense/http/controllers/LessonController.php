@@ -4,6 +4,7 @@ use Log;
 use Lang;
 use Request;
 use Exception;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Genuineq\JWTAuth\Classes\JWTAuth;
@@ -33,14 +34,40 @@ class LessonController extends Controller
             );
         }
 
+        /** Validate the date. */
+        if (Carbon::now()->format('Y-m-d') != post('date')) {
+            return response()->json(
+                ['error' => Lang::get('genuineq.esense::lang.components.lessonsActions.message.invalid_date'),],
+                Response::HTTP_FORBIDDEN
+            );
+        }
+
+        /** Validate the hours. */
+        if (post('startHour') >= post('endHour')) {
+            return response()->json(
+                ['error' => Lang::get('genuineq.esense::lang.components.lessonsActions.message.invalid_hours'),],
+                Response::HTTP_FORBIDDEN
+            );
+        }
+
+        /** Validate the category. */
+        /** Extract the exercises categories. */
+        $categoriesSlugs = $auth->user()->profile->exercises_categories->pluck('slug')->toArray();
+        if (!in_array(post('category'), $categoriesSlugs)) {
+            return response()->json(
+                ['error' => Lang::get('genuineq.esense::lang.components.lessonsActions.message.invalid_category') . implode(", ", $categoriesSlugs),],
+                Response::HTTP_FORBIDDEN
+            );
+        }
+
         /** Create a new Lesson. */
         $lesson = Lesson::create([
             'day' => post('date'),
             'start_hour' => post('startHour'),
             'end_hour' => post('endHour'),
-            'title' => post('title'),
-            'description' => post('description'),
-            'feedback' => post('feedback'),
+            'title' => ((post('title')) ? (post('title')) : ('')),
+            'description' => ((post('description')) ? (post('description')) : ('')),
+            'feedback' => ((post('feedback')) ? (post('feedback')) : ('')),
             'connection_id' => $student->connections->where('specialist_id', $auth->user()->profile->id)->first()->id,
             'category' => post('category')
         ]);

@@ -7,33 +7,12 @@
 
     <div class="d-none d-lg-block">
         <div class="d-flex align-items-center">
-            <p class="p-0 m-0 pl-3 user-name">{{'teacher.dashboard.top.nav.welcome.message'|_}}&nbsp;{{ user.full_name }}</p>
+            <p class="p-0 m-0 pl-3 user-name">{{'partial.navs.top.nav.welcome.message'|_}}&nbsp;{{ user.full_name }}</p>
         </div>
     </div>
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto d-flex align-items-center">
-
-        <!-- Topbar search desktop -->
-        <form class="form-inline my-auto navbar-search mr-3 d-none">
-            <div class="input-group d-flex align-items-center">
-                <input type="text" class="form-control" placeholder="{{'teacher.dashboard.top.nav.search.placeholder'|_}}">
-            </div>
-        </form>
-        <!-- Search mobile version -->
-        <li class="nav-item dropdown no-arrow d-none">
-            <a class="nav-link" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-            </a>
-            <!-- Dropdown - Messages -->
-            <div class="dropdown-menu dropdown-menu-center py-3 px-0 mx-0 top-nav-dropdown-search" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                    <div class="input-group d-flex align-items-center justify-content-center px-3">
-                        <input type="text" class="form-control" placeholder="{{'teacher.dashboard.top.nav.search.placeholder'|_}}">
-                    </div>
-                </form>
-            </div>
-        </li>
 
         {% if user and 'specialist' == user.type and user.profile.affiliated %}
             <!-- Nav Item - Alerts -->

@@ -11,7 +11,10 @@ use Genuineq\ContactForm\Models\Message as MessageModel;
 
 class Messages extends Controller
 {
-    public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController'];
+    public $implement = [
+        'Backend\Behaviors\ListController',
+        'Backend\Behaviors\FormController'
+    ];
 
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
@@ -29,18 +32,17 @@ class Messages extends Controller
      */
     public function onReplyForm()
     {
-        /*Get the selected record ID */
-        $this->asExtension('FormController')->update(post('record_id'));
-
-        /* Get all model fields */
+        /** Extract the message. */
         $messageToReply = MessageModel::find(post('record_id'));
 
-        /* Add variables to view */
+        /** Initialize the Form behavior. */
+        $this->asExtension('FormController')->initForm($messageToReply);
+
+        /** Add variables to view. */
         $this->vars['recordId'] = $messageToReply->id;
         $this->vars['email'] = $messageToReply->email;
 
         return $this->makePartial('reply_form');
-
     }
 
 
@@ -54,21 +56,24 @@ class Messages extends Controller
      */
     public function onReply()
     {
+        /**
+         * Extract the email value from the hidden field
+         *  because default one is disabled.
+         */
+        $receiverEmail = post('email');
 
-        $receiverEmail = post('email'); /* Email value from hidden field, because in view is disabled */
-        $messageToReply = wordwrap(post('Message[message]'), 70); /* Wrap  text to 70 chars line long */
-
+        /** Construnct the email body message. */
         $bodyMessage = [
-            'text' => $messageToReply,
+            'html' => post('Message[reply_message]'),
             'raw' => true
         ];
 
         $data = [
             'email' => post('email'),
-            'message' => strip_tags(post('Message[message]')),
+            'message' => post('Message[reply_message]'),
         ];
 
-        /* try to SEND email */
+        /** Try to SEND html email. */
         try {
 
             if ($this->validateReceiverEmail($receiverEmail)) {
@@ -76,13 +81,6 @@ class Messages extends Controller
                     $message->subject(Lang::get('genuineq.contactform::lang.backend.email.subject'));
                     $message->to($receiverEmail);
                 });
-
-                /* Create/Save reply message to database if no errors occurs */
-                MessageModel::create([
-                    'first_name' => 'Admin', /* required / can be empty string, but not NULL */
-                    'email' => $receiverEmail,
-                    'message' => $messageToReply,
-                ]);
 
                 /* Set replied_at timestamp to the reply message */
                 $modelToUpdate = MessageModel::find(post('record_id'));
@@ -95,12 +93,10 @@ class Messages extends Controller
             }
 
         } catch (\InvalidArgumentException $ex) {
-
             /* Write error to log and flash a message to admin frontend */
             Log::error('Invalid user email address in the message with id = ' . post('record_id') . '. Error: ' . $ex);
             Flash::error(Lang::get('genuineq.contactform::lang.backend.flash.invalid_email'), 20);
         }
-
     }
 
 
@@ -126,8 +122,5 @@ class Messages extends Controller
         } else {
             return true;
         }
-
     }
-
-
 }

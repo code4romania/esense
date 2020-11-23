@@ -10,19 +10,19 @@
             'description' => 'Allows to create, accept and decline student access requests.',
 
             'message' => [
-                'access_request_success_creation' => 'Cererea de acces a fost creată cu success.',
-                // 'access_request_failed_creation' => 'Cererea de acces nu a putut fi a fost creată.',
-                'access_request_success_approval' => 'Cererea de acces a fost aprobată cu success.',
-                'access_request_failed_approval' => 'Cererea de acces nu a putut fi aprobată.',
-                'access_request_success_decline' => 'Cererea de acces a fost respinsă cu success.',
-                'access_request_failed_decline' => 'Cererea de acces nu a putut fi refuzată.',
+                'access_request_success_creation' => 'Access request created successfully.',
+                'access_request_failed_creation' => 'The access request could not be created.',
+                'access_request_success_approval' => 'Access request successfully approved.',
+                'access_request_failed_approval' => 'Access request could not be approved.',
+                'access_request_success_decline' => 'The access request was successfully rejected.',
+                'access_request_failed_decline' => 'Access request could not be denied.',
 
-                'transfer_request_success_creation' => 'Cererea de transfer a fost creată cu success.',
-                'transfer_request_failed_creation' => 'Cererea de transfer nu a putut fi a fost creată.',
-                'transfer_request_success_approval' => 'Cererea de transfer a fost aprobată cu success.',
-                'transfer_request_failed_approval' => 'Cererea de transfer nu a putut fi aprobată.',
-                'transfer_request_success_decline' => 'Cererea de transfer a fost respinsă cu success.',
-                'transfer_request_failed_decline' => 'Cererea de transfer nu a putut fi refuzată.',
+                'transfer_request_success_creation' => 'The transfer request was created successfully.',
+                'transfer_request_failed_creation' => 'The transfer request could not be created.',
+                'transfer_request_success_approval' => 'The transfer request was approved successfully.',
+                'transfer_request_failed_approval' => 'The transfer request could not be approved.',
+                'transfer_request_success_decline' => 'The transfer request was successfully rejected.',
+                'transfer_request_failed_decline' => 'The transfer request could not be denied.',
             ],
         ],
 
@@ -31,18 +31,23 @@
             'description' => 'Allows to extract, edit and view lessons',
 
             'message' => [
-                'no_access' => 'Nu aveți acces la elevul specificat.',
-                'save_successful' => 'Sesiunea de joc a fost salvată cu succes.',
-                // 'lesson_updated_successfully' => 'Lesson updated successfully.',
-                'lesson_updated_successfully' => 'Lecția a fost actualizată cu succes.',
+                'no_access' => 'You do not have access to the specified student.',
+                'save_successful' => 'The game session was saved successfully.',
+                'lesson_updated_successfully' => 'Lesson updated successfully.',
+                'invalid_date' => 'The date must be today and in format YYYY-MM-DD.',
+                'invalid_hours' => 'The start hour must be smaller than the end hour.',
+                'invalid_category' => 'The categoty must be among: ',
             ],
 
             'validation' => [
-                // 'description_string' => 'The description has to be of type string',
-                // 'feedback_string' => 'The feedback has to be of type string'
-                'description_string' => 'Descrierea trebuie să fie de tip string',
-                'feedback_string' => 'Feedback-ul trebuie să fie de tip string'
-            ]
+                'description_string' => 'The description has to be of type string',
+                'feedback_string' => 'The feedback has to be of type string',
+            ],
+        ],
+
+        'chartsActions' => [
+            'name' => 'Charts Actions',
+            'description' => 'Allows to extract new data for charts',
         ]
     ],
 ];

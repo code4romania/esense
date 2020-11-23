@@ -3,15 +3,18 @@
         'name' => 'Orar',
         'description' => 'Orar pentru planificarea sesiunilor',
     ],
+
     'lessons' => [
         'title' => 'Lecții',
         'manage_lessons' => 'Administrare lecții',
         'name' => 'Lecții',
     ],
+
     'lesson' => [
         'day' => 'Ziua',
         'start_hour' => 'Ora începerii',
         'end_hour' => 'Ora finalizării',
+        'duration' => 'Durată',
         'title' => 'Titlu',
         'description' => 'Descriere',
         'feedback' => 'Caracterizare',
@@ -22,6 +25,7 @@
         'update' => 'Editează lecție',
         'delete' => 'Șterge lecție',
     ],
+
     'flash' => [
         'create' => 'Lecție creată cu succes.',
         'update' => 'Lecție actualizată cu succes.',
@@ -44,6 +48,7 @@
                 'description_text' => '',
                 'feedback_text' => '',
             ],
+
             'messages' => [
                 'lesson_created_successfully' => 'Lecția a fost creată cu succes.',
                 'lesson_updated_successfully' => 'Lecția a fost actualizată cu succes.',
@@ -52,6 +57,7 @@
             ],
         ],
     ],
+
     'backend' => [
         'timetable' => [
             'fields' => [
@@ -62,6 +68,8 @@
                 'start_hour_comment' => 'Selectați ora începerii.',
                 'end_hour' => 'Ora finalizării',
                 'end_hour_comment' => 'Selectați ora finalizării.',
+                'duration' => 'Durată',
+                'duration_comment' => 'Durata totală în secunde',
                 'title' => 'Titlu',
                 'title_comment' => 'Introduceți un titlu descriptiv.',
                 'description' => 'Descriere',
@@ -69,11 +77,13 @@
                 'feedback' => 'Caracterizare',
                 'feedback_comment' => 'Adăugați o caracterizare.',
             ],
+
             'columns' => [
                 'id' => 'id',
                 'day' => 'Ziua',
                 'start_hour' => 'Ora începerii',
                 'end_hour' => 'Ora finalizării',
+                'duration' => 'Durată',
                 'title' => 'Titlu',
                 'description' => 'Descriere',
                 'feedback' => 'Caracterizare',
@@ -81,11 +91,13 @@
                 'updated_at' => 'Actualizat în',
                 'deleted_at' => 'Șters în',
             ],
+
             'form' => [
                 'create' => 'Adaugă lecție',
                 'update' => 'Editează lecție',
                 'delete' => 'Șterge lecție',
             ],
+
             'list' => [
                 'delete_selected_confirm' => 'Sunteți sigur(ă) că doriți să ștergeți lecțiile selectate?'
             ],

@@ -7,24 +7,21 @@ use Model;
  */
 class Connection extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
-    use \October\Rain\Database\Traits\SoftDelete;
-
-    protected $dates = ['deleted_at'];
-
     /** Fillable fields */
     protected $fillable = [
         'student_id',
-        'specialist_id',
-        'approved',
-        'message',
-        'seen'
+        'specialist_id'
     ];
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'genuineq_esense_connections';
+    public $table = 'genuineq_esense_students_specialists';
+
+    /**
+     * Disable timestamps for this model.
+     */
+    public $timestamps = false;
 
     /**
      * @var array Validation rules
@@ -38,7 +35,6 @@ class Connection extends Model
     public $belongsTo = [
         'student' => ['Genuineq\Students\Models\Student', 'key' => 'student_id'],
         'specialist' => ['Genuineq\Profile\Models\Specialist', 'key' => 'specialist_id'],
-        'toSpecialist' => ['Genuineq\Profile\Models\Specialist', 'key' => 'to_specialist_id']
     ];
 
     /**

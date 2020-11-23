@@ -1,0 +1,103 @@
+<?= Form::open(['id' => 'requestForm']) ?>
+<input type="hidden" name="record_id" value="<?= $userModel->id ?>"/>
+<input type="hidden" name="is_activated" value="<?= $userModel->is_activated ?>"/>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="popup">×</button>
+    <h4 class="modal-title"><?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.preview')) ?></h4>
+</div>
+
+<?php if (!$this->fatalError): ?>
+<div class="modal-body">
+
+    <div data-control="formwidget" data-refresh-handler="form::onRefresh" class="form-widget form-elements layout"
+         role="form" id="Form" data-disposable="">
+
+        <div class="layout-row">
+
+            <div id="Form-outsideTabs" class="form-tabless-fields ">
+
+                <div class="form-group  textarea-field span-full" data-field-name="message"
+                     id="Form-field-group">
+
+                    <!-- Textarea that contains user request informations -->
+                    <textarea name="user_details" id="user_details" autocomplete="off"
+                              class="form-control field-textarea size-giant text"
+                              style="color:black; font-weight: bolder"
+                              disabled="disabled">
+                        <?php
+                        echo PHP_EOL . 'Id >>> ' . $userModel->id . PHP_EOL;
+                        echo 'Name >>> ' . $userModel->name . PHP_EOL;
+                        echo 'Surname >>> ' . $userModel->surname . PHP_EOL;
+                        echo 'Email >>> ' . $userModel->email . PHP_EOL;
+                        echo 'Username >>> ' . $userModel->username . PHP_EOL;
+                        echo 'Type >>> ' . $userModel->type . PHP_EOL;
+                        echo 'Permissions >>> ' . $userModel->permissions . PHP_EOL;
+                        echo 'Consent >>> ' . $userModel->consent . PHP_EOL;
+                        echo 'Is_activated >>> ' . $userModel->is_activated . PHP_EOL;
+                        echo 'Email_notifications >>> ' . $userModel->email_notifications . PHP_EOL;
+                        echo 'Is_guest >>> ' . $userModel->is_guest . PHP_EOL;
+                        echo 'Is_superuser >>> ' . $userModel->is_superuser . PHP_EOL;
+                        echo 'Created_ip_address >>> ' . $userModel->created_ip_address . PHP_EOL;
+                        echo 'Created_at >>> ' . $userModel->created_at . PHP_EOL;
+                        ?>
+
+                    </textarea>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="modal-footer">
+    <button
+        type="submit"
+        data-request="onRequest"
+        onclick="$(this).data('request-data', {
+                    redirect: 0
+                })"
+        data-hotkey="ctrl+s, cmd+s"
+        data-popup-load-indicator
+        class="btn btn-primary">
+        <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.activate_button')) ?>
+    </button>
+
+    <button
+        type="button"
+        class="btn btn-default"
+        data-dismiss="popup">
+        <?= e(trans('backend::lang.form.cancel')) ?>
+    </button>
+</div>
+
+<?php else: ?>
+
+<div class="modal-body">
+    <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-default"
+        data-dismiss="popup">
+        <?= e(trans('backend::lang.form.close')) ?>
+    </button>
+</div>
+
+<?php endif ?>
+
+<script>
+    setTimeout(
+        function () {
+            $('#requestForm input.form-control:first').focus()
+        },
+        310
+    )
+
+</script>
+
+<?= Form::close() ?>

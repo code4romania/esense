@@ -4,12 +4,12 @@ modelClass: Genuineq\Timetable\Models\Lesson
 defaultRedirect: genuineq/timetable/lessons
 create:
     title: 'genuineq.timetable::lang.lesson.create'
-    redirect: genuineq/timetable/lessons
+    redirect: genuineq/timetable/lessons/update/:id
     redirectClose: genuineq/timetable/lessons
     flashSave: 'genuineq.timetable::lang.flash.create'
 update:
     title: 'genuineq.timetable::lang.lesson.update'
-    redirect: genuineq/timetable/lessons
+    redirect: genuineq/timetable/lessons/update/:id
     redirectClose: genuineq/timetable/lessons
     flashSave: 'genuineq.timetable::lang.flash.update'
     flashDelete: 'genuineq.timetable::lang.flash.delete'

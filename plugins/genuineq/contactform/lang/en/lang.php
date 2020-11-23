@@ -8,7 +8,8 @@
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
             'email' => 'Email',
-            'message' => 'Message',
+            'message' => 'Received Message',
+            'reply_message' => 'Reply Message',
         ],
     ],
 
@@ -48,7 +49,7 @@
         ],
 
         'email' => [
-            'subject' => 'Reply to your message',
+            'subject' => 'Reply for your e-Sense message',
         ],
 
         'flash' => [
