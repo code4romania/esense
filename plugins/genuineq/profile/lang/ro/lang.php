@@ -129,24 +129,12 @@
     'reportwidgets' => [
         'total_specialists' => [
             'label' => 'Total specialiști',
-            'title' => 'Numărul total de specialiști',
-            'title_default' => 'Total specialiști',
-            'title_validation' => '',
-
-            'frontend' => [
-                'label_specialists' => 'Numărul total de specialiști'
-            ],
+            'description' => 'Numărul total de specialiști',
         ],
 
         'total_schools' => [
             'label' => 'Total școli',
-            'title' => 'Numărul total de școli',
-            'title_default' => 'Total școli',
-            'title_validation' => '',
-
-            'frontend' => [
-                'label_schools' => 'Numărul total de școli'
-            ],
+            'description' => 'Numărul total de școli',
         ],
     ],
 

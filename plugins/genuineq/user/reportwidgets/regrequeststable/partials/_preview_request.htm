@@ -3,7 +3,7 @@
 <input type="hidden" name="is_activated" value="<?= $userModel->is_activated ?>"/>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="popup">×</button>
-    <h4 class="modal-title"><?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.preview')) ?></h4>
+    <h4 class="modal-title"><?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.preview')) ?></h4>
 </div>
 
 <?php if (!$this->fatalError): ?>
@@ -25,20 +25,19 @@
                               style="color:black; font-weight: bolder"
                               disabled="disabled">
                         <?php
-                        echo PHP_EOL . 'Id >>> ' . $userModel->id . PHP_EOL;
-                        echo 'Name >>> ' . $userModel->name . PHP_EOL;
-                        echo 'Surname >>> ' . $userModel->surname . PHP_EOL;
-                        echo 'Email >>> ' . $userModel->email . PHP_EOL;
-                        echo 'Username >>> ' . $userModel->username . PHP_EOL;
-                        echo 'Type >>> ' . $userModel->type . PHP_EOL;
-                        echo 'Permissions >>> ' . $userModel->permissions . PHP_EOL;
-                        echo 'Consent >>> ' . $userModel->consent . PHP_EOL;
-                        echo 'Is_activated >>> ' . $userModel->is_activated . PHP_EOL;
-                        echo 'Email_notifications >>> ' . $userModel->email_notifications . PHP_EOL;
-                        echo 'Is_guest >>> ' . $userModel->is_guest . PHP_EOL;
-                        echo 'Is_superuser >>> ' . $userModel->is_superuser . PHP_EOL;
-                        echo 'Created_ip_address >>> ' . $userModel->created_ip_address . PHP_EOL;
-                        echo 'Created_at >>> ' . $userModel->created_at . PHP_EOL;
+                        echo PHP_EOL . e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.id')) . ' = ' . $userModel->id . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.name')) . ' = ' . $userModel->name . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.surname')) . ' = ' . $userModel->surname . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.email')) . ' = ' . $userModel->email . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.username')) . ' = ' . $userModel->username . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.type')) . ' = ' . $userModel->type . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.permissions')) . ' = ' . $userModel->permissions . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.consent')) . ' = ' . $userModel->consent . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.email_notifications')) . ' = ' . $userModel->email_notifications . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.is_guest')) . ' = ' . $userModel->is_guest . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.is_superuser')) . ' = ' . $userModel->is_superuser . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.created_ip_address')) . ' = ' . $userModel->created_ip_address . PHP_EOL;
+                        echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.created_at')) . ' = ' . $userModel->created_at . PHP_EOL;
                         ?>
 
                     </textarea>
@@ -63,7 +62,7 @@
         data-hotkey="ctrl+s, cmd+s"
         data-popup-load-indicator
         class="btn btn-primary">
-        <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.activate_button')) ?>
+        <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.activate_button')) ?>
     </button>
 
     <button

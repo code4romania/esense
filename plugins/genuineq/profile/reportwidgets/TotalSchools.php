@@ -12,7 +12,7 @@ class TotalSchools extends ReportWidgetBase
     public function render()
     {
         try {
-            $this->vars['labelSchools'] = Lang::get('genuineq.profile::lang.reportwidgets.total_schools.frontend.label_schools');
+            $this->vars['labelSchools'] = Lang::get('genuineq.profile::lang.reportwidgets.total_schools.label');
 
             /** Get no of activated account schools from database  */
             $this->vars['totalSchools'] = DB::table('backend_users')
@@ -33,11 +33,9 @@ class TotalSchools extends ReportWidgetBase
     {
         return [
             'title' => [
-                'title' => Lang::get('genuineq.profile::lang.reportwidgets.total_schools.title'),
-                'default' => Lang::get('genuineq.profile::lang.reportwidgets.total_schools.title_default'),
+                'title' => Lang::get('genuineq.profile::lang.reportwidgets.total_schools.label'),
                 'type' => 'string',
                 'validationPattern' => '^.+$',
-                'validationMessage' => Lang::get('genuineq.profile::lang.reportwidgets.total_schools.title_validation'),
             ]
         ];
     }

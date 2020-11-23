@@ -383,30 +383,35 @@ return [
     'reportwidgets' => [
         'total_registration_requests' => [
             'label' => 'Total registration requests',
-            'title' => 'Total number of registration requests',
-            'title_default' => 'Total registration requests',
-            'title_validation' => '',
-
-            'frontend' => [
-                'label_registration_requests' => 'Total number of registration requests'
-            ],
+            'description' => 'Total number of registration requests',
         ],
 
         'reg_requests_table' => [
             'label' => 'Registration requests',
-            'title' => 'Registration requests',
-            'title_default' => 'Registration requests table',
-            'title_validation' => '',
-
-            'frontend' => [
-                'activate_button' => 'Activate account(s)',
-                'label_registration_requests' => 'Registration requests table',
-                'preview' => 'Preview request details',
-            ],
+            'description' => 'Registration requests table',
+            'activate_button' => 'Activate account(s)',
+            'preview' => 'Preview request details',
+            'delete_selected' => 'Delete selected',
 
             'flash' => [
                 'success' => 'Account was successfully activated',
                 'fail' => 'Failed to activate that account',
+            ],
+
+            'columns' => [
+                'id' => 'Id',
+                'name' => 'Name',
+                'surname' => 'Surname',
+                'email' => 'Email',
+                'username' => 'Username',
+                'type' => 'Type',
+                'permissions' => 'Permissions',
+                'consent' => 'Consent',
+                'email_notifications' => 'Email notifications?',
+                'is_guest' => 'Is guest?',
+                'is_superuser' => 'Is superuser?',
+                'created_ip_address' => 'Created IP address',
+                'created_at' => 'Created at',
             ],
         ],
     ],

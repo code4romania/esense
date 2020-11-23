@@ -12,7 +12,7 @@ class TotalSpecialists extends ReportWidgetBase
     public function render()
     {
         try {
-            $this->vars['labelSpecialists'] = Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.frontend.label_specialists');
+            $this->vars['labelSpecialists'] = Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.label');
 
             /** Get no of activated account specialists from database  */
             $this->vars['totalSpecialists'] = DB::table('backend_users')
@@ -33,11 +33,9 @@ class TotalSpecialists extends ReportWidgetBase
     {
         return [
             'title' => [
-                'title' => Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.title'),
-                'default' => Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.title_default'),
+                'title' => Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.label'),
                 'type' => 'string',
                 'validationPattern' => '^.+$',
-                'validationMessage' => Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.title_validation'),
             ]
         ];
     }

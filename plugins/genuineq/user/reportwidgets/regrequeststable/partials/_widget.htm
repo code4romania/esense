@@ -1,7 +1,5 @@
 <div class="report-widget">
-    <h3><?= e($this->property('title')) ?></h3>
-
-<?php if($userRequests): ?>
+    <h3><?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.label')) ?></h3>
 
     <!--LIST of requests-->
     <div class="layout-row">
@@ -24,7 +22,7 @@
                             data-trigger-condition="checked"
                             data-popup-load-indicator
                             data-request-success="$(this).prop('disabled', true)">
-                            <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.activate_button')) ?>
+                            <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.activate_button')) ?>
                         </button>
 
                         <button
@@ -40,7 +38,7 @@
                             data-trigger-condition="checked"
                             data-request-success="$(this).prop('disabled', true)"
                             data-stripe-load-indicator>
-                            <?= e(trans('backend::lang.list.delete_selected')) ?>
+                            <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.delete_selected')) ?>
                         </button>
                     </div>
                 </div>
@@ -65,21 +63,21 @@
                         </th>
 
                         <th class="list-cell-name-id list-cell-type-number">
-                            <a href="#"> id </a>
+                            <a href="#"> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.id')) ?> </a>
                         </th>
                         <th class="list-cell-name-name list-cell-type-text">
-                            <a href="#"> name </a>
+                            <a href="#"> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.name')) ?> </a>
                         </th>
                         <th class="list-cell-name-email list-cell-type-text">
-                            <a href="#"> email </a>
+                            <a href="#"> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.email')) ?> </a>
                         </th>
 
-                        <th class="list-cell-name-email list-cell-type-text">
-                            <a href="#"> created_ip_address </a>
+                        <th class="list-cell-name-created_ip_adress list-cell-type-text">
+                            <a href="#"> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.created_ip_address')) ?> </a>
                         </th>
 
                         <th class="list-cell-name-created_at list-cell-type-datetime">
-                            <a href="#"> created_at </a>
+                            <a href="#"> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.created_at')) ?> </a>
                         </th>
                     </tr>
 
@@ -138,8 +136,6 @@
         </div>
 
     </div>
-
-<?php endif ?>
 
 </div>
 

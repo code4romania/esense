@@ -382,31 +382,36 @@ return [
 
     'reportwidgets' => [
         'total_registration_requests' => [
-            'label' => 'Total cereri de înregistrare',
-            'title' => 'Numărul total de cereri de înregistrare',
-            'title_default' => 'Total cereri de înregistrare',
-            'title_validation' => '',
-
-            'frontend' => [
-                'label_registration_requests' => 'Numărul total de cereri de înregistrare'
-            ],
+            'label' => 'Total cereri înregistrare',
+            'description' => 'Numărul total de cereri de înregistrare',
         ],
 
         'reg_requests_table' => [
             'label' => 'Cereri de înregistrare',
-            'title' => 'Cereri de înregistrare',
-            'title_default' => 'Tabelul cererilor de înregistrare',
-            'title_validation' => '',
-
-            'frontend' => [
-                'activate_button' => 'Activați cont(-uri)',
-                'label_registration_requests' => 'Tabelul cererilor de înregistrare',
-                'preview' => 'Detalii cerere înregistrare',
-            ],
+            'details' => 'Tabelul cu cererile de înregistrare',
+            'activate_button' => 'Activați cont(-uri)',
+            'preview' => 'Detalii cerere înregistrare',
+            'delete_selected' => 'Șterge selecția',
 
             'flash' => [
                 'success' => 'Contul a fost activat cu succes',
                 'fail' => 'Nu s-a activat contul respectiv',
+            ],
+
+            'columns' => [
+                'id' => 'Id',
+                'name' => 'Prenume',
+                'surname' => 'Nume',
+                'email' => 'Email',
+                'username' => 'Username',
+                'type' => 'Tip',
+                'permissions' => 'Permisiuni',
+                'consent' => 'Acord',
+                'email_notifications' => 'Notificări email?',
+                'is_guest' => 'Este invitat?',
+                'is_superuser' => 'Este superuser?',
+                'created_ip_address' => 'Adresă IP creare',
+                'created_at' => 'Creat la',
             ],
         ],
     ],
