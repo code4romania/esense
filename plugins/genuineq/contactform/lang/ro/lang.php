@@ -8,7 +8,8 @@
             'first_name' => 'Prenume',
             'last_name' => 'Nume',
             'email' => 'Email',
-            'message' => 'Mesaj',
+            'message' => 'Mesaj Primit',
+            'reply_message' => 'Mesaj de răspuns',
         ],
     ],
 
@@ -48,7 +49,7 @@
         ],
 
         'email' => [
-            'subject' => 'Răspuns la mesajul dvs.',
+            'subject' => 'Răspuns la mesajul dvs. pentru e-Sense',
         ],
 
         'flash' => [

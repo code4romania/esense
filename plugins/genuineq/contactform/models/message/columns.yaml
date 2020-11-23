@@ -2,33 +2,41 @@ columns:
     id:
         label: id
         type: number
+
     first_name:
         label: first_name
         type: text
         searchable: true
         sortable: true
+
     last_name:
         label: last_name
         type: text
         sortable: true
+
     email:
         label: email
         type: text
         searchable: true
         sortable: true
+
     message:
         label: message
         type: text
+
     replied_at:
         label: replied_at
         type: datetime
+
     created_at:
         label: created_at
         type: datetime
         sortable: true
+
     updated_at:
         label: updated_at
         type: datetime
+
     deleted_at:
         label: deleted_at
         type: datetime
