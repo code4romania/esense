@@ -111,9 +111,9 @@ class Plugin extends PluginBase
     {
         return [
             'config' => [
-                'label'       => 'Builder',
+                'label'       => 'rainlab.builder::lang.plugin.name',
                 'icon'        => 'icon-wrench',
-                'description' => 'Set your author name and namespace for plugin creation.',
+                'description' => 'rainlab.builder::lang.plugin.description',
                 'class'       => 'RainLab\Builder\Models\Settings',
                 'permissions' => ['rainlab.builder.manage_plugins'],
                 'order'       => 600

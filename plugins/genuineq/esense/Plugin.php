@@ -90,6 +90,7 @@ class Plugin extends PluginBase
         /** Extend the Specialist model. */
         $this->specialistExtendRelationships();
         $this->specialistExtendMethods();
+        $this->specialistExtendComponens();
 
         /** Extend the Lesson model. */
         $this->lessonExtendRelationships();
@@ -635,6 +636,23 @@ class Plugin extends PluginBase
                 return ("#" . substr(dechex(crc32($category)), 0, 6));
             });
         });
+    }
+
+    /**
+     * Function that contains all the component extensions of the Specialist component.
+     */
+    protected function specialistExtendComponens()
+    {
+        /************ Specialist DELETE start ************/
+        Event::listen('genuineq.specialist.change.student.owner.before.delete', function($specialist) {
+            foreach($specialist->myStudents as $student) {
+                /** Change the student owner from specialist to school. */
+                $student->owner_id = Auth::user()->profile->id;
+                $student->owner_type = 'Genuineq\Profile\Models\School';
+                $student->save();
+            }
+        });
+        /************ Specialist DELETE end ************/
     }
 
     /***********************************************
