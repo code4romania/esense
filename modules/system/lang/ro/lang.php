@@ -270,5 +270,43 @@ return [
         'manage_mail_templates' => 'Gestioneaza sabloanele de email',
         'manage_other_administrators' => 'Gestioneaza alti administratori',
         'view_the_dashboard' => 'Vizualizare panou de control'
-    ]
+    ],
+
+    'log' => [
+        'menu_label' => 'Setări jurnal',
+        'menu_description' => 'Specificați ce zone ar trebui să creeze jurnale.',
+        'default_tab' => 'Jurnal',
+        'log_events' => 'Jurnal al evenimentelor sistemului',
+        'log_events_comment' => 'Stocați evenimentele de sistem în baza de date pe lângă jurnalul bazat pe fișiere.',
+        'log_requests' => 'Jurnal pentru solicitările greșite',
+        'log_requests_comment' => 'Solicitări de browser care pot necesita atenție, cum ar fi erori 404.',
+        'log_theme' => 'Jurnal pentru modificări de temă',
+        'log_theme_comment' => 'Când se face o modificare a temei utilizând back-end-ul.',
+    ],
+
+    'media' => [
+        'invalid_path' => "Calea ':path'  specificată pentru fișier nu este validă.",
+        'folder_size_items' => 'element(e)',
+    ],
+    'page' => [
+        'custom_error' => [
+            'label' => 'Eroare de pagină',
+            'help' => 'Ne pare rău, dar ceva nu a mers bine și pagina nu poate fi afișată.',
+        ],
+        'invalid_token' => [
+            'label' => 'Simbol de securitate nu este valid',
+        ],
+        'maintenance' => [
+            'label' => "Vom reveni imediat!",
+            'help' => "Momentan avem servicii de întreținere, reveniți puțin mai tîrziu!",
+            'message' => 'Mesaj:',
+            'available_at' => 'Încercați din nou după:',
+        ],
+    ],
+    'pagination' => [
+        'previous' => 'Precedent',
+        'next' => 'Următor',
+    ],
+
+
 ];
