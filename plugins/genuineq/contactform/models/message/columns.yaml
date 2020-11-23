@@ -4,39 +4,39 @@ columns:
         type: number
 
     first_name:
-        label: first_name
+        label: 'genuineq.contactform::lang.backend.columns.first_name'
         type: text
         searchable: true
         sortable: true
 
     last_name:
-        label: last_name
+        label: 'genuineq.contactform::lang.backend.columns.last_name'
         type: text
         sortable: true
 
     email:
-        label: email
+        label: 'genuineq.contactform::lang.backend.columns.email'
         type: text
         searchable: true
         sortable: true
 
     message:
-        label: message
+        label: 'genuineq.contactform::lang.backend.columns.message'
         type: text
 
     replied_at:
-        label: replied_at
+        label: 'genuineq.contactform::lang.backend.columns.replied_at'
         type: datetime
 
     created_at:
-        label: created_at
+        label: 'genuineq.contactform::lang.backend.columns.created_at'
         type: datetime
         sortable: true
 
     updated_at:
-        label: updated_at
+        label: 'genuineq.contactform::lang.backend.columns.updated_at'
         type: datetime
 
     deleted_at:
-        label: deleted_at
+        label: 'genuineq.contactform::lang.backend.columns.deleted_at'
         type: datetime

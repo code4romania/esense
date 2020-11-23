@@ -57,5 +57,16 @@
             ],
             'invalid_email' => 'Invalid email address. Please check if domain name (@example.com) is correct.'
         ],
+
+        'columns' => [
+            'first_name' => 'first name',
+            'last_name' => 'last name',
+            'email' => 'email',
+            'message' => 'message',
+            'replied_at' => 'replied at',
+            'created_at' => 'created at',
+            'updated_at' => 'updated at',
+            'deleted_at' => 'deleted at',
+        ],
     ],
 ];
