@@ -24,7 +24,7 @@ class SeederDataLessons extends Migration
 
             $currentYear = Carbon::now()->year;
 
-            for ($year = FakeDataHelper::yearsNumber; $year > 0 ; $year--) {
+            for ($year = FakeDataHelper::yearsNumber; $year >= 0 ; $year--) {
                 /** Parse all connections. */
                 foreach (Connection::all() as $key => $connection) {
                     Lesson::insert([

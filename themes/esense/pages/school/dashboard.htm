@@ -10,6 +10,8 @@ allowedUserGroups[] = "registered"
 allowedUserTypes[] = "school"
 
 [specialist]
+
+[chartsActions]
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
@@ -54,32 +56,9 @@ allowedUserTypes[] = "school"
         </div>
 
         <!-- Teachers activity chart -->
-        <div class="col-12 mt-5">
-            <div class="rounded bg-white shadow p-3">
-                <div class="row mb-4">
-                    <div class="col-12 col-md-12 col-lg-6">
-                        <p class="p-0 m-0 font-weight-light display-2 text-gray-dark">{{'page.school.dashboard.chart.title'|_}}</p>
-                        <p class="display-4 text-gray-light pt-2">{{'page.school.dashboard.chart.subtitle'|_}}</p>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="form-group register-select">
-                            <select class="form-control selectpicker border outline-none" data-style="btn-white">
-                                <option>XXX</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="form-group register-select">
-                            <select class="form-control selectpicker border outline-none" data-style="btn-white">
-                                <option>XXX</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <canvas id="chLine" height="100"></canvas>
-                </div>
-            </div>
+        <div id="activity-chart-container" class="col-12 mt-5">
+            <!-- Partial for teachers activity chart -->
+            {% partial 'web-app/school/activity-chart' year = 'now'|date('Y') years = user.profile.lessons_years durations = user.profile.getYearLessonsDurations('now'|date('Y')) %}
         </div>
 
         <!-- Specialists table -->
@@ -216,47 +195,6 @@ allowedUserTypes[] = "school"
                 }
             });
 
-            /***********************************************
-            *************** Teacher chart ******************
-            ***********************************************/
-
-            /** Chart colors. */
-            var colors = ['#A6CEE3','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
-
-            /** Large line chart. */
-            var chLine = document.getElementById("chLine");
-
-            /** Chart data. */
-            var chartData = {
-                labels: ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"],
-                datasets: [{
-                    data: [1, 2, 4, 3, 2, 3, 5, 0, 2, 4, 0, 2],
-                    backgroundColor: 'transparent',
-                    borderColor: colors[0],
-                    borderWidth: 2,
-                    pointBackgroundColor: colors[0]
-                }]
-            };
-
-            /** Chart options */
-            if (chLine) {
-                new Chart(chLine, {
-                    type: 'line',
-                    data: chartData,
-                    options: {
-                        responsive: true,
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: false,
-                                    precision:0,
-                                }
-                            }]
-                        },
-                        legend: { display: false }
-                    }
-                });
-            }
         });
     </script>
 {% endput %}

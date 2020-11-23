@@ -1,0 +1,121 @@
+description = "Used for displaying a line chart graph to the specialist."
+
+[viewBag]
+==
+<div class="rounded bg-white shadow p-3">
+    <div class="row mb-4">
+        <div class="col-12 col-md-12 col-lg-6">
+            <p class="p-0 m-0 font-weight-light display-2 text-gray-dark">{{'page.specialist.dashboard.chart.title'|_}}</p>
+            <p class="display-4 text-gray-light pt-2">{{'page.specialist.dashboard.chart.subtitle'|_}}</p>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-3 offset-lg-3">
+            <div class="form-group register-select">
+                <select id="activity-chart-year" class="form-control selectpicker border outline-none" data-style="btn-white">
+                    {% for item in years %}
+                        <option value="{{ item }}" {% if item == year %} selected {% endif %}>{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <canvas id="chLine" height="100"></canvas>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        /***********************************************
+        **************** Selectpicker *****************
+        ***********************************************/
+        $('#activity-chart-year').prop("disabled", false);
+        $("#activity-chart-year").selectpicker("refresh");
+
+        /***********************************************
+        ****************** Line chart ******************
+        ***********************************************/
+
+        /** Large line chart. */
+        var chLine = document.getElementById("chLine");
+
+        /** Chart data. */
+        var chartData = {
+            labels: [
+                "{{'general.date_january'|_}}",
+                "{{'general.date_february'|_}}",
+                "{{'general.date_march'|_}}",
+                "{{'general.date_april'|_}}",
+                "{{'general.date_may'|_}}",
+                "{{'general.date_june'|_}}",
+                "{{'general.date_july'|_}}",
+                "{{'general.date_august'|_}}",
+                "{{'general.date_september'|_}}",
+                "{{'general.date_octomber'|_}}",
+                "{{'general.date_november'|_}}",
+                "{{'general.date_december'|_}}"
+            ],
+            datasets: [
+                {
+                    data: [
+                        {{ durations[0] }},  // Jan
+                        {{ durations[1] }},  // Feb
+                        {{ durations[2] }},  // Mar
+                        {{ durations[3] }},  // Apr
+                        {{ durations[4] }},  // May
+                        {{ durations[5] }},  // Jun
+                        {{ durations[6] }},  // Jul
+                        {{ durations[7] }},  // Aug
+                        {{ durations[8] }},  // Sep
+                        {{ durations[9] }},  // Oct
+                        {{ durations[10] }}, // Nov
+                        {{ durations[11] }}, // Dec
+                    ],
+                    backgroundColor: 'transparent',
+                    borderColor: '#A6CEE3',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#A6CEE3'
+                }
+            ]
+        };
+
+        /** Chart options */
+        if (chLine) {
+            new Chart(chLine, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: false,
+                                precision:0,
+                            }
+                        }]
+                    },
+                    legend: { display: false }
+                }
+            });
+        }
+
+        /***********************************************************
+        *********************** Year selector **********************
+        ************************************************************/
+        $('#activity-chart-year').on('change', function() {
+            $.request(
+                'onSpecialistActivityChartUpdate',
+                {
+                    update: {
+                        'web-app/specialist/activity-chart': '#activity-chart-container'
+                    },
+                    data: {
+                        year: this.value
+                    }
+                }
+            );
+        });
+    });
+</script>

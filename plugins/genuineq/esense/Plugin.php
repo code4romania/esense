@@ -14,6 +14,8 @@ use Genuineq\Esense\Models\TransferRequest;
 use Genuineq\Esense\Models\Connection;
 use Genuineq\Timetable\Models\Lesson;
 use Genuineq\User\Models\User;
+use JanVince\SmallRecords\Models\Category as ExerciseCategory;
+use JanVince\SmallRecords\Models\Record as Exercise;
 
 class Plugin extends PluginBase
 {
@@ -26,7 +28,8 @@ class Plugin extends PluginBase
         'Genuineq.Profile',
         'Genuineq.Addresses',
         'Genuineq.Students',
-        'Genuineq.Timetable'
+        'Genuineq.Timetable',
+        'JanVince.SmallRecords',
     ];
 
     /** Function for registering Profile component. */
@@ -34,7 +37,8 @@ class Plugin extends PluginBase
     {
         return [
             \Genuineq\Esense\Components\StudentActions::class => 'studentActions',
-            \Genuineq\Esense\Components\LessonsActions::class => 'lessonsActions'
+            \Genuineq\Esense\Components\LessonsActions::class => 'lessonsActions',
+            \Genuineq\Esense\Components\ChartsActions::class => 'chartsActions'
         ];
     }
 
@@ -324,12 +328,12 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getUnarchivedStudentsAttribute', function() use ($model) {
                 $students = new Collection();
 
-                /** Parse students all from the specialists. */
+                /** Parse all students from the active specialists. */
                 foreach ($model->active_specialists as $specialist) {
                     $students = $students->merge($specialist->unarchivedStudents);
                 }
 
-                return $students;
+                return $students->sortBy('name');
             });
 
             /** Add archived students attribute. */
@@ -347,6 +351,76 @@ class Plugin extends PluginBase
                 }
 
                 return $archivedStudents;
+            });
+
+            /** Add get month lessons duration function. */
+            $model->addDynamicMethod('getMonthLessonsDuration', function($month, $year = null) use ($model) {
+                $duration = 0;
+
+                if (!$year) {
+                    $year = Carbon::now()->year;
+                }
+
+                /** Parse all the active specialists. */
+                foreach ($model->active_specialists as $specialist) {
+                    $duration += $specialist->getMonthLessonsDuration($month, $year);
+                }
+
+                return $duration;
+            });
+
+            /** Add get year lessons durations function. */
+            $model->addDynamicMethod('getYearLessonsDurations', function($year = null) use ($model) {
+                $durations = [
+                    0 => 0,  // Jan
+                    1 => 0,  // Feb
+                    2 => 0,  // Mar
+                    3 => 0,  // Apr
+                    4 => 0,  // May
+                    5 => 0,  // Jun
+                    6 => 0,  // Jul
+                    7 => 0,  // Aug
+                    8 => 0,  // Sep
+                    9 => 0,  // Oct
+                    10 => 0, // Nov
+                    11 => 0  // Dec
+                ];
+
+                if (!$year) {
+                    $year = Carbon::now()->year;
+                }
+
+                /** Parse all the active specialists. */
+                foreach ($model->active_specialists as $specialist) {
+                    $specialistDurations = $specialist->getYearLessonsDurations($year);
+
+                    $durations[0] += $specialistDurations[0];   // Jan
+                    $durations[1] += $specialistDurations[1];   // Feb
+                    $durations[2] += $specialistDurations[2];   // Mar
+                    $durations[3] += $specialistDurations[3];   // Apr
+                    $durations[4] += $specialistDurations[4];   // May
+                    $durations[5] += $specialistDurations[5];   // Jun
+                    $durations[6] += $specialistDurations[6];   // Jul
+                    $durations[7] += $specialistDurations[7];   // Aug
+                    $durations[8] += $specialistDurations[8];   // Sep
+                    $durations[9] += $specialistDurations[9];   // Oct
+                    $durations[10] += $specialistDurations[10]; // Nov
+                    $durations[11] += $specialistDurations[11]; // Dec
+                }
+
+                return $durations;
+            });
+
+            /** Add get lessons years attribute. */
+            $model->addDynamicMethod('getLessonsYearsAttribute', function() use ($model) {
+               $years = [];
+
+                /** Parse all the active specialists. */
+                foreach ($model->active_specialists as $specialist) {
+                    $years = array_unique(array_merge($years, $specialist->lessons_years), SORT_REGULAR);
+                }
+
+                return $years;
             });
         });
     }
@@ -436,14 +510,105 @@ class Plugin extends PluginBase
                 return $model->lessons()->where('day', Carbon::now()->format('Y-m-d'))->get();
             });
 
-            /** Add today lessons attribute. */
+            /** Add today lessons function. */
             $model->addDynamicMethod('getDateLessons', function($date) use ($model) {
                 return $model->lessons()->where('day', Carbon::parse($date)->format('Y-m-d'))->get();
             });
 
-            /** Add get connection attribute. */
-            $model->addDynamicMethod('getConnection', function($student) use ($model) {
+            /** Add get connection function. */
+            $model->addDynamicMethod('getStudentConnection', function($student) use ($model) {
                 return $model->connections()->where('student_id', $student)->first();
+            });
+
+            /** Add get month lessons duration function. */
+            $model->addDynamicMethod('getMonthLessonsDuration', function($month, $year = null) use ($model) {
+                if (!$year) {
+                    $year = Carbon::now()->year;
+                }
+
+                /** Extract the start and the end of the month. */
+                $monthStart = Carbon::parse($year . '-' . $month . '-01')->format('Y-m-d');
+                $monthEnd = Carbon::parse($year . '-' . $month . '-01')->endOfMonth()->format('Y-m-d');
+
+                return ($model->lessons()->whereBetween('day', [$monthStart, $monthEnd])->sum('duration')) / 3600;
+            });
+
+            /** Add get year lessons durations function. */
+            $model->addDynamicMethod('getYearLessonsDurations', function($year = null) use ($model) {
+                if (!$year) {
+                    $year = Carbon::now()->year;
+                }
+
+                return [
+                    0 => $model->getMonthLessonsDuration(1, $year),   // Jan
+                    1 => $model->getMonthLessonsDuration(2, $year),   // Feb
+                    2 => $model->getMonthLessonsDuration(3, $year),   // Mar
+                    3 => $model->getMonthLessonsDuration(4, $year),   // Apr
+                    4 => $model->getMonthLessonsDuration(5, $year),   // May
+                    5 => $model->getMonthLessonsDuration(6, $year),   // Jun
+                    6 => $model->getMonthLessonsDuration(7, $year),   // Jul
+                    7 => $model->getMonthLessonsDuration(8, $year),   // Aug
+                    8 => $model->getMonthLessonsDuration(9, $year),   // Sep
+                    9 => $model->getMonthLessonsDuration(10, $year),  // Oct
+                    10 => $model->getMonthLessonsDuration(11, $year), // Nov
+                    11 => $model->getMonthLessonsDuration(12, $year)  // Dec
+                ];
+            });
+
+            /** Add get lessons years attribute. */
+            $model->addDynamicMethod('getLessonsYearsAttribute', function() use ($model) {
+                return $model->lessons->unique(function($item) {
+                    return $item['day']->year;
+                })->map(function($item) {
+                    return $item['day']->year;
+                })->sort()->toArray();
+            });
+
+            /** Add get exercises categories attribute. */
+            $model->addDynamicMethod('getExercisesCategoriesAttribute', function() use ($model) {
+                /** Get games parent category. */
+                $games = ExerciseCategory::whereSlug('jocuri')->first();
+
+                return $games->getChildren();
+            });
+
+            /** Add get exercises number function. */
+            $model->addDynamicMethod('getExercisesNumber', function() use ($model) {
+                $exercisesCount = 0;
+
+                /** Parse all games categories and count the exercises. */
+                foreach ($model->exercises_categories as $key => $exerciseCategory) {
+                    $exercisesCount += $exerciseCategory->records->count();
+                }
+
+                return $exercisesCount;
+            });
+
+            /** Add get game category lessons duration function. */
+            $model->addDynamicMethod('getStudentCategoryLessonsDuration', function($student, $category) use ($model) {
+                /** Get student connection. */
+                $connection = $model->getStudentConnection($student);
+                /** Get current year. */
+                $year = Carbon::now()->year;
+
+                /** Extract the duration of all the lessons during current year from the specified category. */
+                return ($connection->lessons()->whereCategory($category)->whereYear('day', $year)->sum('duration')) / 3600;
+            });
+
+            /** Add get student lessons count function. */
+            $model->addDynamicMethod('getStudentLessonsCount', function($student) use ($model) {
+                /** Get student connection. */
+                $connection = $model->getStudentConnection($student);
+                /** Get current year. */
+                $year = Carbon::now()->year;
+
+                /** Extract the duration of all the lessons during current year from the specified category. */
+                return $connection->lessons()->whereYear('day', $year)->count();
+            });
+
+            /** Add get category color function. */
+            $model->addDynamicMethod('getCategoryColor', function($category) use ($model) {
+                return ("#" . substr(dechex(crc32($category)), 0, 6));
             });
         });
     }

@@ -41,5 +41,10 @@
                 'feedback_string' => 'The feedback has to be of type string',
             ],
         ],
+
+        'chartsActions' => [
+            'name' => 'Charts Actions',
+            'description' => 'Allows to extract new data for charts',
+        ]
     ],
 ];

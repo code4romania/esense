@@ -13,6 +13,7 @@ class Lesson extends Model
     use \October\Rain\Database\Traits\SoftDelete;
 
     protected $dates = [
+        'day',
         'deleted_at',
         'created_at',
         'updated_at'

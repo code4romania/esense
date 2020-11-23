@@ -176,30 +176,30 @@ allowedUserTypes[] = "specialist"
                 }
             });
             $('.added-content').html('\
-                    <div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">\
-                        <div class="col-12 col-lg-7">\
-                            <p class="text-medium-dark font-weight-bold">\
-                                {{"page.specialist.dashboard.students.table.title"|_}} ({{ user.profile.unarchivedStudents.count }})\
-                            </p> </div> <div class="col-12 col-lg-5">\
-                            <div class="d-flex align-items-center justify-content-start justify-content-lg-end flex-column flex-md-row">\
-                                {% if user.profile.affiliated  %}\
-                                    <a href="{{"specialist/student-transfer"|page}}" class="btn btn-sm btn-outline-primary-light mb-3 mb-md-0 mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"><i class="fas fa-exchange-alt mr-2"></i>\
-                                        {{"page.specialist.dashboard.students.table.transfer.btn.text"|_}}\
-                                    </a>\
-                                {% endif %}\
-                                {% if user.profile.affiliated  %}\
-                                    <a data-toggle="modal" data-target="#addStudentModal" role="button" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\
-                                        {{"page.specialist.dashboard.students.table.add.btn.text"|_}}\
-                                    </a>\
-                                {% else %}\
-                                    <a href="{{"specialist/student-add"|page}}" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\
-                                        {{"page.specialist.dashboard.students.table.add.btn.text"|_}}\
-                                    </a>\
-                                {% endif %}\
-                            </div>\
+                <div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">\
+                    <div class="col-12 col-lg-7">\
+                        <p class="text-medium-dark font-weight-bold">\
+                            {{"page.specialist.dashboard.students.table.title"|_}} ({{ user.profile.unarchivedStudents.count }})\
+                        </p> </div> <div class="col-12 col-lg-5">\
+                        <div class="d-flex align-items-center justify-content-start justify-content-lg-end flex-column flex-md-row">\
+                            {% if user.profile.affiliated  %}\
+                                <a href="{{"specialist/student-transfer"|page}}" class="btn btn-sm btn-outline-primary-light mb-3 mb-md-0 mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"><i class="fas fa-exchange-alt mr-2"></i>\
+                                    {{"page.specialist.dashboard.students.table.transfer.btn.text"|_}}\
+                                </a>\
+                            {% endif %}\
+                            {% if user.profile.affiliated  %}\
+                                <a data-toggle="modal" data-target="#addStudentModal" role="button" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\
+                                    {{"page.specialist.dashboard.students.table.add.btn.text"|_}}\
+                                </a>\
+                            {% else %}\
+                                <a href="{{"specialist/student-add"|page}}" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\
+                                    {{"page.specialist.dashboard.students.table.add.btn.text"|_}}\
+                                </a>\
+                            {% endif %}\
                         </div>\
-                    </div>'
-                );
+                    </div>\
+                </div>'
+            );
         });
 
     </script>

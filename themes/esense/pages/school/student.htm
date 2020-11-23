@@ -84,45 +84,11 @@ allowedUserTypes[] = "school"
 
                     <!-- Activity schedule -->
                     <div class="col-12 col-lg-6" id="schedule-timeline">
-                        {% partial 'web-app/general/schedule-timeline' title='page.school.dashboard.student.profile.schedule_timeline'|_ lessons=student.today_lessons %}
+                        {% partial 'web-app/general/schedule-timeline' title='page.school.dashboard.student.profile.schedule_timeline'|_ lessons=student.today_lessons allow_edit=false %}
                     </div>
 
                     <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
                         <div class="calendar-wrapper"></div>
-                    </div>
-
-                    <!-- Frequent exercises owl carousel -->
-                    <div class="col-12 mt-4">
-                        <div class="px-3 d-flex align-items-center justify-content-between">
-                            <p class="p-0 m-0 text-gray-dark font-weight-bold">{{ 'page.school.dashboard.student.profile.frequent_exercises'|_ }}</p>
-                        </div>
-
-                        <div class="mt-4 px-3">
-                            <div class="exercises-owl-carousel owl-carousel owl-theme">
-                                <div class="item">
-                                    <div class="rounded bg-white" style="box-shadow: 0px 0px 32px rgba(136, 152, 170, 0.15);">
-                                        <div class="bg-white">
-                                            <p class="p-0 m-0 pl-3 text-gray-dark">Denumire joc #1</p>
-                                        </div>
-
-                                        <div class="">
-                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/exercise_1.svg'|theme }}">
-                                        </div>
-
-                                        <div class="p-3 bg-white d-flex align-items-center justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/label.svg'|theme }}">
-                                                <p class="p-0 m-0 ml-2" style="font-size: 12px; color: #000000; line-height:16px;">Localizare</p>
-                                            </div>
-
-                                            <div>
-                                                <a href="" class="btn btn-sm btn-primary-dark">Detalii</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Student profile table -->
@@ -180,7 +146,7 @@ allowedUserTypes[] = "school"
                                             </td>
                                             <td>
                                                 <div class="pl-2 py-lg-4">
-                                                    <a role="button" href="{{ 'specialist/lesson'|page({id: lesson.id }) }}">
+                                                    <a role="button" href="{{ 'school/lesson'|page({id: lesson.id }) }}">
                                                         <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
                                                     </a>
                                                 </div>
@@ -237,8 +203,6 @@ allowedUserTypes[] = "school"
                     }
                 }
             });
-
-
 
             function selectDate(date) {
                 /** Update the calendar. */
