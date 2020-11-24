@@ -10,7 +10,17 @@ return [
         'invalid_file_extension'=>'Extensie de fisier invalida: :invalid. Extensiile permise sunt: :allowed.',
         'error_deleting' => 'Eroare la stergerea fisierului sablon ":name". Verificati permisiunile de scriere.',
         'delete_success' => 'Sabloanele au fost sterse cu succes, in total: :count.',
-        'file_name_required' => 'Campul nume fisier este necesar.'
+        'file_name_required' => 'Campul nume fisier este necesar.',
+        'safe_mode_enabled' => 'Modul de siguranță este activat în prezent. Editarea codului PHP al șabloanelor CMS este dezactivată. Pentru a dezactiva modul de siguranță, setați valoarea de configurare `cms.enableSafeMode` la `false`.',
+     ],
+     'dashboard' => [
+         'active_theme' => [
+             'widget_title_default' => 'Site web',
+             'online' => 'Online',
+             'maintenance' => 'În întreținere',
+             'manage_themes' => 'Gestionați temele',
+             'customize_theme' => 'Personalizați tema',
+         ],
     ],
     'theme' => [
         'not_found_name' => "Tema ':name' nu este găsită.",
@@ -84,7 +94,6 @@ return [
         'saving' => 'Salvarea temei ...',
         'return' => 'Reveniți la lista temelor',
     ],
-
     'maintenance' => [
         'settings_menu' => 'Mod Întreținere site',
         'settings_menu_description' => 'Configurați pagina Modului Întreținere și comutați setarea.',
@@ -92,8 +101,8 @@ return [
         'is_enabled_comment' => 'Selectați pagina de afișat când Modul Întreținere este activat.',
         'hint' => 'Modul Întreținere va afișa pagina de Întreținere către vizitatoriii care nu s-au conectat la zona back-end.',
     ],
-
     'page' => [
+        'not_found_name' => "Pagina ':name' nu este găsită",
         'not_found' => [
             'label' => "Pagina negasita",
             'help' => "Pagina cautata nu a putut fi gasita.",
@@ -103,16 +112,22 @@ return [
             'help' => "Ne cerem scuze, dar a aparut o problema si pagina nu poate fi afisata.",
         ],
         'menu_label' => 'Pagini',
+        'unsaved_label' => 'Pagini nesalvate',
         'no_list_records' => 'Nu au fost gasite pagini',
         'new' => 'Pagina noua',
         'invalid_url' => 'Format URL invalid. URL-ul ar trebui sa inceapa cu un slash ( / ) si poate sa contina cifre, caractere latine si urmatoarele simboluri: ._-[]:?|/+*^$',
         'delete_confirm_multiple' => 'Vreti sa stergeti paginile selectate?',
         'delete_confirm_single' => 'Vreti sa stergeti aceasta pagina?',
-        'no_layout' => '-- fara macheta --'
+        'no_layout' => '-- fara macheta --',
+        'cms_page' => 'Pagina CMS',
+        'title' => 'Titlul paginii',
+        'url' => 'URL pagină',
+        'file_name' => 'Numele fișierului paginii',
     ],
     'layout' => [
         'not_found_name' => "Macheta ':name' nu a fost gasita",
         'menu_label' => 'Machete',
+        'unsaved_label' => 'Machete nesalvate',
         'no_list_records' => 'Nu au fost gasite machete',
         'new' => 'Macheta noua',
         'delete_confirm_multiple' => 'Vreti sa stergeti machetele selectate?',
@@ -122,6 +137,7 @@ return [
         'not_found_name' => "Componenta partiala ':name' nu a fost gasita.",
         'invalid_name' => "Nume invalid pentru componenta partiala: :name.",
         'menu_label' => 'Componente partiale',
+        'unsaved_label' => 'Componente partiale nesalvate',
         'no_list_records' => 'Nu au fost gasite componente partiale',
         'delete_confirm_multiple' => 'Vreti sa stergeti componentele partiale selectate?',
         'delete_confirm_single' => 'Vreti sa stergeti aceasta componenta partiala?',
@@ -130,6 +146,7 @@ return [
     'content' => [
         'not_found_name' => "Fisierul de continut ':name' nu a fost gasit.",
         'menu_label' => 'Continut',
+        'unsaved_label' => 'Conținut nesalvat',
         'no_list_records' => 'Nu au fost gasite fisiere de continut',
         'delete_confirm_multiple' => 'Vreti sa stergeti fisierele si directoarele cu continut?',
         'delete_confirm_single' => 'Vreti sa stergeti acest fisier cu continut?',
@@ -164,18 +181,34 @@ return [
         'hidden' => 'Ascuns',
         'hidden_comment' => 'Fisierele ascunse sunt vizibile doar administratorilor logati in sistem',
         'enter_fullscreen' => 'Intrare in mod ecran complet',
-        'exit_fullscreen' => 'Iesire din mod ecran complet'
+        'exit_fullscreen' => 'Iesire din mod ecran complet',
+        'open_searchbox' => 'Deschideți caseta de căutare',
+        'close_searchbox' => 'Închide caseta de căutare',
+        'open_replacebox' => 'Deschideți caseta de înlocuire',
+        'close_replacebox' => 'Închideți caseta de înlocuire',
+        'commit' => 'Transmite',
+        'reset' => 'Resetează',
+        'commit_confirm' => 'Sigur doriți să transferați modificările aduse acestui fișier în sistemul de fișiere? Aceasta va suprascrie fișierul existent pe sistemul de fișiere ',
+        'reset_confirm' => 'Sigur doriți să resetați acest fișier la copia care se află pe sistemul de fișiere? Acest lucru îl va înlocui complet cu fișierul care se află în sistemul de fișiere ',
+        'committing' => 'Transmitere',
+        'resetting' => 'Resetare',
+        'commit_success' => 'Tipul :type a fost trimis către sistemul de fișiere',
+        'reset_success' => 'Tipul :type a fost resetat la versiunea sistemului de fișiere',
     ],
     'asset' => [
         'menu_label' => "Fisiere design",
-        'drop_down_add_title' => 'Adaure...',
+        'unsaved_label' => 'Fișiere utile nesalvate',
+        'drop_down_add_title' => 'Adaugare...',
         'drop_down_operation_title' => 'Actiune...',
         'upload_files' => 'Incarcare fisier(e)',
         'create_file' => 'Creare fisier',
-        'create_directory' => 'Creare director',
+        'create_directory' => 'Creare dosar',
+        'directory_popup_title' => 'Dosar nou',
+        'directory_name' => 'Nume dosar',
         'rename' => 'Redenumire',
         'delete' => 'Stergere',
         'move' => 'Mutare',
+        'select' => 'Selectare',
         'new' => 'Fisier nou',
         'rename_popup_title' => 'Redenumire',
         'rename_new_name' => 'Nume nou',
@@ -202,6 +235,8 @@ return [
         'error_moving_file' => 'Eroare la mutarea fisierului :file',
         'error_moving_directory' => 'Eroare la mutarea directorului :dir',
         'error_deleting_directory' => 'Eroare la stergerea directorului original :dir',
+        'no_list_records' => 'Nu s-au găsit fișiere',
+        'delete_confirm' => 'Ștergeți fișierele sau dosarele selectate?',
         'path' => 'Cale'
     ],
     'component' => [
@@ -214,12 +249,18 @@ return [
         'invalid_request' => "Sablonul nu a putut fi salvat din cauza datelor invalide ale componentei.",
         'no_records' => 'Nicio componenta nu a fost gasita',
         'not_found' => "Componenta ':name' nu a fost gasita.",
+        'no_default_partial' => "Această componentă nu are un fișier parțial 'implicit'",
         'method_not_found' => "Componenta ':name' nu contine nicio metoda ':method'.",
+        'soft_component' => 'Componentă soft',
+        'soft_component_description' => 'Această componentă lipsește, dar este opțională.',
     ],
     'template' => [
         'invalid_type' => "Tip de sablon necunoscut.",
         'not_found' => "Sablonul solicitat nu a fost gasit.",
-        'saved'=> "Sablonul a fost salvat cu succes."
+        'saved'=> "Sablonul a fost salvat cu succes.",
+        'no_list_records' => 'Nu s-au găsit înregistrări',
+        'delete_confirm' => 'Ștergeți șabloanele selectate?',
+        'order_by' => 'Ordonează după',
     ],
     'permissions' => [
         'name' => 'CMS',
@@ -231,7 +272,6 @@ return [
         'manage_themes' => 'Activați, dezactivați și configurați temele CMS',
         'manage_theme_options' => 'Configurați opțiunile de personalizare pentru tema activă',
     ],
-
     'theme_log' => [
         'hint' => 'Acest jurnal afișează orice modificări aduse temei de către administratori în zona back-end.',
         'menu_label' => 'Jurnal pentru teme',
@@ -261,5 +301,4 @@ return [
         'template_created' => 'Șablonul a fost creat',
         'template_deleted' => 'Șablonul a fost șters',
     ],
-
 ];
