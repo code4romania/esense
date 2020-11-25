@@ -9,10 +9,10 @@ class BuilderTableUpdateGenuineqContactformMessages extends Migration
     {
         Schema::table('genuineq_contactform_messages', function($table)
         {
-            $table->text('reply_message')->default('null');
+            $table->text('reply_message')->nullable();
         });
     }
-    
+
     public function down()
     {
         Schema::table('genuineq_contactform_messages', function($table)

@@ -40,3 +40,8 @@ columns:
     deleted_at:
         label: 'genuineq.contactform::lang.backend.columns.deleted_at'
         type: datetime
+
+    reply_message:
+        label: 'genuineq.contactform::lang.backend.columns.reply_message'
+        type: text
+        invisible: true

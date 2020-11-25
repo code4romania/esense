@@ -67,6 +67,7 @@
             'created_at' => 'created at',
             'updated_at' => 'updated at',
             'deleted_at' => 'deleted at',
+            'reply_message' => 'reply message',
         ],
     ],
 ];

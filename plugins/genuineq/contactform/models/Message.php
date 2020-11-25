@@ -48,14 +48,4 @@ class Message extends Model
         ];
     }
 
-    /**
-     * Function that holds the validation messages.
-     */
-    public function messages()
-    {
-        return [
-            // NEED TO BE MODIFIED
-        ];
-    }
-
 }

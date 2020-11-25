@@ -67,6 +67,7 @@
             'created_at' => 'creat la',
             'updated_at' => 'actualizat la',
             'deleted_at' => 'șters la',
+            'reply_message' => 'mesaj de răspuns',
         ],
     ],
 ];
