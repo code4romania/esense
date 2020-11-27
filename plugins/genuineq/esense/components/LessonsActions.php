@@ -1,6 +1,7 @@
 <?php namespace Genuineq\Esense\Components;
 
 use App;
+use Carbon\Carbon;
 use Log;
 use Lang;
 use Auth;
@@ -144,4 +145,45 @@ class LessonsActions extends ComponentBase
             return Redirect::guest($this->pageUrl(RedirectHelper::accessDenied()));
         }
     }
+
+    /**
+     * Function that forces the refresh of the specialist lessons table
+     *  in order to display lessons from different periods of time.
+     */
+    public function onSpecialistLessonsTableYearUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+        /** Send the user back. */
+        $this->page['user'] = Auth::user();
+
+        /** Set the new year. */
+        $this->page['year'] = post('year');
+        /** Set the years array. */
+        $this->page['years'] = Auth::user()->profile->lessons_years;
+        /** Get Lessons. */
+        //$this->page['lessons'] = Auth::user()->profile->lessons();
+    }
+
+    /**
+     * Function that forces the refresh of the specialist lessons table
+     *  in order to display lessons from different periods of time.
+     */
+    public function onSpecialistLessonsTableMonthUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+        /** Send the user back. */
+        $this->page['user'] = Auth::user();
+
+        /** Set the new year. */
+        $this->page['year'] = post('year');
+        /** Set the years array. */
+        $this->page['years'] = Auth::user()->profile->lessons_years;
+        /** Get Lessons. */
+        //$this->page['lessons'] = Auth::user()->profile->lessons();
+    }
+
 }
