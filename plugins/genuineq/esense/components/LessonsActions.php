@@ -158,12 +158,8 @@ class LessonsActions extends ComponentBase
         /** Send the user back. */
         $this->page['user'] = Auth::user();
 
-        /** Set the new year. */
-        $this->page['year'] = post('year');
-        /** Set the years array. */
-        $this->page['years'] = Auth::user()->profile->lessons_years;
-        /** Get Lessons. */
-        //$this->page['lessons'] = Auth::user()->profile->lessons();
+        /** Get & Filter Lessons */
+        $this->page['lessons'] = Auth::user()->profile->getLessonsFromYear(post('year'));
     }
 
     /**
@@ -178,12 +174,8 @@ class LessonsActions extends ComponentBase
         /** Send the user back. */
         $this->page['user'] = Auth::user();
 
-        /** Set the new year. */
-        $this->page['year'] = post('year');
-        /** Set the years array. */
-        $this->page['years'] = Auth::user()->profile->lessons_years;
-        /** Get Lessons. */
-        //$this->page['lessons'] = Auth::user()->profile->lessons();
+        /** Get & Filter Lessons */
+        $this->page['lessons'] = Auth::user()->profile->getLessonsFromMonth(post('month'), post('year'));
     }
 
 }

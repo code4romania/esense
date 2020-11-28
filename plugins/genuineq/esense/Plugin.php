@@ -589,6 +589,27 @@ class Plugin extends PluginBase
                 })->sort()->toArray();
             });
 
+
+            /** Add get lessons from specific year method. */
+            $model->addDynamicMethod('getLessonsFromYear', function($year = null) use ($model) {
+
+                /** Extract the start and the end of the year. */
+                $yearStart = Carbon::parse(($year ?? Carbon::now()->year) . '-01-01')->format('Y-m-d');
+                $yearEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-12-31')->format('Y-m-d');
+
+               return $model->lessons()->whereBetween('day', [$yearStart, $yearEnd])->orderBy('day', 'DESC')->get();
+            });
+
+            /** Add get lessons from specific month method. */
+            $model->addDynamicMethod('getLessonsFromMonth', function($month, $year = null) use ($model) {
+                /** Extract the start and the end of the year. */
+                $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
+                $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
+
+                return $model->lessons()->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+            });
+
+
             /** Add get exercises categories attribute. */
             $model->addDynamicMethod('getExercisesCategoriesAttribute', function() use ($model) {
                 /** Get games parent category. */
