@@ -11,6 +11,7 @@ class FakeDataHelper
 
     /** Students */
     const maxSpecialistStudentsNumber = 15;
+    const maxStudentSpecialistsNumber = 3;
 
     /** Addresses */
     const maxCityFirstCounty = 666;

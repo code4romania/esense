@@ -71,7 +71,7 @@ class SeederDataStudents extends Migration
 
                     /** Create specialists connections. */
                     $specialistsIds = [/*owner*/($i + 1)];
-                    for ($k = 1; $k < $faker->numberBetween($min = 1, $max = FakeDataHelper::totalProfileSpecialistsNumber); $k++) {
+                    for ($k = 1; $k < $faker->numberBetween($min = 1, $max = FakeDataHelper::maxStudentSpecialistsNumber); $k++) {
                         $specialistId = $faker->numberBetween($min = 1, $max = FakeDataHelper::totalProfileSpecialistsNumber);
 
                         while (in_array($specialistId, $specialistsIds)) {
