@@ -267,27 +267,27 @@ class Student extends ComponentBase
         if ($student) {
             /** Check if contact person 1 is defined. */
             if($student->contact_person_1){
-                $student->contact_person_1->forceDelete();
+                $student->contact_person_1->delete();
             }
             /** Check if contact person 2 is defined. */
             if($student->contact_person_2){
-                $student->contact_person_2->forceDelete();
+                $student->contact_person_2->delete();
             }
             /** Check if contact person 3 is defined. */
             if($student->contact_person_3){
-                $student->contact_person_3->forceDelete();
+                $student->contact_person_3->delete();
             }
             /** Check if contact person 4 is defined. */
             if($student->contact_person_4){
-                $student->contact_person_4->forceDelete();
+                $student->contact_person_4->delete();
             }
             /** Check if contact person 5 is defined. */
             if($student->contact_person_5){
-                $student->contact_person_5->forceDelete();
+                $student->contact_person_5->delete();
             }
 
             /** Delete the extracted student. */
-            $student->forceDelete();
+            $student->delete();
 
             Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_delete_successful'));
 
