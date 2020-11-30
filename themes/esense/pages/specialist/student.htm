@@ -152,7 +152,8 @@ orderByDirection = "DESC"
                         <p class="text-gray-dark font-weight-bold px-3">{{ 'page.specialist.dashboard.student.profile.exercises'|_ }}</p>
 
                         <!-- Partial for specialist lessons with a student -->
-                        {% partial 'web-app/general/specialist-student-lessons' year = 'now'|date('Y') years = user.profile.lessons_years lessons = user.profile.lessons %}
+                        {% partial 'web-app/general/specialist-student-lessons' year = 'now'|date('Y') years = user.profile.lessons_years lessons = [] %}
+                        
 
                     </div>
                 </div>
