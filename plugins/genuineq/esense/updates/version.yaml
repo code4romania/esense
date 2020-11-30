@@ -15,3 +15,6 @@
 1.0.6:
     - 'Update table genuineq_timetable_lessons'
     - table_update_genuineq_timetable_lessons.php
+1.0.7:
+    - 'Updated table genuineq_esense_students_specialists'
+    - builder_table_update_genuineq_esense_students_specialists.php
