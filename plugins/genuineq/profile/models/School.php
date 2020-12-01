@@ -139,4 +139,20 @@ class School extends Model
             $this->slug = str_slug($this->name, '-') . '-' . Carbon::now()->timestamp;
         }
     }
+
+    public function beforeDelete()
+    {
+        Event::fire('genuineq.profile.school.before.delete', [$this]);
+    }
+
+    public function afterDelete()
+    {
+        /** Force reload the user relationship. */
+        $this->reloadRelations('user');
+
+        /** Check if the user has not been deleted. */
+        if ($this->user) {
+            $this->user->delete();
+        }
+    }
 }
