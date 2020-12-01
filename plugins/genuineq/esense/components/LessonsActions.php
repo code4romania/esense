@@ -150,31 +150,22 @@ class LessonsActions extends ComponentBase
      * Function that forces the refresh of the specialist lessons table
      *  in order to display lessons from different periods of time.
      */
-    public function onSpecialistLessonsTableYearUpdate()
+    public function onSpecialistLessonsTableUpdate()
     {
         if (!Auth::check()) {
             return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
         }
+
         /** Send the user back. */
         $this->page['user'] = Auth::user();
 
-        /** Get & Filter Lessons */
-        $this->page['lessons'] = Auth::user()->profile->getLessonsFromYear(post('year'));
-    }
-
-    /**
-     * Function that forces the refresh of the specialist lessons table
-     *  in order to display lessons from different periods of time.
-     */
-    public function onSpecialistLessonsTableMonthUpdate()
-    {
-        if (!Auth::check()) {
-            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
-        }
-        /** Send the user back. */
-        $this->page['user'] = Auth::user();
-
-        /** Get & Filter Lessons */
+        /** Send the year back. */
+        $this->page['year'] = post('year');
+        /** Set the years array. */
+        $this->page['years'] = Auth::user()->profile->lessons_years;
+        /** Send the month back. */
+        $this->page['month'] = post('month');
+        /** Set the lessons. */
         $this->page['lessons'] = Auth::user()->profile->getLessonsFromMonth(post('month'), post('year'));
     }
 

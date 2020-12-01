@@ -1,0 +1,178 @@
+description = "Partial for specialist lessons with a student"
+
+[viewBag]
+==
+
+<div class="row">
+    <div class="col-12 col-md-6 col-lg-3 offset-lg-6">
+        <div class="form-group register-select">
+            <select id="month" class="form-control selectpicker border outline-none" data-style="btn-white">
+                <option value="1" {% if 1 == month %} selected {% endif %}>{{'general.date_january'|_}}</option>
+                <option value="2" {% if 2 == month %} selected {% endif %}>{{'general.date_february'|_}}</option>
+                <option value="3" {% if 3 == month %} selected {% endif %}>{{'general.date_march'|_}}</option>
+                <option value="4" {% if 4 == month %} selected {% endif %}>{{'general.date_april'|_}}</option>
+                <option value="5" {% if 5 == month %} selected {% endif %}>{{'general.date_may'|_}}</option>
+                <option value="6" {% if 6 == month %} selected {% endif %}>{{'general.date_june'|_}}</option>
+                <option value="7" {% if 7 == month %} selected {% endif %}>{{'general.date_july'|_}}</option>
+                <option value="8" {% if 8 == month %} selected {% endif %}>{{'general.date_august'|_}}</option>
+                <option value="9" {% if 9 == month %} selected {% endif %}>{{'general.date_september'|_}}</option>
+                <option value="10" {% if 10 == month %} selected {% endif %}>{{'general.date_octomber'|_}}</option>
+                <option value="11" {% if 11 == month %} selected {% endif %}>{{'general.date_november'|_}}</option>
+                <option value="12" {% if 12 == month %} selected {% endif %}>{{'general.date_december'|_}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+        <div class="form-group register-select">
+            <select id="year" class="form-control selectpicker border outline-none" data-style="btn-white">
+                {% for item in years %}
+                    <option value="{{ item }}" {% if item == year %} selected {% endif %}>{{ item }}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive px-3" style="overflow-x: hidden;">
+    <!-- Student lessons datatable -->
+    <table id="student-lessons-datatable" class="table table-striped table-sm px-3 m-0" cellspacing="0" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
+        <thead>
+            <tr>
+                <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.specialist.dashboard.student.lesson'|_ }}</p></th>
+                <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.specialist.dashboard.student.category'|_ }}</p></th>
+                <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.specialist.dashboard.student.date'|_ }}</p></th>
+                <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.specialist.dashboard.student.length'|_ }}</p></th>
+                <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.specialist.dashboard.student.specialist'|_ }}</p></th>
+                <th class="no-sort"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for lesson in lessons %}
+                <tr>
+                    <td>
+                        <div class="pl-2 py-lg-4 d-flex align-items-center">
+                            <span class="display-4 text-blue">{{ lesson.title }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="pl-2 py-lg-4 d-flex align-items-center">
+                            <span class="display-4 text-black">{{ lesson.category }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="pl-2 py-lg-4 d-flex align-items-center">
+                            <span class="display-4 text-black">{{ lesson.day|date("d/m/Y") }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="pl-2 py-lg-4 d-flex align-items-center">
+                            <span class="display-4 text-black">{{ lesson.lesson_duration }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="pl-2 py-lg-3 d-flex align-items-center">
+                            <div>
+                                {% if lesson.connection.specialist.user.avatar %}
+                                    <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{ lesson.connection.specialist.user.avatar.getThumb(30, 30, { mode : 'crop' }) }}" alt="specialist-avatar">
+                                {% else %}
+                                    <img class="img-fluid add-custom-avatar" width="30px" height="30px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
+                                {% endif %}
+                            </div>
+                            <div class="d-flex flex-column ml-2">
+                                <span class="display-4" style="color:#1a1a1a;">{{ lesson.connection.specialist.full_name }}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="pl-2 py-lg-4">
+                            <a role="button" href="{{ 'specialist/lesson'|page({id: lesson.id }) }}">
+                                <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        /***********************************************
+        ****************** Data table ******************
+        ***********************************************/
+        $('#student-lessons-datatable').DataTable({
+            dom: '<"row"<"col-12 px-3"t>><"row bg-white p-3 rounded-bottom"<"col-12 col-lg-6 d-flex align-items-center"l><"col-12 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-end"ip>>',
+            lengthMenu: [
+                [5, 10, 25, 50, 100, -1],
+                [5, 10, 25, 50, 100]
+            ],
+            bSort: true,
+            responsive: true,
+            processing: true,
+            pagingType: 'simple',
+            language: {
+                "info": "_PAGE_ - _PAGE_ of _PAGES_",
+                'zeroRecords': "{{'general.datatable.zeroRecords'|_}}",
+                'emptyPanes': "{{'general.datatable.emptyPanes'|_}}",
+                'emptyTable': "{{'general.datatable.emptyTable'|_}}",
+                'search': '',
+                'lengthMenu': "{{'general.datatable.lengthMenu'|_}}: _MENU_",
+                'paginate': {
+                    'first': '«',
+                    'previous': '‹',
+                    'next': '›',
+                    'last': '»',
+                },
+                'aria': {
+                    'paginate': {
+                        'first': "{{'general.datatable.first'|_}}",
+                        'previous': "{{'general.datatable.previous'|_}}",
+                        'next': "{{'general.datatable.next'|_}}",
+                        'last': "{{'general.datatable.last'|_}}"
+                    }
+                }
+            }
+        });
+
+        /***********************************************
+        ***************** Selectpicker *****************
+        ***********************************************/
+        $("#lessons-year").selectpicker("refresh");
+        $("#lessons-month").selectpicker("refresh");
+
+        /** Function that extracts the lessons from a new month. */
+        function updateLessons($month, $year) {
+            $.request(
+                'onSpecialistLessonsTableUpdate',
+                {
+                    data: {
+                        month: $month,
+                        year: $year
+                    },
+                    update: {
+                        'web-app/specialist/student-lessons': '#student-lessons-datatable-container'
+                    }
+                }
+            );
+        }
+
+        /***********************************************************
+        *********************** Year selector **********************
+        ***********************************************************/
+        $('#year').on('change', function() {
+            updateLessons($('#month').val(), this.value);
+        });
+
+        /************************************************
+        ******************* Month selector **************
+        ************************************************/
+        $('#month').on('change', function() {
+           updateLessons(this.value, $('#year').val());
+        });
+
+    });
+</script>
