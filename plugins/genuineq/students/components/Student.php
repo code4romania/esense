@@ -261,7 +261,7 @@ class Student extends ComponentBase
         /** Extract the student that needs to be deleted. */
         $student = StudentModel::find(post('id'));
 
-        /** Fire event before student unzipe. */
+        /** Fire event before student delete. */
         Event::fire('genuineq.students.student.before.delete', [&$student, post()]);
 
         if ($student) {
