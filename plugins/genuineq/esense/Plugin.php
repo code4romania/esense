@@ -86,6 +86,7 @@ class Plugin extends PluginBase
         /** Extend the School model. */
         $this->schoolExtendRelationships();
         $this->schoolExtendMethods();
+        $this->schoolExtendComponens();
 
         /** Extend the Specialist model. */
         $this->specialistExtendRelationships();
@@ -135,6 +136,12 @@ class Plugin extends PluginBase
 
             /** Link "Lesson" model to "Student" model with has-many-through relation. */
             $model->hasManyThrough['lessons'] = ['Genuineq\Timetable\Models\Lesson', 'through' => 'Genuineq\Esense\Models\Connection'];
+
+            /** Link "TransferRequest" model to "Student" model with one-to-many relation. */
+            $model->hasMany['transferRequests'] = ['Genuineq\Esense\Models\TransferRequest', 'key' => 'student_id'];
+
+            /** Link "AccessRequest" model to "Student" model with one-to-many relation. */
+            $model->hasMany['accessRequests'] = ['Genuineq\Esense\Models\AccessRequest', 'key' => 'student_id'];
         });
     }
 
@@ -274,11 +281,26 @@ class Plugin extends PluginBase
 
             /** Remove all student lessons. */
             foreach ($student->lessons as $key => $lesson) {
-                $lesson->forceDelete();
+                $lesson->delete();
+            }
+
+            /** Remove all student connections. */
+            foreach($student->connections as $key => $connection) {
+                $connection->delete();
+            }
+
+            /** Remove all student access requests. */
+            foreach($student->accessRequests as $key => $accessRequest) {
+                $accessRequest->delete();
+            }
+
+            /** Remove all student transfer requests. */
+            foreach($student->transferRequests as $key => $transferRequest) {
+                $transferRequest->delete();
             }
 
             /** Remove all specialists connections. */
-            $student->specialists()->detach();
+            // $student->specialists()->detach();
         });
         /************ Student DELETE end ************/
     }
@@ -448,6 +470,48 @@ class Plugin extends PluginBase
                 return $years;
             });
         });
+    }
+
+    /**
+     * Function that contains all the component extensions of the School model.
+     */
+    protected function schoolExtendComponens()
+    {
+        /************ School DELETE start ************/
+        Event::listen('genuineq.profile.school.before.delete', function($school) {
+
+            /** Delete school students. */
+            foreach($school->myStudents as $student) {
+                /** Check if contact person 1 is defined. */
+                if($student->contact_person_1){
+                    $student->contact_person_1->delete();
+                }
+                /** Check if contact person 2 is defined. */
+                if($student->contact_person_2){
+                    $student->contact_person_2->delete();
+                }
+                /** Check if contact person 3 is defined. */
+                if($student->contact_person_3){
+                    $student->contact_person_3->delete();
+                }
+                /** Check if contact person 4 is defined. */
+                if($student->contact_person_4){
+                    $student->contact_person_4->delete();
+                }
+                /** Check if contact person 5 is defined. */
+                if($student->contact_person_5){
+                    $student->contact_person_5->delete();
+                }
+                $student->delete();
+            }
+
+            /** Delete school specialists. */
+            foreach($school->specialists as $specialist) {
+                $specialist->delete();
+            }
+
+        });
+        /************ School DELETE end ************/
     }
 
     /***********************************************
@@ -665,13 +729,59 @@ class Plugin extends PluginBase
     protected function specialistExtendComponens()
     {
         /************ Specialist DELETE start ************/
-        Event::listen('genuineq.specialist.change.student.owner.before.delete', function($specialist) {
+        Event::listen('genuineq.profile.specialist.before.delete', function($specialist) {
             foreach($specialist->myStudents as $student) {
-                /** Change the student owner from specialist to school. */
-                $student->owner_id = Auth::user()->profile->id;
-                $student->owner_type = 'Genuineq\Profile\Models\School';
-                $student->save();
+                if ($specialist->school) {
+                    /** Change the student owner from specialist to school if specialist is afiliated. */
+                    $student->owner_id = $specialist->school_id;
+                    $student->owner_type = 'Genuineq\Profile\Models\School';
+                    $student->save();
+                } else {
+                    /** Check if contact person 1 is defined. */
+                    if($student->contact_person_1){
+                        $student->contact_person_1->delete();
+                    }
+                    /** Check if contact person 2 is defined. */
+                    if($student->contact_person_2){
+                        $student->contact_person_2->delete();
+                    }
+                    /** Check if contact person 3 is defined. */
+                    if($student->contact_person_3){
+                        $student->contact_person_3->delete();
+                    }
+                    /** Check if contact person 4 is defined. */
+                    if($student->contact_person_4){
+                        $student->contact_person_4->delete();
+                    }
+                    /** Check if contact person 5 is defined. */
+                    if($student->contact_person_5){
+                        $student->contact_person_5->delete();
+                    }
+                    /** Delete the student if specialist is unafiliated. */
+                    $student->delete();
+                }
             }
+
+            /** Delete specialist lessons. */
+            foreach($specialist->lessons as $key => $lesson) {
+                $lesson->delete();
+            }
+
+            /** Delete specialist connection. */
+            foreach($specialist->connections as $key => $connection) {
+                $connection->delete();
+            }
+
+            /** Delete specialist transfer requests. */
+            foreach($specialist->transferRequests as $key => $transferRequests) {
+                $transferRequests->delete();
+            }
+
+            /** Delete specialist access requests. */
+            foreach($specialist->accessRequests as $key => $accessRequests) {
+                $accessRequests->delete();
+            }
+
         });
         /************ Specialist DELETE end ************/
     }
