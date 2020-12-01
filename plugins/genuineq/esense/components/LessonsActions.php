@@ -147,8 +147,8 @@ class LessonsActions extends ComponentBase
     }
 
     /**
-     * Function that forces the refresh of the specialist lessons table
-     *  in order to display lessons from different periods of time.
+     * Function that forces the refresh of the specialist-student lessons table
+     *  in order to display lessons from  selected year.
      */
     public function onSpecialistLessonsTableYearUpdate()
     {
@@ -163,10 +163,42 @@ class LessonsActions extends ComponentBase
     }
 
     /**
-     * Function that forces the refresh of the specialist lessons table
-     *  in order to display lessons from different periods of time.
+     * Function that forces the refresh of the specialist-student lessons table
+     *  in order to display lessons from  selected month.
      */
     public function onSpecialistLessonsTableMonthUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+        /** Send the user back. */
+        $this->page['user'] = Auth::user();
+
+        /** Get & Filter Lessons */
+        $this->page['lessons'] = Auth::user()->profile->getLessonsFromMonth(post('month'), post('year'));
+    }
+
+    /**
+     * Function that forces the refresh of the school-student lessons table
+     *  in order to display lessons from selected year.
+     */
+    public function onSchoolLessonsTableYearUpdate()
+    {
+        if (!Auth::check()) {
+            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
+        }
+        /** Send the user back. */
+        $this->page['user'] = Auth::user();
+
+        /** Get & Filter Lessons */
+        $this->page['lessons'] = Auth::user()->profile->getLessonsFromYear(post('year'));
+    }
+
+    /**
+     * Function that forces the refresh of the school-student lessons table
+     *  in order to display lessons from different selected month.
+     */
+    public function onSchoolLessonsTableMonthUpdate()
     {
         if (!Auth::check()) {
             return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
