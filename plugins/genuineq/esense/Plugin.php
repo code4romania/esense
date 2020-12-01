@@ -175,6 +175,31 @@ class Plugin extends PluginBase
             $model->addDynamicMethod('getConnection', function($specialist) use ($model) {
                 return $model->connections->where('specialist_id', $specialist)->first();
             });
+
+
+            /** Add get lessons years attribute. */
+            $model->addDynamicMethod('getLessonsYearsAttribute', function() use ($model) {
+
+                $lessonsYears = [];
+                $lessons = $model->lessons()->get();
+
+                     foreach ($lessons as $lesson){
+                         $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
+                     }
+
+                     return array_unique($lessonsYears);
+            });
+
+
+            /** Add get school-student lessons from specific month method. */
+            $model->addDynamicMethod('getLessonsFromMonth', function($month, $year = null) use ($model) {
+
+                /** Extract the start and the end of the year. */
+                $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
+                $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
+
+                return $model->lessons()->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+            });
         });
     }
 
@@ -468,17 +493,6 @@ class Plugin extends PluginBase
                 }
 
                 return $years;
-            });
-
-
-            /** Add get school-student lessons from specific year method. */
-            $model->addDynamicMethod('getLessonsFromYear', function($year = null) use ($model) {
-
-                /** Extract the start and the end of the year. */
-                $yearStart = Carbon::parse(($year ?? Carbon::now()->year) . '-01-01')->format('Y-m-d');
-                $yearEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-12-31')->format('Y-m-d');
-
-                return $model->lessons()->whereBetween('day', [$yearStart, $yearEnd])->orderBy('day', 'DESC')->get();
             });
 
             /** Add get school-student lessons from specific month method. */

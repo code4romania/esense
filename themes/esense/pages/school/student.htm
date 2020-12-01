@@ -95,8 +95,10 @@ allowedUserTypes[] = "school"
                     <div class="col-12 mt-5">
                         <p class="text-gray-dark font-weight-bold px-3">{{ 'page.school.dashboard.student.profile.exercises'|_ }}</p>
 
+                        <div id="student-lessons-datatable-container">
                         <!-- Partial for school student lessons  -->
-                        {% partial 'web-app/general/school-student-lessons' year = 'now'|date('Y') years = user.profile.lessons_years lessons = [] %}
+                        {% partial 'web-app/school/student-lessons' month = 'now'|date('n') year = 'now'|date('Y') years = student.lessons_years lessons = [] %}
+                        </div>
 
                     </div>
                 </div>
@@ -109,74 +111,40 @@ allowedUserTypes[] = "school"
 {% partial 'web-app/general/student-archive' %}
 
 {% put scripts %}
-    <!-- Scripts for datatables -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#students-datatable').DataTable({
-                dom: '<"row"<"col-12 px-3"t>><"row bg-white p-3 rounded-bottom"<"col-12 col-lg-6 d-flex align-items-center"l><"col-12 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-end"ip>>',
-                lengthMenu: [
-                    [5, 10, 25, 50, 100, -1],
-                    [5, 10, 25, 50, 100]
-                ],
-                bSort: true,
-                responsive: true,
-                processing: true,
-                pagingType: 'simple',
-                language: {
-                    "info": "_PAGE_ - _PAGE_ of _PAGES_",
-                    'zeroRecords': "{{'general.datatable.zeroRecords'|_}}",
-                    'emptyPanes': "{{'general.datatable.emptyPanes'|_}}",
-                    'emptyTable': "{{'general.datatable.emptyTable'|_}}",
-                    'search': '',
-                    'lengthMenu': "{{'general.datatable.lengthMenu'|_}}: _MENU_",
-                    'paginate': {
-                        'first': '«',
-                        'previous': '‹',
-                        'next': '›',
-                        'last': '»',
-                    },
-                    'aria': {
-                        'paginate': {
-                            'first': "{{'general.datatable.first'|_}}",
-                            'previous': "{{'general.datatable.previous'|_}}",
-                            'next': "{{'general.datatable.next'|_}}",
-                            'last': "{{'general.datatable.last'|_}}"
-                        }
-                    }
-                }
-            });
+<script type="text/javascript">
+    $(document).ready(function () {
+        /** Function that extarcts the schedule for a date and updates the page. */
+        function selectDate(date) {
+            /** Update the calendar. */
+            $('.calendar-wrapper').updateCalendarOptions({date: date});
 
-            function selectDate(date) {
-                /** Update the calendar. */
-                $('.calendar-wrapper').updateCalendarOptions({date: date});
+            /** Extract the formated date. */
+            var $_date = new Date(date);
+            var $formatedDate = $_date.getFullYear() + '-' + ((2 > ($_date.getMonth() + 1).length) ? ('0' + ($_date.getMonth() + 1)) : ($_date.getMonth() + 1)) + '-' + ((2 > $_date.getDate().length) ? ('0' + $_date.getDate()) : ($_date.getDate()))
 
-                /** Extract the formated date. */
-                var $_date = new Date(date);
-                var $formatedDate = $_date.getFullYear() + '-' + ((2 > ($_date.getMonth() + 1).length) ? ('0' + ($_date.getMonth() + 1)) : ($_date.getMonth() + 1)) + '-' + ((2 > $_date.getDate().length) ? ('0' + $_date.getDate()) : ($_date.getDate()))
-
-                $.request('onGetStudentDateLessons', {
-                    data: {
-                        student: {{ student.id }},
-                        date: $formatedDate
-                    },
-                    update: {
-                        'web-app/general/schedule-timeline': '#schedule-timeline'
-                    }
-                });
+            $.request('onGetStudentDateLessons', {
+                data: {
+                    student: {{ student.id }},
+            date: $formatedDate
+        },
+            update: {
+                'web-app/general/schedule-timeline': '#schedule-timeline'
             }
-
-            /** Intialize the calendar. */
-            $('.calendar-wrapper').calendar({
-                weekDayLength: 1,
-                date: new Date(),
-                onClickDate: selectDate,
-                showYearDropdown: true,
-                prevButton: '<',
-                nextButton: '>',
-                todayButtonContent: '',
-                showTodayButton: false,
-            });
         });
+        }
 
-    </script>
+        /** Intialize the calendar. */
+        $('.calendar-wrapper').calendar({
+            weekDayLength: 1,
+            date: new Date(),
+            onClickDate: selectDate,
+            showYearDropdown: true,
+            prevButton: '<',
+            nextButton: '>',
+            todayButtonContent: '',
+            showTodayButton: false,
+        });
+    });
+
+</script>
 {% endput %}

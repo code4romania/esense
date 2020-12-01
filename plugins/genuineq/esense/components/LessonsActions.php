@@ -173,7 +173,7 @@ class LessonsActions extends ComponentBase
      * Function that forces the refresh of the school-student lessons table
      *  in order to display lessons from selected year.
      */
-    public function onSchoolLessonsTableYearUpdate()
+    public function onSchoolStudentLessonsTableUpdate()
     {
         if (!Auth::check()) {
             return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
@@ -181,24 +181,15 @@ class LessonsActions extends ComponentBase
         /** Send the user back. */
         $this->page['user'] = Auth::user();
 
-        /** Get & Filter Lessons */
-        $this->page['lessons'] = Auth::user()->profile->getLessonsFromYear(post('year'));
-    }
-
-    /**
-     * Function that forces the refresh of the school-student lessons table
-     *  in order to display lessons from different selected month.
-     */
-    public function onSchoolLessonsTableMonthUpdate()
-    {
-        if (!Auth::check()) {
-            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
-        }
-        /** Send the user back. */
-        $this->page['user'] = Auth::user();
-
-        /** Get & Filter Lessons */
-        $this->page['lessons'] = Auth::user()->profile->getLessonsFromMonth(post('month'), post('year'));
+        /** Send the year back. */
+        $this->page['year'] = post('year');
+        /** Set the years array. */
+        $userId = $this->page['param']['id'];
+        $this->page['years'] = Auth::user()->profile->students->where('id', $userId)->lessons_years;
+        /** Send the month back. */
+        $this->page['month'] = post('month');
+        /** Set the lessons. */
+        $this->page['lessons'] = Auth::user()->profile->students->where('id', $userId)->getLessonsFromMonth(post('month'), post('year'));
     }
 
 }
