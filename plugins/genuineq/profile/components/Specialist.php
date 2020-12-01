@@ -267,12 +267,8 @@ class Specialist extends ComponentBase
         $specialist = $user->profile->archivedSpecialists()->where('id', post('id'))->first();
 
         if ($specialist) {
-
-            /** Fire event before specialist is deleted. */
-            Event::fire('genuineq.specialist.change.student.owner.before.delete', [$specialist]);
-
-            /** Delete the extracted specialist. */
-            $specialist->forceDelete();
+            /** Delete the extracted specialist profile. */
+            $specialist->delete();
 
             Flash::success(Lang::get('genuineq.profile::lang.components.school.message.delete_successful'));
 
