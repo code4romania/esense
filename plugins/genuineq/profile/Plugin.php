@@ -115,7 +115,7 @@ class Plugin extends PluginBase
                     ],
                 ]);
             }
-                
+
         });
     }
 
@@ -203,6 +203,16 @@ class Plugin extends PluginBase
             Mail::send('genuineq.profile::mail.new_teacher', $data, function ($message) use ($user) {
                 $message->to($user->email, $user->full_name);
             });
+        });
+
+        Event::listen('genuineq.user.after.delete', function ($user) {
+            /** Force reload the profile relationship. */
+            $user->reloadRelations('profile');
+
+            /** Check if the profile has not been deleted. */
+            if ($user->profile) {
+                $user->profile->delete();
+            }
         });
     }
 }
