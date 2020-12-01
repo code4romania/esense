@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Profile\Models;
 
+use Event;
 use Model;
 use Carbon\Carbon;
 
