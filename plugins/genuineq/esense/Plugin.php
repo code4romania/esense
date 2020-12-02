@@ -180,7 +180,6 @@ class Plugin extends PluginBase
             /** Add get lessons years attribute. */
             $model->addDynamicMethod('getLessonsYearsAttribute', function() use ($model) {
 
-                $lessonsYears = [];
                 $lessons = $model->lessons()->get();
 
                      foreach ($lessons as $lesson){
@@ -192,7 +191,7 @@ class Plugin extends PluginBase
 
 
             /** Add get school-student lessons from specific month method. */
-            $model->addDynamicMethod('getLessonsFromMonth', function($month, $year = null) use ($model) {
+            $model->addDynamicMethod('getLessonsFromMonth', function($month = null, $year = null) use ($model) {
 
                 /** Extract the start and the end of the year. */
                 $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
@@ -482,28 +481,6 @@ class Plugin extends PluginBase
 
                 return $durations;
             });
-
-            /** Add get lessons years attribute. */
-            $model->addDynamicMethod('getLessonsYearsAttribute', function() use ($model) {
-               $years = [];
-
-                /** Parse all the active specialists. */
-                foreach ($model->active_specialists as $specialist) {
-                    $years = array_unique(array_merge($years, $specialist->lessons_years), SORT_REGULAR);
-                }
-
-                return $years;
-            });
-
-            /** Add get school-student lessons from specific month method. */
-            $model->addDynamicMethod('getLessonsFromMonth', function($month, $year = null) use ($model) {
-                /** Extract the start and the end of the year. */
-                $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
-                $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
-
-                return $model->lessons()->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
-            });
-
 
         });
     }

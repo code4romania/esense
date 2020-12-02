@@ -184,12 +184,11 @@ class LessonsActions extends ComponentBase
         /** Send the year back. */
         $this->page['year'] = post('year');
         /** Set the years array. */
-        $userId = $this->page['param']['id'];
-        $this->page['years'] = Auth::user()->profile->students->where('id', $userId)->lessons_years;
+//        $this->page['years'] = Auth::user()->profile->students()->lessons_years;
         /** Send the month back. */
         $this->page['month'] = post('month');
         /** Set the lessons. */
-        $this->page['lessons'] = Auth::user()->profile->students->where('id', $userId)->getLessonsFromMonth(post('month'), post('year'));
+        $this->page['lessons'] = Auth::user()->profile->student->getLessonsFromMonth(post('month'), post('year'));
     }
 
 }
