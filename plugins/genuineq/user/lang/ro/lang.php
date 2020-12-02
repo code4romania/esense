@@ -387,7 +387,7 @@ return [
         ],
 
         'reg_requests_table' => [
-            'label' => 'Cereri de înregistrare',
+            'label' => 'Tabel cereri de înregistrare',
             'details' => 'Tabelul cu cererile de înregistrare',
             'activate_button' => 'Activați cont(-uri)',
             'preview' => 'Detalii cerere înregistrare',

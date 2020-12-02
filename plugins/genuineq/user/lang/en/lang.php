@@ -387,7 +387,7 @@ return [
         ],
 
         'reg_requests_table' => [
-            'label' => 'Registration requests',
+            'label' => 'Registration requests table',
             'description' => 'Registration requests table',
             'activate_button' => 'Activate account(s)',
             'preview' => 'Preview request details',

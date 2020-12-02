@@ -1,8 +1,8 @@
 <?php namespace Genuineq\User\ReportWidgets;
 
-use DB;
 use Lang;
 use Backend\Classes\ReportWidgetBase;
+use Genuineq\User\Models\User as UserModel;
 
 class TotalRegistrationRequests extends ReportWidgetBase
 {
@@ -15,7 +15,7 @@ class TotalRegistrationRequests extends ReportWidgetBase
             $this->vars['labelRegistrationRequests'] = Lang::get('genuineq.user::lang.reportwidgets.total_registration_requests.label');
 
             /** Get no of inactive user accounts (== user requests) from database  */
-            $this->vars['totalRegistrationRequests'] = DB::table('users')->select()->where('is_activated', '=', 0)->count();
+            $this->vars['totalRegistrationRequests'] = UserModel::where('is_activated', 0)->count();
 
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
