@@ -480,6 +480,11 @@ class Plugin extends PluginBase
         /************ School DELETE start ************/
         Event::listen('genuineq.profile.school.before.delete', function($school) {
 
+            /** Delete school specialists. */
+            foreach($school->specialists as $specialist) {
+                $specialist->delete();
+            }
+
             /** Delete school students. */
             foreach($school->myStudents as $student) {
                 /** Check if contact person 1 is defined. */
@@ -503,11 +508,6 @@ class Plugin extends PluginBase
                     $student->contact_person_5->delete();
                 }
                 $student->delete();
-            }
-
-            /** Delete school specialists. */
-            foreach($school->specialists as $specialist) {
-                $specialist->delete();
             }
 
         });
