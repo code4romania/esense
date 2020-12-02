@@ -95,67 +95,11 @@ allowedUserTypes[] = "school"
                     <div class="col-12 mt-5">
                         <p class="text-gray-dark font-weight-bold px-3">{{ 'page.school.dashboard.student.profile.exercises'|_ }}</p>
 
-                        <div class="table-responsive px-3" style="overflow-x: hidden;">
-                            <table id="students-datatable" class="table table-striped table-sm px-3 m-0" cellspacing="0" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
-                                <thead>
-                                    <tr>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.lesson'|_ }}</p></th>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.category'|_ }}</p></th>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.date'|_ }}</p></th>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.length'|_ }}</p></th>
-                                        <th><p class="p-0 m-0 py-2 pl-2 display-4 text-black font-weight-light" style="line-height: 18px;">{{ 'page.school.dashboard.student.specialist'|_ }}</p></th>
-                                        <th class="no-sort"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for lesson in student.lessons %}
-                                        <tr>
-                                            <td>
-                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                    <span class="display-4 text-blue">{{ lesson.title }}</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                    <span class="display-4 text-black">{{ lesson.category }}</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                    <span class="display-4 text-black">{{ lesson.day|date("d/m/Y") }}</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="pl-2 py-lg-4 d-flex align-items-center">
-                                                    <span class="display-4 text-black">{{ lesson.lesson_duration }}</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="pl-2 py-lg-3 d-flex align-items-center">
-                                                    <div>
-                                                        {% if lesson.connection.specialist.user.avatar %}
-                                                            <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{ lesson.connection.specialist.user.avatar.getThumb(30, 30, { mode : 'crop' }) }}" alt="specialist-avatar">
-                                                        {% else %}
-                                                            <img class="img-fluid add-custom-avatar" width="30px" height="30px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="d-flex flex-column ml-2">
-                                                        <span class="display-4" style="color:#1a1a1a;">{{ lesson.connection.specialist.full_name }}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="pl-2 py-lg-4">
-                                                    <a role="button" href="{{ 'school/lesson'|page({id: lesson.id }) }}">
-                                                        <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                        <div id="student-lessons-datatable-container">
+                        <!-- Partial for school student lessons  -->
+                        {% partial 'web-app/school/student-lessons' month = 'now'|date('n') year = 'now'|date('Y') years = student.lessons_years lessons = [] %}
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -167,74 +111,40 @@ allowedUserTypes[] = "school"
 {% partial 'web-app/general/student-archive' %}
 
 {% put scripts %}
-    <!-- Scripts for datatables -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#students-datatable').DataTable({
-                dom: '<"row"<"col-12 px-3"t>><"row bg-white p-3 rounded-bottom"<"col-12 col-lg-6 d-flex align-items-center"l><"col-12 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-end"ip>>',
-                lengthMenu: [
-                    [5, 10, 25, 50, 100, -1],
-                    [5, 10, 25, 50, 100]
-                ],
-                bSort: true,
-                responsive: true,
-                processing: true,
-                pagingType: 'simple',
-                language: {
-                    "info": "_PAGE_ - _PAGE_ of _PAGES_",
-                    'zeroRecords': "{{'general.datatable.zeroRecords'|_}}",
-                    'emptyPanes': "{{'general.datatable.emptyPanes'|_}}",
-                    'emptyTable': "{{'general.datatable.emptyTable'|_}}",
-                    'search': '',
-                    'lengthMenu': "{{'general.datatable.lengthMenu'|_}}: _MENU_",
-                    'paginate': {
-                        'first': '«',
-                        'previous': '‹',
-                        'next': '›',
-                        'last': '»',
-                    },
-                    'aria': {
-                        'paginate': {
-                            'first': "{{'general.datatable.first'|_}}",
-                            'previous': "{{'general.datatable.previous'|_}}",
-                            'next': "{{'general.datatable.next'|_}}",
-                            'last': "{{'general.datatable.last'|_}}"
-                        }
-                    }
-                }
-            });
+<script type="text/javascript">
+    $(document).ready(function () {
+        /** Function that extarcts the schedule for a date and updates the page. */
+        function selectDate(date) {
+            /** Update the calendar. */
+            $('.calendar-wrapper').updateCalendarOptions({date: date});
 
-            function selectDate(date) {
-                /** Update the calendar. */
-                $('.calendar-wrapper').updateCalendarOptions({date: date});
+            /** Extract the formated date. */
+            var $_date = new Date(date);
+            var $formatedDate = $_date.getFullYear() + '-' + ((2 > ($_date.getMonth() + 1).length) ? ('0' + ($_date.getMonth() + 1)) : ($_date.getMonth() + 1)) + '-' + ((2 > $_date.getDate().length) ? ('0' + $_date.getDate()) : ($_date.getDate()))
 
-                /** Extract the formated date. */
-                var $_date = new Date(date);
-                var $formatedDate = $_date.getFullYear() + '-' + ((2 > ($_date.getMonth() + 1).length) ? ('0' + ($_date.getMonth() + 1)) : ($_date.getMonth() + 1)) + '-' + ((2 > $_date.getDate().length) ? ('0' + $_date.getDate()) : ($_date.getDate()))
-
-                $.request('onGetStudentDateLessons', {
-                    data: {
-                        student: {{ student.id }},
-                        date: $formatedDate
-                    },
-                    update: {
-                        'web-app/general/schedule-timeline': '#schedule-timeline'
-                    }
-                });
+            $.request('onGetStudentDateLessons', {
+                data: {
+                    student: {{ student.id }},
+            date: $formatedDate
+        },
+            update: {
+                'web-app/general/schedule-timeline': '#schedule-timeline'
             }
-
-            /** Intialize the calendar. */
-            $('.calendar-wrapper').calendar({
-                weekDayLength: 1,
-                date: new Date(),
-                onClickDate: selectDate,
-                showYearDropdown: true,
-                prevButton: '<',
-                nextButton: '>',
-                todayButtonContent: '',
-                showTodayButton: false,
-            });
         });
+        }
 
-    </script>
+        /** Intialize the calendar. */
+        $('.calendar-wrapper').calendar({
+            weekDayLength: 1,
+            date: new Date(),
+            onClickDate: selectDate,
+            showYearDropdown: true,
+            prevButton: '<',
+            nextButton: '>',
+            todayButtonContent: '',
+            showTodayButton: false,
+        });
+    });
+
+</script>
 {% endput %}
