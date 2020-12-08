@@ -55,6 +55,7 @@ class RegRequestsTable extends ReportWidgetBase
 
         /* Add userModel variable to modal view */
         $this->vars['userModel'] = $userModel;
+        $this->vars['userModelProfile'] = json_decode($userModel->profile);
 
 
         return $this->makePartial('preview_request');
