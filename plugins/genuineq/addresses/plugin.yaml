@@ -4,21 +4,35 @@ plugin:
     author: genuineq
     icon: oc-icon-map-marker
     homepage: ''
+    permissions:
+        - addresses_access
 navigation:
     main-menu-item:
         label: 'genuineq.addresses::lang.plugin.backend-menu'
         url: genuineq/addresses/cities
         icon: icon-map-marker
+        permissions:
+            - addresses_access
         sideMenu:
             side-menu-item:
                 label: 'genuineq.addresses::lang.region.backend-menu'
                 url: genuineq/addresses/regions
                 icon: icon-tag
+                permissions:
+                    - addresses_access
             side-menu-item2:
                 label: 'genuineq.addresses::lang.county.backend-menu'
                 url: genuineq/addresses/counties
                 icon: icon-tags
+                permissions:
+                    - addresses_access
             side-menu-item3:
                 label: 'genuineq.addresses::lang.cities.backend-menu'
                 url: genuineq/addresses/cities
                 icon: icon-map-marker
+                permissions:
+                    - addresses_access
+permissions:
+    addresses_access:
+        tab: 'genuineq.addresses::lang.plugin.backend-menu'
+        label: 'genuineq.addresses::lang.permissions'
