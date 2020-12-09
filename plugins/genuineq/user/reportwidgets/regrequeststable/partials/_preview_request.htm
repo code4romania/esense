@@ -16,7 +16,7 @@
 
 <div class="modal-body">
 
-    <!--    inline styles for table bellow -->
+    <!--    styles for table bellow -->
     <style>
         #user-request-info tr td {
             /*color: black;*/
@@ -31,55 +31,55 @@
     </style>
 
         <!-- Fields that contains user request info -->
-        <table id='user-request-info'>
-            <tbody>
+    <table id="user-request-info">
+        <tbody>
 
 <?php if('school' == $userModel->type): ?>
-                <tr>
-                     <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.school_name')) ?> </td>
-                     <td> <?php echo $userModelProfile->name ?> </td>
-                </tr>
+            <tr>
+                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.school_name')) ?> </td>
+                <td> <?php echo $userModelProfile->name ?> </td>
+            </tr>
 <?php endif ?>
 
-                <tr>
-                    <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.name')) ?> </td>
-                    <td> <?php echo $userModel->name ?> </td>
-                </tr>
-                 <tr>
-                     <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.surname')) ?> </td>
-                     <td> <?php echo $userModel->surname ?> </td>
-                 </tr>
-                 <tr>
-                     <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.email')) ?> </td>
-                     <td> <?php echo $userModel->email ?> </td>
-                 </tr>
-                 <tr>
-                     <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.type')) ?> </td>
-                     <td>
+            <tr>
+                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.name')) ?> </td>
+                <td> <?php echo $userModel->name ?> </td>
+            </tr>
+            <tr>
+                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.surname')) ?> </td>
+                <td> <?php echo $userModel->surname ?> </td>
+            </tr>
+            <tr>
+                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.email')) ?> </td>
+                <td> <?php echo $userModel->email ?> </td>
+            </tr>
+            <tr>
+                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.type')) ?> </td>
+                <td>
 
-                         <?php
-                         if('school' == $userModel->type){
-                                echo 'școală';
-                         }else {
-                                echo $userModel->type;
+                    <?php
+                       if('school' == $userModel->type){
+                            echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.school'));
+                        }else {
+                            echo $userModel->type;
                             }
-                         ?>
+                    ?>
 
-                     </td>
-                 </tr>
-                 <tr>
-                     <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.phone')) ?> </td>
-                     <td> <?php echo $userModelProfile->phone ?> </td>
-                 </tr>
-                 <tr>
-                     <td colspan='2'> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.description')) ?>
-                         <br>
-                        <p style='font-weight: normal'> <?php echo $userModelProfile->description ?> </p>
-                     </td>
-                 </tr>
+                </td>
+            </tr>
+            <tr>
+                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.phone')) ?> </td>
+                <td> <?php echo $userModelProfile->phone ?> </td>
+            </tr>
+            <tr>
+                <td colspan='2'> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.description')) ?>
+                    <br>
+                    <p style='font-weight: normal'> <?php echo $userModelProfile->description ?> </p>
+                </td>
+            </tr>
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 
     <br>
 

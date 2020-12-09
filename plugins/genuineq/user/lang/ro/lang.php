@@ -407,6 +407,7 @@ return [
                 'phone' => 'Telefon',
                 'description' => 'Descriere',
                 'school_name' => 'Nume Școală',
+                'school' => 'școală',
                 'created_ip_address' => 'Adresă IP creare',
                 'created_at' => 'Creat la',
             ],

@@ -407,6 +407,7 @@ return [
                 'phone' => 'Phone',
                 'description' => 'Description',
                 'school_name' => 'School Name',
+                'school' => 'school',
                 'created_ip_address' => 'Created IP address',
                 'created_at' => 'Created at',
             ],
