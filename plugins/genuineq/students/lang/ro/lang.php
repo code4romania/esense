@@ -5,6 +5,8 @@
         'backend-menu' => 'Studenți'
     ],
 
+    'permissions' => 'Acces la studenți',
+
     'student' => [
         'form-labels' => [
             'name' => 'Name',
