@@ -49,6 +49,8 @@ class Plugin extends PluginBase
         /** Extend the "Genuineq\User\Models\User" model. */
         $this->userExtendRelationships();
         $this->userExtendComponents();
+        $this->userExtendListColumns();
+        $this->userExtendMethods();
     }
 
     /***********************************************
@@ -215,4 +217,52 @@ class Plugin extends PluginBase
             }
         });
     }
+
+
+    /**
+     * Function that performs List columns extension for the User model.
+     */
+    protected function userExtendListColumns(){
+        // Extend all backend list usage
+        Event::listen('backend.list.extendColumns', function($listWidget) {
+
+            // Only for the User controller
+            if (!$listWidget->getController() instanceof \Genuineq\User\Controllers\Users) {
+                return;
+            }
+            // Only for the User model
+            if (!$listWidget->model instanceof \Genuineq\User\Models\User) {
+                return;
+            }
+            // Add an extra School Name column
+            $listWidget->addColumns([
+                'school_name' => [
+                    'label' => 'genuineq.profile::lang.specialist.form-labels.school' // 'School'
+                ]
+            ]);
+
+        });
+
+    }
+
+    /**
+     * Function that performs methods extensions of the User model.
+     */
+    protected function userExtendMethods()
+    {
+        User::extend(function ($model) {
+            /** Add attribute that checks if user is specialist and get the school name if is affiliated. */
+            $model->addDynamicMethod('getSchoolNameAttribute', function () use ($model) {
+                if('specialist' === $model->type){
+                    $school = $model->profile->school;
+                    return $school['name'];
+                }else {
+                    return '';
+                }
+            });
+        });
+
+
+    }
+
 }
