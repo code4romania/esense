@@ -54,7 +54,7 @@ fields:
         select: 'name, surname'
         span: left
         type: relation
-    contact_person_4_id:
+    contact_person_4:
         label: 'genuineq.students::lang.student.form-labels.contact_person_4'
         nameFrom: ''
         descriptionFrom: description
