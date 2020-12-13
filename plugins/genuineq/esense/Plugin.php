@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Esense;
 
+use Illuminate\Routing\Route;
 use Log;
 use Auth;
 use Event;
@@ -96,7 +97,25 @@ class Plugin extends PluginBase
         /** Extend the Lesson model. */
         $this->lessonExtendRelationships();
         $this->lessonExtendProperties();
+
+        /** Extends SmallRecords plugin */
+        $this->smallRecordsPluginExtend();
+
     }
+
+
+        public function registerPermissions()
+        {
+            $permissions = [
+
+                /** Permissions for accessing Tags & Attributes in SmallRecords plugin */
+                'genuineq.esense.smallrecords_access' => [
+                    'roles' => ['Developer'],
+                ],
+
+            ];
+        }
+
 
     /***********************************************
      ************** Student extensions *************
@@ -778,4 +797,36 @@ class Plugin extends PluginBase
             ]);
         });
     }
+
+
+    /***********************************************
+     ******** SmallRecords plugin extension *******
+     ***********************************************/
+
+    /** Extend JanVince\SmallRecords Plugin to set Permissions to Tags and Attributes sideMenuItems */
+    public function smallRecordsPluginExtend(){
+
+        /** Check if user have specific rights and remove sideMenuItems */
+
+//        $loggedInUser = \Backend\Facades\BackendAuth::getUser();
+//
+//           if('publisher' == $loggedInUser) {
+//            Event::listen('backend.menu.extendItems', function ($manager) {
+//                $manager->removeSideMenuItem('JanVince.SmallRecords', 'SmallRecords', 'tags');
+//                $manager->removeSideMenuItem('JanVince.SmallRecords', 'SmallRecords', 'attributes');
+//                });
+//            }
+
+
+        \JanVince\SmallRecords\Controllers\Tags::extend(function ($controller){
+            $controller->requiredPermissions = ['genuineq.esense.smallrecords_access'];
+        });
+
+        \JanVince\SmallRecords\Controllers\Attributes::extend(function ($controller){
+            $controller->requiredPermissions = ['genuineq.esense.smallrecords_access'];
+        });
+
+    }
+
+
 }
