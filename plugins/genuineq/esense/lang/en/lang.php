@@ -50,4 +50,9 @@
             'description' => 'Allows to extract new data for charts',
         ]
     ],
+
+    'smallrecords_permissions' => [
+        'tab' => 'Small Records access',
+        'label' => 'Small Records access',
+    ],
 ];

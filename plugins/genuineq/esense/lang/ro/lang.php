@@ -45,4 +45,9 @@
             ],
         ],
     ],
+
+    'smallrecords_permissions' => [
+        'tab' => 'Acces la Mini Înregistrări',
+        'label' => 'Acces la Mini Înregistrări',
+    ],
 ];
