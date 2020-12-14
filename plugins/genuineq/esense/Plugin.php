@@ -106,13 +106,13 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         /** Permissions for SmallRecords plugin */
-            return [
-                'genuineq.esense.smallrecords_access' => [
-                    'tab' => 'genuineq.esense::lang.smallrecords_permissions.tab',
-                    'label' => 'genuineq.esense::lang.smallrecords_permissions.label',
-                    'roles' => ['Developer'],
-                ],
-            ];
+        return [
+            'genuineq.esense.smallrecords_access' => [
+                'tab' => 'genuineq.esense::lang.smallrecords_permissions.tab',
+                'label' => 'genuineq.esense::lang.smallrecords_permissions.label',
+                'roles' => ['Developer'],
+            ],
+        ];
     }
 
 
@@ -802,18 +802,16 @@ class Plugin extends PluginBase
      ******** SmallRecords plugin extension *******
      ***********************************************/
 
-    /** Extend JanVince\SmallRecords Plugin to set Permissions to Tags and Attributes sideMenuItems */
+    /** Extend JanVince\SmallRecords Plugin to set Permissions to Tags and Attributes sideMenuItems. */
     public function smallRecordsPluginExtend(){
 
-        /** Check if user have specific rights and remove sideMenuItems */
+        /** Check if user have specific rights and remove sideMenuItems. */
         Event::listen('backend.menu.extendItems', function ($manager) {
-
-                /** get current logged in user and its role */
+            /** Get current logged in user and its role. */
             $loggedInUser = \Backend\Facades\BackendAuth::getUser();
-            $loggedInUserRole = $loggedInUser->role->name;
 
-            /** check if it has a 'Publisher' role */
-            if(/*NOT*/ ! ('Developer' == $loggedInUserRole)) {
+            /** Check if it has a 'Publisher' role. */
+            if(/*NOT*/ ! ('Developer' == $loggedInUser->role->name)) {
                 $manager->removeSideMenuItem('JanVince.SmallRecords', 'SmallRecords', 'tags');
                 $manager->removeSideMenuItem('JanVince.SmallRecords', 'SmallRecords', 'attributes');
             }
@@ -828,6 +826,4 @@ class Plugin extends PluginBase
         });
 
     }
-
-
 }
