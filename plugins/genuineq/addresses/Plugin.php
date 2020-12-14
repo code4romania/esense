@@ -1,6 +1,5 @@
 <?php namespace Genuineq\Addresses;
 
-use Backend;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase

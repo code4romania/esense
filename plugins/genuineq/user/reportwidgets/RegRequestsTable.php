@@ -73,26 +73,21 @@ class RegRequestsTable extends ReportWidgetBase
     {
         if ([] != post('record_id')) {
             $this->activateUser(post('record_id'));
-            /** Go to show success message */
-            goto success;
-
-        }elseif ([] != post('checked')) {
-
+        } elseif ([] != post('checked')) {
             /** Iterate IDs and get the corresponding user, then activate it */
             foreach (post('checked') as $accountId) {
                 $this->activateUser($accountId);
             }
-
-            success:
-            Flash::success(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.success'));
-
-            /* Refreshing the page */
-            return Redirect::refresh();
-
         } else {
             Flash::error(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail'));
+
             return;
         }
+
+        Flash::success(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.success'));
+
+        /* Refreshing the page */
+        return Redirect::refresh();
     }
 
     /**

@@ -1,138 +1,134 @@
 <?= Form::open(['id' => 'requestForm']) ?>
 
-<!-- Hidden fields that contains user information for activation action -->
-<input type="hidden" name="record_id" value="<?= $userModel->id ?>"/>
-<input type="hidden" name="is_activated" value="<?= $userModel->is_activated ?>"/>
+    <!-- Hidden fields that contains user information for activation action -->
+    <input type="hidden" name="record_id" value="<?= $userModel->id ?>"/>
+    <input type="hidden" name="is_activated" value="<?= $userModel->is_activated ?>"/>
 
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="popup">×</button>
-    <h4 class="modal-title"><?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.preview')) ?></h4>
-</div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="popup">×</button>
+        <h4 class="modal-title"><?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.preview')) ?></h4>
+    </div>
 
-<?php if (!$this->fatalError): ?>
+    <?php if (!$this->fatalError): ?>
 
-    <!-- MODAL BODY-->
+        <!-- MODAL BODY-->
+        <div class="modal-body">
 
-<div class="modal-body">
+            <!-- styles for table bellow -->
+            <style>
+                #user-request-info tr td {
+                    /*color: black;*/
+                    font-weight: bold;
+                    font-size: 1.1em;
+                    border: 1px solid black;
+                    padding: .5vh 1vh;
+                    width: auto;
+                    box-shadow: 0 0 5px #9ecaed;
 
-    <!--    styles for table bellow -->
-    <style>
-        #user-request-info tr td {
-            /*color: black;*/
-            font-weight: bold;
-            font-size: 1.1em;
-            border: 1px solid black;
-            padding: .5vh 1vh;
-            width: auto;
-            box-shadow: 0 0 5px #9ecaed;
+                }
+            </style>
 
-        }
-    </style>
+            <!-- Fields that contains user request info -->
+            <table id="user-request-info">
+                <tbody>
 
-        <!-- Fields that contains user request info -->
-    <table id="user-request-info">
-        <tbody>
+        <?php if('school' == $userModel->type): ?>
+                    <tr>
+                        <td> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.school_name')) ?> </td>
+                        <td> <?= $userModelProfile->name ?> </td>
+                    </tr>
+        <?php endif ?>
 
-<?php if('school' == $userModel->type): ?>
-            <tr>
-                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.school_name')) ?> </td>
-                <td> <?php echo $userModelProfile->name ?> </td>
-            </tr>
-<?php endif ?>
+                    <tr>
+                        <td> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.name')) ?> </td>
+                        <td> <?= $userModel->name ?> </td>
+                    </tr>
+                    <tr>
+                        <td> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.surname')) ?> </td>
+                        <td> <?= $userModel->surname ?> </td>
+                    </tr>
+                    <tr>
+                        <td> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.email')) ?> </td>
+                        <td> <?= $userModel->email ?> </td>
+                    </tr>
+                    <tr>
+                        <td> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.type')) ?> </td>
+                        <td>
 
-            <tr>
-                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.name')) ?> </td>
-                <td> <?php echo $userModel->name ?> </td>
-            </tr>
-            <tr>
-                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.surname')) ?> </td>
-                <td> <?php echo $userModel->surname ?> </td>
-            </tr>
-            <tr>
-                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.email')) ?> </td>
-                <td> <?php echo $userModel->email ?> </td>
-            </tr>
-            <tr>
-                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.type')) ?> </td>
-                <td>
+                            <?php
+                            if('school' == $userModel->type){
+                                    echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.school'));
+                                }else {
+                                    echo $userModel->type;
+                                }
+                            ?>
 
-                    <?php
-                       if('school' == $userModel->type){
-                            echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.school'));
-                        }else {
-                            echo $userModel->type;
-                            }
-                    ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.phone')) ?> </td>
+                        <td> <?= $userModelProfile->phone ?> </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2'> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.description')) ?>
+                            <br>
+                            <p style='font-weight: normal'> <?= $userModelProfile->description ?> </p>
+                        </td>
+                    </tr>
 
-                </td>
-            </tr>
-            <tr>
-                <td> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.phone')) ?> </td>
-                <td> <?php echo $userModelProfile->phone ?> </td>
-            </tr>
-            <tr>
-                <td colspan='2'> <?php echo e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.description')) ?>
-                    <br>
-                    <p style='font-weight: normal'> <?php echo $userModelProfile->description ?> </p>
-                </td>
-            </tr>
+                </tbody>
+            </table>
 
-        </tbody>
-    </table>
+            <br>
 
-    <br>
-
-</div>
+        </div>
 
 
-                <!--MODAL FOOTER-->
+        <!--MODAL FOOTER-->
+        <div class="modal-footer">
+            <button
+                type="submit"
+                data-request="onRequest"
+                onclick="$(this).data('request-data', {
+                            redirect: 0
+                        })"
+                data-hotkey="ctrl+s, cmd+s"
+                data-popup-load-indicator
+                class="btn btn-primary">
+                <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.activate_button')) ?>
+            </button>
 
-<div class="modal-footer">
-    <button
-        type="submit"
-        data-request="onRequest"
-        onclick="$(this).data('request-data', {
-                    redirect: 0
-                })"
-        data-hotkey="ctrl+s, cmd+s"
-        data-popup-load-indicator
-        class="btn btn-primary">
-        <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.activate_button')) ?>
-    </button>
+            <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="popup">
+                <?= e(trans('backend::lang.form.cancel')) ?>
+            </button>
+        </div>
 
-    <button
-        type="button"
-        class="btn btn-default"
-        data-dismiss="popup">
-        <?= e(trans('backend::lang.form.cancel')) ?>
-    </button>
-</div>
+    <?php else: ?>
 
-<?php else: ?>
+        <div class="modal-body">
+            <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+        </div>
+        <div class="modal-footer">
+            <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="popup">
+                <?= e(trans('backend::lang.form.close')) ?>
+            </button>
+        </div>
 
-<div class="modal-body">
-    <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
-</div>
-<div class="modal-footer">
-    <button
-        type="button"
-        class="btn btn-default"
-        data-dismiss="popup">
-        <?= e(trans('backend::lang.form.close')) ?>
-    </button>
-</div>
+    <?php endif ?>
 
-<?php endif ?>
-
-<script>
-    setTimeout(
-        function () {
-            $('#requestForm input.form-control:first').focus()
-        },
-        310
-    )
-
-</script>
-
+    <script>
+        setTimeout(
+            function () {
+                $('#requestForm input.form-control:first').focus()
+            },
+            310
+        )
+    </script>
 <?= Form::close() ?>
