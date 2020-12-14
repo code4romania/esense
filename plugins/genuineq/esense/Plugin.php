@@ -813,7 +813,7 @@ class Plugin extends PluginBase
             $loggedInUserRole = $loggedInUser->role->name;
 
             /** check if it has a 'Publisher' role */
-            if('Publisher' == $loggedInUserRole) {
+            if(/*NOT*/ ! ('Developer' == $loggedInUserRole)) {
                 $manager->removeSideMenuItem('JanVince.SmallRecords', 'SmallRecords', 'tags');
                 $manager->removeSideMenuItem('JanVince.SmallRecords', 'SmallRecords', 'attributes');
             }
