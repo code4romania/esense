@@ -218,31 +218,33 @@ class Plugin extends PluginBase
         });
     }
 
-
     /**
      * Function that performs List columns extension for the User model.
      */
-    protected function userExtendListColumns(){
-        // Extend all backend list usage
+    protected function userExtendListColumns()
+    {
+        /** Extend all backend list usage. */
         Event::listen('backend.list.extendColumns', function($listWidget) {
-
-            // Only for the User controller
+            /** Only for the User controller. */
             if (!$listWidget->getController() instanceof \Genuineq\User\Controllers\Users) {
                 return;
             }
-            // Only for the User model
+
+            /** Only for the User model. */
             if (!$listWidget->model instanceof \Genuineq\User\Models\User) {
                 return;
             }
-            // Add an extra School Name column
+
+            /** Add an extra School Name column. */
             $listWidget->addColumns([
                 'school_name' => [
-                    'label' => 'genuineq.profile::lang.specialist.form-labels.school' // 'School'
+                    'label' => 'genuineq.profile::lang.specialist.form-labels.school', // 'School'
+                    'type'=> 'text',
+                    'searchable'=> true,
+                    'sortable'=> true
                 ]
             ]);
-
         });
-
     }
 
     /**
@@ -253,16 +255,12 @@ class Plugin extends PluginBase
         User::extend(function ($model) {
             /** Add attribute that checks if user is specialist and get the school name if is affiliated. */
             $model->addDynamicMethod('getSchoolNameAttribute', function () use ($model) {
-                if('specialist' === $model->type){
-                    $school = $model->profile->school;
-                    return $school['name'];
-                }else {
+                if ('specialist' === $model->type) {
+                    return $model->profile->school['name'];
+                } else {
                     return '';
                 }
             });
         });
-
-
     }
-
 }
