@@ -1,11 +1,11 @@
 <?php return [
     'plugin' => [
-        'name' => 'Studenți',
-        'description' => 'Conține structura și datele de conectare pentru studenți și persoane de contact.',
-        'backend-menu' => 'Studenți'
+        'name' => 'Elevi',
+        'description' => 'Conține structura și datele de conectare pentru elevi și persoane de contact.',
+        'backend-menu' => 'Elevi'
     ],
 
-    'permissions' => 'Acces la studenți',
+    'permissions' => 'Acces la elevi',
 
     'student' => [
         'form-labels' => [
@@ -23,7 +23,7 @@
             'contact_person_5' => 'Persoana de contact 5'
         ],
 
-        'backend-menu' => 'Studenți'
+        'backend-menu' => 'Elevi'
     ],
 
     'contact-person' => [
@@ -33,7 +33,7 @@
             'email' => 'Email',
             'phone' => 'Telefon',
             'description' => 'Descriere',
-            'student' => 'Student'
+            'student' => 'Elev'
         ],
 
         'backend-menu' => 'Persoane de contact'
@@ -41,8 +41,8 @@
 
     'components' => [
         'students' => [
-            'name' => 'Studenți',
-            'description' => 'Tratează operațiunile CRUD pentru studenți.',
+            'name' => 'Elevi',
+            'description' => 'Tratează operațiunile CRUD pentru elevi.',
 
             'validation' => [
                 'surname_required' => 'Nume este obligatoriu',
