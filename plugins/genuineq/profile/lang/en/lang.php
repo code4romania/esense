@@ -7,8 +7,7 @@
 
     'school' => [
         'form-labels' => [
-            'contact_name' => 'Contact Name',
-            'contact_email' => 'Contact Email',
+            'contact_person' => 'Contact Person',
             'name' => 'Name',
             'phone' => 'Phone',
             'description' => 'Description',

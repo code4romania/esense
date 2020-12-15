@@ -7,8 +7,7 @@
 
     'school' => [
         'form-labels' => [
-            'contact_name' => 'Nume contact',
-            'contact_email' => 'E-mail de contact',
+            'contact_person' => 'Persoană de contact',
             'name' => 'Nume',
             'phone' => 'Telefon',
             'description' => 'Descriere',
