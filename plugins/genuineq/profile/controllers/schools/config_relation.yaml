@@ -1,0 +1,12 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+user:
+    label: 'genuineq.user::lang.backend.user.fields.name'
+    view:
+        list: $/genuineq/user/models/user/columns.yaml
+        form: $/genuineq/user/models/user/fields.yaml
+    manage:
+        list: $/genuineq/user/models/user/columns.yaml
+        form: $/genuineq/user/models/user/fields.yaml
