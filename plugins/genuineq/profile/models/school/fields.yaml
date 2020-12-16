@@ -1,26 +1,8 @@
 fields:
     user:
-        nameFrom: name
-        descriptionFrom: description
-        span: left
-        readOnly: 1
-        context:
-            - update
-            - preview
-            - relation
         type: partial
         path: $/genuineq/profile/controllers/schools/_user.htm
-#    email:
-#        label: 'genuineq.profile::lang.school.form-labels.contact_email'
-#        nameFrom: name
-#        descriptionFrom: description
-#        span: right
-#        readOnly: 1
-#        context:
-#            - update
-#            - preview
-#        type: partial
-#        path: $/genuineq/profile/controllers/schools/_user.htm
+
     name:
         label: 'genuineq.profile::lang.school.form-labels.name'
         span: left
