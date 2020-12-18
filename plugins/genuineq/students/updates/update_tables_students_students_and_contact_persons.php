@@ -13,6 +13,7 @@ class UpdateTablesStudentsStudentsAndContactPersons extends Migration
             $table->integer('student_id')->unsigned()->after('id');
         });
 
+
         /** get all students and contact persons */
         $students = \Genuineq\Students\Models\Student::select(
             'id',
@@ -63,14 +64,14 @@ class UpdateTablesStudentsStudentsAndContactPersons extends Migration
             $table->integer('contact_person_5_id')->unsigned()->nullable()->after('contact_person_4_id');
         });
 
-        $contactPersons = \Genuineq\Students\Models\ContactPerson::all();
 
+        /** Extract all contact persons */
+        $contactPersons = \Genuineq\Students\Models\ContactPerson::all();
 
         foreach ($contactPersons as $contactPerson) {
 
+            /** Find a student by ID from contact person */
             $student = \Genuineq\Students\Models\Student::find($contactPerson->student_id);
-
-//            $contactPersonId[] = $contactPerson->id;
 
             switch ($contactPerson) {
                 case (is_null($student->contact_person_1_id)):
@@ -94,9 +95,8 @@ class UpdateTablesStudentsStudentsAndContactPersons extends Migration
                     $student->save();
                     break;
             }
-
-
         }
+
 
         Schema::table('genuineq_students_contact_persons', function($table)
         {
