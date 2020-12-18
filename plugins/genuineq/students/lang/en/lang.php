@@ -16,11 +16,12 @@
             'visual_impairment' => 'Visual impairment',
             'birthdate' => 'Birthdate',
             'gender' => 'Gender',
-            'contact_person_1' => 'Contact Person 1',
-            'contact_person_2' => 'Contact Person 2',
-            'contact_person_3' => 'Contact Person 3',
-            'contact_person_4' => 'Contact Person 4',
-            'contact_person_5' => 'Contact Person 5'
+            'contact_persons_number' => 'Contact persons number',
+//            'contact_person_1' => 'Contact Person 1',
+//            'contact_person_2' => 'Contact Person 2',
+//            'contact_person_3' => 'Contact Person 3',
+//            'contact_person_4' => 'Contact Person 4',
+//            'contact_person_5' => 'Contact Person 5'
         ],
 
         'backend-menu' => 'Students'
