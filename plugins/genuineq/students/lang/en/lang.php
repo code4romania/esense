@@ -16,7 +16,7 @@
             'visual_impairment' => 'Visual impairment',
             'birthdate' => 'Birthdate',
             'gender' => 'Gender',
-            'contact_persons_number' => 'Contact persons number',
+            'contact_persons' => 'Contact persons',
 //            'contact_person_1' => 'Contact Person 1',
 //            'contact_person_2' => 'Contact Person 2',
 //            'contact_person_3' => 'Contact Person 3',

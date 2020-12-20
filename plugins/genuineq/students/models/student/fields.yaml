@@ -41,10 +41,10 @@ fields:
         type: richeditor
 
     contact_persons:
-        label: 'genuineq.students::lang.student.form-labels.contact_persons_number'
+        label: 'genuineq.students::lang.student.form-labels.contact_persons'
         nameFrom: ''
         descriptionFrom: description
         select: 'name, surname'
         span: left
         type: relation
-        disabled: true
+#        disabled: true

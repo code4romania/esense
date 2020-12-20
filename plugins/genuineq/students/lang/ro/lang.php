@@ -16,7 +16,7 @@
             'visual_impairment' => 'Deficiență vizuală',
             'birthdate' => 'Data nașterii',
             'gender' => 'Gen',
-            'contact_persons_number' => 'Numar persoane de contact',
+            'contact_persons' => 'Persoane de contact',
 //            'contact_person_1' => 'Persoana de contact 1',
 //            'contact_person_2' => 'Persoana de contact 2',
 //            'contact_person_3' => 'Persoana de contact 3',

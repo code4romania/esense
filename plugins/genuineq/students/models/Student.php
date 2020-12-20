@@ -83,33 +83,10 @@ class Student extends Model
     public function beforeDelete()
     {
         /** Delete contact persons before student is deleted */
-        /** Check if contact person 1 is defined. */
+        $this->contact_persons->delete();
 
-        foreach ($this->contact_persons as $contactPerson) {
-            $contactPerson->delete();
-        }
-
-
-
-
-//        if($this->contact_person_1){
-//            $this->contact_person_1->delete();
-//        }
-//        /** Check if contact person 2 is defined. */
-//        if($this->contact_person_2){
-//            $this->contact_person_2->delete();
-//        }
-//        /** Check if contact person 3 is defined. */
-//        if($this->contact_person_3){
-//            $this->contact_person_3->delete();
-//        }
-//        /** Check if contact person 4 is defined. */
-//        if($this->contact_person_4){
-//            $this->contact_person_4->delete();
-//        }
-//        /** Check if contact person 5 is defined. */
-//        if($this->contact_person_5){
-//            $this->contact_person_5->delete();
+//        foreach ($this->contact_persons as $contactPerson) {
+//            $contactPerson->delete();
 //        }
     }
 
