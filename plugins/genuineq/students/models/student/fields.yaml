@@ -47,4 +47,3 @@ fields:
         select: 'name, surname'
         span: left
         type: relation
-#        disabled: true
