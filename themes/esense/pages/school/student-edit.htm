@@ -11,6 +11,25 @@ allowedUserTypes[] = "school"
 
 [student]
 ==
+<script type="text/javascript">
+    /** Function that show a preview of uploaded student avatar */
+    function previewFile(input){
+        let file = $('input[type=file]').get(0).files[0];
+        if(file){
+            let reader = new FileReader();
+            reader.onload = function(){
+                $('#add-avatar')
+                    .attr('width', 150)
+                    .attr('src', reader.result);
+                $('#add-avatar2')
+                    .attr('width', 150)
+                    .attr('src', reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
 <div class="container-fluid px-lg-4">
     <div class="row">
 
@@ -70,7 +89,7 @@ allowedUserTypes[] = "school"
                                                     </div>
 
                                                     <div class="add-avatar">
-                                                        <img id="add-avatar" class="img-fluid add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                        <img id="add-avatar" class="img-fluid rounded-circle add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
                                                     </div>
                                                 {% endif %}
                                             </div>
@@ -80,7 +99,7 @@ allowedUserTypes[] = "school"
                                         <div class="tab-pane fade {% if student.gender == 'male' %} show active {% endif %}" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                             <div class="d-flex">
                                                 {% if student.avatar and student.gender == 'male' %}
-                                                    <img id="add-avatar" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{user.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                                                    <img id="add-avatar2" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{user.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
                                                 {% else %}
 
                                                     <div class="avatars1 d-none">
@@ -93,14 +112,14 @@ allowedUserTypes[] = "school"
                                                     </div>
 
                                                     <div class="add-avatar">
-                                                        <img id="add-avatar" class="img-fluid  add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                        <img id="add-avatar2" class="img-fluid rounded-circle add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
                                                     </div>
                                                 {% endif %}
                                             </div>
                                         </div>
 
                                         <!-- Input for adding custom avatar -->
-                                        <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
+                                        <input name="avatar" class="d-none custom-avatar onChangeValue" onchange="previewFile(this)" accept="image/*" type="file" id="avatar" name="studentAvatar" />
                                         <!-- Input for gender -->
                                         <input name="gender" id="gender" class="d-none onChangeValue" type="text" value="{{student.gender}}" />
                                     </div>
@@ -354,7 +373,7 @@ allowedUserTypes[] = "school"
 
             /** WYSWYG Editor. */
             $('#description').richText({
-                id:'diagnostic', 
+                id:'diagnostic',
                 class: 'onChangeValue',
                 useParagraph:true
             });
