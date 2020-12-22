@@ -7,6 +7,13 @@
     background: url("../../../img/svg/login-bg.png");
     background-repeat: no-repeat;
     background-position:center center;
+    background-size: cover;
     width: 100%;
     min-height: calc(100vh - 80px);
+}
+
+@media (max-width: 1000px) {
+    section.login-bg > .container {
+        width: 80%;
+    }
 }
