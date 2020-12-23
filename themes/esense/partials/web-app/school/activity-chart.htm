@@ -103,7 +103,7 @@ description = "Used for displaying a line chart graph to the school."
                                 // extract duration (hours) for specific tooltip and convert to minutes
                                 var minutesDuration = (data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]) * 60;
 
-                                //function that set minutes values to HH:MM format
+                                //function that change minutes values to HH:MM format
                                 const convertMinutesToHHMM = (mins) => {
                                     var hours = Math.floor(mins / 60);
                                     var minutes = Math.round(mins % 60);

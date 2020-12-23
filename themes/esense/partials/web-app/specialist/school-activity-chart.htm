@@ -97,6 +97,25 @@ description = "Used for displaying a line chart graph to the specialist."
                         }]
                     },
                     legend: { display: false }
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                // extract duration (hours) for specific tooltip and convert to minutes
+                                var minutesDuration = (data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]) * 60;
+
+                                //function that change minutes values to HH:MM format
+                                const convertMinutesToHHMM = (mins) => {
+                                    var hours = Math.floor(mins / 60);
+                                    var minutes = Math.round(mins % 60);
+                                    hours = hours < 10 ? '0' + hours : hours;
+                                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                                    return `${hours}:${minutes}`;
+                                }
+
+                                return convertMinutesToHHMM(minutesDuration);
+                            }
+                        }
+                    } //end tooltips
                 }
             });
         }
