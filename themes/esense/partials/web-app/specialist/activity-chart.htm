@@ -2,7 +2,6 @@ description = "Used for displaying a line chart graph to the specialist."
 
 [viewBag]
 ==
-{{ (durations[0] * 60) }}
 <div class="rounded bg-white shadow p-3">
     <div class="row mb-4">
         <div class="col-12 col-md-12 col-lg-6">
@@ -82,38 +81,6 @@ description = "Used for displaying a line chart graph to the specialist."
             ]
         };
 
-        /** Formatted chart data */
-        var hoursMinutesChartData = {
-            labels: [
-                    "{{'general.date_january'|_}}",
-                    "{{'general.date_february'|_}}",
-                    "{{'general.date_march'|_}}",
-                    "{{'general.date_april'|_}}",
-                    "{{'general.date_may'|_}}",
-                    "{{'general.date_june'|_}}",
-                    "{{'general.date_july'|_}}",
-                    "{{'general.date_august'|_}}",
-                    "{{'general.date_september'|_}}",
-                    "{{'general.date_octomber'|_}}",
-                    "{{'general.date_november'|_}}",
-                    "{{'general.date_december'|_}}"
-                ],
-            time: [
-                    {{ durations[0] }},  // Jan
-                    {{ durations[1] }},  // Feb
-                    {{ durations[2] }},  // Mar
-                    {{ durations[3] }},  // Apr
-                    {{ durations[4] }},  // May
-                    {{ durations[5] }},  // Jun
-                    {{ durations[6] }},  // Jul
-                    {{ durations[7] }},  // Aug
-                    {{ durations[8] }},  // Sep
-                    {{ durations[9] }},  // Oct
-                    {{ durations[10] }}, // Nov
-                    {{ durations[11] }}, // Dec
-                ],
-    };
-
 
         if (chLine) {
             new Chart(chLine, {
@@ -133,15 +100,22 @@ description = "Used for displaying a line chart graph to the specialist."
                     tooltips: {
                         callbacks: {
                             label: function(tooltipItem, data) {
-                                var label = data.datasets[tooltipItem.datasetIndex].label;
+                                // extract duration (hours) for specific tooltip and convert to minutes
+                                var minutesDuration = (data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]) * 60;
 
+                                //function that set minutes values to HH:MM format
+                                const convertMinutesToHHMM = (mins) => {
+                                    var hours = Math.floor(mins / 60);
+                                    var minutes = Math.round(mins % 60);
+                                    hours = hours < 10 ? '0' + hours : hours;
+                                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                                    return `${hours}:${minutes}`;
+                                }
 
-                                return hoursMinutesChartData.time[0];
-
-
+                                return convertMinutesToHHMM(minutesDuration);
                             }
                         }
-                    }
+                    } //end tooltips
                 }
             });
         }
