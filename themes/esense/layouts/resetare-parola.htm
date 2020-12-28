@@ -1,0 +1,114 @@
+description = "Resetare parolă - [layout]"
+
+[staticPage]
+useContent = 0
+default = 0
+
+[session]
+security = "all"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
+
+[passwordReset]
+==
+
+<!-- Reset password Form design variables -->
+{variable name="resetPasswordFormTitle" label="Titlu formular de resetare parolă" tab="Resetare parolă" type="text"}{/variable}
+{variable name="resetPasswordFormPasswordPlaceholder" label="Descriere cîmp parolă" tab="Resetare parolă" type="text"}{/variable}
+{variable name="resetPasswordFormConfirmPasswordPlaceholder" label="Descriere cîmp confirmare parolă" tab="Resetare parolă" type="text"}{/variable}
+{variable name="resetPasswordFormSubmit" label="Buton de resetare parolă" tab="Resetare parolă" type="text"}{/variable}
+{variable name="resetPasswordFormLoginLink" label="Text pentru adresa către autentificare în cont" tab="Resetare parolă" type="text"}{/variable}
+
+
+
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <link href="{{ [
+            'assets/scss/esense/landing-page/landing-page.scss',
+        ]|theme }}" rel="stylesheet">
+
+    {% partial 'web-app/general/google-analytics' %}
+
+    <body>
+
+        {% flash %}
+        <p
+            data-control="flash-message"
+            class="flash-message fade {{ type }}"
+            data-interval="5">
+            {{ message }}
+        </p>
+        {% endflash %}
+
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-center" style="height: 80px;">
+                            <a href="/">
+                                <img class="img-fluid" src="{{ 'assets/img/svg/logo.svg'|theme }}" alt="Logo site e-Sense">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="login-bg d-flex align-items-center justify-content-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-4 offset-lg-4 bg-light pb-5 my-md-5 my-lg-0 rounded shadow">
+                        <p class="py-5 text-center font-weight-bold">{{ resetPasswordFormTitle }}</p>
+
+                        <!-- Reset password form -->
+                        <form method="POST" data-request="onPasswordReset">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group mb-3 px-lg-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-white border-light" id="password-addon">
+                                                <img class="img-fluid" src="{{ 'assets/img/svg/password-icon.svg'|theme }}" alt="Emblemă lacăt pentru parolă">
+                                            </span>
+                                        </div>
+                                        <!-- Password input -->
+                                        <input type="password" name="password" class="form-control border-left-0 border-light pl-0" placeholder="{{ resetPasswordFormPasswordPlaceholder }}" aria-label="password" aria-describedby="password-addon">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="input-group mb-3 px-lg-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-white border-light" id="password-confirmation-addon">
+                                                <img class="img-fluid" src="{{ 'assets/img/svg/password-icon.svg'|theme }}" alt="Emblemă lacăt pentru confirmare parolă">
+                                            </span>
+                                        </div>
+                                        <!-- Password confirmation input -->
+                                        <input type="password" name="password_confirmation" class="form-control border-left-0 border-light pl-0" placeholder="{{ resetPasswordFormConfirmPasswordPlaceholder }}" aria-label="resest-password" aria-describedby="password-confirmation-addon">
+                                    </div>
+                                </div>
+
+                                <input name="code" type="hidden" value="{{ resetCode }}">
+
+                                <div class="col-12">
+                                    <!-- Submit button -->
+                                    <div class="d-flex justify-content-center mb-1">
+                                        <button role="button" type="submit" class="btn btn-lg btn-primary px-5 text-white">{{ resetPasswordFormSubmit }}</button>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <a class="text-dark display-4" href="{{ 'login' | staticPage }}">{{ resetPasswordFormLoginLink }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% partial 'footer-scripts' %}
+
+    </body>
+
+</html>

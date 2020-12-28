@@ -10,15 +10,15 @@ allowedUserGroups[] = "registered"
 allowedUserGroups[] = "guest"
 
 [passwordReset]
-resetPage = "authentification/reset-password"
+resetPage = "resetare-parola"
 ==
 
 <!-- Recover password by email Form design variables -->
-{variable name="recoverFormTitle" label="Titlu formular de recuperare parolă" tab="Recuperare parolă" type="text"}{/variable}
-{variable name="recoverFormSubtitle" label="Descriere modalitate de recuperare parolă" tab="Recuperare parolă" type="text"}{/variable}
-{variable name="recoverFormEmailPlaceholder" label="Descriere cîmp e-mail" tab="Recuperare parolă" type="text"}{/variable}
-{variable name="recoverFormSubmit" label="Buton de recuperare parolă" tab="Recuperare parolă" type="text"}{/variable}
-{variable name="recoverFormLoginLink" label="Text pentru adresa către autentificare în cont" tab="Recuperare parolă" type="text"}{/variable}
+{variable name="recoverPasswordTitle" label="Titlu formular de recuperare parolă" tab="Recuperare parolă" type="text"}{/variable}
+{variable name="recoverPasswordSubtitle" label="Descriere modalitate de recuperare parolă" tab="Recuperare parolă" type="text"}{/variable}
+{variable name="recoverPasswordEmailPlaceholder" label="Descriere cîmp e-mail" tab="Recuperare parolă" type="text"}{/variable}
+{variable name="recoverPasswordSubmit" label="Buton de recuperare parolă" tab="Recuperare parolă" type="text"}{/variable}
+{variable name="recoverPasswordLoginLink" label="Text pentru adresa către autentificare în cont" tab="Recuperare parolă" type="text"}{/variable}
 
 
 <html lang="en">
@@ -60,8 +60,10 @@ resetPage = "authentification/reset-password"
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-4 offset-lg-4 bg-light pb-5 my-md-5 my-lg-0 rounded shadow">
-                        <p class="pt-5 text-center font-weight-bold">{{ recoverFormTitle }}</p>
-                        <p class="pb-3 small text-gray-light text-center">{{ recoverFormSubtitle }}</p>
+                        <p class="pt-5 text-center font-weight-bold">{{ recoverPasswordTitle }}</p>
+                        <p class="pb-3 small text-gray-light text-center">{{ recoverPasswordSubtitle }}</p>
+
+                        <!-- Password recover form-->
                         <form method="POST" data-request="onPasswordRecover">
                             <div class="row">
                                 <div class="col-12 mb-3">
@@ -73,21 +75,22 @@ resetPage = "authentification/reset-password"
                                         </div>
 
                                         <!-- Email input -->
-                                        <input type="email" name="email" class="form-control border-left-0 border-light pl-0" placeholder="{{ recoverFormEmailPlaceholder }}" aria-label="email" aria-describedby="email-addon">
+                                        <input type="email" name="email" class="form-control border-left-0 border-light pl-0" placeholder="{{ recoverPasswordEmailPlaceholder }}" aria-label="email" aria-describedby="email-addon">
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <!-- Submit button -->
                                     <div class="d-flex justify-content-center mb-1">
-                                        <button role="button" type="submit" class="btn btn-sm btn-primary px-5 text-white">{{ recoverFormSubmit }}</button>
+                                        <button role="button" type="submit" class="btn btn-sm btn-primary px-5 text-white">{{ recoverPasswordSubmit }}</button>
                                     </div>
                                     <div class="d-flex justify-content-center mt-2">
-                                        <a class="text-dark display-4" href="{{ 'login' | staticPage }}">{{ recoverFormLoginLink }}</a>
+                                        <a class="text-dark display-4" href="{{ 'login' | staticPage }}">{{ recoverPasswordLoginLink }}</a>
                                     </div>
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>

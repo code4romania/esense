@@ -4,3 +4,5 @@ static-pages:
     politica-de-confidentialitate: {  }
     login: {  }
     recuperare-parola-email: {  }
+    resetare-parola: {  }
+    formular-inregistrare: {  }
