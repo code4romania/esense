@@ -100,6 +100,9 @@ class Plugin extends PluginBase
         /** Extends SmallRecords plugin */
         $this->smallRecordsPluginExtend();
 
+        /** Extends Rainlab\Pages plugin */
+        $this->staticPagesPluginExtend();
+
     }
 
 
@@ -826,4 +829,49 @@ class Plugin extends PluginBase
         });
 
     }
+
+    /***********************************************
+     ******** Rainlab\Pages plugin extension *******
+     ***********************************************/
+
+    /** Extend Rainlab\Pages Plugin to set Permissions to form fields */
+    public function staticPagesPluginExtend() {
+
+        /** REMOVE SIDE MENU ITEMS for non-developers */
+        Event::listen('backend.menu.extendItems', function($manager) {
+
+            /** Get current logged in user and its role. */
+            $loggedInUser = \Backend\Facades\BackendAuth::getUser();
+
+            /** Check if it has a 'Publisher' role. */
+            if(/*NOT*/ ! ('Developer' == $loggedInUser->role->name)) {
+                $manager->removeSideMenuItem('Rainlab.Pages', 'Pages', 'menus');
+                $manager->removeSideMenuItem('Rainlab.Pages', 'Pages', 'content');
+                $manager->removeSideMenuItem('Rainlab.Pages', 'Pages', 'snippets');
+            }
+        });
+
+
+        /** REMOVE FIELDS for non-developers */
+        Event::listen('backend.form.extendFields', function($widget) {
+
+            /** Check if it is Index controller  */
+            if (/*NOT*/ ! $widget->getController() instanceof  \RainLab\Pages\Controllers\Index) {
+                return;
+            }
+
+            /** Get current logged in user and its role. */
+            $loggedInUser = \Backend\Facades\BackendAuth::getUser();
+
+            /** Check if it has a 'Publisher' role. */
+            if(/*NOT*/ ! ('Developer' == $loggedInUser->role->name)) {
+                $widget->removeField('viewBag[title]');
+                $widget->removeField('viewBag[url]');
+                $widget->removeField('viewBag[layout]');
+                $widget->removeField('viewBag[is_hidden]');
+                $widget->removeField('viewBag[navigation_hidden]');
+            }
+        });
+    }
+
 }
