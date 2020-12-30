@@ -837,6 +837,24 @@ class Plugin extends PluginBase
     /** Extend Rainlab\Pages Plugin to set Permissions to form fields */
     public function staticPagesPluginExtend() {
 
+        Event::listen('backend.page.beforeDisplay', function($controller) {
+            /** Check if it is RainLab\Pages Index controller  */
+            if (/*NOT*/ ! $controller instanceof  \RainLab\Pages\Controllers\Index) {
+                return;
+            }
+
+            /** Get current logged in user and its role. */
+            $loggedInUser = \Backend\Facades\BackendAuth::getUser();
+
+            if(/*NOT*/ ! ('Developer' == $loggedInUser->role->name)) {
+                //jQuery selector for disabling
+                // 'add' and 'delete' buttons,
+                // 'checkboxes' and
+                // 'Add subpage' in Rainlab\Pages
+                $controller->addJs('/themes/esense/assets/js/static-pages-remove-items.js');
+            }
+        });
+
         /** REMOVE SIDE MENU ITEMS for non-developers */
         Event::listen('backend.menu.extendItems', function($manager) {
 
@@ -852,10 +870,10 @@ class Plugin extends PluginBase
         });
 
 
-        /** REMOVE FIELDS for non-developers */
+        /** HIDE FIELDS for non-developers */
         Event::listen('backend.form.extendFields', function($widget) {
 
-            /** Check if it is Index controller  */
+            /** Check if it is RainLab\Pages Index controller  */
             if (/*NOT*/ ! $widget->getController() instanceof  \RainLab\Pages\Controllers\Index) {
                 return;
             }
@@ -865,11 +883,14 @@ class Plugin extends PluginBase
 
             /** Check if it has a 'Publisher' role. */
             if(/*NOT*/ ! ('Developer' == $loggedInUser->role->name)) {
-                $widget->removeField('viewBag[title]');
-                $widget->removeField('viewBag[url]');
-                $widget->removeField('viewBag[layout]');
-                $widget->removeField('viewBag[is_hidden]');
-                $widget->removeField('viewBag[navigation_hidden]');
+                $fields = $widget->getFields();
+
+                $fields['viewBag[title]']->cssClass = 'hidden';
+                $fields['viewBag[url]']->cssClass = 'hidden';
+                $fields['viewBag[layout]']->cssClass = 'hidden';
+                $fields['viewBag[is_hidden]']->cssClass = 'hidden';
+                $fields['viewBag[navigation_hidden]']->cssClass = 'hidden';
+
             }
         });
     }
