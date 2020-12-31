@@ -11,29 +11,29 @@ allowedUserGroups[] = "guest"
 
 ==
 
-
-<!-- REGISTER FORM design variables -->
+<!-- ABOUT PROJECT PAGE design variables -->
 {variable name="aboutTitle" label="Titlu" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutText1" label="" tab="Despre proiect" type="textarea" size="small"}{/variable}
-{variable name="aboutText2" label="" tab="Despre proiect" type="textarea" size="small"}{/variable}
-{variable name="aboutText3" label="" tab="Despre proiect" type="textarea" size="small"}{/variable}
-{variable name="aboutDeficiencyTitle" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutDeficiencyText1" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutDeficiencyText2" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutDeficiencyText3" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesTitle" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesDescription" label="" tab="Despre proiect" type="textarea" size="small"}{/variable}
-{variable name="aboutExercisesCategoryTitle1" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesCategoryDetail1a" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesCategoryDetail1b" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesCategoryTitle2" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesCategoryDetail2a" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesCategoryDetail2b" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesCategoryTitle3" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesCategoryDetail3a" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesCategoryDetail3b" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesTestingTitle" label="" tab="Despre proiect" type="text"}{/variable}
-{variable name="aboutExercisesTestingLink" label="" tab="Despre proiect" type="text"}{/variable}
+{variable name="aboutText1" label="Text 1 descriere proiect" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutText2" label="Text 2 descriere proiect" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutText3" label="Text 3 descriere proiect" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutDeficiencyTitle" label="Titlu descriere afecțiune" tab="Despre proiect" type="text"}{/variable}
+{variable name="aboutDeficiencyText1" label="Text 1 despre afecțiune" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutDeficiencyText2" label="Text 2 despre afecțiune" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutDeficiencyText3" label="Text 3 despre afecțiune" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+
+{variable name="aboutExercisesTitle" label="Titlu secțiune categorii exerciții" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesDescription" label="Descriere exerciții" tab="Exerciții" type="richeditor" size="small"}{/variable}
+{variable name="aboutExercisesCategoryTitle1" label="Titlu categorie 1" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail1a" label="Detalii categorie 1a" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail1b" label="Detalii categorie 1b" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryTitle2" label="Titlu categorie 2" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail2a" label="Detalii categorie 2a" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail2b" label="Detalii categorie 2b" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryTitle3" label="Titlu categorie 3" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail3a" label="Detalii categorie 3a" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail3b" label="Detalii categorie 3b" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesTestingTitle" label="Titlu invitație la testare joc" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesTestingLinkText" label="Text legătură către joc" tab="Exerciții" type="text"}{/variable}
 
 
 <html lang="en">
@@ -66,9 +66,9 @@ allowedUserGroups[] = "guest"
                 <div class="row">
                     <div class="col-12 mt-lg-5">
                         <h1 class="text-gray-dark font-weight-light" style="line-height: 48px;">{{ aboutTitle }}</h1>
-                        <p class="pb-4 text-muted display-2" style="line-height: 34px;">{{ aboutText1 }}</p>
-                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutText2 }}</p>
-                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutText3 }}</p>
+                        <p class="pb-4 text-muted display-2" style="line-height: 34px;">{{ aboutText1 | raw }}</p>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutText2 | raw }}</p>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutText3 | raw }}</p>
                     </div>
                 </div>
             </div>
@@ -81,9 +81,9 @@ allowedUserGroups[] = "guest"
                 <div class="row">
                     <div class="col-12 col-lg-6 mt-lg-5 order-2 order-md-1">
                         <h1 class="text-gray-dark font-weight-light" style="line-height: 48px;">{{ aboutDeficiencyTitle }}</h1>
-                        <p class="pb-2 text-muted display-2" style="line-height: 34px;">{{ aboutDeficiencyText1 }}</p>
-                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutDeficiencyText2 }}</p>
-                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutDeficiencyText3 }}</p>
+                        <p class="pb-2 text-muted display-2" style="line-height: 34px;">{{ aboutDeficiencyText1 | raw }}</p>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutDeficiencyText2 | raw }}</p>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutDeficiencyText3 | raw }}</p>
                     </div>
                     <div class="col-12 col-lg-6 order-1 order-md-2">
                         <div>
@@ -101,7 +101,7 @@ allowedUserGroups[] = "guest"
                 <div class="row">
                     <div class="col-12 py-5">
                         <h1 class="text-gray-dark font-weight-light pb-3 pb-md-0" style="line-height: 48px;">{{ aboutExercisesTitle }}</h1>
-                        <p class="pb-2 dispay-2 text-muted" style="line-height: 34px;">{{ aboutExercisesDescription }}</p>
+                        <p class="pb-2 dispay-2 text-muted" style="line-height: 34px;">{{ aboutExercisesDescription | raw }}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -166,7 +166,7 @@ allowedUserGroups[] = "guest"
                             <div class="col-9 col-lg-9 p-lg-0 m-lg-0 pb-5">
                                 <div class="mb-5">
                                     <p class="text-gray-dark font-weight-bold p-0 m-0" style="line-height: 27px;">{{ aboutExercisesTestingTitle }}</p>
-                                    <a class="small text-danger pb-5" href="{{ 'landing-pages/demo-game'|page }}">{{ aboutExercisesTestingLink }}</a>
+                                    <a class="small text-danger pb-5" href="{{ 'demo-joc' | staticPage }}">{{ aboutExercisesTestingLinkText }}</a>
                                 </div>
                             </div>
                         </div>

@@ -1,9 +1,11 @@
 static-pages:
-    termeni-si-conditii: {  }
+    acasa-esense: {  }
+    autentificare: {  }
+    demo-joc: {  }
+    despre-proiect: {  }
+    formular-inregistrare: {  }
     intrebari-si-raspunsuri: {  }
     politica-de-confidentialitate: {  }
-    login: {  }
     recuperare-parola-email: {  }
     resetare-parola: {  }
-    formular-inregistrare: {  }
-    despre-proiect: {  }
+    termeni-si-conditii: {  }
