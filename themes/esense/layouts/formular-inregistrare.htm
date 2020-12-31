@@ -21,8 +21,8 @@ schools = 1
 
 <!-- REGISTER FORM design variables -->
 {variable name="registerPageTitle" label="Titlu" tab="Formular înregistrare" type="text"}{/variable}
-{variable name="registerPageIntro1" label="Text 1 intro" tab="Formular înregistrare" type="text"}{/variable}
-{variable name="registerPageIntro2" label="Text 2 intro" tab="Formular înregistrare" type="text"}{/variable}
+{variable name="registerPageIntro1" label="Text 1 intro" tab="Formular înregistrare" type="richeditor" size="small"}{/variable}
+{variable name="registerPageIntro2" label="Text 2 intro" tab="Formular înregistrare" type="richeditor" size="small"}{/variable}
 {variable name="registerPageSpecialistType" label="Tip cont specialist" tab="Formular înregistrare" type="text"}{/variable}
 {variable name="registerPageSchoolType" label="Tip cont școală" tab="Formular înregistrare" type="text"}{/variable}
 
@@ -86,8 +86,8 @@ schools = 1
                     <div class="row">
                         <div class="col-12 mb-4">
                             <h3 class="text-gray-dark font-weight-light mb-3" style="line-height: 38px;">{{ registerPageTitle }}</h3>
-                            <p class="small text-muted" style="line-height: 22px; letter-spacing: -0.3px;">{{ registerPageIntro1 }}</p>
-                            <p class="small text-muted" style="line-height: 22px; letter-spacing: -0.3px;">{{ registerPageIntro2 }}</p>
+                            <p class="small text-muted" style="line-height: 22px; letter-spacing: -0.3px;">{{ registerPageIntro1 | raw }}</p>
+                            <p class="small text-muted" style="line-height: 22px; letter-spacing: -0.3px;">{{ registerPageIntro2 | raw }}</p>
                         </div>
                     </div>
                 </div>
