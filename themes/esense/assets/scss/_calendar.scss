@@ -34,7 +34,7 @@
 }
 
 .day.disabled span {
-  color: #AAA;
+  color: #CCC;
 }
 
 /* vertical highlight */
@@ -147,6 +147,12 @@ h1 {
   text-transform: uppercase;
   font-size: 13px;
   color: #ADB5BD;
+  cursor: not-allowed;
+}
+
+.week .day[disabled="disabled"] span {
+    color: #ddd;
+    cursor: not-allowed;
 }
 
 .day span {
