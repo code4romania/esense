@@ -143,6 +143,8 @@ allowedUserTypes[] = "school"
             nextButton: '>',
             todayButtonContent: '',
             showTodayButton: false,
+            min: "{{ student.created_at.format('m/d/Y') }}",
+            max: new Date(),
         });
     });
 
