@@ -167,7 +167,9 @@ orderByDirection = "DESC"
 
 {% put scripts %}
     <script type="text/javascript">
+
         $(document).ready(function () {
+            
             /** Function that extarcts the schedule for a date and updates the page. */
             function selectDate(date) {
                 /** Update the calendar. */
@@ -198,6 +200,8 @@ orderByDirection = "DESC"
                 nextButton: '>',
                 todayButtonContent: '',
                 showTodayButton: false,
+                min: "{{ student.created_at.format('m/d/Y') }}",
+                max: new Date(),
             });
         });
 

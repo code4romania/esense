@@ -111,42 +111,43 @@ allowedUserTypes[] = "school"
 {% partial 'web-app/general/student-archive' %}
 
 {% put scripts %}
-<script type="text/javascript">
-    $(document).ready(function () {
-        /** Function that extarcts the schedule for a date and updates the page. */
-        function selectDate(date) {
-            /** Update the calendar. */
-            $('.calendar-wrapper').updateCalendarOptions({date: date});
+    <script type="text/javascript">
 
-            /** Extract the formated date. */
-            var $_date = new Date(date);
-            var $formatedDate = $_date.getFullYear() + '-' + ((2 > ($_date.getMonth() + 1).length) ? ('0' + ($_date.getMonth() + 1)) : ($_date.getMonth() + 1)) + '-' + ((2 > $_date.getDate().length) ? ('0' + $_date.getDate()) : ($_date.getDate()))
+        $(document).ready(function () {
+            /** Function that extarcts the schedule for a date and updates the page. */
+            function selectDate(date) {
+                /** Update the calendar. */
+                $('.calendar-wrapper').updateCalendarOptions({date: date});
 
-            $.request('onGetStudentDateLessons', {
-                data: {
-                    student: {{ student.id }},
-            date: $formatedDate
-        },
-            update: {
-                'web-app/general/schedule-timeline': '#schedule-timeline'
+                /** Extract the formated date. */
+                var $_date = new Date(date);
+                var $formatedDate = $_date.getFullYear() + '-' + ((2 > ($_date.getMonth() + 1).length) ? ('0' + ($_date.getMonth() + 1)) : ($_date.getMonth() + 1)) + '-' + ((2 > $_date.getDate().length) ? ('0' + $_date.getDate()) : ($_date.getDate()))
+
+                $.request('onGetStudentDateLessons', {
+                    data: {
+                        student: {{ student.id }},
+                        date: $formatedDate
+                    },
+                    update: {
+                        'web-app/general/schedule-timeline': '#schedule-timeline'
+                    }
+                });
             }
-        });
-        }
 
-        /** Intialize the calendar. */
-        $('.calendar-wrapper').calendar({
-            weekDayLength: 1,
-            date: new Date(),
-            onClickDate: selectDate,
-            showYearDropdown: true,
-            prevButton: '<',
-            nextButton: '>',
-            todayButtonContent: '',
-            showTodayButton: false,
-            min: "{{ student.created_at.format('m/d/Y') }}",
-            max: new Date(),
+            /** Intialize the calendar. */
+            $('.calendar-wrapper').calendar({
+                weekDayLength: 1,
+                date: new Date(),
+                onClickDate: selectDate,
+                showYearDropdown: true,
+                prevButton: '<',
+                nextButton: '>',
+                todayButtonContent: '',
+                showTodayButton: false,
+                min: "{{ student.created_at.format('m/d/Y') }}",
+                max: new Date(),
+            });
         });
-    });
 
-</script>
+    </script>
 {% endput %}
