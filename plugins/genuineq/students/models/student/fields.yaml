@@ -40,40 +40,8 @@ fields:
         span: full
         type: richeditor
 
-    contact_person_1:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_1'
-        nameFrom: ''
-        descriptionFrom: description
-        select: 'name, surname'
-        span: left
-        type: relation
-
-    contact_person_2:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_2'
-        nameFrom: ''
-        descriptionFrom: description
-        select: 'name, surname'
-        span: right
-        type: relation
-
-    contact_person_3:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_3'
-        nameFrom: ''
-        descriptionFrom: description
-        select: 'name, surname'
-        span: left
-        type: relation
-
-    contact_person_4:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_4'
-        nameFrom: ''
-        descriptionFrom: description
-        select: 'name, surname'
-        span: right
-        type: relation
-
-    contact_person_5:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_5'
+    contact_persons:
+        label: 'genuineq.students::lang.student.form-labels.contact_persons'
         nameFrom: ''
         descriptionFrom: description
         select: 'name, surname'

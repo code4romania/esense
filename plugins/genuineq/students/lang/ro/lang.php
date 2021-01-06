@@ -16,11 +16,12 @@
             'visual_impairment' => 'Deficiență vizuală',
             'birthdate' => 'Data nașterii',
             'gender' => 'Gen',
-            'contact_person_1' => 'Persoana de contact 1',
-            'contact_person_2' => 'Persoana de contact 2',
-            'contact_person_3' => 'Persoana de contact 3',
-            'contact_person_4' => 'Persoana de contact 4',
-            'contact_person_5' => 'Persoana de contact 5'
+            'contact_persons' => 'Persoane de contact',
+//            'contact_person_1' => 'Persoana de contact 1',
+//            'contact_person_2' => 'Persoana de contact 2',
+//            'contact_person_3' => 'Persoana de contact 3',
+//            'contact_person_4' => 'Persoana de contact 4',
+//            'contact_person_5' => 'Persoana de contact 5'
         ],
 
         'backend-menu' => 'Elevi'

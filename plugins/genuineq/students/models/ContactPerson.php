@@ -32,7 +32,10 @@ class ContactPerson extends Model
     public $rules = [
     ];
 
-    public $hasOne = [
+    /**
+     * One-to-One relationship
+     */
+    public $belongsTo = [
         'student' => 'Genuineq\Students\Models\Student'
     ];
 }

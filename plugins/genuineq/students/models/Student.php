@@ -42,14 +42,10 @@ class Student extends Model
     ];
 
     /**
-     * One-to-one relationship.
+     * One-to-Many relationship.
      */
-    public $belongsTo = [
-        'contact_person_1' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_1_id'],
-        'contact_person_2' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_2_id'],
-        'contact_person_3' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_3_id'],
-        'contact_person_4' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_4_id'],
-        'contact_person_5' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_5_id'],
+    public $hasMany = [
+        'contact_persons' => ['Genuineq\Students\Models\ContactPerson']
     ];
 
     /***********************************************
@@ -65,7 +61,7 @@ class Student extends Model
     }
 
     /**
-     * Accessor for getting the user name.
+     * Accessor for getting birthdate.
      */
     public function getDisplayBirthdateAttribute()
     {
@@ -87,26 +83,11 @@ class Student extends Model
     public function beforeDelete()
     {
         /** Delete contact persons before student is deleted */
-        /** Check if contact person 1 is defined. */
-        if($this->contact_person_1){
-            $this->contact_person_1->delete();
-        }
-        /** Check if contact person 2 is defined. */
-        if($this->contact_person_2){
-            $this->contact_person_2->delete();
-        }
-        /** Check if contact person 3 is defined. */
-        if($this->contact_person_3){
-            $this->contact_person_3->delete();
-        }
-        /** Check if contact person 4 is defined. */
-        if($this->contact_person_4){
-            $this->contact_person_4->delete();
-        }
-        /** Check if contact person 5 is defined. */
-        if($this->contact_person_5){
-            $this->contact_person_5->delete();
-        }
+        $this->contact_persons->delete();
+
+//        foreach ($this->contact_persons as $contactPerson) {
+//            $contactPerson->delete();
+//        }
     }
-    
+
 }

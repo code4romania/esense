@@ -78,6 +78,9 @@ class Student extends ComponentBase
         /** Create the student. */
         $student = StudentModel::create($data);
 
+        /** Create contact persons */
+        $contactPersons = ContactPerson::create($data);
+
         /** Add student avatar. */
         if (Input::hasFile('avatar')) {
             $student->avatar = Input::file('avatar');
@@ -91,7 +94,7 @@ class Student extends ComponentBase
         Event::fire('genuineq.students.create.before.contact.persons.create', [post()]);
 
         /** Save contact persons. */
-        $this->updateContactPersons($student, post());
+        $this->updateContactPersons($contactPersons, post());
 
         /** Fire event before contact persons create. */
         Event::fire('genuineq.students.create.after.contact.persons.create', [post()]);
@@ -138,6 +141,9 @@ class Student extends ComponentBase
 
         /** Extract the student. */
         $student = StudentModel::find(post('id'));
+
+        /** Extract contact persons for a given student */
+//        $contactPersons = ContactPerson::all()->where('student_id', $student->id);
 
         /** Fire event before student update. */
         Event::fire('genuineq.students.update.before.student.update', [&$student, post()]);
@@ -265,9 +271,10 @@ class Student extends ComponentBase
         Event::fire('genuineq.students.student.before.delete', [&$student, post()]);
 
         if ($student) {
-            
+
             /** Delete the extracted student. */
             $student->delete();
+            $this->contact_persons->delete();
 
             Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_delete_successful'));
 
@@ -287,99 +294,23 @@ class Student extends ComponentBase
      */
     protected function updateContactPersons($student, $data)
     {
-        /** Check if contact person 1 data exists. */
-        if ($data['contact_1_surname'] && $data['contact_1_name'] && $data['contact_1_phone']) {
-            if ($student->contact_person_1) {
-                $this->updateContactPerson($student->contact_person_1, $data['contact_1_surname'], $data['contact_1_name'], $data['contact_1_phone'], $data['contact_1_email'], $data['contact_1_observations']);
-            } else {
-                $contactPerson = $this->createContactPerson($data['contact_1_surname'], $data['contact_1_name'], $data['contact_1_phone'], $data['contact_1_email'], $data['contact_1_observations']);
-                $student->contact_person_1_id = $contactPerson->id;
-                $student->save();
+        for ($i = 1, $j=0; $i <= 5, $j < 5; $i++, $j++) {
+            /** Check if contact person data exists. */
+            if ($data['contact_' . $i . '_surname'] && $data['contact_' . $i . '_name'] && $data['contact_' . $i . '_phone']) {
+                if ($student->contact_persons[$j]) {
+                    $this->updateContactPerson($student->contact_persons[$j], $data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
+                } else {
+                    $student->contact_persons[$j] = $this->createContactPerson($data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
+                    $student->contact_persons[$j]->save();
+                }
+            } elseif ($student->contact_persons[$j]) {
+                /** No data provided. Delete old data. */
+                $student->contact_persons[$j]->student_id->delete();
+
+                /** Update student. */
+                $student->contact_persons[$j]->student_id = $student->id; // need attention ,  NOT WORKING
+                $student->contact_persons[$j]->save();
             }
-        } elseif ($student->contact_person_1) {
-            /** No data provided. Delete old data. */
-            $contactPerson = $student->contact_person_1;
-            $contactPerson->delete();
-
-            /** Update student. */
-            $student->contact_person_1_id = null;
-            $student->save();
-        }
-
-        /** Check if contact person 2 data exists. */
-        if ($data['contact_2_surname'] && $data['contact_2_name'] && $data['contact_2_phone']) {
-            if ($student->contact_person_2) {
-                $this->updateContactPerson($student->contact_person_2, $data['contact_2_surname'], $data['contact_2_name'], $data['contact_2_phone'], $data['contact_2_email'], $data['contact_2_observations']);
-            } else {
-                $contactPerson = $this->createContactPerson($data['contact_2_surname'], $data['contact_2_name'], $data['contact_2_phone'], $data['contact_2_email'], $data['contact_2_observations']);
-                $student->contact_person_2_id = $contactPerson->id;
-                $student->save();
-            }
-        } elseif ($student->contact_person_2) {
-            /** No data provided. Delete old data. */
-            $contactPerson = $student->contact_person_2;
-            $contactPerson->delete();
-
-            /** Update student. */
-            $student->contact_person_2_id = null;
-            $student->save();
-        }
-
-        /** Check if contact person 3 data exists. */
-        if ($data['contact_3_surname'] && $data['contact_3_name'] && $data['contact_3_phone']) {
-            if ($student->contact_person_3) {
-                $this->updateContactPerson($student->contact_person_3, $data['contact_3_surname'], $data['contact_3_name'], $data['contact_3_phone'], $data['contact_3_email'], $data['contact_3_observations']);
-            } else {
-                $contactPerson = $this->createContactPerson($data['contact_3_surname'], $data['contact_3_name'], $data['contact_3_phone'], $data['contact_3_email'], $data['contact_3_observations']);
-                $student->contact_person_3_id = $contactPerson->id;
-                $student->save();
-            }
-        } elseif ($student->contact_person_3) {
-            /** No data provided. Delete old data. */
-            $contactPerson = $student->contact_person_3;
-            $contactPerson->delete();
-
-            /** Update student. */
-            $student->contact_person_3_id = null;
-            $student->save();
-        }
-
-        /** Check if contact person 4 data exists. */
-        if ($data['contact_4_surname'] && $data['contact_4_name'] && $data['contact_4_phone']) {
-            if ($student->contact_person_4) {
-                $this->updateContactPerson($student->contact_person_4, $data['contact_4_surname'], $data['contact_4_name'], $data['contact_4_phone'], $data['contact_4_email'], $data['contact_4_observations']);
-            } else {
-                $contactPerson = $this->createContactPerson($data['contact_4_surname'], $data['contact_4_name'], $data['contact_4_phone'], $data['contact_4_email'], $data['contact_4_observations']);
-                $student->contact_person_4_id = $contactPerson->id;
-                $student->save();
-            }
-        } elseif ($student->contact_person_4) {
-            /** No data provided. Delete old data. */
-            $contactPerson = $student->contact_person_4;
-            $contactPerson->delete();
-
-            /** Update student. */
-            $student->contact_person_4_id = null;
-            $student->save();
-        }
-
-        /** Check if contact person 5 data exists. */
-        if ($data['contact_5_surname'] && $data['contact_5_name'] && $data['contact_5_phone']) {
-            if ($student->contact_person_5) {
-                $this->updateContactPerson($student->contact_person_5, $data['contact_5_surname'], $data['contact_5_name'], $data['contact_5_phone'], $data['contact_5_email'], $data['contact_5_observations']);
-            } else {
-                $contactPerson = $this->createContactPerson($data['contact_5_surname'], $data['contact_5_name'], $data['contact_5_phone'], $data['contact_5_email'], $data['contact_5_observations']);
-                $student->contact_person_5_id = $contactPerson->id;
-                $student->save();
-            }
-        } elseif ($student->contact_person_5) {
-            /** No data provided. Delete old data. */
-            $contactPerson = $student->contact_person_5;
-            $contactPerson->delete();
-
-            /** Update student. */
-            $student->contact_person_5_id = null;
-            $student->save();
         }
     }
 
