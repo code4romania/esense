@@ -503,6 +503,18 @@ class Plugin extends PluginBase
                 return $durations;
             });
 
+            /** Add get lessons years attribute. */
+            $model->addDynamicMethod('getLessonsYearsAttribute', function () use ($model) {
+                /** get all students from active specialists */
+                $students = $model->students;
+                $years = [];
+                /** parse all students lessons  */
+                foreach ($students as $student) {
+                    $years = array_merge($years, $student->lessons_years);
+                }
+                return array_unique($years);
+            });
+
         });
     }
 
