@@ -78,9 +78,6 @@ class Student extends ComponentBase
         /** Create the student. */
         $student = StudentModel::create($data);
 
-        /** Create contact persons */
-        $contactPersons = ContactPerson::create($data);
-
         /** Add student avatar. */
         if (Input::hasFile('avatar')) {
             $student->avatar = Input::file('avatar');
@@ -94,7 +91,7 @@ class Student extends ComponentBase
         Event::fire('genuineq.students.create.before.contact.persons.create', [post()]);
 
         /** Save contact persons. */
-        $this->updateContactPersons($contactPersons, post());
+        $this->updateContactPersons($student, post());
 
         /** Fire event before contact persons create. */
         Event::fire('genuineq.students.create.after.contact.persons.create', [post()]);
@@ -273,8 +270,8 @@ class Student extends ComponentBase
         if ($student) {
 
             /** Delete the extracted student. */
+            $student->contact_persons->delete();
             $student->delete();
-            $this->contact_persons->delete();
 
             Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_delete_successful'));
 
@@ -298,27 +295,24 @@ class Student extends ComponentBase
             /** Check if contact person data exists. */
             if ($data['contact_' . $i . '_surname'] && $data['contact_' . $i . '_name'] && $data['contact_' . $i . '_phone']) {
                 if ($student->contact_persons[$j]) {
-                    $this->updateContactPerson($student->contact_persons[$j], $data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
+                    $this->updateContactPerson($student, $student->contact_persons[$j], $data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
                 } else {
-                    $student->contact_persons[$j] = $this->createContactPerson($data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
+                    $student->contact_persons[$j] = $this->createContactPerson($student, $data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
                     $student->contact_persons[$j]->save();
                 }
             } elseif ($student->contact_persons[$j]) {
                 /** No data provided. Delete old data. */
-                $student->contact_persons[$j]->student_id->delete();
-
-                /** Update student. */
-                $student->contact_persons[$j]->student_id = $student->id; // need attention ,  NOT WORKING
-                $student->contact_persons[$j]->save();
+                $student->contact_persons[$j]->delete();
             }
         }
     }
 
     /** Function that creates a contact person with the provided details. */
-    protected function createContactPerson($surname, $name, $phone, $email, $description)
+    protected function createContactPerson($student, $surname, $name, $phone, $email, $description)
     {
         /** Extract the form data. */
         $data = [
+            'student_id' => $student->id,
             'surname' => $surname,
             'name' => $name,
             'phone' => $phone,
@@ -355,6 +349,7 @@ class Student extends ComponentBase
         }
 
         return ContactPerson::create([
+            'student_id' => $student->id,
             'surname' => $surname,
             'name' => $name,
             'phone' => $phone,
@@ -364,10 +359,11 @@ class Student extends ComponentBase
     }
 
     /** Function that updates a contact person with the provided details. */
-    protected function updateContactPerson($contactPerson, $surname, $name, $phone, $email, $description)
+    protected function updateContactPerson($student, $contactPerson, $surname, $name, $phone, $email, $description)
     {
         /** Extract the form data. */
         $data = [
+            'student_id' => $student->id,
             'surname' => $surname,
             'name' => $name,
             'phone' => $phone,
@@ -405,6 +401,7 @@ class Student extends ComponentBase
 
         /** Update the contact person. */
         $contactPerson->update([
+            'student_id' => $student->id,
             'surname' => $surname,
             'name' => $name,
             'phone' => $phone,
