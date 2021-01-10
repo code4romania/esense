@@ -194,14 +194,18 @@ class Plugin extends PluginBase
 
             /** Add get connection attribute. */
             $model->addDynamicMethod('getConnection', function($specialist) use ($model) {
-                return $model->connections->where('specialist_id', $specialist)->first();
+                return $model->connections->where('specialist_id', $specialist->id)->first();
             });
 
 
             /** Add get lessons years attribute. */
-            $model->addDynamicMethod('getLessonsYearsAttribute', function() use ($model) {
+            $model->addDynamicMethod('getLessonsYearsAttribute', function($specialist) use ($model) {
 
-                $lessons = $model->lessons()->get();
+                $connection = $model->getConnection($specialist->profile);
+
+                $lessons = $model->lessons()->where('connection_id', $connection->id)->get();
+
+                $lessonsYears = [];
 
                      foreach ($lessons as $lesson){
                          $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
@@ -212,13 +216,13 @@ class Plugin extends PluginBase
 
 
             /** Add get school-student lessons from specific month method. */
-            $model->addDynamicMethod('getLessonsFromMonth', function($month = null, $year = null) use ($model) {
+            $model->addDynamicMethod('getLessonsFromMonth', function($specialist, $month = null, $year = null) use ($model) {
 
                 /** Extract the start and the end of the year. */
                 $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
                 $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
 
-                return $model->lessons()->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+                return $model->lessons()->where('connection_id', $model->getConnection($specialist->profile)->id)->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
             });
         });
     }
@@ -509,9 +513,10 @@ class Plugin extends PluginBase
                 $students = $model->students;
                 $years = [];
                 /** parse all students lessons  */
-                foreach ($students as $student) {
-                    $years = array_merge($years, $student->lessons_years);
-                }
+//                foreach ($students as $student) {
+//                    $specialist = $student->specialists()->where('school_id', $model->id);
+//                    $years = array_merge($years, $student->lessons_years($specialist));
+//                }
                 return array_unique($years);
             });
 
@@ -672,6 +677,8 @@ class Plugin extends PluginBase
 
             /** Add get lessons years attribute. */
             $model->addDynamicMethod('getLessonsYearsAttribute', function() use ($model) {
+
+
                 return $model->lessons->unique(function($item) {
                     return $item['day']->year;
                 })->map(function($item) {

@@ -97,7 +97,7 @@ allowedUserTypes[] = "school"
 
                         <div id="student-lessons-datatable-container">
                         <!-- Partial for school student lessons  -->
-                        {% partial 'web-app/school/student-lessons' month = 'now'|date('n') year = 'now'|date('Y') years = student.lessons_years lessons = student.getLessonsFromMonth() %}
+                        {% partial 'web-app/school/student-lessons' month = 'now'|date('n') year = 'now'|date('Y') years = user.profile.lessons_years lessons = user.profile.getLessonsFromMonth() %}
                         </div>
 
                     </div>

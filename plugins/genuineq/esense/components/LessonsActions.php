@@ -156,17 +156,28 @@ class LessonsActions extends ComponentBase
             return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
         }
 
+        $specialist = Auth::user();
+
+        /** verify current url and extract student ID */
+        $studentId = preg_replace(
+            '/^(http[s]?:\/\/[a-z.]*)(\/[a-z]*\/[a-z]*\/)/', // pattern matches 'http(s)://(www.)abcdefgh.domain/some/text/'
+            "", // replacement
+            url()->current() ); // get current URL
+
+        /** get current student */
+        $student = $specialist->profile->students->where('id', $studentId)->first();
+
         /** Send the user back. */
-        $this->page['user'] = Auth::user();
+        $this->page['user'] = $specialist;
 
         /** Send the year back. */
         $this->page['year'] = post('year');
         /** Set the years array. */
-        $this->page['years'] = Auth::user()->profile->lessons_years;
+        $this->page['years'] = $specialist->profile->$student->lessons_years($specialist);
         /** Send the month back. */
         $this->page['month'] = post('month');
         /** Set the lessons. */
-        $this->page['lessons'] = Auth::user()->profile->getLessonsFromMonth(post('month'), post('year'));
+        $this->page['lessons'] = $specialist->profile->$student->getLessonsFromMonth($specialist, post('month'), post('year'));
     }
 
     /**
@@ -178,17 +189,34 @@ class LessonsActions extends ComponentBase
         if (!Auth::check()) {
             return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
         }
+
+        /** get authenticated user */
+        $school = Auth::user();
+
         /** Send the user back. */
-        $this->page['user'] = Auth::user();
+        $this->page['user'] = $school;
+
+        /** verify current url and extract student ID */
+        $studentId = (int)preg_replace(
+            '/^(http[s]?:\/\/[a-z.]*)(\/[a-z]*\/[a-z]*\/)/', // pattern matches 'http(s)://(www.)abc.domain/some/text/'
+            "", // replacement
+            url()->current() ); // get current URL
+
+        $student = $school->profile->students->where('id', $studentId)->first();
+
+        $specialists = $student->specialists->where('school_id', $school->profile->id);
 
         /** Send the year back. */
         $this->page['year'] = post('year');
         /** Set the years array. */
-//        $this->page['years'] = Auth::user()->profile->students()->lessons_years;
+        // $this->page['years'] = $student->lessons_years;
         /** Send the month back. */
         $this->page['month'] = post('month');
         /** Set the lessons. */
-        $this->page['lessons'] = Auth::user()->profile->student->getLessonsFromMonth(post('month'), post('year'));
+
+            foreach ($specialists as $specialist) {
+                $this->page['lessons'][] = $student->getLessonsFromMonth($specialist, post('month'), post('year'));
+            }
     }
 
 }
