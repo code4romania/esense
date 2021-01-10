@@ -220,6 +220,7 @@ allowedUserTypes[] = "school"
                                 contactPersonLastNameId = 'contact_1_surname_id'
                                 contactPersonFirstNameId = 'contact_1_name_id'
                                 contactPersonPhoneId = 'contact_1_phone_id'
+                                contactPersonObservationsId = 'contact_1_observations_id'
                                 addContactPerson = 'add-contact-1'
                                 hideId = 'hide-1'
                                 hideClass = 'd-none'
@@ -247,6 +248,7 @@ allowedUserTypes[] = "school"
                                 contactPersonLastNameId = 'contact_2_surname_id'
                                 contactPersonFirstNameId = 'contact_2_name_id'
                                 contactPersonPhoneId = 'contact_2_phone_id'
+                                contactPersonObservationsId = 'contact_2_observations_id'
                                 addContactPerson = 'add-contact-2'
                                 hideId = 'hide-2'
                                 hideClass = 'd-none'
@@ -275,6 +277,7 @@ allowedUserTypes[] = "school"
                                 contactPersonLastNameId = 'contact_3_surname_id'
                                 contactPersonFirstNameId = 'contact_3_name_id'
                                 contactPersonPhoneId = 'contact_3_phone_id'
+                                contactPersonObservationsId = 'contact_3_observations_id'
                                 addContactPerson = 'add-contact-3'
                                 hideId = 'hide-3'
                                 hideClass = 'd-none'
@@ -302,6 +305,7 @@ allowedUserTypes[] = "school"
                                 contactPersonLastNameId = 'contact_4_surname_id'
                                 contactPersonFirstNameId = 'contact_4_name_id'
                                 contactPersonPhoneId = 'contact_4_phone_id'
+                                contactPersonObservationsId = 'contact_4_observations_id'
                                 addContactPerson = 'add-contact-4'
                                 hideId = 'hide-4'
                                 hideClass = 'd-none'
@@ -377,7 +381,10 @@ allowedUserTypes[] = "school"
                 class: 'onChangeValue',
                 useParagraph:true
             });
-            $('.observations').richText();
+
+            $('.observations').each(function () {
+                $(this).richText();
+            });
 
             /** Initiate the datepicker plugin. */
             $('#birthdate').datepicker({

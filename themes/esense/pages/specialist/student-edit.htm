@@ -374,11 +374,12 @@ allowedUserTypes[] = "specialist"
                 class: 'onChangeValue',
                 useParagraph:true
             });
-            $('#one').richText();
-            $('#two').richText();
-            $('#three').richText();
-            $('#four').richText();
-            $('#five').richText();
+
+
+            $('.observations').each(function () {
+                $(this).richText();
+            });
+
 
 
             /** Initiate the datepicker plugin. */
