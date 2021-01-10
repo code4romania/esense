@@ -290,14 +290,14 @@ class Student extends ComponentBase
     {
         for ($i = 1, $j=0; $i <= 5, $j < 5; $i++, $j++) {
             /** Check if contact person data exists. */
-            if ($data['contact_' . $i . '_surname'] && $data['contact_' . $i . '_name'] && $data['contact_' . $i . '_phone']) {
-                if ($student->contact_persons[$j]) {
+            if ( isset($data['contact_' . $i . '_surname']) && isset($data['contact_' . $i . '_name']) && isset($data['contact_' . $i . '_phone']) ) {
+                if ( isset($student->contact_persons[$j]) ) {
                     $this->updateContactPerson($student, $student->contact_persons[$j], $data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
                 } else {
                     $student->contact_persons[$j] = $this->createContactPerson($student, $data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
                     $student->contact_persons[$j]->save();
                 }
-            } elseif ($student->contact_persons[$j]) {
+            } elseif ( isset($student->contact_persons[$j]) ) {
                 /** No data provided. Delete old data. */
                 $student->contact_persons[$j]->delete();
             }

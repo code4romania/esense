@@ -14,6 +14,7 @@ class ContactPerson extends Model
 
     /** Fillable fields */
     protected $fillable = [
+        'student_id',
         'surname',
         'name',
         'phone',
