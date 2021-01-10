@@ -139,9 +139,6 @@ class Student extends ComponentBase
         /** Extract the student. */
         $student = StudentModel::find(post('id'));
 
-        /** Extract contact persons for a given student */
-//        $contactPersons = ContactPerson::all()->where('student_id', $student->id);
-
         /** Fire event before student update. */
         Event::fire('genuineq.students.update.before.student.update', [&$student, post()]);
 
