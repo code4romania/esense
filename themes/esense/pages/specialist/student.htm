@@ -153,7 +153,16 @@ orderByDirection = "DESC"
 
                         <div id="student-lessons-datatable-container">
                             <!-- Partial for specialist lessons with a student -->
-                            {% partial 'web-app/specialist/student-lessons' month = 'now'|date('n') year = 'now'|date('Y') years = user.profile.lessons_years lessons = user.profile.getLessonsFromMonth() %}
+                            {%
+                                partial 'web-app/specialist/student-lessons'
+
+                                month = 'now'|date('n')
+                                year = 'now'|date('Y')
+
+                                years = student.lessons_years
+                                lessons = student.getLessonsFromMonth()
+
+                            %}
                         </div>
                     </div>
                 </div>
@@ -169,7 +178,7 @@ orderByDirection = "DESC"
     <script type="text/javascript">
 
         $(document).ready(function () {
-            
+
             /** Function that extarcts the schedule for a date and updates the page. */
             function selectDate(date) {
                 /** Update the calendar. */
