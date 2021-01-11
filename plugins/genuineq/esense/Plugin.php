@@ -257,7 +257,7 @@ class Plugin extends PluginBase
                     /** get authenticated school profile */
                     $schoolProfile = Auth::user()->profile;
                     $specialists = $model->specialists->where('school_id', $schoolProfile->id);
-                    var_dump($specialists);
+
                     $lessons = [];
                     foreach ($specialists as $specialist) {
                         /** get connection with a specific specialist */
