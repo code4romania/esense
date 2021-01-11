@@ -188,88 +188,48 @@ allowedUserGroups[] = "guest"
                     <div class="col-12 mt-3 mb-5">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-3 w-100 my-3 my-lg-0">
-                                <div class="partener-1"
-                                     style="
-                                     background-repeat: no-repeat !important;
-                                     background-size: cover !important;
-                                     background: url(
-                                         {% if homeImagesPartners_1 %}
-                                            {{ homeImagesPartners_1 | media }}
-                                         {% else %}
-                                            {{ 'assets/img/svg/timisoara.png' | theme }}
-                                         {% endif %}
-                                     )">
-                                    <div class="h-100 d-flex justify-content-between flex-column">
-                                        <div></div>
-                                        <div>
-                                            <p class="small text-white p-0 m-0 pl-2 pb-2" style="line-height: 22px;">{{ homePartnersName_1 }}</p>
-                                            <p class="text-white display-2 p-0 m-0 pl-2 pb-3" style="line-height: 22px;">{{ homePartnersLocation_1 }}</p>
+                                <div class="partener-1">
+                                    <div class="h-100 d-flex justify-content-end flex-column">
+                                        <img class="img-fluid w-100 h-100" src="{% if homeImagesPartners_1 %}{{ homeImagesPartners_1 | media }}{% else %}{{ 'assets/img/svg/timisoara.png' | theme }}{% endif %}" alt="{{ homePartnersName_1 }}">
+                                        <div class="partener-description d-flex flex-column">
+                                            <p class="small text-white p-0 m-0" style="line-height: 22px;">{{ homePartnersName_1 }}</p>
+                                            <p class="text-white display-2 p-0 m-0 mt-auto" style="line-height: 22px;">{{ homePartnersLocation_1 }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-3 my-3 my-lg-0">
-                                <div class="partener-2"
-                                     style="
-                                     background-repeat: no-repeat !important;
-                                     background-size: cover !important;
-                                     background: url(
-                                         {% if homeImagesPartners_2 %}
-                                            {{ homeImagesPartners_2 | media }}
-                                         {% else %}
-                                            {{ 'assets/img/svg/iasi.png' | theme }}
-                                         {% endif %}
-                                     )">
-                                    <div class="h-100 d-flex justify-content-between flex-column">
-                                        <div></div>
-                                        <div>
-                                            <p class="small text-white p-0 m-0 pl-2 pb-2" style="line-height: 22px;">{{ homePartnersName_2 }}</p>
-                                            <p class="text-white p-0 m-0 pl-2 pb-3" style="line-height: 22px;">{{ homePartnersLocation_2 }}</p>
+                                <div class="partener-2">
+                                    <div class="h-100 d-flex justify-content-end flex-column">
+                                        <img class="img-fluid w-100 h-100" src="{% if homeImagesPartners_2 %}{{ homeImagesPartners_2 | media }}{% else %}{{ 'assets/img/svg/iasi.png' | theme }}{% endif %}" alt="{{ homePartnersName_2 }}">
+                                        <div class="partener-description d-flex flex-column">
+                                            <p class="small text-white p-0 m-0" style="line-height: 22px;">{{ homePartnersName_2 }}</p>
+                                            <p class="text-white display-2 p-0 m-0 mt-auto" style="line-height: 22px;">{{ homePartnersLocation_2 }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-3 my-3 my-lg-0">
-                                <div class="partener-3"
-                                     style="
-                                     background-repeat: no-repeat !important;
-                                     background-size: cover !important;
-                                     background: url(
-                                         {% if homeImagesPartners_3 %}
-                                            {{ homeImagesPartners_3 | media }}
-                                         {% else %}
-                                            {{ 'assets/img/svg/oradea.png' | theme }}
-                                         {% endif %}
-                                     )">
-                                    <div class="h-100 d-flex justify-content-between flex-column">
-                                        <div></div>
-                                        <div>
-                                            <p class="small text-white p-0 m-0 pl-2 pb-2" style="line-height: 22px;">{{ homePartnersName_3 }}</p>
-                                            <p class="text-white p-0 m-0 pl-2 pb-3" style="line-height: 22px;">{{ homePartnersLocation_3 }}</p>
+                                <div class="partener-3">
+                                    <div class="h-100 d-flex justify-content-end flex-column">
+                                        <img class="img-fluid w-100 h-100" src="{% if homeImagesPartners_3 %}{{ homeImagesPartners_3 | media }}{% else %}{{ 'assets/img/svg/oradea.png' | theme }}{% endif %}" alt="{{ homePartnersName_3 }}">
+                                        <div class="partener-description d-flex flex-column">
+                                            <p class="small text-white p-0 m-0" style="line-height: 22px;">{{ homePartnersName_3 }}</p>
+                                            <p class="text-white display-2 p-0 m-0 mt-auto" style="line-height: 22px;">{{ homePartnersLocation_3 }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-3 my-3 my-lg-0">
-                                <div class="partener-4"
-                                     style="
-                                     background-repeat: no-repeat !important;
-                                     background-size: cover !important;
-                                     background: url(
-                                         {% if homeImagesPartners_4 %}
-                                            {{ homeImagesPartners_4 | media }}
-                                         {% else %}
-                                            {{ 'assets/img/svg/code4ro.png' | theme }}
-                                         {% endif %}
-                                     )">
-                                    <div class="h-100 d-flex justify-content-between flex-column">
-                                        <div></div>
-                                        <div>
-                                            <p class="small text-white p-0 pl-2 pb-4" style="margin-bottom: 3.5px; line-height: 22px;">{{ homePartnersName_4 }}</p>
-                                            <p class="text-white p-0 m-0 pl-2 pb-3" style="line-height: 22px;">{{ homePartnersLocation_4 }}</p>
+                                <div class="partener-4">
+                                    <div class="h-100 d-flex justify-content-end flex-column">
+                                        <img class="img-fluid w-100 h-100" src="{% if homeImagesPartners_4 %}{{ homeImagesPartners_4 | media }}{% else %}{{ 'assets/img/svg/code4ro.png' | theme }}{% endif %}" alt="{{ homePartnersName_4 }}">
+                                        <div class="partener-description d-flex flex-column">
+                                            <p class="small text-white p-0 m-0 align-self-start" style="line-height: 22px;">{{ homePartnersName_4 }}</p>
+                                            <p class="text-white display-2 p-0 m-0 mt-auto" style="line-height: 22px;">{{ homePartnersLocation_4 }}</p>
                                         </div>
                                     </div>
                                 </div>

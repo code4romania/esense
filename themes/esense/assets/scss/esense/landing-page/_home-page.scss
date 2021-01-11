@@ -43,40 +43,24 @@
 .partener-3,
 .partener-4 {
     position: relative;
-    min-height: 280px;
-    background-position: center;
 }
 
-.partener-1 {
-    background: url("../../../img/svg/timisoara.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+.partener-description {
+    position: absolute;
+    bottom:5%;
+    height: 20%;
     width: 100%;
-    height: 100%;
+    padding: 0px 10px;
 }
 
-.partener-2 {
-    background: url("../../../img/svg/iasi.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-}
-
-.partener-3 {
-    background: url("../../../img/svg/oradea.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-}
-
-.partener-4 {
-    background: url("../../../img/svg/code4ro.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
+@media screen and (max-width:1599px) {
+    .partener-description {
+        position: absolute;
+        bottom:5%;
+        height: 25%;
+        width: 100%;
+        padding: 0px 10px;
+    }
 }
 
 /***********************************************
