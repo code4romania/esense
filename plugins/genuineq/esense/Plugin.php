@@ -198,31 +198,76 @@ class Plugin extends PluginBase
             });
 
 
-            /** Add get lessons years attribute. */
-            $model->addDynamicMethod('getLessonsYearsAttribute', function($specialist) use ($model) {
+            /** Add get lessons years attribute for Specialist/School => student.htm. */
+            $model->addDynamicMethod('getLessonsYearsAttribute', function () use ($model) {
 
-                $connection = $model->getConnection($specialist->profile);
+                if ('specialist' == Auth::user()->type) {
+                    /** get authenticated specialist profile */
+                    $specialistProfile = Auth::user()->profile;
+                    /** get connection with a specific specialist */
+                    $connection = $model->connections->where('specialist_id', $specialistProfile->id)->first();
 
-                $lessons = $model->lessons()->where('connection_id', $connection->id)->get();
+                    /** get years of lessons with a specific specialist */
+                    $lessons = $model->lessons()->where('connection_id', $connection->id)->get();
+                    /** get years with lessons */
+                    $lessonsYears = [];
+                    foreach ($lessons as $lesson) {
+                        $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
+                    }
 
-                $lessonsYears = [];
+                    return array_unique($lessonsYears);
 
-                     foreach ($lessons as $lesson){
-                         $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
-                     }
+                } elseif ('school' == Auth::user()->type) {
+                    /** get authenticated school profile */
+                    $schoolProfile = Auth::user()->profile;
+                    $specialists = $schoolProfile->active_specialists->where('student_id', $model->id);
 
-                     return array_unique($lessonsYears);
+                    $lessons = [];
+                    foreach ($specialists as $specialist) {
+                        /** get connection with a specific specialist */
+                        $connection = $model->getConnection($specialist);
+                        /** get lessons */
+                        $lessons[] = $model->lessons()->where('connection_id', $connection->id)->get();
+                    }
+
+                    $lessonsYears = [];
+                    foreach ($lessons as $lesson) {
+                        $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
+                    }
+
+                    return array_unique($lessonsYears);
+                }
             });
 
 
             /** Add get school-student lessons from specific month method. */
-            $model->addDynamicMethod('getLessonsFromMonth', function($specialist, $month = null, $year = null) use ($model) {
-
-                /** Extract the start and the end of the year. */
+            $model->addDynamicMethod('getLessonsFromMonth', function ($month = null, $year = null) use ($model) {
+                /** Extract the start and the end of the month of an year . */
                 $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
                 $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
 
-                return $model->lessons()->where('connection_id', $model->getConnection($specialist->profile)->id)->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+                if ('specialist' == Auth::user()->type) {
+                    $specialistProfile = Auth::user()->profile;
+                    /** get connection with a specific specialist */
+                    $connection = $model->connections->where('specialist_id', $specialistProfile->id)->first();
+                    /** return lessons with a specific specialist */
+                    return $model->lessons()->where('connection_id', $connection->id)->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+
+                } elseif ('school' == Auth::user()->type) {
+                    /** get authenticated school profile */
+                    $schoolProfile = Auth::user()->profile;
+                    $specialists = $model->specialists->where('school_id', $schoolProfile->id);
+                    var_dump($specialists);
+                    $lessons = [];
+                    foreach ($specialists as $specialist) {
+                        /** get connection with a specific specialist */
+                        $connection = $model->connections->where('specialist_id', $specialist->id)->first();
+                        /** get lessons */
+                        $lessons[] = $model->lessons()->where('connection_id', $connection->id)->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+                    }
+                    return $lessons;
+                }
+
             });
         });
     }
@@ -509,14 +554,13 @@ class Plugin extends PluginBase
 
             /** Add get lessons years attribute. */
             $model->addDynamicMethod('getLessonsYearsAttribute', function () use ($model) {
-                /** get all students from active specialists */
-                $students = $model->students;
+                /** get all active specialists */
+                $specialists = $model->active_specialists;
                 $years = [];
-                /** parse all students lessons  */
-//                foreach ($students as $student) {
-//                    $specialist = $student->specialists()->where('school_id', $model->id);
-//                    $years = array_merge($years, $student->lessons_years($specialist));
-//                }
+                /** parse all student lessons  */
+                foreach ($specialists as $specialist) {
+                    $years = array_merge($years, $specialist->lessons_years);
+                }
                 return array_unique($years);
             });
 
@@ -677,8 +721,6 @@ class Plugin extends PluginBase
 
             /** Add get lessons years attribute. */
             $model->addDynamicMethod('getLessonsYearsAttribute', function() use ($model) {
-
-
                 return $model->lessons->unique(function($item) {
                     return $item['day']->year;
                 })->map(function($item) {
@@ -687,12 +729,16 @@ class Plugin extends PluginBase
             });
 
             /** Add get lessons from specific month method. */
-            $model->addDynamicMethod('getLessonsFromMonth', function($month = null, $year = null) use ($model) {
-                /** Extract the start and the end of the month. */
+            $model->addDynamicMethod('getLessonsFromMonth', function($student, $month = null, $year = null) use ($model) {
+                /** Extract the start and the end of the year. */
                 $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
                 $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
 
-                return $model->lessons()->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+                /** get connections for lessons */
+                $connection = $model->getStudentConnection($student->id);
+
+                /** return lessons with a specific student */
+                return $connection->lessons()->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
             });
 
 
