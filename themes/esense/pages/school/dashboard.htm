@@ -138,6 +138,9 @@ allowedUserTypes[] = "school"
                                             <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                             </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
+                                                <a class="dropdown-item display-4" href="{{ 'school/specialist-edit'|page({id: specialist.id }) }}" style="color: #1A212C;">{{'page.school.dashboard.students.table.options.link_1'|_}}</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
