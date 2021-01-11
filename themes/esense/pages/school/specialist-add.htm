@@ -170,7 +170,7 @@ resetPage = "authentification/reset-password"
             }
 
             /** Validation for activeting the finish button. */
-            $(document.body).on('change', '.onChangeValue', function(){
+            $(document.body).on('change blur keyup', '.onChangeValue', function(){
                 if(
                     (
                         ((0 !== $("#specialist_1_surname_id").val().length) && ((0 == $("#specialist_1_name_id").val().length) || (0 == $("#specialist_1_phone_id").val().length) || (0 == $("#specialist_1_email_id").val().length) )) ||

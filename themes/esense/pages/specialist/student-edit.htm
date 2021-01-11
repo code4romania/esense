@@ -426,7 +426,7 @@ allowedUserTypes[] = "specialist"
             }
 
              /** Validation for activeting the finish button. */
-             $(document.body).on('change blur', '.onChangeValue', function(){
+             $(document.body).on('change blur keyup', '.onChangeValue', function(){
                 if(
                     (
                         ((0 !== $("#birthdate").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
