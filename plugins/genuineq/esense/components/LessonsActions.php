@@ -207,25 +207,16 @@ class LessonsActions extends ComponentBase
 
         $student = $schoolProfile->students->where('id', $studentId)->first();
 
-        $specialists = $student->specialists->where('school_id', $schoolProfile->id);
-
         /** Send the year back. */
         $this->page['year'] = post('year');
         /** Send the month back. */
         $this->page['month'] = post('month');
 
         /** Send back the years array. */
-        $this->page['years'] = [];
-        foreach ($specialists as $specialist) {
-            $this->page['years'] = array_merge($this->page['years'], $student->lessons_years);
-            array_unique($this->page['years']);
-        }
+        $this->page['years'] = $student->lessons_years;
 
         /** Get the lessons. */
-        $this->page['lessons'] = [];
-        foreach ($specialists as $specialist) {
-            $this->page['lessons'] = array_merge( $this->page['lessons'], $student->getLessonsFromMonth(post('month'), post('year')) );
-        }
+        $this->page['lessons'] = $student->getLessonsFromMonth(post('month'), post('year'));
     }
 
 }
