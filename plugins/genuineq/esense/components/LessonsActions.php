@@ -138,7 +138,6 @@ class LessonsActions extends ComponentBase
 
             /** Make the update. */
             $lesson->update($data);
-            $lesson->save();
 
             Flash::success(Lang::get('genuineq.esense::lang.components.lessonsActions.message.lesson_updated_successfully'));
         } else {
