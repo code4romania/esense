@@ -53,11 +53,11 @@
     padding: 0px 10px;
 }
 
-@media screen and (max-width:1599px) {
+@media screen and (min-width:1750px) {
     .partener-description {
         position: absolute;
         bottom:5%;
-        height: 25%;
+        height: 27%;
         width: 100%;
         padding: 0px 10px;
     }
