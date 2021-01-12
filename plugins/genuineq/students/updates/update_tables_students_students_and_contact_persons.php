@@ -2,20 +2,22 @@
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
+use Genuineq\Students\Models\Student;
+use Genuineq\Students\Models\ContactPerson;
 
 class UpdateTablesStudentsStudentsAndContactPersons extends Migration
 {
     public function up()
     {
-        /** create new Student_id column */
+        /** Add student_id column to the contact persons table. */
         Schema::table('genuineq_students_contact_persons', function($table)
         {
             $table->integer('student_id')->unsigned()->after('id');
         });
 
 
-        /** get all students and contact persons */
-        $students = \Genuineq\Students\Models\Student::select(
+        /** Get all students and contact persons. */
+        $students = Student::select(
             'id',
             'contact_person_1_id',
             'contact_person_2_id',
@@ -24,25 +26,25 @@ class UpdateTablesStudentsStudentsAndContactPersons extends Migration
             'contact_person_5_id'
         )->get();
 
+        /** Parse all Students and make set the student_id. */
         foreach ($students as $student) {
-
             for ($i = 1; $i <= 5; $i++) {
                 $contactId = 'contact_person_' . $i . '_id';
 
-                /** check if a contact person column has NULL value */
+                /** Check if a contact person column has NULL value. */
                 if (/*NOT*/ !is_null($student->$contactId)) {
 
-                    /** get contact person by ID  */
-                    $contactPerson = \Genuineq\Students\Models\ContactPerson::find($student->$contactId);
+                    /** Get contact person by ID.  */
+                    $contactPerson = ContactPerson::find($student->$contactId);
 
-                    /** set corresponding student id to contact person and save */
+                    /** Set corresponding student id to contact person and save. */
                     $contactPerson->student_id = $student->id;
                     $contactPerson->save();
                 }
             }
         }
 
-
+        /** Remove the "contact_person_x_id" columns. */
         Schema::table('genuineq_students_students', function($table)
         {
             $table->dropColumn('contact_person_1_id');
@@ -65,13 +67,13 @@ class UpdateTablesStudentsStudentsAndContactPersons extends Migration
         });
 
 
-        /** Extract all contact persons */
-        $contactPersons = \Genuineq\Students\Models\ContactPerson::all();
+        /** Extract all contact persons. */
+        $contactPersons = ContactPerson::all();
 
+        /** Parse all contact persons and set the "contact_person_x_id" columns values. */
         foreach ($contactPersons as $contactPerson) {
-
-            /** Find a student by ID from contact person */
-            $student = \Genuineq\Students\Models\Student::find($contactPerson->student_id);
+            /** Find a student by ID from contact person. */
+            $student = Student::find($contactPerson->student_id);
 
             switch ($contactPerson) {
                 case (is_null($student->contact_person_1_id)):
@@ -97,7 +99,7 @@ class UpdateTablesStudentsStudentsAndContactPersons extends Migration
             }
         }
 
-
+        /** Remov the student_id column from the contact persons table. */
         Schema::table('genuineq_students_contact_persons', function($table)
         {
             $table->dropColumn('student_id');
