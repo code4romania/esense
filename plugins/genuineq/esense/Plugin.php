@@ -752,7 +752,7 @@ class Plugin extends PluginBase
                 $connection = $model->getStudentConnection($student->id);
 
                 /** return lessons with a specific student */
-                return $connection->lessons()->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+                return $connection->lessons()->whereBetween('day', [$monthStart, $monthEnd])->get();
             });
 
 
