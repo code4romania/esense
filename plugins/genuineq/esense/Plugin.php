@@ -291,6 +291,27 @@ class Plugin extends PluginBase
      */
     protected function studentExtendComponens()
     {
+        /************ Student READ start ************/
+        Event::listen('genuineq.students.student.read.start', function(&$component, $id, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
+            }
+        });
+
+        Event::listen('genuineq.students.before.student.read', function(&$component, $id, &$redirectUrl) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract the student that needs to be read. */
+            $student = $user->profile->students->where('id', $id)->first();
+
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
+        });
+        /************ Student READ end ************/
+
         /************ Student CREATE start ************/
         Event::listen('genuineq.students.student.create.start', function(&$component, $inputs, &$redirectUrl) {
             if (!Auth::check()) {
@@ -298,7 +319,7 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('genuineq.students.create.before.student.create', function(&$data, $inputs) {
+        Event::listen('genuineq.students.before.student.create', function(&$data, $inputs) {
             /** Add the owner ID to the data. */
             if ('specialist' == Auth::getUser()->type) {
                 $data['owner_id'] = Auth::user()->profile->id;
@@ -308,13 +329,13 @@ class Plugin extends PluginBase
             $data['owner_type'] = 'Genuineq\Profile\Models\Specialist';
         });
 
-        Event::listen('genuineq.students.create.after.student.create', function($student) {
+        Event::listen('genuineq.students.after.student.create', function($student) {
             /** Create a specialist connection. */
             $student->specialists()->attach($student->owner_id);
         });
 
 
-        Event::listen('genuineq.students.create.before.finish', function(&$redirectUrl, $student) {
+        Event::listen('genuineq.students.before.student.create.finish', function(&$redirectUrl, $student) {
             /** Redirect to all students page. */
             if ('specialist' == Auth::getUser()->type) {
                 $redirectUrl = 'specialist/students';
@@ -332,12 +353,17 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('genuineq.students.update.before.student.update', function(&$student, $inputs) {
+        Event::listen('genuineq.students.update.before.student.update', function(&$student, $inputs, &$redirectUrl) {
             /** Extract the user */
             $user = Auth::getUser();
 
-            /** Extract the student that needs to be archived. */
+            /** Extract the student that needs to be updated. */
             $student = $user->profile->unarchivedStudents->where('id', $inputs['id'])->first();
+
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
         });
         /************ Student UPDATE end ************/
 
@@ -348,12 +374,17 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('genuineq.students.student.before.archive', function(&$student, $inputs) {
+        Event::listen('genuineq.students.student.before.archive', function(&$student, $inputs, &$redirectUrl) {
             /** Extract the user */
             $user = Auth::getUser();
 
             /** Extract the student that needs to be archived. */
             $student = $user->profile->unarchivedStudents->where('id', $inputs['id'])->first();
+
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
         });
         /************ Student ARCHIVE end ************/
 
@@ -364,12 +395,17 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('genuineq.students.student.before.unzip', function(&$student, $inputs) {
+        Event::listen('genuineq.students.student.before.unzip', function(&$student, $inputs, &$redirectUrl) {
             /** Extract the user */
             $user = Auth::getUser();
 
             /** Extract the student that needs to be unziped. */
             $student = $user->profile->archivedStudents->where('id', $inputs['id'])->first();
+
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
         });
         /************ Student UNZIP end ************/
 
@@ -380,12 +416,18 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('genuineq.students.student.before.delete', function(&$student, $inputs) {
+        Event::listen('genuineq.students.student.before.delete', function(&$student, $inputs, &$redirectUrl) {
             /** Extract the user */
             $user = Auth::getUser();
 
             /** Extract the student that needs to be deleted. */
             $student = $user->profile->archivedStudents->where('id', $inputs['id'])->first();
+
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+                return;
+            }
 
             /** Remove all student lessons. */
             foreach ($student->lessons as $key => $lesson) {

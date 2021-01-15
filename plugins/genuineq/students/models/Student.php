@@ -83,11 +83,9 @@ class Student extends Model
     public function beforeDelete()
     {
         /** Delete contact persons before student is deleted */
-        $this->contact_persons->delete();
-
-//        foreach ($this->contact_persons as $contactPerson) {
-//            $contactPerson->delete();
-//        }
+        $this->contact_persons->each(function ($item, $key) {
+            $item->delete();
+        });
     }
 
 }

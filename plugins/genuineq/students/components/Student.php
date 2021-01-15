@@ -33,8 +33,24 @@ class Student extends ComponentBase
      */
     public function onRun()
     {
+        /** Define redirect url variable. */
+        $redirectUrl = null;
+        Event::fire('genuineq.students.student.read.start', [&$this, $this->param('id'), &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
+        }
+
         /** Check if a student is accessed. */
         if ($this->param('id')) {
+            Event::fire('genuineq.students.before.student.read', [&$this, $this->param('id'), &$redirectUrl]);
+
+            /** Check if a redirect is required. */
+            if ($redirectUrl) {
+                return Redirect::to($redirectUrl);
+            }
+
             /** Extract the student and send it to the page. */
             $this->page['student'] = StudentModel::find($this->param('id'));
         }
@@ -73,7 +89,7 @@ class Student extends ComponentBase
         $this->validateStudentData($data, post());
 
         /** Fire event before student create. */
-        Event::fire('genuineq.students.create.before.student.create', [&$data, post()]);
+        Event::fire('genuineq.students.before.student.create', [&$data, post()]);
 
         /** Create the student. */
         $student = StudentModel::create($data);
@@ -85,22 +101,22 @@ class Student extends ComponentBase
         }
 
         /** Fire event after create. */
-        Event::fire('genuineq.students.create.after.student.create', [$student]);
+        Event::fire('genuineq.students.after.student.create', [$student]);
 
         /** Fire event before contact persons create. */
-        Event::fire('genuineq.students.create.before.contact.persons.create', [post()]);
+        // Event::fire('genuineq.students.create.before.contact.persons.create', [post()]);
 
         /** Save contact persons. */
         $this->updateContactPersons($student, post());
 
         /** Fire event before contact persons create. */
-        Event::fire('genuineq.students.create.after.contact.persons.create', [post()]);
+        // Event::fire('genuineq.students.create.after.contact.persons.create', [post()]);
 
         Flash::success(Lang::get('genuineq.students::lang.components.students.message.success_creation'));
 
         $redirectUrl = null;
         /** Fire event before finish. */
-        Event::fire('genuineq.students.create.before.finish', [&$redirectUrl, $student]);
+        Event::fire('genuineq.students.before.student.create.finish', [&$redirectUrl, $student]);
 
         /** Check if a redirect is required. */
         if ($redirectUrl) {
@@ -136,15 +152,19 @@ class Student extends ComponentBase
         /** Validate the student data. */
         $this->validateStudentData($data, post());
 
+        /** Fire event before student update. */
+        Event::fire('genuineq.students.update.before.student.update', [&$student, post(), &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
+        }
+
         /** Extract the student. */
         $student = StudentModel::find(post('id'));
 
-        /** Fire event before student update. */
-        Event::fire('genuineq.students.update.before.student.update', [&$student, post()]);
-
         /** Update the student. */
         $student->update($data);
-        $student->save();
 
         /** Add student avatar. */
         if (Input::hasFile('avatar')) {
@@ -156,7 +176,7 @@ class Student extends ComponentBase
         Event::fire('genuineq.students.update.after.student.update', [$student]);
 
         /** Fire event before contact persons update. */
-        Event::fire('genuineq.students.update.before.contact.persons.update', [post()]);
+        // Event::fire('genuineq.students.update.before.contact.persons.update', [post()]);
 
         /** Save contact persons. */
         $this->updateContactPersons($student, post());
@@ -192,23 +212,24 @@ class Student extends ComponentBase
             return Redirect::to($redirectUrl);
         }
 
+        /** Fire event before student archive. */
+        Event::fire('genuineq.students.student.before.archive', [&$student, post(), &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
+        }
+
         /** Extract the student that needs to be archived. */
         $student = StudentModel::find(post('id'));
 
-        /** Fire event before student archive. */
-        Event::fire('genuineq.students.student.before.archive', [&$student, post()]);
+        /** Archive the extracted student. */
+        $student->archived = true;
+        $student->save();
 
-        if ($student) {
-            /** Archive the extracted student. */
-            $student->archived = true;
-            $student->save();
+        Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_archive_successful'));
 
-            Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_archive_successful'));
-
-            return Redirect::refresh();
-        } else {
-            Flash::error(Lang::get('genuineq.students::lang.components.students.message.student_archive_failed'));
-        }
+        return Redirect::refresh();
     }
 
     /**
@@ -225,23 +246,24 @@ class Student extends ComponentBase
             return Redirect::to($redirectUrl);
         }
 
+        /** Fire event before student unzip. */
+        Event::fire('genuineq.students.student.before.unzip', [&$student, post(), &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
+        }
+
         /** Extract the student that needs to be unziped. */
         $student = StudentModel::find(post('id'));
 
-        /** Fire event before student unzip. */
-        Event::fire('genuineq.students.student.before.unzip', [&$student, post()]);
+        /** Unzip the extracted student. */
+        $student->archived = false;
+        $student->save();
 
-        if ($student) {
-            /** Unzip the extracted student. */
-            $student->archived = false;
-            $student->save();
+        Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_unzip_successful'));
 
-            Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_unzip_successful'));
-
-            return Redirect::refresh();
-        } else {
-            Flash::error(Lang::get('genuineq.students::lang.components.students.message.student_unzip_failed'));
-        }
+        return Redirect::refresh();
     }
 
     /**
@@ -258,24 +280,24 @@ class Student extends ComponentBase
             return Redirect::to($redirectUrl);
         }
 
+        /** Fire event before student delete. */
+        Event::fire('genuineq.students.student.before.delete', [&$student, post(), &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
+        }
+
         /** Extract the student that needs to be deleted. */
         $student = StudentModel::find(post('id'));
 
-        /** Fire event before student delete. */
-        Event::fire('genuineq.students.student.before.delete', [&$student, post()]);
+        /** Delete the extracted student. */
+        $student->contact_persons->delete();
+        $student->delete();
 
-        if ($student) {
+        Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_delete_successful'));
 
-            /** Delete the extracted student. */
-            $student->contact_persons->delete();
-            $student->delete();
-
-            Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_delete_successful'));
-
-            return Redirect::refresh();
-        } else {
-            Flash::error(Lang::get('genuineq.students::lang.components.students.message.student_delete_failed'));
-        }
+        return Redirect::refresh();
     }
 
     /***********************************************
@@ -283,46 +305,50 @@ class Student extends ComponentBase
      ***********************************************/
 
     /**
-     * Function that parses 5 contact persons from
-     *  the input data and creates/updates or deletes contact persons.
+     * Function that parses 5 contact persons from the input data
+     *  and creates/updates or deletes contact persons.
      */
     protected function updateContactPersons($student, $data)
     {
-        for ($i = 1, $j=0; $i <= 5, $j < 5; $i++, $j++) {
-            /** Check if contact person data exists. */
-            if ( isset($data['contact_' . $i . '_surname']) && isset($data['contact_' . $i . '_name']) && isset($data['contact_' . $i . '_phone']) ) {
-                if ( isset($student->contact_persons[$j]) ) {
-                    $this->updateContactPerson($student, $student->contact_persons[$j], $data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
-                } else {
-                    $student->contact_persons[$j] = $this->createContactPerson($student, $data['contact_' . $i . '_surname'], $data['contact_' . $i . '_name'], $data['contact_' . $i . '_phone'], $data['contact_' . $i . '_email'], $data['contact_' . $i . '_observations']);
-                    $student->contact_persons[$j]->save();
-                }
-            } elseif ( isset($student->contact_persons[$j]) ) {
-                /** No data provided. Delete old data. */
-                $student->contact_persons[$j]->delete();
+        /** Delete all existing contact persons. */
+        $student->contact_persons->each(function ($item, $key) {
+            $item->delete();
+        });
+
+        /** Parse all contact persons input data. */
+        for ($i = 1; $i <= 5; $i++) {
+            /** Check if any of the mandatory contact person data exists for index $i. */
+            if ($data['contact_' . $i . '_surname'] || $data['contact_' . $i . '_name'] || $data['contact_' . $i . '_phone']) {
+                /** Extract the data. */
+                $contactPersonData = [
+                    'student_id' => $student->id,
+                    'surname' => $data['contact_' . $i . '_surname'],
+                    'name' => $data['contact_' . $i . '_name'],
+                    'phone' => $data['contact_' . $i . '_phone'],
+                    'email' => $data['contact_' . $i . '_email'],
+                    'description' => $data['contact_' . $i . '_observations']
+                ];
+
+                /** Validate the data. */
+                $this->validateContactPersonData($contactPersonData);
+
+                /** Create the contact person. */
+                ContactPerson::create($contactPersonData);
             }
         }
     }
 
-    /** Function that creates a contact person with the provided details. */
-    protected function createContactPerson($student, $surname, $name, $phone, $email, $description)
+    /**
+     * Function that validates the data for a contact person.
+     */
+    protected function validateContactPersonData($data)
     {
-        /** Extract the form data. */
-        $data = [
-            'student_id' => $student->id,
-            'surname' => $surname,
-            'name' => $name,
-            'phone' => $phone,
-            'email' => $email,
-            'description' => $description
-        ];
-
         /** Create the validation rules. */
         $rules = [
             'surname' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'phone' => 'required|numeric',
-            'email' => 'between:6,255|email|unique:users',
+            'email' => 'between:6,255|email',
             'description' => 'string',
         ];
 
@@ -332,8 +358,8 @@ class Student extends ComponentBase
             'surname.regex' => Lang::get('genuineq.students::lang.components.students.validation.surname_string'),
             'name.required' => Lang::get('genuineq.students::lang.components.students.validation.name_required'),
             'name.regex' => Lang::get('genuineq.students::lang.components.students.validation.name_string'),
-            'phone.required' => Lang::get('genuineq.students::lang.components.students.validation.birthdate_required'),
-            'phone.numeric' => Lang::get('genuineq.students::lang.components.students.validation.birthdate_date'),
+            'phone.required' => Lang::get('genuineq.students::lang.components.students.validation.phone_required'),
+            'phone.numeric' => Lang::get('genuineq.students::lang.components.students.validation.phone_numeric'),
             'email.between' => Lang::get('genuineq.students::lang.components.students.validation.email_between'),
             'email.email' => Lang::get('genuineq.students::lang.components.students.validation.email_email'),
             'description.string' => Lang::get('genuineq.students::lang.components.students.validation.description_string'),
@@ -344,68 +370,6 @@ class Student extends ComponentBase
         if ($validation->fails()) {
             throw new ValidationException($validation);
         }
-
-        return ContactPerson::create([
-            'student_id' => $student->id,
-            'surname' => $surname,
-            'name' => $name,
-            'phone' => $phone,
-            'email' => $email,
-            'description' => $description
-        ]);
-    }
-
-    /** Function that updates a contact person with the provided details. */
-    protected function updateContactPerson($student, $contactPerson, $surname, $name, $phone, $email, $description)
-    {
-        /** Extract the form data. */
-        $data = [
-            'student_id' => $student->id,
-            'surname' => $surname,
-            'name' => $name,
-            'phone' => $phone,
-            'email' => $email,
-            'description' => $description
-        ];
-
-        /** Create the validation rules. */
-        $rules = [
-            'surname' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
-            'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
-            'phone' => 'required|numeric',
-            'email' => 'between:6,255|email|unique:users',
-            'description' => 'string',
-        ];
-
-        /** Create the validation messages. */
-        $messages = [
-            'surname.required' => Lang::get('genuineq.students::lang.components.students.validation.surname_required'),
-            'surname.regex' => Lang::get('genuineq.students::lang.components.students.validation.surname_string'),
-            'name.required' => Lang::get('genuineq.students::lang.components.students.validation.name_required'),
-            'name.regex' => Lang::get('genuineq.students::lang.components.students.validation.name_string'),
-            'phone.required' => Lang::get('genuineq.students::lang.components.students.validation.birthdate_required'),
-            'phone.numeric' => Lang::get('genuineq.students::lang.components.students.validation.birthdate_date'),
-            'email.between' => Lang::get('genuineq.students::lang.components.students.validation.email_between'),
-            'email.email' => Lang::get('genuineq.students::lang.components.students.validation.email_email'),
-            'description.string' => Lang::get('genuineq.students::lang.components.students.validation.description_string'),
-        ];
-
-        /** Apply the validation rules. */
-        $validation = Validator::make($data, $rules, $messages);
-        if ($validation->fails()) {
-            throw new ValidationException($validation);
-        }
-
-        /** Update the contact person. */
-        $contactPerson->update([
-            'student_id' => $student->id,
-            'surname' => $surname,
-            'name' => $name,
-            'phone' => $phone,
-            'email' => $email,
-            'description' => $description
-        ]);
-        $contactPerson->save();
     }
 
     /**
