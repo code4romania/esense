@@ -200,6 +200,8 @@ class Plugin extends PluginBase
 
             /** Add get lessons years attribute for Specialist/School => student.htm. */
             $model->addDynamicMethod('getLessonsYearsAttribute', function () use ($model) {
+                /** initialize the array */
+                $lessonsYears = [];
 
                 if ('specialist' == Auth::user()->type) {
                     /** get authenticated specialist profile */
@@ -209,34 +211,35 @@ class Plugin extends PluginBase
 
                     /** get years of lessons with a specific specialist */
                     $lessons = $model->lessons()->where('connection_id', $connection->id)->get();
+
                     /** get years with lessons */
-                    $lessonsYears = [];
                     foreach ($lessons as $lesson) {
                         $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
                     }
-
-                    return array_unique($lessonsYears);
 
                 } elseif ('school' == Auth::user()->type) {
                     /** get authenticated school profile */
                     $schoolProfile = Auth::user()->profile;
-                    $specialists = $schoolProfile->active_specialists->where('student_id', $model->id);
 
-                    $lessons = [];
-                    foreach ($specialists as $specialist) {
+                    $lessonsCollection = [];
+                    foreach ($schoolProfile->active_specialists as $specialist) {
                         /** get connection with a specific specialist */
-                        $connection = $model->getConnection($specialist);
-                        /** get lessons */
-                        $lessons[] = $model->lessons()->where('connection_id', $connection->id)->get();
+                        $connection = $model->connections->where('specialist_id', $specialist->id)->first();
+                        /** check if student have a connection with that specialist */
+                       if( $connection ) {
+                           /** get lessons collection object */
+                        $lessonsCollection[] = $model->lessons()->where('connection_id', $connection->id)->get();
+                       }
                     }
 
-                    $lessonsYears = [];
-                    foreach ($lessons as $lesson) {
-                        $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
+                    foreach ($lessonsCollection as $lessons) {
+                        foreach ($lessons as $lesson) {
+                            $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
+                        }
                     }
-
-                    return array_unique($lessonsYears);
                 }
+
+                return array_unique($lessonsYears);
             });
 
 
@@ -247,28 +250,39 @@ class Plugin extends PluginBase
                 $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
 
                 if ('specialist' == Auth::user()->type) {
+                    /** get logged in specialist */
                     $specialistProfile = Auth::user()->profile;
-                    /** get connection with a specific specialist */
-                    $connection = $model->connections->where('specialist_id', $specialistProfile->id)->first();
-                    /** return lessons with a specific specialist */
-                    return $model->lessons()->where('connection_id', $connection->id)->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+                    /** return lessons from specific month with specific student */
+                    return $specialistProfile->getLessonsFromMonth($model, $month, $year);
 
                 } elseif ('school' == Auth::user()->type) {
                     /** get authenticated school profile */
                     $schoolProfile = Auth::user()->profile;
-                    $specialists = $model->specialists->where('school_id', $schoolProfile->id);
 
-                    $lessons = [];
-                    foreach ($specialists as $specialist) {
+                    /** get student lessons with active specialists from authenticated school */
+                    $lessonsCollection = [];
+                    foreach ($schoolProfile->active_specialists as $specialist) {
                         /** get connection with a specific specialist */
                         $connection = $model->connections->where('specialist_id', $specialist->id)->first();
-                        /** get lessons */
-                        $lessons[] = $model->lessons()->where('connection_id', $connection->id)->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+                        /** check if student have a connection with that specialist */
+                        if ($connection) {
+                            /** get lessons collection object */
+                            $lessonsCollection[] = $specialist->getLessonsFromMonth($model, $month, $year);
+                        }
                     }
-                    return $lessons;
-                }
+                    /** initialise empty lessons array */
+                    $lessonsArray = [];
+                    /** iterate collection */
+                    foreach ($lessonsCollection as $lessons) {
+                        foreach ($lessons as $lesson) {
+                            $lessonsArray[] = $lesson;
+                        }
+                    }
 
+                    return $lessonsArray;
+                }
             });
+
         });
     }
 
@@ -738,7 +752,7 @@ class Plugin extends PluginBase
                 $connection = $model->getStudentConnection($student->id);
 
                 /** return lessons with a specific student */
-                return $connection->lessons()->whereBetween('day', [$monthStart, $monthEnd])->orderBy('day', 'DESC')->get();
+                return $connection->lessons()->whereBetween('day', [$monthStart, $monthEnd])->get();
             });
 
 
