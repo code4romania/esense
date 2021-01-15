@@ -11,25 +11,6 @@ allowedUserTypes[] = "specialist"
 
 [student]
 ==
-<script type="text/javascript">
-    /** Function that show a preview of uploaded student avatar */
-    function previewFile(input){
-        let file = $('input[type=file]').get(0).files[0];
-        if(file){
-            let reader = new FileReader();
-            reader.onload = function(){
-                $('#add-avatar')
-                    .attr('width', 150)
-                    .attr('src', reader.result);
-                $('#add-avatar2')
-                    .attr('width', 150)
-                    .attr('src', reader.result);
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-</script>
-
 <div class="container-fluid px-lg-4">
     <div class="row">
 
@@ -309,6 +290,7 @@ allowedUserTypes[] = "specialist"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ro.min.js" integrity="sha512-OyKt3ZoVnoGpHGx10TMtzQTSDHKyGzHIXdOoOiaHcMJMGOR/ev9Y6ocEGd64HVPqGEwkg29xVVbavNjDPeg9GA==" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ ['assets/js/file-preview.js']|theme }}"></script>
 
 {% put scripts %}
     <script type="text/javascript">
@@ -321,11 +303,10 @@ allowedUserTypes[] = "specialist"
                 useParagraph:true
             });
 
-            $('#contact_1_observations_id').richText();
-            $('#contact_2_observations_id').richText();
-            $('#contact_3_observations_id').richText();
-            $('#contact_4_observations_id').richText();
-            $('#contact_5_observations_id').richText();
+            /** WYSWYG Editor. */
+            $('.observations').each(function () {
+                $(this).richText();
+            });
 
             /** Initiate the datepicker plugin. */
             $('#birthdate').datepicker({
