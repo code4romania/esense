@@ -17,13 +17,13 @@ class TableUpdateGenuineqTimetableLessons extends Migration
 
     public function down()
     {
-        if (Schema::hasColumns('genuineq_timetable_lessons', 'connection_id')) {
+        if (Schema::hasColumn('genuineq_timetable_lessons', 'connection_id')) {
             Schema::table('genuineq_timetable_lessons', function ($table) {
                 $table->dropColumn('connection_id');
             });
         }
 
-        if (Schema::hasColumns('genuineq_timetable_lessons', 'category')) {
+        if (Schema::hasColumn('genuineq_timetable_lessons', 'category')) {
             Schema::table('genuineq_timetable_lessons', function ($table) {
                 $table->dropColumn('category');
             });
