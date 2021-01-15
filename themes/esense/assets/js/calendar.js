@@ -36,28 +36,28 @@
         yearView = false;
 
     var monthMap = {
-        1: 'ianuarie',
-        2: 'februarie',
-        3: 'martie',
-        4: 'aprilie',
-        5: 'mai',
-        6: 'iunie',
-        7: 'iulie',
-        8: 'august',
-        9: 'septembrie',
-        10: 'octombrie',
-        11: 'noiembrie',
-        12: 'decembrie'
+        1: "ianuarie",
+        2: "februarie",
+        3: "martie",
+        4: "aprilie",
+        5: "mai",
+        6: "iunie",
+        7: "iulie",
+        8: "august",
+        9: "septembrie",
+        10: "octombrie",
+        11: "noiembrie",
+        12: "decembrie",
     };
 
     var dayMap = {
-        0: 'duminica',
-        1: 'luni',
-        2: 'marti',
-        3: 'miercuri',
-        4: 'joi',
-        5: 'vineri',
-        6: 'sambata'
+        0: "luni",
+        1: "marti",
+        2: "miercuri",
+        3: "joi",
+        4: "vineri",
+        5: "sambata",
+        6: "duminica",
     };
 
     function getFirstDayOfMonth(currentDate) {
@@ -67,7 +67,11 @@
     }
 
     function getLastDayOfMonth(currentDate) {
-        return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        return new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth() + 1,
+            0
+        );
     }
 
     function getLastMonthLastDay(currentDate) {
@@ -176,7 +180,9 @@
             "" +
             '<div class="buttons-container">' +
             (settings.enableMonthChange && settings.enableYearView
-                ? '<button class="prev-button">' + settings.prevButton + "</button>"
+                ? '<button class="prev-button">' +
+                  settings.prevButton +
+                  "</button>"
                 : "") +
             '<span class="label-container year-label">';
         if (settings.showYearDropdown) {
@@ -184,7 +190,11 @@
             for (var i = 2015; i < 2100; i++) {
                 if (i === currentDate.getFullYear()) {
                     str +=
-                        '<option selected="selected" value="' + i + '">' + i + "</option>";
+                        '<option selected="selected" value="' +
+                        i +
+                        '">' +
+                        i +
+                        "</option>";
                 } else {
                     str += '<option value="' + i + '">' + i + "</option>";
                 }
@@ -196,7 +206,9 @@
         str +=
             "</span>" +
             (settings.enableMonthChange && settings.enableYearView
-                ? '<button class="next-button">' + settings.nextButton + "</button>"
+                ? '<button class="next-button">' +
+                  settings.nextButton +
+                  "</button>"
                 : "") +
             "</div>";
         return str;
@@ -234,7 +246,9 @@
             "" +
             '<div class="buttons-container">' +
             (settings.enableMonthChange
-                ? '<button class="prev-button">' + settings.prevButton + "</button>"
+                ? '<button class="prev-button">' +
+                  settings.prevButton +
+                  "</button>"
                 : "") +
             '<span class="label-container month-container">' +
             '<span class="month-label">' +
@@ -246,7 +260,9 @@
             "</span>" +
             "</span>" +
             (settings.enableMonthChange
-                ? '<button class="next-button">' + settings.nextButton + "</button>"
+                ? '<button class="next-button">' +
+                  settings.nextButton +
+                  "</button>"
                 : "") +
             "</div>"
         );
@@ -316,6 +332,13 @@
                     today +
                     '" data-date="' +
                     day +
+                    '" ' +
+                    '" date="' +
+                    day.getFullYear() +
+                    "-" +
+                    ("0" + (day.getMonth() + 1)).slice(-2) +
+                    "-" +
+                    ("0" + day.getDate()).slice(-2) +
                     '" ' +
                     dateDisabled +
                     " ><span>" +
