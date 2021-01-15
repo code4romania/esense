@@ -967,7 +967,7 @@ class Plugin extends PluginBase
             /** Get current logged in user and its role. */
             $loggedInUser = \Backend\Facades\BackendAuth::getUser();
 
-            if(/*NOT*/ ! ('Developer' == $loggedInUser->role->name)) {
+            if('Developer' !== $loggedInUser->role->name) {
                 //jQuery selector for disabling
                 // 'add' and 'delete' buttons,
                 // 'checkboxes' and
@@ -975,21 +975,6 @@ class Plugin extends PluginBase
                 $controller->addJs('/themes/esense/assets/js/static-pages-remove-items.js');
             }
         });
-
-        /** REMOVE SIDE MENU ITEMS for non-developers */
-        Event::listen('backend.menu.extendItems', function($manager) {
-
-            /** Get current logged in user and its role. */
-            $loggedInUser = \Backend\Facades\BackendAuth::getUser();
-
-            /** Check if it has a 'Publisher' role. */
-            if(/*NOT*/ ! ('Developer' == $loggedInUser->role->name)) {
-                $manager->removeSideMenuItem('Rainlab.Pages', 'Pages', 'menus');
-                $manager->removeSideMenuItem('Rainlab.Pages', 'Pages', 'content');
-                $manager->removeSideMenuItem('Rainlab.Pages', 'Pages', 'snippets');
-            }
-        });
-
 
         /** HIDE FIELDS for non-developers */
         Event::listen('backend.form.extendFields', function($widget) {
@@ -1003,7 +988,7 @@ class Plugin extends PluginBase
             $loggedInUser = \Backend\Facades\BackendAuth::getUser();
 
             /** Check if it has a 'Publisher' role. */
-            if(/*NOT*/ ! ('Developer' == $loggedInUser->role->name)) {
+            if('Developer' !== $loggedInUser->role->name) {
                 $fields = $widget->getFields();
 
                 $fields['viewBag[title]']->cssClass = 'hidden';
