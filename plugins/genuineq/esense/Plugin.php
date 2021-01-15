@@ -610,16 +610,17 @@ class Plugin extends PluginBase
 
             /** Add get lessons years attribute. */
             $model->addDynamicMethod('getLessonsYearsAttribute', function () use ($model) {
-                /** get all active specialists */
+                /** Get all active specialists. */
                 $specialists = $model->active_specialists;
                 $years = [];
-                /** parse all student lessons  */
+
+                /** Parse all student lessons. */
                 foreach ($specialists as $specialist) {
                     $years = array_merge($years, $specialist->lessons_years);
                 }
+
                 return array_unique($years);
             });
-
         });
     }
 
@@ -968,10 +969,10 @@ class Plugin extends PluginBase
             $loggedInUser = \Backend\Facades\BackendAuth::getUser();
 
             if('Developer' !== $loggedInUser->role->name) {
-                //jQuery selector for disabling
-                // 'add' and 'delete' buttons,
-                // 'checkboxes' and
-                // 'Add subpage' in Rainlab\Pages
+                /**
+                 * jQuery selector for disabling 'add' and 'delete' buttons, 'checkboxes'
+                 *  and 'Add subpage' in Rainlab\Pages.
+                 */
                 $controller->addJs('/themes/esense/assets/js/static-pages-remove-items.js');
             }
         });
@@ -996,7 +997,6 @@ class Plugin extends PluginBase
                 $fields['viewBag[layout]']->cssClass = 'hidden';
                 $fields['viewBag[is_hidden]']->cssClass = 'hidden';
                 $fields['viewBag[navigation_hidden]']->cssClass = 'hidden';
-
             }
         });
     }
