@@ -60,19 +60,19 @@ description = "Used for displaying a line chart graph to the school."
             datasets: [
                 {
                     data: [
-                            {{ durations[0] }},  // Jan
-                            {{ durations[1] }},  // Feb
-                            {{ durations[2] }},  // Mar
-                            {{ durations[3] }},  // Apr
-                            {{ durations[4] }},  // May
-                            {{ durations[5] }},  // Jun
-                            {{ durations[6] }},  // Jul
-                            {{ durations[7] }},  // Aug
-                            {{ durations[8] }},  // Sep
-                            {{ durations[9] }},  // Oct
-                            {{ durations[10] }}, // Nov
-                            {{ durations[11] }}, // Dec
-                        ],
+                        {{ durations[0] }},  // Jan
+                        {{ durations[1] }},  // Feb
+                        {{ durations[2] }},  // Mar
+                        {{ durations[3] }},  // Apr
+                        {{ durations[4] }},  // May
+                        {{ durations[5] }},  // Jun
+                        {{ durations[6] }},  // Jul
+                        {{ durations[7] }},  // Aug
+                        {{ durations[8] }},  // Sep
+                        {{ durations[9] }},  // Oct
+                        {{ durations[10] }}, // Nov
+                        {{ durations[11] }}, // Dec
+                    ],
                     backgroundColor: 'transparent',
                     borderColor: '#A6CEE3',
                     borderWidth: 2,
@@ -100,15 +100,17 @@ description = "Used for displaying a line chart graph to the school."
                     tooltips: {
                         callbacks: {
                             label: function(tooltipItem, data) {
-                                // extract duration (hours) for specific tooltip and convert to minutes
+                                /** Extract duration (hours) for specific tooltip and convert to minutes. */
                                 var minutesDuration = (data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]) * 60;
 
-                                //function that change minutes values to HH:MM format
+                                /** Function that change minutes values to HH:MM format. */
                                 const convertMinutesToHHMM = (mins) => {
                                     var hours = Math.floor(mins / 60);
                                     var minutes = Math.round(mins % 60);
-                                    hours = hours < 10 ? '0' + hours : hours;
-                                    minutes = minutes < 10 ? '0' + minutes : minutes;
+
+                                    hours = (10 > hours) ? ('0' + hours) : (hours);
+                                    minutes = (10 > minutes) ? ('0' + minutes) : (minutes);
+
                                     return `${hours}:${minutes}`;
                                 }
 
