@@ -28,6 +28,18 @@ class Student extends ComponentBase
         ];
     }
 
+    public function defineProperties()
+    {
+        return [
+            'userPermissionToAddStudent' => [
+                 'title'       => 'genuineq.students::lang.components.students.options.title',
+                 'description' => 'genuineq.students::lang.components.students.options.description',
+                 'default'     => false,
+                 'type'        => 'checkbox',
+            ]
+        ];
+    }
+
     /**
      * Executed when this component is bound to a page or layout.
      */
@@ -35,7 +47,7 @@ class Student extends ComponentBase
     {
         /** Define redirect url variable. */
         $redirectUrl = null;
-        Event::fire('genuineq.students.student.read.start', [&$this, $this->param('id'), &$redirectUrl]);
+        Event::fire('genuineq.students.student.read.start', [&$this, &$redirectUrl]);
 
         /** Check if a redirect is required. */
         if ($redirectUrl) {
@@ -53,6 +65,14 @@ class Student extends ComponentBase
 
             /** Extract the student and send it to the page. */
             $this->page['student'] = StudentModel::find($this->param('id'));
+        } elseif ($this->property('userPermissionToAddStudent')) {
+            /** Fire event before student create start. */
+            Event::fire('genuineq.students.before.student.create.start', [&$this, $this->param('id'), &$redirectUrl]);
+
+            /** Check if a redirect is required. */
+            if ($redirectUrl) {
+                return Redirect::to($redirectUrl);
+            }
         }
     }
 

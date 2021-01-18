@@ -40,6 +40,11 @@
             'name' => 'Elevi',
             'description' => 'Tratează operațiunile CRUD pentru elevi.',
 
+            'options' => [
+                'title' => 'Verifică permisiunile userului',
+                'description' => 'Verifică dacă utilizatorul are dreptul să adauge un elev',
+            ],
+
             'validation' => [
                 'surname_required' => 'Nume este obligatoriu',
                 'surname_string' => 'Numele poate conține doar litere, spațiu și caracterul -',

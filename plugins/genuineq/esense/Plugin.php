@@ -292,7 +292,7 @@ class Plugin extends PluginBase
     protected function studentExtendComponens()
     {
         /************ Student READ start ************/
-        Event::listen('genuineq.students.student.read.start', function(&$component, $id, &$redirectUrl) {
+        Event::listen('genuineq.students.student.read.start', function(&$component, &$redirectUrl) {
             if (!Auth::check()) {
                 $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
             }
@@ -313,6 +313,15 @@ class Plugin extends PluginBase
         /************ Student READ end ************/
 
         /************ Student CREATE start ************/
+        Event::listen('genuineq.students.before.student.create.start', function(&$component, $id, &$redirectUrl) {
+            /** Extract the user */
+            $user = Auth::getUser();
+            
+            if (('school' == $user->type) && (!$user->profile->unarchivedSpecialists->count())) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::redirectWithMessage('test message'));
+            }
+        });
+        
         Event::listen('genuineq.students.student.create.start', function(&$component, $inputs, &$redirectUrl) {
             if (!Auth::check()) {
                 $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());

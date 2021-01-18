@@ -22,6 +22,18 @@ class RedirectHelper
     }
 
     /**
+     * Redirects the user to the right page when an access denied error occurs
+     *  and displays the received message.
+     * @return Redirect
+     */
+    public static function redirectWithMessage($message)
+    {
+        Flash::error($message);
+
+        return $redirectPage = self::getRedirectPage();
+    }
+
+    /**
      * Redirects the user to the right page when an access denied error occurs.
      * @return Redirect
      */

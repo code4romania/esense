@@ -40,6 +40,11 @@
             'name' => 'Students',
             'description' => 'Handles the CRUD operations for students.',
 
+            'options' => [
+                'title' => 'Check user permission',
+                'description' => 'Check if user has permission to add student',
+            ],
+
             'validation' => [
                 'surname_required' => 'Name required',
                 'surname_string' => 'Name can only contain letters, space and character -',
