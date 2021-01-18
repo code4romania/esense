@@ -117,7 +117,7 @@ class Specialist extends ComponentBase
 
                         /** Create user profile. */
                         $profile = new SpecialistModel([
-                            'slug' => SpecialistModel::slug($user->full_name),
+                            'slug' => SpecialistModel::slug($newUser->full_name),
                             'phone' => post('phone'),
                             'county_id' => $user->profile->county_id,
                             'city_id' => $user->profile->city_id,

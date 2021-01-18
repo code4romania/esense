@@ -29,11 +29,6 @@ class UserInviteHelper
         /** Register new user. */
         $newUser = Auth::register($data, /*$activate*/true, /*$autoLogin*/false);
 
-        /** Set the user profile. */
-        $newUser->profile_id = $user->profile_id;
-        $newUser->profile_type = $user->profile_type;
-        $newUser->save();
-
         EmailHelper::sendInviteEmail($newUser, $user, $url);
 
         return $newUser;

@@ -60,7 +60,7 @@ class EmailHelper
     public static function sendInviteEmail($newUser, $user, $resetPage)
     {
         /** Generate a password reset code. */
-        $code = implode('!', [$user->id, $user->getResetPasswordCode()]);
+        $code = implode('!', [$newUser->id, $newUser->getResetPasswordCode()]);
         /** Create the password reset URL. */
         $link = Page::url($resetPage) . '?reset=' . $code;
 
@@ -68,7 +68,7 @@ class EmailHelper
             'name' => $newUser->name,
             'link' => $link,
             'user_name' => $user->name,
-            'company_name' => $user->profile->name
+            'school_name' => $user->profile->name
         ];
 
         Mail::send('genuineq.user::mail.invite', $data, function($message) use ($newUser) {
