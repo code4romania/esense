@@ -16,6 +16,7 @@
                 'access_request_failed_approval' => 'Cererea de acces nu a putut fi aprobată.',
                 'access_request_success_decline' => 'Cererea de acces a fost respinsă cu success.',
                 'access_request_failed_decline' => 'Cererea de acces nu a putut fi refuzată.',
+                'access_to_create_student' => 'Trebuie să ai un profesor activ.',
 
                 'transfer_request_success_creation' => 'Cererea de transfer a fost creată cu success.',
                 'transfer_request_failed_creation' => 'Cererea de transfer nu a putut fi a fost creată.',

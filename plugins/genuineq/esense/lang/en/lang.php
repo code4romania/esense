@@ -16,6 +16,7 @@
                 'access_request_failed_approval' => 'Access request could not be approved.',
                 'access_request_success_decline' => 'The access request was successfully rejected.',
                 'access_request_failed_decline' => 'Access request could not be denied.',
+                'access_to_create_student' => 'You need to have an active teacher.',
 
                 'transfer_request_success_creation' => 'The transfer request was created successfully.',
                 'transfer_request_failed_creation' => 'The transfer request could not be created.',

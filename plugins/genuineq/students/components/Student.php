@@ -31,7 +31,7 @@ class Student extends ComponentBase
     public function defineProperties()
     {
         return [
-            'userPermissionToAddStudent' => [
+            'throwBeforeStudentCreateStart' => [
                  'title'       => 'genuineq.students::lang.components.students.options.title',
                  'description' => 'genuineq.students::lang.components.students.options.description',
                  'default'     => false,
@@ -65,7 +65,7 @@ class Student extends ComponentBase
 
             /** Extract the student and send it to the page. */
             $this->page['student'] = StudentModel::find($this->param('id'));
-        } elseif ($this->property('userPermissionToAddStudent')) {
+        } elseif ($this->property('throwBeforeStudentCreateStart')) {
             /** Fire event before student create start. */
             Event::fire('genuineq.students.before.student.create.start', [&$this, $this->param('id'), &$redirectUrl]);
 
@@ -312,7 +312,6 @@ class Student extends ComponentBase
         $student = StudentModel::find(post('id'));
 
         /** Delete the extracted student. */
-        $student->contact_persons->delete();
         $student->delete();
 
         Flash::success(Lang::get('genuineq.students::lang.components.students.message.student_delete_successful'));

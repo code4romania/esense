@@ -3,6 +3,7 @@
 use Log;
 use Auth;
 use Event;
+use Lang;
 use Carbon\Carbon;
 use System\Classes\PluginBase;
 use Illuminate\Support\Collection;
@@ -197,7 +198,6 @@ class Plugin extends PluginBase
                 return $model->connections->where('specialist_id', $specialist->id)->first();
             });
 
-
             /** Add get lessons years attribute for Specialist/School => student.htm. */
             $model->addDynamicMethod('getLessonsYearsAttribute', function () use ($model) {
                 /** initialize the array */
@@ -316,12 +316,12 @@ class Plugin extends PluginBase
         Event::listen('genuineq.students.before.student.create.start', function(&$component, $id, &$redirectUrl) {
             /** Extract the user */
             $user = Auth::getUser();
-            
+
             if (('school' == $user->type) && (!$user->profile->unarchivedSpecialists->count())) {
-                $redirectUrl = $component->pageUrl(RedirectHelper::redirectWithMessage('test message'));
+                $redirectUrl = $component->pageUrl(RedirectHelper::redirectWithMessage(Lang::get('genuineq.esense::lang.components.studentActions.message.access_to_create_student')));
             }
         });
-        
+
         Event::listen('genuineq.students.student.create.start', function(&$component, $inputs, &$redirectUrl) {
             if (!Auth::check()) {
                 $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
@@ -674,18 +674,10 @@ class Plugin extends PluginBase
                 'table' => 'genuineq_esense_students_specialists'
             ];
 
-            /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
-            $model->belongsToMany['unarchivedStudents'] = [
+            /** Link "Student" model to "Specialist" model with many-to-many relation. */
+            $model->belongsToMany['allStudents'] = [
                 'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_students_specialists',
-                'conditions' => 'archived = 0'
-            ];
-
-            /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
-            $model->belongsToMany['archivedStudents'] = [
-                'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_students_specialists',
-                'conditions' => 'archived = 1'
+                'table' => 'genuineq_esense_students_specialists'
             ];
 
             /** Link "TransferRequest" model to "Specialist" model with one-to-many relation. */
@@ -723,6 +715,34 @@ class Plugin extends PluginBase
                 }
 
                 return $schoolStudents;
+            });
+
+            /** Add unarchived students attribute. */
+            $model->addDynamicMethod('getUnarchivedStudentsAttribute', function() use ($model) {
+                $unarchivedStudents = new Collection();
+
+                /** Parse all the students and extract unarchived ones. */
+                foreach ($model->allStudents as $student) {
+                    if (!$student->archived) {
+                        $unarchivedStudents->push($student);
+                    }
+                }
+
+                return $unarchivedStudents->unique('id')->sortBy('name');
+            });
+
+            /** Add archived students attribute. */
+            $model->addDynamicMethod('getArchivedStudentsAttribute', function() use ($model) {
+                $archivedStudents = new Collection();
+
+                /** Parse all the students and extract archived ones. */
+                foreach ($model->allStudents as $student) {
+                    if ($student->archived) {
+                        $archivedStudents->push($student);
+                    }
+                }
+
+                return $archivedStudents->unique('id')->sortBy('name');
             });
 
             /** Add access notifications attribute. */
