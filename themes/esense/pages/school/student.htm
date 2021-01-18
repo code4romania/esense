@@ -67,7 +67,7 @@ allowedUserTypes[] = "school"
                                             {{ 'page.school.dashboard.student.options.edit'|_ }}
                                         </a>
 
-                                        <a class="dropdown-item display-4" style="color: #1A212C;" role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}'>
+                                        <a class="dropdown-item display-4" style="color: #1A212C;" role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}'>
                                             {{ 'page.school.dashboard.student.options.archive'|_ }}
                                         </a>
 
