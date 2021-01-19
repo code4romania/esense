@@ -67,10 +67,16 @@
     display: none;
 }
 
-@media screen and (max-width:500px) {
-    .donut-chart {
+@media screen and (max-width:1090px) {
+    canvas.donut-chart {
         width: 250px !important;
         height: 250px !important;
-        margin: 0 auto !important;
+    }
+}
+
+@media screen and (max-width:400px) {
+    canvas.donut-chart {
+        width: 220px !important;
+        height: 220px !important;
     }
 }

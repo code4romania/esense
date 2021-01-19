@@ -175,7 +175,7 @@ allowedUserTypes[] = "specialist"
                     </div>
                 </div>
                 <div class="py-3">
-                    <div class="students-activity-owl-carousel owl-carousel owl-theme owl-responsive-0">
+                    <div class="students-activity-owl-carousel owl-carousel owl-theme">
                         {% for student in user.profile.unarchivedStudents %}
                             <div class="item">
                                 <div class="row">
@@ -320,8 +320,9 @@ allowedUserTypes[] = "specialist"
                     },
 
                     options: {
-                        cutoutPercentage: 75,
                         responsive: false,
+                        maintainAspectRatio: false,
+                        cutoutPercentage: 75,
                         elements: {
                             center: {
                                 text: "{{ user.profile.getStudentLessonsCount(student.id) }} {{'page.specialist.dashboard.donut.chart.games.number'|_}}",
