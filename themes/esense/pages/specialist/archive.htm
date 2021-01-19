@@ -11,6 +11,17 @@ allowedUserTypes[] = "specialist"
 
 [student]
 ==
+<?php
+    use Genuineq\User\Helpers\RedirectHelper;
+
+    function onStart()
+    {
+        if (Auth::user() && ('specialist' == Auth::user()->type) && Auth::user()->profile->affiliated) {
+            return Redirect::to(RedirectHelper::accessDenied());
+        }
+    }
+?>
+==
 <div class="container-fluid px-lg-4">
     <div class="row">
 
