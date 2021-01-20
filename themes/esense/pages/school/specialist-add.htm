@@ -17,105 +17,65 @@ resetPage = "authentification/reset-password"
         <div class="col-12">
             <form class="px-lg-4" data-request="onSpecialistsInvite">
 
-                <div id="specialist-1" class="px-3">
-                    {%
-                        partial 'web-app/school/specialist-form'
+                <div id="add_specialists_wrapper">
+                    <div class="px-3 my-4 rounded shadow-sm">
+                        {%
+                            partial 'web-app/school/specialist-form'
 
-                        lastNameId = 'specialist_1_surname_id'
-                        firstNameId = 'specialist_1_name_id'
-                        phoneId = 'specialist_1_phone_id'
-                        emailId = 'specialist_1_email_id'
-                        typeId = 'specialist_1_type_id'
-                        hideId = 'hide-1'
-                        hideClass = ''
+                            index = 1
+                            nextIndex = 2
+                            display = true
+                            displayDeleteButton = false
+                            hideAddPerson = false
+                        %}
+                    </div>
 
-                        lastName = 'specialist_1_surname'
-                        firstName = 'specialist_1_name'
-                        phone = 'specialist_1_phone'
-                        email = 'specialist_1_email'
-                        type = 'specialist_1_type'
-                    %}
-                </div>
+                    <div class="px-3 my-4 rounded shadow-sm">
+                        {%
+                            partial 'web-app/school/specialist-form'
 
-                <div id="specialist-2" class="px-3 d-none">
-                    {%
-                        partial 'web-app/school/specialist-form'
+                            index = 2
+                            nextIndex = 3
+                            display = false
+                            displayDeleteButton = true
+                            hideAddPerson = false
+                        %}
+                    </div>
 
-                        lastNameId = 'specialist_2_surname_id'
-                        firstNameId = 'specialist_2_name_id'
-                        phoneId = 'specialist_2_phone_id'
-                        emailId = 'specialist_2_email_id'
-                        typeId = 'specialist_2_type_id'
-                        hideId = 'hide-2'
-                        specialistFormId = 'specialist-2'
+                    <div class="px-3 my-4 rounded shadow-sm">
+                        {%
+                            partial 'web-app/school/specialist-form'
 
-                        lastName = 'specialist_2_surname'
-                        firstName = 'specialist_2_name'
-                        phone = 'specialist_2_phone'
-                        email = 'specialist_2_email'
-                        type = 'specialist_2_type'
-                    %}
-                </div>
+                            index = 3
+                            nextIndex = 4
+                            display = false
+                            displayDeleteButton = true
+                            hideAddPerson = false
+                        %}
+                    </div>
 
-                <div id="specialist-3" class="px-3 d-none">
-                    {%
-                        partial 'web-app/school/specialist-form'
+                    <div class="px-3 my-4 rounded shadow-sm">
+                        {%
+                            partial 'web-app/school/specialist-form'
 
-                        lastNameId = 'specialist_3_surname_id'
-                        firstNameId = 'specialist_3_name_id'
-                        phoneId = 'specialist_3_phone_id'
-                        emailId = 'specialist_3_email_id'
-                        typeId = 'specialist_3_type_id'
-                        hideId = 'hide-3'
-                        specialistFormId = 'specialist-3'
+                            index = 4
+                            nextIndex = 5
+                            display = false
+                            displayDeleteButton = true
+                            hideAddPerson = false
+                        %}
+                    </div>
 
-                        lastName = 'specialist_3_surname'
-                        firstName = 'specialist_3_name'
-                        phone = 'specialist_3_phone'
-                        email = 'specialist_3_email'
-                        type = 'specialist_3_type'
-                    %}
-                </div>
+                    <div class="px-3 my-4 rounded shadow-sm">
+                        {%
+                            partial 'web-app/school/specialist-form'
 
-                <div id="specialist-4" class="px-3 d-none">
-                    {%
-                        partial 'web-app/school/specialist-form'
-
-                        lastNameId = 'specialist_4_surname_id'
-                        firstNameId = 'specialist_4_name_id'
-                        phoneId = 'specialist_4_phone_id'
-                        emailId = 'specialist_4_email_id'
-                        typeId = 'specialist_4_type_id'
-                        hideId = 'hide-4'
-                        specialistFormId = 'specialist-4'
-
-                        lastName = 'specialist_4_surname'
-                        firstName = 'specialist_4_name'
-                        phone = 'specialist_4_phone'
-                        email = 'specialist_4_email'
-                        type = 'specialist_4_type'
-                    %}
-                </div>
-
-                <div id="specialist-5" class="px-3 d-none">
-                    {%
-                        partial 'web-app/school/specialist-form'
-
-                        lastNameId = 'specialist_5_surname_id'
-                        firstNameId = 'specialist_5_name_id'
-                        phoneId = 'specialist_5_phone_id'
-                        emailId = 'specialist_5_email_id'
-                        typeId = 'specialist_5_type_id'
-                        specialistFormId = 'specialist-5'
-                        hideId = 'hide-5'
-                        hideClass = 'd-none'
-
-                        lastName = 'specialist_5_surname'
-                        firstName = 'specialist_5_name'
-                        phone = 'specialist_5_phone'
-                        email = 'specialist_5_email'
-                        type = 'specialist_5_type'
-                    %}
+                            index = 5
+                            display = false
+                            displayDeleteButton = true
+                            hideAddPerson = true
+                        %}
+                    </div>
                 </div>
 
                 <!-- Submit button -->
@@ -134,21 +94,6 @@ resetPage = "authentification/reset-password"
     <!-- Scripts for datatables -->
     <script type="text/javascript">
         $(document).ready(function () {
-
-            /** Function for adding a new specialist */
-            function addNewContact(link,form) {
-                $(link).on('click', function(){
-                    $(form).removeClass('d-none');
-                    $(link).addClass('d-none');
-                });
-            }
-
-            /** Call the function for adding a new specialist */
-            addNewContact('#hide-1', '#specialist-2');
-            addNewContact('#hide-2', '#specialist-3');
-            addNewContact('#hide-3', '#specialist-4');
-            addNewContact('#hide-4', '#specialist-5');
-
             /**
              * Function for triggering the finish button when
              * values from all fields are selected
