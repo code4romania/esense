@@ -3,7 +3,7 @@ description = "Add another contact person for new student"
 [viewBag]
 ==
 <div class="row contact-person-form {% if not display %} d-none {% else %} d-flex {% endif %}" id="contact-{{index}}">
-    <div class="col-12 d-flex align-items-baseline justify-content-between headerr">
+    <div class="col-12 d-flex align-items-baseline justify-content-between">
         <p class="text-muted my-3">{{'partial.student.add.contact.person.title'|_}}&nbsp;{{index}}</p>
 
         <div id='delete-contact-person-{{index}}' class="mr-2 {% if not displayDeleteButton %} d-none {% endif %}">
