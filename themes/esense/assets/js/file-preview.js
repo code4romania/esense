@@ -5,8 +5,8 @@ function previewFile(input){
     if (file) {
         let reader = new FileReader();
         reader.onload = function() {
-            $('#add-avatar').attr('width', 70).attr('src', reader.result);
-            $('#add-avatar2').attr('width', 70).attr('src', reader.result);
+            $('#add-avatar').attr('style', 'width: 100; height: 100').attr('src', reader.result);
+            $('#add-avatar2').attr('style', 'width: 100; height: 100').attr('src', reader.result);
         }
         reader.readAsDataURL(file);
     }
