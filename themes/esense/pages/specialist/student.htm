@@ -135,7 +135,7 @@ orderByDirection = "DESC"
                                                 </div>
 
                                                 <div>
-                                                    <a href="{{records.property('recordPage') ? records.property('recordPage')|page({(records.paramName('recordPageSlug')):(record.slug)})}}" class="btn btn-sm btn-primary-dark">Detalii</a>
+                                                    <a href="{{records.property('recordPage') ? records.property('recordPage')|page({(records.paramName('recordPageSlug')):(record.slug)})}}" class="btn btn-sm btn-primary-dark">{{ 'page.specialist.dashboard.student.profile.details'|_ }}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -176,35 +176,12 @@ orderByDirection = "DESC"
 
 {% put scripts %}
     <script type="text/javascript">
-        /**
-         * Variable that holds all the days that have lessons.
-         */
-        var lessonsDays = {{ (student.lessons.pluck('day').toJson())|raw }};
-
-        /**
-         * Function that highlights all the days that contain lessons.
-         */
-        function highlightDaysWithLessons(){
-            lessonsDays.forEach(lessonDay => {
-                /** Extract the date. */
-                let _date = lessonDay.split('T')[0];
-                
-                /** Highlight the date. */
-                $("[date='" + _date + "']").each(function(){
-                    $(this).addClass("lesson-day");
-                })
-            });
-        }
-
         $(document).ready(function () {
 
             /** Function that extarcts the schedule for a date and updates the page. */
             function selectDate(date) {
                 /** Update the calendar. */
                 $('.calendar-wrapper').updateCalendarOptions({date: date});
-
-                /** Highlight days with lessons. */
-                highlightDaysWithLessons();
 
                 /** Extract the formated date. */
                 var $_date = new Date(date);
@@ -233,10 +210,8 @@ orderByDirection = "DESC"
                 showTodayButton: false,
                 min: "{{ student.created_at.format('m/d/Y') }}",
                 max: new Date(),
+                highlightedDays: {{ (student.lessons.pluck('day').toJson())|raw }},
             });
-
-            /** Highlight days with lessons. */
-            highlightDaysWithLessons();
         });
 
     </script>

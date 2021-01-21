@@ -28,6 +28,7 @@
         showYearDropdown: false,
         min: null,
         max: null,
+        highlightedDays: [],
         disable: function (date) {},
     };
 
@@ -415,6 +416,18 @@
         }
         if (settings.highlightSelectedWeek) {
             highlightWeek();
+        }
+
+        if(0 !== settings.highlightedDays.length) {
+            settings.highlightedDays.forEach(lessonDay => {
+                /** Extract the date. */
+                let _date = lessonDay.split('T')[0];
+                
+                /** Highlight the date. */
+                $("[date='" + _date + "']").each(function(){
+                    $(this).addClass("lesson-day");
+                })
+            });
         }
     }
 
