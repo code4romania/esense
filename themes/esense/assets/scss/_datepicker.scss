@@ -76,3 +76,21 @@
     font-size: 14px !important;
     color: #fab954 !important;
 }
+
+.datepicker-days .day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.datepicker-days .day:hover {
+    color: #fff !important;
+    background: #0e4870 !important;
+    opacity: 0.6 !important;
+}
+
+.datepicker-days .day.active {
+    background: $secondary !important;
+    color: #fff !important;
+    text-shadow: none !important;
+}
