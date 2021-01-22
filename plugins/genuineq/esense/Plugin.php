@@ -643,14 +643,25 @@ class Plugin extends PluginBase
 
             /** Delete school specialists. */
             foreach($school->specialists as $specialist) {
-                $specialist->delete();
+                /** Remove school connection with specialist. */
+                $specialist->school_id = null;
+
+                /** 
+                 * Identify all the stundets that the specialist has access to and does NOT own them. */
+                $foreignStudents = $specialist->students->diff($specialist->myStudents);
+
+                /** Remove connections to all foreign students. */
+                foreach ($foreignStudents as $foreignStudent) {
+                    $specialist->students()->remove($foreignStudent);
+                }
+
+                $specialist->save();
             }
 
             /** Delete school students. */
             foreach($school->myStudents as $student) {
                 $student->delete();
             }
-
         });
         /************ School DELETE end ************/
     }
@@ -670,12 +681,6 @@ class Plugin extends PluginBase
 
             /** Link "Student" model to "Specialist" model with many-to-many relation. */
             $model->belongsToMany['students'] = [
-                'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_students_specialists'
-            ];
-
-            /** Link "Student" model to "Specialist" model with many-to-many relation. */
-            $model->belongsToMany['allStudents'] = [
                 'Genuineq\Students\Models\Student',
                 'table' => 'genuineq_esense_students_specialists'
             ];
@@ -722,7 +727,7 @@ class Plugin extends PluginBase
                 $unarchivedStudents = new Collection();
 
                 /** Parse all the students and extract unarchived ones. */
-                foreach ($model->allStudents as $student) {
+                foreach ($model->students as $student) {
                     if (!$student->archived) {
                         $unarchivedStudents->push($student);
                     }
@@ -736,7 +741,7 @@ class Plugin extends PluginBase
                 $archivedStudents = new Collection();
 
                 /** Parse all the students and extract archived ones. */
-                foreach ($model->allStudents as $student) {
+                foreach ($model->students as $student) {
                     if ($student->archived) {
                         $archivedStudents->push($student);
                     }
