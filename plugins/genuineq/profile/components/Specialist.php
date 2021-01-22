@@ -33,21 +33,13 @@ class Specialist extends ComponentBase
     }
 
     /**
-     * Executed when this component is initialized
-     */
-    public function prepareVars()
-    {
-        if($this->param('id')) {
-            $this->page['specialist'] = SpecialistModel::find($this->param('id'));
-        }
-    }
-
-    /**
      * Executed when this component is bound to a page or layout.
      */
     public function onRun()
     {
-        $this->prepareVars();
+        if($this->param('specialistId')) {
+            $this->page['specialist'] = SpecialistModel::find($this->param('specialistId'));
+        }
     }
 
     /***********************************************
@@ -118,7 +110,7 @@ class Specialist extends ComponentBase
                         /** Create user profile. */
                         $profile = new SpecialistModel([
                             'slug' => SpecialistModel::slug($newUser->full_name),
-                            'phone' => post('phone'),
+                            'phone' => post('specialist_' . $index . '_phone'),
                             'county_id' => $user->profile->county_id,
                             'city_id' => $user->profile->city_id,
                             'school_id' => $user->profile->id,
