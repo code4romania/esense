@@ -240,8 +240,8 @@ class Plugin extends PluginBase
                 'school_name' => [
                     'label' => 'genuineq.profile::lang.specialist.form-labels.school', // 'School'
                     'type'=> 'text',
-                    'searchable'=> true,
-                    'sortable'=> true
+                    'searchable'=> false,
+                    'sortable'=> false
                 ]
             ]);
         });
