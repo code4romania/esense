@@ -154,6 +154,7 @@ allowedUserTypes[] = "school"
                 todayButtonContent: '',
                 showTodayButton: false,
                 min: "{{ student.created_at.format('m/d/Y') }}",
+                highlightedDays: {{ (student.lessons.pluck('day').toJson())|raw }},
                 max: new Date(),
             });
         });
