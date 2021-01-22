@@ -1,5 +1,5 @@
 title = "Profil elev"
-url = "/specialist/student/:id"
+url = "/specialist/student/:studentId"
 layout = "web-app"
 description = "Display a student"
 is_hidden = 0
@@ -75,7 +75,7 @@ orderByDirection = "DESC"
                                     </button>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                        <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id}) }}" style="color: #1A212C;">
+                                        <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({studentId: student.id}) }}" style="color: #1A212C;">
                                             {{ 'page.specialist.dashboard.student.options.edit'|_ }}
                                         </a>
 

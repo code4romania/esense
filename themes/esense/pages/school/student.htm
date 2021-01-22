@@ -1,5 +1,5 @@
 title = "Profil elev"
-url = "/school/student/:id"
+url = "/school/student/:studentId"
 layout = "web-app"
 description = "Used for viewing a student"
 is_hidden = 0
@@ -63,7 +63,7 @@ allowedUserTypes[] = "school"
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
 
-                                        <a class="dropdown-item display-4" href="{{ 'school/student-edit'|page({id: student.id}) }}" style="color: #1A212C;">
+                                        <a class="dropdown-item display-4" href="{{ 'school/student-edit'|page({studentId: student.id}) }}" style="color: #1A212C;">
                                             {{ 'page.school.dashboard.student.options.edit'|_ }}
                                         </a>
 

@@ -107,7 +107,7 @@ allowedUserTypes[] = "school"
                                                 <img class="img-fluid add-custom-avatar" width="40px" height="40px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
                                             {% endif %}
                                             <div class="d-flex flex-column ml-2">
-                                                <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({id: specialist.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</a>
+                                                <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({specialistId: specialist.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -145,7 +145,7 @@ allowedUserTypes[] = "school"
                                                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                <a class="dropdown-item display-4" href="{{ 'school/specialist-edit'|page({id: specialist.id }) }}" style="color: #1A212C;">{{'page.school.dashboard.students.table.options.link_1'|_}}</a>
+                                                <a class="dropdown-item display-4" href="{{ 'school/specialist-edit'|page({specialistId: specialist.id }) }}" style="color: #1A212C;">{{'page.school.dashboard.students.table.options.link_1'|_}}</a>
                                             </div>
                                         </div>
                                     </div>

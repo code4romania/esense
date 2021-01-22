@@ -12,7 +12,7 @@ description = "Partial for displaying a day schedule timeline."
                 {{ lesson.title }}
 
                 {% if allow_edit %}
-                    <a role="button" href="{{ 'specialist/lesson'|page({id: lesson.id }) }}" class="edit-lesson">
+                    <a role="button" href="{{ 'specialist/lesson'|page({lessonId: lesson.id }) }}" class="edit-lesson">
                         <img class="img-profile ml-4" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
                     </a>
                 {% endif %}
