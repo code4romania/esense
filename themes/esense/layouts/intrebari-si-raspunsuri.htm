@@ -8,6 +8,8 @@ default = 0
 security = "all"
 allowedUserGroups[] = "registered"
 allowedUserGroups[] = "guest"
+
+[cookieConsent]
 ==
 <!-- FAQ -->
 {variable name="answersAndQuestionsTitle" label="Titlu" tab="Întrebări și Răspunsuri" type="text"}{/variable}
@@ -53,6 +55,9 @@ allowedUserGroups[] = "guest"
     {% partial 'web-app/general/google-analytics' %}
 
     <body>
+
+        {% component 'cookieConsent' %}
+
         {% partial 'navbar' %}
 
         {% flash %}

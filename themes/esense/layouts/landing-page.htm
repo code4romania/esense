@@ -1,4 +1,6 @@
 description = "Landing page layout for esense"
+
+[cookieConsent]
 ==
 <html lang="en">
 
@@ -11,6 +13,9 @@ description = "Landing page layout for esense"
 {% partial 'web-app/general/google-analytics' %}
 
 <body>
+
+    {% component 'cookieConsent' %}
+
     {% partial 'navbar' %}
 
     {% flash %}

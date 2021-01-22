@@ -11,6 +11,7 @@ allowedUserGroups[] = "guest"
 
 [contactform]
 
+[cookieConsent]
 ==
 
 <!--HOME PAGE E-SENSE design variables-->
@@ -67,6 +68,9 @@ allowedUserGroups[] = "guest"
     {% partial 'web-app/general/google-analytics' %}
 
     <body>
+
+        {% component 'cookieConsent' %}
+
         {% partial 'navbar' %}
 
         {% flash %}

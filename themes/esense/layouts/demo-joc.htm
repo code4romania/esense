@@ -9,6 +9,7 @@ security = "all"
 allowedUserGroups[] = "registered"
 allowedUserGroups[] = "guest"
 
+[cookieConsent]
 ==
 
 <!-- DEMO GAME PAGE design variables -->
@@ -37,6 +38,9 @@ allowedUserGroups[] = "guest"
     {% partial 'web-app/general/google-analytics' %}
 
     <body>
+
+        {% component 'cookieConsent' %}
+
         {% partial 'navbar' %}
 
         {% flash %}
