@@ -153,7 +153,7 @@ class School extends Model
 
         /** Check if the user has not been deleted. */
         if ($this->user) {
-            $this->user->delete();
+            $this->user->forceDelete();
         }
     }
 }
