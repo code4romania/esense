@@ -107,7 +107,7 @@ allowedUserTypes[] = "school"
                                                 <img class="img-fluid add-custom-avatar" width="40px" height="40px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
                                             {% endif %}
                                             <div class="d-flex flex-column ml-2">
-                                                <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</p>
+                                                <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({id: specialist.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</a>
                                             </div>
                                         </div>
                                     </div>
