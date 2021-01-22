@@ -36,9 +36,9 @@ class LessonsActions extends ComponentBase
     public function onRun()
     {
         /** Check if a lesson is accessed. */
-        if ($this->param('id')) {
+        if ($this->param('lessonId')) {
             /** Extract the lesson and send it to the page. */
-            $this->page['lesson'] = Lesson::find($this->param('id'));
+            $this->page['lesson'] = Lesson::find($this->param('lessonId'));
         }
     }
 

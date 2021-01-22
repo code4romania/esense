@@ -55,8 +55,8 @@ class Student extends ComponentBase
         }
 
         /** Check if a student is accessed. */
-        if ($this->param('id')) {
-            Event::fire('genuineq.students.before.student.read', [&$this, $this->param('id'), &$redirectUrl]);
+        if ($this->param('studentId')) {
+            Event::fire('genuineq.students.before.student.read', [&$this, $this->param('studentId'), &$redirectUrl]);
 
             /** Check if a redirect is required. */
             if ($redirectUrl) {
@@ -64,10 +64,10 @@ class Student extends ComponentBase
             }
 
             /** Extract the student and send it to the page. */
-            $this->page['student'] = StudentModel::find($this->param('id'));
+            $this->page['student'] = StudentModel::find($this->param('studentId'));
         } elseif ($this->property('throwBeforeStudentCreateStart')) {
             /** Fire event before student create start. */
-            Event::fire('genuineq.students.before.student.create.start', [&$this, $this->param('id'), &$redirectUrl]);
+            Event::fire('genuineq.students.before.student.create.start', [&$this, $this->param('studentId'), &$redirectUrl]);
 
             /** Check if a redirect is required. */
             if ($redirectUrl) {
