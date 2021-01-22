@@ -6,6 +6,7 @@ use Log;
 use Lang;
 use Auth;
 use Flash;
+use Event;
 use Request;
 use Redirect;
 use Validator;
@@ -35,8 +36,24 @@ class LessonsActions extends ComponentBase
      */
     public function onRun()
     {
+        /** Define redirect url variable. */
+        $redirectUrl = null;
+        Event::fire('genuineq.lessons.read.start', [&$this, &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
+        }
+
         /** Check if a lesson is accessed. */
         if ($this->param('lessonId')) {
+            Event::fire('genuineq.lessons.before.lesson.read', [&$this, $this->param('lessonId'), &$redirectUrl]);
+
+            /** Check if a redirect is required. */
+            if ($redirectUrl) {
+                return Redirect::to($redirectUrl);
+            }
+
             /** Extract the lesson and send it to the page. */
             $this->page['lesson'] = Lesson::find($this->param('lessonId'));
         }

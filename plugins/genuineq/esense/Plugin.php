@@ -97,6 +97,7 @@ class Plugin extends PluginBase
         /** Extend the Lesson model. */
         $this->lessonExtendRelationships();
         $this->lessonExtendProperties();
+        $this->lessonExtendComponens();
 
         /** Extends SmallRecords plugin */
         $this->smallRecordsPluginExtend();
@@ -887,6 +888,27 @@ class Plugin extends PluginBase
      */
     protected function specialistExtendComponens()
     {
+        /************ Specialist READ start ************/
+        Event::listen('genuineq.specialists.read.start', function(&$component, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
+            }
+        });
+
+        Event::listen('genuineq.specialists.before.specialist.read', function(&$component, $id, &$redirectUrl) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract the specialist that needs to be read. */
+            $specialist = $user->profile->specialists->where('id', $id)->first();
+
+            /** Check if the user has access to the specified specialist. */
+            if (!$specialist) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
+        });
+        /************ Specialist READ end ************/
+
         /************ Specialist DELETE start ************/
         Event::listen('genuineq.profile.specialist.before.delete', function($specialist) {
             foreach($specialist->myStudents as $student) {
@@ -954,6 +976,42 @@ class Plugin extends PluginBase
                 'category'
             ]);
         });
+    }
+
+    /**
+     * Function that contains all the component extensions of the LessonActions component.
+     */
+    protected function lessonExtendComponens()
+    {
+        /************ LessonActions READ start ************/
+        Event::listen('genuineq.lessons.read.start', function(&$component, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
+            }
+        });
+
+        Event::listen('genuineq.lessons.before.lesson.read', function(&$component, $id, &$redirectUrl) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract lesson. */
+            $lesson = Lesson::find($id);
+
+            /** Check if the lesson exists. */
+            if (!$lesson) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+                return;
+            }
+
+            /** Extract the connection that needs to be read. */
+            $connection = $user->profile->connections->where('id', $lesson->connection->id)->first();
+
+            /** Check if the user has access to the specified connection. */
+            if (!$connection) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
+        });
+        /************ LessonActions READ end ************/
     }
 
 

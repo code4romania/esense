@@ -37,7 +37,25 @@ class Specialist extends ComponentBase
      */
     public function onRun()
     {
-        if($this->param('specialistId')) {
+        /** Define redirect url variable. */
+        $redirectUrl = null;
+        Event::fire('genuineq.specialists.read.start', [&$this, &$redirectUrl]);
+
+        /** Check if a redirect is required. */
+        if ($redirectUrl) {
+            return Redirect::to($redirectUrl);
+        }
+
+        /** Check if a specialist is accessed. */
+        if ($this->param('specialistId')) {
+            Event::fire('genuineq.specialists.before.specialist.read', [&$this, $this->param('specialistId'), &$redirectUrl]);
+
+            /** Check if a redirect is required. */
+            if ($redirectUrl) {
+                return Redirect::to($redirectUrl);
+            }
+
+            /** Extract the specialist and send it to the page. */
             $this->page['specialist'] = SpecialistModel::find($this->param('specialistId'));
         }
     }
