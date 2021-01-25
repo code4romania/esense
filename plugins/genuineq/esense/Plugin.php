@@ -1003,12 +1003,22 @@ class Plugin extends PluginBase
                 return;
             }
 
-            /** Extract the connection that needs to be read. */
-            $connection = $user->profile->connections->where('id', $lesson->connection->id)->first();
+            if ('specialist' == $user->type) {
+                /** Extract the connection that needs to be read. */
+                $connection = $user->profile->connections->where('id', $lesson->connection->id)->first();
 
-            /** Check if the user has access to the specified connection. */
-            if (!$connection) {
-                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+                /** Check if the user has access to the specified connection. */
+                if (!$connection) {
+                    $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+                }
+            } else {
+                /** Extract the specialist that has the lesson connection. */
+                $specialist = $user->profile->specialists->where('id', $lesson->connection->specialist_id)->first();
+
+                /** Check if the user has access to the specified specialist. */
+                if (!$specialist) {
+                    $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+                }
             }
         });
         /************ LessonActions READ end ************/
