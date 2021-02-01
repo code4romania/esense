@@ -34,7 +34,7 @@
 }
 
 .day.disabled span {
-  color: #AAA;
+  color: #CCC;
 }
 
 /* vertical highlight */
@@ -47,7 +47,7 @@
 }
 
 .day.today span {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .months-container.hidden, .weeks-container.hidden {
@@ -147,6 +147,12 @@ h1 {
   text-transform: uppercase;
   font-size: 13px;
   color: #ADB5BD;
+  cursor: not-allowed;
+}
+
+.week .day[disabled="disabled"] span {
+    color: #ddd;
+    cursor: not-allowed;
 }
 
 .day span {
@@ -159,9 +165,9 @@ h1 {
 }
 
 .day.today span {
-  position: relative;
-  display: inline-block;
-  font-size: 110%;
+  position: relative !important;
+  display: inline-block !important;
+  font-size: 110% !important;
 }
 
 /* weekend */
@@ -172,8 +178,8 @@ h1 {
 }
 
 .day.today span {
-  background: #E0E0E0;
-  color: #fff;
+  background: #E0E0E0 !important;
+  color: #fff !important;
 }
 
 .day.sunday span {
@@ -185,8 +191,18 @@ h1 {
 }
 
 .week .day.selected span {
-  background: #27AE60;
+  background: #27AE60 !important;
+  color: white !important;
+}
+
+.week .day.lesson-day span {
+  background: #FAB954;
   color: white;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  font-size: 110%;
+  text-align: center;
 }
 
 .months-wrapper .month span {
@@ -203,10 +219,10 @@ h1 {
 }
 
 .today-button {
-  margin: 0 auto;
-  background: transparent;
-  border: none;
-  padding: 5px;
+  margin: 0 auto !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 5px !important;
 }
 
 footer {

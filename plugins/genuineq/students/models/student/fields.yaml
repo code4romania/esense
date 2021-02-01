@@ -1,70 +1,49 @@
 fields:
     name:
-        label: 'genuineq.students::lang.student.form-labels.name'
+        label: "genuineq.students::lang.student.form-labels.name"
         span: left
         type: text
+
     surname:
-        label: 'genuineq.students::lang.student.form-labels.surname'
+        label: "genuineq.students::lang.student.form-labels.surname"
         span: right
         type: text
+
     birthdate:
-        label: 'genuineq.students::lang.student.form-labels.birthdate'
+        label: "genuineq.students::lang.student.form-labels.birthdate"
         mode: date
         span: left
         type: datepicker
+
     gender:
-        label: 'genuineq.students::lang.student.form-labels.gender'
+        label: "genuineq.students::lang.student.form-labels.gender"
         options:
             Female: female
             Male: male
         showSearch: 0
         span: right
         type: dropdown
+
     visual_impairment:
-        label: 'genuineq.students::lang.student.form-labels.visual_impairment'
+        label: "genuineq.students::lang.student.form-labels.visual_impairment"
         span: auto
         type: checkbox
+
     hearing_impairment:
-        label: 'genuineq.students::lang.student.form-labels.hearing_impairment'
+        label: "genuineq.students::lang.student.form-labels.hearing_impairment"
         span: right
         type: checkbox
+
     description:
-        label: 'genuineq.students::lang.student.form-labels.description'
+        label: "genuineq.students::lang.student.form-labels.description"
         size: huge
         span: full
         type: richeditor
-    contact_person_1:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_1'
-        nameFrom: ''
+
+    contact_persons:
+        label: "genuineq.students::lang.student.form-labels.contact_persons"
+        nameFrom: "name, surname"
         descriptionFrom: description
-        select: 'name, surname'
-        span: left
-        type: relation
-    contact_person_2:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_2'
-        nameFrom: ''
-        descriptionFrom: description
-        select: 'name, surname'
-        span: right
-        type: relation
-    contact_person_3:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_3'
-        nameFrom: ''
-        descriptionFrom: description
-        select: 'name, surname'
-        span: left
-        type: relation
-    contact_person_4_id:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_4'
-        nameFrom: ''
-        descriptionFrom: description
-        select: 'name, surname'
-        span: right
-        type: relation
-    contact_person_5:
-        label: 'genuineq.students::lang.student.form-labels.contact_person_5'
-        nameFrom: ''
-        descriptionFrom: description
-        select: 'name, surname'
+        select: concat(name, ' ', surname)
         span: left
         type: relation

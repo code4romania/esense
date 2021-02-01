@@ -1,0 +1,190 @@
+description = "Despre proiect - [layout]"
+
+[staticPage]
+useContent = 0
+default = 0
+
+[session]
+security = "all"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
+
+[cookieConsent]
+==
+
+<!-- ABOUT PROJECT PAGE design variables -->
+{variable name="aboutTitle" label="Titlu" tab="Despre proiect" type="text"}{/variable}
+{variable name="aboutText1" label="Text 1 descriere proiect" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutText2" label="Text 2 descriere proiect" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutText3" label="Text 3 descriere proiect" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutDeficiencyTitle" label="Titlu descriere afecțiune" tab="Despre proiect" type="text"}{/variable}
+{variable name="aboutDeficiencyText1" label="Text 1 despre afecțiune" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutDeficiencyText2" label="Text 2 despre afecțiune" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+{variable name="aboutDeficiencyText3" label="Text 3 despre afecțiune" tab="Despre proiect" type="richeditor" size="small"}{/variable}
+
+{variable name="aboutExercisesTitle" label="Titlu secțiune categorii exerciții" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesDescription" label="Descriere exerciții" tab="Exerciții" type="richeditor" size="small"}{/variable}
+{variable name="aboutExercisesCategoryTitle1" label="Titlu categorie 1" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail1a" label="Detalii categorie 1a" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail1b" label="Detalii categorie 1b" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryTitle2" label="Titlu categorie 2" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail2a" label="Detalii categorie 2a" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail2b" label="Detalii categorie 2b" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryTitle3" label="Titlu categorie 3" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail3a" label="Detalii categorie 3a" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesCategoryDetail3b" label="Detalii categorie 3b" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesTestingTitle" label="Titlu invitație la testare joc" tab="Exerciții" type="text"}{/variable}
+{variable name="aboutExercisesTestingLinkText" label="Text legătură către joc" tab="Exerciții" type="text"}{/variable}
+
+
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <link href="{{ [
+        'assets/scss/esense/landing-page/landing-page.scss',
+    ]|theme }}" rel="stylesheet">
+
+    {% partial 'web-app/general/google-analytics' %}
+
+    <body>
+
+        {% component 'cookieConsent' %}
+
+        {% partial 'navbar' %}
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        <section class="despre-proiect"></section>
+
+        <!-- About project -->
+        <section>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 mt-lg-5">
+                        <h1 class="text-gray-dark font-weight-light" style="line-height: 48px;">{{ aboutTitle }}</h1>
+                        <p class="pb-4 text-muted display-2" style="line-height: 34px;">{{ aboutText1 | raw }}</p>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutText2 | raw }}</p>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutText3 | raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- What is surdocitate -->
+        <section>
+            <div class="container my-5">
+                <div class="row">
+                    <div class="col-12 col-lg-6 mt-lg-5 order-2 order-md-1">
+                        <h1 class="text-gray-dark font-weight-light" style="line-height: 48px;">{{ aboutDeficiencyTitle }}</h1>
+                        <p class="pb-2 text-muted display-2" style="line-height: 34px;">{{ aboutDeficiencyText1 | raw }}</p>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutDeficiencyText2 | raw }}</p>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ aboutDeficiencyText3 | raw }}</p>
+                    </div>
+                    <div class="col-12 col-lg-6 order-1 order-md-2">
+                        <div>
+                            <img class="img-fluid my-5 px-4 my-md-0 px-md-0" src="{{ 'assets/img/svg/despre-surdocitate.svg'|theme }}" alt="Reprezentare grafică a posibilităților de comunicare">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Exercises -->
+        <section class="w-100 bg-light mb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 py-5">
+                        <h1 class="text-gray-dark font-weight-light pb-3 pb-md-0" style="line-height: 48px;">{{ aboutExercisesTitle }}</h1>
+                        <p class="pb-2 dispay-2 text-muted" style="line-height: 34px;">{{ aboutExercisesDescription | raw }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div>
+                            <img class="img-fluid" src="{{ 'assets/img/svg/despre-exercitii.svg'|theme }}" alt="Reprezentare grafică a paginii cu jocuri din cadrul sitului">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 my-4 my-lg-0">
+
+                        <div class="row">
+                            <div class="col-3 col-lg-3">
+                                <div>
+                                    <img class="img-fluid" src="{{ 'assets/img/svg/despre-surdocitate-categorie-1-icon.svg'|theme }}" alt="Emblemă categorie de joc">
+                                </div>
+                            </div>
+                            <div class="col-9 col-lg-9 p-lg-0 m-lg-0">
+                                <div>
+                                    <p class="text-gray-dark display-2 font-weight-bold p-0 m-0 pb-2" style="line-height: 27px;">{{ aboutExercisesCategoryTitle1 }}</p>
+                                    <p class="small text-primary-dark" style="line-height: 22px;">{{ aboutExercisesCategoryDetail1a }}</p>
+                                    <p class="small mb-5 text-primary-dark" style="line-height: 22px;">{{ aboutExercisesCategoryDetail1b }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3 col-lg-3">
+                                <div>
+                                    <img class="img-fluid" src="{{ 'assets/img/svg/despre-surdocitate-categorie-2-icon.svg'|theme }}" alt="Emblemă categorie de joc">
+                                </div>
+                            </div>
+                            <div class="col-9 col-lg-9 p-lg-0 m-lg-0">
+                                <div>
+                                    <p class="text-gray-dark display-2 font-weight-bold p-0 m-0 pb-2" style="line-height: 27px;">{{ aboutExercisesCategoryTitle2 }}</p>
+                                    <p class="small text-primary-dark" style="line-height: 22px;">{{ aboutExercisesCategoryDetail2a }}</p>
+                                    <p class="small mb-5 text-primary-dark" style="line-height: 22px;">{{ aboutExercisesCategoryDetail2b }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3 col-lg-3">
+                                <div>
+                                    <img class="img-fluid" src="{{ 'assets/img/svg/despre-surdocitate-categorie-3-icon.svg'|theme }}" alt="Emblemă categorie de joc">
+                                </div>
+                            </div>
+                            <div class="col-9 col-lg-9 p-lg-0 m-lg-0">
+                                <div>
+                                    <p class="text-gray-dark display-2 font-weight-bold p-0 m-0 pb-2" style="line-height: 27px;">{{ aboutExercisesCategoryTitle3 }}</p>
+                                    <p class="small text-primary-dark" style="line-height: 22px;">{{ aboutExercisesCategoryDetail3a }}</p>
+                                    <p class="small mb-5 p-0 m-0 text-primary-dark" style="line-height: 22px;">{{ aboutExercisesCategoryDetail3b }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3 col-lg-3">
+                                <div>
+                                    <img class="img-fluid" src="{{ 'assets/img/svg/despre-surdocitate-categorie-4-icon.svg'|theme }}" alt="Emblemă categorie de joc">
+                                </div>
+                            </div>
+                            <div class="col-9 col-lg-9 p-lg-0 m-lg-0 pb-5">
+                                <div class="mb-5">
+                                    <p class="text-gray-dark font-weight-bold p-0 m-0" style="line-height: 27px;">{{ aboutExercisesTestingTitle }}</p>
+                                    <a class="small text-danger pb-5" href="{{ 'demo-joc' | staticPage }}">{{ aboutExercisesTestingLinkText }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% partial 'footer-columns' %}
+
+        {% partial 'footer' %}
+
+        {% partial 'footer-scripts' %}
+
+    </body>
+
+</html>

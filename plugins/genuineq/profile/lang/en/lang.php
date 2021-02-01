@@ -7,8 +7,7 @@
 
     'school' => [
         'form-labels' => [
-            'contact_name' => 'Contact Name',
-            'contact_email' => 'Contact Email',
+            'contact_person' => 'Contact Person',
             'name' => 'Name',
             'phone' => 'Phone',
             'description' => 'Description',
@@ -129,24 +128,12 @@
     'reportwidgets' => [
         'total_specialists' => [
             'label' => 'Total specialists',
-            'title' => 'Total number of specialists',
-            'title_default' => 'Total specialists',
-            'title_validation' => '',
-
-            'frontend' => [
-                'label_specialists' => 'Total number of specialists'
-            ]
+            'description' => 'Total number of specialists',
         ],
 
         'total_schools' => [
             'label' => 'Total schools',
-            'title' => 'Total number of schools',
-            'title_default' => 'Total schools',
-            'title_validation' => '',
-
-            'frontend' => [
-                'label_schools' => 'Total number of schools'
-            ]
+            'description' => 'Total number of schools',
         ],
     ],
 

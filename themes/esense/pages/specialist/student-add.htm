@@ -61,7 +61,7 @@ allowedUserTypes[] = "specialist"
                                                 </div>
 
                                                 <div class="add-avatar">
-                                                    <img id="add-avatar" class="img-fluid add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                    <img id="add-avatar" class="img-fluid rounded-circle add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -78,7 +78,7 @@ allowedUserTypes[] = "specialist"
                                                 </div>
 
                                                 <div class="add-avatar">
-                                                    <img id="add-avatar" class="img-fluid add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                    <img id="add-avatar2" class="img-fluid rounded-circle add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -88,7 +88,8 @@ allowedUserTypes[] = "specialist"
                         </div>
 
                         <!-- Input for adding custom avatar -->
-                        <input name="avatar" id="avatar" class="d-none custom-avatar onChangeValue" type="file"/>
+                        <input name="avatar" id="avatar" class="d-none custom-avatar onChangeValue" onchange="previewFile(this)" accept="image/*" type="file"/>
+
                         <!-- Input for gender -->
                         <input name="gender" id="gender" class="d-none" type="text" value="female" />
 
@@ -162,114 +163,71 @@ allowedUserTypes[] = "specialist"
                         </div>
 
 
-                        <!-- First contact person -->
-                        <div id="person-1" class="px-3 px-lg-2">
-                            {%
-                                partial 'web-app/general/student-contact-person'
+                        <div id="contact_persons_wrapper" class="pl-lg-3 pr-lg-4">
+                            <!-- First contact person -->
+                            <div id="person-1" class="student-add-contact px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_1_surname_id'
-                                contactPersonFirstNameId = 'contact_1_name_id'
-                                contactPersonPhoneId = 'contact_1_phone_id'
-                                contactPersonEmailId = 'contact_1_email_id'
-                                contactPersonObservationsId = 'contact_1_observations_id'
-                                addContactPerson = 'add-contact-1'
-                                hideId = 'hide-1'
-                                contactPersonFormId = 'contact-1'
+                                    index = 1
+                                    nextIndex = 2
+                                    display = true
+                                    displayDeleteButton = false
+                                    hideAddPerson = false
+                                %}
+                            </div>
 
-                                contactPersonLastName = 'contact_1_surname'
-                                contactPersonFirstName = 'contact_1_name'
-                                contactPersonEmail = 'contact_1_email'
-                                contactPersonPhone = 'contact_1_phone'
-                                contactPersonObservations = 'contact_1_observations'
-                            %}
-                        </div>
+                            <!-- Second contact person -->
+                            <div id="person-2" class="student-add-contact px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
 
-                        <!-- Second contact person -->
-                        <div id="person-2" class="px-3 px-lg-2 d-none">
-                            {%
-                                partial 'web-app/general/student-contact-person'
+                                    index = 2
+                                    nextIndex = 3
+                                    display = false
+                                    displayDeleteButton = true
+                                    hideAddPerson = false
+                                %}
+                            </div>
 
-                                contactPersonLastNameId = 'contact_2_surname_id'
-                                contactPersonFirstNameId = 'contact_2_name_id'
-                                contactPersonPhoneId = 'contact_2_phone_id'
-                                contactPersonEmailId = 'contact_2_email_id'
-                                contactPersonObservationsId = 'contact_2_observations_id'
-                                addContactPerson = 'add-contact-2'
-                                hideId = 'hide-2'
-                                contactPersonFormId = 'contact-2'
+                            <!-- Third contact person -->
+                            <div id="person-3" class="student-add-contact px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastName = 'contact_2_surname'
-                                contactPersonFirstName = 'contact_2_name'
-                                contactPersonEmail = 'contact_2_email'
-                                contactPersonPhone = 'contact_2_phone'
-                                contactPersonObservations = 'contact_2_observations'
-                            %}
-                        </div>
+                                    index = 3
+                                    nextIndex = 4
+                                    display = false
+                                    displayDeleteButton = true
+                                    hideAddPerson = false
+                                %}
+                            </div>
 
-                        <!-- Third contact person -->
-                        <div id="person-3" class="px-3 px-lg-2 d-none">
-                            {%
-                                partial 'web-app/general/student-contact-person'
+                            <!-- Forth contact person -->
+                            <div id="person-4" class="student-add-contact px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_3_surname_id'
-                                contactPersonFirstNameId = 'contact_3_name_id'
-                                contactPersonPhoneId = 'contact_3_phone_id'
-                                contactPersonEmailId = 'contact_3_email_id'
-                                contactPersonObservationsId = 'contact_3_observations_id'
-                                addContactPerson = 'add-contact-3'
-                                hideId = 'hide-3'
-                                contactPersonFormId = 'contact-3'
+                                    index = 4
+                                    nextIndex = 5
+                                    display = false
+                                    displayDeleteButton = true
+                                    hideAddPerson = false
+                                %}
+                            </div>
 
-                                contactPersonLastName = 'contact_3_surname'
-                                contactPersonFirstName = 'contact_3_name'
-                                contactPersonEmail = 'contact_3_email'
-                                contactPersonPhone = 'contact_3_phone'
-                                contactPersonObservations = 'contact_3_observations'
-                            %}
-                        </div>
+                            <!-- Fifth contact person -->
+                            <div id="person-5" class="student-add-contact px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
 
-                        <!-- Forth contact person -->
-                        <div id="person-4" class="px-3 px-lg-2 d-none">
-                            {%
-                                partial 'web-app/general/student-contact-person'
-
-                                contactPersonLastNameId = 'contact_4_surname_id'
-                                contactPersonFirstNameId = 'contact_4_name_id'
-                                contactPersonPhoneId = 'contact_4_phone_id'
-                                contactPersonEmailId = 'contact_4_email_id'
-                                contactPersonObservationsId = 'contact_4_observations_id'
-                                addContactPerson = 'add-contact-4'
-                                hideId = 'hide-4'
-                                contactPersonFormId = 'contact-4'
-
-                                contactPersonLastName = 'contact_4_surname'
-                                contactPersonFirstName = 'contact_4_name'
-                                contactPersonEmail = 'contact_4_email'
-                                contactPersonPhone = 'contact_4_phone'
-                                contactPersonObservations = 'contact_4_observations'
-                            %}
-                        </div>
-
-                        <!-- Fifth contact person -->
-                        <div id="person-5" class="px-3 px-lg-2 d-none">
-                            {%
-                                partial 'web-app/general/student-contact-person'
-
-                                contactPersonLastNameId = 'contact_5_surname_id'
-                                contactPersonFirstNameId = 'contact_5_name_id'
-                                contactPersonPhoneId = 'contact_5_phone_id'
-                                contactPersonEmailId = 'contact_5_email_id'
-                                contactPersonObservationsId = 'contact_5_observations_id'
-                                addContactPerson = 'add-contact-5'
-                                hideId = 'hide-5'
-                                contactPersonFormId = 'contact-5'
-
-                                contactPersonLastName = 'contact_5_surname'
-                                contactPersonFirstName = 'contact_5_name'
-                                contactPersonEmail = 'contact_5_email'
-                                contactPersonPhone = 'contact_5_phone'
-                                contactPersonObservations = 'contact_5_observations'
-                            %}
+                                    index = 5
+                                    hideAddPerson = true
+                                    display = false
+                                    displayDeleteButton = true
+                                    hideAddPerson = true
+                                %}
+                            </div>
                         </div>
 
                          <!-- Submit button -->
@@ -289,6 +247,7 @@ allowedUserTypes[] = "specialist"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ro.min.js" integrity="sha512-OyKt3ZoVnoGpHGx10TMtzQTSDHKyGzHIXdOoOiaHcMJMGOR/ev9Y6ocEGd64HVPqGEwkg29xVVbavNjDPeg9GA==" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ ['assets/js/file-preview.js']|theme }}"></script>
 
 {% put scripts %}
     <script type="text/javascript">
@@ -300,12 +259,6 @@ allowedUserTypes[] = "specialist"
                 class: 'onChangeValue',
                 useParagraph:true
             });
-
-            $('#contact_1_observations_id').richText();
-            $('#contact_2_observations_id').richText();
-            $('#contact_3_observations_id').richText();
-            $('#contact_4_observations_id').richText();
-            $('#contact_5_observations_id').richText();
 
             /** Initiate the datepicker plugin. */
             $('#birthdate').datepicker({
@@ -327,20 +280,6 @@ allowedUserTypes[] = "specialist"
             $(".add-custom-avatar").click(function () {
                 $(".custom-avatar").trigger('click');
             });
-
-            /** Function for adding a new contact person */
-            function addNewContact(link, form) {
-                $(link).on('click', function(){
-                    $(form).removeClass('d-none');
-                    $(link).addClass('d-none');
-                });
-            }
-
-            /** Call the function for adding a new contact person */
-            addNewContact('#hide-1', '#person-2');
-            addNewContact('#hide-2', '#person-3');
-            addNewContact('#hide-3', '#person-4');
-            addNewContact('#hide-4', '#person-5');
 
             /**
              * Function for activating the finish button when
@@ -365,7 +304,7 @@ allowedUserTypes[] = "specialist"
             }
 
             /** Validation for activeting the finish button. */
-            $(document.body).on('change blur', '.onChangeValue', function(){
+            $(document.body).on('change keyup', '.onChangeValue', function(){
                 if(
                     (
                         ((0 !== $("#birthdate").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||

@@ -62,7 +62,7 @@ class Messages extends Controller
          */
         $receiverEmail = post('email');
 
-        /** Construnct the email body message. */
+        /** Construct the email body message. */
         $bodyMessage = [
             'html' => post('Message[reply_message]'),
             'raw' => true
@@ -82,9 +82,10 @@ class Messages extends Controller
                     $message->to($receiverEmail);
                 });
 
-                /* Set replied_at timestamp to the reply message */
+                /* Set replied_at timestamp to the reply message and save the message in `reply_message` column*/
                 $modelToUpdate = MessageModel::find(post('record_id'));
                 $modelToUpdate->replied_at = Carbon::createFromTimestamp(time());
+                $modelToUpdate->reply_message = $modelToUpdate->replied_at . "<br>" . implode(PHP_EOL, $data);
                 $modelToUpdate->save();
 
                 Flash::success(Lang::get('genuineq.contactform::lang.backend.flash.send_message.success'), 20);

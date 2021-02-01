@@ -49,6 +49,8 @@ class Plugin extends PluginBase
         /** Extend the "Genuineq\User\Models\User" model. */
         $this->userExtendRelationships();
         $this->userExtendComponents();
+        $this->userExtendListColumns();
+        $this->userExtendMethods();
     }
 
     /***********************************************
@@ -115,7 +117,7 @@ class Plugin extends PluginBase
                     ],
                 ]);
             }
-                
+
         });
     }
 
@@ -202,6 +204,62 @@ class Plugin extends PluginBase
 
             Mail::send('genuineq.profile::mail.new_teacher', $data, function ($message) use ($user) {
                 $message->to($user->email, $user->full_name);
+            });
+        });
+
+        Event::listen('genuineq.user.after.delete', function ($user) {
+            /** Force reload the profile relationship. */
+            $user->reloadRelations('profile');
+
+            /** Check if the profile has not been deleted. */
+            if ($user->profile) {
+                $user->profile->delete();
+            }
+        });
+    }
+
+    /**
+     * Function that performs List columns extension for the User model.
+     */
+    protected function userExtendListColumns()
+    {
+        /** Extend all backend list usage. */
+        Event::listen('backend.list.extendColumns', function($listWidget) {
+            /** Only for the User controller. */
+            if (!$listWidget->getController() instanceof \Genuineq\User\Controllers\Users) {
+                return;
+            }
+
+            /** Only for the User model. */
+            if (!$listWidget->model instanceof \Genuineq\User\Models\User) {
+                return;
+            }
+
+            /** Add an extra School Name column. */
+            $listWidget->addColumns([
+                'school_name' => [
+                    'label' => 'genuineq.profile::lang.specialist.form-labels.school', // 'School'
+                    'type'=> 'text',
+                    'searchable'=> false,
+                    'sortable'=> false
+                ]
+            ]);
+        });
+    }
+
+    /**
+     * Function that performs methods extensions of the User model.
+     */
+    protected function userExtendMethods()
+    {
+        User::extend(function ($model) {
+            /** Add attribute that checks if user is specialist and get the school name if is affiliated. */
+            $model->addDynamicMethod('getSchoolNameAttribute', function () use ($model) {
+                if ('specialist' === $model->type) {
+                    return $model->profile->school['name'];
+                } else {
+                    return '';
+                }
             });
         });
     }

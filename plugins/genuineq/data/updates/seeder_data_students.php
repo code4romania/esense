@@ -37,19 +37,6 @@ class SeederDataStudents extends Migration
                         4 => null
                     ];
 
-                    /** Add a variable number of contact persons. */
-                    for ($k = 0; $k < $faker->numberBetween($min = 1, $max = 5); $k++) {
-                        $contactPerson = ContactPerson::create([
-                            'surname' => $faker->lastName(),
-                            'name' => $faker->firstName(),
-                            'phone' => $faker->tollFreePhoneNumber(),
-                            'email' => 'contact_person_' . ($j + 1) . '_' . ($k + 1) . '@email.com',
-                            'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
-                        ]);
-
-                        $contactPersons[$k] = $contactPerson->id;
-                    }
-
                     /** Create the student. */
                     $student = Student::create([
                         'surname' => $faker->lastName(),
@@ -59,19 +46,28 @@ class SeederDataStudents extends Migration
                         'visual_impairment' => $faker->numberBetween($min = 0, $max = 1),
                         'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'),
                         'gender' => $faker->randomElement($array = ['male', 'female']),
-                        'contact_person_1_id' => $contactPersons[0],
-                        'contact_person_2_id' => $contactPersons[1],
-                        'contact_person_3_id' => $contactPersons[2],
-                        'contact_person_4_id' => $contactPersons[3],
-                        'contact_person_5_id' => $contactPersons[4],
                         'owner_id' => ($i + 1),
                         'owner_type' => 'Genuineq\Profile\Models\Specialist',
                         'archived' => $faker->numberBetween($min = 0, $max = 1)
                     ]);
 
+                    /** Add a variable number of contact persons. */
+                    for ($k = 0; $k < $faker->numberBetween($min = 1, $max = 5); $k++) {
+                        $contactPerson = ContactPerson::create([
+                            'surname' => $faker->lastName(),
+                            'name' => $faker->firstName(),
+                            'student_id' => $student->id,
+                            'phone' => $faker->tollFreePhoneNumber(),
+                            'email' => 'contact_person_' . ($j + 1) . '_' . ($k + 1) . '@email.com',
+                            'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
+                        ]);
+
+                        $contactPersons[$k] = $contactPerson->id;
+                    }
+
                     /** Create specialists connections. */
                     $specialistsIds = [/*owner*/($i + 1)];
-                    for ($k = 1; $k < $faker->numberBetween($min = 1, $max = FakeDataHelper::totalProfileSpecialistsNumber); $k++) {
+                    for ($k = 1; $k < $faker->numberBetween($min = 1, $max = FakeDataHelper::maxStudentSpecialistsNumber); $k++) {
                         $specialistId = $faker->numberBetween($min = 1, $max = FakeDataHelper::totalProfileSpecialistsNumber);
 
                         while (in_array($specialistId, $specialistsIds)) {

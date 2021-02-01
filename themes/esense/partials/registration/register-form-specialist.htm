@@ -1,4 +1,4 @@
-description = "Register from"
+description = "Register form for specialist"
 
 [viewBag]
 ==
@@ -60,7 +60,7 @@ description = "Register from"
                                     <div class="form-group register-select">
                                         <select name="county" id="specialistCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white">
                                             {% for key, county in counties %}
-                                                <option value="{{ key }}">{{ county }}</option>
+                                            <option value="{{ key }}">{{ county }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -79,7 +79,7 @@ description = "Register from"
                                         <select name="school" class="form-control border outline-none selectpicker" data-style="btn-white">
                                             <option value="-1">{{'partial.register.specialist.school.default.option'|_}}</option>
                                             {% for key, school in schools %}
-                                                <option value="{{ key }}">{{ school }}</option>
+                                            <option value="{{ key }}">{{ school }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -115,14 +115,37 @@ description = "Register from"
 </section>
 
 {% put scripts %}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            /**
-             * Extracts the initial cities.
-             */
+<script type="text/javascript">
+    $(document).ready(function () {
+        /**
+         * Extracts the initial cities.
+         */
+        $.request('onGetCities', {
+            data: {
+                countyId: 1
+            },
+            success: function(data) {
+                /* Reset the city select content. */
+                $('#specialistCity').html('');
+
+                /* Parse all received citied and add them. */
+                for (const city in data) {
+                    $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                }
+
+                /* Activate the select. */
+                $('#specialistCity').prop("disabled", false);
+                $("#specialistCity").selectpicker("refresh");
+            }
+        });
+
+        /**
+         * Function that extracts the cities of a county.
+         */
+        $('#specialistCounty').on('change', function() {
             $.request('onGetCities', {
                 data: {
-                    countyId: 1
+                    countyId: this.value
                 },
                 success: function(data) {
                     /* Reset the city select content. */
@@ -137,31 +160,8 @@ description = "Register from"
                     $('#specialistCity').prop("disabled", false);
                     $("#specialistCity").selectpicker("refresh");
                 }
-            });
-
-            /**
-             * Function that extracts the cities of a county.
-             */
-            $('#specialistCounty').on('change', function() {
-                $.request('onGetCities', {
-                    data: {
-                        countyId: this.value
-                    },
-                    success: function(data) {
-                        /* Reset the city select content. */
-                        $('#specialistCity').html('');
-
-                        /* Parse all received citied and add them. */
-                        for (const city in data) {
-                            $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
-                        }
-
-                        /* Activate the select. */
-                        $('#specialistCity').prop("disabled", false);
-                        $("#specialistCity").selectpicker("refresh");
-                    }
-                })
-            });
+            })
         });
-    </script>
+    });
+</script>
 {% endput %}

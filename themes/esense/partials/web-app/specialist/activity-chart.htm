@@ -29,7 +29,7 @@ description = "Used for displaying a line chart graph to the specialist."
     $(document).ready(function () {
 
         /***********************************************
-        **************** Selectpicker *****************
+        **************** Selectpicker ******************
         ***********************************************/
         $('#activity-chart-year').prop("disabled", false);
         $("#activity-chart-year").selectpicker("refresh");
@@ -81,7 +81,7 @@ description = "Used for displaying a line chart graph to the specialist."
             ]
         };
 
-        /** Chart options */
+
         if (chLine) {
             new Chart(chLine, {
                 type: 'line',
@@ -96,7 +96,28 @@ description = "Used for displaying a line chart graph to the specialist."
                             }
                         }]
                     },
-                    legend: { display: false }
+                    legend: { display: false },
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                /** Extract duration (hours) for specific tooltip and convert to minutes. */
+                                var minutesDuration = (data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]) * 60;
+
+                                /** Function that change minutes values to HH:MM format. */
+                                const convertMinutesToHHMM = (mins) => {
+                                    var hours = Math.floor(mins / 60);
+                                    var minutes = Math.round(mins % 60);
+
+                                    hours = (10 > hours) ? ('0' + hours) : (hours);
+                                    minutes = (10 > minutes) ? ('0' + minutes) : (minutes);
+
+                                    return `${hours}:${minutes}`;
+                                }
+
+                                return convertMinutesToHHMM(minutesDuration);
+                            }
+                        }
+                    } //end tooltips
                 }
             });
         }

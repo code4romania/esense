@@ -259,23 +259,6 @@ class Account extends ComponentBase
     }
 
     /**
-     * Function that sends an invitation to a new user.
-     */
-    public function onUserInvite()
-    {
-        if (!Auth::check()) {
-            return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
-        }
-
-        /** Create user and send invite. */
-        UserInviteHelper::inviteUser(Auth::getUser(), $data, (($this->property('resetPage')) ? ($this->property('resetPage')) : ($this->currentPageUrl())));
-
-        Flash::success(Lang::get('genuineq.user::lang.component.account.message.user_invite_successful'));
-
-        return Redirect::refresh();
-    }
-
-    /**
      * Deactivate user
      */
     public function onDeactivate()

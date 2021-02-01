@@ -60,7 +60,10 @@ schools = 1
                                                 <img id="add-avatar" class="img-fluid add-custom-avatar ml-3" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}" style="cursor: pointer;">
                                             </div>
                                         {% endif %}
-                                        <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" />
+
+                                        <!-- Input for adding custom avatar -->
+                                        <input name="avatar" id="avatar" class="d-none custom-avatar onChangeValue" onchange="previewFile(this)" accept="image/*" type="file"/>
+
                                     </div>
                                 </div>
                             </div>
@@ -148,6 +151,8 @@ schools = 1
 </div>
 
 {% partial 'web-app/general/password-change' %}
+
+<script type="text/javascript" src="{{ ['assets/js/file-preview.js']|theme }}"></script>
 
 {% put scripts %}
     <script type="text/javascript">

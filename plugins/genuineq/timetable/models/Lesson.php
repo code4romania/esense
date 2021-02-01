@@ -86,8 +86,8 @@ class Lesson extends Model
      ***************** Accessors *******************
      ***********************************************/
 
-    public function getDurationAttribute()
+    public function getLessonDurationAttribute()
     {
-        return round(Carbon::parse($this->end_hour)->floatDiffInHours($this->start_hour), /*precision*/1);
+        return gmdate("H:i:s", $this->duration);
     }
 }

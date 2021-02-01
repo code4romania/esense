@@ -60,7 +60,13 @@ allowedUserTypes[] = "specialist"
         <!-- Students activity chart -->
         <div id="activity-chart-container" class="col-12 mt-5">
             <!-- Partial for student activity chart -->
-            {% partial 'web-app/specialist/activity-chart' year = 'now'|date('Y') years = user.profile.lessons_years durations = user.profile.getYearLessonsDurations('now'|date('Y')) %}
+            {%
+                partial 'web-app/specialist/activity-chart'
+
+                year = 'now'|date('Y')
+                years = user.profile.lessons_years
+                durations = user.profile.getYearLessonsDurations()
+            %}
         </div>
 
         <!-- Students table -->
@@ -95,7 +101,7 @@ allowedUserTypes[] = "specialist"
                                                 {% endif %}
                                             </div>
                                             <div class="d-flex flex-column ml-2">
-                                                <a class="display-4 font-weight-light" href="{{ 'specialist/student'|page({id: student.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
+                                                <a class="display-4 font-weight-light" href="{{ 'specialist/student'|page({studentId: student.id }) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
                                             </div>
                                         </div>
 
@@ -108,7 +114,7 @@ allowedUserTypes[] = "specialist"
                                                     </button>
 
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                        <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">
+                                                        <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({studentId: student.id }) }}" style="color: #1A212C;">
                                                             {{'page.specialist.dashboard.students.table.dropdown.options.link_1'|_}}
                                                         </a>
 
@@ -140,7 +146,7 @@ allowedUserTypes[] = "specialist"
                                                 </button>
 
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                                    <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({id: student.id }) }}" style="color: #1A212C;">
+                                                    <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({studentId: student.id }) }}" style="color: #1A212C;">
                                                         {{'page.specialist.dashboard.students.table.dropdown.options.link_1'|_}}
                                                     </a>
 
@@ -169,7 +175,7 @@ allowedUserTypes[] = "specialist"
                     </div>
                 </div>
                 <div class="py-3">
-                    <div class="students-activity-owl-carousel owl-carousel owl-theme owl-responsive-0">
+                    <div class="students-activity-owl-carousel owl-carousel owl-theme">
                         {% for student in user.profile.unarchivedStudents %}
                             <div class="item">
                                 <div class="row">
@@ -193,7 +199,7 @@ allowedUserTypes[] = "specialist"
 
                                     <!-- Student donut chart -->
                                     <div class="col-12 d-flex align-items-center justify-content-center py-3">
-                                        <canvas id="donut-{{student.id}}" width="400px" height="400px"></canvas>
+                                        <canvas id="donut-{{student.id}}" class="donut-chart" width="400px" height="400px"></canvas>
                                     </div>
 
                                     <!-- Student lesson description -->
@@ -207,7 +213,7 @@ allowedUserTypes[] = "specialist"
                                         <div class="pl-1 pl-lg-0">
                                             <p class="p-0 m-0 small text-rgba-black font-weight-normal">{{'page.specialist.dashboard.donut.chart.despre'|_}}&nbsp;<span class="font-weight-bold">{{ student.full_name }}</span></p>
                                             <p class="p-0 m-0 py-1 display-4 text-rgba-black">{{student.description|raw}}</p>
-                                            <a class="display-4 text-blue" href="{{ 'specialist/student-edit'|page({id: student.id }) }}">{{'page.specialist.dashboard.donut.chart.link'|_}}</a>
+                                            <a class="display-4 text-blue" href="{{ 'specialist/student-edit'|page({studentId: student.id }) }}">{{'page.specialist.dashboard.donut.chart.link'|_}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -314,8 +320,9 @@ allowedUserTypes[] = "specialist"
                     },
 
                     options: {
-                        cutoutPercentage: 75,
                         responsive: false,
+                        maintainAspectRatio: false,
+                        cutoutPercentage: 75,
                         elements: {
                             center: {
                                 text: "{{ user.profile.getStudentLessonsCount(student.id) }} {{'page.specialist.dashboard.donut.chart.games.number'|_}}",
@@ -334,7 +341,26 @@ allowedUserTypes[] = "specialist"
                                 usePointStyle: true,
                                 padding: 25
                             }
-                        }
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function(tooltipItem, data) {
+                                    // extract duration (hours) for specific tooltip and convert to minutes
+                                    var minutesDuration = (data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]) * 60;
+
+                                    //function that change minutes values to HH:MM format
+                                    const convertMinutesToHHMM = (mins) => {
+                                        var hours = Math.floor(mins / 60);
+                                        var minutes = Math.round(mins % 60);
+                                        hours = hours < 10 ? '0' + hours : hours;
+                                        minutes = minutes < 10 ? '0' + minutes : minutes;
+                                        return `${hours}:${minutes}`;
+                                    }
+
+                                    return convertMinutesToHHMM(minutesDuration);
+                                }
+                            }
+                        } //end tooltips
                     }
                 });
             {% endfor %}

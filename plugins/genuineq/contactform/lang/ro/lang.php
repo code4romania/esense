@@ -24,8 +24,6 @@
         'total_messages' => [
             'label' => 'Total mesaje',
             'title' =>  'Numărul total de mesaje',
-            'title_default' => 'Total mesaje',
-            'title_validation' => '',
         ],
     ],
 
@@ -58,6 +56,18 @@
                 'fail' => 'Mesajul nu a fost trimis',
             ],
             'invalid_email' => 'Adresă de e-mail nevalidă. Vă rugăm să verificați dacă numele domeniului (@ example.com) este corect.'
+        ],
+
+        'columns' => [
+            'first_name' => 'prenume',
+            'last_name' => 'nume',
+            'email' => 'e-mail',
+            'message' => 'mesaj',
+            'replied_at' => 'răspuns la',
+            'created_at' => 'creat la',
+            'updated_at' => 'actualizat la',
+            'deleted_at' => 'șters la',
+            'reply_message' => 'mesaj de răspuns',
         ],
     ],
 ];

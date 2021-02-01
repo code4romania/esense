@@ -5,10 +5,15 @@ use BackendMenu;
 
 class Students extends Controller
 {
-    public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController'    ];
-    
+    public $implement = [
+        'Backend\Behaviors\ListController',
+        'Backend\Behaviors\FormController'
+    ];
+
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
+
+    public $requiredPermissions = ['genuineq.students.students_access'];
 
     public function __construct()
     {

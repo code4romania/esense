@@ -215,7 +215,7 @@ class StudentActions extends ComponentBase
 
             if ($student) {
                 /** Create the student transfer. */
-                $transferRequest = TransferRequest::create(['student_id' => post('student'), 'from_specialist_id' => post('specialist'), 'to_specialist_id' => $user->profile->id]);
+                TransferRequest::create(['student_id' => post('student'), 'from_specialist_id' => post('specialist'), 'to_specialist_id' => $user->profile->id]);
 
                 Flash::success(Lang::get('genuineq.esense::lang.components.studentActions.message.transfer_request_success_creation'));
             } else {

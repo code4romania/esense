@@ -15,6 +15,19 @@ class Plugin extends PluginBase
     {
     }
 
+    /** Register permission access for users */
+    public function registerPermissions()
+    {
+        return [
+            'genuineq.addresses.addresses_access' => [
+                'menu' => 'genuineq.addresses::lang.plugin.backend-menu',
+                'label' => 'genuineq.addresses::lang.permissions',
+                'roles' => ['Developer'],
+            ],
+        ];
+    }
+
+
     /***********************************************
      *************** Form widgets *******************
      ***********************************************/

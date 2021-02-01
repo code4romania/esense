@@ -4,17 +4,27 @@ plugin:
     author: genuineq
     icon: oc-icon-child
     homepage: ''
+
 navigation:
     main-menu-item:
         label: 'genuineq.students::lang.plugin.backend-menu'
         url: genuineq/students/students
         icon: icon-child
+        permissions:
+            - students_access
+
         sideMenu:
             side-menu-item:
                 label: 'genuineq.students::lang.student.backend-menu'
                 url: genuineq/students/students
                 icon: icon-child
+
             side-menu-item2:
                 label: 'genuineq.students::lang.contact-person.backend-menu'
                 url: genuineq/students/contactpersons
                 icon: icon-mobile-phone
+
+permissions:
+    students_access:
+        tab: 'genuineq.students::lang.plugin.backend-menu'
+        label: 'genuineq.students::lang.permissions'

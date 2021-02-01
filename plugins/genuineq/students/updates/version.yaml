@@ -6,3 +6,6 @@
 1.0.3:
     - 'Created table genuineq_students_contact_persons'
     - builder_table_create_genuineq_students_contact_persons.php
+1.0.4:
+    - 'Update Tables Students Students And Contact Persons'
+    - update_tables_students_students_and_contact_persons.php

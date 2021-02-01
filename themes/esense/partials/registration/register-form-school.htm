@@ -1,4 +1,4 @@
-description = "Register from"
+description = "Register form for school"
 
 [viewBag]
 ==
@@ -25,7 +25,7 @@ description = "Register from"
                                     <div class="form-group register-select">
                                         <select name="county" id="schoolCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="{{'partial.register.school.form.county.no_option'|_}}" data-style="btn-white">
                                             {% for key, county in counties %}
-                                                <option value="{{ key }}">{{ county }}</option>
+                                            <option value="{{ key }}">{{ county }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -110,14 +110,37 @@ description = "Register from"
 </section>
 
 {% put scripts %}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            /**
-             * Extracts the initial cities.
-             */
+<script type="text/javascript">
+    $(document).ready(function () {
+        /**
+         * Extracts the initial cities.
+         */
+        $.request('onGetCities', {
+            data: {
+                countyId: 1
+            },
+            success: function(data) {
+                /* Reset the city select content. */
+                $('#schoolCity').html('');
+
+                /* Parse all received citied and add them. */
+                for (const city in data) {
+                    $('#schoolCity').append(`<option value="${data[city]}">${city}</option>`);
+                }
+
+                /* Activate the select. */
+                $('#schoolCity').prop("disabled", false);
+                $("#schoolCity").selectpicker("refresh");
+            }
+        });
+
+        /**
+         * Function that extracts the cities of a county.
+         */
+        $('#schoolCounty').on('change', function() {
             $.request('onGetCities', {
                 data: {
-                    countyId: 1
+                    countyId: this.value
                 },
                 success: function(data) {
                     /* Reset the city select content. */
@@ -133,30 +156,7 @@ description = "Register from"
                     $("#schoolCity").selectpicker("refresh");
                 }
             });
-
-            /**
-             * Function that extracts the cities of a county.
-             */
-            $('#schoolCounty').on('change', function() {
-                $.request('onGetCities', {
-                    data: {
-                        countyId: this.value
-                    },
-                    success: function(data) {
-                        /* Reset the city select content. */
-                        $('#schoolCity').html('');
-
-                        /* Parse all received citied and add them. */
-                        for (const city in data) {
-                            $('#schoolCity').append(`<option value="${data[city]}">${city}</option>`);
-                        }
-
-                        /* Activate the select. */
-                        $('#schoolCity').prop("disabled", false);
-                        $("#schoolCity").selectpicker("refresh");
-                    }
-                });
-            });
         });
-    </script>
+    });
+</script>
 {% endput %}

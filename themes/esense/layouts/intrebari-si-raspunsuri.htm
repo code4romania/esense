@@ -1,46 +1,48 @@
-description = "Answers and questions"
+description = "Întrebări și Răspunsuri - [layout]"
 
 [staticPage]
-useContent = 1
+useContent = 0
 default = 0
 
 [session]
 security = "all"
 allowedUserGroups[] = "registered"
 allowedUserGroups[] = "guest"
+
+[cookieConsent]
 ==
 <!-- FAQ -->
-{variable name="answersAndQuestionsTitle" label="Title" tab="Answers and Questions" type="text"}{/variable}
+{variable name="answersAndQuestionsTitle" label="Titlu" tab="Întrebări și Răspunsuri" type="text"}{/variable}
 
-{variable name="linkOne" label="Title One" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textOne" label="Text One" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkOne" label="Întrebarea nr. 1" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textOne" label="Text 1" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
-{variable name="linkTwo" label="Title Two" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textTwo" label="Text Two" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkTwo" label="Întrebarea nr. 2" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textTwo" label="Text 2" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
-{variable name="linkThree" label="Title Three" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textThree" label="Text Three" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkThree" label="Întrebarea nr. 3" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textThree" label="Text 3" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
-{variable name="linkFour" label="Title Four" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textFour" label="Text Four" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkFour" label="Întrebarea nr. 4" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textFour" label="Text 4" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
-{variable name="linkFive" label="Title Five" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textFive" label="Text Five" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkFive" label="Întrebarea nr. 5" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textFive" label="Text 5" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
-{variable name="linkSix" label="Title Six" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textSix" label="Text Six" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkSix" label="Întrebarea nr. 6" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textSix" label="Text 6" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
-{variable name="linkSeven" label="Title Seven" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textSeven" label="Text Seven" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkSeven" label="Întrebarea nr. 7" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textSeven" label="Text 7" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
-{variable name="linkEight" label="Title Eight" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textEight" label="Text Eight" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkEight" label="Întrebarea nr. 8" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textEight" label="Text 8" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
-{variable name="linkNine" label="Title Nine" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textNine" label="Text Nine" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkNine" label="Întrebarea nr. 9" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textNine" label="Text 9" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
-{variable name="linkTen" label="Title Ten" tab="Answers and Questions" type="text"}{/variable}
-{variable name="textTen" label="Text Ten" tab="Answers and Questions" type="richeditor"}{/variable}
+{variable name="linkTen" label="Întrebarea nr. 10" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textTen" label="Text 10" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
 
 <html lang="en">
 
@@ -50,7 +52,12 @@ allowedUserGroups[] = "guest"
         'assets/scss/esense/landing-page/landing-page.scss',
     ]|theme }}" rel="stylesheet">
 
+    {% partial 'web-app/general/google-analytics' %}
+
     <body>
+
+        {% component 'cookieConsent' %}
+
         {% partial 'navbar' %}
 
         {% flash %}
@@ -62,7 +69,7 @@ allowedUserGroups[] = "guest"
             </p>
         {% endflash %}
 
-        <section class="depre-proiect"></section>
+        <section class="despre-proiect"></section>
 
         <div class="container mt-5 py-5">
             <div class="row">
@@ -149,8 +156,8 @@ allowedUserGroups[] = "guest"
                                 <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textSix|raw}}</p>
                             </div>
                         </div>
-
                         {% endif %}
+
                         {% if linkSeven != '' %}
                         <div class="card border-0 my-5">
                             <div class="acordeon-header" id="headingSeven">
@@ -210,6 +217,7 @@ allowedUserGroups[] = "guest"
                             </div>
                         </div>
                         {% endif %}
+
                     </div>
                 </div>
             </div>

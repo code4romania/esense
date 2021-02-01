@@ -1,33 +1,40 @@
 description = "Landing page layout for esense"
+
+[cookieConsent]
 ==
 <html lang="en">
 
-    {% partial 'head' %}
+{% partial 'head' %}
 
-    <link href="{{ [
+<link href="{{ [
         'assets/scss/esense/landing-page/landing-page.scss',
     ]|theme }}" rel="stylesheet">
 
-    <body>
-        {% partial 'navbar' %}
+{% partial 'web-app/general/google-analytics' %}
 
-        {% flash %}
-            <p
-                data-control="flash-message"
-                class="flash-message fade {{ type }}"
-                data-interval="5">
-                {{ message }}
-            </p>
-        {% endflash %}
+<body>
 
-        {% page %}
+    {% component 'cookieConsent' %}
 
-        {% partial 'footer-columns' %}
+    {% partial 'navbar' %}
 
-        {% partial 'footer' %}
+    {% flash %}
+        <p
+            data-control="flash-message"
+            class="flash-message fade {{ type }}"
+            data-interval="5">
+            {{ message }}
+        </p>
+    {% endflash %}
 
-        {% partial 'footer-scripts' %}
+    {% page %}
 
-    </body>
+    {% partial 'footer-columns' %}
+
+    {% partial 'footer' %}
+
+    {% partial 'footer-scripts' %}
+
+</body>
 
 </html>

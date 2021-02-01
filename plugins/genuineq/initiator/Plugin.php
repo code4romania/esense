@@ -8,7 +8,7 @@ class Plugin extends PluginBase
      * @var array   Require the dependency plugins
      */
     public $require = [
-        'AjayLulia.OCookie',
+        'CarlosRgzm.CookieConsent',
         'Rainlab.Translate',
         'Janvince.Smallrecords'
     ];

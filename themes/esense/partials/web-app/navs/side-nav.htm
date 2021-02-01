@@ -32,7 +32,7 @@
         </li>
 
         <!-- Elevi mei -->
-        <li class="nav-item mb-2 {% if (this.page.url == "/specialist/students") or (this.page.url == "/specialist/student") or (this.page.url == '/specialist/student-transfer') or (this.page.url == '/specialist/student-add') or (this.page.url == '/specialist/student-edit/:id')  %} active {% endif %}">
+        <li class="nav-item mb-2 {% if (this.page.url == "/specialist/students") or (this.page.url == "/specialist/student/:studentId") or (this.page.url == '/specialist/student-transfer') or (this.page.url == '/specialist/student-add') or (this.page.url == '/specialist/student-edit/:studentId')  or (this.page.url == '/lesson/:lessonId') or (this.page.url == 'school/lesson/:lessonId') %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'specialist/students'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
@@ -92,7 +92,7 @@
     {% if 'school' == user.type %}
 
         <!-- Panou de administrare -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/dashboard" or this.page.url == "/school/specialist-add" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/dashboard" %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/dashboard'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/grid.svg'|theme }}">
@@ -101,7 +101,7 @@
         </li>
 
         <!-- Profesori -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/specialists" or this.page.url == "/school/specialist/:id" or this.page.url == "/school/specialist-edit/:id" %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/specialists" or this.page.url == "/school/specialist/:specialistId" or this.page.url == "/school/specialist-edit/:specialistId" or this.page.url == "/school/specialist-add" %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/specialists'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/building.svg'|theme }}">
@@ -110,7 +110,7 @@
         </li>
 
         <!-- Elevi -->
-        <li class="nav-item mb-2 {% if this.page.url == "/school/students" or this.page.url == '/school/student/:id' or this.page.url == "/school/student-add" or this.page.url == '/school/student-edit/:id' %} active {% endif %}">
+        <li class="nav-item mb-2 {% if this.page.url == "/school/students" or this.page.url == '/school/student/:studentId' or this.page.url == "/school/student-add" or this.page.url == '/school/student-edit/:studentId' %} active {% endif %}">
             <div class="vertical-border"></div>
             <a class="nav-link" href="{{ 'school/students'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/user.svg'|theme }}">
@@ -141,7 +141,7 @@
     <!-- Iesi din cont -->
     <li class="nav-item mb-2">
         <div class="vertical-border"></div>
-        <a class="nav-link" data-request="onLogout" data-request-data="redirect: '{{ 'langing-pages/esense-home'|page }}'" href="">
+        <a class="nav-link" data-request="onLogout" data-request-data="redirect: '{{ 'acasa-esense' | staticPage }}'" href="">
             <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/exit.svg'|theme }}">
             <span class="text-primary-dark">{{"partial.navs.side.nav.link_7"|_}}</span>
         </a>

@@ -7,6 +7,14 @@ use Model;
  */
 class Connection extends Model
 {
+    use \October\Rain\Database\Traits\SoftDelete;
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
     /** Fillable fields */
     protected $fillable = [
         'student_id',
@@ -17,11 +25,6 @@ class Connection extends Model
      * @var string The database table used by the model.
      */
     public $table = 'genuineq_esense_students_specialists';
-
-    /**
-     * Disable timestamps for this model.
-     */
-    public $timestamps = false;
 
     /**
      * @var array Validation rules

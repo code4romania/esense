@@ -3,6 +3,7 @@
 use Log;
 use Auth;
 use Event;
+use Lang;
 use Carbon\Carbon;
 use System\Classes\PluginBase;
 use Illuminate\Support\Collection;
@@ -86,6 +87,7 @@ class Plugin extends PluginBase
         /** Extend the School model. */
         $this->schoolExtendRelationships();
         $this->schoolExtendMethods();
+        $this->schoolExtendComponens();
 
         /** Extend the Specialist model. */
         $this->specialistExtendRelationships();
@@ -95,7 +97,29 @@ class Plugin extends PluginBase
         /** Extend the Lesson model. */
         $this->lessonExtendRelationships();
         $this->lessonExtendProperties();
+        $this->lessonExtendComponens();
+
+        /** Extends SmallRecords plugin */
+        $this->smallRecordsPluginExtend();
+
+        /** Extends Rainlab\Pages plugin */
+        $this->staticPagesPluginExtend();
+
     }
+
+
+    public function registerPermissions()
+    {
+        /** Permissions for SmallRecords plugin */
+        return [
+            'genuineq.esense.smallrecords_access' => [
+                'tab' => 'genuineq.esense::lang.smallrecords_permissions.tab',
+                'label' => 'genuineq.esense::lang.smallrecords_permissions.label',
+                'roles' => ['Developer'],
+            ],
+        ];
+    }
+
 
     /***********************************************
      ************** Student extensions *************
@@ -135,6 +159,12 @@ class Plugin extends PluginBase
 
             /** Link "Lesson" model to "Student" model with has-many-through relation. */
             $model->hasManyThrough['lessons'] = ['Genuineq\Timetable\Models\Lesson', 'through' => 'Genuineq\Esense\Models\Connection'];
+
+            /** Link "TransferRequest" model to "Student" model with one-to-many relation. */
+            $model->hasMany['transferRequests'] = ['Genuineq\Esense\Models\TransferRequest', 'key' => 'student_id'];
+
+            /** Link "AccessRequest" model to "Student" model with one-to-many relation. */
+            $model->hasMany['accessRequests'] = ['Genuineq\Esense\Models\AccessRequest', 'key' => 'student_id'];
         });
     }
 
@@ -166,8 +196,94 @@ class Plugin extends PluginBase
 
             /** Add get connection attribute. */
             $model->addDynamicMethod('getConnection', function($specialist) use ($model) {
-                return $model->connections->where('specialist_id', $specialist)->first();
+                return $model->connections->where('specialist_id', $specialist->id)->first();
             });
+
+            /** Add get lessons years attribute for Specialist/School => student.htm. */
+            $model->addDynamicMethod('getLessonsYearsAttribute', function () use ($model) {
+                /** initialize the array */
+                $lessonsYears = [];
+
+                if ('specialist' == Auth::user()->type) {
+                    /** get authenticated specialist profile */
+                    $specialistProfile = Auth::user()->profile;
+                    /** get connection with a specific specialist */
+                    $connection = $model->connections->where('specialist_id', $specialistProfile->id)->first();
+
+                    /** get years of lessons with a specific specialist */
+                    $lessons = $model->lessons()->where('connection_id', $connection->id)->get();
+
+                    /** get years with lessons */
+                    foreach ($lessons as $lesson) {
+                        $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
+                    }
+
+                } elseif ('school' == Auth::user()->type) {
+                    /** get authenticated school profile */
+                    $schoolProfile = Auth::user()->profile;
+
+                    $lessonsCollection = [];
+                    foreach ($schoolProfile->active_specialists as $specialist) {
+                        /** get connection with a specific specialist */
+                        $connection = $model->connections->where('specialist_id', $specialist->id)->first();
+                        /** check if student have a connection with that specialist */
+                       if( $connection ) {
+                           /** get lessons collection object */
+                        $lessonsCollection[] = $model->lessons()->where('connection_id', $connection->id)->get();
+                       }
+                    }
+
+                    foreach ($lessonsCollection as $lessons) {
+                        foreach ($lessons as $lesson) {
+                            $lessonsYears[] = Carbon::parse($lesson->day)->format('Y');
+                        }
+                    }
+                }
+
+                return array_unique($lessonsYears);
+            });
+
+
+            /** Add get school-student lessons from specific month method. */
+            $model->addDynamicMethod('getLessonsFromMonth', function ($month = null, $year = null) use ($model) {
+                /** Extract the start and the end of the month of an year . */
+                $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
+                $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
+
+                if ('specialist' == Auth::user()->type) {
+                    /** get logged in specialist */
+                    $specialistProfile = Auth::user()->profile;
+                    /** return lessons from specific month with specific student */
+                    return $specialistProfile->getLessonsFromMonth($model, $month, $year);
+
+                } elseif ('school' == Auth::user()->type) {
+                    /** get authenticated school profile */
+                    $schoolProfile = Auth::user()->profile;
+
+                    /** get student lessons with active specialists from authenticated school */
+                    $lessonsCollection = [];
+                    foreach ($schoolProfile->active_specialists as $specialist) {
+                        /** get connection with a specific specialist */
+                        $connection = $model->connections->where('specialist_id', $specialist->id)->first();
+                        /** check if student have a connection with that specialist */
+                        if ($connection) {
+                            /** get lessons collection object */
+                            $lessonsCollection[] = $specialist->getLessonsFromMonth($model, $month, $year);
+                        }
+                    }
+                    /** initialise empty lessons array */
+                    $lessonsArray = [];
+                    /** iterate collection */
+                    foreach ($lessonsCollection as $lessons) {
+                        foreach ($lessons as $lesson) {
+                            $lessonsArray[] = $lesson;
+                        }
+                    }
+
+                    return $lessonsArray;
+                }
+            });
+
         });
     }
 
@@ -176,14 +292,44 @@ class Plugin extends PluginBase
      */
     protected function studentExtendComponens()
     {
+        /************ Student READ start ************/
+        Event::listen('genuineq.students.student.read.start', function(&$component, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
+            }
+        });
+
+        Event::listen('genuineq.students.before.student.read', function(&$component, $id, &$redirectUrl) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract the student that needs to be read. */
+            $student = $user->profile->students->where('id', $id)->first();
+
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
+        });
+        /************ Student READ end ************/
+
         /************ Student CREATE start ************/
+        Event::listen('genuineq.students.before.student.create.start', function(&$component, $id, &$redirectUrl) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            if (('school' == $user->type) && (!$user->profile->unarchivedSpecialists->count())) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::redirectWithMessage(Lang::get('genuineq.esense::lang.components.studentActions.message.access_to_create_student')));
+            }
+        });
+
         Event::listen('genuineq.students.student.create.start', function(&$component, $inputs, &$redirectUrl) {
             if (!Auth::check()) {
                 $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
             }
         });
 
-        Event::listen('genuineq.students.create.before.student.create', function(&$data, $inputs) {
+        Event::listen('genuineq.students.before.student.create', function(&$data, $inputs) {
             /** Add the owner ID to the data. */
             if ('specialist' == Auth::getUser()->type) {
                 $data['owner_id'] = Auth::user()->profile->id;
@@ -193,13 +339,13 @@ class Plugin extends PluginBase
             $data['owner_type'] = 'Genuineq\Profile\Models\Specialist';
         });
 
-        Event::listen('genuineq.students.create.after.student.create', function($student) {
+        Event::listen('genuineq.students.after.student.create', function($student) {
             /** Create a specialist connection. */
             $student->specialists()->attach($student->owner_id);
         });
 
 
-        Event::listen('genuineq.students.create.before.finish', function(&$redirectUrl, $student) {
+        Event::listen('genuineq.students.before.student.create.finish', function(&$redirectUrl, $student) {
             /** Redirect to all students page. */
             if ('specialist' == Auth::getUser()->type) {
                 $redirectUrl = 'specialist/students';
@@ -217,12 +363,17 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('genuineq.students.update.before.student.update', function(&$student, $inputs) {
+        Event::listen('genuineq.students.update.before.student.update', function(&$student, $inputs, &$redirectUrl) {
             /** Extract the user */
             $user = Auth::getUser();
 
-            /** Extract the student that needs to be archived. */
+            /** Extract the student that needs to be updated. */
             $student = $user->profile->unarchivedStudents->where('id', $inputs['id'])->first();
+
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
         });
         /************ Student UPDATE end ************/
 
@@ -233,12 +384,17 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('genuineq.students.student.before.archive', function(&$student, $inputs) {
+        Event::listen('genuineq.students.student.before.archive', function(&$student, $inputs, &$redirectUrl) {
             /** Extract the user */
             $user = Auth::getUser();
 
             /** Extract the student that needs to be archived. */
             $student = $user->profile->unarchivedStudents->where('id', $inputs['id'])->first();
+
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
         });
         /************ Student ARCHIVE end ************/
 
@@ -249,12 +405,17 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('genuineq.students.student.before.unzip', function(&$student, $inputs) {
+        Event::listen('genuineq.students.student.before.unzip', function(&$student, $inputs, &$redirectUrl) {
             /** Extract the user */
             $user = Auth::getUser();
 
             /** Extract the student that needs to be unziped. */
             $student = $user->profile->archivedStudents->where('id', $inputs['id'])->first();
+
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
         });
         /************ Student UNZIP end ************/
 
@@ -265,20 +426,41 @@ class Plugin extends PluginBase
             }
         });
 
-        Event::listen('genuineq.students.student.before.delete', function(&$student, $inputs) {
+        Event::listen('genuineq.students.student.before.delete', function(&$student, $inputs, &$redirectUrl) {
             /** Extract the user */
             $user = Auth::getUser();
 
             /** Extract the student that needs to be deleted. */
             $student = $user->profile->archivedStudents->where('id', $inputs['id'])->first();
 
+            /** Check if the user has access to the specified student. */
+            if (!$student) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+                return;
+            }
+
             /** Remove all student lessons. */
             foreach ($student->lessons as $key => $lesson) {
-                $lesson->forceDelete();
+                $lesson->delete();
+            }
+
+            /** Remove all student connections. */
+            foreach($student->connections as $key => $connection) {
+                $connection->delete();
+            }
+
+            /** Remove all student access requests. */
+            foreach($student->accessRequests as $key => $accessRequest) {
+                $accessRequest->delete();
+            }
+
+            /** Remove all student transfer requests. */
+            foreach($student->transferRequests as $key => $transferRequest) {
+                $transferRequest->delete();
             }
 
             /** Remove all specialists connections. */
-            $student->specialists()->detach();
+            // $student->specialists()->detach();
         });
         /************ Student DELETE end ************/
     }
@@ -437,17 +619,52 @@ class Plugin extends PluginBase
             });
 
             /** Add get lessons years attribute. */
-            $model->addDynamicMethod('getLessonsYearsAttribute', function() use ($model) {
-               $years = [];
+            $model->addDynamicMethod('getLessonsYearsAttribute', function () use ($model) {
+                /** Get all active specialists. */
+                $specialists = $model->active_specialists;
+                $years = [];
 
-                /** Parse all the active specialists. */
-                foreach ($model->active_specialists as $specialist) {
-                    $years = array_unique(array_merge($years, $specialist->lessons_years), SORT_REGULAR);
+                /** Parse all student lessons. */
+                foreach ($specialists as $specialist) {
+                    $years = array_merge($years, $specialist->lessons_years);
                 }
 
-                return $years;
+                return array_unique($years);
             });
         });
+    }
+
+    /**
+     * Function that contains all the component extensions of the School model.
+     */
+    protected function schoolExtendComponens()
+    {
+        /************ School DELETE start ************/
+        Event::listen('genuineq.profile.school.before.delete', function($school) {
+
+            /** Delete school specialists. */
+            foreach($school->specialists as $specialist) {
+                /** Remove school connection with specialist. */
+                $specialist->school_id = null;
+
+                /** 
+                 * Identify all the stundets that the specialist has access to and does NOT own them. */
+                $foreignStudents = $specialist->students->diff($specialist->myStudents);
+
+                /** Remove connections to all foreign students. */
+                foreach ($foreignStudents as $foreignStudent) {
+                    $specialist->students()->remove($foreignStudent);
+                }
+
+                $specialist->save();
+            }
+
+            /** Delete school students. */
+            foreach($school->myStudents as $student) {
+                $student->delete();
+            }
+        });
+        /************ School DELETE end ************/
     }
 
     /***********************************************
@@ -467,20 +684,6 @@ class Plugin extends PluginBase
             $model->belongsToMany['students'] = [
                 'Genuineq\Students\Models\Student',
                 'table' => 'genuineq_esense_students_specialists'
-            ];
-
-            /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
-            $model->belongsToMany['unarchivedStudents'] = [
-                'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_students_specialists',
-                'conditions' => 'archived = 0'
-            ];
-
-            /** Link "Student" model to archived "Specialist" model with many-to-many relation. */
-            $model->belongsToMany['archivedStudents'] = [
-                'Genuineq\Students\Models\Student',
-                'table' => 'genuineq_esense_students_specialists',
-                'conditions' => 'archived = 1'
             ];
 
             /** Link "TransferRequest" model to "Specialist" model with one-to-many relation. */
@@ -518,6 +721,34 @@ class Plugin extends PluginBase
                 }
 
                 return $schoolStudents;
+            });
+
+            /** Add unarchived students attribute. */
+            $model->addDynamicMethod('getUnarchivedStudentsAttribute', function() use ($model) {
+                $unarchivedStudents = new Collection();
+
+                /** Parse all the students and extract unarchived ones. */
+                foreach ($model->students as $student) {
+                    if (!$student->archived) {
+                        $unarchivedStudents->push($student);
+                    }
+                }
+
+                return $unarchivedStudents->unique('id')->sortBy('name');
+            });
+
+            /** Add archived students attribute. */
+            $model->addDynamicMethod('getArchivedStudentsAttribute', function() use ($model) {
+                $archivedStudents = new Collection();
+
+                /** Parse all the students and extract archived ones. */
+                foreach ($model->students as $student) {
+                    if ($student->archived) {
+                        $archivedStudents->push($student);
+                    }
+                }
+
+                return $archivedStudents->unique('id')->sortBy('name');
             });
 
             /** Add access notifications attribute. */
@@ -589,6 +820,20 @@ class Plugin extends PluginBase
                 })->sort()->toArray();
             });
 
+            /** Add get lessons from specific month method. */
+            $model->addDynamicMethod('getLessonsFromMonth', function($student, $month = null, $year = null) use ($model) {
+                /** Extract the start and the end of the year. */
+                $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
+                $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
+
+                /** get connections for lessons */
+                $connection = $model->getStudentConnection($student->id);
+
+                /** return lessons with a specific student */
+                return $connection->lessons()->whereBetween('day', [$monthStart, $monthEnd])->get();
+            });
+
+
             /** Add get exercises categories attribute. */
             $model->addDynamicMethod('getExercisesCategoriesAttribute', function() use ($model) {
                 /** Get games parent category. */
@@ -643,14 +888,61 @@ class Plugin extends PluginBase
      */
     protected function specialistExtendComponens()
     {
-        /************ Specialist DELETE start ************/
-        Event::listen('genuineq.specialist.change.student.owner.before.delete', function($specialist) {
-            foreach($specialist->myStudents as $student) {
-                /** Change the student owner from specialist to school. */
-                $student->owner_id = Auth::user()->profile->id;
-                $student->owner_type = 'Genuineq\Profile\Models\School';
-                $student->save();
+        /************ Specialist READ start ************/
+        Event::listen('genuineq.specialists.read.start', function(&$component, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
             }
+        });
+
+        Event::listen('genuineq.specialists.before.specialist.read', function(&$component, $id, &$redirectUrl) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract the specialist that needs to be read. */
+            $specialist = $user->profile->specialists->where('id', $id)->first();
+
+            /** Check if the user has access to the specified specialist. */
+            if (!$specialist) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+            }
+        });
+        /************ Specialist READ end ************/
+
+        /************ Specialist DELETE start ************/
+        Event::listen('genuineq.profile.specialist.before.delete', function($specialist) {
+            foreach($specialist->myStudents as $student) {
+                if ($specialist->school) {
+                    /** Change the student owner from specialist to school if specialist is afiliated. */
+                    $student->owner_id = $specialist->school_id;
+                    $student->owner_type = 'Genuineq\Profile\Models\School';
+                    $student->save();
+                } else {
+                    /** Delete the student if specialist is unafiliated. */
+                    $student->delete();
+                }
+            }
+
+            /** Delete specialist lessons. */
+            foreach($specialist->lessons as $key => $lesson) {
+                $lesson->delete();
+            }
+
+            /** Delete specialist connection. */
+            foreach($specialist->connections as $key => $connection) {
+                $connection->delete();
+            }
+
+            /** Delete specialist transfer requests. */
+            foreach($specialist->transferRequests as $key => $transferRequests) {
+                $transferRequests->delete();
+            }
+
+            /** Delete specialist access requests. */
+            foreach($specialist->accessRequests as $key => $accessRequests) {
+                $accessRequests->delete();
+            }
+
         });
         /************ Specialist DELETE end ************/
     }
@@ -685,4 +977,130 @@ class Plugin extends PluginBase
             ]);
         });
     }
+
+    /**
+     * Function that contains all the component extensions of the LessonActions component.
+     */
+    protected function lessonExtendComponens()
+    {
+        /************ LessonActions READ start ************/
+        Event::listen('genuineq.lessons.read.start', function(&$component, &$redirectUrl) {
+            if (!Auth::check()) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::loginRequired());
+            }
+        });
+
+        Event::listen('genuineq.lessons.before.lesson.read', function(&$component, $id, &$redirectUrl) {
+            /** Extract the user */
+            $user = Auth::getUser();
+
+            /** Extract lesson. */
+            $lesson = Lesson::find($id);
+
+            /** Check if the lesson exists. */
+            if (!$lesson) {
+                $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+                return;
+            }
+
+            if ('specialist' == $user->type) {
+                /** Extract the connection that needs to be read. */
+                $connection = $user->profile->connections->where('id', $lesson->connection->id)->first();
+
+                /** Check if the user has access to the specified connection. */
+                if (!$connection) {
+                    $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+                }
+            } else {
+                /** Extract the specialist that has the lesson connection. */
+                $specialist = $user->profile->specialists->where('id', $lesson->connection->specialist_id)->first();
+
+                /** Check if the user has access to the specified specialist. */
+                if (!$specialist) {
+                    $redirectUrl = $component->pageUrl(RedirectHelper::accessDenied());
+                }
+            }
+        });
+        /************ LessonActions READ end ************/
+    }
+
+
+    /***********************************************
+     ******** SmallRecords plugin extension *******
+     ***********************************************/
+
+    /** Extend JanVince\SmallRecords Plugin to set Permissions to Tags and Attributes sideMenuItems. */
+    public function smallRecordsPluginExtend(){
+
+        /** Check if user have specific rights and remove sideMenuItems. */
+        Event::listen('backend.menu.extendItems', function ($manager) {
+            /** Get current logged in user and its role. */
+            $loggedInUser = \Backend\Facades\BackendAuth::getUser();
+
+            /** Check if it has a 'Publisher' role. */
+            if(/*NOT*/ ! ('Developer' == $loggedInUser->role->name)) {
+                $manager->removeSideMenuItem('JanVince.SmallRecords', 'SmallRecords', 'tags');
+                $manager->removeSideMenuItem('JanVince.SmallRecords', 'SmallRecords', 'attributes');
+            }
+        });
+
+        \JanVince\SmallRecords\Controllers\Tags::extend(function ($controller){
+            $controller->requiredPermissions = ['genuineq.esense.smallrecords_access'];
+        });
+
+        \JanVince\SmallRecords\Controllers\Attributes::extend(function ($controller){
+            $controller->requiredPermissions = ['genuineq.esense.smallrecords_access'];
+        });
+
+    }
+
+    /***********************************************
+     ******** Rainlab\Pages plugin extension *******
+     ***********************************************/
+
+    /** Extend Rainlab\Pages Plugin to set Permissions to form fields */
+    public function staticPagesPluginExtend() {
+
+        Event::listen('backend.page.beforeDisplay', function($controller) {
+            /** Check if it is RainLab\Pages Index controller  */
+            if (/*NOT*/ ! $controller instanceof  \RainLab\Pages\Controllers\Index) {
+                return;
+            }
+
+            /** Get current logged in user and its role. */
+            $loggedInUser = \Backend\Facades\BackendAuth::getUser();
+
+            if('Developer' !== $loggedInUser->role->name) {
+                /**
+                 * jQuery selector for disabling 'add' and 'delete' buttons, 'checkboxes'
+                 *  and 'Add subpage' in Rainlab\Pages.
+                 */
+                $controller->addJs('/themes/esense/assets/js/static-pages-remove-items.js');
+            }
+        });
+
+        /** HIDE FIELDS for non-developers */
+        Event::listen('backend.form.extendFields', function($widget) {
+
+            /** Check if it is RainLab\Pages Index controller  */
+            if (/*NOT*/ ! $widget->getController() instanceof  \RainLab\Pages\Controllers\Index) {
+                return;
+            }
+
+            /** Get current logged in user and its role. */
+            $loggedInUser = \Backend\Facades\BackendAuth::getUser();
+
+            /** Check if it has a 'Publisher' role. */
+            if('Developer' !== $loggedInUser->role->name) {
+                $fields = $widget->getFields();
+
+                $fields['viewBag[title]']->cssClass = 'hidden';
+                $fields['viewBag[url]']->cssClass = 'hidden';
+                $fields['viewBag[layout]']->cssClass = 'hidden';
+                $fields['viewBag[is_hidden]']->cssClass = 'hidden';
+                $fields['viewBag[navigation_hidden]']->cssClass = 'hidden';
+            }
+        });
+    }
+
 }

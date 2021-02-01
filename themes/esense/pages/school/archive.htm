@@ -51,7 +51,7 @@ allowedUserTypes[] = "school"
                                             {% endif %}
                                         </div>
                                         <div class="d-flex flex-column ml-2">
-                                            <a class="display-4 font-weight-light" href="{{ 'school/student'|page({id: student.id}) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
+                                            <a class="display-4 font-weight-light" href="{{ 'school/student'|page({studentId: student.id}) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.full_name }}</a>
                                             <h6 class="p-0 m-0 font-weight-normal text-gray">{{ student.birthdate|date("d/m/Y") }}</h6>
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@ allowedUserTypes[] = "school"
                                 </td>
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
-                                        <a class="display-4 font-weight-light" href="{{ 'school/student'|page({id: student.id}) }}">
+                                        <a class="display-4 font-weight-light" href="{{ 'school/student'|page({studentId: student.id}) }}">
                                             <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
                                         </a>
 
@@ -145,7 +145,7 @@ allowedUserTypes[] = "school"
                                             {% endif %}
 
                                             <div class="d-flex flex-column ml-2">
-                                                <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({id: specialist.id}) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</a>
+                                                <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({specialistId: specialist.id}) }}" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -167,7 +167,7 @@ allowedUserTypes[] = "school"
 
                                 <td>
                                     <div class="pl-2 py-3 d-flex align-items-center">
-                                        <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({id: specialist.id}) }}">
+                                        <a class="display-4 font-weight-light" href="{{ 'school/specialist'|page({specialistId: specialist.id}) }}">
                                             <img class="img-fluid pt-2" src="{{ 'assets/img/svg/dashboard/eye.svg'|theme }}">
                                         </a>
 

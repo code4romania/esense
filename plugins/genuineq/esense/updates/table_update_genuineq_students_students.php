@@ -18,13 +18,13 @@ class TableUpdateGenuineqStudentsStudents extends Migration
 
     public function down()
     {
-        if (Schema::hasColumns('genuineq_students_students', 'owner_id')) {
+        if (Schema::hasColumn('genuineq_students_students', 'owner_id')) {
             Schema::table('genuineq_students_students', function ($table) {
                 $table->dropColumn('owner_id');
             });
         }
 
-        if (Schema::hasColumns('genuineq_students_students', 'owner_type')) {
+        if (Schema::hasColumn('genuineq_students_students', 'owner_type')) {
             Schema::table('genuineq_students_students', function ($table) {
                 $table->dropColumn('owner_type');
             });

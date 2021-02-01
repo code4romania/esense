@@ -42,14 +42,10 @@ class Student extends Model
     ];
 
     /**
-     * One-to-one relationship.
+     * One-to-Many relationship.
      */
-    public $belongsTo = [
-        'contact_person_1' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_1_id'],
-        'contact_person_2' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_2_id'],
-        'contact_person_3' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_3_id'],
-        'contact_person_4' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_4_id'],
-        'contact_person_5' => ['Genuineq\Students\Models\ContactPerson', 'key' => 'contact_person_5_id'],
+    public $hasMany = [
+        'contact_persons' => ['Genuineq\Students\Models\ContactPerson']
     ];
 
     /***********************************************
@@ -65,7 +61,7 @@ class Student extends Model
     }
 
     /**
-     * Accessor for getting the user name.
+     * Accessor for getting birthdate.
      */
     public function getDisplayBirthdateAttribute()
     {
@@ -79,4 +75,17 @@ class Student extends Model
     {
         return date_diff(date_create($this->birthdate), date_create('today'))->y;
     }
+
+    /***********************************************
+     ****************** Events *********************
+     ***********************************************/
+
+    public function beforeDelete()
+    {
+        /** Delete contact persons before student is deleted */
+        $this->contact_persons->each(function ($item, $key) {
+            $item->delete();
+        });
+    }
+
 }

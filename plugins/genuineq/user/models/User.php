@@ -326,6 +326,8 @@ class User extends UserBase
         $this->avatar && $this->avatar->delete();
 
         parent::afterDelete();
+
+        Event::fire('genuineq.user.after.delete', [$this]);
     }
 
     /***********************************************

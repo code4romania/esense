@@ -1,8 +1,8 @@
 <?php namespace Genuineq\Profile\ReportWidgets;
 
-use DB;
 use Lang;
 use Backend\Classes\ReportWidgetBase;
+use Genuineq\User\Models\User as UserModel;
 
 class TotalSpecialists extends ReportWidgetBase
 {
@@ -12,15 +12,10 @@ class TotalSpecialists extends ReportWidgetBase
     public function render()
     {
         try {
-            $this->vars['labelSpecialists'] = Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.frontend.label_specialists');
+            $this->vars['labelSpecialists'] = Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.label');
 
             /** Get no of activated account specialists from database  */
-            $this->vars['totalSpecialists'] = DB::table('backend_users')
-                ->join('genuineq_profile_specialists', function ($join) {
-                    $join->on('backend_users.id', '=', 'genuineq_profile_specialists.id')
-                        ->where('backend_users.is_activated', '=', 1);
-                })
-                ->count();
+            $this->vars['totalSpecialists'] = UserModel::where('is_activated', 1)->where('type', 'specialist')->count();
 
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
@@ -33,11 +28,9 @@ class TotalSpecialists extends ReportWidgetBase
     {
         return [
             'title' => [
-                'title' => Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.title'),
-                'default' => Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.title_default'),
+                'title' => Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.label'),
                 'type' => 'string',
                 'validationPattern' => '^.+$',
-                'validationMessage' => Lang::get('genuineq.profile::lang.reportwidgets.total_specialists.title_validation'),
             ]
         ];
     }

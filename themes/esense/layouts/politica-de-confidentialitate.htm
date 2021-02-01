@@ -1,18 +1,20 @@
-description = "Layout for 'Politica de confidentialitate' page."
+description = "Politica de confidentialitate  - [layout]"
 
 [staticPage]
-useContent = 1
+useContent = 0
 default = 0
 
 [session]
 security = "all"
 allowedUserGroups[] = "registered"
 allowedUserGroups[] = "guest"
+
+[cookieConsent]
 ==
 
 <!-- Politica de confidentialitate -->
-{variable name="politicaDeConfidentialitateTitle" label="Title" tab="Politica de confidentialitate" type="text"}{/variable}
-{variable name="politicaDeConfidentialitateText" label="Content" tab="Politica de confidentialitate" type="richeditor"}{/variable}
+{variable name="politicaDeConfidentialitateTitle" label="Titlu" tab="Politica de confidențialitate" type="text"}{/variable}
+{variable name="politicaDeConfidentialitateText" label="Conținut'" tab="Politica de confidențialitate" type="richeditor" size="huge"}{/variable}
 
 <html lang="en">
 
@@ -22,11 +24,15 @@ allowedUserGroups[] = "guest"
         'assets/scss/esense/landing-page/landing-page.scss',
     ]|theme }}" rel="stylesheet">
 
+    {% partial 'web-app/general/google-analytics' %}
+
     <body>
+
+        {% component 'cookieConsent' %}
 
         {% partial 'navbar' %}
 
-        <section class="depre-proiect"></section>
+        <section class="despre-proiect"></section>
 
         {% flash %}
             <p

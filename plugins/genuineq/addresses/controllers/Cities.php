@@ -10,6 +10,8 @@ class Cities extends Controller
         'Backend\Behaviors\FormController'
     ];
 
+    public $requiredPermissions = ['genuineq.addresses.addresses_access'];
+
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
 

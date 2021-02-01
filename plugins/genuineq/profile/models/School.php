@@ -1,5 +1,6 @@
 <?php namespace Genuineq\Profile\Models;
 
+use Event;
 use Model;
 use Carbon\Carbon;
 
@@ -137,6 +138,22 @@ class School extends Model
     {
         if (!$this->slug) {
             $this->slug = str_slug($this->name, '-') . '-' . Carbon::now()->timestamp;
+        }
+    }
+
+    public function beforeDelete()
+    {
+        Event::fire('genuineq.profile.school.before.delete', [$this]);
+    }
+
+    public function afterDelete()
+    {
+        /** Force reload the user relationship. */
+        $this->reloadRelations('user');
+
+        /** Check if the user has not been deleted. */
+        if ($this->user) {
+            $this->user->forceDelete();
         }
     }
 }

@@ -20,7 +20,7 @@ class RegRequestsTable extends ReportWidgetBase
     public function render()
     {
         try {
-            $this->vars['labelRegRequestsTable'] = Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.frontend.label_registration_requests');
+            $this->vars['labelRegRequestsTable'] = Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.label');
 
             /** Get no of inactive user accounts (== user requests) from database  */
             $this->vars['userRequests'] = UserModel::where('is_activated', 0)->orderBy('created_at', 'DESC')->get();
@@ -36,11 +36,9 @@ class RegRequestsTable extends ReportWidgetBase
     {
         return [
             'title' => [
-                'title' => Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.title'),
-                'default' => Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.title_default'),
+                'title' => Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.label'),
                 'type' => 'string',
                 'validationPattern' => '^.+$',
-                'validationMessage' => Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.title_validation'),
             ]
         ];
     }
@@ -57,6 +55,7 @@ class RegRequestsTable extends ReportWidgetBase
 
         /* Add userModel variable to modal view */
         $this->vars['userModel'] = $userModel;
+        $this->vars['userModelProfile'] = json_decode($userModel->profile);
 
 
         return $this->makePartial('preview_request');
@@ -74,26 +73,21 @@ class RegRequestsTable extends ReportWidgetBase
     {
         if ([] != post('record_id')) {
             $this->activateUser(post('record_id'));
-            /** Go to show success message */
-            goto success;
-
-        }elseif ([] != post('checked')) {
-
+        } elseif ([] != post('checked')) {
             /** Iterate IDs and get the corresponding user, then activate it */
             foreach (post('checked') as $accountId) {
                 $this->activateUser($accountId);
             }
-
-            success:
-            Flash::success(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.success'));
-
-            /* Refreshing the page */
-            return Redirect::refresh();
-
         } else {
             Flash::error(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.fail'));
+
             return;
         }
+
+        Flash::success(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash.success'));
+
+        /* Refreshing the page */
+        return Redirect::refresh();
     }
 
     /**

@@ -5,6 +5,8 @@
         'backend-menu' => 'Students'
     ],
 
+    'permissions' => 'Students access',
+
     'student' => [
         'form-labels' => [
             'name' => 'Name',
@@ -14,11 +16,7 @@
             'visual_impairment' => 'Visual impairment',
             'birthdate' => 'Birthdate',
             'gender' => 'Gender',
-            'contact_person_1' => 'Contact Person 1',
-            'contact_person_2' => 'Contact Person 2',
-            'contact_person_3' => 'Contact Person 3',
-            'contact_person_4' => 'Contact Person 4',
-            'contact_person_5' => 'Contact Person 5'
+            'contact_persons' => 'Contact persons',
         ],
 
         'backend-menu' => 'Students'
@@ -42,6 +40,11 @@
             'name' => 'Students',
             'description' => 'Handles the CRUD operations for students.',
 
+            'options' => [
+                'title' => 'Check user permission',
+                'description' => 'Check if user has permission to add student',
+            ],
+
             'validation' => [
                 'surname_required' => 'Name required',
                 'surname_string' => 'Name can only contain letters, space and character -',
@@ -56,19 +59,16 @@
                 'visual_impairment_boolean' => 'The value of the visual impairment field can only be "Yes" or "No"',
                 'gender_required' => 'Gender required',
                 'gender_in' => 'Gender can only be "Male" or "Female"',
-                'phone.required' => 'Phone number required',
-                'phone.numeric' => 'Phone number can only contain digits',
+                'phone_required' => 'Phone number required',
+                'phone_numeric' => 'Phone number can only contain digits',
                 'email_between' => 'Email address must be between 6 and 255 characters',
                 'email_email' => 'Email address is invalid',
             ],
 
             'message' => [
                 'student_archive_successful' => 'Archiving Successfully',
-                'student_archive_failed' => 'Archiving failed',
                 'student_unzip_successful' => 'Unzip successfully',
-                'student_unzip_failed' => 'Unzip failed',
                 'student_delete_successful' => 'Delete successfully',
-                'student_delete_failed' => 'Delete failed',
                 'success_creation' => 'Student successfully added',
                 'success_update' => 'Student successfully updated',
             ],

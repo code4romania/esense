@@ -2,7 +2,7 @@
 set -e
 
 # Create .env file from environment variables
-echo APP_ENV=$APP_ENV > .env
+echo APP_ENV=$APP_ENV >> .env
 echo APP_DEBUG=$APP_DEBUG >> .env
 echo APP_LOG=$APP_LOG >> .env
 echo APP_NAME=\"$APP_NAME\" >> .env
@@ -36,6 +36,8 @@ echo CMS_ROUTES_CACHE=$CMS_ROUTES_CACHE >> .env
 echo CMS_ASSET_CACHE=$CMS_ASSET_CACHE >> .env
 echo CMS_LINK_POLICY=$CMS_LINK_POLICY >> .env
 echo CMS_ENABLE_CSRF=$CMS_ENABLE_CSRF >> .env
+echo APP_LOCALE=$APP_LOCALE >> .env
+echo APP_FALLBACK_LOCALE=$APP_FALLBACK_LOCALE >> .env
 
 # Run any new DB migrations
 php artisan october:up
@@ -51,10 +53,10 @@ php artisan config:cache
 php artisan october:mirror public --relative
 
 # Remove the media folder public link if exists
-#rm -f ./public/storage/app/media
+rm -f ./public/storage/app/media
 
 # Create the media folder public link
-#ln -s ../../../storage/app/media ./storage/app/media
+ln -s ../../../storage/app/media ./public/storage/app/media
 
 # Change public folder ownership
 chown -R www-data:www-data /var/www

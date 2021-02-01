@@ -5,6 +5,8 @@
         'backend-menu' => 'Addresses',
     ],
 
+    'permissions' => 'Addresses access',
+
     'region' => [
         'form-labels' => [
             'name' => 'Name'

@@ -135,48 +135,6 @@ allowedUserTypes[] = "specialist"
                     }
                 }
             });
-
-            /***********************************************
-            *************** Teacher chart ******************
-            ***********************************************/
-
-            /** Chart colors. */
-            var colors = ['#A6CEE3','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
-
-            /** Large line chart. */
-            var chLine = document.getElementById("chLine");
-
-            /** Chart data. */
-            var chartData = {
-                labels: ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"],
-                datasets: [{
-                    data: [1, 2, 4, 3, 2, 3, 5, 0, 2, 4, 0, 2],
-                    backgroundColor: 'transparent',
-                    borderColor: colors[0],
-                    borderWidth: 2,
-                    pointBackgroundColor: colors[0]
-                }]
-            };
-
-            /** Chart options */
-            if (chLine) {
-                new Chart(chLine, {
-                    type: 'line',
-                    data: chartData,
-                    options: {
-                        responsive: true,
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: false,
-                                    precision:0,
-                                }
-                            }]
-                        },
-                        legend: { display: false }
-                    }
-                });
-            }
         });
     </script>
 {% endput %}

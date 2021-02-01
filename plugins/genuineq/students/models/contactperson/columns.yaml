@@ -4,16 +4,19 @@ columns:
         type: text
         searchable: true
         sortable: true
+
     surname:
         label: 'genuineq.students::lang.contact-person.form-labels.surname'
         type: text
         searchable: true
         sortable: true
+
     email:
         label: 'genuineq.students::lang.contact-person.form-labels.email'
         type: text
         searchable: true
         sortable: true
+
     phone:
         label: 'genuineq.students::lang.contact-person.form-labels.phone'
         type: text

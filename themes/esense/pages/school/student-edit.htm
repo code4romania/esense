@@ -1,5 +1,5 @@
 title = "Editează profil elev"
-url = "/school/student-edit/:id"
+url = "/school/student-edit/:studentId"
 layout = "web-app"
 description = "Used for editing a student"
 is_hidden = 0
@@ -70,7 +70,7 @@ allowedUserTypes[] = "school"
                                                     </div>
 
                                                     <div class="add-avatar">
-                                                        <img id="add-avatar" class="img-fluid add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                        <img id="add-avatar" class="img-fluid rounded-circle add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
                                                     </div>
                                                 {% endif %}
                                             </div>
@@ -80,7 +80,7 @@ allowedUserTypes[] = "school"
                                         <div class="tab-pane fade {% if student.gender == 'male' %} show active {% endif %}" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                             <div class="d-flex">
                                                 {% if student.avatar and student.gender == 'male' %}
-                                                    <img id="add-avatar" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{user.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                                                    <img id="add-avatar2" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{student.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
                                                 {% else %}
 
                                                     <div class="avatars1 d-none">
@@ -93,14 +93,14 @@ allowedUserTypes[] = "school"
                                                     </div>
 
                                                     <div class="add-avatar">
-                                                        <img id="add-avatar" class="img-fluid  add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                        <img id="add-avatar2" class="img-fluid rounded-circle add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
                                                     </div>
                                                 {% endif %}
                                             </div>
                                         </div>
 
                                         <!-- Input for adding custom avatar -->
-                                        <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
+                                        <input name="avatar" class="d-none custom-avatar onChangeValue" onchange="previewFile(this)" accept="image/*" type="file" id="avatar" name="studentAvatar" />
                                         <!-- Input for gender -->
                                         <input name="gender" id="gender" class="d-none onChangeValue" type="text" value="{{student.gender}}" />
                                     </div>
@@ -193,147 +193,107 @@ allowedUserTypes[] = "school"
 
                         <input name="id" class="d-none" type="text" id="id" value="{{ student.id }}"/>
 
-                        <!-- First contact person -->
-                        <div id="person-1" class="px-lg-2">
-                            {%
-                                partial 'web-app/general/student-contact-person'
+                        <div id="contact_persons_wrapper" class="pl-lg-3 pr-lg-4">
+                            <!-- First contact person -->
+                            <div id="person-1" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
 
-                                contactPersonLastNameId = 'contact_1_surname_id'
-                                contactPersonFirstNameId = 'contact_1_name_id'
-                                contactPersonPhoneId = 'contact_1_phone_id'
-                                addContactPerson = 'add-contact-1'
-                                hideId = 'hide-1'
-                                hideClass = 'd-none'
-                                contactPersonFormId = 'contact-1'
+                                    index = 1
+                                    nextIndex = 2
+                                    displayDeleteButton = ( (student.contact_persons|length > 1) ? (true) : (false) )
+                                    display = ( (student.contact_persons[0]) ? (true) : (false) )
+                                    hideAddPerson = ( (student.contact_persons[1]) ? (true) : (false) )
 
-                                contactPersonLastName = 'contact_1_surname'
-                                contactPersonFirstName = 'contact_1_name'
-                                contactPersonEmail = 'contact_1_email'
-                                contactPersonPhone = 'contact_1_phone'
-                                contactPersonObservations = 'contact_1_observations'
+                                    lastNameValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].name) : ('') )
+                                    emailValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].description) : ('') )
+                                %}
+                            </div>
 
-                                lastNameValue = ((student.contact_person_1) ? (student.contact_person_1.surname) : (''))
-                                firstNameValue = ((student.contact_person_1) ? (student.contact_person_1.name) : (''))
-                                emailValue = ((student.contact_person_1) ? (student.contact_person_1.email) : (''))
-                                phoneValue = ((student.contact_person_1) ? (student.contact_person_1.phone) : (''))
-                                textareaValue = ((student.contact_person_1) ? (student.contact_person_1.description) : (''))
-                            %}
+                            <!-- Second contact person -->
+                            <div id="person-2" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
+
+                                    index = 2
+                                    nextIndex = 3
+                                    displayDeleteButton = ( (student.contact_persons[1]) ? (true) : (false) )
+                                    display = ( (student.contact_persons[1]) ? (true) : (false) )
+                                    hideAddPerson = ( (student.contact_persons[2]) ? (true) : (false) )
+
+                                    lastNameValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].name) : ('') )
+                                    emailValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].description) : ('') )
+                                %}
+                            </div>
+
+
+                            <!-- Third contact person -->
+                            <div id="person-3" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
+
+                                    index = 3
+                                    nextIndex = 4
+                                    displayDeleteButton = ( (student.contact_persons[2]) ? (true) : (false) )
+                                    display = ( (student.contact_persons[2]) ? (true) : (false) )
+                                    hideAddPerson = ( (student.contact_persons[3]) ? (true) : (false) )
+
+                                    lastNameValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].name) : ('') )
+                                    emailValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].description) : ('') )
+                                %}
+                            </div>
+
+                            <!-- Forth contact person -->
+                            <div id="person-4" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
+
+                                    index = 4
+                                    nextIndex = 5
+                                    displayDeleteButton = ( (student.contact_persons[3]) ? (true) : (false) )
+                                    display = ( (student.contact_persons[3]) ? (true) : (false) )
+                                    hideAddPerson = ( (student.contact_persons[4]) ? (true) : (false) )
+
+                                    lastNameValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].name) : ('') )
+                                    emailValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].description) : ('') )
+                                %}
+                            </div>
+
+                            <!-- Fifth contact person -->
+                            <div id="person-5" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
+
+                                    index = 5
+                                    displayDeleteButton = ( (student.contact_persons[4]) ? (true) : (false) )
+                                    display = ( (student.contact_persons[4]) ? (true) : (false) )
+                                    hideAddPerson = true
+
+                                    lastNameValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].name) : ('') )
+                                    emailValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].description) : ('') )
+                                %}
+                            </div>
                         </div>
 
-                        <!-- Second contact person -->
-                        <div id="person-2" class="px-lg-2">
-                            {%
-                                partial 'web-app/general/student-contact-person'
-
-                                contactPersonLastNameId = 'contact_2_surname_id'
-                                contactPersonFirstNameId = 'contact_2_name_id'
-                                contactPersonPhoneId = 'contact_2_phone_id'
-                                addContactPerson = 'add-contact-2'
-                                hideId = 'hide-2'
-                                hideClass = 'd-none'
-                                contactPersonFormId = 'contact-2'
-
-                                contactPersonLastName = 'contact_2_surname'
-                                contactPersonFirstName = 'contact_2_name'
-                                contactPersonEmail = 'contact_2_email'
-                                contactPersonPhone = 'contact_2_phone'
-                                contactPersonObservations = 'contact_2_observations'
-
-                                lastNameValue = ((student.contact_person_2) ? (student.contact_person_2.surname) : (''))
-                                firstNameValue = ((student.contact_person_2) ? (student.contact_person_2.name) : (''))
-                                emailValue = ((student.contact_person_2) ? (student.contact_person_2.email) : (''))
-                                phoneValue = ((student.contact_person_2) ? (student.contact_person_2.phone) : (''))
-                                textareaValue = ((student.contact_person_2) ? (student.contact_person_2.description) : (''))
-                            %}
-                        </div>
-
-
-                        <!-- Third contact person -->
-                        <div id="person-3" class="px-lg-2">
-                            {%
-                                partial 'web-app/general/student-contact-person'
-
-                                contactPersonLastNameId = 'contact_3_surname_id'
-                                contactPersonFirstNameId = 'contact_3_name_id'
-                                contactPersonPhoneId = 'contact_3_phone_id'
-                                addContactPerson = 'add-contact-3'
-                                hideId = 'hide-3'
-                                hideClass = 'd-none'
-                                contactPersonFormId = 'contact-3'
-
-                                contactPersonLastName = 'contact_3_surname'
-                                contactPersonFirstName = 'contact_3_name'
-                                contactPersonEmail = 'contact_3_email'
-                                contactPersonPhone = 'contact_3_phone'
-                                contactPersonObservations = 'contact_3_observations'
-
-                                lastNameValue = ((student.contact_person_3) ? (student.contact_person_3.surname) : (''))
-                                firstNameValue = ((student.contact_person_3) ? (student.contact_person_3.name) : (''))
-                                emailValue = ((student.contact_person_3) ? (student.contact_person_3.email) : (''))
-                                phoneValue = ((student.contact_person_3) ? (student.contact_person_3.phone) : (''))
-                                textareaValue = ((student.contact_person_3) ? (student.contact_person_3.description) : (''))
-                            %}
-                        </div>
-
-                        <!-- Forth contact person -->
-                        <div id="person-4" class="px-lg-2">
-                            {%
-                                partial 'web-app/general/student-contact-person'
-
-                                contactPersonLastNameId = 'contact_4_surname_id'
-                                contactPersonFirstNameId = 'contact_4_name_id'
-                                contactPersonPhoneId = 'contact_4_phone_id'
-                                addContactPerson = 'add-contact-4'
-                                hideId = 'hide-4'
-                                hideClass = 'd-none'
-                                contactPersonFormId = 'contact-4'
-
-                                contactPersonLastName = 'contact_4_surname'
-                                contactPersonFirstName = 'contact_4_name'
-                                contactPersonEmail = 'contact_4_email'
-                                contactPersonPhone = 'contact_4_phone'
-                                contactPersonObservations = 'contact_4_observations'
-
-                                lastNameValue = ((student.contact_person_4) ? (student.contact_person_4.surname) : (''))
-                                firstNameValue = ((student.contact_person_4) ? (student.contact_person_4.name) : (''))
-                                emailValue = ((student.contact_person_4) ? (student.contact_person_4.email) : (''))
-                                phoneValue = ((student.contact_person_4) ? (student.contact_person_4.phone) : (''))
-                                textareaValue = ((student.contact_person_4) ? (student.contact_person_4.description) : (''))
-                            %}
-                        </div>
-
-                        <!-- Fifth contact person -->
-                        <div id="person-5" class="px-lg-2">
-                            {%
-                                partial 'web-app/general/student-contact-person'
-
-                                contactPersonLastNameId = 'contact_5_surname_id'
-                                contactPersonFirstNameId = 'contact_5_name_id'
-                                contactPersonPhoneId = 'contact_5_phone_id'
-                                contactPersonObservationsId = 'contact_5_observations_id'
-                                addContactPerson = 'add-contact-5'
-                                hideId = 'hide-5'
-                                hideClass = 'd-none'
-                                contactPersonFormId = 'contact-5'
-
-                                contactPersonLastName = 'contact_5_surname'
-                                contactPersonFirstName = 'contact_5_name'
-                                contactPersonEmail = 'contact_5_email'
-                                contactPersonPhone = 'contact_5_phone'
-                                contactPersonObservations = 'contact_5_observations'
-
-                                lastNameValue = ((student.contact_person_5) ? (student.contact_person_5.surname) : (''))
-                                firstNameValue = ((student.contact_person_5) ? (student.contact_person_5.name) : (''))
-                                emailValue = ((student.contact_person_5) ? (student.contact_person_5.email) : (''))
-                                phoneValue = ((student.contact_person_5) ? (student.contact_person_5.phone) : (''))
-                                textareaValue = ((student.contact_person_5) ? (student.contact_person_5.description) : (''))
-                            %}
-                        </div>
-
-                         <!-- Submit button -->
+                        <!-- Submit button -->
                         <div class="col-12 mb-5 mt-3">
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'page.school.dashboard.student.add.profile.submit.btn.text'|_}}</button>
+                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-5" disabled>{{'page.school.dashboard.student.edit.profile.submit.btn.text'|_}}</button>
                             </div>
                         </div>
 
@@ -347,6 +307,7 @@ allowedUserTypes[] = "school"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ro.min.js" integrity="sha512-OyKt3ZoVnoGpHGx10TMtzQTSDHKyGzHIXdOoOiaHcMJMGOR/ev9Y6ocEGd64HVPqGEwkg29xVVbavNjDPeg9GA==" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ ['assets/js/file-preview.js']|theme }}"></script>
 
 {% put scripts %}
     <script type="text/javascript">
@@ -354,11 +315,10 @@ allowedUserTypes[] = "school"
 
             /** WYSWYG Editor. */
             $('#description').richText({
-                id:'diagnostic', 
+                id:'diagnostic',
                 class: 'onChangeValue',
                 useParagraph:true
             });
-            $('.observations').richText();
 
             /** Initiate the datepicker plugin. */
             $('#birthdate').datepicker({
@@ -404,7 +364,7 @@ allowedUserTypes[] = "school"
             }
 
             /** Validation for activeting the finish button. */
-            $(document.body).on('change blur', '.onChangeValue', function(){
+             $(document.body).on('change keyup', '.onChangeValue', function(){
                 if(
                     (
                         ((0 !== $("#birthdate").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
