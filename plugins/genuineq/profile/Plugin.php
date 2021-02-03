@@ -256,7 +256,7 @@ class Plugin extends PluginBase
             /** Add attribute that checks if user is specialist and get the school name if is affiliated. */
             $model->addDynamicMethod('getSchoolNameAttribute', function () use ($model) {
                 if ('specialist' === $model->type) {
-                    return $model->profile->school['name'];
+                    return ( ($model->profile->school) ? ($model->profile->school['name']) : ("") );
                 } else {
                     return '';
                 }

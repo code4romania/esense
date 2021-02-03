@@ -14,7 +14,7 @@
 <?php if ($formModel->created_at): ?>
     <div class="scoreboard-item title-value">
         <h4><?= e(trans('genuineq.user::lang.backend.user.scoreboard.joined')) ?></h4>
-        <p title="<?= $formModel->created_at->diffForHumans() ?>">
+        <p title="<?= $formModel->created_at ?>">
             <?= $formModel->created_at->toFormattedDateString() ?>
         </p>
         <p class="description">
@@ -32,7 +32,7 @@
 <?php if ($formModel->last_seen): ?>
     <div class="scoreboard-item title-value">
         <h4><?= e(trans('genuineq.user::lang.backend.user.scoreboard.last_seen')) ?></h4>
-        <p><?= $formModel->last_seen->diffForHumans() ?></p>
+        <p><?= $formModel->last_seen ?></p>
         <p class="description">
             <?= $formModel->isOnline() ? e(trans('genuineq.user::lang.backend.user.scoreboard.is_online')) : e(trans('genuineq.user::lang.backend.user.scoreboard.is_offline')) ?>
         </p>
