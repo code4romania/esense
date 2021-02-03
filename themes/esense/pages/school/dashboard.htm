@@ -59,13 +59,16 @@ allowedUserTypes[] = "school"
 
         <!-- Teachers activity chart -->
         <div id="activity-chart-container" class="col-12 mt-5">
+
+            {% set durations = user.profile.getYearLessonsDurations() %}
             <!-- Partial for teachers activity chart -->
             {%
                 partial 'web-app/school/activity-chart'
 
                 year = 'now'|date('Y')
                 years = user.profile.lessons_years
-                durations = user.profile.getYearLessonsDurations()
+                values = durations['values']
+                tooltips = durations['tooltips']
             %}
         </div>
 

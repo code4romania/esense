@@ -55,10 +55,18 @@ class ChartsActions extends ComponentBase
 
         /** Set the new year. */
         $this->page['year'] = post('year');
+
         /** Set the years array. */
         $this->page['years'] = Auth::user()->profile->lessons_years;
-        /** Set the durations. */
-        $this->page['durations'] = Auth::user()->profile->getYearLessonsDurations(post('year'));
+
+        /** Extract the durations. */
+        $duration = Auth::user()->profile->getYearLessonsDurations(post('year'));
+
+        /** Send the values to the page. */
+        $this->page['values'] = $duration['values'];
+
+        /** Set the tooltips to the page. */
+        $this->page['tooltips'] = $duration['tooltips'];
     }
 
     /**
@@ -76,10 +84,18 @@ class ChartsActions extends ComponentBase
 
         /** Set the new year. */
         $this->page['year'] = post('year');
+
         /** Set the years array. */
         $this->page['years'] = Auth::user()->profile->school->lessons_years;
-        /** Set the durations. */
-        $this->page['durations'] = Auth::user()->profile->school->getYearLessonsDurations(post('year'));
+
+        /** Extract the durations. */
+        $duration = Auth::user()->profile->getYearLessonsDurations(post('year'));
+
+        /** Send the values to the page. */
+        $this->page['values'] = $duration['values'];
+
+        /** Set the tooltips to the page. */
+        $this->page['tooltips'] = $duration['tooltips'];
     }
 
     /**
@@ -97,9 +113,17 @@ class ChartsActions extends ComponentBase
 
         /** Set the new year. */
         $this->page['year'] = post('year');
+
         /** Set the years array. */
         $this->page['years'] = Auth::user()->profile->lessons_years;
-        /** Set the durations. */
-        $this->page['durations'] = Auth::user()->profile->getYearLessonsDurations(post('year'));
+
+        /** Extract the durations. */
+        $duration = Auth::user()->profile->getYearLessonsDurations(post('year'));
+
+        /** Send the values to the page. */
+        $this->page['values'] = $duration['values'];
+
+        /** Set the tooltips to the page. */
+        $this->page['tooltips'] = $duration['tooltips'];
     }
 }
