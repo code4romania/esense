@@ -59,13 +59,16 @@ allowedUserTypes[] = "specialist"
 
         <!-- Students activity chart -->
         <div id="activity-chart-container" class="col-12 mt-5">
+
+            {% set durations = user.profile.getYearLessonsDurations() %}
             <!-- Partial for student activity chart -->
             {%
                 partial 'web-app/specialist/activity-chart'
 
                 year = 'now'|date('Y')
                 years = user.profile.lessons_years
-                durations = user.profile.getYearLessonsDurations()
+                values = durations['values']
+                tooltips = durations['tooltips']
             %}
         </div>
 
@@ -297,26 +300,34 @@ allowedUserTypes[] = "specialist"
                             "{{'page.spacialist.dashboard.donut.chart.legend_2'|_}}",
                             "{{'page.spacialist.dashboard.donut.chart.legend_3'|_}}"
                         ],
-                        datasets: [{
-                            label: 'legend',
-                                data: [
+                        datasets: [
+                            {
+                                label: 'legend',
+                                    data: [
+                                        {% for category in user.profile.exercises_categories %}
+                                            {{ user.profile.getStudentCategoryLessonsDuration(student.id, category.slug) }},
+                                        {% endfor %}
+                                    ],
+
+                                backgroundColor: [
                                     {% for category in user.profile.exercises_categories %}
-                                        {{ user.profile.getStudentCategoryLessonsDuration(student.id, category.slug) }},
+                                        {% if loop.first %}
+                                            '#F6744F',
+                                        {% else %}
+                                            '{{user.profile.getCategoryColor(category.slug)}}',
+                                        {% endif %}
                                     {% endfor %}
                                 ],
 
-                            backgroundColor: [
-                                {% for category in user.profile.exercises_categories %}
-                                    {% if loop.first %}
-                                        '#F6744F',
-                                    {% else %}
-                                        '{{user.profile.getCategoryColor(category.slug)}}',
-                                    {% endif %}
-                                {% endfor %}
-                            ],
+                                borderWidth: 0
+                            }
+                        ],
+                        tooltips: [
+                            {% for category in user.profile.exercises_categories %}
+                                "{{ user.profile.getStudentCategoryLessonsDurationTooltip(student.id, category.slug) }}",
+                            {% endfor %}
+                        ]
 
-                            borderWidth: 0
-                        }]
                     },
 
                     options: {
@@ -345,19 +356,7 @@ allowedUserTypes[] = "specialist"
                         tooltips: {
                             callbacks: {
                                 label: function(tooltipItem, data) {
-                                    // extract duration (hours) for specific tooltip and convert to minutes
-                                    var minutesDuration = (data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]) * 60;
-
-                                    //function that change minutes values to HH:MM format
-                                    const convertMinutesToHHMM = (mins) => {
-                                        var hours = Math.floor(mins / 60);
-                                        var minutes = Math.round(mins % 60);
-                                        hours = hours < 10 ? '0' + hours : hours;
-                                        minutes = minutes < 10 ? '0' + minutes : minutes;
-                                        return `${hours}:${minutes}`;
-                                    }
-
-                                    return convertMinutesToHHMM(minutesDuration);
+                                    return data.tooltips[tooltipItem.index];
                                 }
                             }
                         } //end tooltips

@@ -576,46 +576,59 @@ class Plugin extends PluginBase
                 return $duration;
             });
 
-            /** Add get year lessons durations function. */
+            /** Add get year lessons durations tooltips function. */
             $model->addDynamicMethod('getYearLessonsDurations', function($year = null) use ($model) {
-                $durations = [
-                    0 => 0,  // Jan
-                    1 => 0,  // Feb
-                    2 => 0,  // Mar
-                    3 => 0,  // Apr
-                    4 => 0,  // May
-                    5 => 0,  // Jun
-                    6 => 0,  // Jul
-                    7 => 0,  // Aug
-                    8 => 0,  // Sep
-                    9 => 0,  // Oct
-                    10 => 0, // Nov
-                    11 => 0  // Dec
-                ];
-
                 if (!$year) {
                     $year = Carbon::now()->year;
                 }
 
-                /** Parse all the active specialists. */
-                foreach ($model->active_specialists as $specialist) {
-                    $specialistDurations = $specialist->getYearLessonsDurations($year);
+                /** Extract the raw durations. */
+                $durations = [
+                    0 => $model->getMonthLessonsDuration(1, $year),   // Jan
+                    1 => $model->getMonthLessonsDuration(2, $year),   // Feb
+                    2 => $model->getMonthLessonsDuration(3, $year),   // Mar
+                    3 => $model->getMonthLessonsDuration(4, $year),   // Apr
+                    4 => $model->getMonthLessonsDuration(5, $year),   // May
+                    5 => $model->getMonthLessonsDuration(6, $year),   // Jun
+                    6 => $model->getMonthLessonsDuration(7, $year),   // Jul
+                    7 => $model->getMonthLessonsDuration(8, $year),   // Aug
+                    8 => $model->getMonthLessonsDuration(9, $year),   // Sep
+                    9 => $model->getMonthLessonsDuration(10, $year),  // Oct
+                    10 => $model->getMonthLessonsDuration(11, $year), // Nov
+                    11 => $model->getMonthLessonsDuration(12, $year)  // Dec
+                ];
 
-                    $durations[0] += $specialistDurations[0];   // Jan
-                    $durations[1] += $specialistDurations[1];   // Feb
-                    $durations[2] += $specialistDurations[2];   // Mar
-                    $durations[3] += $specialistDurations[3];   // Apr
-                    $durations[4] += $specialistDurations[4];   // May
-                    $durations[5] += $specialistDurations[5];   // Jun
-                    $durations[6] += $specialistDurations[6];   // Jul
-                    $durations[7] += $specialistDurations[7];   // Aug
-                    $durations[8] += $specialistDurations[8];   // Sep
-                    $durations[9] += $specialistDurations[9];   // Oct
-                    $durations[10] += $specialistDurations[10]; // Nov
-                    $durations[11] += $specialistDurations[11]; // Dec
+                /** Calculate the values. */
+                $values = [
+                    0 => ($durations[0] / 3600),   // Jan
+                    1 => ($durations[1] / 3600),   // Feb
+                    2 => ($durations[2] / 3600),   // Mar
+                    3 => ($durations[3] / 3600),   // Apr
+                    4 => ($durations[4] / 3600),   // May
+                    5 => ($durations[5] / 3600),   // Jun
+                    6 => ($durations[6] / 3600),   // Jul
+                    7 => ($durations[7] / 3600),   // Aug
+                    8 => ($durations[8] / 3600),   // Sep
+                    9 => ($durations[9] / 3600),  // Oct
+                    10 => ($durations[10] / 3600), // Nov
+                    11 => ($durations[11] / 3600)  // Dec
+                ];
+
+                /** Calculate the tooltips in HH:MM:SS format. */
+                $tooltips = [];
+                for ($index = 0; $index < count($durations); $index++) {
+                    $h = floor($durations[$index] / 3600);
+                    $m = floor(($durations[$index] % 3600) / 60);
+                    $s = ceil(($durations[$index] % 3600) % 60);
+
+                    $h = (10 > $h) ? ('0' . $h) : ($h);
+                    $m = (10 > $m) ? ('0' . $m) : ($m);
+                    $s = (10 > $s) ? ('0' . $s) : ($s);
+
+                    $tooltips[$index] = $h . ':' . $m . ':' . $s;
                 }
 
-                return $durations;
+                return [ 'values' => $values, 'tooltips' => $tooltips ];
             });
 
             /** Add get lessons years attribute. */
@@ -647,8 +660,7 @@ class Plugin extends PluginBase
                 /** Remove school connection with specialist. */
                 $specialist->school_id = null;
 
-                /** 
-                 * Identify all the stundets that the specialist has access to and does NOT own them. */
+                /** Identify all the stundets that the specialist has access to and does NOT own them. */
                 $foreignStudents = $specialist->students->diff($specialist->myStudents);
 
                 /** Remove connections to all foreign students. */
@@ -786,16 +798,17 @@ class Plugin extends PluginBase
                 $monthStart = Carbon::parse($year . '-' . $month . '-01')->format('Y-m-d');
                 $monthEnd = Carbon::parse($year . '-' . $month . '-01')->endOfMonth()->format('Y-m-d');
 
-                return ($model->lessons()->whereBetween('day', [$monthStart, $monthEnd])->sum('duration')) / 3600;
+                return ($model->lessons()->whereBetween('day', [$monthStart, $monthEnd])->sum('duration'));
             });
 
-            /** Add get year lessons durations function. */
+            /** Add get year lessons durations values and tooltips function. */
             $model->addDynamicMethod('getYearLessonsDurations', function($year = null) use ($model) {
                 if (!$year) {
                     $year = Carbon::now()->year;
                 }
 
-                return [
+                /** Extract the raw durations. */
+                $durations = [
                     0 => $model->getMonthLessonsDuration(1, $year),   // Jan
                     1 => $model->getMonthLessonsDuration(2, $year),   // Feb
                     2 => $model->getMonthLessonsDuration(3, $year),   // Mar
@@ -809,6 +822,38 @@ class Plugin extends PluginBase
                     10 => $model->getMonthLessonsDuration(11, $year), // Nov
                     11 => $model->getMonthLessonsDuration(12, $year)  // Dec
                 ];
+
+                /** Calculate the values. */
+                $values = [
+                    0 => ($durations[0] / 3600),   // Jan
+                    1 => ($durations[1] / 3600),   // Feb
+                    2 => ($durations[2] / 3600),   // Mar
+                    3 => ($durations[3] / 3600),   // Apr
+                    4 => ($durations[4] / 3600),   // May
+                    5 => ($durations[5] / 3600),   // Jun
+                    6 => ($durations[6] / 3600),   // Jul
+                    7 => ($durations[7] / 3600),   // Aug
+                    8 => ($durations[8] / 3600),   // Sep
+                    9 => ($durations[9] / 3600),  // Oct
+                    10 => ($durations[10] / 3600), // Nov
+                    11 => ($durations[11] / 3600)  // Dec
+                ];
+
+                /** Calculate the tooltips in HH:MM:SS format. */
+                $tooltips = [];
+                for ($index = 0; $index < count($durations); $index++) {
+                    $h = floor($durations[$index] / 3600);
+                    $m = floor(($durations[$index] % 3600) / 60);
+                    $s = ceil(($durations[$index] % 3600) % 60);
+
+                    $h = (10 > $h) ? ('0' . $h) : ($h);
+                    $m = (10 > $m) ? ('0' . $m) : ($m);
+                    $s = (10 > $s) ? ('0' . $s) : ($s);
+
+                    $tooltips[$index] = $h . ':' . $m . ':' . $s;
+                }
+
+                return [ 'values' => $values, 'tooltips' => $tooltips ];
             });
 
             /** Add get lessons years attribute. */
@@ -863,6 +908,28 @@ class Plugin extends PluginBase
 
                 /** Extract the duration of all the lessons during current year from the specified category. */
                 return ($connection->lessons()->whereCategory($category)->whereYear('day', $year)->sum('duration')) / 3600;
+            });
+
+            /** Add get game category lessons duration tooltip function. */
+            $model->addDynamicMethod('getStudentCategoryLessonsDurationTooltip', function($student, $category) use ($model) {
+                /** Get student connection. */
+                $connection = $model->getStudentConnection($student);
+                /** Get current year. */
+                $year = Carbon::now()->year;
+
+                /** Extract the duration of all the lessons during current year from the specified category. */
+                $duration = $connection->lessons()->whereCategory($category)->whereYear('day', $year)->sum('duration');
+
+                /** Calculate the tooltip in HH:MM:SS format. */
+                $h = floor($duration / 3600);
+                $m = floor(($duration % 3600) / 60);
+                $s = ceil(($duration % 3600) % 60);
+
+                $h = (10 > $h) ? ('0' . $h) : ($h);
+                $m = (10 > $m) ? ('0' . $m) : ($m);
+                $s = (10 > $s) ? ('0' . $s) : ($s);
+
+                return $h . ':' . $m . ':' . $s;
             });
 
             /** Add get student lessons count function. */

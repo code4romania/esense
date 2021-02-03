@@ -21,8 +21,17 @@ allowedUserTypes[] = "specialist"
 
         <!-- School activity chart -->
         <div id="activity-chart-container" class="col-12 mt-3">
+
+            {% set durations = user.profile.getYearLessonsDurations() %}
             <!-- Partial for student activity chart -->
-            {% partial 'web-app/specialist/school-activity-chart' year = 'now'|date('Y') years = user.profile.school.lessons_years durations = user.profile.school.getYearLessonsDurations('now'|date('Y')) %}
+            {%
+                partial 'web-app/specialist/school-activity-chart'
+
+                year = 'now'|date('Y')
+                years = user.profile.school.lessons_years
+                values = durations['values']
+                tooltips = durations['tooltips']
+            %}
         </div>
 
         <!-- Teachers table -->
