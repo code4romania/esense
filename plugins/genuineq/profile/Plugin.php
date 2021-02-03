@@ -236,14 +236,14 @@ class Plugin extends PluginBase
             }
 
             /** Add an extra School Name column. */
-            // $listWidget->addColumns([
-            //     'school_name' => [
-            //         'label' => 'genuineq.profile::lang.specialist.form-labels.school', // 'School'
-            //         'type'=> 'text',
-            //         'searchable'=> false,
-            //         'sortable'=> false
-            //     ]
-            // ]);
+            $listWidget->addColumns([
+                'school_name' => [
+                    'label' => 'genuineq.profile::lang.specialist.form-labels.school', // 'School'
+                    'type'=> 'text',
+                    'searchable'=> false,
+                    'sortable'=> false
+                ]
+            ]);
         });
     }
 
@@ -256,7 +256,7 @@ class Plugin extends PluginBase
             /** Add attribute that checks if user is specialist and get the school name if is affiliated. */
             $model->addDynamicMethod('getSchoolNameAttribute', function () use ($model) {
                 if ('specialist' === $model->type) {
-                    return $model->profile->school['name'];
+                    return ( ($model->profile->school) ? ($model->profile->school['name']) : ("") );
                 } else {
                     return '';
                 }
