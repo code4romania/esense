@@ -236,14 +236,14 @@ class Plugin extends PluginBase
             }
 
             /** Add an extra School Name column. */
-            $listWidget->addColumns([
-                'school_name' => [
-                    'label' => 'genuineq.profile::lang.specialist.form-labels.school', // 'School'
-                    'type'=> 'text',
-                    'searchable'=> false,
-                    'sortable'=> false
-                ]
-            ]);
+            // $listWidget->addColumns([
+            //     'school_name' => [
+            //         'label' => 'genuineq.profile::lang.specialist.form-labels.school', // 'School'
+            //         'type'=> 'text',
+            //         'searchable'=> false,
+            //         'sortable'=> false
+            //     ]
+            // ]);
         });
     }
 
