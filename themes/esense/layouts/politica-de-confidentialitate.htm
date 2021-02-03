@@ -8,8 +8,6 @@ default = 0
 security = "all"
 allowedUserGroups[] = "registered"
 allowedUserGroups[] = "guest"
-
-[cookieConsent]
 ==
 
 <!-- Politica de confidentialitate -->
@@ -27,8 +25,6 @@ allowedUserGroups[] = "guest"
     {% partial 'web-app/general/google-analytics' %}
 
     <body>
-
-        {% component 'cookieConsent' %}
 
         {% partial 'navbar' %}
 

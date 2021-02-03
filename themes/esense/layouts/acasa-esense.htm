@@ -11,7 +11,6 @@ allowedUserGroups[] = "guest"
 
 [contactform]
 
-[cookieConsent]
 ==
 
 <!--HOME PAGE E-SENSE design variables-->
@@ -68,9 +67,6 @@ allowedUserGroups[] = "guest"
     {% partial 'web-app/general/google-analytics' %}
 
     <body>
-
-        {% component 'cookieConsent' %}
-
         {% partial 'navbar' %}
 
         {% flash %}
@@ -298,11 +294,11 @@ allowedUserGroups[] = "guest"
                                             <!-- First name -->
                                             <div class="col-12 col-md-6 mb-3">
                                                 <label class="display-4 text-muted px-3 px-lg-0" for="first_name" style="line-height: 21px;">{{ homeContactFormLabelName }}</label>
-                                                <div class="input-group mb-3 px-3 px-lg-0 shadow-sm">
+                                                <div class="input-group mb-3 px-3 px-lg-0">
                                                     <div class="input-group-prepend">
-                                                <span class="input-group-text bg-white border-light">
-                                                    <img class="img-fluid" src="{{ 'assets/img/svg/user-form-icon.svg' | theme }}" alt="Emblemă utilizator pentru prenume">
-                                                </span>
+                                                        <span class="input-group-text bg-white border-light">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/user-form-icon.svg' | theme }}" alt="Emblemă utilizator pentru prenume">
+                                                        </span>
                                                     </div>
                                                     <input name="first_name" type="text" value="{{ (user) ? (user.name) : ('') }}" class="form-control border-left-0 border-light pl-0" placeholder="{{ homeContactFormPlaceholderName }}" aria-label="first_name" aria-describedby="basic-addon1" id="first_name">
                                                 </div>
@@ -311,11 +307,11 @@ allowedUserGroups[] = "guest"
                                             <!-- Last name -->
                                             <div class="col-12 col-md-6 mb-3">
                                                 <label class="display-4 text-muted px-3 px-lg-0" for="last_name" style="line-height: 21px;">{{ homeContactFormLabelSurname }}</label>
-                                                <div class="input-group mb-3 px-3 px-lg-0 shadow-sm">
+                                                <div class="input-group mb-3 px-3 px-lg-0">
                                                     <div class="input-group-prepend">
-                                                <span class="input-group-text bg-white border-light">
-                                                    <img class="img-fluid" src="{{ 'assets/img/svg/form-label-icon.svg' | theme }}" alt="Emblemă cu etichetă pentru nume">
-                                                </span>
+                                                        <span class="input-group-text bg-white border-light">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/form-label-icon.svg' | theme }}" alt="Emblemă cu etichetă pentru nume">
+                                                        </span>
                                                     </div>
                                                     <input name="last_name" type="text" value="{{ (user) ? (user.surname) : ('') }}" class="form-control border-left-0 border-light pl-0" placeholder="{{ homeContactFormPlaceholderSurname }}" aria-label="last_name" aria-describedby="basic-addon1" id="last_name">
                                                 </div>
@@ -324,11 +320,11 @@ allowedUserGroups[] = "guest"
                                             <!-- Email -->
                                             <div class="col-12 mb-3">
                                                 <label class="display-4 text-muted px-3 px-lg-0" for="email" style="line-height: 21px;">{{ homeContactFormLabelEmail }}</label>
-                                                <div class="input-group mb-3 px-3 px-lg-0 shadow-sm">
+                                                <div class="input-group mb-3 px-3 px-lg-0">
                                                     <div class="input-group-prepend">
-                                                <span class="input-group-text bg-white border-light">
-                                                    <img class="img-fluid" src="{{ 'assets/img/svg/form-email-icon.svg' | theme }}" alt="Emblemă cu plic pentru email">
-                                                </span>
+                                                        <span class="input-group-text bg-white border-light">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/form-email-icon.svg' | theme }}" alt="Emblemă cu plic pentru email">
+                                                        </span>
                                                     </div>
                                                     <input name="email" type="email" value="{{ (user) ? (user.email) : ('') }}" class="form-control border-left-0 border-light pl-0" placeholder="{{ homeContactFormPlaceholderEmail }}"
                                                            aria-label="email" aria-describedby="basic-addon1" id="email">
@@ -339,7 +335,7 @@ allowedUserGroups[] = "guest"
                                             <div class="col-12 mb-3">
                                                 <div class="form-group px-3 px-lg-0">
                                                     <label class="display-4 text-muted" for="message" style="line-height: 21px;">{{ homeContactFormLabelMessage }}</label>
-                                                    <textarea name="message" class="form-control border-light shadow-sm" id="message" rows="4"></textarea>
+                                                    <textarea name="message" class="form-control border-light" id="message" rows="4"></textarea>
                                                 </div>
                                             </div>
 
