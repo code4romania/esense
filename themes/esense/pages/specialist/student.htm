@@ -97,6 +97,14 @@ orderByDirection = "DESC"
                     <!-- Activity schedule -->
                     <div class="col-12 col-lg-6" id="schedule-timeline">
                         {% partial 'web-app/general/schedule-timeline' title='page.specialist.dashboard.student.profile.schedule_timeline'|_ lessons=student.today_lessons allow_edit=true %}
+
+                        <div class="row">
+                            <div class="col-12 py-3">
+                                <a class="btn btn-secondary btn-lg display-4 roboto-family ml-3" href="esense://C:\Program Files (x86)\Esense\ScoliSpeciale.exe">
+                                    {{ 'page.specialist.dashboard.student.start_game'|_ }}
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
