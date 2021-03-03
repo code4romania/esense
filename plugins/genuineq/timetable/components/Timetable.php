@@ -42,6 +42,7 @@ class Timetable extends ComponentBase
             'day' => post('day'),
             'start_hour' => post('start_hour'),
             'end_hour' => post('end_hour'),
+            'duration' => post('duration') ?? (strtotime(post('end_hour')) - strtotime(post('start_hour'))),
             'title' => post('title'),
             'description' => post('description'),
             'feedback' => post('feedback'),
@@ -61,6 +62,7 @@ class Timetable extends ComponentBase
             $lesson->day = post('day');
             $lesson->start_hour = post('start_hour');
             $lesson->end_hour = post('end_hour');
+            $lesson->duration = post('duration') ?? (strtotime(post('end_hour')) - strtotime(post('start_hour')));
             $lesson->title = post('title');
             $lesson->description = post('description');
             $lesson->feedback = post('feedback');

@@ -63,8 +63,14 @@ class LessonController extends Controller
         /** Create a new Lesson. */
         $lesson = Lesson::create([
             'day' => post('date'),
-            'start_hour' => post('startHour'),
-            'end_hour' => post('endHour'),
+            'start_hour' => post('start_hour'),
+            'end_hour' => post('end_hour'),
+            'duration' => post('duration') ?? (strtotime(post('end_hour')) - strtotime(post('start_hour'))),
+
+            // 'start_hour' => post('startHour'),
+            // 'end_hour' => post('endHour'),
+            // 'duration' => post('duration') ?? (strtotime(post('endHour')) - strtotime(post('startHour'))),
+
             'title' => ((post('title')) ? (post('title')) : ('')),
             'description' => ((post('description')) ? (post('description')) : ('')),
             'feedback' => ((post('feedback')) ? (post('feedback')) : ('')),
