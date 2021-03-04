@@ -18,8 +18,8 @@ description = "Partial for displaying a day schedule timeline."
                 {% endif %}
             </p>
             <p class="p-0 m-0 display-4 text-gray-dark">
-                Ora începerii: {{ lesson.start_hour }} /
-                Durata: {{ lesson.lesson_duration }}
+                {{ 'page.specialist.dashboard.student.start_hour'|_ }}: {{ lesson.start_hour }} /
+                {{ 'page.specialist.dashboard.student.duration'|_ }}: {{ lesson.lesson_duration }}
             </p>
         </li>
     </ul>
