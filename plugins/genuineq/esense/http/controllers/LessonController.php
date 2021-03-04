@@ -65,6 +65,7 @@ class LessonController extends Controller
             'day' => post('date'),
             'start_hour' => post('startHour'),
             'end_hour' => post('endHour'),
+            'duration' => post('duration') ?? (strtotime(post('endHour')) - strtotime(post('startHour'))),
             'title' => ((post('title')) ? (post('title')) : ('')),
             'description' => ((post('description')) ? (post('description')) : ('')),
             'feedback' => ((post('feedback')) ? (post('feedback')) : ('')),

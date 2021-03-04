@@ -42,22 +42,14 @@ class Lesson extends Model
      * @var array Validation rules
      */
     public $rules = [
+        'day' => 'required|date',
+        'start_hour' => 'required',
+        'end_hour' => 'required',
+        'duration' => 'required|numeric',
+        'title' => 'required|string',
+        'description' => 'string',
+        'feedback' => 'string',
     ];
-
-    /**
-     * Function that holds the validation rules.
-     */
-    public static function rules()
-    {
-        return [
-            'day' => 'required|date',
-            'start_hour' => 'required|time',
-            'end_hour' => 'required|time',
-            'title' => 'required|string',
-            'description' => 'text',
-            'feedback' => 'text',
-        ];
-    }
 
     /**
      * Function that holds the validation messages.
