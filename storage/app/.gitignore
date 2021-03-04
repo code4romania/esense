@@ -1,5 +1,4 @@
-
+*
 !.gitignore
-/resized
-/uploads
-/resized
+!uploads
+!resized
