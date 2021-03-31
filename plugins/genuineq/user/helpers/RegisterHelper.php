@@ -32,9 +32,9 @@ class RegisterHelper
     {
         return [
             'surname.required' => Lang::get('genuineq.user::lang.component.register.validation.name_required'),
-            'surname.regex' => Lang::get('genuineq.user::lang.component.register.validation.name_alpha'),
+            'surname.regex' => Lang::get('genuineq.user::lang.component.register.validation.name_regex'),
             'name.required' => Lang::get('genuineq.user::lang.component.register.validation.name_required'),
-            'name.regex' => Lang::get('genuineq.user::lang.component.register.validation.name_alpha'),
+            'name.regex' => Lang::get('genuineq.user::lang.component.register.validation.name_regex'),
             'email.required' => Lang::get('genuineq.user::lang.component.register.validation.email_required'),
             'email.between' => Lang::get('genuineq.user::lang.component.register.validation.email_between'),
             'email.email' => Lang::get('genuineq.user::lang.component.register.validation.email_email'),
