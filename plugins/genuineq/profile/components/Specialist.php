@@ -144,13 +144,15 @@ class Specialist extends ComponentBase
 
                         $newUser->save();
 
-                        Flash::success(Lang::get('genuineq.profile::lang.components.school.message.user_invite_successful') . $index);
+                        Flash::success(Lang::get('genuineq.profile::lang.components.school.message.user_invite_successful') . ' ' . $newUser->full_name);
                     } catch (Exception $exception) {
-                        Flash::error(Lang::get('genuineq.profile::lang.components.school.message.specialist_create_error') . $index);
+                        Flash::error(Lang::get('genuineq.profile::lang.components.school.message.specialist_create_error') . ' ' . $newUser->full_name);
                     }
+
                 } elseif (('specialist' == $specialistUser->type) && $specialistUser->profile->school) {
                     /** The specialist exist and IS affiliated. */
-                    Flash::error(Lang::get('genuineq.profile::lang.components.school.message.user_already_affiliated_1') . $index . Lang::get('genuineq.profile::lang.components.school.message.user_already_affiliated_2'));
+                    Flash::error(Lang::get('genuineq.profile::lang.components.school.message.user_already_affiliated_1') . ' ' . $specialistUser->full_name . ' ' . Lang::get('genuineq.profile::lang.components.school.message.user_already_affiliated_2'));
+
                 } elseif ('specialist' == $specialistUser->type) {
                     /** The specialist exist and is NOT affiliated. Affiliate it. */
 
@@ -170,10 +172,11 @@ class Specialist extends ComponentBase
                         $message->to($specialistUser->email, $specialistUser->full_name);
                     });
 
-                    Flash::success(Lang::get('genuineq.profile::lang.components.school.message.user_invite_successful') . $index);
+                    Flash::success(Lang::get('genuineq.profile::lang.components.school.message.user_invite_successful') . ' ' . $$specialistUser->full_name);
+
                 } else {
                     /** The user exists and is registered as a SCHOOL */
-                    Flash::error(Lang::get('genuineq.profile::lang.components.school.message.user_is_school_1') . $index . Lang::get('genuineq.profile::lang.components.school.message.user_is_school_2'));
+                    Flash::error(Lang::get('genuineq.profile::lang.components.school.message.user_is_school_1') . ' ' . $specialistUser->full_name . ' ' . Lang::get('genuineq.profile::lang.components.school.message.user_is_school_2'));
                 }
             }
         }
