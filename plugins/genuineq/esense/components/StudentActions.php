@@ -182,14 +182,14 @@ class StudentActions extends ComponentBase
         $specialist = Specialist::find(post('specialist'));
 
         /* Extract all the students in JSON format. */
-        if($specialist->myStudents ?? false){
+        if(!is_null($specialist)){
 
             foreach ($specialist->myStudents as $student) {
                 $students[$student->full_name] = $student->id;
             }
 
             /** Return the students in JSON format. */
-            return $students ?? false;
+            return $students ?? [];
         }
 
     }
