@@ -1,12 +1,12 @@
 title = "Exerciții"
-url = "/specialist/exercises/:category?"
+url = "/specialist/exercitii/:category?"
 layout = "web-app"
 description = "Displays exercises list"
 is_hidden = 0
 
 [records]
 activeOnly = 0
-areaSlug = "exercises"
+areaSlug = "exercitii"
 categorySlug = "{{ :category }}"
 useMainCategory = 0
 useMultiCategories = 1
@@ -22,20 +22,20 @@ orderByDirection = "ASC"
 activeOnly = 0
 rootOnly = 0
 parentCategorySlug = "jocuri"
-areaSlug = "exercises"
+areaSlug = "exercitii"
 activeRecordsOnly = 1
 useMainCategory = 1
 useMultiCategories = 1
-categoriesPage = "specialist/exercises"
+categoriesPage = "specialist/exercitii"
 categoriesPageSlug = "{{ :category }}"
-categoryPage = "specialist/exercises"
+categoryPage = "specialist/exercitii"
 categoryPageSlug = "{{ :category }}"
 limit = 10
 
 [categoryDetail category]
 activeOnly = 1
 categorySlug = "jocuri"
-areaSlug = "exercises"
+areaSlug = "exercitii"
 recordPage = "specialist/exercise"
 recordPageSlug = "{{ :slug }}"
 
