@@ -1,0 +1,245 @@
+description = "Întrebări și Răspunsuri - [layout]"
+
+[staticPage]
+useContent = 0
+default = 0
+
+[session]
+security = "all"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
+==
+<!-- FAQ -->
+{variable name="answersAndQuestionsTitle" label="Titlu" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+
+{variable name="linkOne" label="Întrebarea nr. 1" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textOne" label="Text 1" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+{variable name="linkTwo" label="Întrebarea nr. 2" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textTwo" label="Text 2" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+{variable name="linkThree" label="Întrebarea nr. 3" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textThree" label="Text 3" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+{variable name="linkFour" label="Întrebarea nr. 4" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textFour" label="Text 4" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+{variable name="linkFive" label="Întrebarea nr. 5" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textFive" label="Text 5" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+{variable name="linkSix" label="Întrebarea nr. 6" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textSix" label="Text 6" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+{variable name="linkSeven" label="Întrebarea nr. 7" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textSeven" label="Text 7" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+{variable name="linkEight" label="Întrebarea nr. 8" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textEight" label="Text 8" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+{variable name="linkNine" label="Întrebarea nr. 9" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textNine" label="Text 9" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+{variable name="linkTen" label="Întrebarea nr. 10" tab="Întrebări și Răspunsuri" type="text"}{/variable}
+{variable name="textTen" label="Text 10" tab="Întrebări și Răspunsuri" type="richeditor"}{/variable}
+
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <link href="{{ [
+        'assets/scss/esense/landing-page/landing-page.scss',
+    ]|theme }}" rel="stylesheet">
+
+    {% partial 'web-app/general/google-analytics' %}
+
+    <body>
+        {% partial 'navbar' %}
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        <section class="despre-proiect"></section>
+
+        <div class="container mt-5 py-5">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-gray-dark py-4 font-weight-light" style="line-height: 48px;">{{ answersAndQuestionsTitle }}</h1>
+                </div>
+                <div class="col-12 mb-5 pb-5">
+                    <div class="accordion" id="accordionExample">
+
+                        <div class="card border-0 mb-4">
+                            <div class="acordeon-header" id="headingOne">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="line-height: 27px;">
+                                    {{linkOne}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseOne" class="collapse text-muted px-lg-4" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <p class="display-2 mt-3 text-muted px-5" style="line-height: 37px;">{{textOne|raw}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingTwo">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    {{linkTwo}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseTwo" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textTwo|raw}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingThree">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                    {{linkThree}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseThree" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textThree|raw}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingFour">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                    {{linkFour}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseFour" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textFour|raw}}</p>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingFive">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                    {{linkFive}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseFive" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textFive|raw}}</p>
+                            </div>
+                        </div>
+
+                        {% if linkSix != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingSix">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                    {{linkSix}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseSix" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textSix|raw}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if linkSeven != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingSeven">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                    {{linkSeven}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseSeven" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textSeven|raw}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if linkEight != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingEight">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                    {{linkEight}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseEight" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textEight|raw}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if linkNine != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingNine">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                                    {{linkNine}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseNine" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textNine|raw}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if linkTen != '' %}
+                        <div class="card border-0 my-5">
+                            <div class="acordeon-header" id="headingTen">
+                                <p class="display-2 bg-gray-medium text-primary-light font-weight-light d-flex align-items-center justify-content-between mb-0 p-4 pr-lg-5" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                                    {{linkTen}}
+                                    <img class="img-fluid img" src="{{ 'assets/img/svg/arrow-down.svg'|theme }}" alt="Săgeată în jos pentru a derula răspunsul la întrebare">
+                                </p>
+                            </div>
+                            <div id="collapseTen" class="collapse text-muted px-lg-4" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <p class="display-2 mt-3 px-5" style="line-height: 37px;">{{textTen|raw}}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% partial 'footer-columns'%}
+
+        {% partial 'footer' %}
+
+        {% partial 'footer-scripts' %}
+
+        {% scripts %}
+
+        <script>
+            $(document).ready(function () {
+                /** Flip arrow. */
+                $(".collapse.show").each(function () {
+                    $(this).prev(".acordeon-header").find(".img").addClass("rotate-up");
+                });
+                $(".collapse").on('show.bs.collapse', function () {
+                    $(this).prev(".acordeon-header").find(".img").removeClass("rotate-down").addClass(
+                        "rotate-up");
+                }).on('hide.bs.collapse', function () {
+                    $(this).prev(".acordeon-header").find(".img").removeClass("rotate-up").addClass(
+                        "rotate-down");
+                });
+            });
+        </script>
+    </body>
+</html>

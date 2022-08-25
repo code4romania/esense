@@ -1,0 +1,30 @@
+/** Import variables that override bootstrap. */
+@import "variables";
+
+/** Import typography. */
+@import "typography";
+
+/** Custom select */
+@import "custom-select";
+
+/** Input placeholder */
+@import "input-placeholder";
+
+/** Import color for buttons */
+@import "buttons";
+
+/** Import bootstrap from node modules. */
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+/** Import Ocookie styles that override predefined ocookie plugin styles. */
+@import "ocookie";
+
+@import "datepicker";
+
+@import "calendar.scss";
+
+.form-control:focus {
+    border-color: #ADB5BD;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

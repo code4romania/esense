@@ -1,0 +1,128 @@
+description = "Add another contact person for new student"
+
+[viewBag]
+==
+<div class="row contact-person-form {% if not display %} d-none {% else %} d-flex {% endif %}" id="contact-{{index}}">
+    <div class="col-12 d-flex align-items-baseline justify-content-between">
+        <p class="text-muted my-3">{{'partial.student.add.contact.person.title'|_}}&nbsp;{{index}}</p>
+
+        <div id='delete-contact-person-{{index}}' class="mr-2 {% if not displayDeleteButton %} d-none {% endif %}">
+            <i class="fas fa-times-circle text-secondary display-1" style="cursor:pointer"></i>
+        </div>
+    </div>
+    <!-- Contact person last name -->
+    <div class="col-12 col-md-6 input-type">
+        <div class="form-group d-flex">
+            <input name='contact_{{index}}_surname' type="text" class="form-control onChangeValue" id="contact_{{index}}_surname_id" placeholder="{{'partial.general.student.add.contact.person.last.name'|_}}" value="{{lastNameValue}}">
+            <span class="text-danger ml-2">*</span>
+        </div>
+    </div>
+
+    <!-- Contact person first name -->
+    <div class="col-12 col-md-6 input-type">
+        <div class="form-group d-flex">
+            <input name='contact_{{index}}_name' type="text" class="form-control onChangeValue" id="contact_{{index}}_name_id" placeholder="{{'partial.general.student.add.contact.person.first.name'|_}}" value="{{firstNameValue}}">
+            <span class="text-danger ml-2">*</span>
+        </div>
+    </div>
+
+    <!-- Contact person email -->
+    <div class="col-12 col-md-6 input-type">
+        <div class="form-group mr-3">
+            <input name='contact_{{index}}_email' type="email" class="form-control onChangeValue" id="contact_{{index}}_email_id" placeholder="{{'partial.general.add.contact.person.email'|_}}" value="{{emailValue}}">
+        </div>
+    </div>
+
+    <!-- Contact person phone -->
+    <div class="col-12 col-md-6 input-type">
+        <div class="form-group d-flex">
+            <input name='contact_{{index}}_phone' type="number" class="form-control onChangeValue" id="contact_{{index}}_phone_id" placeholder="{{'partial.general.add.contact.person.phone'|_}}" value="{{phoneValue}}">
+            <span class="text-danger ml-2">*</span>
+        </div>
+    </div>
+
+    <!-- Contact person observations -->
+    <div class="col-12">
+        <label class="small" style="color: #BFB5BD;">{{'partial.general.student.add.profile.contact.person.observations'|_}}</label>
+        <div class="form-group mr-3">
+            <textarea name="contact_{{index}}_observations" class="form-control observations onChangeValue" id="contact_{{index}}_observations_id" rows="3">
+               {{textareaValue}}
+            </textarea>
+        </div>
+    </div>
+
+    <!-- Add new contact person -->
+    <div class="col-12 my-3 {% if hideAddPerson %} d-none {% endif %}" id="hide-{{index}}">
+        <div class="d-flex align-items-center justify-content-center">
+            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/add-gray.svg'|theme }}">
+            <span class="ml-2 display-4 text-secondary2" style="cursor: pointer;">{{'partial.general.student.add.another.contact.person'|_}}</span>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+
+    /** Function that show/hide contact persons delete button. */
+    function checkIfHideDeleteButton() {
+        if($('.contact-person-form.d-flex').length > 1) {
+            $('.contact-person-form.d-flex > div:first-child > div').removeClass('d-none');
+        } else {
+            $('.contact-person-form.d-flex > div:first-child > div').addClass('d-none');
+        }
+    }
+
+    /** Display button to add another contact person. */
+    $('#hide-{{index}}').on('click', function() {
+        $('#contact-{{index + 1}}').removeClass('d-none').addClass('d-flex');
+        $(this).addClass('d-none');
+
+        /** Call to function that show/hide contact persons delete button. */
+        checkIfHideDeleteButton();
+    });
+
+    /** Add class and id for contact persons wyswyg. */
+    $('#contact_{{index}}_observations_id').each(function () {
+        $(this).richText({
+            id:'contact_{{index}}_observations_id',
+            class: 'onChangeValue',
+            useParagraph:true
+        });
+    });
+
+    /** Delete contact person form. */
+    $("#delete-contact-person-{{index}}").click(function() {
+        {% for i in index..5 %}
+            {% if 5 == i %}
+                $('#contact_{{i}}_surname_id').val('');
+                $('#contact_{{i}}_name_id').val('');
+                $('#contact_{{i}}_email_id').val('');
+                $('#contact_{{i}}_phone_id').val('');
+                $('#contact_{{i}}_observations_id .richText-editor').text();
+            {% else %}
+                $('#contact_{{i}}_surname_id').val($('#contact_{{i + 1}}_surname_id').val());
+                $('#contact_{{i}}_name_id').val($('#contact_{{i + 1}}_name_id').val());
+                $('#contact_{{i}}_email_id').val($('#contact_{{i + 1}}_email_id').val());
+                $('#contact_{{i}}_phone_id').val($('#contact_{{i + 1}}_phone_id').val());
+                $('#contact_{{i}}_observations_id .richText-editor').text($('#contact_{{i + 1}}_observations_id .richText-editor').text());
+            {% endif %}
+        {% endfor %}
+
+        /** Hide the last visible form. */
+        $('#contact_persons_wrapper').each(function(){
+            /** Hide the last contact person that has the 'd-flex' class. */
+            $(this).find('.contact-person-form.d-flex').last().removeClass('d-flex').addClass('d-none');
+            /** Display the last new contact person button. */
+            $('.contact-person-form.d-flex > div').last().removeClass('d-none');
+
+            /** Check if last input has value if it has trigger keyup to activate button. */
+            if(0 !== $(this).find('.contact-person-form.d-flex .input-type input').last().val().length) {
+                $(this).find('.contact-person-form.d-flex input').last().trigger('keyup');
+            }
+        });
+
+        /** Call to function that show/hide contact persons delete button. */
+        checkIfHideDeleteButton();
+    });
+});
+</script>

@@ -1,0 +1,93 @@
+title = "Detalii sesiune"
+url = "/lesson/:lessonId"
+layout = "web-app"
+description = "Page for viewing the details of a lesson"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "specialist"
+
+[lessonsActions]
+==
+<div class="container-fluid px-lg-5 mb-5">
+    <div class="row">
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'specialist/student'|page({studentId: lesson.connection.student.id }) }}">{{ 'page.specialist.dashboard.lesson.student.back'|_ }}</a>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-8">
+            <img class="img-fluid w-100" src="{{ 'assets/img/svg/dashboard/exercise/exercise_1.svg'|theme }}">
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <p class="text-gray-dark font-weight-bold">{{ lesson.title }}</p>
+            <div class="d-flex align-items-center mb-2">
+                <img class="img-fluid" src="{{ 'assets/img/svg/small-tag-icon.svg'|theme }}">
+                <p class="p-0 m-0 display-4 pl-3" style="color: #000;">{{ lesson.category }}</p>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/clock.svg'|theme }}">
+                <span class="ml-2 display-4 text-black"> {{ lesson.lesson_duration }} {{ 'page.specialist.dashboard.lesson.hours'|_ }}</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/calendar.svg'|theme }}">
+                <span class="ml-2 display-4 text-black">{{ lesson.day|date("d/m/Y") }}</span>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/user.svg'|theme }}">
+                <span class="ml-2 display-4 text-black">{{ lesson.connection.student.full_name }}</span>
+            </div>
+        </div>
+
+        <div class="col-12 mt-5">
+            <form action="POST" data-request="onUpdateStudentLesson" class="rounded shadow bg-white p-3 p-lg-4">
+                <div class="row">
+                    <div class="col-12 mt-2">
+                        <div class="d-flex align-items-center mb-3">
+                            <p class="p-0 m-0 text-black font-weigh-bold">{{'page.specialist.dashboard.lesson.description'|_}}</p>
+                            <img class="img-fluid ml-2" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="description" type="textarea" class="form-control" id="description" rows="6" cols="50" placeholder="">{{ lesson.description }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-5">
+                        <div class="d-flex align-items-center mb-3">
+                            <p class="p-0 m-0 text-black font-weigh-bold">{{'page.specialist.dashboard.lesson.feedback'|_}}</p>
+                            <img class="img-fluid ml-2" src="{{ 'assets/img/svg/dashboard/small-edit.svg'|theme }}">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="feedback" type="textarea" class="form-control" id="feedback" rows="6" cols="50" placeholder="">{{ lesson.feedback }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <input name="lesson" type="text" class="d-none" value="{{ lesson.id }}"></input>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <button type="submit" class="btn btn-sm px-5 btn-secondary mt-3">{{'page.specialist.dashboard.lesson.btn'|_}}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /** WYSWYG Editor. */
+             $('#description').richText();
+             $('#feedback').richText();
+        });
+    </script>
+{% endput %}

@@ -1,0 +1,40 @@
+/***********************************************
+************* Input placeholder ****************
+***********************************************/
+input {
+    font-size: 14px !important;
+    color: #252525 !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    background: #fff !important;
+}
+
+::placeholder {
+    font-size: 14px;
+    color: #ADB5BD !important;
+    line-height: 21px;
+    font-style: italic;
+}
+
+.form-styles {
+    font-family: 'Roboto-Regular', sans-serif;
+    font-weight: 500;
+    line-height: 23px;
+}
+
+/***********************************************
+********* Checkbox background checked **********
+***********************************************/
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+    background-color: #fab954;
+    border-color: #fab954;
+    outline: 0;
+}
+
+/***********************************************
+*********** Rounded checkbox toggle ************
+***********************************************/
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20rem; }
+.toggle.ios .toggle-handle { border-radius: 50%; }

@@ -1,0 +1,168 @@
+/***********************************************
+******************** Colors ********************
+***********************************************/
+
+/** Override bootstrap main colors. */
+$primary:   #0e4870;
+$secondary: #fab954;
+$dark:      #2e294e;
+$light:     #F4F5F7;
+$danger:    #EA4335;
+$success:   #7BCF95;
+
+/** Color for text muted. */
+$gray-600: #52567f;
+
+// Custom theme colors
+$theme-colors: () !default;
+$theme-colors: map-merge((
+        "secondary2":     #363636,
+        "gray-dark":      #32325d,
+        "white":          #ffffff,
+        "gray-light":     #ADB5BD,
+        "gray":           #D3D3D3,
+        "primary-dark":   #072C2A,
+        "primary-light":  #0E4870,
+        "gray-medium":    #E1E1E1,
+        "medium-dark":    #252525,
+        "black":          #000000,
+        "gray-2":         #636363,
+        "rgba-black":     rgba(0,0,0,0.6),
+        "chart-red":      #F6744F,
+        "chart-yellow":   #FAB955,
+        "chart-green":    #1B997B,
+        "blue":           #3297D3,
+    ),
+    $theme-colors);
+
+// Navbar-light variables
+// $navbar-light-color: $dark;
+// $navbar-light-hover-color: $primary;
+
+// Link variables
+// $link-color: $primary;
+// $link-hover-color: $primary;
+// $link-decoration: none !default;
+// $link-hover-decoration: underline !default;
+
+/***********************************************
+******************** Fonts *********************
+***********************************************/
+
+/** Fonts path. */
+$open-sans-font-path:     "../fonts/open-sans/";
+$titillium-web-font-path: "../fonts/titillium-web/";
+$roboto-font-path:        "../fonts/roboto/";
+
+/** Font family. */
+// $font-family-sans-serif: 'OpenSans-Regular', sans-serif;
+// $font-family-titilium:   'TitilliumWeb-Regular', sans-serif;
+$font-family-base:       'OpenSans-Regular-nu', sans-serif;
+
+/** Font size base. */
+$font-size-base: 1.15rem;
+$font-size-lg:   $font-size-base * 1.25;
+$font-size-sm:   $font-size-base * .875;
+$small-font-size: 16px;
+
+/** Heading font size. */
+$h1-font-size: 35px;
+$h2-font-size: 30px;
+$h3-font-size: 28px;
+$h4-font-size: 24px;
+$h5-font-size: 22px;
+$h6-font-size: 13px;
+
+// Heading font family
+// $headings-font-family: $font-family-sans-serif;
+
+// Heading font weight
+$headings-font-weight: bold;
+
+/** Displayes font variable. */
+$display1-size:      25px;
+$display1-weight:    400;
+$display2-size:      20px;
+$display2-weight:    400;
+// $display3-size:   24px;
+// $display3-weight: 400;
+$display4-size:      14px;
+$display4-weight:    400;
+
+
+/** Font weight */
+$font-weight-lighter: 300;
+$font-weight-light:   600;
+$font-weight-normal:  400;
+$font-weight-bold:    700;
+$font-weight-bolder:  800;
+
+/***********************************************
+***************** Buttons **********************
+***********************************************/
+
+// $input-btn-font-family: 'Muli-Regular' !default;
+// $btn-font-weight: 600;
+
+/** Btn general */
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1.5rem;
+// $btn-font-family: 'Muli-Regular';
+$btn-font-size: 16px;
+$btn-line-height: 22px;
+$btn-white-space: nowrap !default;
+
+// Border radius
+// $btn-border-radius: 5px;
+// $btn-border-radius-lg: 5px;
+// $btn-border-radius-sm: 6px;
+
+/** Btn small. */
+$btn-padding-y-sm: 0.35rem;
+$btn-padding-x-sm: 1.9rem;
+$btn-font-size-sm: 14px;
+$btn-line-height: 16px;
+$btn-border-radius-sm: 3px;
+
+/** Btn large. */
+$btn-padding-y-lg: 0.3rem !default;
+$btn-padding-x-lg: 2rem !default;
+$btn-font-size-lg: 16px !default;
+$btn-line-height-lg: 22px !default;
+
+/***********************************************
+***************** Box shadow *******************
+***********************************************/
+
+$box-shadow-sm: 0px 0px 3px rgba(50, 50, 93, 0.15), 0px 1px 0px rgba(0, 0, 0, 0.02);
+$box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+$box-shadow-lg: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+/***********************************************
+**************** Border-radius *****************
+***********************************************/
+
+$border-radius: 4px;
+// $border-radius-lg: 8px;
+
+/***********************************************
+**************** Pills *************************
+***********************************************/
+
+$nav-pills-link-active-color: $light;
+$nav-pills-link-active-bg: $secondary;
+
+/***********************************************
+**************** Dropdown **********************
+***********************************************/
+
+$dropdown-link-color: $primary;
+$dropdown-link-hover-color: $light;
+$dropdown-link-hover-bg: $secondary;
+$dropdown-font-size:$display4-size;
+
+/***********************************************
+************** Responsive text *****************
+***********************************************/
+
+$enable-responsive-font-sizes: true;

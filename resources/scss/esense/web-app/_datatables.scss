@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/***********************************************
+*************** Search input *******************
+***********************************************/
+
+.dataTables_filter label {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.dataTables_filter input {
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid rgba(223, 214, 214, 0.1);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    padding: 7px;
+    background-image: url("../../../img/svg/dashboard/search.svg");
+    background-repeat: no-repeat;
+    background-position: 97% center;
+}
+
+.dataTables_filter input:focus {
+    outline: none !important;
+    background-image:none;
+}
+
+.dataTables_filter input::placeholder {
+    margin-left: 25px;
+    font-style: italic;
+}
+
+.dataTables_filter input:focus::placeholder {
+    opacity: 0 !important;
+}
+
+/***********************************************
+**************** Table th/td *******************
+***********************************************/
+
+table.dataTable th {
+    border: none;
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    color: #9FA2B4 !important;
+}
+
+table.dataTable tbody tr td {
+    border: none;
+    background: #fff;
+    font-family: 'Mulish', sans-serif;
+}
+
+table.dataTable tbody tr {
+    border-top: 1.5px solid #DFE0EB;
+}
+
+table.dataTable tbody tr:last-child {
+    border-bottom: 1.5px solid #DFE0EB;
+}
+
+@media screen and (max-width: 767px) {
+
+    table.dataTable {
+        width: 100% !important;
+    }
+
+    table.dataTable th {
+        display: none;
+    }
+
+    table.dataTable tbody tr td {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/***********************************************
+***************** Pagination *******************
+***********************************************/
+
+.paginate_button {
+    position: relative;
+    color: #9FA2B4;
+    top: -5px;
+    cursor: pointer;
+}
+
+.paginate_button:hover {
+    color: #9FA2B4;
+    text-decoration: none;
+}
+
+.paginate_button.previous,
+.paginate_button.next {
+    font-size: 35px;
+    margin: 0px 3px;
+}
+
+.teacher-dashboard-pagination .paging_full_numbers {
+    padding: 0 10px;
+    margin: 0;
+}
+
+.teacher-dashboard-pagination .paginate_button {
+    position: relative;
+    color: #9FA2B4;
+    top: 0;
+    font-size: 14px;
+}
+
+.teacher-dashboard-pagination .paginate_button.previous,
+.teacher-dashboard-pagination .paginate_button.next {
+    font-size: 20px;
+    margin: 0px 3px;
+}
+
+.paginate_button.current {
+    color: #fab954 !important;
+}
+
+/***********************************************
+************** Pagination info *****************
+***********************************************/
+
+.dataTables_info {
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 0.3px;
+    color: #9FA2B4;
+    margin-right: 10px;
+}
+
+/***********************************************
+************** Datatables length ***************
+***********************************************/
+
+.dataTables_length label {
+    font-family: "Mulish", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    color: #9FA2B4;
+}
+
+.dataTables_length select {
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    color: #9FA2B4;
+}
+
+/***********************************************
+************** Datatables sorting **************
+***********************************************/
+
+table.dataTable thead>tr>th.sorting_asc,
+table.dataTable thead>tr>th.sorting_desc,
+table.dataTable thead>tr>th.sorting,
+table.dataTable thead>tr>td.sorting_asc,
+table.dataTable thead>tr>td.sorting_desc,
+table.dataTable thead>tr>td.sorting {
+    padding-left: 30px;
+}
+
+table.dataTable thead>tr>th:active,
+table.dataTable thead>tr>td:active {
+    outline: none;
+}
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    position: relative;
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:after {
+    position: absolute;
+    top: 50% !important;
+    transform: translateY(-50%);
+    left: 0;
+    display: block;
+    opacity: 0.3;
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:before {
+    left: 1em;
+    content: "\2191";
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+    left: 0.5em;
+    bottom: 0 !important;
+    content: "\2193";
+}
+
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:after {
+    opacity: 1;
+}
+
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:after {
+    opacity: 0;
+}
+
+div.dataTables_scrollHead table.dataTable {
+    margin-bottom: 0 !important;
+}
+
+div.dataTables_scrollBody table {
+    border-top: none;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+div.dataTables_scrollBody table thead .sorting:before,
+div.dataTables_scrollBody table thead .sorting_asc:before,
+div.dataTables_scrollBody table thead .sorting_desc:before,
+div.dataTables_scrollBody table thead .sorting:after,
+div.dataTables_scrollBody table thead .sorting_asc:after,
+div.dataTables_scrollBody table thead .sorting_desc:after {
+    display: none;
+}
+
+table.dataTable.table-sm>thead>tr>th :not(.sorting_disabled) {
+    padding-right: 20px;
+}
+
+table.dataTable.table-sm .sorting:before,
+table.dataTable.table-sm .sorting_asc:before,
+table.dataTable.table-sm .sorting_desc:before {
+    top: 5px;
+    right: 0.85em;
+}
+
+table.dataTable.table-sm .sorting:after,
+table.dataTable.table-sm .sorting_asc:after,
+table.dataTable.table-sm .sorting_desc:after {
+    top: 5px;
+}
+
+table.dataTable thead .no-sort.sorting:before,
+table.dataTable thead .no-sort.sorting_asc:before,
+table.dataTable thead .no-sort.sorting_desc:before,
+table.dataTable thead .no-sort.sorting_asc_disabled:before,
+table.dataTable thead .no-sort.sorting_desc_disabled:before {
+    display: none;
+}
+
+table.dataTable thead .no-sort.sorting:after,
+table.dataTable thead .no-sort.sorting_asc:after,
+table.dataTable thead .no-sort.sorting_desc:after,
+table.dataTable thead .no-sort.sorting_asc_disabled:after,
+table.dataTable thead .no-sort.sorting_desc_disabled:after {
+    display: none;
+}
+
+tr {
+    background: #fff !important;
+}

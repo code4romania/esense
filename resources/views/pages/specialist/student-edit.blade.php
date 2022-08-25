@@ -1,0 +1,399 @@
+title = "Editează profil elev"
+url = "/specialist/student-edit/:studentId"
+layout = "web-app"
+description = "Used for editing a student"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "specialist"
+
+[student]
+==
+<div class="container-fluid px-lg-4">
+    <div class="row">
+
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{'page.specialist.dashboard.student.back.link'|_}}</a>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="rounded shadow bg-white p-3 p-lg-4">
+
+                <div class="border-bottom">
+                    <p class="text-muted">{{'page.specialist.dashboard.student.add.profile.title'|_}}</p>
+                </div>
+
+                <!-- Form for editing student -->
+                <form method="POST" data-request="onUpdateStudent" data-request-validate data-request-flash data-request-files>
+                    <div class="row mt-2">
+
+                        <!-- Edit avatar -->
+                        <div class="col-12">
+                            <div class="row">
+                                <!-- Nav for switching gender -->
+                                <div class="col-12 col-md-6">
+                                    <p class="py-3 text-muted">{{'page.specialist.dashboard.student.add.profile.gen.title'|_}}</p>
+                                    <div class="d-flex">
+                                        <div class="nav flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link onChangeValue {% if student.gender == 'female' %} active {% endif %} btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-home-tab" data-gender="female" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                                {{'page.specialist.dashboard.student.add.gen.fata'|_}}
+                                            </a>
+                                            <a class="nav-link onChangeValue {% if student.gender == 'male' %} active {% endif %} ml-3 ml-lg-4 btn btn-sm btn-outline border-dark px-3 px-lg-5" id="v-pills-profile-tab" data-gender="male" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                                                {{'page.specialist.dashboard.student.add.gen.baiat'|_}}
+                                            </a>
+                                        </div>
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <p class="p-0 m-0 pt-3 text-muted">{{'page.specialist.dashboard.student.add.profile.avatar'|_}}</p>
+
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <!-- Girl avatar -->
+                                        <div class="tab-pane fade {% if student.gender == 'female' %} show active {% endif %}" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                            <div class="d-flex">
+                                                {% if student.avatar and student.gender == 'female' %}
+                                                    <img id="add-avatar" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{student.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                                                {% else %}
+
+                                                    <div class="avatars d-none">
+                                                        <div class="predifined-avatar active-avatar d-block">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}">
+                                                        </div>
+                                                        <div class="predifined-avatar d-block ml-4">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/girl-avatar-2.svg'|theme }}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="add-avatar">
+                                                        <img id="add-avatar" width="70" height="70" class="img-fluid rounded-circle add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <!-- Boy avatar -->
+                                        <div class="tab-pane fade {% if student.gender == 'male' %} show active {% endif %}" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                            <div class="d-flex">
+                                                {% if student.avatar and student.gender == 'male' %}
+                                                    <img id="add-avatar2" class="img-fluid img-avatar rounded-circle add-custom-avatar mt-2" src="{{student.avatar.getThumb(70,70, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                                                {% else %}
+                                                    <div class="avatars1 d-none">
+                                                        <div class="predifined-avatar1 active-avatar1 d-block">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-1.svg'|theme }}">
+                                                        </div>
+                                                        <div class="predifined-avatar1 d-block ml-4">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="add-avatar">
+                                                        <img id="add-avatar2" width="70" height="70" class="img-fluid  rounded-circle add-custom-avatar mt-2" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <!-- Input for adding custom avatar -->
+                                        <input name="avatar" class="d-none custom-avatar onChangeValue" onchange="previewFile(this)" accept="image/*" type="file" id="avatar" name="studentAvatar" />
+                                        <!-- Input for gender -->
+                                        <input name="gender" id="gender" class="d-none onChangeValue" type="text" value="{{student.gender}}" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Edit date of birth -->
+                        <div class="col-12">
+                            <p class="text-muted mt-5">{{'page.specialist.dashboard.student.edit.profile.personal.data'|_}}</p>
+                            <p class="display-4 text-gray-light">{{'page.specialist.dashboard.student.edit.profile.dob.label'|_}}</p>
+                            <div class="row">
+
+                                <!-- Select date -->
+                                <div class="col-12 col-md-4 col-lg-5 pr-lg-0 mr-lg-0">
+                                    <div class="form-group d-flex">
+                                        <input autocomplete="off" type="text" name="birthdate" id="birthdate" class="form-control onChangeValue" value="{{ student.birthdate|date("d-m-Y") }}">
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Input last name -->
+                        <div class="col-12 col-md-6">
+                            <div class="form-group d-flex">
+                                <input  type="text" class="form-control onChangeValue" name="surname" id="surname" placeholder="{{'page.specialist.dashboard.student.profile.input.last.name'|_}}" value="{{student.surname}}">
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <!-- Input first name -->
+                        <div class="col-12 col-md-6">
+                            <div class="form-group d-flex">
+                                <input type="text" class="form-control onChangeValue" name="name" id="name" placeholder="{{'page.specialist.dashboard.student.profile.input.first.name'|_}}" value="{{student.name}}">
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <!-- Input diagnostic description -->
+                        <div class="col-12">
+                            <label class="small" style="color: #BFB5BD;">{{'page.specialist.dashboard.student.profile.input.diagnostic'|_}}</label>
+                            <div class="form-group d-flex">
+                                <textarea class="form-control onChangeValue" name="description" id="description" rows="3">
+                                    {{student.description|raw}}
+                                </textarea>
+                                <span class="text-danger ml-2">*</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row">
+
+                                <!-- Select disability y/n -->
+                                <div class="col-12 col-md-6 ml-lg-0 pl-lg-0">
+                                    <div class="d-flex mb-3 mb-md-0">
+                                        <div class="form-check">
+                                            <label class="form-check-label display-4 text-gray-light" for="hearing_impairment">{{'page.specialist.dashboard.student.add.profile.checkbox1.label'|_}}</label>
+                                            <input class="onChangeValue" name="hearing_impairment" id="hearing_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'page.specialist.dashboard.student.toggle.yes'|_}}" data-off="{{'page.specialist.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.hearing_impairment %} checked {% endif %}>
+                                        </div>
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                                <!-- Select disability y/n -->
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex">
+                                        <div class="form-check">
+                                            <label class="form-check-label display-4 text-gray-light" for="visual_impairment">{{'page.specialist.dashboard.student.add.profile.checkbox2.label'|_}}</label>
+                                            <input class="onChangeValue" name="visual_impairment" id="visual_impairment" type="checkbox" data-toggle="toggle" data-onstyle="secondary" data-offstyle="gray-medium" data-size="xs" data-on="{{'page.specialist.dashboard.student.toggle.yes'|_}}" data-off="{{'page.specialist.dashboard.student.toggle.no'|_}}" data-style="ios" {% if student.visual_impairment %} checked {% endif %}>
+                                        </div>
+                                        <span class="text-danger ml-2">*</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <input name="id" class="d-none" type="text" id="id" value="{{ student.id }}"/>
+
+                        <div id="contact_persons_wrapper" class="pl-lg-3 pr-lg-4">
+                            <!-- First contact person -->
+                            <div id="person-1" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
+
+                                    index = 1
+                                    nextIndex = 2
+                                    displayDeleteButton = ( (student.contact_persons|length > 1) ? (true) : (false) )
+                                    display = ( (student.contact_persons[0]) ? (true) : (false) )
+                                    hideAddPerson = ( (student.contact_persons[1]) ? (true) : (false) )
+
+                                    lastNameValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].name) : ('') )
+                                    emailValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[0]) ? (student.contact_persons[0].description) : ('') )
+                                %}
+                            </div>
+
+                            <!-- Second contact person -->
+                            <div id="person-2" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
+
+                                    index = 2
+                                    nextIndex = 3
+                                    displayDeleteButton = ( (student.contact_persons[1]) ? (true) : (false) )
+                                    display = ( (student.contact_persons[1]) ? (true) : (false) )
+                                    hideAddPerson = ( (student.contact_persons[2]) ? (true) : (false) )
+
+                                    lastNameValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].name) : ('') )
+                                    emailValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[1]) ? (student.contact_persons[1].description) : ('') )
+                                %}
+                            </div>
+
+
+                            <!-- Third contact person -->
+                            <div id="person-3" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
+
+                                    index = 3
+                                    nextIndex = 4
+                                    displayDeleteButton = ( (student.contact_persons[2]) ? (true) : (false) )
+                                    display = ( (student.contact_persons[2]) ? (true) : (false) )
+                                    hideAddPerson = ( (student.contact_persons[3]) ? (true) : (false) )
+
+                                    lastNameValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].name) : ('') )
+                                    emailValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[2]) ? (student.contact_persons[2].description) : ('') )
+                                %}
+                            </div>
+
+                            <!-- Forth contact person -->
+                            <div id="person-4" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
+
+                                    index = 4
+                                    nextIndex = 5
+                                    displayDeleteButton = ( (student.contact_persons[3]) ? (true) : (false) )
+                                    display = ( (student.contact_persons[3]) ? (true) : (false) )
+                                    hideAddPerson = ( (student.contact_persons[4]) ? (true) : (false) )
+
+                                    lastNameValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].name) : ('') )
+                                    emailValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[3]) ? (student.contact_persons[3].description) : ('') )
+                                %}
+                            </div>
+
+                            <!-- Fifth contact person -->
+                            <div id="person-5" class="px-3 px-lg-2 my-4 rounded shadow-sm">
+                                {%
+                                    partial 'web-app/general/student-contact-person'
+
+                                    index = 5
+                                    displayDeleteButton = ( (student.contact_persons[4]) ? (true) : (false) )
+                                    display = ( (student.contact_persons[4]) ? (true) : (false) )
+                                    hideAddPerson = true
+
+                                    lastNameValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].surname) : ('') )
+                                    firstNameValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].name) : ('') )
+                                    emailValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].email) : ('') )
+                                    phoneValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].phone) : ('') )
+                                    textareaValue = ( (student.contact_persons[4]) ? (student.contact_persons[4].description) : ('') )
+                                %}
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="col-12 mb-5 mt-3">
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="add-student btn btn-sm text-white btn-gray-light px-lg-5" disabled>{{'page.specialist.dashboard.student.edit.profile.submit.btn.text'|_}}</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ro.min.js" integrity="sha512-OyKt3ZoVnoGpHGx10TMtzQTSDHKyGzHIXdOoOiaHcMJMGOR/ev9Y6ocEGd64HVPqGEwkg29xVVbavNjDPeg9GA==" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ ['assets/js/file-preview.js']|theme }}"></script>
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /** WYSWYG Editor. */
+            $('#description').richText({
+                id:'diagnostic',
+                class: 'onChangeValue',
+                useParagraph:true
+            });
+
+            /** Initiate the datepicker plugin. */
+            $('#birthdate').datepicker({
+                format: "dd-mm-yyyy",
+                weekStart: 1,
+                clearBtn: true,
+                language: "ro",
+                orientation: "bottom auto",
+                autoclose: true
+            });
+
+            /** Function that handles gender switch on active tab toggle */
+            $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+                /* Set the gender value. */
+                $('#gender').val($(e.target).data('gender'));
+            });
+
+            /** Add file input functionlity for plus-icon img. */
+            $(".add-custom-avatar").click(function () {
+                $(".custom-avatar").trigger('click');
+            });
+
+            /**
+             * Function for activating the finish button when
+             * values from all fields are selected
+             */
+            function activateFinishBtn() {
+                $('.add-student').removeAttr('disabled');
+                $('.add-student').removeClass('btn-gray-light');
+                $('.add-student').removeClass('text-white');
+                $('.add-student').addClass('btn-secondary');
+            }
+
+            /**
+             * Function for deactivating the finish button when
+             * values from all fields are selected
+             */
+            function deactivateFinishBtn() {
+                $('.add-student').attr('disabled');
+                $('.add-student').addClass('btn-gray-light');
+                $('.add-student').addClass('text-white');
+                $('.add-student').removeClass('btn-secondary');
+            }
+
+             /** Validation for activeting the finish button. */
+             $(document.body).on('change keyup', '.onChangeValue', function(){
+                if(
+                    (
+                        ((0 !== $("#birthdate").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#surname").val().length)  && ((0 == $("#birthdate").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#name").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#diagnostic .richText-editor").text().length) && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#contact_1_surname_id").val().length) && ((0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#contact_1_name_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_phone_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length) || (0 == $("#gender").val().length) )) ||
+                        ((0 !== $("#contact_1_phone_id").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length) || (0 == $("#gender").val().length)  )) ||
+                        ((0 !== $("#gender").val().length) && ((0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#birthdate").val().length) || (0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length) || (0 == $("#contact_1_phone_id").val().length) ))
+                    ) ||
+                    (
+                        ((0 !== $("#contact_2_surname_id").val().length) && ((0 == $("#contact_2_name_id").val().length) || (0 == $("#contact_2_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_2_name_id").val().length) && ((0 == $("#contact_2_surname_id").val().length) || (0 == $("#contact_2_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_2_phone_id").val().length) && ((0 == $("#contact_2_surname_id").val().length) ||(0 == $("#contact_2_name_id").val().length) ))
+                    ) ||
+                    (
+                        ((0 !== $("#contact_3_surname_id").val().length) && ((0 == $("#contact_3_name_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_3_name_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) || (0 == $("#contact_3_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_3_phone_id").val().length) && ((0 == $("#contact_3_surname_id").val().length) ||(0 == $("#contact_3_name_id").val().length) ))
+                    ) ||
+                    (
+                        ((0 !== $("#contact_4_surname_id").val().length) && ((0 == $("#contact_4_name_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_4_name_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) || (0 == $("#contact_4_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_4_phone_id").val().length) && ((0 == $("#contact_4_surname_id").val().length) ||(0 == $("#contact_4_name_id").val().length) ))
+                    ) ||
+                    (
+                        ((0 !== $("#contact_5_surname_id").val().length) && ((0 == $("#contact_5_name_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_5_name_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) || (0 == $("#contact_5_phone_id").val().length) )) ||
+                        ((0 !== $("#contact_5_phone_id").val().length) && ((0 == $("#contact_5_surname_id").val().length) ||(0 == $("#contact_5_name_id").val().length) ))
+                    )
+                ) {
+                    deactivateFinishBtn()
+                } else {
+                    activateFinishBtn()
+                }
+            });
+        });
+    </script>
+{% endput %}

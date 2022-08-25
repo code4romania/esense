@@ -1,0 +1,82 @@
+/** Put navigation arrow on owl-item sides. */
+.owl-stage{
+    position: relative;
+}
+
+.custom-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.owl-prev, .owl-next {
+    position: absolute;
+    background: none;
+    border: none;
+    z-index: 100;
+}
+
+.owl-prev {
+    top: 15px;
+    left: 10%;
+    background-color: transparent !important;
+    border: none !important;
+    transform: translate(-50%,-50%);
+    font-size: 15px !important;
+    color: #fff !important;
+}
+
+.owl-next {
+    top: 15px;
+    right: 2.5%;
+    background-color: transparent !important;
+    border: none !important;
+    transform: translate(-50%,-50%);
+    font-size: 15px !important;
+    color: #fff !important;
+}
+
+.owl-next:hover,
+.owl-prev:hover {
+    background: transparent !important;
+    border: none !important;
+}
+
+.owl-next:focus,
+.owl-prev:focus {
+    border: none;
+    outline: none;
+}
+
+@media screen and (max-width: 767px) {
+    .students-activity-owl-carousel .owl-prev {
+        top: 15px;
+        left: 0%;
+        transform: translate(0,-50%);
+    }
+
+    .students-activity-owl-carousel .owl-next {
+        top: 15px;
+        right: 0%;
+        transform: translate(0,-50%);
+    }
+}
+
+/** Change the color of dots in owl-carousel. */
+.owl-dots{
+    display: none;
+}
+
+@media screen and (max-width:1090px) {
+    canvas.donut-chart {
+        width: 250px !important;
+        height: 250px !important;
+    }
+}
+
+@media screen and (max-width:400px) {
+    canvas.donut-chart {
+        width: 220px !important;
+        height: 220px !important;
+    }
+}

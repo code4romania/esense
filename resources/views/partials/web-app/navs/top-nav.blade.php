@@ -1,0 +1,43 @@
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <div class="d-none d-lg-block">
+        <div class="d-flex align-items-center">
+            <p class="p-0 m-0 pl-3 user-name">{{'partial.navs.top.nav.welcome.message'|_}}&nbsp;{{ user.full_name }}</p>
+        </div>
+    </div>
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto d-flex align-items-center">
+
+        {% if user and 'specialist' == user.type and user.profile.affiliated %}
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item mr-2 ml-3">
+                <a class="nav-link" href="{{ 'specialist/notifications'|page }}">
+                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/top-nav/bell.svg'|theme }}">
+                </a>
+            </li>
+        {% endif %}
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item mr-lg-3">
+            {% if 'specialist' == user.type %}
+                <a class="nav-link" href="{{'specialist/profile-edit'|page}}">
+            {% else %}
+                <a class="nav-link" href="{{'school/profile-edit'|page}}">
+            {% endif %}
+                    {% if user.avatar %}
+                        <img class="img-fluid img-avatar rounded-circle ml-2" src="{{user.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar" style="cursor: pointer;">
+                    {% else %}
+                        <img width="40px" height="40px" class="img-fluid ml-2" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}" alt="avatar" style="cursor: pointer;">
+                    {% endif %}
+                </a>
+        </li>
+    </ul>
+
+</nav>
+<!-- End of Topbar -->

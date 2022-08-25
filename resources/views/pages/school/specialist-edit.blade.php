@@ -1,0 +1,200 @@
+title = "Editează profil profesor"
+url = "/school/specialist-edit/:specialistId"
+layout = "web-app"
+description = "Used for editing a specialist"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "school"
+
+[addresses]
+counties = 1
+
+[profileStaticData]
+schools = 1
+
+[specialist]
+==
+<div class="container-fluid px-lg-4 mb-5">
+    <div class="row">
+
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'school/specialists'|page }}">{{'page.school.dashboard.specilists.back.link.text'|_}}</a>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <!-- Edit profile form -->
+            <form data-request='onSpecialistUpdate' data-request-data='id: {{ specialist.id }}'>
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="shadow-lg rounded bg-white p-0 p-md-5">
+                            <div class="shadow rounded p-3 py-4">
+                                <p class="display-2 text-medium-dark form-styles p-0 m-0 mb-3">{{'page.school.dashboard.edit.profile.title'|_}}</p>
+
+                                <!-- Teacher avatar -->
+                                <div class="d-flex align-items-center mt-3 mb-4">
+                                    <p class="p-0 m-0 small text-gray-darl">{{'page.school.dashboard.profile.avatar.text'|_}}</p>
+                                    {% if specialist.avatar %}
+                                        <img class="img-fluid img-avatar add-custom-avatar ml-3" src="{{specialist.avatar.getThumb(80,80, { mode : 'crop' } )}}" alt="avatar">
+                                    {% else %}
+                                        <div class="add-avatar">
+                                            <img id="add-avatar" class="img-fluid add-custom-avatar ml-3" src="{{ 'assets/img/svg/dashboard/add-student-gray.svg'|theme }}">
+                                            <input name="avatar" class="d-none custom-avatar onChangeValue" type="file" id="avatar" name="studentAvatar" />
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="row">
+
+                                    <!-- Last name input -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" name="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="{{'page.school.dashboard.edit.form.input.last.name.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.surname }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- First name input -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="{{'page.school.dashboard.edit.form.input.first.name.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.name }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone number input -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="number" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="{{'page.school.dashboard.edit.form.input.phone.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.phone }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- Email input -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="{{'page.school.dashboard.edit.form.input.email.placeholder'|_}}" style="font-style: italic;" value="{{ specialist.user.email }}">
+                                        </div>
+                                    </div>
+
+                                    <!-- County select -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group register-select">
+                                            <select name="county" id="specialistCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="{{'page.school.dashboard.edit.select.no.result'|_}}" data-style="btn-white">
+                                                {% for key, county in counties %}
+                                                    <option value="{{ key }}">{{ county }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- City select -->
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group register-select">
+                                            <select name="city" id="specialistCity" class="form-control border outline-none selectpicker" data-none-results-text="{{'page.school.dashboard.edit.select.no.result'|_}}" data-live-search="true" data-style="btn-white" disabled></select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Description input -->
+                            <div class="shadow rounded p-3 py-4 mt-5">
+                                <p class="display-2 text-medium-dark form-styles pl-3">{{'page.school.dashboard.specialist.edit.form.description'|_}}</p>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="description" id="description" rows="5">
+                                            {{ specialist.description|raw }}
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit button -->
+                            <div class="col-12 mt-5 mb-5 mb-lg-0">
+                                <div class="d-flex justify-content-end">
+                                    <button role="button" type="submit" class="btn btn-sm btn-secondary px-5">{{'page.school.dashboard.edit.profile.btn.text'|_}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /** WYSWYG Editor. */
+            $('#description').richText();
+
+            /** Add file input functionlity for plus-icon img. */
+            $(".add-custom-avatar").click(function () {
+                $(".custom-avatar").trigger('click');
+            });
+
+            /**
+             * Extracts the initial cities.
+             */
+            $.request('onGetCities', {
+                data: {
+                    countyId: 1
+                },
+                success: function(data) {
+                    /* Reset the city select content. */
+                    $('#specialistCity').html('');
+
+                    /* Parse all received citied and add them. */
+                    for (const city in data) {
+                        if( data[city] == {{ specialist.city_id }} ) {
+                            $('#specialistCity').append(`<option value="${data[city]}" selected>${city}</option>`);
+                        } else {
+                            $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                        }
+                    }
+
+                    /* Activate the select. */
+                    $('#specialistCity').prop("disabled", false);
+                    $("#specialistCity").selectpicker("refresh");
+                }
+            });
+
+            /**
+             * Function that extracts the cities of a county.
+             */
+            $('#specialistCounty').on('change', function() {
+                $.request('onGetCities', {
+                    data: {
+                        countyId: this.value
+                    },
+                    success: function(data) {
+                        /* Reset the city select content. */
+                        $('#specialistCity').html('');
+
+                        /* Parse all received citied and add them. */
+                        for (const city in data) {
+                            if( data[city] == {{ specialist.city_id }} ) {
+                                $('#specialistCity').append(`<option value="${data[city]}" selected>${city}</option>`);
+                            } else {
+                                $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                            }
+                        }
+
+                        /* Activate the select. */
+                        $('#specialistCity').prop("disabled", false);
+                        $("#specialistCity").selectpicker("refresh");
+                    }
+                })
+            });
+        });
+    </script>
+{% endput %}

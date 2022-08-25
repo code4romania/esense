@@ -1,0 +1,149 @@
+title = "Școală"
+url = "/specialist/school"
+layout = "web-app"
+description = "Displays teacher affiliated school profile"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "specialist"
+
+[chartsActions]
+==
+<div class="container-fluid px-lg-4">
+    <div class="row">
+
+        <!-- Dashboard title -->
+        <div class="col-12">
+            <h4 class="text-gray-dark font-weight-light mb-4">{{ user.profile.school.name }}</h4>
+        </div>
+
+        <!-- School activity chart -->
+        <div id="activity-chart-container" class="col-12 mt-3">
+
+            {% set durations = user.profile.getYearLessonsDurations() %}
+            <!-- Partial for student activity chart -->
+            {%
+                partial 'web-app/specialist/school-activity-chart'
+
+                year = 'now'|date('Y')
+                years = user.profile.school.lessons_years
+                values = durations['values']
+                tooltips = durations['tooltips']
+            %}
+        </div>
+
+        <!-- Teachers table -->
+        <div class="col-12 my-5">
+            <div class="table-responsive rounded p-3" style="overflow-x: hidden; background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">
+                <p class="font-weight-bold text-dark">{{'page.specialist.dashboard.school.table.title'|_}} <span class="text-gray-medium font-weight-normal">({{ user.profile.school.active_specialists.count }})</span></p>
+                <table id="teachers-datatable" class="table table-striped table-sm pt-3 px-3 m-0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <!-- Teacher name column -->
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.school.table.column_1'|_}}</p></th>
+                            <!-- Number of students column -->
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.school.table.column_2'|_}}</p></th>
+                            <!-- Registration date column -->
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.school.table.column_3'|_}}</p></th>
+                            <!-- Email column -->
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.school.table.column_4'|_}}</p></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for specialist in user.profile.school.active_specialists %}
+                            <tr>
+                            <!-- Teacher avatar and name -->
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
+                                            <div>
+                                                {% if specialist.user.avatar %}
+                                                    <img class="img-fluid img-avatar rounded-circle add-custom-avatar" src="{{specialist.user.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
+                                                {% else %}
+                                                    <img class="img-fluid add-custom-avatar" width="40px" height="40px" src="{{ 'assets/img/svg/dashboard/user-bordered.svg'|theme }}">
+                                                {% endif %}
+                                            </div>
+                                            <div class="d-flex flex-column ml-2">
+                                                <p class="p-0 m-0 display-4 font-weight-light" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ specialist.full_name }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- Number of students row -->
+                                <td>
+                                    <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ specialist.students.count }}</p>
+                                    </div>
+                                </td>
+
+                                <!-- Registration date row -->
+                                <td>
+                                    <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ specialist.created_at|date("d/m/Y") }}</p>
+                                    </div>
+                                </td>
+
+                                <!-- Email row -->
+                                <td>
+                                    <div class="pl-2 py-1 py-lg-3 d-flex align-items-center">
+                                        <p class="p-0 m-0 pt-2 font-weight-light display-4 text-gray-light" style="letter-spacing: 0.2px; line-height:20px;">{{ specialist.email }}</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% put scripts %}
+    <!-- Scripts for datatables -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /***********************************************
+            *********** Teacher datatable ******************
+            ***********************************************/
+
+            $('#teachers-datatable').DataTable({
+                dom: '<"row"<"col-12"t>><"row bg-white p-3 rounded-bottom"<"col-12 col-lg-6 d-flex align-items-center"l><"col-12 col-lg-6 d-flex align-items-center justify-content-lg-end"ip>>',
+                lengthMenu: [
+                    [5, 10, 25, 50, 100, -1],
+                    [5, 10, 25, 50, 100]
+                ],
+                bSort: true,
+                responsive: true,
+                processing: true,
+                pagingType: 'simple',
+                language: {
+                    "info": "_PAGE_ - _PAGE_ of _PAGES_",
+                    'zeroRecords': "{{'general.datatable.zeroRecords'|_}}",
+                    'emptyPanes': "{{'general.datatable.emptyPanes'|_}}",
+                    'emptyTable': "{{'general.datatable.emptyTable'|_}}",
+                    'search': '',
+                    'searchPlaceholder': "Cauta un elev dupa nume",
+                    'lengthMenu': "{{'general.datatable.lengthMenu'|_}}: _MENU_",
+                    'paginate': {
+                        'first': '«',
+                        'previous': '‹',
+                        'next': '›',
+                        'last': '»',
+                    },
+                    'aria': {
+                        'paginate': {
+                            'first': "{{'general.datatable.first'|_}}",
+                            'previous': "{{'general.datatable.previous'|_}}",
+                            'next': "{{'general.datatable.next'|_}}",
+                            'last': "{{'general.datatable.last'|_}}"
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endput %}

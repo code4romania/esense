@@ -1,0 +1,91 @@
+/***********************************************
+**************** Hero section ******************
+***********************************************/
+
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.hero-background {
+    position: absolute;
+    height: 90%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+}
+
+@media screen and (max-width: 991px) {
+    .hero {
+        background: #0e4870;
+    }
+}
+
+/***********************************************
+*************** Info section ****************
+***********************************************/
+
+/** Background. */
+.info {
+    position: relative;
+    background: url("../../../img/svg/landing-page-info-background.svg");
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/** Parteneri. */
+.partener-1,
+.partener-2,
+.partener-3,
+.partener-4 {
+    position: relative;
+}
+
+.partener-description {
+    position: absolute;
+    bottom:5%;
+    height: 20%;
+    width: 100%;
+    padding: 0px 10px;
+}
+
+@media screen and (min-width:1750px) {
+    .partener-description {
+        position: absolute;
+        bottom:5%;
+        height: 27%;
+        width: 100%;
+        padding: 0px 10px;
+    }
+}
+
+/***********************************************
+*************** Form section *******************
+***********************************************/
+
+.form-container {
+    position: relative;
+}
+
+.form-bg-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: radial-gradient(100% 284.32% at 100% 0%, #0E4870 0%, #498AB8 100%);;
+    z-index: -1;
+}
+.form-bg-2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: #363636;
+    z-index: -1;
+}

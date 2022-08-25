@@ -1,0 +1,32 @@
+/***********************************************
+*************** Navbar *************************
+***********************************************/
+.roboto-family {
+    font-family: 'Roboto-Regular', sans-serif;
+}
+
+.logo-blue {
+    display: block;
+}
+
+.logo-white {
+    display: none;
+}
+
+.nav-btn {
+    width: 140px;
+}
+
+@media screen and (max-width:991px) {
+    .logo-blue {
+        display: none;
+    }
+
+    .logo-white {
+        display: block;
+    }
+
+    .navbar-custom {
+        background: #0e4870;
+    }
+}

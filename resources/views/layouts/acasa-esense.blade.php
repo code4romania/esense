@@ -1,0 +1,370 @@
+description = "Acasă e-Sense - [layout]"
+
+[staticPage]
+useContent = 0
+default = 0
+
+[session]
+security = "all"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
+
+[contactform]
+
+==
+
+<!--HOME PAGE E-SENSE design variables-->
+{variable name="homeIntroTitle" label="Text intro" tab="Acasă e-Sense" type="text"}{/variable}
+{variable name="homeIntroRegisterButtonText" label="Text buton legătură pagină înregistrare" tab="Acasă e-Sense" type="text"}{/variable}
+{variable name="homeImagesSitePreview" label="Imagine reprezentativă site" tab="Acasă e-Sense" type="mediafinder" mode="image"}{/variable}
+
+{variable name="homeAboutTitle" label="Titlu secțiune 'Despre'" tab="Acasă e-Sense" type="text"}{/variable}
+{variable name="homeAboutText1" label="Text 1 descriere site" tab="Acasă e-Sense" type="richeditor" size="small"}{/variable}
+{variable name="homeAboutText2" label="Text 2 descriere site" tab="Acasă e-Sense" type="richeditor" size="small"}{/variable}
+{variable name="homeAboutFinancier" label="Finanțare proiect" tab="Acasă e-Sense" type="text"}{/variable}
+{variable name="homeImagesLogoFinancier" label="Logo finanțare" tab="Acasă e-Sense" type="mediafinder" mode="image"}{/variable}
+
+{variable name="homeInfoTitle" label="Titlu secțiune prezentare proiect" tab="Acasă e-Sense" type="text"}{/variable}
+{variable name="homeInfoSubtitle1" label="Nume proiect" tab="Acasă e-Sense" type="text"}{/variable}
+{variable name="homeInfoSubtitle2" label="Descriere scurtă" tab="Acasă e-Sense" type="text"}{/variable}
+{variable name="homeImagesSiteVideoPresentation" label="Fișier video prezentare proiect (dacă nu este încărcat niciun fișier, va apărea doar o imagine plasată în momentul construirii sitului)" tab="Acasă e-Sense" type="mediafinder"}{/variable}
+
+{variable name="homePartnersTitle" label="Titlu secțune parteneri proiect" tab="Parteneri" type="text"}{/variable}
+{variable name="homePartnersSubtitle1" label="Descriere parteneriat (1)" tab="Parteneri" type="richeditor" size="small"}{/variable}
+{variable name="homePartnersSubtitle2" label="Descriere parteneriat (2)" tab="Parteneri" type="richeditor" size="small"}{/variable}
+{variable name="homePartnersName_1" label="Denumire partener _1" tab="Parteneri" type="text"}{/variable}
+{variable name="homePartnersLocation_1" label="Localizare partener _1" tab="Parteneri" type="text"}{/variable}
+{variable name="homeImagesPartners_1" label="Imagine partener _1" tab="Parteneri" type="mediafinder" mode="image"}{/variable}
+{variable name="homePartnersName_2" label="Denumire partener _2" tab="Parteneri" type="text"}{/variable}
+{variable name="homePartnersLocation_2" label="Localizare partener _2" tab="Parteneri" type="text"}{/variable}
+{variable name="homeImagesPartners_2" label="Imagine partener _2" tab="Parteneri" type="mediafinder" mode="image"}{/variable}
+{variable name="homePartnersName_3" label="Denumire partener _3" tab="Parteneri" type="text"}{/variable}
+{variable name="homePartnersLocation_3" label="Localizare partener _3" tab="Parteneri" type="text"}{/variable}
+{variable name="homeImagesPartners_3" label="Imagine partener _3" tab="Parteneri" type="mediafinder" mode="image"}{/variable}
+{variable name="homePartnersName_4" label="Denumire partener _4" tab="Parteneri" type="text"}{/variable}
+{variable name="homePartnersLocation_4" label="Localizare partener _4" tab="Parteneri" type="text"}{/variable}
+{variable name="homeImagesPartners_4" label="Imagine partener _4" tab="Parteneri" type="mediafinder" mode="image"}{/variable}
+
+{variable name="homeContactFormTitle" label="Titlu intro formular de contact" tab="Formular contact" type="richeditor" size="small"}{/variable}
+{variable name="homeContactFormLabelName" label="Text etichetă cîmp prenume" tab="Formular contact" type="text"}{/variable}
+{variable name="homeContactFormPlaceholderName" label="Text înlocuitor în cîmpul prenume" tab="Formular contact" type="text"}{/variable}
+{variable name="homeContactFormLabelSurname" label="Text etichetă cîmp nume" tab="Formular contact" type="text"}{/variable}
+{variable name="homeContactFormPlaceholderSurname" label="Text înlocuitor în cîmpul nume" tab="Formular contact" type="text"}{/variable}
+{variable name="homeContactFormLabelEmail" label="Text etichetă cîmp email" tab="Formular contact" type="text"}{/variable}
+{variable name="homeContactFormPlaceholderEmail" label="Text înlocuitor în cîmpul email" tab="Formular contact" type="text"}{/variable}
+{variable name="homeContactFormLabelMessage" label="Text etichetă cîmp mesaj" tab="Formular contact" type="text"}{/variable}
+{variable name="homeContactFormSubmitButton" label="Text buton expediere mesaj" tab="Formular contact" type="text"}{/variable}
+
+
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <link href="{{ [
+        'assets/scss/esense/landing-page/landing-page.scss',
+    ]|theme }}" rel="stylesheet">
+
+    {% partial 'web-app/general/google-analytics' %}
+
+    <body>
+        {% partial 'navbar' %}
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        <!-- Home section -->
+        <section class="min-vh-100">
+            <div class="container-fluid hero">
+                <div class="container mt-md-5 mt-lg-0 py-md-5 py-lg-0">
+                    <div class="row min-vh-100">
+                        <div class="col-12 col-lg-6 order-2 order-lg-1 d-flex align-items-center">
+                            <div class="d-none d-lg-block">
+                                <h1 class="text-dark text-left font-weight-bold p-0 m-0 pr-lg-5" style="line-height: 48px;">
+                                    {{ homeIntroTitle }}
+                                </h1>
+                                <a href="{{ 'register-form' | page }}" class="btn btn-sm btn-primary px-lg-5 mt-2">{{ homeIntroRegisterButtonText }}</a>
+                            </div>
+                            <div class="pr-lg-5 d-block d-lg-none">
+                                <h1 class="text-white font-weight-bolder" style="line-height: 48px;">
+                                    {{ homeIntroTitle }}
+                                </h1>
+                                <a class="btn btn-sm btn-secondary text-white px-lg-5 mt-2" href="{{ 'register-form' | page }}">{{ homeIntroRegisterButtonText }}</a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 d-flex align-items-end align-items-lg-center order-1 order-lg-2">
+                            <div>
+                                <img class="img-fluid w-100"
+                                     src="{% if homeImagesSitePreview %}
+                                            {{ homeImagesSitePreview | media }}
+                                          {% else %}
+                                             {{ 'assets/img/svg/hero-section-laptop.svg' | theme }}
+                                         {% endif %}"
+                                     alt="Reprezentare în miniatură a sitului pe un ecran de laptop">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hero section background image -->
+                <div class="hero-background">
+                    <img class="img-fluid h-100 w-100" src="{{ 'assets/img/svg/hero-section-background.svg' | theme }}" alt="Imagine de fundal pentru prima pagină a sitului">
+                </div>
+            </div>
+        </section>
+
+        <!-- About us section -->
+        <section class="mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-gray-dark font-weight-light" style="line-height: 48px;">{{ homeAboutTitle }}</h1>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ homeAboutText1 | raw }}</p>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ homeAboutText2 | raw }}</p>
+                    </div>
+                    <div class="col-12 my-3 my-md-0">
+                        <div class="d-flex align-items-baseline justify-content-center justify-content-md-end flex-column flex-md-row">
+                            <h5 class="text-gray-dark font-weight-normal align-self-md-end align-self-start">{{ homeAboutFinancier }}</h5>
+                            <img class="img-fluid ml-md-4" style="margin-bottom: 7.3px;"
+                                 src="{% if homeImagesLogoFinancier %}
+                                        {{ homeImagesLogoFinancier | media }}
+                                       {% else %}
+                                         {{ 'assets/img/svg/orange-black.svg' | theme }}
+                                       {% endif %}"
+                                 alt="Logo compania Orange">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Info section -->
+        <section class="info mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="">
+                            <h1 class="text-white text-center mt-5 pt-5 font-weight-light" style="line-height: 48px;">{{ homeInfoTitle }}</h1>
+                            <h4 class="text-center font-weight-normal text-white" style="line-height: 33px;"><span class="font-weight-bold">{{ homeInfoSubtitle1 }}</span> - {{ homeInfoSubtitle2 }}</h4>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mt-4 text-center mb-lg-n5">
+
+                            {% if homeImagesSiteVideoPresentation %}
+
+                            <video
+                                src="{{ homeImagesSiteVideoPresentation | media }}" controls width="100%">
+                            </video>
+
+                            {% else %}
+
+                            <img class="img-fluid"
+                                 src="{{ 'assets/img/svg/info-section-presentation-video.svg' | theme }}"
+                                 alt="Video de prezentare a proiectului">
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partners -->
+        <section class="my-5">
+            <div id="parteneri" class="container pt-5 mt-lg-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-gray-dark font-weight-light" style="line-height: 48px;">{{ homePartnersTitle }}</h1>
+                        <p class="text-muted display-2" style="line-height: 34px;">{{ homePartnersSubtitle1 | raw }}</p>
+                        <p class="text-muted display-2">{{ homePartnersSubtitle2 | raw }}</p>
+                    </div>
+
+                    <div class="col-12 mt-3 mb-5">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-3 w-100 my-3 my-lg-0">
+                                <div class="partener-1">
+                                    <div class="h-100 d-flex justify-content-end flex-column">
+                                        <img class="img-fluid w-100 h-100" src="{% if homeImagesPartners_1 %}{{ homeImagesPartners_1 | media }}{% else %}{{ 'assets/img/svg/timisoara.png' | theme }}{% endif %}" alt="{{ homePartnersName_1 }}">
+                                        <div class="partener-description d-flex flex-column">
+                                            <p class="small text-white p-0 m-0" style="line-height: 22px;">{{ homePartnersName_1 }}</p>
+                                            <p class="text-white display-2 p-0 m-0 mt-auto" style="line-height: 22px;">{{ homePartnersLocation_1 }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 my-3 my-lg-0">
+                                <div class="partener-2">
+                                    <div class="h-100 d-flex justify-content-end flex-column">
+                                        <img class="img-fluid w-100 h-100" src="{% if homeImagesPartners_2 %}{{ homeImagesPartners_2 | media }}{% else %}{{ 'assets/img/svg/iasi.png' | theme }}{% endif %}" alt="{{ homePartnersName_2 }}">
+                                        <div class="partener-description d-flex flex-column">
+                                            <p class="small text-white p-0 m-0" style="line-height: 22px;">{{ homePartnersName_2 }}</p>
+                                            <p class="text-white display-2 p-0 m-0 mt-auto" style="line-height: 22px;">{{ homePartnersLocation_2 }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 my-3 my-lg-0">
+                                <div class="partener-3">
+                                    <div class="h-100 d-flex justify-content-end flex-column">
+                                        <img class="img-fluid w-100 h-100" src="{% if homeImagesPartners_3 %}{{ homeImagesPartners_3 | media }}{% else %}{{ 'assets/img/svg/oradea.png' | theme }}{% endif %}" alt="{{ homePartnersName_3 }}">
+                                        <div class="partener-description d-flex flex-column">
+                                            <p class="small text-white p-0 m-0" style="line-height: 22px;">{{ homePartnersName_3 }}</p>
+                                            <p class="text-white display-2 p-0 m-0 mt-auto" style="line-height: 22px;">{{ homePartnersLocation_3 }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 my-3 my-lg-0">
+                                <div class="partener-4">
+                                    <div class="h-100 d-flex justify-content-end flex-column">
+                                        <img class="img-fluid w-100 h-100" src="{% if homeImagesPartners_4 %}{{ homeImagesPartners_4 | media }}{% else %}{{ 'assets/img/svg/code4ro.png' | theme }}{% endif %}" alt="{{ homePartnersName_4 }}">
+                                        <div class="partener-description d-flex flex-column">
+                                            <p class="small text-white p-0 m-0 align-self-start" style="line-height: 22px;">{{ homePartnersName_4 }}</p>
+                                            <p class="text-white display-2 p-0 m-0 mt-auto" style="line-height: 22px;">{{ homePartnersLocation_4 }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="mt-5 pt-5 min-vh-100 rounded-top d-none"
+                 style="background: radial-gradient(100% 284.32% at 100% 0%, #0E4870 0%, #498AB8 100%);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="testimonials-owl-carousel owl-carousel owl-theme">
+                            <div class="item mt-5">
+                                <div>
+                                    <img class="rounded-100 mb-3" width="80px" height="80px" src="{{ 'assets/img/svg/user-test.svg' | theme }}" alt="Imagine profil">
+                                </div>
+                                <p class="px-5 text-center text-white display-1" style="line-height: 34px;">Ultrices est laoreet
+                                    vitae et felis dui eget orci pharetra. Adipiscing aliquet nisi eu netus neque, pharetra
+                                    senectus nisi. In nisi, felis pharetra eget ut eu eget nulla. Lectus aliquam porta et
+                                    lectus. Feugiat.</p>
+                                <p class="text-white text-center pt-3">- Anca Marinescu, profesor, Iași</p>
+                            </div>
+                            <div class="item mt-5">
+                                <div>
+                                    <img class="rounded-100 mb-3" width="80px" height="80px" src="{{ 'assets/img/svg/user-test.svg' | theme }}" alt="Imagine profil">
+                                </div>
+                                <p class="px-5 text-center text-white display-1" style="line-height: 34px;">Ultrices est laoreet
+                                    vitae et felis dui eget orci pharetra. Adipiscing aliquet nisi eu netus neque, pharetra
+                                    senectus nisi. In nisi, felis pharetra eget ut eu eget nulla. Lectus aliquam porta et
+                                    lectus. Feugiat.</p>
+                                <p class="text-white text-center pt-3">- Anca Marinescu, profesor, Iași</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact form -->
+        <section class="w-100 min-vh-100 pt-5 form-container" id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 px-lg-5">
+                        <div class="px-lg-5 bg-light rounded shadow">
+                            <div class="d-flex justify-content-center">
+                                <img class="img-fluid my-4" src="{{ 'assets/img/svg/message-icon.svg' | theme }}" alt="Emblemă pentru mesaj formular de contact">
+                            </div>
+                            <div class="px-2 px-lg-5">
+                                <h5 class="text-center font-weight-normal px-lg-5 text-gray-dark" style="line-height: 30px;">{{ homeContactFormTitle | raw }}</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-5">
+
+                                    <form method="POST" data-request="onSubmit">
+                                        <div class="row">
+
+                                            <!-- First name -->
+                                            <div class="col-12 col-md-6 mb-3">
+                                                <label class="display-4 text-muted px-3 px-lg-0" for="first_name" style="line-height: 21px;">{{ homeContactFormLabelName }}</label>
+                                                <div class="input-group mb-3 px-3 px-lg-0">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text bg-white border-light">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/user-form-icon.svg' | theme }}" alt="Emblemă utilizator pentru prenume">
+                                                        </span>
+                                                    </div>
+                                                    <input name="first_name" type="text" value="{{ (user) ? (user.name) : ('') }}" class="form-control border-left-0 border-light pl-0" placeholder="{{ homeContactFormPlaceholderName }}" aria-label="first_name" aria-describedby="basic-addon1" id="first_name">
+                                                </div>
+                                            </div>
+
+                                            <!-- Last name -->
+                                            <div class="col-12 col-md-6 mb-3">
+                                                <label class="display-4 text-muted px-3 px-lg-0" for="last_name" style="line-height: 21px;">{{ homeContactFormLabelSurname }}</label>
+                                                <div class="input-group mb-3 px-3 px-lg-0">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text bg-white border-light">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/form-label-icon.svg' | theme }}" alt="Emblemă cu etichetă pentru nume">
+                                                        </span>
+                                                    </div>
+                                                    <input name="last_name" type="text" value="{{ (user) ? (user.surname) : ('') }}" class="form-control border-left-0 border-light pl-0" placeholder="{{ homeContactFormPlaceholderSurname }}" aria-label="last_name" aria-describedby="basic-addon1" id="last_name">
+                                                </div>
+                                            </div>
+
+                                            <!-- Email -->
+                                            <div class="col-12 mb-3">
+                                                <label class="display-4 text-muted px-3 px-lg-0" for="email" style="line-height: 21px;">{{ homeContactFormLabelEmail }}</label>
+                                                <div class="input-group mb-3 px-3 px-lg-0">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text bg-white border-light">
+                                                            <img class="img-fluid" src="{{ 'assets/img/svg/form-email-icon.svg' | theme }}" alt="Emblemă cu plic pentru email">
+                                                        </span>
+                                                    </div>
+                                                    <input name="email" type="email" value="{{ (user) ? (user.email) : ('') }}" class="form-control border-left-0 border-light pl-0" placeholder="{{ homeContactFormPlaceholderEmail }}"
+                                                           aria-label="email" aria-describedby="basic-addon1" id="email">
+                                                </div>
+                                            </div>
+
+                                            <!-- Message -->
+                                            <div class="col-12 mb-3">
+                                                <div class="form-group px-3 px-lg-0">
+                                                    <label class="display-4 text-muted" for="message" style="line-height: 21px;">{{ homeContactFormLabelMessage }}</label>
+                                                    <textarea name="message" class="form-control border-light" id="message" rows="4"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit btn -->
+                                            <div class="col-12">
+                                                <div class="d-flex justify-content-lg-end justify-content-center mb-3">
+                                                    <button name="submit"  role="button" type="submit" class="btn btn-sm btn-secondary px-5">{{ homeContactFormSubmitButton }}</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-bg-1"></div>
+            <div class="form-bg-2"></div>
+        </section>
+
+        {% partial 'footer-columns' %}
+
+        {% partial 'footer' %}
+
+        {% partial 'footer-scripts' %}
+
+    </body>
+
+</html>

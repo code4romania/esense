@@ -1,0 +1,111 @@
+description = "Demo joc - [layout]"
+
+[staticPage]
+useContent = 0
+default = 0
+
+[session]
+security = "all"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
+
+==
+
+<!-- DEMO GAME PAGE design variables -->
+{variable name="demoGameTitle" label="Titlu joc" tab="Demo joc" type="text"}{/variable}
+{variable name="demoGameCategory" label="Categorie joc" tab="Demo joc" type="text"}{/variable}
+{variable name="demoGameText1" label="Text 1 joc" tab="Demo joc" type="text"}{/variable}
+{variable name="demoGameText2" label="Text 2 joc" tab="Demo joc" type="text"}{/variable}
+{variable name="demoGameText3" label="Text 3 joc" tab="Demo joc" type="text"}{/variable}
+{variable name="demoGameText4" label="Text 4 joc" tab="Demo joc" type="text"}{/variable}
+{variable name="demoGameLinkText" label="Text Buton pornire joc" tab="Demo joc" type="text"}{/variable}
+
+{variable name="demoGameDescriptionTitle" label="Titlu descriere joc" tab="Demo joc" type="text"}{/variable}
+{variable name="demoGameDescriptionText1" label="Text 1 descriere joc" tab="Demo joc" type="richeditor" size="small"}{/variable}
+{variable name="demoGameDescriptionText2" label="Text 2 descriere joc" tab="Demo joc" type="richeditor" size="small"}{/variable}
+{variable name="demoGameDescriptionText3" label="Text 3 descriere joc" tab="Demo joc" type="richeditor" size="small"}{/variable}
+
+
+<html lang="en">
+
+    {% partial 'head' %}
+
+    <link href="{{ [
+        'assets/scss/esense/landing-page/landing-page.scss',
+    ]|theme }}" rel="stylesheet">
+
+    {% partial 'web-app/general/google-analytics' %}
+
+    <body>
+        {% partial 'navbar' %}
+
+        {% flash %}
+            <p
+                data-control="flash-message"
+                class="flash-message fade {{ type }}"
+                data-interval="5">
+                {{ message }}
+            </p>
+        {% endflash %}
+
+        <section class="despre-proiect"></section>
+        <section>
+            <div class="container py-5 mt-5">
+                <div class="row">
+                    <div class="col-12 col-md-7 col-lg-9">
+                        <div class="demo-joc-owl-carousel owl-carousel owl-theme">
+                            <div class="item">
+                                <img class="img-fluid" src="{{ 'assets/images/de-inlocuit.png'|theme }}" alt="Imagine reprezentativă joc">
+                            </div>
+                            <div class="item">
+                                <img class="img-fluid" src="{{ 'assets/images/de-inlocuit.png'|theme }}" alt="Imagine reprezentativă joc">
+                            </div>
+                            <div class="item">
+                                <img class="img-fluid" src="{{ 'assets/images/de-inlocuit.png'|theme }}" alt="Imagine reprezentativă joc">
+                            </div>
+                            <div class="item">
+                                <img class="img-fluid" src="{{ 'assets/images/de-inlocuit.png'|theme }}" alt="Imagine reprezentativă joc">
+                            </div>
+                            <div class="item">
+                                <img class="img-fluid" src="{{ 'assets/images/de-inlocuit.png'|theme }}" alt="Imagine reprezentativă joc">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-5 col-lg-3 my-4 my-md-0">
+                        <p class="display-2 text-gray-dark font-weight-light p-0 m-0 mb-2" style="line-height: 27px;">{{ demoGameTitle }}</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <img class="img-fluid" src="{{ 'assets/img/svg/small-tag-icon.svg'|theme }}"  alt="Emblemă etichetă joc">
+                            <p class="p-0 m-0 small pl-3" style="line-height: 22px; color:#000;">{{ demoGameCategory }}</p>
+                        </div>
+                        <p class="p-0 m-0 py-1 text-primary-dark" style="line-height: 22px; letter-spacing: -0,3px;">{{ demoGameText1 }}</p>
+                        <p class="p-0 m-0 py-1 text-primary-dark" style="line-height: 22px; letter-spacing: -0,3px;">{{ demoGameText2 }}</p>
+                        <p class="p-0 m-0 py-1 text-primary-dark" style="line-height: 22px; letter-spacing: -0,3px;">{{ demoGameText3 }}</p>
+                        <p class="p-0 m-0 mb-4 py-1 text-primary-dark" style="line-height: 22px; letter-spacing: -0,3px;">{{ demoGameText4 }}</p>
+                        <a class="btn btn-sm btn-block btn-primary-dark d-none" href="">{{ demoGameLinkText }}</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container py-5 mb-5">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="font-weight-bold" style="line-height: 25px; color: #000;">{{ demoGameDescriptionTitle }}</p>
+                        <p class="small text-muted" style="line-height: 34px;">{{ demoGameDescriptionText1 | raw }}</p>
+                        <p class="small text-muted" style="line-height: 34px;">{{ demoGameDescriptionText2 | raw }}</p>
+                        <p class="small text-muted" style="line-height: 34px;">{{ demoGameDescriptionText3 | raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% partial 'footer-columns' %}
+
+        {% partial 'footer' %}
+
+        {% partial 'footer-scripts' %}
+
+    </body>
+
+</html>

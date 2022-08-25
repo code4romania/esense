@@ -1,0 +1,192 @@
+description = "Add student partial"
+
+[viewBag]
+==
+<!-- Modal -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content border-0" style="background: transparent !important;">
+        <div id="search-student" class="rounded-top rounded-bottom bg-white pb-5 px-5 pt-5">
+            <div class="d-flex align-items-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/add-yellow.svg'|theme }}">
+                <p class="p-0 m-0 ml-2 display-2 text-dark">{{ 'partial.specialist.student.add.modal.title'|_ }}</p>
+            </div>
+
+            <div class="form-group mt-3">
+                <div class="input-group">
+                    <input name='student' id="student" class="onChangeValue tagify pl-0 shadow-none">
+                </div>
+            </div>
+        </div>
+        <div id="spacer" style="width: 5rem; height:10px; background:#c4c4c4; margin-left:5rem;"></div>
+        <div id="create-profile" class="bg-white rounded p-5">
+            <div class="d-flex align-items-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/folder.svg'|theme }}">
+                <p class="p-0 m-0 ml-2 display-2 text-dark">{{ 'partial.specialist.student.add.modal.create.title'|_ }}</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <p class="p-0 m-0 small text-dark">{{ 'partial.specialist.student.add.modal.create.text'|_ }}</p>
+                <a class="text-secondary display-4" href="{{link}}">{{ 'partial.specialist.student.add.modal.create.link'|_ }}</a>
+            </div>
+        </div>
+
+        <div id="message-container" class="rounded-bottom bg-white pb-5 px-5 d-none">
+            <div class="form-group d-flex">
+                <textarea class="form-control" id="message" rows="3" placeholder="{{ 'partial.specialist.student.message.placeholder'|_ }}"></textarea>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-end mt-2">
+                <a role="button" id="cancel-request" class="mr-3 text-gray-2 display-4" data-dismiss="modal">{{ 'partial.specialist.student.add.modal.cancel'|_ }}</a>
+                <button id="send-request" class="btn btn-sm px-5 btn-secondary">{{ 'partial.specialist.student.add.modal.submit'|_ }}</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            /** WYSWYG Editor. */
+            $('#message').richText();
+
+            /** Get tagify input in variable. */
+            var studentInput = document.querySelector('input[name=student]');
+
+            /** Make userList variable for tagify whiteList. */
+            var usersList = [
+                {% for student in user.profile.school_students %}
+                {
+                    "value": "{{ student.id }}",
+                    "name": "{{ student.full_name }}",
+                    "avatar": "{% if student.avatar %}{{student.avatar.getThumb(30,30, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}",
+                    "birthdate": "{{ student.birthdate }}",
+                    "teacher": "{{ student.owner.id }}"
+                },
+                {% endfor %}
+            ];
+
+            /** Add template for student name or birthdate */
+            function tagTemplate(tagData){
+                return `
+                    <tag title="${(tagData.title || tagData.birthdate)}"
+                            contenteditable='false'
+                            spellcheck='false'
+                            tabIndex="-1"
+                            class="${this.settings.classNames.tag} ${tagData.class ? tagData.class : ""}"
+                            ${this.getAttributes(tagData)}>
+                        <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
+                        <div>
+                            <div class='tagify__tag__avatar-wrap'>
+                                <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
+                            </div>
+                            <span class='tagify__tag-text'>${tagData.name}</span>
+                        </div>
+                    </tag>
+                `
+            };
+
+            /** Added sugestion dropdown list */
+            function suggestionItemTemplate(tagData){
+                return `
+                    <div ${this.getAttributes(tagData)}
+                        class='tagify__dropdown__item ${tagData.class ? tagData.class : ""}'
+                        tabindex="0"
+                        role="option">
+                        ${ tagData.avatar ? `
+                        <div class='tagify__dropdown__item__avatar-wrap'>
+                            <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
+                        </div>` : ''
+                        }
+                        <strong>${tagData.name}</strong>
+                        <span>Data nasterii: ${tagData.birthdate}</span>
+                        <label>Profesor: ${tagData.teacher}</label>
+                    </div>
+                `
+            }
+
+            /** Initialize Tagify on the above input node reference. */
+            var tagify = new Tagify(studentInput, {
+                enforceWhitelist: true,
+                skipInvalid: true, // do not remporarily add invalid tags
+                maxTags: 1,
+                dropdown: {
+                    closeOnSelect: true,
+                    enabled: 0,
+                    classname: 'users-list',
+                    searchKeys: ['name', 'teacher']  // very important to set by which keys to search for suggesttions when typing
+                },
+                templates: {
+                    tag: tagTemplate,
+                    dropdownItem: suggestionItemTemplate
+                },
+                whitelist: usersList
+            })
+
+            // tagify.on('dropdown:show dropdown:updated', onDropdownShow)
+            // tagify.on('dropdown:select', onSelectSuggestion)
+
+
+
+            $(document.body).on('change', '.onChangeValue', function() {
+                if(( 0 !== studentInput.value.length)) {
+                    $('#spacer').addClass('d-none');
+                    $('#create-profile').addClass('d-none');
+                    $('#request-access').addClass('d-none');
+                    $('#search-student').removeClass('rounded-bottom');
+                    $('#search-student').removeClass('pb-5');
+                    $('#message-container').removeClass('d-none');
+                } else {
+                    $('#request-access').addClass('d-none');
+                    $('#spacer').removeClass('d-none');
+                    $('#create-profile').removeClass('d-none');
+                    $('#search-student').addClass('rounded-bottom');
+                    $('#search-student').addClass('pb-5');
+                    $('#message-container').addClass('d-none');
+
+                }
+            });
+
+            $('#request-access').on('click', function() {
+                $('#spacer').addClass('d-none');
+                $('#create-profile').addClass('d-none');
+                $('#request-access').addClass('d-none');
+                $('#search-student').removeClass('rounded-bottom');
+                $('#search-student').removeClass('pb-5');
+                $('#message-container').removeClass('d-none');
+            })
+
+            /** Function that clears and closes the modal. */
+            $('#cancel-request').on('click', function() {
+                /** Clear the values. */
+                students.removeAllTags();
+                $('#message').val('');
+
+                $('#request-access').addClass('d-none');
+                $('#spacer').removeClass('d-none');
+                $('#create-profile').removeClass('d-none');
+                $('#search-student').addClass('rounded-bottom');
+                $('#search-student').addClass('pb-5');
+                $('#message-container').addClass('d-none');
+            })
+
+            /** Function that sends the request to the backend. */
+            $('#send-request').on('click', function() {
+                var $student = $('#student').val();
+                var $message = $('#message').val();
+
+                /** Send a student access request. */
+                $.request(
+                    'onCreateStudentAccessRequest', {
+                        data: {
+                            student: $student,
+                            message: $message,
+                        }
+                    }
+                );
+            })
+        });
+    </script>
+{% endput %}

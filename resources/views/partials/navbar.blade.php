@@ -1,0 +1,73 @@
+description = "Navbar partial for drive grade"
+
+[viewBag]
+==
+<nav id="navbar" class="navbar navbar-custom navbar-expand-lg py-3 fixed-top">
+    <div>
+        <a class="navbar-brand pl-lg-5 ml-lg-5" href="/">
+            <img class="img-fluid logo-blue" src="{{ 'assets/img/svg/logo.svg'|theme }}" alt="Logo site e-Sense">
+            <img class="img-fluid logo-white" src="{{ 'assets/img/svg/logo-white.svg'|theme }}" alt="Logo site e-Sense">
+        </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="{{ 'assets/img/menu.png'|theme }}" width="50px" alt="Emblemă deschidere meniu">
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto mr-lg-5">
+
+            <!-- Despre proiect -->
+            <li class="nav-item my-2 pl-3 my-md-0">
+                <a class="nav-link text-white display-4 roboto-family" href="{{ 'despre-proiect'| staticPage }}">
+                    {{'partial.navbar.link_1'|_}}
+                </a>
+            </li>
+
+            <!-- FAQ -->
+            <li class="nav-item my-2 pl-3 my-md-0">
+                <a class="nav-link text-white display-4 roboto-family" href="{{ 'intrebari-si-raspunsuri'|staticPage }}">
+                    {{'partial.navbar.link_2'|_}}
+                </a>
+            </li>
+
+
+            <!-- Contact -->
+            <li class="nav-item my-2 pl-3 my-md-0">
+                <a class="nav-link text-white display-4 roboto-family" href="{{ 'acasa-esense'| staticPage }}#contact">
+                    {{'partial.navbar.link_3'|_}}
+                </a>
+            </li>
+
+            {% if not user %}
+                <!-- Register -->
+                <li class="nav-item my-2 pl-4 my-md-0">
+                    <a class="btn btn-outline-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/register-form'| page }}">
+                        {{'partial.navbar.link_4'|_}}
+                    </a>
+                </li>
+
+                <!-- Login -->
+                <li class="nav-item my-2 pl-4 my-md-0">
+                    <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'authentification/login' | page }}">
+                        {{'partial.navbar.link_5'|_}}
+                    </a>
+                </li>
+
+            {% elseif 'specialist' == user.type %}
+                 <!-- Dashboard -->
+                <li class="nav-item my-2 pl-4 my-md-0">
+                    <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'specialist/dashboard'|page }}">
+                        {{'partial.navbar.link_6'|_}}
+                    </a>
+                </li>
+            {% else %}
+                <!-- Dashboard -->
+                <li class="nav-item my-2 pl-4 my-md-0">
+                    <a class="btn btn-secondary btn-sm display-4 nav-btn roboto-family" href="{{ 'school/dashboard'|page }}">
+                        {{'partial.navbar.link_6'|_}}
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

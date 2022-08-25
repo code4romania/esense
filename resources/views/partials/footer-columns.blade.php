@@ -1,0 +1,70 @@
+description = "Partial that displayes the footer columns"
+
+[viewBag]
+==
+<section class="w-100 bg-secondary2">
+    <div class="container py-5">
+        <div class="row mt-3 pb-5">
+            <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center justify-content-center">
+                <div class="d-flex align-items-center justify-content-center my-3 my-lg-0">
+                    <span class="text-white" style="line-height: 25px; font-size:12px;">{{'footer.columns.proiect.implemented.text'|_}}</span>
+                    <div>
+                        <a href="https://surdocecitate.ro/" target="_blank">
+                            <img class="img-fluid ml-1" height="80px" src="{{ 'assets/img/svg/esense-footer-columns-logo.svg'|theme }}" alt="Logo pentru Fundația Sense Internationl Romania">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center justify-content-center my-3 my-lg-0">
+                <div class="d-flex align-items-center">
+                    <span class="text-white" style="line-height: 25px; font-size:12px;">{{'footer.columns.proiect.developed.text'|_}}</span>
+                    <div>
+                        <a href="https://code4.ro/" target="_blank">
+                            <img class="img-fluid ml-2" src="{{ 'assets/img/svg/footer-columns-code-for-romania-logo.svg'|theme }}" alt="Logo pentru Code for Romania">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 d-flex align-items-center justify-content-center my-3 my-lg-0">
+                <div class="d-flex align-items-center justify-content-center">
+                    <span class="text-white" style="line-height: 25px; font-size:12px;">{{'footer.columns.proiect.financed.text'|_}}</span>
+                    <div>
+                        <a href="https://www.fundatiaorange.ro/" target="_blank">
+                            <img class="img-fluid ml-2" src="{{ 'assets/img/svg/footer-orange-logo.svg'|theme }}" alt="Logo pentru compania Orange">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-12 d-flex align-items-center justify-content-between flex-column flex-lg-row">
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{ 'acasa-esense' | staticPage }}#parteneri" style="line-height: 25px;">{{'partial.footer.columns.link1'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{ 'despre-proiect'| staticPage }}" style="line-height: 25px;">{{'partial.footer.columns.link2'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{ 'intrebari-si-raspunsuri' | staticPage }}" style="line-height: 25px;">{{'partial.footer.columns.link3'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{ 'politica-de-confidentialitate' | staticPage }}" style="line-height: 25px;">{{'partial.footer.columns.link4'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0" style="line-height: 21px; text-decoration:underline;" href="{{ 'termeni-si-conditii' | staticPage }}" style="line-height: 25px;">{{'partial.footer.columns.link5'|_}}</a>
+                <a class="text-white display-4 my-2 my-lg-0 btn btn-lg btn-success px-lg-5 py-lg-3" style="line-height: 21px; font-size:14px;" href="https://surdocecitate.ro/doneaza/">{{'partial.footer.columns.link6'|_}}</a>
+            </div>
+            <div class="col-12 border-top m-0 p-0 my-5"></div>
+            <div class="col-12 d-flex align-items-center justify-content-between flex-column flex-lg-row mb-3">
+                <div class="my-2 my-lg-0">
+                    <p class="p-0 m-0 display-4 text-white">{{'partial.footer.columns.info.text1'|_}}</p>
+                </div>
+                <div class="my-2 my-lg-0">
+                    <p class="p-0 m-0 display-4 text-white">{{'partial.footer.columns.info.text2'|_}}</p>
+                </div>
+                <div class="d-flex align-items-center my-2 my-lg-0">
+                    <p class="p-0 m-0 display-4 text-white">{{'partial.footer.columns.info.text3'|_}}</p>
+                    <a class="ml-2 text-white display-4" style="text-decoration: underline;" href="mailto:contact@esense.ro" target="_blank">{{'partial.footer.columns.info.email'|_}}</a>
+                </div>
+                <div class="d-flex align-items-center my-2 my-lg-0">
+                    <p class="p-0 m-0 display-4 text-white">{{'partial.footer.columns.info.text4'|_}}</p>
+                    <a class="ml-2 text-white display-4" style="text-decoration: underline;" href="http://surdocecitate.ro" target="_blank">{{'partial.footer.columns.info.website'|_}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

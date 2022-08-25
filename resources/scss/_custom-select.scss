@@ -1,0 +1,88 @@
+/***********************************************
+**************** Custom select *****************
+***********************************************/
+.bootstrap-select .btn:focus {
+    outline: none !important;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus,
+.dropdown-toggle:active {
+    background: #fff !important;
+}
+
+.filter-option-inner-inner {
+    font-size: 14px;
+    color: #838383;
+}
+
+.dropdown-menu {
+    max-height: 200px !important;
+}
+
+.dropdown-menu li .active {
+    background:#fab954;
+}
+
+.dropdown-menu li a:hover,
+.dropdown-menu li a:focus {
+    background:#fab954;
+    color: #fff;
+}
+
+.dropdown-menu li a {
+    font-size: 14px;
+    color: #838383;
+    padding: 8px;
+}
+
+.register-select {
+    overflow: visible;
+}
+
+.register-select .dropdown-toggle {
+    padding: 9px 8px;
+    font-style: italic;
+}
+
+.register-select .filter-option-inner-inner {
+    color: #ADB5BD;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.register-select .dropdown-menu li .active {
+    background:transparent;
+}
+
+.register-select .dropdown-menu li a:hover,
+.register-select .dropdown-menu li a:focus {
+    background:#fab954;
+    color: #fff;
+}
+
+.register-select .dropdown-menu li a:active{
+    background:#fab954;
+    color: #fff;
+}
+
+.register-select .dropdown-menu li a {
+    font-size: 14px;
+    color: #838383;
+    padding: 5px 8px;
+}
+
+.bs-searchbox input {
+    background: none;
+    background-image: none;
+}
+
+.register-select .filter-option-inner-inner {
+    color: #252525;
+    font-style: normal;
+}
+
+.exercises-select {
+    position: relative !important;
+    z-index: 1000 !important;
+}
