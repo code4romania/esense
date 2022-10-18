@@ -1,0 +1,158 @@
+title = "Transferă elev"
+url = "/parent/student-transfer"
+layout = "web-app"
+description = "Used for transfering a student"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "parent"
+
+[studentActions]
+==
+<div class="container-fluid px-lg-4">
+    <div class="row">
+        <!-- Back link -->
+        <div class="col-12 my-3">
+            <div class="d-flex align-itmes-center">
+                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
+                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{'page.specialist.dashboard.student.back.link'|_}}</a>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="rounded shadow bg-white p-3 p-lg-4">
+                <div class="border-bottom">
+                    <p class="text-muted">{{ 'page.specialist.dashboard.student.transfer.title'|_ }}</p>
+                </div>
+
+                <!-- Transfer student form -->
+                <div id="transfer-student-body">
+                    <form data-request="onCreateStudentTransferRequest" class="min-vh-75">
+                        <div class="row mt-5">
+
+                            <div class="col-12 col-md-6">
+                                <div class="form-group register-select">
+                                    <select name="specialist" id="specialist" class="form-control selectpicker border outline-none onChangeValue" data-style="btn-white">
+                                        {% for specialist in user.profile.school.specialists %}
+                                            {% if specialist.id != user.profile.id %}
+                                                <option value="{{ specialist.id }}">{{ specialist.full_name }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="form-group register-select">
+                                    <select name="student" id="student" class="form-control selectpicker border outline-none onChangeValue" data-style="btn-white" disabled></select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 my-3 mb-5 mb-md-0">
+                                <div class="custom-control form-control-lg custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input onChangeValue" id="specialist-check">
+                                    <label class="custom-control-label display-4 text-gray-medium p-0 m-0" for="specialist-check" style="line-height: 30px;">{{ 'page.specialist.dashboard.student.transfer.checkbox'|_ }}</label>
+                                </div>
+                            </div>
+
+                            <!-- Submit button -->
+                            <div class="col-12 mb-5 mt-5 pt-5 pt-md-0 mt-md-0">
+                                <div class="d-flex justify-content-end">
+                                    <button role="button" type="submit" id="transfer-student" class="btn btn-sm text-white btn-gray-light px-lg-5 d-none" disabled>{{ 'page.specialist.dashboard.student.transfer.submit' |_}}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% put scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /**
+             * Extracts the initial students.
+             */
+            $.request('onStudentsLoad', {
+                data: {
+                    specialist: $('#specialist').val()
+                },
+                success: function(data) {
+                    /* Reset the students select content. */
+                    $('#student').html('');
+
+                    /* Parse all received citied and add them. */
+                    for (const student in data) {
+                        $('#student').append(`<option value="${data[student]}">${student}</option>`);
+                    }
+
+                    /* Activate the select. */
+                    $('#student').prop("disabled", false);
+                    $("#student").selectpicker("refresh");
+                }
+            });
+
+            /**
+             * Function that extracts the students of a stecialist.
+             */
+            $('#specialist').on('change', function() {
+                $.request('onStudentsLoad', {
+                    data: {
+                        specialist: this.value
+                    },
+                    success: function(data) {
+                        /* Reset the students select content. */
+                        $('#student').html('');
+
+                        /* Parse all received students and add them. */
+                        for (const student in data) {
+                            $('#student').append(`<option value="${data[student]}">${student}</option>`);
+                        }
+
+                        /* Activate the select. */
+                        $('#student').prop("disabled", false);
+                        $("#student").selectpicker("refresh");
+                    }
+                })
+            });
+
+            /**
+             * Function for triggering the finish button when
+             * values from all fields are selected
+             */
+            function activateFinishBtn() {
+                $('#transfer-student').removeAttr('disabled');
+                $('#transfer-student').removeClass('btn-gray-light');
+                $('#transfer-student').removeClass('text-white');
+                $('#transfer-student').removeClass('d-none');
+                $('#transfer-student').addClass('btn-secondary');
+            }
+
+            function deactivateFinishBtn() {
+                $('#transfer-student').attr('disabled');
+                $('#transfer-student').addClass('btn-gray-light');
+                $('#transfer-student').addClass('text-white');
+                $('#transfer-student').addClass('d-none');
+                $('#transfer-student').removeClass('btn-secondary');
+            }
+
+            /** Validation for activeting the finish button. */
+            $(document.body).on('change', '.onChangeValue', function(){
+                if(
+                    ("-1" !== $("#specialist").val()) &&
+                    ("-1" !== $("#student").val()) &&
+                    ($("#specialist-check").is(":checked"))
+                ) {
+                    activateFinishBtn()
+                } else {
+                    deactivateFinishBtn()
+                }
+            });
+        });
+    </script>
+{% endput %}

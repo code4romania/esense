@@ -14,6 +14,7 @@ class RedirectHelper
      */
     private static function getRedirectPage()
     {
+
         if (Auth::check()) {
             return $redirectPage = trim((string) PluginConfig::getLoginRedirects()[Auth::getUser()->type]);
         } else {
@@ -40,7 +41,6 @@ class RedirectHelper
     public static function accessDenied()
     {
         Flash::error(Lang::get('genuineq.user::lang.helper.access_denied'));
-
         return $redirectPage = self::getRedirectPage();
     }
 
@@ -50,6 +50,7 @@ class RedirectHelper
      */
     public static function loginRequired()
     {
+        dd(1);
         Flash::error(Lang::get('genuineq.user::lang.helper.login_required'));
 
         return $redirectPage = self::getRedirectPage();
