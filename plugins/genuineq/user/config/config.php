@@ -8,24 +8,28 @@
     /** The available user types. */
     'userTypes' => [
         'specialist',
-        'school'
+        'school',
+        'parent'
     ],
 
     /** The available user type options displayed in the admin view. */
     'userTypeOptions' => [
         'specialist' => 'Specialist',
-        'school' => 'School'
+        'school' => 'School',
+        'parent' => 'Parent',
     ],
 
     /** Login redirects based on user types. */
     'loginRedirects' => [
         'specialist' => 'specialist/dashboard',
-        'school' => 'school/dashboard'
+        'school' => 'school/dashboard',
+        'parent'=>'parent/dashboard'
     ],
 
     /** Profile page for each user type. */
     'profilePages' => [
         'specialist' => 'specialist/profile',
         'school' => 'school/profile',
+        'parent' => 'parent/profile',
     ],
 ];

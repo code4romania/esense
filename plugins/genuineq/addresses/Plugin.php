@@ -7,7 +7,15 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'Genuineq\Addresses\Components\Addresses' => 'addresses'
+            'Genuineq\Addresses\Components\Addresses' => 'addresses',
+            \Genuineq\Esense\Components\LessonsActions::class => 'lessonsActions',
+            \Genuineq\Esense\Components\ChartsActions::class => 'chartsActions',
+            \Genuineq\Esense\Components\StudentActions::class => 'studentActions',
+            \Genuineq\Profile\Components\Specialist::class => 'specialist',
+
+
+
+
         ];
     }
 
