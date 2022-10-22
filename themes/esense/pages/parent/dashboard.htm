@@ -27,7 +27,7 @@ allowedUserTypes[] = "parent"
         <div class="col-12 col-md-6">
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
-                    <h6 class="text-gray-light">{{'page.specialist.dashboard.students.card.title'|_}}</h6>
+                    <h6 class="text-gray-light">Total copii</h6>
                     <h5 class="text-gray-dark">{{ user.profile.unarchivedStudents.count }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
@@ -79,7 +79,7 @@ allowedUserTypes[] = "parent"
                     <thead>
                         <tr>
                             <!-- Name column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_1.title'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">Nume copil</p></th>
                             <!-- Age column -->
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_2.title'|_}}</p></th>
                             <th class="no-sort"></th>
@@ -212,13 +212,6 @@ allowedUserTypes[] = "parent"
                                             <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/edit.svg'|theme }}">
                                         </div>
                                     </div>
-                                    <div class="col-10">
-                                        <div class="pl-1 pl-lg-0">
-                                            <p class="p-0 m-0 small text-rgba-black font-weight-normal">{{'page.specialist.dashboard.donut.chart.despre'|_}}&nbsp;<span class="font-weight-bold">{{ student.full_name }}</span></p>
-                                            <p class="p-0 m-0 py-1 display-4 text-rgba-black">{{student.description|raw}}</p>
-                                            <a class="display-4 text-blue" href="{{ 'specialist/student-edit'|page({studentId: student.id }) }}">{{'page.specialist.dashboard.donut.chart.link'|_}}</a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -277,12 +270,12 @@ allowedUserTypes[] = "parent"
             $('.added-content').html('\
                 <div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">\
                     <div class="col-12 col-lg-7">\
-                        <p class="display-2 font-weight-light text-gray-2">{{"page.specialist.students.table.title"|_}}</p>\
+                        <p class="display-2 font-weight-light text-gray-2">Copii mei</p>\
                     </div>\
                     <div class="col-12 col-lg-5">\
                         <div class="d-flex align-items-center justify-content-start justify-content-lg-end">\
                             <img class="img-fluid" src="{{ "assets/img/svg/dashboard/arrow-right.svg"|theme }}">\
-                            <a class="ml-2 display-4 text-gray-light" href="{{ "specialist/students"|page }}">{{"page.specialist.dashboard.students.table.all.students.link.text"|_}}</a>\
+                            <a class="ml-2 display-4 text-gray-light" href="{{ "specialist/students"|page }}">Vezi toti copii</a>\
                         </div>\
                     </div>\
                 </div>'

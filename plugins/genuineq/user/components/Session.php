@@ -96,6 +96,7 @@ class Session extends ComponentBase
             (self::SECURITY_ERROR_WRONG_GROUP == $userSecurity) ||
             (self::SECURITY_ERROR_WRONG_TYPE == $userSecurity))
         {
+            dd($userSecurity);
             return Redirect::guest($this->pageUrl(RedirectHelper::accessDenied()));
         } elseif (self::SECURITY_ERROR_NOT_USER == $userSecurity) {
             return Redirect::guest($this->pageUrl(RedirectHelper::loginRequired()));
@@ -192,7 +193,6 @@ class Session extends ComponentBase
         $allowedUserGroups = $this->property('allowedUserGroups', []);
         $allowedUserTypes = $this->property('allowedUserTypes', []);
         $isAuthenticated = Auth::check();
-
         if ($isAuthenticated) {
             /** Check if only guests are allowed. */
             if ($allowedGroup == self::ALLOW_GUEST) {
@@ -212,6 +212,8 @@ class Session extends ComponentBase
             /** Check 'user' is the right type. */
             if (!empty($allowedUserTypes)) {
                 if (!in_array(Auth::getUser()->type, $allowedUserTypes)) {
+                    dd(debug_backtrace());
+                    dd($allowedUserTypes);
                     /** User is not the right type. */
                     return self::SECURITY_ERROR_WRONG_TYPE;
                 }

@@ -11,7 +11,7 @@
     ***********************************************
     -->
 
-    {% if 'specialist' == user.type %}
+    {% if 'specialist' == user.type or 'parent' == user.type %}
 
         <!-- Panou de administrare -->
         <li class="nav-item mb-2 {% if this.page.url == "/specialist/dashboard" %} active {% endif %}">
@@ -32,13 +32,23 @@
         </li>
 
         <!-- Elevi mei -->
-        <li class="nav-item mb-2 {% if (this.page.url == "/specialist/students") or (this.page.url == "/specialist/student/:studentId") or (this.page.url == '/specialist/student-transfer') or (this.page.url == '/specialist/student-add') or (this.page.url == '/specialist/student-edit/:studentId')  or (this.page.url == '/lesson/:lessonId') or (this.page.url == 'school/lesson/:lessonId') %} active {% endif %}">
+    {% if 'parent' == user.type %}
+        <li class="nav-item mb-2 {% if (this.page.url == "/parent/students") or (this.page.url == "/specialist/student/:studentId") or (this.page.url == '/specialist/student-transfer') or (this.page.url == '/specialist/student-add') or (this.page.url == '/specialist/student-edit/:studentId')  or (this.page.url == '/lesson/:lessonId') or (this.page.url == 'school/lesson/:lessonId') %} active {% endif %}">
             <div class="vertical-border"></div>
-            <a class="nav-link" href="{{ 'specialist/students'|page }}">
+            <a class="nav-link" href="{{ 'parent/students'|page }}">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
-                <span class="text-primary-dark">{{"partial.navs.side.nav.link_3"|_}}</span>
+                <span class="text-primary-dark">Copii mei</span>
             </a>
         </li>
+    {%else%}
+    <li class="nav-item mb-2 {% if (this.page.url == "/specialist/students") or (this.page.url == "/specialist/student/:studentId") or (this.page.url == '/specialist/student-transfer') or (this.page.url == '/specialist/student-add') or (this.page.url == '/specialist/student-edit/:studentId')  or (this.page.url == '/lesson/:lessonId') or (this.page.url == 'school/lesson/:lessonId') %} active {% endif %}">
+    <div class="vertical-border"></div>
+    <a class="nav-link" href="{{ 'specialist/students'|page }}">
+        <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/side-nav/users.svg'|theme }}">
+        <span class="text-primary-dark">{{"partial.navs.side.nav.link_3"|_}}</span>
+    </a>
+    </li>
+    {%endif%}
 
         {% if user and 'specialist' == user.type and user.profile.affiliated %}
             <!-- School -->

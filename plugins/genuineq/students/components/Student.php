@@ -127,7 +127,11 @@ class Student extends ComponentBase
         // Event::fire('genuineq.students.create.before.contact.persons.create', [post()]);
 
         /** Save contact persons. */
-        $this->updateContactPersons($student, post());
+        if (post('contact_1_surname') !== null)
+        {
+            $this->updateContactPersons($student, post());
+        }
+
 
         /** Fire event before contact persons create. */
         // Event::fire('genuineq.students.create.after.contact.persons.create', [post()]);
@@ -199,7 +203,10 @@ class Student extends ComponentBase
         // Event::fire('genuineq.students.update.before.contact.persons.update', [post()]);
 
         /** Save contact persons. */
-        $this->updateContactPersons($student, post());
+        if (post('contact_1_surname') !== null)
+        {
+            $this->updateContactPersons($student, post());
+        }
 
         /** Fire event before contact persons update. */
         Event::fire('genuineq.students.update.after.contact.persons.update', [post()]);

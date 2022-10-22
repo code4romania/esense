@@ -331,8 +331,8 @@ class Plugin extends PluginBase
 
         Event::listen('genuineq.students.before.student.create', function(&$data, $inputs) {
             /** Add the owner ID to the data. */
-            if ('specialist' == Auth::getUser()->type) {
-                $data['owner_id'] = Auth::user()->profile->id;
+            if ('specialist' == Auth::getUser()->type || 'parent' == Auth::getUser()->type) {
+                $data['owner_id'] = Auth::user()->profile_id;
             } else {
                 $data['owner_id'] = $inputs['owner'];
             }

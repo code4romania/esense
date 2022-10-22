@@ -153,6 +153,7 @@ class Controller
          * Hidden page
          */
         $page = $this->router->findByUrl($url);
+        
         if ($page && $page->is_hidden && !BackendAuth::getUser()) {
             $page = null;
         }
