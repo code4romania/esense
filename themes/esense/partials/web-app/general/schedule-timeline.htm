@@ -3,12 +3,12 @@ description = "Partial for displaying a day schedule timeline."
 [viewBag]
 ==
 <div class="pl-3 mb-4 d-flex align-items-center">
-    <p class="p-0 m-0 text-gray-dark font-weight-bold">{{ title }}</p>
+    <p class="p-0 m-0 text-primary-dark font-weight-bold">{{ title }}</p>
 </div>
 {% for lesson in lessons %}
     <ul class="activity timeline">
         <li class="d-flex align-items-start flex-column">
-            <p class="p-0 m-0 small font-weight-light text-gray-dark">
+            <p class="p-0 m-0 small font-weight-light text-primary-dark">
                 {{ lesson.title }}
 
                 {% if allow_edit %}
@@ -17,7 +17,7 @@ description = "Partial for displaying a day schedule timeline."
                     </a>
                 {% endif %}
             </p>
-            <p class="p-0 m-0 display-4 text-gray-dark">
+            <p class="p-0 m-0 display-4 text-primary-dark">
                 {{ 'page.specialist.dashboard.student.start_hour'|_ }}: {{ lesson.start_hour }} /
                 {{ 'page.specialist.dashboard.student.duration'|_ }}: {{ lesson.lesson_duration }}
             </p>

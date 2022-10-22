@@ -47,7 +47,7 @@ allowedUserTypes[] = "specialist"
 <div class="container-fluid px-lg-4 mb-5">
     <div class="row">
         <div class="col-12 col-md-6">
-            <p class="text-gray-dark mt-3 font-weight-bold" style="line-height: 25px;">{{'page.specialist.dashboard.exercises.select.label'|_}}</p>
+            <p class="text-primary-dark mt-3 font-weight-bold" style="line-height: 25px;">{{'page.specialist.dashboard.exercises.select.label'|_}}</p>
             <div class="form-group register-select mb-5 exercises-select" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <select class="form-control border outline-none selectpicker" data-style="btn-white" onchange="location = this.value;">
                 <option value="{{categories.property('categoriesPage') ? categories.property('categoriesPage')|page({(categories.paramName('categoriesPageSlug')):(category.slug)})}}">{{'page.specialist.dashboard.exercises.select.all.option'|_}}</option>
@@ -66,7 +66,7 @@ allowedUserTypes[] = "specialist"
             <div class="col-12 col-md-6 mb-4">
                 <div class="card">
                     <div class="card-header bg-white">
-                        <p class="p-0 m-0 text-gray-dark">{{record.name}}</p>
+                        <p class="p-0 m-0 text-primary-dark">{{record.name}}</p>
                     </div>
                     <div class="card-body">
                         <img class="img-fluid" src="{{ record.preview_image.getPath }}">

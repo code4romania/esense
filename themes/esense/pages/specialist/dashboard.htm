@@ -20,7 +20,7 @@ allowedUserTypes[] = "specialist"
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">{{'page.specialist.dashboard.title'|_}}</h4>
+            <h4 class="text-primary-dark font-weight-light mb-4">{{'page.specialist.dashboard.title'|_}}</h4>
         </div>
 
         <!-- Students card -->
@@ -28,7 +28,7 @@ allowedUserTypes[] = "specialist"
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
                     <h6 class="text-gray-light">{{'page.specialist.dashboard.students.card.title'|_}}</h6>
-                    <h5 class="text-gray-dark">{{ user.profile.unarchivedStudents.count }}</h5>
+                    <h5 class="text-primary-dark">{{ user.profile.unarchivedStudents.count }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
                         <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/students'|page }}">{{'page.specialist.dashboard.students.card.link'|_}}</a>
@@ -45,7 +45,7 @@ allowedUserTypes[] = "specialist"
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
                     <h6 class="text-gray-light">{{'page.specialist.dashboard.exercises.title'|_}}</h6>
-                    <h5 class="text-gray-dark">{{ user.profile.getExercisesNumber }}</h5>
+                    <h5 class="text-primary-dark">{{ user.profile.getExercisesNumber }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
                         <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/exercises'|page }}">{{'page.specialist.dashboard.exercises.link'|_}}</a>
@@ -71,6 +71,7 @@ allowedUserTypes[] = "specialist"
                 tooltips = durations['tooltips']
             %}
         </div>
+
 
         <!-- Students table -->
         <div class="col-12 col-lg-6 mt-5">
@@ -203,21 +204,6 @@ allowedUserTypes[] = "specialist"
                                     <!-- Student donut chart -->
                                     <div class="col-12 d-flex align-items-center justify-content-center py-3">
                                         <canvas id="donut-{{student.id}}" class="donut-chart" width="400px" height="400px"></canvas>
-                                    </div>
-
-                                    <!-- Student lesson description -->
-                                    <div class="col-12 border-top py-3"></div>
-                                    <div class="col-1">
-                                        <div class="d-flex justify-content-center" style="width: 30px; height: 30px;">
-                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/edit.svg'|theme }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-10">
-                                        <div class="pl-1 pl-lg-0">
-                                            <p class="p-0 m-0 small text-rgba-black font-weight-normal">{{'page.specialist.dashboard.donut.chart.despre'|_}}&nbsp;<span class="font-weight-bold">{{ student.full_name }}</span></p>
-                                            <p class="p-0 m-0 py-1 display-4 text-rgba-black">{{student.description|raw}}</p>
-                                            <a class="display-4 text-blue" href="{{ 'specialist/student-edit'|page({studentId: student.id }) }}">{{'page.specialist.dashboard.donut.chart.link'|_}}</a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
