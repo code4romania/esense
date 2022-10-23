@@ -8,6 +8,7 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+allowedUserTypes[] = "parent"
 
 [student]
 ==
@@ -162,7 +163,8 @@ allowedUserTypes[] = "specialist"
                             </div>
                         </div>
 
-
+                        {% if user.type !='parent' %}
+                        <input type="hidden" id="isParent" value="false">
                         <div id="contact_persons_wrapper" class="pl-lg-3 pr-lg-4">
                             <!-- First contact person -->
                             <div id="person-1" class="student-add-contact px-3 px-lg-2 my-4 rounded shadow-sm">
@@ -229,6 +231,9 @@ allowedUserTypes[] = "specialist"
                                 %}
                             </div>
                         </div>
+                        {% else %}
+                        <input type="hidden" id="isParent" value="true">
+                        {% endif %}
 
                          <!-- Submit button -->
                         <div class="col-12 mb-5 mt-3">
@@ -252,7 +257,7 @@ allowedUserTypes[] = "specialist"
 {% put scripts %}
     <script type="text/javascript">
         $(document).ready(function () {
-
+            const isParent =   $('#isParent').val();
             /** WYSWYG Editor. */
             $('#description').richText({
                 id:'diagnostic',
@@ -305,6 +310,12 @@ allowedUserTypes[] = "specialist"
 
             /** Validation for activeting the finish button. */
             $(document.body).on('change keyup', '.onChangeValue', function(){
+                if (isParent)
+                {
+                    activateFinishBtn()
+                    return;
+                }
+
                 if(
                     (
                         ((0 !== $("#birthdate").val().length)  && ((0 == $("#surname").val().length) || (0 == $("#name").val().length) || (0 == $("#diagnostic .richText-editor").text().length)  || (0 == $("#contact_1_surname_id").val().length) || (0 == $("#contact_1_name_id").val().length) || (0 == $("#contact_1_phone_id").val().length) )) ||
