@@ -269,7 +269,7 @@ allowedUserTypes[] = "parent"
                     <div class="col-12 col-lg-5">\
                         <div class="d-flex align-items-center justify-content-start justify-content-lg-end">\
                             <img class="img-fluid" src="{{ "assets/img/svg/dashboard/arrow-right.svg"|theme }}">\
-                            <a class="ml-2 display-4 text-gray-light" href="{{ "specialist/students"|page }}">{{"page.specialist.dashboard.students.table.all.students.link.text"|_}}</a>\
+                            <a class="ml-2 display-4 text-gray-light" href="{{ "specialist/students"|page }}">{{user.type=="parent"? 'Vezi toți copii':"page.specialist.dashboard.students.table.all.students.link.text"|_}}</a>\
                         </div>\
                     </div>\
                 </div>`
