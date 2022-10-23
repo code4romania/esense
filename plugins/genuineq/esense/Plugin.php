@@ -347,7 +347,7 @@ class Plugin extends PluginBase
 
         Event::listen('genuineq.students.before.student.create.finish', function(&$redirectUrl, $student) {
             /** Redirect to all students page. */
-            if ('specialist' == Auth::getUser()->type) {
+            if (in_array(Auth::getUser()->type,['specialist','parent'])) {
                 $redirectUrl = 'specialist/students';
             } else {
                 $redirectUrl = 'school/students';
