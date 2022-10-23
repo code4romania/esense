@@ -17,7 +17,7 @@ allowedUserTypes[] = "parent"
 
     function onStart()
     {
-        if (Auth::user() && ('specialist' == Auth::user()->type) && Auth::user()->profile->affiliated) {
+        if (Auth::user() && (in_array(Auth::user()->type,['specialist','parent'])) && Auth::user()->profile->affiliated) {
             return Redirect::to(RedirectHelper::accessDenied());
         }
     }

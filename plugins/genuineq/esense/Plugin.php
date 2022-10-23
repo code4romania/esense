@@ -204,7 +204,7 @@ class Plugin extends PluginBase
                 /** initialize the array */
                 $lessonsYears = [];
 
-                if ('specialist' == Auth::user()->type) {
+                if (in_array(Auth::user()->type,['specialist','parent'])) {
                     /** get authenticated specialist profile */
                     $specialistProfile = Auth::user()->profile;
                     /** get connection with a specific specialist */
@@ -250,7 +250,7 @@ class Plugin extends PluginBase
                 $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
                 $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
 
-                if ('specialist' == Auth::user()->type) {
+                if (in_array(Auth::user()->type,['specialist','parent'])) {
                     /** get logged in specialist */
                     $specialistProfile = Auth::user()->profile;
                     /** return lessons from specific month with specific student */
