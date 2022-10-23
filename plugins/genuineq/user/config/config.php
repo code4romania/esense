@@ -23,13 +23,13 @@
     'loginRedirects' => [
         'specialist' => 'specialist/dashboard',
         'school' => 'school/dashboard',
-        'parent'=>'parent/dashboard'
+        'parent'=>'specialist/dashboard'
     ],
 
     /** Profile page for each user type. */
     'profilePages' => [
         'specialist' => 'specialist/profile',
         'school' => 'school/profile',
-        'parent' => 'parent/profile',
+        'parent' => 'specialist/profile',
     ],
 ];

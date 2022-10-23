@@ -58,7 +58,6 @@ class PluginConfig
      */
     public static function getLoginRedirects()
     {
-
         return Config::get(
             'genuineq.user::loginRedirects',
             [
