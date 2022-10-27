@@ -43,7 +43,6 @@ class RedirectHelper
 
         return $redirectPage = self::getRedirectPage();
     }
-
     /**
      * Redirects the user to the right page when an access denied error occurs.
      * @return Redirect

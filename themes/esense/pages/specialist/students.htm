@@ -8,6 +8,7 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+allowedUserTypes[] = "parent"
 
 [student]
 
@@ -72,10 +73,10 @@ allowedUserTypes[] = "specialist"
                                     <div class="pl-2 py-3">
                                         <div class="d-flex flex-column">
                                             {% if student.hearing_impairment %}
-                                                <p class="p-0 m-0 display-4 text-gray-dark font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">{{'page.specialist.students.table.disability.hearing'|_}}</p>
+                                                <p class="p-0 m-0 display-4 text-primary-dark font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">{{'page.specialist.students.table.disability.hearing'|_}}</p>
                                             {% endif %}
                                             {% if student.visual_impairment %}
-                                                <p class="p-0 m-0 display-4 text-gray-dark font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">{{'page.specialist.students.table.disability.seeing'|_}}</p>
+                                                <p class="p-0 m-0 display-4 text-primary-dark font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">{{'page.specialist.students.table.disability.seeing'|_}}</p>
                                             {% endif %}
                                             {% if (not student.hearing_impairment) and (not student.visual_impairment) %}
                                                 <p class="p-0 m-0 display-4 text-gray font-weight-light" style="letter-spacing: 0.2px; line-height:20px;">{{'page.specialist.students.table.disability.none'|_}}</p>
@@ -175,12 +176,13 @@ allowedUserTypes[] = "specialist"
                     }
                 }
             });
-            $('.added-content').html('\
+            $('.added-content').html(`\
                 <div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">\
                     <div class="col-12 col-lg-7">\
                         <p class="text-medium-dark font-weight-bold">\
-                            {{"page.specialist.dashboard.students.table.title"|_}} ({{ user.profile.unarchivedStudents.count }})\
+                            {{ user.type== 'parent' ? 'Copii' :"page.specialist.dashboard.students.table.title"|_}} ({{ user.profile.unarchivedStudents.count }})\
                         </p> </div> <div class="col-12 col-lg-5">\
+
                         <div class="d-flex align-items-center justify-content-start justify-content-lg-end flex-column flex-md-row">\
                             {% if user.profile.affiliated  %}\
                                 <a href="{{"specialist/student-transfer"|page}}" class="btn btn-sm btn-outline-primary-light mb-3 mb-md-0 mx-lg-2 d-flex align-items-center justify-content-around py-1 px-2" style="width: 140px;"><i class="fas fa-exchange-alt mr-2"></i>\
@@ -189,16 +191,16 @@ allowedUserTypes[] = "specialist"
                             {% endif %}\
                             {% if user.profile.affiliated  %}\
                                 <a data-toggle="modal" data-target="#addStudentModal" role="button" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\
-                                    {{"page.specialist.dashboard.students.table.add.btn.text"|_}}\
+                                    {{ "page.specialist.dashboard.students.table.add.btn.text"|_}}\
                                 </a>\
                             {% else %}\
                                 <a href="{{"specialist/student-add"|page}}" class="btn btn-sm btn-primary-light d-flex align-items-center justify-content-around py-1 px-2" style="width:140px;"> <i class="fas fa-user-edit mr-2"></i>\
-                                    {{"page.specialist.dashboard.students.table.add.btn.text"|_}}\
+                                    {{  user.type== 'parent' ? 'Adaugă Copil' : "page.specialist.dashboard.students.table.add.btn.text"|_}}\
                                 </a>\
                             {% endif %}\
                         </div>\
                     </div>\
-                </div>'
+                </div>`
             );
         });
 

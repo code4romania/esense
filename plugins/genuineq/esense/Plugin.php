@@ -204,7 +204,7 @@ class Plugin extends PluginBase
                 /** initialize the array */
                 $lessonsYears = [];
 
-                if ('specialist' == Auth::user()->type) {
+                if (in_array(Auth::user()->type,['specialist','parent'])) {
                     /** get authenticated specialist profile */
                     $specialistProfile = Auth::user()->profile;
                     /** get connection with a specific specialist */
@@ -250,7 +250,7 @@ class Plugin extends PluginBase
                 $monthStart = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->format('Y-m-d');
                 $monthEnd = Carbon::parse(($year ?? Carbon::now()->year) . '-' . ($month ?? Carbon::now()->month) . '-01')->endOfMonth()->format('Y-m-d');
 
-                if ('specialist' == Auth::user()->type) {
+                if (in_array(Auth::user()->type,['specialist','parent'])) {
                     /** get logged in specialist */
                     $specialistProfile = Auth::user()->profile;
                     /** return lessons from specific month with specific student */
@@ -331,8 +331,8 @@ class Plugin extends PluginBase
 
         Event::listen('genuineq.students.before.student.create', function(&$data, $inputs) {
             /** Add the owner ID to the data. */
-            if ('specialist' == Auth::getUser()->type) {
-                $data['owner_id'] = Auth::user()->profile->id;
+            if ('specialist' == Auth::getUser()->type || 'parent' == Auth::getUser()->type) {
+                $data['owner_id'] = Auth::user()->profile_id;
             } else {
                 $data['owner_id'] = $inputs['owner'];
             }
@@ -347,7 +347,7 @@ class Plugin extends PluginBase
 
         Event::listen('genuineq.students.before.student.create.finish', function(&$redirectUrl, $student) {
             /** Redirect to all students page. */
-            if ('specialist' == Auth::getUser()->type) {
+            if (in_array(Auth::getUser()->type,['specialist','parent'])) {
                 $redirectUrl = 'specialist/students';
             } else {
                 $redirectUrl = 'school/students';

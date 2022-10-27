@@ -145,7 +145,7 @@ class Plugin extends PluginBase
             $profile = null;
 
             /** Create user profile based on user type. */
-            if ('specialist' == $user->type) {
+            if ('specialist' == $user->type||'parent') {
                 $profile = new Specialist([
                         'slug' => Specialist::slug($user->full_name),
                         'phone' => $data['phone'],
@@ -255,11 +255,15 @@ class Plugin extends PluginBase
         User::extend(function ($model) {
             /** Add attribute that checks if user is specialist and get the school name if is affiliated. */
             $model->addDynamicMethod('getSchoolNameAttribute', function () use ($model) {
-                if ('specialist' === $model->type) {
-                    return ( ($model->profile->school) ? ($model->profile->school['name']) : ("") );
-                } else {
+                if (! in_array($model->type, ['specialist', 'parent'])) {
                     return '';
                 }
+
+                if (is_null(optional($model->profile)->school)) {
+                    return '';
+                }
+
+                return $model->profile->school['name'];
             });
         });
     }

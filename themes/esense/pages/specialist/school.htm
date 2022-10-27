@@ -8,6 +8,7 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+allowedUserTypes[] = "parent"
 
 [chartsActions]
 ==
@@ -16,7 +17,7 @@ allowedUserTypes[] = "specialist"
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">{{ user.profile.school.name }}</h4>
+            <h4 class="text-primary-dark font-weight-light mb-4">{{ user.profile.school.name }}</h4>
         </div>
 
         <!-- School activity chart -->

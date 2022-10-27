@@ -49,6 +49,7 @@ class Student extends ComponentBase
         $redirectUrl = null;
         Event::fire('genuineq.students.student.read.start', [&$this, &$redirectUrl]);
 
+
         /** Check if a redirect is required. */
         if ($redirectUrl) {
             return Redirect::to($redirectUrl);
@@ -65,7 +66,8 @@ class Student extends ComponentBase
 
             /** Extract the student and send it to the page. */
             $this->page['student'] = StudentModel::find($this->param('studentId'));
-        } elseif ($this->property('throwBeforeStudentCreateStart')) {
+        }
+        elseif ($this->property('throwBeforeStudentCreateStart')) {
             /** Fire event before student create start. */
             Event::fire('genuineq.students.before.student.create.start', [&$this, $this->param('studentId'), &$redirectUrl]);
 
@@ -73,7 +75,9 @@ class Student extends ComponentBase
             if ($redirectUrl) {
                 return Redirect::to($redirectUrl);
             }
+
         }
+
     }
 
     /***********************************************
@@ -127,7 +131,11 @@ class Student extends ComponentBase
         // Event::fire('genuineq.students.create.before.contact.persons.create', [post()]);
 
         /** Save contact persons. */
-        $this->updateContactPersons($student, post());
+        if (post('contact_1_surname') !== null)
+        {
+            $this->updateContactPersons($student, post());
+        }
+
 
         /** Fire event before contact persons create. */
         // Event::fire('genuineq.students.create.after.contact.persons.create', [post()]);
@@ -199,7 +207,10 @@ class Student extends ComponentBase
         // Event::fire('genuineq.students.update.before.contact.persons.update', [post()]);
 
         /** Save contact persons. */
-        $this->updateContactPersons($student, post());
+        if (post('contact_1_surname') !== null)
+        {
+            $this->updateContactPersons($student, post());
+        }
 
         /** Fire event before contact persons update. */
         Event::fire('genuineq.students.update.after.contact.persons.update', [post()]);

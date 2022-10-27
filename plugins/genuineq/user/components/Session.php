@@ -192,7 +192,6 @@ class Session extends ComponentBase
         $allowedUserGroups = $this->property('allowedUserGroups', []);
         $allowedUserTypes = $this->property('allowedUserTypes', []);
         $isAuthenticated = Auth::check();
-
         if ($isAuthenticated) {
             /** Check if only guests are allowed. */
             if ($allowedGroup == self::ALLOW_GUEST) {

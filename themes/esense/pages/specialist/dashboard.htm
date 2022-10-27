@@ -8,6 +8,7 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+allowedUserTypes[] = "parent"
 
 [student]
 
@@ -20,18 +21,18 @@ allowedUserTypes[] = "specialist"
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">{{'page.specialist.dashboard.title'|_}}</h4>
+            <h4 class="text-primary-dark font-weight-light mb-4">{{'page.specialist.dashboard.title'|_}}</h4>
         </div>
 
         <!-- Students card -->
         <div class="col-12 col-md-6">
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
-                    <h6 class="text-gray-light">{{'page.specialist.dashboard.students.card.title'|_}}</h6>
-                    <h5 class="text-gray-dark">{{ user.profile.unarchivedStudents.count }}</h5>
+                    <h6 class="text-gray-light">{{user.type=="parent"? 'Total copii':'page.specialist.dashboard.students.card.title'|_}}</h6>
+                    <h5 class="text-primary-dark">{{ user.profile.unarchivedStudents.count }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
-                        <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/students'|page }}">{{'page.specialist.dashboard.students.card.link'|_}}</a>
+                        <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/students'|page }}">{{user.type=="parent"? 'Vezi toti copii' :'page.specialist.dashboard.students.card.link'|_}}</a>
                     </div>
                 </div>
                 <div>
@@ -45,7 +46,7 @@ allowedUserTypes[] = "specialist"
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
                     <h6 class="text-gray-light">{{'page.specialist.dashboard.exercises.title'|_}}</h6>
-                    <h5 class="text-gray-dark">{{ user.profile.getExercisesNumber }}</h5>
+                    <h5 class="text-primary-dark">{{ user.profile.getExercisesNumber }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
                         <a class="ml-2 display-4 text-gray-light" href="{{ 'specialist/exercises'|page }}">{{'page.specialist.dashboard.exercises.link'|_}}</a>
@@ -72,6 +73,7 @@ allowedUserTypes[] = "specialist"
             %}
         </div>
 
+
         <!-- Students table -->
         <div class="col-12 col-lg-6 mt-5">
             <div class="table-responsive rounded" style="overflow-x: hidden; box-shadow: 0px 0px 32px rgba(136, 152, 170, 0.15);">
@@ -79,7 +81,7 @@ allowedUserTypes[] = "specialist"
                     <thead>
                         <tr>
                             <!-- Name column -->
-                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_1.title'|_}}</p></th>
+                            <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{user.type=="parent"? 'Nume copil':'page.specialist.dashboard.students.table.column_1.title'|_}}</p></th>
                             <!-- Age column -->
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_2.title'|_}}</p></th>
                             <th class="no-sort"></th>
@@ -204,21 +206,6 @@ allowedUserTypes[] = "specialist"
                                     <div class="col-12 d-flex align-items-center justify-content-center py-3">
                                         <canvas id="donut-{{student.id}}" class="donut-chart" width="400px" height="400px"></canvas>
                                     </div>
-
-                                    <!-- Student lesson description -->
-                                    <div class="col-12 border-top py-3"></div>
-                                    <div class="col-1">
-                                        <div class="d-flex justify-content-center" style="width: 30px; height: 30px;">
-                                            <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/edit.svg'|theme }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-10">
-                                        <div class="pl-1 pl-lg-0">
-                                            <p class="p-0 m-0 small text-rgba-black font-weight-normal">{{'page.specialist.dashboard.donut.chart.despre'|_}}&nbsp;<span class="font-weight-bold">{{ student.full_name }}</span></p>
-                                            <p class="p-0 m-0 py-1 display-4 text-rgba-black">{{student.description|raw}}</p>
-                                            <a class="display-4 text-blue" href="{{ 'specialist/student-edit'|page({studentId: student.id }) }}">{{'page.specialist.dashboard.donut.chart.link'|_}}</a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -274,18 +261,18 @@ allowedUserTypes[] = "specialist"
                     }
                 }
             });
-            $('.added-content').html('\
+            $('.added-content').html(`\
                 <div class="row pb-3 px-3 pt-4 rounded-top" style="background: linear-gradient(0deg, #FFFFFF, #FFFFFF);">\
                     <div class="col-12 col-lg-7">\
-                        <p class="display-2 font-weight-light text-gray-2">{{"page.specialist.students.table.title"|_}}</p>\
+                        <p class="display-2 font-weight-light text-gray-2">{{user.type=="parent"? 'Copii mei':"page.specialist.students.table.title"|_}}</p>\
                     </div>\
                     <div class="col-12 col-lg-5">\
                         <div class="d-flex align-items-center justify-content-start justify-content-lg-end">\
                             <img class="img-fluid" src="{{ "assets/img/svg/dashboard/arrow-right.svg"|theme }}">\
-                            <a class="ml-2 display-4 text-gray-light" href="{{ "specialist/students"|page }}">{{"page.specialist.dashboard.students.table.all.students.link.text"|_}}</a>\
+                            <a class="ml-2 display-4 text-gray-light" href="{{ "specialist/students"|page }}">{{user.type=="parent"? 'Vezi toți copii':"page.specialist.dashboard.students.table.all.students.link.text"|_}}</a>\
                         </div>\
                     </div>\
-                </div>'
+                </div>`
             );
 
             /***********************************************

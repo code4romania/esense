@@ -20,7 +20,7 @@ allowedUserTypes[] = "school"
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">{{'page.school.dashboard.title'|_}}</h4>
+            <h4 class="text-primary-dark font-weight-light mb-4">{{'page.school.dashboard.title'|_}}</h4>
         </div>
 
           <!-- Students card -->
@@ -28,7 +28,7 @@ allowedUserTypes[] = "school"
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
                     <h6 class="text-gray-light">{{'page.school.dashboard.students.card.title'|_}}</h6>
-                    <h5 class="text-gray-dark">{{ user.profile.students.count }}</h5>
+                    <h5 class="text-primary-dark">{{ user.profile.students.count }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
                         <a class="ml-2 display-4 text-gray-light" href="{{ 'school/students'|page }}">{{'page.school.dashboard.students.card.link'|_}}</a>
@@ -45,7 +45,7 @@ allowedUserTypes[] = "school"
             <div class="bg-white rounded shadow py-3 px-4 d-flex justify-content-between">
                 <div>
                     <h6 class="text-gray-light">{{'page.school.dashboard.specialists.card.title'|_}}</h6>
-                    <h5 class="text-gray-dark">{{ user.profile.active_specialists.count }}</h5>
+                    <h5 class="text-primary-dark">{{ user.profile.active_specialists.count }}</h5>
                     <div class="d-flex align-items-center">
                         <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-right.svg'|theme }}">
                         <a class="ml-2 display-4 text-gray-light" href="{{ 'school/specialists'|page }}">{{'page.school.dashboard.specialists.card.link'|_}}</a>

@@ -8,6 +8,7 @@ is_hidden = 0
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
+allowedUserTypes[] = "parent"
 
 [student]
 ==
@@ -16,7 +17,7 @@ allowedUserTypes[] = "specialist"
 
     function onStart()
     {
-        if (Auth::user() && ('specialist' == Auth::user()->type) && Auth::user()->profile->affiliated) {
+        if (Auth::user() && (in_array(Auth::user()->type,['specialist','parent'])) && Auth::user()->profile->affiliated) {
             return Redirect::to(RedirectHelper::accessDenied());
         }
     }
@@ -27,7 +28,7 @@ allowedUserTypes[] = "specialist"
 
         <!-- Dashboard title -->
         <div class="col-12">
-            <h4 class="text-gray-dark font-weight-light mb-4">{{ 'page.specialist.dashboard.archive.title'|_ }}</h4>
+            <h4 class="text-primary-dark font-weight-light mb-4">{{ 'page.specialist.dashboard.archive.title'|_ }}</h4>
         </div>
 
         <!-- Students table -->
