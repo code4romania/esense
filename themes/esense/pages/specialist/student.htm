@@ -34,7 +34,8 @@ orderByDirection = "DESC"
         <div class="col-12 my-3">
             <div class="d-flex align-itmes-center">
                 <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{ 'page.specialist.dashboard.back.students.link'|_ }}</a>
+                <a class="ml-3 text-black" href="{{ 'specialist/students'|page }}">{{
+                    'page.specialist.dashboard.back.students.link'|_ }}</a>
             </div>
         </div>
 
@@ -46,52 +47,89 @@ orderByDirection = "DESC"
                         <div class="p-3 d-flex align-items-start justify-content-between">
                             <div class="d-flex flex-column flex-md-row">
                                 {% if student.avatar %}
-                                    <img class="img-profile rounded-circle mb-2 mb-md-0" src="{{ student.avatar.getThumb(80, 80, { mode : 'crop' } ) }}" alt="avatar">
+                                <img class="img-profile rounded-circle mb-2 mb-md-0"
+                                     src="{{ student.avatar.getThumb(80, 80, { mode : 'crop' } ) }}" alt="avatar">
                                 {% elseif student.gender == 'female' %}
-                                    <img class="img-profile rounded-circle mb-2 mb-md-0" width="80" height="80" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
+                                <img class="img-profile rounded-circle mb-2 mb-md-0" width="80" height="80"
+                                     src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
                                 {% else %}
-                                    <img class="img-profile rounded-circle mb-2 mb-md-0" width="80" height="80" src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}" alt="avatar">
+                                <img class="img-profile rounded-circle mb-2 mb-md-0" width="80" height="80"
+                                     src="{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}" alt="avatar">
                                 {% endif %}
 
                                 <div class="ml-3">
-                                    <p class="p-0 m-0 font-weight-bold text-dark" style="line-height: 25px;">{{ student.full_name }}</p>
-                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{ 'page.specialist.dashboard.student.age.label'|_ }} {{ student.age }}&nbsp;{{ 'page.specialist.dashboard.student.years.text'|_ }}</p>
-                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{ 'page.specialist.dashboard.student.specialist.name'|_ }}
+                                    <p class="p-0 m-0 font-weight-bold text-dark" style="line-height: 25px;">{{
+                                        student.full_name }}</p>
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{
+                                        'page.specialist.dashboard.student.age.label'|_ }} {{ student.age }}&nbsp;{{
+                                        'page.specialist.dashboard.student.years.text'|_ }}</p>
+                                    {% if user.type!='parent' %}
+                                    <p class="p-0 m-0 small text-dark" style="line-height: 22px;">{{
+                                        'page.specialist.dashboard.student.specialist.name'|_ }}
                                         {% for specialist in student.specialists %}
-                                            {% if loop.last %}
-                                                {{ specialist.full_name }}
-                                            {% else %}
-                                                {{ specialist.full_name }},&nbsp;
-                                            {% endif %}
+                                        {% if loop.last %}
+                                        {{ specialist.full_name }}
+                                        {% else %}
+                                        {{ specialist.full_name }},&nbsp;
+                                        {% endif %}
                                         {% endfor %}
                                     </p>
+                                    {% endif %}
+                                    {% if student.hearing_impairment == 1 %}
+                                    <p class="p-0 m-0 small text-dark btn btn-default" style="line-height: 22px;">
+                                        Probleme de auz
+                                    </p>
+                                    {% endif %}
+                                    {% if student.visual_impairment == 1 %}
+                                    <p class="p-0 m-0 small text-dark btn btn-default" style="line-height: 22px;">
+                                        Probleme de vaz
+                                    </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="col-12">
+                                    {{ student.description |raw}}
                                 </div>
                             </div>
 
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="col-6">
-                                    <a class="btn btn-secondary btn-lg display-4 roboto-family ml-3" href="https://e-sense-frontend.vercel.app/login">
+                                    <a class="btn btn-secondary btn-lg display-4 roboto-family ml-3"
+                                       href="https://e-sense-frontend.vercel.app/login">
                                         {{ 'page.specialist.dashboard.student.start_game'|_ }}
                                     </a>
                                 </div>
                                 <div class="dropdown">
-                                    <button class="btn shadow-none p-0 m-0" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn shadow-none p-0 m-0" type="button" id="studentsTableOptions"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img class="" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
                                     </button>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentsTableOptions">
-                                        <a class="dropdown-item display-4" href="{{ 'specialist/student-edit'|page({studentId: student.id}) }}" style="color: #1A212C;">
+                                    <div class="dropdown-menu dropdown-menu-right"
+                                         aria-labelledby="studentsTableOptions">
+                                        <a class="dropdown-item display-4"
+                                           href="{{ 'specialist/student-edit'|page({studentId: student.id}) }}"
+                                           style="color: #1A212C;">
                                             {{ 'page.specialist.dashboard.student.options.edit'|_ }}
                                         </a>
+                                        {% if user.type !='parent' %}
 
-                                        <a class="dropdown-item display-4" style="color: #1A212C;" role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}'>
-                                            {{ 'page.specialist.dashboard.student.options.archive'|_ }}
+                                        <a class="dropdown-item display-4" style="color: #1A212C;" role="button"
+                                           data-toggle="modal" data-target="#archiveStudentModal"
+                                           data-name='{{ student.full_name }}' data-id='{{ student.id }}'
+                                           data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : '
+                                           crop' } )}}{% elseif student.gender == 'female' %}{{
+                                        'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{
+                                        'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}'>
+                                        {{ 'page.specialist.dashboard.student.options.archive'|_ }}
                                         </a>
+                                        {% endif %}
 
                                         {% if user.profile.affiliated %}
-                                            <a class="dropdown-item display-4" href="#" style="color: #1A212C;">
-                                                {{ 'page.specialist.dashboard.student.options.invite_specialist'|_ }}
-                                            </a>
+                                        <a class="dropdown-item display-4" href="#" style="color: #1A212C;">
+                                            {{ 'page.specialist.dashboard.student.options.invite_specialist'|_ }}
+                                        </a>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -104,38 +142,44 @@ orderByDirection = "DESC"
                     <!-- Frequent exercises owl carousel -->
                     <div class="col-12 mt-4 d-none">
                         <div class="px-3 d-flex align-items-center justify-content-between">
-                            <p class="p-0 m-0 text-primary-dark font-weight-bold">{{ 'page.specialist.dashboard.student.profile.frequent_exercises'|_ }}</p>
+                            <p class="p-0 m-0 text-primary-dark font-weight-bold">{{
+                                'page.specialist.dashboard.student.profile.frequent_exercises'|_ }}</p>
                         </div>
 
                         <div class="mt-4 px-3">
                             <div class="exercises-owl-carousel owl-carousel owl-theme">
                                 {% for record in records.items %}
-                                    <div class="item">
-                                        <div class="rounded bg-white" style="box-shadow: 0px 0px 32px rgba(136, 152, 170, 0.15);">
-                                            <div class="bg-white">
-                                                <p class="p-0 m-0 pl-3 text-primary-dark">{{record.name}}</p>
+                                <div class="item">
+                                    <div class="rounded bg-white"
+                                         style="box-shadow: 0px 0px 32px rgba(136, 152, 170, 0.15);">
+                                        <div class="bg-white">
+                                            <p class="p-0 m-0 pl-3 text-primary-dark">{{record.name}}</p>
+                                        </div>
+
+                                        <div class="">
+                                            <img class="img-fluid" src="{{ record.preview_image.getPath }}">
+                                        </div>
+
+                                        <div class="p-3 bg-white d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img class="img-fluid"
+                                                     src="{{ 'assets/img/svg/dashboard/exercise/label.svg'|theme }}">
+                                                <p class="p-0 m-0 ml-2"
+                                                   style="font-size: 12px; color: #000000; line-height:16px;">
+                                                    {% for category in record.categories %}
+                                                    {{ category.name }}
+                                                    {% endfor %}
+                                                </p>
                                             </div>
 
-                                            <div class="">
-                                                <img class="img-fluid" src="{{ record.preview_image.getPath }}">
-                                            </div>
-
-                                            <div class="p-3 bg-white d-flex align-items-center justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/exercise/label.svg'|theme }}">
-                                                    <p class="p-0 m-0 ml-2" style="font-size: 12px; color: #000000; line-height:16px;">
-                                                        {% for category in record.categories %}
-                                                            {{ category.name }}
-                                                        {% endfor %}
-                                                    </p>
-                                                </div>
-
-                                                <div>
-                                                    <a href="{{records.property('recordPage') ? records.property('recordPage')|page({(records.paramName('recordPageSlug')):(record.slug)})}}" class="btn btn-sm btn-primary-dark">{{ 'page.specialist.dashboard.student.profile.details'|_ }}</a>
-                                                </div>
+                                            <div>
+                                                <a href="{{records.property('recordPage') ? records.property('recordPage')|page({(records.paramName('recordPageSlug')):(record.slug)})}}"
+                                                   class="btn btn-sm btn-primary-dark">{{
+                                                    'page.specialist.dashboard.student.profile.details'|_ }}</a>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -145,18 +189,19 @@ orderByDirection = "DESC"
                 <div class="row">
                     <!-- Student profile table -->
                     <div class="col-12 mt-5">
-                        <p class="text-primary-dark font-weight-bold px-3">{{ 'page.specialist.dashboard.student.profile.exercises'|_ }}</p>
+                        <p class="text-primary-dark font-weight-bold px-3">{{
+                            'page.specialist.dashboard.student.profile.exercises'|_ }}</p>
 
                         <div id="student-lessons-datatable-container">
                             <!-- Partial for specialist lessons with a student -->
                             {%
-                                partial 'web-app/specialist/student-lessons'
+                            partial 'web-app/specialist/student-lessons'
 
-                                month = 'now'|date('n')
-                                year = 'now'|date('Y')
+                            month = 'now'|date('n')
+                            year = 'now'|date('Y')
 
-                                years = student.lessons_years
-                                lessons = student.getLessonsFromMonth()
+                            years = student.lessons_years
+                            lessons = student.getLessonsFromMonth()
 
                             %}
                         </div>
@@ -171,44 +216,56 @@ orderByDirection = "DESC"
 {% partial 'web-app/general/student-archive' %}
 
 {% put scripts %}
-    <script type="text/javascript">
-        $(document).ready(function () {
+<script type="text/javascript">
+    $(document).ready(function () {
 
-            /** Function that extarcts the schedule for a date and updates the page. */
-            function selectDate(date) {
-                /** Update the calendar. */
-                $('.calendar-wrapper').updateCalendarOptions({date: date});
+        /** Function that extarcts the schedule for a date and updates the page. */
+        function selectDate(date) {
+            /** Update the calendar. */
+            $('.calendar-wrapper').updateCalendarOptions({date: date});
 
-                /** Extract the formated date. */
-                var $_date = new Date(date);
-                var $formatedDate = $_date.getFullYear() + '-' + ((2 > ($_date.getMonth() + 1).length) ? ('0' + ($_date.getMonth() + 1)) : ($_date.getMonth() + 1)) + '-' + ((2 > $_date.getDate().length) ? ('0' + $_date.getDate()) : ($_date.getDate()))
+            /** Extract the formated date. */
+            var $_date = new Date(date);
+            var $formatedDate = $_date.getFullYear() + '-' + ((2 > ($_date.getMonth() + 1).length) ? ('0' + ($_date.getMonth() + 1)) : ($_date.getMonth() + 1)) + '-' + ((2 > $_date.getDate().length) ? ('0' + $_date.getDate()) : ($_date.getDate()))
 
-                $.request('onGetStudentDateLessons', {
-                    data: {
-                        student: {{ student.id }},
-                        date: $formatedDate
-                    },
-                    update: {
-                        'web-app/general/schedule-timeline': '#schedule-timeline'
-                    }
-                });
+            $.request('onGetStudentDateLessons', {
+                data: {
+                    student: {
+            {
+                student.id
             }
+        },
+            date: $formatedDate
+        },
+            update: {
+                'web-app/general/schedule-timeline'
+            :
+                '#schedule-timeline'
+            }
+        })
+            ;
+        }
 
-            /** Intialize the calendar. */
-            $('.calendar-wrapper').calendar({
-                weekDayLength: 1,
-                date: new Date(),
-                onClickDate: selectDate,
-                showYearDropdown: true,
-                prevButton: '<',
-                nextButton: '>',
-                todayButtonContent: '',
-                showTodayButton: false,
-                min: "{{ student.created_at.format('m/d/Y') }}",
-                max: new Date(),
-                highlightedDays: {{ (student.lessons.pluck('day').toJson())|raw }},
-            });
-        });
+        /** Intialize the calendar. */
+        $('.calendar-wrapper').calendar({
+            weekDayLength: 1,
+            date: new Date(),
+            onClickDate: selectDate,
+            showYearDropdown: true,
+            prevButton: '<',
+            nextButton: '>',
+            todayButtonContent: '',
+            showTodayButton: false,
+            min: "{{ student.created_at.format('m/d/Y') }}",
+            max: new Date(),
+            highlightedDays: {
+        {
+            (student.lessons.pluck('day').toJson()) | raw
+        }
+    },
+    })
+        ;
+    });
 
-    </script>
+</script>
 {% endput %}
