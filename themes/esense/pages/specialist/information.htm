@@ -4,61 +4,61 @@ layout = "web-app"
 description = "Displays platform informations"
 is_hidden = 0
 
-[recordDetail]
-activeOnly = 0
-recordSlug = "{{ :slug }}"
-areaSlug = "informations"
-categorySlug = "{{ :category }}"
-useMainCategory = 1
-useMultiCategories = 1
-categoryPage = "category"
-categoryPageSlug = "{{ :category }}"
-
-[categoryDetail category]
-activeOnly = 1
-categorySlug = "introducere-in-platforma"
-areaSlug = "informations"
-recordPage = "specialist/information"
-recordPageSlug = "{{ :slug }}"
-
 [session]
 security = "user"
 allowedUserGroups[] = "registered"
 allowedUserTypes[] = "specialist"
 allowedUserTypes[] = "parent"
 ==
-<?php
-function onEnd()
-{
-    if(!$this['recordDetail']){
-        $this['recordDetail'] = $this['categoryDetail']->records[0];
-    }
-}
-?>
 ==
 <div class="container-fluid px-lg-4 mb-5 min-vh-100">
+
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-7">
-            {% if recordDetail.preview_image %}
-                <div>
-                    <img class="img-fluid w-100" src="{{ recordDetail.preview_image.getPath }}">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="col-11 bg-white ml-2 mr-4 p-4">
+                    <h3>Informații utile</h3>
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <p>E-sense este un software elaborat pentru a fi utilizat în activitățile de intervenție terapeutică și educațională la copiii cu SC/ DSM.</p>
+
+                           <p> Platforma E-sense are două componente:</p>
+                            <ul>
+                               <li> prima componentă e o aplicație de jocuri și exerciții de stimulare vizuală și cognitivă organizate în patru tipuri de activități: stimulare, identificare, localizare, discriminare.</li>
+                                <li> a doua componentă este o aplicație web care permite școlii și profesorului să realizeze o evidență a elevilor și monitorizeze progresele fiecăruia. Profesorul poate crea profilul fiecrui elev completând date relevante precum: data nașterii, diagnostic, persoane de contact</li>
+                            </ul>
+                           <p> Profesorul care utilizează platforma  E-sense selectează și organizează sarcini și exerciții adaptate nivelului funcțional al fiecărui copil și corelează conținutul curricular cu obiectivele  propuse.</p>
+
+                            <p>Este de dorit ca activitățile de stimulare a vederii restante să înceapă cât mai devreme. Pentru copiii cu DSM/SC, care beneficiază de intervenție timpurie antepreșcolară, platforma poate fi utilizată în cadrul activităților de educație senzorială și cognitivă după cum e prevăzut în Conținutul educativ pentru intervenție timpurie antepreșcolară destinat copiilor cu deficiențe senzoriale multiple/surdocecitate din 18.01.2013, conform cu OM 3071/2013. În multe cazuri, în măsură în care vederea restantă este exersată, are loc o creștere a eficienței vizuale.</p>
+
+                            <p>Pentru copiii de nivel preșcolar, exercițiile din platform E-sense pot fi utilizate în cadrul activităților specifice de compensare, disciplină care face parte din aria curriculară „Terapii și programe de intervenție”, conform disciplinelor din Planurile-cadru aprobate prin Ordinul nr. 3622/2018 privind aprobarea planurilor-cadru pentru învăţământul special preşcolar, primar şi gimnazial . Exerciţiile şi activităţile de învăţare propuse pentru atingerea obiectivelor de referinţă sunt gradate ca dificultate şi se recomandă a fi parcurse în funcţie de nivelul de dezvoltare funcţională a copilului.</p>
+
+                            <p>Pentru copii de nivel preșcolar, exercițiile din platform E-sense pot fi utilizate în cadrul activităților specifice de compensare, disciplina care face parte din aria curriculară „Terapii și programe de intervenție” conform disciplinelor din Planurile-cadru aprobate prin Ordinul nr. 3622/2018 privind aprobarea planurilor-cadru pentru învăţământul special preşcolar, primar şi gimnazial.</p>
+
+                            <p>La elevii din clasa pregătitoare – clasa a IV-a exercițiile din platforma E-sense pot fi utilizate în cadrul activităților  educaționale, la  disciplina  „Educație senzorială și psihomotorie”. Programa şcolară pentru elevi cu dizabilități senzoriale multiple/surdocecitate conform disciplinelor din Planurile-cadru aprobate prin Ordinul nr. 3622/2018 privind aprobarea planurilor-cadru pentru învăţământul special preşcolar, primar şi gimnazial, disciplina „Educație senzorială și psihomotorie” este elaborată potrivit unui nou model de proiectare curriculară, centrat pe competenţe și reprezintă o ofertă curriculară pentru clasele pregătitoare - a IV-a din învățământul primar, înscriindu-se în aria curriculară „Matematică și științe ale naturii”.</p>
+
+                            <p>Vederea neclară duce la dificultăți ale analizei și sintezei vizuale și în general la o investigare care consumă timp. Platforma permite un ritm adaptat nivelului funcțional al fiecărui copil.  Profesorul poate selecta tipul adecvat de exerciții și îl poate personaliza, ajustând aspectele vizuale ale exercițiului, setând conținutul specific sau selectând nivelul de dificultate. Setul de exerciții utilizat, durata și progresul copilului sunt monitorizate constant. Aceste exerciții reprezintă o modalitate de a încuraja, de a motiva copiii cu SC/DSM, să-și utilizeze restantul vizual. Platforma oferă exerciții atractive pentru copii, cu feedback imediat, cu scopul de a dezvolta abilitățile perceptive și cognitive ale copiilor.</p>
+
+                            <p>În expunerea copilului la stimuli vizuali se va ţine cont de diagnosticele  medicale ale copilului, evitându-se astfel reacţii adverse, creşterea gradului de frustrare, suprasolicitarea vizuală. Este important să ne consultăm cu medicul oftalmolog al copilului, pentru a înțelege implicațiile funcționale ale diagnosticului. În cazul în care copilul manifestă hipersensibilitate la  stimulul vizual prezentat, se va urmări, în proiectarea activităţilor ulterioare, respectarea etapelor de desensibilizare sistematică/ expunere progresivă la acesta. În cazul elevilor cu surdocecitate, care pot utiliza resturile de vedere, pot să apară semnale de suprasolicitare a efortului vizual. Aceste manifestari se referă la tensiune oculară, senzații de arsură, senzații de nisip sub pleoape, mâncărimi la nivelul organelor de văz sau uscarea excesivă a ochilor. Uscarea excesivă a ochilor, glaucomul sau degenerescența maculară sunt afecțiuni care necesită sfatul specialistului oftalmolog, cu privire la activitățile de stimularea vizuală. Profesorul trebuie să își organizeze astfel activitatea încât antrenamentul vizual să alterneze cu alte modalități de stimulare senzorială, în care efortul vizual al copilului cu DSM/SC este minim.</p>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-register" role="tabpanel" aria-labelledby="v-pills-register-tab">...</div>
+                        <div class="tab-pane fade" id="v-child-profile" role="tabpanel" aria-labelledby=v-child-profile-tab">...</div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+                    </div>
                 </div>
-            {% endif %}
-            <h5 class="text-medium-dark py-3">
-                {{recordDetail.description|raw}}
-            </h5>
-            <div class="text-medium-dark">
-                {{recordDetail.content|raw}}
+<!--                <div class="col-3 bg-white p-4 mx-4 sticky">-->
+<!--                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">-->
+<!--                        <a href="#" class="nav-link active" id="v-pills-home-tab" data-toggle="pill" data-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Introducere în platformă</a>-->
+<!--                        <a href="#" class="nav-link" id="v-pills-register-tab" data-toggle="pill" data-target="#v-pills-register" type="button" role="tab" aria-controls="v-pills-register" aria-selected="false">Înregistrarea unui copil</a>-->
+<!--                        <a href="#" class="nav-link" id="v-child-profile-tab" data-toggle="pill" data-target="#v-child-profile" type="button" role="tab" aria-controls="v-child-profile" aria-selected="false">Profilul copilului</a>-->
+<!--                        <a href="#" class="nav-link" id="v-pills-settings-tab" data-toggle="pill" data-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Setare orar jocuri și exerciții</a>-->
+<!--                        <a href="#" class="nav-link" id="v-pills-settings-tab" data-toggle="pill" data-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Jocuri și exerciții</a>-->
+<!--                        <a href="#" class="nav-link" id="v-pills-settings-tab" data-toggle="pill" data-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Profil profesor</a>-->
+<!--                        <a href="#" class="nav-link" id="v-pills-settings-tab" data-toggle="pill" data-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Profil profesor</a>-->
+<!--                        <a href="#" class="nav-link" id="v-pills-settings-tab" data-toggle="pill" data-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Panou de administrare</a>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
-        <div class="col-12 col-lg-4 mt-lg-5">
-			<ul class="timeline">
-                {% for record in categoryDetail.records %}
-                    <li class="{{ (record.slug == recordDetail.slug) ? ('active') : ('') }}">
-                        <a class="text-medium-dark" style="line-height: 25px;" href="{{ (category.property('recordPage')) ? category.property('recordPage')|page({(category.paramName('recordPageSlug')):(record.slug)})}}">{{ record.name }}</a>
-                    </li>
-                {% endfor %}
-			</ul>
-		</div>
     </div>
 </div>
