@@ -70,7 +70,7 @@ orderByDirection = "DESC"
 
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="col-6">
-                                    <a class="btn btn-secondary btn-lg display-4 roboto-family ml-3" href="https://e-sense-frontend.vercel.app/login">
+                                    <a class="btn btn-secondary btn-lg display-4 roboto-family ml-3" href="{{ 'specialist/student-play'|page({studentId: student.id}) }}">
                                         {{ 'page.specialist.dashboard.student.start_game'|_ }}
                                     </a>
                                 </div>
