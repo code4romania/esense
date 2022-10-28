@@ -1,6 +1,5 @@
 title = "Joacă"
 url = "/specialist/student/:studentId/play"
-layout = "web-app"
 description = "Used for playing a game with student"
 is_hidden = 0
 
@@ -14,30 +13,14 @@ allowedUserTypes[] = "parent"
 ==
 <div class="container-fluid px-lg-4">
     <div class="row">
-
-        <!-- Back link -->
-        <div class="col-12 my-3">
-            <div class="d-flex align-itmes-center">
-                <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/arrow-black.svg'|theme }}">
-                <a class="ml-3 text-black"
-                    href="{{ 'specialist/student'|page({studentId: student.id}) }}">{{'page.specialist.dashboard.student.back.link'|_}}</a>
-            </div>
-        </div>
-
-        <div class=" col-12">
-            <div id="app" data-user="{{ user }}" data-student="{{ student.id }}"
-                class="rounded shadow bg-white p-3 p-lg-4">
+        <div class="col-12 rounded shadow bg-white p-3 p-lg-4">
+            <div id="app" data-user="{{ user }}" data-student="{{ student }}">
             </div>
         </div>
     </div>
 </div>
 
-
-{%put styles %}
 <link href="{{ 'assets/game/main.css'|theme }}" rel="stylesheet">
-{% endput %}
 
-{% put scripts %}
 <script defer="defer" src="{{ 'assets/game/vendor.js'|theme }}"></script>
 <script defer="defer" src="{{ 'assets/game/main.js'|theme }}"></script>
-{% endput %}
