@@ -76,7 +76,7 @@ allowedUserTypes[] = "parent"
                                     <div class="pl-2 py-3 d-flex align-items-center">
                                         <div>
                                             {% if student.avatar %}
-                                                <img class="img-fluid img-avatar rounded-circle" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
+                                                <img class="img-fluid img-avatar rounded-circle" width="40" height="40"  src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
                                             {% elseif student.gender == 'female' %}
                                                 <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
                                             {% else %}
@@ -149,7 +149,7 @@ allowedUserTypes[] = "parent"
                                     <div class="pl-2 py-3 d-flex align-items-center">
                                         <div>
                                             {% if student.avatar %}
-                                                <img class="img-fluid img-avatar rounded-circle" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
+                                                <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
                                             {% elseif student.gender == 'female' %}
                                                 <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
                                             {% else %}

@@ -24,7 +24,9 @@ allowedUserTypes[] = "parent"
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_1'|_}}</p></th>
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_2'|_}}</p></th>
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_3'|_}}</p></th>
+                            {% if user.type != 'parent'%}
                             <th><p class="p-0 m-0 py-2 pl-2 display-4" style="line-height: 18px; letter-spacing:0.2px">{{'page.specialist.dashboard.students.table.column_4'|_}}</p></th>
+                            {%endif%}
                             <th class="no-sort"></th>
                         </tr>
                     </thead>
@@ -36,7 +38,7 @@ allowedUserTypes[] = "parent"
                                         <div class="pl-2 py-3 d-flex align-items-center">
                                             <div>
                                                 {% if student.avatar %}
-                                                    <img class="img-fluid img-avatar rounded-circle" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
+                                                    <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}" alt="avatar">
                                                 {% elseif student.gender == 'female' %}
                                                     <img class="img-fluid img-avatar rounded-circle" width="40" height="40" src="{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}" alt="avatar">
                                                 {% else %}
@@ -89,6 +91,7 @@ allowedUserTypes[] = "parent"
                                         <p class="p-0 m-0 pt-2 font-weight-light display-4" style="letter-spacing: 0.2px; line-height:20px; color:#252733;">{{ student.age }}&nbsp;{{'page.specialist.dashboard.students.table.age'|_}}</p>
                                     </div>
                                 </td>
+                                {% if user.type != 'parent'%}
                                 <td>
                                     <div class="pl-2 py-3">
                                         <div class="d-flex align-items-center pt-2">
@@ -97,12 +100,10 @@ allowedUserTypes[] = "parent"
                                         </div>
                                     </div>
                                 </td>
+                                {%endif%}
                                 <td>
                                     <div class="d-none d-md-block">
                                         <div class="pl-2 py-3 d-flex align-items-center">
-                                            <a role="button" data-toggle="modal" data-target="#archiveStudentModal" data-name='{{ student.full_name }}' data-id='{{ student.id }}' data-avatar='{% if student.avatar %}{{student.avatar.getThumb(40,40, { mode : 'crop' } )}}{% elseif student.gender == 'female' %}{{ 'assets/img/svg/dashboard/girl-avatar-1.svg'|theme }}{% else %}{{ 'assets/img/svg/dashboard/baiat-avatar-2.svg'|theme }}{% endif %}'>
-                                                <img class="img-fluid pt-2 ml-4" src="{{ 'assets/img/svg/dashboard/file-container.svg'|theme }}">
-                                            </a>
                                             <div class="dropdown pt-2">
                                                 <button class="btn shadow-none" type="button" id="studentsTableOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <img class="img-fluid" src="{{ 'assets/img/svg/dashboard/options.svg'|theme }}">
