@@ -1080,7 +1080,7 @@ class Plugin extends PluginBase
                 }
             } else {
                 /** Extract the specialist that has the lesson connection. */
-                $specialist = $user->profile->specialists->where('id', $lesson->connection->specialist_id)->first();
+                $specialist = ($user->profile->specialists) ? $user->profile->specialists->where('id', $lesson->connection->specialist_id)->first() :$user;
 
                 /** Check if the user has access to the specified specialist. */
                 if (!$specialist) {
