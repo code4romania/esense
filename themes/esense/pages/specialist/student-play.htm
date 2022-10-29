@@ -1,0 +1,27 @@
+title = "Joacă"
+url = "/specialist/student/:studentId/play"
+description = "Used for playing a game with student"
+is_hidden = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "registered"
+allowedUserTypes[] = "specialist"
+allowedUserTypes[] = "parent"
+allowedUserTypes[] = "school"
+
+[student]
+==
+<div class="container-fluid px-lg-4">
+    <div class="row">
+        <div class="col-12 rounded shadow bg-white p-3 p-lg-4">
+            <div id="app" data-user="{{ user }}" data-student="{{ student }}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="{{ 'assets/game/main.css'|theme }}" rel="stylesheet">
+
+<script defer="defer" src="{{ 'assets/game/vendor.js'|theme }}"></script>
+<script defer="defer" src="{{ 'assets/game/main.js'|theme }}"></script>

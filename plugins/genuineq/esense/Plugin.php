@@ -11,12 +11,9 @@ use Genuineq\User\Helpers\RedirectHelper;
 use Genuineq\Profile\Models\Specialist;
 use Genuineq\Profile\Models\School;
 use Genuineq\Students\Models\Student;
-use Genuineq\Esense\Models\TransferRequest;
-use Genuineq\Esense\Models\Connection;
 use Genuineq\Timetable\Models\Lesson;
 use Genuineq\User\Models\User;
 use JanVince\SmallRecords\Models\Category as ExerciseCategory;
-use JanVince\SmallRecords\Models\Record as Exercise;
 
 class Plugin extends PluginBase
 {
@@ -25,7 +22,6 @@ class Plugin extends PluginBase
      */
     public $require = [
         'Genuineq.User',
-        'Genuineq.JWTAuth',
         'Genuineq.Profile',
         'Genuineq.Addresses',
         'Genuineq.Students',
