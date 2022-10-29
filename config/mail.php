@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'noreply@esense.tld',
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@esense.tld'),
         'name'    => env('MAIL_NAME', '')
     ],
 
