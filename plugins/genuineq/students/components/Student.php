@@ -20,6 +20,7 @@ use Genuineq\Students\Models\ContactPerson;
  */
 class Student extends ComponentBase
 {
+
     public function componentDetails()
     {
         return [
@@ -45,6 +46,7 @@ class Student extends ComponentBase
      */
     public function onRun()
     {
+
         /** Define redirect url variable. */
         $redirectUrl = null;
         Event::fire('genuineq.students.student.read.start', [&$this, &$redirectUrl]);
@@ -89,6 +91,7 @@ class Student extends ComponentBase
      */
     public function onCreateStudent()
     {
+
         /** Define redirect url variable. */
         $redirectUrl = null;
         Event::fire('genuineq.students.student.create.start', [&$this, post(), &$redirectUrl]);
@@ -103,11 +106,12 @@ class Student extends ComponentBase
             'surname' => post('surname'),
             'name' => post('name'),
             'description' => post('description'),
-            'birthdate' => date_format(date_create_from_format('d-m-Y', post('birthdate')), 'Y-m-d'),
+            'birthdate' => post('birthdate')?date_format(date_create_from_format('d-m-Y', post('birthdate')), 'Y-m-d'):null,
             'hearing_impairment' => ((Input::has('hearing_impairment')) ? (1) : (0)),
             'visual_impairment' => ((Input::has('visual_impairment')) ? (1) : (0)),
             'gender' => post('gender')
         ];
+
 
         /** Validate the student data. */
         $this->validateStudentData($data, post());
@@ -130,8 +134,9 @@ class Student extends ComponentBase
         /** Fire event before contact persons create. */
         // Event::fire('genuineq.students.create.before.contact.persons.create', [post()]);
 
+
         /** Save contact persons. */
-        if (post('contact_1_surname') !== null)
+        if (post('contact_1_surname') !== null && post('contact_1_surname') !=='')
         {
             $this->updateContactPersons($student, post());
         }
@@ -171,7 +176,7 @@ class Student extends ComponentBase
             'surname' => post('surname'),
             'name' => post('name'),
             'description' => post('description'),
-            'birthdate' => date_format(date_create_from_format('d-m-Y', post('birthdate')), 'Y-m-d'),
+            'birthdate' =>  post('birthdate')?date_format(date_create_from_format('d-m-Y', post('birthdate')), 'Y-m-d'): null,
             'hearing_impairment' => ((Input::has('hearing_impairment')) ? (1) : (0)),
             'visual_impairment' => ((Input::has('visual_impairment')) ? (1) : (0)),
             'gender' => post('gender')
@@ -182,6 +187,7 @@ class Student extends ComponentBase
 
         /** Fire event before student update. */
         Event::fire('genuineq.students.update.before.student.update', [&$student, post(), &$redirectUrl]);
+
 
         /** Check if a redirect is required. */
         if ($redirectUrl) {
@@ -205,9 +211,10 @@ class Student extends ComponentBase
 
         /** Fire event before contact persons update. */
         // Event::fire('genuineq.students.update.before.contact.persons.update', [post()]);
+        dd(post());
 
         /** Save contact persons. */
-        if (post('contact_1_surname') !== null)
+        if (post('contact_1_surname') !== null && post('contact_1_surname') !=='')
         {
             $this->updateContactPersons($student, post());
         }
@@ -411,8 +418,8 @@ class Student extends ComponentBase
         $rules = [
             'surname' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
             'name' => ['required', 'regex:/^[a-zA-Z0123456789 -]*$/i'],
-            'description' => 'required|string',
-            'birthdate' => 'required|date|date_format:Y-m-d',
+            'description' => 'string',
+            'birthdate' => 'nullable|date|date_format:Y-m-d',
             'hearing_impairment' => 'boolean',
             'visual_impairment' => 'boolean',
             'gender' => 'required|in:male,female'
@@ -434,6 +441,7 @@ class Student extends ComponentBase
             'gender.required' => Lang::get('genuineq.students::lang.components.students.validation.gender_required'),
             'gender.in' => Lang::get('genuineq.students::lang.components.students.validation.gender_in'),
         ];
+
 
         /** Fire event before student validation. */
         Event::fire('genuineq.students.before.student.validate', [&$data, &$rules, &$messages, $post]);

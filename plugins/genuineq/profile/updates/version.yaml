@@ -12,3 +12,6 @@
 1.0.5:
     - 'Change enum for type from users'
     - add_parent_type_to_user_table.php
+1.0.6:
+    - 'Set default nullable'
+    - set_nullable_on_student_table.php
