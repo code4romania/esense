@@ -75,9 +75,6 @@
     },
     "config": {
         "preferred-install": "dist",
-        "platform": {
-            "php": "7.2"
-        },
         "allow-plugins": {
             "composer/installers": true
         }
