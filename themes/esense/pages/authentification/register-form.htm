@@ -1,6 +1,6 @@
 title = "Înregistrare"
 url = "/register-form"
-layout = "landing-page"
+layout = "authentification"
 description = "Formular de inregistrare"
 is_hidden = 0
 
@@ -18,7 +18,20 @@ security = "guest"
 ==
 {% partial 'web-app/general/google-analytics' %}
 
-<section class="despre-proiect"></section>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex align-items-center justify-content-center" style="height: 80px;">
+                    <a href="/">
+                        <img class="img-fluid" src="{{ 'assets/img/svg/logo.svg'|theme }}" alt="Logo site e-Sense">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <div style="min-height: 50vh;">
     <section id="textSection" class="mt-5">
