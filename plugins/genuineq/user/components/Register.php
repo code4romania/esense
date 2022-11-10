@@ -121,15 +121,15 @@ class Register extends ComponentBase
             /** Set the user type field. */
             $data['type'] = post('type');
 
+
             /** Filter out the registration requests that have an already registered school. */
-            if ((('specialist' == post('type')) && (-1 == post('school'))) || ('school' == post('type'))) {
+            if (in_array($data['type'], ['specialist', 'parent', 'school'])) {
                 /** Attempt to register the user. */
                 $user = RegisterLogic::register($data);
 
                 if ('email' == RegisterHelper::getActivationMode()) {
                     /** Send activation email. */
                     EmailHelper::sendActivationEmail($user);
-
                     Flash::success(Lang::get('genuineq.user::lang.component.register.message.activation_email_sent'));
                 } else {
                     Flash::success(Lang::get('genuineq.user::lang.component.register.message.registration_successful'));
