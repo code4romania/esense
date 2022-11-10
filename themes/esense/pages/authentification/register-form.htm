@@ -54,6 +54,7 @@ security = "guest"
                         <select id="selectRegisterForm" class="form-control selectpicker border outline-none" data-style="btn-white">
                             <option value="teacher" data-icon="fas fa-user mr-3">{{'page.register.type.specilist'|_}}</option>
                             <option value="school" data-icon="fas fa-city mr-2">{{'page.register.type.school'|_}}</option>
+                            <option value="parent" data-icon="fas fa-city mr-2">Părinte</option>
                         </select>
                     </div>
                 </div>
@@ -78,9 +79,10 @@ security = "guest"
 <script type="text/javascript">
     $(document).ready(function () {
         /* Decide which form to display. */
-        if ('teacher' == $('#selectRegisterForm').val()) {
+        if ('school' != $('#selectRegisterForm').val()) {
             $('#teacherForm').removeClass('d-none');
             $('#schoolForm').addClass('d-none');
+            $('#type').val($('#selectRegisterForm').val())
         } else {
             $('#teacherForm').addClass('d-none');
             $('#schoolForm').removeClass('d-none');
@@ -91,9 +93,11 @@ security = "guest"
          *  selected value of the "selectRegisterForm" select.
          */
         $('#selectRegisterForm').on('change', function() {
-            if ('teacher' == this.value) {
+            console.log(this.value)
+            if ('school' != this.value) {
                 $('#teacherForm').removeClass('d-none');
                 $('#schoolForm').addClass('d-none');
+                $('#type').val($('#selectRegisterForm').val())
             } else {
                 $('#teacherForm').addClass('d-none');
                 $('#schoolForm').removeClass('d-none');
