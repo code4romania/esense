@@ -1,7 +1,7 @@
 <?php namespace Genuineq\User\Helpers;
 
 use URL;
-use Illuminate\Support\Facades\Mail;
+use Mail;
 use Cms\Classes\Page;
 
 class EmailHelper
