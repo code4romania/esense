@@ -121,9 +121,11 @@ class Register extends ComponentBase
             /** Set the user type field. */
             $data['type'] = post('type');
 
-
             /** Filter out the registration requests that have an already registered school. */
-            if (in_array($data['type'], ['specialist', 'parent', 'school'])) {
+            if (
+                in_array($data['type'], ['specialist', 'parent']) && (-1 == post('school')) ||
+                'school' == $data['type']
+            ) {
                 /** Attempt to register the user. */
                 $user = RegisterLogic::register($data);
 

@@ -143,7 +143,10 @@ return [
 
             'fields' => [
                 'name' => 'Name',
-                'name_comment' => 'The full name of the user',
+                'name_comment' => 'The name of the user',
+
+                'surname' => 'Surname',
+                'surname_comment' => 'The surname of the user',
 
                 'email' => 'Email',
                 'email_comment' => 'The email of the user',
@@ -192,6 +195,7 @@ return [
             'columns' => [
                 'id' => '#',
                 'name' => 'Name',
+                'surname' => 'Surnume',
                 'email' => 'Email',
                 'identifier' => 'Identifier',
                 'type' => 'Type',

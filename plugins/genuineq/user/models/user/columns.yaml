@@ -15,6 +15,12 @@ columns:
         searchable: true
         sortable: true
 
+    surname:
+        label: genuineq.user::lang.backend.user.columns.surname
+        type: text
+        searchable: true
+        sortable: true
+
     email:
         label: genuineq.user::lang.backend.user.columns.email
         type: text
