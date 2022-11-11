@@ -398,6 +398,11 @@ return [
                 'fail' => 'Nu s-a activat contul respectiv',
             ],
 
+            'flash_delete' => [
+                'success' => 'Contul a fost șters cu succes',
+                'fail' => 'Nu s-a șters contul respectiv',
+            ],
+
             'columns' => [
                 'id' => 'Id',
                 'name' => 'Prenume',

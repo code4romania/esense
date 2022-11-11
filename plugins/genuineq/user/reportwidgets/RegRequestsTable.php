@@ -101,4 +101,34 @@ class RegRequestsTable extends ReportWidgetBase
         $userModel->save();
     }
 
+    public function onDelete()
+    {
+        if ([] != post('record_id')) {
+            $this->deleteUser(post('record_id'));
+        } elseif ([] != post('checked')) {
+            /** Iterate IDs and get the corresponding user, then activate it */
+            foreach (post('checked') as $accountId) {
+                $this->deleteUser($accountId);
+            }
+        } else {
+            Flash::error(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash_delete.fail'));
+
+            return;
+        }
+
+        Flash::success(Lang::get('genuineq.user::lang.reportwidgets.reg_requests_table.flash_delete.success'));
+
+        /* Refreshing the page */
+        return Redirect::refresh();
+    }
+
+
+    private function deleteUser($accountId)
+    {
+        $userModel = UserModel::find($accountId);
+
+        if (!is_null($userModel)) {
+            $userModel->delete();
+        }
+    }
 }
