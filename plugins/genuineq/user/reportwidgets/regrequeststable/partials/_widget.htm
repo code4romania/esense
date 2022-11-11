@@ -62,6 +62,9 @@
                             <th class="list-cell-name-name list-cell-type-text">
                                 <a href="#"> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.name')) ?> </a>
                             </th>
+                            <th class="list-cell-name-name list-cell-type-text">
+                                <a href="#"> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.surname')) ?> </a>
+                            </th>
                             <th class="list-cell-name-email list-cell-type-text">
                                 <a href="#"> <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.columns.email')) ?> </a>
                             </th>
@@ -99,6 +102,10 @@
 
                                 <td class="list-cell-index-2 list-cell-name-name list-cell-type-text">
                                     <?= $userModel->name ?>
+                                </td>
+
+                                <td class="list-cell-index-2 list-cell-name-name list-cell-type-text">
+                                    <?= $userModel->surname ?>
                                 </td>
 
                                 <td class="list-cell-index-3 list-cell-name-email list-cell-type-text">

@@ -142,8 +142,11 @@ return [
             'label' => 'Utilizator',
 
             'fields' => [
-                'name' => 'Nume',
-                'name_comment' => 'Numele complet al utilizatorului',
+                'name' => 'Prenume',
+                'name_comment' => 'Prenumele utilizatorului',
+
+                'surname' => 'Nume',
+                'surname_comment' => 'Numele utilizatorului',
 
                 'email' => 'Email',
                 'email_comment' => 'Adresa de e-mail a utilizatorului',
@@ -191,7 +194,8 @@ return [
 
             'columns' => [
                 'id' => '#',
-                'name' => 'Nume',
+                'name' => 'Prenume',
+                'surname' => 'Nume',
                 'email' => 'Email',
                 'identifier' => 'Identificator',
                 'type' => 'Tip',

@@ -9,6 +9,11 @@ fields:
         comment: genuineq.user::lang.backend.user.fields.name_comment
         span: auto
 
+    surname:
+        label: genuineq.user::lang.backend.user.fields.surname
+        comment: genuineq.user::lang.backend.user.fields.surname_comment
+        span: auto
+
     email:
         label: genuineq.user::lang.backend.user.fields.email
         comment: genuineq.user::lang.backend.user.fields.email_comment
