@@ -100,10 +100,15 @@
             </button>
 
             <button
-                type="button"
-                class="btn btn-default"
-                data-dismiss="popup">
-                <?= e(trans('backend::lang.form.cancel')) ?>
+                type="submit"
+                data-request="onDelete"
+                onclick="$(this).data('request-data', {
+                            redirect: 0
+                        })"
+                data-hotkey="ctrl+d, cmd+d"
+                data-popup-load-indicator
+                class="btn btn-default">
+                <?= e(trans('genuineq.user::lang.reportwidgets.reg_requests_table.delete_selected')) ?>
             </button>
         </div>
 

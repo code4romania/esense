@@ -398,6 +398,11 @@ return [
                 'fail' => 'Failed to activate that account',
             ],
 
+            'flash_delete' => [
+                'success' => 'Account was successfully deleted',
+                'fail' => 'Failed to delete that account',
+            ],
+
             'columns' => [
                 'id' => 'Id',
                 'name' => 'Name',
