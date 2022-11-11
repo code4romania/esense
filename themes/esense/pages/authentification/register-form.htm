@@ -77,30 +77,18 @@ security = "guest"
 
 {% put scripts %}
 <script type="text/javascript">
-    $(document).ready(function () {
-        /* Decide which form to display. */
-        if ('school' != $('#selectRegisterForm').val()) {
-            $('#teacherForm').removeClass('d-none');
-            $('#schoolForm').addClass('d-none');
-            $('#type').val($('#selectRegisterForm').val())
-        } else {
-            $('#teacherForm').addClass('d-none');
-            $('#schoolForm').removeClass('d-none');
-        }
+    function switchForm(target) {
+        var isSchoolForm = 'school' === target;
 
-        /**
-         * Function that toggles the display of forms based on the
-         *  selected value of the "selectRegisterForm" select.
-         */
-        $('#selectRegisterForm').on('change', function() {
-            if ('school' != this.value) {
-                $('#teacherForm').removeClass('d-none');
-                $('#schoolForm').addClass('d-none');
-                $('#type').val($('#selectRegisterForm').val())
-            } else {
-                $('#teacherForm').addClass('d-none');
-                $('#schoolForm').removeClass('d-none');
-            }
+        $('#teacherForm').toggleClass('d-none', isSchoolForm);
+        $('#schoolForm').toggleClass('d-none', !isSchoolForm);
+    }
+
+    $(document).ready(function () {
+        switchForm($('#selectRegisterForm').val());
+
+        $('#selectRegisterForm').change(function() {
+            switchForm($(this).val());
         });
     });
 </script>
