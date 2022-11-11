@@ -52,8 +52,9 @@ security = "guest"
                 <div class="col-12 col-lg-7">
                     <div class="form-group outline-none">
                         <select id="selectRegisterForm" class="form-control selectpicker border outline-none" data-style="btn-white">
-                            <option value="teacher" data-icon="fas fa-user mr-3">{{'page.register.type.specilist'|_}}</option>
-                            <option value="school" data-icon="fas fa-city mr-2">{{'page.register.type.school'|_}}</option>
+                            <option value="teacher" data-icon="fas fa-fw fa-user-cog mr-2">{{'page.register.type.specilist'|_}}</option>
+                            <option value="school" data-icon="fas fa-fw fa-school mr-2">{{'page.register.type.school'|_}}</option>
+                            <option value="parent" data-icon="fas fa-fw fa-user mr-2">{{'page.register.type.parent'|_}}</option>
                         </select>
                     </div>
                 </div>
@@ -76,28 +77,18 @@ security = "guest"
 
 {% put scripts %}
 <script type="text/javascript">
-    $(document).ready(function () {
-        /* Decide which form to display. */
-        if ('teacher' == $('#selectRegisterForm').val()) {
-            $('#teacherForm').removeClass('d-none');
-            $('#schoolForm').addClass('d-none');
-        } else {
-            $('#teacherForm').addClass('d-none');
-            $('#schoolForm').removeClass('d-none');
-        }
+    function switchForm(target) {
+        var isSchoolForm = 'school' === target;
 
-        /**
-         * Function that toggles the display of forms based on the
-         *  selected value of the "selectRegisterForm" select.
-         */
-        $('#selectRegisterForm').on('change', function() {
-            if ('teacher' == this.value) {
-                $('#teacherForm').removeClass('d-none');
-                $('#schoolForm').addClass('d-none');
-            } else {
-                $('#teacherForm').addClass('d-none');
-                $('#schoolForm').removeClass('d-none');
-            }
+        $('#teacherForm').toggleClass('d-none', isSchoolForm);
+        $('#schoolForm').toggleClass('d-none', !isSchoolForm);
+    }
+
+    $(document).ready(function () {
+        switchForm($('#selectRegisterForm').val());
+
+        $('#selectRegisterForm').change(function() {
+            switchForm($(this).val());
         });
     });
 </script>
