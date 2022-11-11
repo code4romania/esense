@@ -101,7 +101,7 @@ class Register extends ComponentBase
                 throw new ApplicationException(Lang::get('genuineq.user::lang.component.register.message.registration_disabled'));
             }
 
-            if (!UserSettings::get('use_register_throttle', false) && UserModel::isRegisterThrottled(Request::ip())) {
+            if ((bool) UserSettings::get('use_register_throttle', false) && UserModel::isRegisterThrottled(Request::ip())) {
                 throw new ApplicationException(Lang::get('genuineq.user::lang.component.register.message.registration_throttled'));
             }
 
@@ -140,8 +140,6 @@ class Register extends ComponentBase
 
                 Flash::success(Lang::get('genuineq.user::lang.component.register.message.registration_skiped'));
             }
-
-            return Redirect::to('/');
         }
         catch (Exception $ex) {
             if (Request::ajax()){
