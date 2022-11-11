@@ -6,6 +6,7 @@ use Flash;
 use Redirect;
 use Exception;
 use Backend\Classes\ReportWidgetBase;
+use Genuineq\User\Helpers\EmailHelper;
 use Genuineq\User\Models\User as UserModel;
 
 /**
@@ -24,7 +25,6 @@ class RegRequestsTable extends ReportWidgetBase
 
             /** Get no of inactive user accounts (== user requests) from database  */
             $this->vars['userRequests'] = UserModel::where('is_activated', 0)->orderBy('created_at', 'DESC')->get();
-
         } catch (Exception $ex) {
             $this->vars['error'] = $ex->getMessage();
         }
@@ -97,8 +97,11 @@ class RegRequestsTable extends ReportWidgetBase
     private function activateUser($accountId)
     {
         $userModel = UserModel::find($accountId);
-        $userModel->is_activated = 1;
-        $userModel->save();
+
+        $userModel->attemptActivation($userModel->getActivationCode());
+
+        /** Inform user via email of account activation. */
+        EmailHelper::sendWelcomeEmail($userModel);
     }
 
     public function onDelete()
