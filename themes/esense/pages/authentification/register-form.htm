@@ -93,7 +93,6 @@ security = "guest"
          *  selected value of the "selectRegisterForm" select.
          */
         $('#selectRegisterForm').on('change', function() {
-            console.log(this.value)
             if ('school' != this.value) {
                 $('#teacherForm').removeClass('d-none');
                 $('#schoolForm').addClass('d-none');
