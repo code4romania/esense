@@ -53,6 +53,7 @@ security = "guest"
                     <div class="form-group outline-none">
                         <select id="selectRegisterForm" class="form-control selectpicker border outline-none" data-style="btn-white">
                             <option value="specialist" data-icon="fas fa-fw fa-user-cog mr-2">{{'page.register.type.specilist'|_}}</option>
+                            <option value="specialist_afiliat" data-icon="fas fa-fw fa-user-cog mr-2">{{'page.register.type.specialist_afiliat'|_}}</option>
                             <option value="school" data-icon="fas fa-fw fa-school mr-2">{{'page.register.type.school'|_}}</option>
                             <option value="parent" data-icon="fas fa-fw fa-user mr-2">{{'page.register.type.parent'|_}}</option>
                         </select>
@@ -61,8 +62,11 @@ security = "guest"
             </div>
 
             <div class="row">
-                <div id="teacherForm" class="d-none">
+                <div id="unafilliatedForm" class="d-none">
                     {% partial 'registration/register-form-specialist' %}
+                </div>
+                <div id="afilliatedForm" class="d-none">
+                    {% partial 'registration/register-form-specialist-afilliated' %}
                 </div>
                 <div id="schoolForm" class="d-none">
                     {% partial 'registration/register-form-school' %}
@@ -78,11 +82,15 @@ security = "guest"
 {% put scripts %}
 <script type="text/javascript">
     function switchForm(target) {
-        var isSchoolForm = 'school' === target;
 
-        $('#teacherForm').toggleClass('d-none', isSchoolForm);
-        $('#schoolForm').toggleClass('d-none', !isSchoolForm);
-        $('#type').val(target);
+        var isSchool = 'school' === target,
+            isAffilliated = 'specialist_afiliat' === target;
+
+        console.log(target, isSchool, isAffilliated);
+
+        $('#unafilliatedForm').toggleClass('d-none', isSchool || isAffilliated);
+        $('#afilliatedForm').toggleClass('d-none', !isAffilliated);
+        $('#schoolForm').toggleClass('d-none', !isSchool);
     }
 
     $(document).ready(function () {

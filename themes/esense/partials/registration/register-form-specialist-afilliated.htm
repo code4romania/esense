@@ -1,11 +1,11 @@
-description = "Register form for specialist"
+description = "Register form for afilliated specialist"
 
 [viewBag]
 ==
 <section class="my-5">
     <div class="container">
         <!-- Register form -->
-        <form method="POST" data-request="onRegister" data-request-success="$('#unafilliatedForm').addClass('d-none'); $('#successMessage').removeClass('d-none');">
+        <form method="POST" data-request="onRegister" data-request-success="$('#afilliatedForm').addClass('d-none'); $('#successMessage').removeClass('d-none');">
             <div class="row">
                 <div class="col-12">
                     <div class="shadow-lg border rounded bg-white p-0 p-md-5">
@@ -58,7 +58,7 @@ description = "Register form for specialist"
                                 <!-- County select -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group register-select">
-                                        <select name="county" id="specialistCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white" title="{{'partial.register.specialist.form.county.placeholder'|_}}">
+                                        <select name="county" id="afilliatedSpecialistCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="Niciun rezultat" data-style="btn-white" title="{{'partial.register.specialist.form.county.placeholder'|_}}">
                                             {% for key, county in counties %}
                                             <option value="{{ key }}">{{ county }}</option>
                                             {% endfor %}
@@ -69,13 +69,22 @@ description = "Register form for specialist"
                                 <!-- City select -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group register-select">
-                                        <select name="city" id="specialistCity" class="form-control border outline-none selectpicker" data-none-results-text="Niciun rezultat" data-live-search="true" data-style="btn-white" disabled></select>
+                                        <select name="city" id="afilliatedSpecialistCity" class="form-control border outline-none selectpicker" data-none-results-text="Niciun rezultat" data-live-search="true" data-style="btn-white" disabled></select>
                                     </div>
                                 </div>
 
-                                <input type="hidden" name="school" value="-1">
+                                <!-- School name select -->
+                                <div id="specialistSchool" class="col-12">
+                                    <div class="form-group register-select">
+                                        <select name="school" class="form-control border outline-none selectpicker" data-style="btn-white" title="{{'partial.register.specialist.form.school.placeholder'|_}}">
+                                            {% for key, school in schools %}
+                                            <option value="{{ key }}">{{ school }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
 
-                                <input type="hidden" name="type" value="specialist">
+                                <input name="type" type="text" id="type" class="d-none" value="specialist">
                             </div>
                         </div>
 
@@ -116,39 +125,39 @@ description = "Register form for specialist"
             },
             success: function(data) {
                 /* Reset the city select content. */
-                $('#specialistCity').html('');
+                $('#afilliatedSpecialistCity').html('');
 
                 /* Parse all received citied and add them. */
                 for (const city in data) {
-                    $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                    $('#afilliatedSpecialistCity').append(`<option value="${data[city]}">${city}</option>`);
                 }
 
                 /* Activate the select. */
-                $('#specialistCity').prop("disabled", false);
-                $("#specialistCity").selectpicker("refresh");
+                $('#afilliatedSpecialistCity').prop("disabled", false);
+                $("#afilliatedSpecialistCity").selectpicker("refresh");
             }
         });
 
         /**
          * Function that extracts the cities of a county.
          */
-        $('#specialistCounty').on('change', function() {
+        $('#afilliatedSpecialistCounty').on('change', function() {
             $.request('onGetCities', {
                 data: {
                     countyId: this.value
                 },
                 success: function(data) {
                     /* Reset the city select content. */
-                    $('#specialistCity').html('');
+                    $('#afilliatedSpecialistCity').html('');
 
                     /* Parse all received citied and add them. */
                     for (const city in data) {
-                        $('#specialistCity').append(`<option value="${data[city]}">${city}</option>`);
+                        $('#afilliatedSpecialistCity').append(`<option value="${data[city]}">${city}</option>`);
                     }
 
                     /* Activate the select. */
-                    $('#specialistCity').prop("disabled", false);
-                    $("#specialistCity").selectpicker("refresh");
+                    $('#afilliatedSpecialistCity').prop("disabled", false);
+                    $("#afilliatedSpecialistCity").selectpicker("refresh");
                 }
             })
         });

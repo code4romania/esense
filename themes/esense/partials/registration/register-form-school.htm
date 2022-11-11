@@ -23,7 +23,7 @@ description = "Register form for school"
                                 <!-- County select -->
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group register-select">
-                                        <select name="county" id="schoolCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="{{'partial.register.school.form.county.no_option'|_}}" data-style="btn-white">
+                                        <select name="county" id="schoolCounty" class="form-control border outline-none selectpicker" data-live-search="true" data-none-results-text="{{'partial.register.school.form.county.no_option'|_}}" data-style="btn-white" title="{{'partial.register.specialist.form.county.placeholder'|_}}">
                                             {% for key, county in counties %}
                                             <option value="{{ key }}">{{ county }}</option>
                                             {% endfor %}
