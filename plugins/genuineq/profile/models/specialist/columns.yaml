@@ -1,11 +1,34 @@
 columns:
-    slug:
-        label: slug
+    name:
+        label: 'genuineq.profile::lang.specialist.form-labels.user'
         type: text
         searchable: true
         sortable: true
+        relation: user
+        select: name
+    school:
+        label: 'genuineq.profile::lang.specialist.form-labels.school'
+        type: text
+        searchable: true
+        sortable: true
+        relation: school
+        select: name
+    county:
+        label: 'genuineq.profile::lang.specialist.form-labels.county'
+        type: text
+        searchable: true
+        sortable: true
+        relation: county
+        select: name
+    city:
+        label: 'genuineq.profile::lang.specialist.form-labels.city'
+        type: text
+        searchable: true
+        sortable: true
+        relation: city
+        select: name
     phone:
-        label: phone
+        label: 'genuineq.profile::lang.specialist.form-labels.phone'
         type: text
         searchable: true
         sortable: true
