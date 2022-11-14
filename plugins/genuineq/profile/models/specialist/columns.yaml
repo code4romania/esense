@@ -5,7 +5,7 @@ columns:
         searchable: true
         sortable: true
         relation: user
-        select: name
+        select: concat(name, ' ', surname)
     school:
         label: 'genuineq.profile::lang.specialist.form-labels.school'
         type: text
