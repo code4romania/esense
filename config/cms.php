@@ -314,20 +314,20 @@ return [
     'storage' => [
 
         'uploads' => [
-            'disk'            => 'local',
+            'disk'            => env('CMS_UPLOADS_DISK', env('CMS_DISK', 'local')),
             'folder'          => 'uploads',
             'path'            => '/storage/app/uploads',
             'temporaryUrlTTL' => 3600,
         ],
 
         'media' => [
-            'disk'   => 'local',
+            'disk'   => env('CMS_MEDIA_DISK', env('CMS_DISK', 'local')),
             'folder' => 'media',
             'path'   => '/storage/app/media',
         ],
 
         'resized' => [
-            'disk'   => 'local',
+            'disk'   => env('CMS_RESIZED_DISK', env('CMS_DISK', 'local')),
             'folder' => 'resized',
             'path'   => '/storage/app/resized',
         ],
