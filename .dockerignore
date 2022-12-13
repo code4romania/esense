@@ -7,10 +7,6 @@
 /containers
 /coverage
 /node_modules
-/public/assets
-/public/hot
-/public/storage
-/public/vendor
 /storage/*.key
 /storage/app/*
 /storage/clockwork
