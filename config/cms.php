@@ -314,22 +314,22 @@ return [
     'storage' => [
 
         'uploads' => [
-            'disk'            => env('CMS_UPLOADS_DISK', env('CMS_DISK', 'local')),
-            'folder'          => 'uploads',
-            'path'            => '/storage/app/uploads',
+            'disk'            => env('FILESYSTEM_DEFAULT', 'local'),
+            'folder'          => env('FILESYSTEM_FOLDER', '') . 'uploads',
+            'path'            => env('FILESYSTEM_PATH', '/storage/app') . '/uploads',
             'temporaryUrlTTL' => 3600,
         ],
 
         'media' => [
-            'disk'   => env('CMS_MEDIA_DISK', env('CMS_DISK', 'local')),
-            'folder' => 'media',
-            'path'   => '/storage/app/media',
+            'disk'   => env('FILESYSTEM_DEFAULT', 'local'),
+            'folder' => env('FILESYSTEM_FOLDER', '') . 'media',
+            'path'   => env('FILESYSTEM_PATH', '/storage/app') . '/media',
         ],
 
         'resized' => [
-            'disk'   => env('CMS_RESIZED_DISK', env('CMS_DISK', 'local')),
-            'folder' => 'resized',
-            'path'   => '/storage/app/resized',
+            'disk'   => env('FILESYSTEM_DEFAULT', 'local'),
+            'folder' => env('FILESYSTEM_FOLDER', '') . 'resized',
+            'path'   => env('FILESYSTEM_PATH', '/storage/app') . '/resized',
         ],
 
     ],
@@ -371,7 +371,7 @@ return [
     |
     */
 
-    'defaultMask' => ['file' => '777', 'folder' => '777'],
+    'defaultMask' => ['file' => null, 'folder' => null],
 
     /*
     |--------------------------------------------------------------------------
